@@ -52,30 +52,23 @@
       line-height: 1.8;
     }
 
-    /* สไตล์ข้อความโดดเด่นด้านบน */
-    .highlight-register {
-      background-color: #fff9db;
+    /* ข้อความนับถอยหลัง แบบไม่มีกรอบ */
+    .countdown-container {
       color: #b36b00;
-      text-align: center;
-      padding: 20px 10px;
-      margin-bottom: 25px;
       font-weight: 600;
       font-size: 1.3rem;
-      box-shadow: 0 3px 8px rgba(179, 107, 0, 0.3);
-      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 30px;
       user-select: none;
+      letter-spacing: 0.05em;
     }
 
-    .highlight-register p {
-      margin: 6px 0;
-    }
-
-    .countdown {
+    .countdown-time {
+      font-size: 1.6rem;
       font-weight: 700;
-      font-size: 1.5rem;
-      margin-top: 10px;
+      margin-top: 8px;
       color: #d05e00;
-      letter-spacing: 1px;
+      letter-spacing: 0.1em;
     }
 
     .announcement-box {
@@ -158,11 +151,10 @@
     </nav>
 
     <div class="content">
-      <div class="highlight-register">
-        <p>ลงทะเบียนเรียน รหัส 67</p>
-        <p>ภาคต้น 2568</p>
-        <p>นับถอยหลังถึงวันที่ 19 มิถุนายน 2568 เวลา 09.30</p>
-        <div id="countdown" class="countdown"></div>
+
+      <div class="countdown-container">
+        <div>ลงทะเบียนเรียนภาคต้น 2568<br>วันที่ 19 มิถุนายน 2568</div>
+        <div id="countdown" class="countdown-time"></div>
       </div>
 
       <div class="announcement-box">
