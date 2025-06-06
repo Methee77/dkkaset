@@ -13,12 +13,16 @@
       margin: 0;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: #f4f4f4;
+      background-image: url('https://cdn.prod.website-files.com/656e9d671ff40834d6f31aff/656e9d671ff40834d6f32f40_Main%20Image%201520%20x%20900.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
-      background-color: white;
+      background-color: rgba(255,255,255,0.95);
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       min-height: 100vh;
       display: flex;
@@ -52,38 +56,37 @@
       line-height: 1.8;
     }
 
-    /* ข้อความนับถอยหลัง แบบไม่มีกรอบ */
     .countdown-container {
-      color: #b36b00;
-      font-weight: 600;
-      font-size: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
-      margin-bottom: 30px;
-      user-select: none;
-      letter-spacing: 0.05em;
+    }
+
+    .countdown-container div:first-child {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
     }
 
     .countdown-time {
-      font-size: 1.6rem;
+      font-size: 2.8rem;
       font-weight: 700;
-      margin-top: 8px;
-      color: #d05e00;
-      letter-spacing: 0.1em;
-    }
-
-    .announcement-box {
-      background-color: #eaf4ff;
-      border-left: 5px solid #003366;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 8px;
-    }
-
-    .announcement-box h3 {
-      margin-top: 0;
       color: #003366;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .search-form {
@@ -91,7 +94,8 @@
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      max-width: 400px; /* กำหนด max width ให้เท่ากับ select */
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .search-form label {
@@ -126,17 +130,19 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 100%;
     }
 
     .search-form button:hover {
-      background-color: #0055a3;
+      background-color: #0055aa;
     }
 
-    .result-message {
-      font-weight: 600;
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #d05e00;
+    .search-result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #003366;
     }
 
     footer {
@@ -161,25 +167,16 @@
     </nav>
 
     <div class="content">
-
       <div class="countdown-container">
         <div>ลงทะเบียนเรียนภาคต้น 2568<br>วันที่ 19 มิถุนายน 2568</div>
         <div id="countdown" class="countdown-time"></div>
       </div>
 
-      <div class="announcement-box">
-        <h3>สารจากผู้สร้างเว็บไซต์</h3>
-        <p>
-          เว็บไซต์นี้จัดทำขึ้นโดยนักเรียน F39-1 เพื่อเป็นศูนย์กลางในการค้นหาตารางสอบและติดตามข่าวสารต่าง ๆ ของรุ่นเราทุกคน ❤️<br />
-          หากพบข้อผิดพลาดหรือมีข้อเสนอแนะสามารถแจ้งได้ทางหน้า “ติดต่อ”
-        </p>
-      </div>
-
-      <h2>ค้นหาตารางสอบรายบุคคล</h2>
+      <h2 style="text-align: center;">ค้นหาตารางสอบ</h2>
 
       <div class="search-form">
-        <form id="searchForm" action="#" method="GET" onsubmit="return handleSearch(event)">
-          <label for="student-id">รหัสนิสิต 3 ตัวท้าย</label>
+        <form id="exam-form">
+          <label for="student-id">รหัสนักเรียน</label>
           <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน" required />
 
           <label for="grade">ชั้น</label>
@@ -194,18 +191,16 @@
 
           <button type="submit">ค้นหา</button>
         </form>
-
-        <div id="resultMessage" class="result-message"></div>
+        <div id="search-result" class="search-result"></div>
       </div>
     </div>
 
-    <footer>© 2025 สุธี All rights reserved.</footer>
+    <footer>© 2025 dekdeekasetF39. All rights reserved.</footer>
   </div>
 
   <script>
-    // กำหนดวันเป้าหมาย (19 มิถุนายน 2568 เวลา 09:30)
-    // ปี ค.ศ. = พ.ศ. - 543
-    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0); // เดือน 5 = มิถุนายน (0=มกราคม)
+    // ฟังก์ชันนับถอยหลัง
+    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0); // 19 มิถุนายน 2568, 09:30
 
     function updateCountdown() {
       const now = new Date();
@@ -226,41 +221,23 @@
         `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
     }
 
-    updateCountdown(); // เรียกครั้งแรก
+    updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
 
-    // ตัวอย่างข้อมูลนักเรียนที่มีในระบบ (สมมติ)
-    const studentData = [
-      "F39001",
-      "F39002",
-      "F39003",
-      "F39004",
-      "F39005"
-    ];
+    // ฟังก์ชันค้นหา
+    document.getElementById('exam-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('student-id').value.trim();
+      const resultBox = document.getElementById('search-result');
 
-    function handleSearch(event) {
-      event.preventDefault(); // ป้องกันการ submit form แบบปกติ
-
-      const inputId = document.getElementById('student-id').value.trim();
-      const resultDiv = document.getElementById('resultMessage');
-
-      if (inputId === "") {
-        resultDiv.textContent = "กรุณากรอกรหัสนักเรียน";
-        resultDiv.style.color = "red";
-        return false;
-      }
-
-      // ตรวจสอบว่ารหัสนักเรียนมีในฐานข้อมูลไหม
-      if (studentData.includes(inputId)) {
-        resultDiv.textContent = "พบข้อมูล";
-        resultDiv.style.color = "green";
+      if (input === '12345') {
+        resultBox.textContent = 'พบข้อมูล';
+        resultBox.style.color = 'green';
       } else {
-        resultDiv.textContent = "ไม่พบข้อมูล";
-        resultDiv.style.color = "red";
+        resultBox.textContent = 'ไม่พบข้อมูล';
+        resultBox.style.color = 'red';
       }
-
-      return false; // ป้องกันการ reload หน้า
-    }
+    });
   </script>
 </body>
 </html>
