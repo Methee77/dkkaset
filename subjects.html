@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>วิชา พื้นฐานการเขียนโปรแกรม (CS101)</title>
 
-<!-- ฟอนต์ IBM Plex Sans Thai และ Sarabun -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&family=Sarabun&display=swap" rel="stylesheet" />
+<!-- ฟอนต์ IBM Plex Sans Thai -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
 
 <style>
   /* Reset & base */
@@ -14,45 +14,13 @@
     box-sizing: border-box;
   }
   body {
-    font-family: "Sarabun", sans-serif, Arial;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
     background: #f9faff;
     color: #222;
     margin: 0; padding: 0;
     line-height: 1.6;
-    position: relative;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
   }
-
-  /* Dark mode style */
-  body.dark-mode {
-    background: #121212;
-    color: #ddd;
-  }
-  body.dark-mode header, 
-  body.dark-mode .container {
-    background: #1e1e1e;
-    box-shadow: 0 0 12px rgb(255 255 255 / 0.1);
-    color: #ddd;
-  }
-  body.dark-mode .course-content {
-    background: #2a2a2a;
-    border-color: #4a90e2;
-  }
-  body.dark-mode .course-title {
-    color: #4a90e2;
-    border-color: #4a90e2;
-    background-color: #121212;
-    box-shadow:
-      inset 2px 2px 5px rgba(255, 255, 255, 0.1),
-      2px 2px 8px rgba(0, 0, 0, 0.7);
-  }
-  body.dark-mode .course-title:hover {
-    background-color: #163e70;
-  }
-  body.dark-mode .course-title::after {
-    color: #4a90e2;
-  }
-
   /* Container */
   .container {
     max-width: 900px;
@@ -61,9 +29,8 @@
     border-radius: 8px;
     box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
     padding: 2rem 3rem;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
   }
-
   /* Header */
   header {
     border-bottom: 3px solid #0077cc;
@@ -81,65 +48,57 @@
     font-weight: 600;
     color: #555;
   }
-
-  /* Dark mode toggle switch container */
+  /* Dark Mode Switch */
   .dark-mode-switch {
     position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
+    top: 5px;
+    right: 0;
+    display: inline-block;
     cursor: pointer;
     user-select: none;
+    width: 50px;
+    height: 26px;
   }
-  .dark-mode-switch input[type="checkbox"] {
-    display: none;
+  .dark-mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
   .toggle-slider {
+    position: relative;
     width: 50px;
     height: 26px;
     background-color: #ccc;
     border-radius: 26px;
-    position: relative;
     transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    box-sizing: border-box;
+    padding: 0 5px;
   }
-  .toggle-slider::before {
-    content: "";
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    left: 2px;
-    top: 2px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  .icon-moon,
+  .icon-sun {
+    position: static;
+    display: none;
+    pointer-events: none;
   }
+  /* แสดงไอคอนพระจันทร์เมื่อ toggle ปิด */
+  .toggle-slider .icon-moon {
+    display: inline;
+  }
+  /* เมื่อ toggle เปิด ให้แสดงไอคอนพระอาทิตย์แทน */
   input[type="checkbox"]:checked + .toggle-slider {
     background-color: #0077cc;
   }
-  input[type="checkbox"]:checked + .toggle-slider::before {
-    transform: translateX(24px);
+  input[type="checkbox"]:checked + .toggle-slider .icon-moon {
+    display: none;
   }
-
-  /* ไอคอนพระจันทร์และพระอาทิตย์ */
-  .icon-moon, .icon-sun {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: white;
-    pointer-events: none;
-    user-select: none;
+  input[type="checkbox"]:checked + .toggle-slider .icon-sun {
+    display: inline;
   }
-  .icon-moon {
-    left: 8px;
-  }
-  .icon-sun {
-    right: 8px;
-  }
-
   /* Course List */
   .course-list {
     margin-top: 1rem;
@@ -151,35 +110,27 @@
     margin: 0.8rem 0;
     cursor: pointer;
     user-select: none;
-    position: relative;
-    padding-right: 24px; /* ช่องว่างให้ลูกศร */
-    border: 2px solid #0077cc;
-    border-radius: 12px;
-    padding: 8px 20px 8px 16px;
-    /* เงานูน */
-    box-shadow:
-      inset 2px 2px 5px rgba(255, 255, 255, 0.7),
-      2px 2px 8px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    box-shadow: 2px 2px 6px rgb(0 0 0 / 0.15);
+    transition: box-shadow 0.3s ease;
   }
-  .course-title:hover {
-    background-color: #f0f7ff;
+  .course-title:hover,
+  .course-title:focus {
+    box-shadow: 4px 4px 12px rgb(0 0 0 / 0.25);
+    outline: none;
   }
-  .course-title::after {
-    content: "▼";
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.9rem;
-    color: #0077cc;
+  .course-title .arrow {
+    font-size: 1.2rem;
     transition: transform 0.3s ease;
   }
-  .course-title[aria-expanded="true"]::after {
-    transform: translateY(-50%) rotate(180deg);
+  .course-title[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
   }
-
   .course-content {
     max-height: 0;
     overflow: hidden;
@@ -188,22 +139,46 @@
     border-left: 4px solid #0077cc;
     padding: 0 1rem;
     margin-bottom: 1rem;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
   }
   .course-content.open {
-    max-height: 500px; /* เพียงพอสำหรับข้อมูล */
+    max-height: 500px;
     padding: 1rem;
   }
   .course-content p {
     margin: 0.4rem 0;
   }
 
-  /* Dark mode adjustments for toggle */
-  body.dark-mode .toggle-slider {
-    background-color: #444;
+  /* Dark mode styles */
+  body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
   }
-  body.dark-mode input[type="checkbox"]:checked + .toggle-slider {
-    background-color: #0077cc;
+  body.dark .container {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 0 12px rgb(255 255 255 / 0.1);
+  }
+  body.dark header {
+    border-color: #5599ff;
+  }
+  body.dark header h1 {
+    color: #5599ff;
+  }
+  body.dark header p {
+    color: #aaa;
+  }
+  body.dark .course-title {
+    color: #5599ff;
+    border-color: #555;
+    box-shadow: 2px 2px 6px rgb(255 255 255 / 0.1);
+  }
+  body.dark .course-title:hover,
+  body.dark .course-title:focus {
+    box-shadow: 4px 4px 12px rgb(255 255 255 / 0.2);
+  }
+  body.dark .course-content {
+    background: #2a2a2a;
+    border-color: #5599ff;
   }
 </style>
 </head>
@@ -213,6 +188,7 @@
   <header>
     <h1>วิชา พื้นฐานการเขียนโปรแกรม</h1>
     <p>รหัสวิชา: CS101</p>
+
     <label class="dark-mode-switch" aria-label="Toggle dark mode" role="switch" aria-checked="false" tabindex="0">
       <input type="checkbox" id="dark-mode-toggle" />
       <span class="toggle-slider">
@@ -224,7 +200,10 @@
 
   <section class="course-list">
     <div>
-      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">011355103</p>
+      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">
+        011355103
+        <span class="arrow">▼</span>
+      </p>
       <div id="course-011355103-content" class="course-content" aria-hidden="true">
         <p><strong>ชื่อวิชา:</strong> โครงสร้างข้อมูล</p>
         <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
@@ -261,26 +240,11 @@
     });
   });
 
-  // Dark mode toggle switch
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
-  const darkModeSwitchLabel = darkModeToggle.parentElement;
-
-  function setAriaChecked(value) {
-    darkModeSwitchLabel.setAttribute('aria-checked', value.toString());
-  }
-
-  darkModeToggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
-    setAriaChecked(darkModeToggle.checked);
-  });
-
-  // Keyboard support for the label acting as a switch
-  darkModeSwitchLabel.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-      e.preventDefault();
-      darkModeToggle.checked = !darkModeToggle.checked;
-      darkModeToggle.dispatchEvent(new Event('change'));
-    }
+  // dark mode toggle
+  const toggle = document.getElementById('dark-mode-toggle');
+  toggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', toggle.checked);
+    toggle.setAttribute('aria-checked', toggle.checked);
   });
 </script>
 
