@@ -34,17 +34,6 @@
       font-weight: 600;
     }
 
-    nav {
-      background-color: #e0e0e0;
-      padding: 10px 20px;
-    }
-
-    nav a {
-      margin-right: 15px;
-      text-decoration: none;
-      color: #333;
-    }
-
     .content {
       flex: 1;
       padding: 30px 20px;
@@ -133,6 +122,18 @@
       font-size: 1.2rem;
     }
 
+    .menu-bar {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .menu-bar a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #003366;
+      font-weight: 600;
+    }
+
     footer {
       background-color: #003366;
       color: white;
@@ -146,16 +147,6 @@
 
   <div class="wrapper">
     <header>dekdeekasetF39</header>
-
-    <nav>
-      <a href="#">หน้าแรก</a>
-      <a href="#">เกี่ยวกับเรา</a>
-      <a href="#">กิจกรรม</a>
-      <a href="#">ติดต่อ</a>
-      <a href="#">วิชาเรียน</a>
-      <a href="#">ปฏิทิน</a>
-      <a href="#">กยศ</a>
-    </nav>
 
     <div class="content">
       <div class="countdown-container">
@@ -183,6 +174,13 @@
           <button type="submit">ค้นหา</button>
         </form>
         <div id="search-result" class="search-result"></div>
+      </div>
+
+      <!-- เมนูย้ายมาไว้ที่นี่ -->
+      <div class="menu-bar">
+        <a href="#">วิชาเรียน</a>
+        <a href="#">ปฏิทิน</a>
+        <a href="#">กยศ</a>
       </div>
     </div>
 
