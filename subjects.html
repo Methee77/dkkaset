@@ -4,18 +4,50 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>วิชา พื้นฐานการเขียนโปรแกรม (CS101)</title>
+
+<!-- ฟอนต์ IBM Plex Sans Thai -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+
 <style>
   /* Reset & base */
   * {
     box-sizing: border-box;
   }
   body {
-    font-family: "Sarabun", sans-serif, Arial;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
     background: #f9faff;
     color: #222;
     margin: 0; padding: 0;
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
   }
+
+  /* Dark mode styles */
+  body.dark-mode {
+    background: #121212;
+    color: #eee;
+  }
+  body.dark-mode .container {
+    background: #1e1e1e;
+    box-shadow: 0 0 12px rgb(255 255 255 / 0.1);
+  }
+  body.dark-mode header h1,
+  body.dark-mode .course-title {
+    color: #66aaff;
+  }
+  body.dark-mode header p,
+  body.dark-mode .course-content {
+    color: #ccc;
+  }
+  body.dark-mode .course-content {
+    background: #222f44;
+    border-left-color: #66aaff;
+  }
+  body.dark-mode #dark-mode-toggle {
+    background-color: #66aaff;
+    color: #121212;
+  }
+
   /* Container */
   .container {
     max-width: 900px;
@@ -30,6 +62,7 @@
     border-bottom: 3px solid #0077cc;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
+    position: relative;
   }
   header h1 {
     margin: 0;
@@ -41,6 +74,26 @@
     font-weight: 600;
     color: #555;
   }
+
+  /* Dark mode toggle button */
+  #dark-mode-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5rem 0;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  #dark-mode-toggle:hover {
+    background-color: #005fa3;
+  }
+
   /* Course List */
   .course-list {
     margin-top: 1rem;
@@ -52,11 +105,39 @@
     margin: 0.8rem 0;
     cursor: pointer;
     user-select: none;
+    position: relative;
+    padding-right: 24px; /* ช่องว่างให้ลูกศร */
+    border: 2px solid #0077cc;
+    border-radius: 12px;
+    padding: 8px 20px 8px 16px;
+    box-shadow:
+      inset 2px 2px 5px rgba(255, 255, 255, 0.7),
+      4px 4px 10px rgba(0, 119, 204, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
+  .course-title:hover {
+    background-color: #e6f0ff;
+  }
+  /* ลูกศรชี้ลง */
+  .course-title::after {
+    content: "▼";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: #0077cc;
+    transition: transform 0.3s ease;
+  }
+  /* หมุนลูกศรเมื่อเปิด */
+  .course-title[aria-expanded="true"]::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
   .course-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease;
+    transition: max-height 0.35s ease, padding 0.3s ease;
     background: #f0f7ff;
     border-left: 4px solid #0077cc;
     padding: 0 1rem;
@@ -77,6 +158,7 @@
   <header>
     <h1>วิชา พื้นฐานการเขียนโปรแกรม</h1>
     <p>รหัสวิชา: CS101</p>
+    <button id="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
   </header>
 
   <section class="course-list">
@@ -116,6 +198,15 @@
         title.click();
       }
     });
+  });
+
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById('dark-mode-toggle');
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    darkModeToggle.setAttribute('aria-pressed', isDark.toString());
+    darkModeToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
   });
 </script>
 
