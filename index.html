@@ -98,6 +98,7 @@
       cursor: pointer;
       font-size: 0.9rem;
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
     }
 
     #dark-mode-toggle:hover,
@@ -344,9 +345,9 @@
       }
     });
 
-    // ปุ่มสุธีเข้าระบบ
+    // ปุ่มสุธีเข้าระบบ เปลี่ยนเป็นลิงก์ไปหน้า suteelogin.html
     document.getElementById('sutee-login').addEventListener('click', () => {
-      alert('เข้าสู่ระบบสำหรับสุธี');
+      window.location.href = 'suteelogin.html';
     });
   </script>
 </body>
