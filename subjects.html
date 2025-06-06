@@ -19,6 +19,7 @@
   a {
     color: #0056b3;
     text-decoration: none;
+    cursor: pointer;
   }
   a:hover {
     text-decoration: underline;
@@ -99,6 +100,34 @@
       font-size: 1.6rem;
     }
   }
+  /* New: Collapsible style */
+  .course-list {
+    margin-top: 1rem;
+  }
+  .course-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0077cc;
+    margin: 0.8rem 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .course-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    background: #f0f7ff;
+    border-left: 4px solid #0077cc;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+  .course-content.open {
+    max-height: 500px; /* เพียงพอสำหรับข้อมูล */
+    padding: 1rem;
+  }
+  .course-content p {
+    margin: 0.4rem 0;
+  }
 </style>
 </head>
 <body>
@@ -156,7 +185,48 @@
     <p>โทรศัพท์: 012-345-6789</p>
     <p>Facebook: <a href="https://facebook.com/instructorpage" target="_blank" rel="noopener">fb.com/instructorpage</a></p>
   </section>
+
+  <section class="course-list">
+    <h2>วิชาเพิ่มเติม</h2>
+    <div>
+      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01355103-content">01355103</p>
+      <div id="course-01355103-content" class="course-content" aria-hidden="true">
+        <p><strong>ชื่อวิชา:</strong> โครงสร้างข้อมูล</p>
+        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
+        <p><strong>ผู้สอน:</strong> อาจารย์ สุนทร ทองดี</p>
+        <p><strong>วัน/สถานที่:</strong> อังคาร 10:00 - 12:00 ห้อง 101 อาคารคอมพิวเตอร์</p>
+      </div>
+    </div>
+  </section>
 </div>
+
+<script>
+  // เลือกทุก course-title แล้วเพิ่ม event click toggle
+  document.querySelectorAll('.course-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const content = title.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+
+      if (isOpen) {
+        content.classList.remove('open');
+        title.setAttribute('aria-expanded', 'false');
+        content.setAttribute('aria-hidden', 'true');
+      } else {
+        content.classList.add('open');
+        title.setAttribute('aria-expanded', 'true');
+        content.setAttribute('aria-hidden', 'false');
+      }
+    });
+
+    // ให้สามารถเปิดปิดด้วยปุ่ม Enter/Space เพื่อเพิ่ม accessibility
+    title.addEventListener('keydown', (e) => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        title.click();
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
