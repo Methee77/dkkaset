@@ -2,11 +2,11 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dekdeekasetF39</title>
 
   <!-- ฟอนต์ IBM Plex Sans Thai -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -52,6 +52,20 @@
       line-height: 1.8;
     }
 
+    /* กรอบสี่เหลี่ยมด้านบน */
+    .register-box {
+      background-color: #fff6e5;
+      border: 2px solid #ffcc00;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #333;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* กล่องสารจากผู้สร้างเว็บไซต์ */
     .announcement-box {
       background-color: #eaf4ff;
       border-left: 5px solid #003366;
@@ -67,6 +81,7 @@
       margin-bottom: 10px;
     }
 
+    /* ฟอร์มค้นหา */
     .search-form {
       background-color: #f9f9f9;
       padding: 20px;
@@ -103,6 +118,7 @@
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     .search-form button:hover {
@@ -133,11 +149,18 @@
     </nav>
 
     <div class="content">
+
+      <div class="register-box">
+        <p><strong>ลงทะเบียนเรียน รหัส 67</strong></p>
+        <p>ภาคต้น 2568</p>
+        <p>นับถอยหลังถึงวันที่ 19 มิถุนายน 2568 เวลา 09.30</p>
+      </div>
+
       <div class="announcement-box">
         <h3>สารจากผู้สร้างเว็บไซต์</h3>
         <p>
-          เว็บไซต์นี้จัดทำขึ้นเพื่อประโยชน์ของทุกคนในกลุ่มและแก้ปัญหาของข้อมูลที่ส่งให้แล้วหมดอายุ หรือไฟล์หาย ❤️<br>
-          เมธี ┃ ผู้พัฒนา
+          เว็บไซต์นี้จัดทำขึ้นโดยนักเรียน F39-1 เพื่อเป็นศูนย์กลางในการค้นหาตารางสอบและติดตามข่าวสารต่าง ๆ ของรุ่นเราทุกคน ❤️<br />
+          หากพบข้อผิดพลาดหรือมีข้อเสนอแนะสามารถแจ้งได้ทางหน้า “ติดต่อ”
         </p>
       </div>
 
@@ -146,7 +169,13 @@
       <div class="search-form">
         <form action="#" method="GET">
           <label for="student-id">รหัสนักเรียน</label>
-          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน">
+          <input
+            type="text"
+            id="student-id"
+            name="student-id"
+            placeholder="กรอกรหัสนักเรียน"
+            required
+          />
 
           <label for="grade">ระดับชั้น</label>
           <select id="grade" name="grade" disabled>
@@ -161,6 +190,7 @@
           <button type="submit">ค้นหา</button>
         </form>
       </div>
+
     </div>
 
     <footer>
