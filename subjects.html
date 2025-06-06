@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
 
 <style>
-  /* Reset & base */
   * {
     box-sizing: border-box;
   }
@@ -17,11 +16,12 @@
     font-family: 'IBM Plex Sans Thai', sans-serif;
     background: #f9faff;
     color: #222;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
   }
-  /* Container */
+
   .container {
     max-width: 900px;
     margin: 2rem auto;
@@ -31,9 +31,9 @@
     padding: 2rem 3rem;
     transition: background-color 0.3s, color 0.3s;
   }
-  /* Header */
+
   header {
-    border-bottom: 3px solid #0077cc;
+    border-bottom: 3px solid #2e7d32;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     position: relative;
@@ -41,14 +41,14 @@
   header h1 {
     margin: 0;
     font-size: 2.2rem;
-    color: #0077cc;
+    color: #2e7d32;
   }
   header p {
     margin: 0.2rem 0 0;
     font-weight: 600;
     color: #555;
   }
-  /* Dark Mode Switch */
+
   .dark-mode-switch {
     position: absolute;
     top: 5px;
@@ -89,7 +89,7 @@
     display: inline;
   }
   input[type="checkbox"]:checked + .toggle-slider {
-    background-color: #0077cc;
+    background-color: #2e7d32;
   }
   input[type="checkbox"]:checked + .toggle-slider .icon-moon {
     display: none;
@@ -97,21 +97,21 @@
   input[type="checkbox"]:checked + .toggle-slider .icon-sun {
     display: inline;
   }
-  /* Course List */
+
   .course-list {
     margin-top: 1rem;
   }
   .course-title {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #0077cc;
+    color: #2e7d32;
     margin: 0.8rem 0;
     cursor: pointer;
     user-select: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1.5px solid #ccc;
+    border: 1.5px solid #a5d6a7;
     border-radius: 8px;
     padding: 8px 12px;
     box-shadow: 2px 2px 6px rgb(0 0 0 / 0.15);
@@ -133,8 +133,8 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease, padding 0.35s ease;
-    background: #f0f7ff;
-    border-left: 4px solid #0077cc;
+    background: #e8f5e9;
+    border-left: 4px solid #2e7d32;
     padding: 0 1rem;
     margin-bottom: 1rem;
   }
@@ -146,10 +146,9 @@
     margin: 0.4rem 0;
   }
 
-  /* กล่องปี */
   .course-year-box {
-    background-color: #e0f0ff;
-    border-left: 4px solid #0077cc;
+    background-color: #e0f2f1;
+    border-left: 4px solid #2e7d32;
     padding: 0.75rem 1rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
@@ -157,7 +156,7 @@
     box-shadow: 2px 2px 6px rgb(0 0 0 / 0.1);
   }
 
-  /* Dark mode styles */
+  /* Dark mode */
   body.dark {
     background-color: #121212;
     color: #e0e0e0;
@@ -168,17 +167,17 @@
     box-shadow: 0 0 12px rgb(255 255 255 / 0.1);
   }
   body.dark header {
-    border-color: #5599ff;
+    border-color: #66bb6a;
   }
   body.dark header h1 {
-    color: #5599ff;
+    color: #66bb6a;
   }
   body.dark header p {
     color: #aaa;
   }
   body.dark .course-title {
-    color: #5599ff;
-    border-color: #555;
+    color: #66bb6a;
+    border-color: #4caf50;
     box-shadow: 2px 2px 6px rgb(255 255 255 / 0.1);
   }
   body.dark .course-title:hover,
@@ -186,13 +185,13 @@
     box-shadow: 4px 4px 12px rgb(255 255 255 / 0.2);
   }
   body.dark .course-content {
-    background: #2a2a2a;
-    border-color: #5599ff;
+    background: #1b3c2f;
+    border-color: #66bb6a;
   }
   body.dark .course-year-box {
-    background-color: #263850;
-    border-left-color: #5599ff;
-    color: #cde4ff;
+    background-color: #2e3b32;
+    border-left-color: #66bb6a;
+    color: #c8e6c9;
     box-shadow: 2px 2px 6px rgb(255 255 255 / 0.05);
   }
 </style>
@@ -234,7 +233,6 @@
 </div>
 
 <script>
-  // toggle course content
   document.querySelectorAll('.course-title').forEach(title => {
     title.addEventListener('click', () => {
       const content = title.nextElementSibling;
@@ -259,7 +257,6 @@
     });
   });
 
-  // dark mode toggle
   const toggle = document.getElementById('dark-mode-toggle');
   toggle.addEventListener('change', () => {
     document.body.classList.toggle('dark', toggle.checked);
