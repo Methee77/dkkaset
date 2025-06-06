@@ -76,6 +76,11 @@
       font-size: 1rem;
     }
 
+    .search-form select[disabled] {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
     .search-form button {
       background-color: #003366;
       color: white;
@@ -122,22 +127,13 @@
           <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน">
 
           <label for="grade">ระดับชั้น</label>
-          <select id="grade" name="grade">
-            <option value="">-- เลือกระดับชั้น --</option>
-            <option value="ม.1">ม.1</option>
-            <option value="ม.2">ม.2</option>
-            <option value="ม.3">ม.3</option>
-            <option value="ม.4">ม.4</option>
-            <option value="ม.5">ม.5</option>
-            <option value="ม.6">ม.6</option>
+          <select id="grade" name="grade" disabled>
+            <option value="F39-1" selected>F39-1</option>
           </select>
 
           <label for="term">ภาคเรียน</label>
-          <select id="term" name="term">
-            <option value="">-- เลือกภาคเรียน --</option>
-            <option value="1">ภาคเรียนที่ 1</option>
-            <option value="2">ภาคเรียนที่ 2</option>
-            <option value="3">ภาคเรียนฤดูร้อน</option>
+          <select id="term" name="term" disabled>
+            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
           </select>
 
           <button type="submit">ค้นหา</button>
