@@ -16,14 +16,6 @@
     margin: 0; padding: 0;
     line-height: 1.6;
   }
-  a {
-    color: #0056b3;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
   /* Container */
   .container {
     max-width: 900px;
@@ -49,58 +41,7 @@
     font-weight: 600;
     color: #555;
   }
-  /* Section Titles */
-  h2 {
-    color: #0077cc;
-    border-bottom: 2px solid #0077cc;
-    padding-bottom: 0.3rem;
-    margin-top: 2rem;
-  }
-  /* About Section */
-  .about p {
-    margin: 0.4rem 0;
-  }
-  /* Schedule Table */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0.8rem;
-  }
-  th, td {
-    text-align: left;
-    padding: 0.6rem 0.8rem;
-    border-bottom: 1px solid #ddd;
-  }
-  th {
-    background-color: #e6f0ff;
-    color: #0056b3;
-  }
-  /* Instructor */
-  .instructor p {
-    margin: 0.3rem 0;
-  }
-  /* Resources List */
-  ul.resources {
-    list-style: none;
-    padding-left: 0;
-  }
-  ul.resources li {
-    margin: 0.5rem 0;
-  }
-  /* Contact */
-  .contact p {
-    margin: 0.3rem 0;
-  }
-  /* Responsive */
-  @media (max-width: 600px) {
-    .container {
-      padding: 1.5rem 1.5rem;
-    }
-    header h1 {
-      font-size: 1.6rem;
-    }
-  }
-  /* New: Collapsible style */
+  /* Course List */
   .course-list {
     margin-top: 1rem;
   }
@@ -138,59 +79,10 @@
     <p>รหัสวิชา: CS101</p>
   </header>
 
-  <section class="about">
-    <h2>เกี่ยวกับวิชา</h2>
-    <p>วิชานี้มีวัตถุประสงค์เพื่อให้ผู้เรียนเข้าใจพื้นฐานของการเขียนโปรแกรมคอมพิวเตอร์ และสามารถพัฒนาโปรแกรมง่าย ๆ ได้</p>
-    <p>หน่วยกิต: 3 หน่วยกิต</p>
-  </section>
-
-  <section class="schedule">
-    <h2>ตารางเรียน</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>วัน-เวลา</th>
-          <th>สถานที่</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>พุธ 13:00 - 15:00</td>
-          <td>ห้อง 201 อาคารเรียนรวม</td>
-        </tr>
-        <tr>
-          <td>ศุกร์ 09:00 - 11:00</td>
-          <td>ห้อง 305 อาคารวิทยาศาสตร์</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="instructor">
-    <h2>อาจารย์ผู้สอน</h2>
-    <p>ชื่อ: ดร. สมชาย ใจดี</p>
-    <p>อีเมล: <a href="mailto:somchai@example.com">somchai@example.com</a></p>
-  </section>
-
-  <section class="resources">
-    <h2>เอกสารประกอบการเรียน</h2>
-    <ul class="resources">
-      <li><a href="#">สไลด์บทที่ 1 (PDF)</a></li>
-      <li><a href="#">แบบฝึกหัดที่ 1 (ZIP)</a></li>
-    </ul>
-  </section>
-
-  <section class="contact">
-    <h2>ติดต่อเพิ่มเติม</h2>
-    <p>โทรศัพท์: 012-345-6789</p>
-    <p>Facebook: <a href="https://facebook.com/instructorpage" target="_blank" rel="noopener">fb.com/instructorpage</a></p>
-  </section>
-
   <section class="course-list">
-    <h2>วิชาเพิ่มเติม</h2>
     <div>
-      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01355103-content">01355103</p>
-      <div id="course-01355103-content" class="course-content" aria-hidden="true">
+      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">011355103</p>
+      <div id="course-011355103-content" class="course-content" aria-hidden="true">
         <p><strong>ชื่อวิชา:</strong> โครงสร้างข้อมูล</p>
         <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
         <p><strong>ผู้สอน:</strong> อาจารย์ สุนทร ทองดี</p>
@@ -201,7 +93,7 @@
 </div>
 
 <script>
-  // เลือกทุก course-title แล้วเพิ่ม event click toggle
+  // toggle course content
   document.querySelectorAll('.course-title').forEach(title => {
     title.addEventListener('click', () => {
       const content = title.nextElementSibling;
@@ -218,7 +110,6 @@
       }
     });
 
-    // ให้สามารถเปิดปิดด้วยปุ่ม Enter/Space เพื่อเพิ่ม accessibility
     title.addEventListener('keydown', (e) => {
       if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
         e.preventDefault();
