@@ -85,11 +85,9 @@
     display: none;
     pointer-events: none;
   }
-  /* แสดงไอคอนพระจันทร์เมื่อ toggle ปิด */
   .toggle-slider .icon-moon {
     display: inline;
   }
-  /* เมื่อ toggle เปิด ให้แสดงไอคอนพระอาทิตย์แทน */
   input[type="checkbox"]:checked + .toggle-slider {
     background-color: #0077cc;
   }
@@ -148,6 +146,17 @@
     margin: 0.4rem 0;
   }
 
+  /* กล่องปี */
+  .course-year-box {
+    background-color: #e0f0ff;
+    border-left: 4px solid #0077cc;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgb(0 0 0 / 0.1);
+  }
+
   /* Dark mode styles */
   body.dark {
     background-color: #121212;
@@ -180,6 +189,12 @@
     background: #2a2a2a;
     border-color: #5599ff;
   }
+  body.dark .course-year-box {
+    background-color: #263850;
+    border-left-color: #5599ff;
+    color: #cde4ff;
+    box-shadow: 2px 2px 6px rgb(255 255 255 / 0.05);
+  }
 </style>
 </head>
 <body>
@@ -198,6 +213,8 @@
     </label>
   </header>
 
+  <div class="course-year-box">วิชาตามแผนปี 2</div>
+
   <section class="course-list">
     <div>
       <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">
@@ -209,7 +226,7 @@
         <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
         <p><strong>หมู่เรียน:</strong> 703 - 707</p>
         <p><strong>ผู้จัดการรายวิชา:</strong> กษิดิษฐ์ สุพรรณ</p>
-        <p><strong>วัน:</strong> จันทร์ พุธ 10:30 - 12:00 ห้อง 101 อาคารคอมพิวเตอร์</p>
+        <p><strong>วัน:</strong> จันทร์ พุธ 10:30 - 12:00</p>
         <p><strong>สถานที่:</strong> รอประกาศ</p>
       </div>
     </div>
