@@ -10,61 +10,72 @@
       font-family: 'Arial', sans-serif;
       background-color: #f4f4f4;
     }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
     header {
       background-color: #003366;
       color: white;
-      padding: 20px 0;
+      padding: 20px;
       text-align: center;
       font-size: 2rem;
       font-weight: bold;
     }
-    .container {
-      width: 100%;
-      max-width: 1200px; /* ปรับความกว้างกลางให้เหมือนต้นแบบ */
-      margin: 0 auto;     /* เว้นข้างเท่าๆ ทั้งซ้ายและขวา */
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+
     nav {
-      background-color: #ececec;
+      background-color: #e0e0e0;
       padding: 10px 20px;
-      font-size: 1rem;
     }
+
     nav a {
       margin-right: 15px;
-      color: #333;
       text-decoration: none;
+      color: #333;
     }
+
     .content {
+      flex: 1;
       padding: 30px 20px;
+      font-size: 1.1rem;
       line-height: 1.6;
     }
+
     footer {
       background-color: #003366;
       color: white;
-      padding: 15px 0;
       text-align: center;
+      padding: 15px 0;
       font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    dekdeekasetF39
-  </header>
+  <div class="wrapper">
+    <header>
+      dekdeekasetF39
+    </header>
 
-  <div class="container">
     <nav>
       <a href="#">หน้าแรก</a>
-      <a href="#">ข้อมูลทั่วไป</a>
-      <a href="#">ประวัติ</a>
+      <a href="#">เกี่ยวกับเรา</a>
+      <a href="#">กิจกรรม</a>
       <a href="#">ติดต่อ</a>
     </nav>
 
     <div class="content">
-      <h1>ยินดีต้อนรับ</h1>
-      <p>นี่คือหน้าเว็บที่ดีไซน์เลียนแบบรูปแบบของโรงเรียนกรรณสูตศึกษาลัย... เนื้อหาตรงกลางมีความกว้างจำกัดและมี margin ซ้าย‑ขวาเท่ากันเหมาะสำหรับหน้าจอทุกขนาดครับ</p>
+      <h2>ยินดีต้อนรับ</h2>
+      <p>
+        เว็บไซต์นี้ออกแบบให้มีขนาดคงที่เท่ากันทั้งเว็บ โดยใช้กรอบกลางความกว้างไม่เกิน 1200px และเว้นขอบด้านข้างให้เท่ากันทุกส่วน ไม่ว่าจะเป็นหัวเว็บ เมนู เนื้อหา หรือท้ายเว็บ
+      </p>
     </div>
 
     <footer>
