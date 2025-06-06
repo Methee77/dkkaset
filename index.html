@@ -91,6 +91,7 @@
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      max-width: 400px; /* กำหนด max width ให้เท่ากับ select */
     }
 
     .search-form label {
@@ -107,6 +108,7 @@
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 1rem;
+      box-sizing: border-box;
     }
 
     .search-form select[disabled],
@@ -122,8 +124,19 @@
       border: none;
       font-size: 1rem;
       border-radius: 5px;
-      cursor: not-allowed;
-      opacity: 0.6;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-form button:hover {
+      background-color: #0055a3;
+    }
+
+    .result-message {
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #d05e00;
     }
 
     footer {
@@ -164,8 +177,8 @@
 
       <h2>ค้นหาตารางสอบ</h2>
 
-     <div class="search-form">
-        <form action="#" method="GET">
+      <div class="search-form">
+        <form id="searchForm" action="#" method="GET" onsubmit="return handleSearch(event)">
           <label for="student-id">รหัสนักเรียน</label>
           <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน" required />
 
@@ -179,8 +192,10 @@
             <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
           </select>
 
-          <button type="submit" disabled>ค้นหา</button>
+          <button type="submit">ค้นหา</button>
         </form>
+
+        <div id="resultMessage" class="result-message"></div>
       </div>
     </div>
 
@@ -213,6 +228,39 @@
 
     updateCountdown(); // เรียกครั้งแรก
     const intervalId = setInterval(updateCountdown, 1000);
+
+    // ตัวอย่างข้อมูลนักเรียนที่มีในระบบ (สมมติ)
+    const studentData = [
+      "F39001",
+      "F39002",
+      "F39003",
+      "F39004",
+      "F39005"
+    ];
+
+    function handleSearch(event) {
+      event.preventDefault(); // ป้องกันการ submit form แบบปกติ
+
+      const inputId = document.getElementById('student-id').value.trim();
+      const resultDiv = document.getElementById('resultMessage');
+
+      if (inputId === "") {
+        resultDiv.textContent = "กรุณากรอกรหัสนักเรียน";
+        resultDiv.style.color = "red";
+        return false;
+      }
+
+      // ตรวจสอบว่ารหัสนักเรียนมีในฐานข้อมูลไหม
+      if (studentData.includes(inputId)) {
+        resultDiv.textContent = "พบข้อมูล";
+        resultDiv.style.color = "green";
+      } else {
+        resultDiv.textContent = "ไม่พบข้อมูล";
+        resultDiv.style.color = "red";
+      }
+
+      return false; // ป้องกันการ reload หน้า
+    }
   </script>
 </body>
 </html>
