@@ -13,16 +13,12 @@
       margin: 0;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: #f4f4f4;
-      background-image: url('https://cdn.prod.website-files.com/656e9d671ff40834d6f31aff/656e9d671ff40834d6f32f40_Main%20Image%201520%20x%20900.webp');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
     }
 
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
-      background-color: rgba(255,255,255,0.95);
+      background-color: white;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       min-height: 100vh;
       display: flex;
@@ -63,11 +59,10 @@
       justify-content: center;
       padding: 30px;
       margin-bottom: 40px;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -115,12 +110,6 @@
       box-sizing: border-box;
     }
 
-    .search-form select[disabled],
-    .search-form input[disabled] {
-      background-color: #e0e0e0;
-      color: #333;
-    }
-
     .search-form button {
       background-color: #003366;
       color: white;
@@ -142,7 +131,6 @@
       margin-top: 20px;
       font-weight: bold;
       font-size: 1.2rem;
-      color: #003366;
     }
 
     footer {
@@ -199,8 +187,7 @@
   </div>
 
   <script>
-    // ฟังก์ชันนับถอยหลัง
-    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0); // 19 มิถุนายน 2568, 09:30
+    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0);
 
     function updateCountdown() {
       const now = new Date();
@@ -224,7 +211,6 @@
     updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
 
-    // ฟังก์ชันค้นหา
     document.getElementById('exam-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const input = document.getElementById('student-id').value.trim();
