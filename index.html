@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>dekdeekasetF39</title>
 
-  <!-- โหลดฟอนต์ IBM Plex Sans Thai จาก Google Fonts -->
+  <!-- ฟอนต์ IBM Plex Sans Thai -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -43,7 +43,6 @@
       margin-right: 15px;
       text-decoration: none;
       color: #333;
-      font-weight: 400;
     }
 
     .content {
@@ -51,6 +50,44 @@
       padding: 30px 20px;
       font-size: 1.1rem;
       line-height: 1.8;
+    }
+
+    .search-form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .search-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .search-form input,
+    .search-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .search-form button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-form button:hover {
+      background-color: #0055aa;
     }
 
     footer {
@@ -77,10 +114,35 @@
     </nav>
 
     <div class="content">
-      <h2>ยินดีต้อนรับ</h2>
-      <p>
-        เว็บไซต์นี้ใช้ฟอนต์ IBM Plex Sans Thai เพื่อความเรียบง่ายและความชัดเจนในการอ่าน เหมาะกับเว็บไซต์ที่ต้องการความเป็นมืออาชีพ ดูสะอาดตา และรองรับภาษาไทยอย่างดีเยี่ยม
-      </p>
+      <h2>ค้นหาตารางสอบ</h2>
+
+      <div class="search-form">
+        <form action="#" method="GET">
+          <label for="student-id">รหัสนักเรียน</label>
+          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน">
+
+          <label for="grade">ระดับชั้น</label>
+          <select id="grade" name="grade">
+            <option value="">-- เลือกระดับชั้น --</option>
+            <option value="ม.1">ม.1</option>
+            <option value="ม.2">ม.2</option>
+            <option value="ม.3">ม.3</option>
+            <option value="ม.4">ม.4</option>
+            <option value="ม.5">ม.5</option>
+            <option value="ม.6">ม.6</option>
+          </select>
+
+          <label for="term">ภาคเรียน</label>
+          <select id="term" name="term">
+            <option value="">-- เลือกภาคเรียน --</option>
+            <option value="1">ภาคเรียนที่ 1</option>
+            <option value="2">ภาคเรียนที่ 2</option>
+            <option value="3">ภาคเรียนฤดูร้อน</option>
+          </select>
+
+          <button type="submit">ค้นหา</button>
+        </form>
+      </div>
     </div>
 
     <footer>
