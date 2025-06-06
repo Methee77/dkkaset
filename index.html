@@ -10,29 +10,41 @@
       font-family: 'Arial', sans-serif;
       background-color: #f4f4f4;
     }
-
     header {
-      background-color: #2e8b57;
+      background-color: #003366;
       color: white;
       padding: 20px 0;
       text-align: center;
       font-size: 2rem;
       font-weight: bold;
     }
-
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+      width: 100%;
+      max-width: 1200px; /* ปรับความกว้างกลางให้เหมือนต้นแบบ */
+      margin: 0 auto;     /* เว้นข้างเท่าๆ ทั้งซ้ายและขวา */
       background-color: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 10px;
     }
-
+    nav {
+      background-color: #ececec;
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+    nav a {
+      margin-right: 15px;
+      color: #333;
+      text-decoration: none;
+    }
     .content {
-      padding: 30px;
-      font-size: 1.1rem;
+      padding: 30px 20px;
       line-height: 1.6;
+    }
+    footer {
+      background-color: #003366;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -43,10 +55,21 @@
   </header>
 
   <div class="container">
+    <nav>
+      <a href="#">หน้าแรก</a>
+      <a href="#">ข้อมูลทั่วไป</a>
+      <a href="#">ประวัติ</a>
+      <a href="#">ติดต่อ</a>
+    </nav>
+
     <div class="content">
-      <!-- เนื้อหาของเว็บใส่ตรงนี้ -->
-      <p>ยินดีต้อนรับสู่เว็บไซต์ dekdeekasetF39!</p>
+      <h1>ยินดีต้อนรับ</h1>
+      <p>นี่คือหน้าเว็บที่ดีไซน์เลียนแบบรูปแบบของโรงเรียนกรรณสูตศึกษาลัย... เนื้อหาตรงกลางมีความกว้างจำกัดและมี margin ซ้าย‑ขวาเท่ากันเหมาะสำหรับหน้าจอทุกขนาดครับ</p>
     </div>
+
+    <footer>
+      © 2025 dekdeekasetF39. All rights reserved.
+    </footer>
   </div>
 
 </body>
