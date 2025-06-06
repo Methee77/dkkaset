@@ -52,20 +52,32 @@
       line-height: 1.8;
     }
 
-    /* กรอบสี่เหลี่ยมด้านบน */
-    .register-box {
-      background-color: #fff6e5;
-      border: 2px solid #ffcc00;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 1.1rem;
-      color: #333;
+    /* สไตล์ข้อความโดดเด่นด้านบน */
+    .highlight-register {
+      background-color: #fff9db;
+      color: #b36b00;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px 10px;
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      box-shadow: 0 3px 8px rgba(179, 107, 0, 0.3);
+      border-radius: 12px;
+      user-select: none;
     }
 
-    /* กล่องสารจากผู้สร้างเว็บไซต์ */
+    .highlight-register p {
+      margin: 6px 0;
+    }
+
+    .countdown {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #d05e00;
+      letter-spacing: 1px;
+    }
+
     .announcement-box {
       background-color: #eaf4ff;
       border-left: 5px solid #003366;
@@ -81,7 +93,6 @@
       margin-bottom: 10px;
     }
 
-    /* ฟอร์มค้นหา */
     .search-form {
       background-color: #f9f9f9;
       padding: 20px;
@@ -137,9 +148,7 @@
 <body>
 
   <div class="wrapper">
-    <header>
-      dekdeekasetF39
-    </header>
+    <header>dekdeekasetF39</header>
 
     <nav>
       <a href="#">หน้าแรก</a>
@@ -149,11 +158,11 @@
     </nav>
 
     <div class="content">
-
-      <div class="register-box">
-        <p><strong>ลงทะเบียนเรียน รหัส 67</strong></p>
+      <div class="highlight-register">
+        <p>ลงทะเบียนเรียน รหัส 67</p>
         <p>ภาคต้น 2568</p>
         <p>นับถอยหลังถึงวันที่ 19 มิถุนายน 2568 เวลา 09.30</p>
+        <div id="countdown" class="countdown"></div>
       </div>
 
       <div class="announcement-box">
@@ -169,13 +178,7 @@
       <div class="search-form">
         <form action="#" method="GET">
           <label for="student-id">รหัสนักเรียน</label>
-          <input
-            type="text"
-            id="student-id"
-            name="student-id"
-            placeholder="กรอกรหัสนักเรียน"
-            required
-          />
+          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน" required />
 
           <label for="grade">ระดับชั้น</label>
           <select id="grade" name="grade" disabled>
@@ -190,13 +193,37 @@
           <button type="submit">ค้นหา</button>
         </form>
       </div>
-
     </div>
 
-    <footer>
-      © 2025 dekdeekasetF39. All rights reserved.
-    </footer>
+    <footer>© 2025 dekdeekasetF39. All rights reserved.</footer>
   </div>
 
+  <script>
+    // กำหนดวันเป้าหมาย (19 มิถุนายน 2568 เวลา 09:30)
+    // ปี ค.ศ. = พ.ศ. - 543
+    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0); // เดือน 5 = มิถุนายน (0=มกราคม)
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = 'หมดเวลานับถอยหลังแล้ว';
+        clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').textContent =
+        `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
+    }
+
+    updateCountdown(); // เรียกครั้งแรก
+    const intervalId = setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
