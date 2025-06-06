@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* CSS Variables for Light Mode */
+    /* CSS Variables และ Theme */
     :root {
       --bg-color: #f4f4f4;
       --wrapper-bg: white;
@@ -30,7 +30,6 @@
       --shadow-color: rgba(0,0,0,0.1);
     }
 
-    /* Dark Mode Variables */
     .dark-mode {
       --bg-color: #121212;
       --wrapper-bg: #1e1e1e;
@@ -80,12 +79,17 @@
       position: relative;
     }
 
-    /* Dark mode toggle button */
-    #dark-mode-toggle {
+    .header-buttons {
       position: absolute;
       top: 50%;
       right: 20px;
       transform: translateY(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    #dark-mode-toggle,
+    #sutee-login {
       background: transparent;
       border: 2px solid var(--header-text);
       color: var(--header-text);
@@ -96,7 +100,8 @@
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
-    #dark-mode-toggle:hover {
+    #dark-mode-toggle:hover,
+    #sutee-login:hover {
       background-color: var(--header-text);
       color: var(--header-bg);
       border-color: var(--header-text);
@@ -138,7 +143,6 @@
       font-size: 2.2rem;
       font-weight: 700;
       letter-spacing: 0.05em;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .search-form {
@@ -165,10 +169,8 @@
       border-radius: 5px;
       border: 1px solid var(--form-border);
       font-size: 1rem;
-      box-sizing: border-box;
       background-color: var(--wrapper-bg);
       color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     .search-form input::placeholder {
@@ -183,7 +185,6 @@
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
       width: 100%;
     }
 
@@ -219,7 +220,6 @@
       background-color: var(--button-hover-bg);
     }
 
-    /* ประกาศใต้เมนู */
     .announcement-box {
       max-width: 600px;
       margin: 20px auto 40px auto;
@@ -230,9 +230,6 @@
       border-radius: 8px;
       font-weight: 600;
       text-align: center;
-      font-size: 1rem;
-      box-shadow: 0 2px 6px rgba(176, 58, 46, 0.2);
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     footer {
@@ -241,17 +238,17 @@
       text-align: center;
       padding: 15px 0;
       font-size: 0.9rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
   </style>
 </head>
 <body>
-
   <div class="wrapper">
     <header>
       เด็กดีของเสดสิ่ง67
-      <a href="#" class="sutee-login-btn">สำหรับสุธีเข้าระบบ</a>
-      <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
+      <div class="header-buttons">
+        <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
+        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
+      </div>
     </header>
 
     <div class="content">
@@ -267,17 +264,14 @@
         <form id="exam-form">
           <label for="student-id">รหัสนิสิต</label>
           <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required />
-
           <label for="grade">ชั้น</label>
           <select id="grade" name="grade" disabled>
             <option value="F39-1" selected>F39-1</option>
           </select>
-
           <label for="term">ภาคการศึกษา</label>
           <select id="term" name="term" disabled>
             <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
           </select>
-
           <button type="submit">ค้นหา</button>
         </form>
         <div id="search-result" class="search-result"></div>
@@ -298,37 +292,31 @@
   </div>
 
   <script>
-    // Countdown timer
+    // Countdown
     const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0);
-
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
-
       if (diff <= 0) {
         document.getElementById('countdown').textContent = 'หมดเวลานับถอยหลังแล้ว';
         clearInterval(intervalId);
         return;
       }
-
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-
       document.getElementById('countdown').textContent =
         `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
     }
-
     updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
 
-    // Search form
+    // Search
     document.getElementById('exam-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const input = document.getElementById('student-id').value.trim();
       const resultBox = document.getElementById('search-result');
-
       if (input === '12345') {
         resultBox.textContent = 'พบข้อมูล';
         resultBox.style.color = 'green';
@@ -341,22 +329,24 @@
     // Dark mode toggle
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
-
-    // โหลดสถานะ dark mode จาก localStorage
     if (localStorage.getItem('darkMode') === 'enabled') {
       bodyElement.classList.add('dark-mode');
       toggleBtn.textContent = '☀️';
     }
-
     toggleBtn.addEventListener('click', () => {
       bodyElement.classList.toggle('dark-mode');
       if (bodyElement.classList.contains('dark-mode')) {
-        toggleBtn.textContent = '☀️'; // icon แสดงกลางวัน
+        toggleBtn.textContent = '☀️';
         localStorage.setItem('darkMode', 'enabled');
       } else {
-        toggleBtn.textContent = '🌙'; // icon แสดงกลางคืน
+        toggleBtn.textContent = '🌙';
         localStorage.setItem('darkMode', 'disabled');
       }
+    });
+
+    // ปุ่มสุธีเข้าระบบ
+    document.getElementById('sutee-login').addEventListener('click', () => {
+      alert('เข้าสู่ระบบสำหรับสุธี');
     });
   </script>
 </body>
