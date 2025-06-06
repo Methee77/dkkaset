@@ -86,9 +86,11 @@
       margin-bottom: 10px;
     }
 
-    /* ซ่อนส่วนค้นหาตารางสอบ */
     .search-form {
-      display: none;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
 
     .search-form label {
@@ -163,12 +165,12 @@
         </p>
       </div>
 
-      <h2>ค้นหาตารางสอบ</h2>
+      <h2>ค้นหาตารางสอบรายบุคคล</h2>
 
       <div class="search-form">
         <form action="#" method="GET">
           <label for="student-id">รหัสนักเรียน</label>
-          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนักเรียน" required />
+          <option value="ปิดระบบค้นหาชั่วคราว" selected>ปิดระบบค้นหาชั่วคราว</option>
 
           <label for="grade">ระดับชั้น</label>
           <select id="grade" name="grade" disabled>
