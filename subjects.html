@@ -3,148 +3,160 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>01402471 ชีวเคมีพื้นฐาน | วิชาเรียน</title>
+<title>วิชา พื้นฐานการเขียนโปรแกรม (CS101)</title>
 <style>
-  /* Reset */
-  *, *::before, *::after {
+  /* Reset & base */
+  * {
     box-sizing: border-box;
   }
-
   body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f7fa;
+    font-family: "Sarabun", sans-serif, Arial;
+    background: #f9faff;
     color: #222;
+    margin: 0; padding: 0;
     line-height: 1.6;
   }
-
-  header {
-    background-color: #0077b6;
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  header img.logo {
-    height: 50px;
-    width: auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
-  }
-
-  header h1 {
-    font-weight: 700;
-    font-size: 1.6rem;
-  }
-
-  nav {
-    background: white;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-    display: flex;
-    justify-content: center;
-  }
-
-  nav a {
+  a {
+    color: #0056b3;
     text-decoration: none;
-    color: #0077b6;
-    padding: 1rem 1.5rem;
-    font-weight: 600;
-    transition: background-color 0.3s, color 0.3s;
   }
-
-  nav a:hover,
-  nav a.active {
-    background-color: #0077b6;
-    color: white;
-    border-radius: 6px 6px 0 0;
+  a:hover {
+    text-decoration: underline;
   }
-
-  main {
-    max-width: 960px;
+  /* Container */
+  .container {
+    max-width: 900px;
     margin: 2rem auto;
-    padding: 0 1rem;
-  }
-
-  main h2 {
-    color: #023e8a;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  .content {
     background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+    padding: 2rem 3rem;
   }
-
-  .content p {
-    margin-bottom: 1rem;
+  /* Header */
+  header {
+    border-bottom: 3px solid #0077cc;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
   }
-
-  footer {
-    text-align: center;
-    padding: 1rem;
+  header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: #0077cc;
+  }
+  header p {
+    margin: 0.2rem 0 0;
+    font-weight: 600;
     color: #555;
-    font-size: 0.9rem;
-    margin-top: 3rem;
   }
-
+  /* Section Titles */
+  h2 {
+    color: #0077cc;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 0.3rem;
+    margin-top: 2rem;
+  }
+  /* About Section */
+  .about p {
+    margin: 0.4rem 0;
+  }
+  /* Schedule Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #e6f0ff;
+    color: #0056b3;
+  }
+  /* Instructor */
+  .instructor p {
+    margin: 0.3rem 0;
+  }
+  /* Resources List */
+  ul.resources {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul.resources li {
+    margin: 0.5rem 0;
+  }
+  /* Contact */
+  .contact p {
+    margin: 0.3rem 0;
+  }
   /* Responsive */
   @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      text-align: center;
+    .container {
+      padding: 1.5rem 1.5rem;
     }
-
-    nav {
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      flex: 1 1 100%;
-      text-align: center;
-      padding: 0.75rem 0;
-      border-radius: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    nav a:hover,
-    nav a.active {
-      border-radius: 6px;
+    header h1 {
+      font-size: 1.6rem;
     }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <img class="logo" src="https://biochem.flas.kps.ku.ac.th/01402471/logo.png" alt="โลโก้วิชา" />
-  <h1>01402471 ชีวเคมีพื้นฐาน</h1>
-</header>
+<div class="container">
+  <header>
+    <h1>วิชา พื้นฐานการเขียนโปรแกรม</h1>
+    <p>รหัสวิชา: CS101</p>
+  </header>
 
-<nav>
-  <a href="#" class="active">หน้าแรก</a>
-  <a href="#">สอน</a>
-  <a href="#">แบบฝึกหัด</a>
-  <a href="#">สื่อการสอน</a>
-  <a href="#">ติดต่อ</a>
-</nav>
-
-<main>
-  <h2>ข้อมูลวิชาเรียน</h2>
-  <section class="content">
-    <p>ยินดีต้อนรับสู่รายวิชา <strong>01402471 ชีวเคมีพื้นฐาน</strong> ในภาคเรียนนี้ คุณจะได้เรียนรู้พื้นฐานของสารชีวโมเลกุลสำคัญ เช่น โปรตีน คาร์โบไฮเดรต และไขมัน พร้อมทั้งการประยุกต์ใช้ในชีววิทยาและการแพทย์</p>
-    <p>เนื้อหาของรายวิชาประกอบด้วยบทเรียน การบ้าน และแบบทดสอบที่ช่วยเสริมสร้างความเข้าใจอย่างครบถ้วน</p>
-    <p>สามารถติดตามข้อมูลประกอบการเรียนเพิ่มเติมได้จากเมนูด้านบน</p>
+  <section class="about">
+    <h2>เกี่ยวกับวิชา</h2>
+    <p>วิชานี้มีวัตถุประสงค์เพื่อให้ผู้เรียนเข้าใจพื้นฐานของการเขียนโปรแกรมคอมพิวเตอร์ และสามารถพัฒนาโปรแกรมง่าย ๆ ได้</p>
+    <p>หน่วยกิต: 3 หน่วยกิต</p>
   </section>
-</main>
 
-<footer>
-  &copy; 2025 ภาควิชาชีวเคมี คณะวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์
-</footer>
+  <section class="schedule">
+    <h2>ตารางเรียน</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>วัน-เวลา</th>
+          <th>สถานที่</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>พุธ 13:00 - 15:00</td>
+          <td>ห้อง 201 อาคารเรียนรวม</td>
+        </tr>
+        <tr>
+          <td>ศุกร์ 09:00 - 11:00</td>
+          <td>ห้อง 305 อาคารวิทยาศาสตร์</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="instructor">
+    <h2>อาจารย์ผู้สอน</h2>
+    <p>ชื่อ: ดร. สมชาย ใจดี</p>
+    <p>อีเมล: <a href="mailto:somchai@example.com">somchai@example.com</a></p>
+  </section>
+
+  <section class="resources">
+    <h2>เอกสารประกอบการเรียน</h2>
+    <ul class="resources">
+      <li><a href="#">สไลด์บทที่ 1 (PDF)</a></li>
+      <li><a href="#">แบบฝึกหัดที่ 1 (ZIP)</a></li>
+    </ul>
+  </section>
+
+  <section class="contact">
+    <h2>ติดต่อเพิ่มเติม</h2>
+    <p>โทรศัพท์: 012-345-6789</p>
+    <p>Facebook: <a href="https://facebook.com/instructorpage" target="_blank" rel="noopener">fb.com/instructorpage</a></p>
+  </section>
+</div>
 
 </body>
 </html>
