@@ -109,7 +109,8 @@
       font-size: 1rem;
     }
 
-    .search-form select[disabled] {
+    .search-form select[disabled],
+    .search-form input[disabled] {
       background-color: #e0e0e0;
       color: #333;
     }
@@ -121,12 +122,8 @@
       border: none;
       font-size: 1rem;
       border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .search-form button:hover {
-      background-color: #0055aa;
+      cursor: not-allowed;
+      opacity: 0.6;
     }
 
     footer {
@@ -165,27 +162,27 @@
         </p>
       </div>
 
-      <h2>ค้นหาตารางสอบรายบุคคล</h2>
+      <h2>ค้นหาตารางสอบ</h2>
 
-<div class="search-form">
-  <form action="#" method="GET">
-    <label for="student-id">รหัสนักเรียน</label>
-    <input type="text" id="student-id" name="student-id" value="ปิดระบบค้นหาชั่วคราว" disabled />
+      <div class="search-form">
+        <form action="#" method="GET">
+          <label for="student-id">รหัสนิสิต</label>
+          <input type="text" id="student-id" name="student-id" value="ปิดระบบค้นหาชั่วคราว" disabled />
 
-    <label for="grade">ระดับชั้น</label>
-    <select id="grade" name="grade" disabled>
-      <option value="F39-1" selected>F39-1</option>
-    </select>
+          <label for="grade">ชั้น</label>
+          <select id="grade" name="grade" disabled>
+            <option value="F39-1" selected>F39-1</option>
+          </select>
 
-    <label for="term">ภาคเรียน</label>
-    <select id="term" name="term" disabled>
-      <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
-    </select>
+          <label for="term">ภาคการศึกษา</label>
+          <select id="term" name="term" disabled>
+            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
+          </select>
 
-    <button type="submit" disabled>ค้นหา</button>
-  </form>
-</div>
-
+          <button type="submit" disabled>ค้นหา</button>
+        </form>
+      </div>
+    </div>
 
     <footer>© 2025 dekdeekasetF39. All rights reserved.</footer>
   </div>
