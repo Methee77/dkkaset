@@ -59,14 +59,14 @@
     }
 
     .countdown-container div:first-child {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: #333;
       margin-bottom: 10px;
     }
 
     .countdown-time {
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 700;
       color: #003366;
       letter-spacing: 0.05em;
@@ -122,16 +122,25 @@
       font-size: 1.2rem;
     }
 
-    .menu-bar {
+    .sub-menu {
+      margin-top: 40px;
       text-align: center;
-      margin-top: 50px;
     }
 
-    .menu-bar a {
-      margin: 0 10px;
+    .sub-menu a {
+      display: inline-block;
+      margin: 0 15px;
+      padding: 10px 20px;
+      background-color: #003366;
+      color: white;
       text-decoration: none;
-      color: #003366;
-      font-weight: 600;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .sub-menu a:hover {
+      background-color: #0055aa;
     }
 
     footer {
@@ -176,11 +185,10 @@
         <div id="search-result" class="search-result"></div>
       </div>
 
-      <!-- เมนูย้ายมาไว้ที่นี่ -->
-      <div class="menu-bar">
+      <div class="sub-menu">
+        <a href="#">กยศ</a>
         <a href="#">วิชาเรียน</a>
         <a href="#">ปฏิทิน</a>
-        <a href="#">กยศ</a>
       </div>
     </div>
 
