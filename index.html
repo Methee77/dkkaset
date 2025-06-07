@@ -79,6 +79,22 @@
       position: relative;
     }
 
+    .semester-tag {
+      margin-top: 8px;
+      background-color: white;
+      color: var(--header-bg);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .dark-mode .semester-tag {
+      background-color: #fff;
+      color: #0d47a1;
+    }
+
     .header-buttons {
       position: absolute;
       top: 50%;
@@ -246,6 +262,7 @@
   <div class="wrapper">
     <header>
       เด็กดีของเสดสิ่ง67
+      <div class="semester-tag">ภาคต้น 2568</div>
       <div class="header-buttons">
         <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
         <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
@@ -261,94 +278,4 @@
       <h2 style="text-align: center;">ค้นหาตารางสอบ</h2>
       <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">Updated 7 มิถุนายน 2568</p>
 
-      <div class="search-form">
-        <form id="exam-form">
-          <label for="student-id">รหัสนิสิต</label>
-          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required />
-          <label for="grade">ชั้น</label>
-          <select id="grade" name="grade" disabled>
-            <option value="F39-1" selected>F39-1</option>
-          </select>
-          <label for="term">ภาคการศึกษา</label>
-          <select id="term" name="term" disabled>
-            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
-          </select>
-          <button type="submit">ค้นหา</button>
-        </form>
-        <div id="search-result" class="search-result"></div>
-      </div>
-
-      <div class="sub-menu">
-        <a href="#">กยศ</a>
-        <a href="subjects.html">วิชาเรียน</a>
-        <a href="#">ปฏิทิน</a>
-      </div>
-
-      <div class="announcement-box">
-        เว็บนี้ไม่ใช่เว็บสำเร็จรูป เกิดจากการเขียนโค้ดเองทุกจุด อาจจะมีบางจุดที่มองแล้วแปลกๆ เพราะอยู่ในช่วงพัฒนา
-      </div>
-    </div>
-
-    <footer>© 2025 dekdeekasetF39. All rights reserved.</footer>
-  </div>
-
-  <script>
-    // Countdown
-    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0);
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-      if (diff <= 0) {
-        document.getElementById('countdown').textContent = 'หมดเวลานับถอยหลังแล้ว';
-        clearInterval(intervalId);
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      document.getElementById('countdown').textContent =
-        `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
-    }
-    updateCountdown();
-    const intervalId = setInterval(updateCountdown, 1000);
-
-    // Search
-    document.getElementById('exam-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const input = document.getElementById('student-id').value.trim();
-      const resultBox = document.getElementById('search-result');
-      if (input === '12345') {
-        resultBox.textContent = 'พบข้อมูล';
-        resultBox.style.color = 'green';
-      } else {
-        resultBox.textContent = 'ไม่พบข้อมูล';
-        resultBox.style.color = 'red';
-      }
-    });
-
-    // Dark mode toggle
-    const toggleBtn = document.getElementById('dark-mode-toggle');
-    const bodyElement = document.body;
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      bodyElement.classList.add('dark-mode');
-      toggleBtn.textContent = '☀️';
-    }
-    toggleBtn.addEventListener('click', () => {
-      bodyElement.classList.toggle('dark-mode');
-      if (bodyElement.classList.contains('dark-mode')) {
-        toggleBtn.textContent = '☀️';
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        toggleBtn.textContent = '🌙';
-        localStorage.setItem('darkMode', 'disabled');
-      }
-    });
-
-    // ปุ่มสุธีเข้าระบบ เปลี่ยนเป็นลิงก์ไปหน้า suteelogin.html
-    document.getElementById('sutee-login').addEventListener('click', () => {
-      window.location.href = 'suteelogin.html';
-    });
-  </script>
-</body>
-</html>
+      <div
