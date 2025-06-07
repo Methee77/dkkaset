@@ -1,200 +1,164 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>วิชาเรียน</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>วิชาเรียน</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      background: #f9faff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+      padding: 2rem 3rem;
+    }
+    header {
+      border-bottom: 3px solid #2e7d32;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      color: #2e7d32;
+    }
+    header p {
+      margin: 0.2rem 0 0;
+      font-weight: 600;
+      color: #555;
+    }
 
-<!-- ฟอนต์ IBM Plex Sans Thai -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+    .dark-mode-switch {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      cursor: pointer;
+      width: 50px;
+      height: 26px;
+    }
+    .dark-mode-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      background-color: #ccc;
+      border-radius: 26px;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+    }
+    .icon-moon, .icon-sun {
+      display: none;
+      pointer-events: none;
+    }
+    .toggle-slider .icon-moon { display: inline; }
+    input[type="checkbox"]:checked + .toggle-slider {
+      background-color: #2e7d32;
+    }
+    input[type="checkbox"]:checked + .toggle-slider .icon-moon {
+      display: none;
+    }
+    input[type="checkbox"]:checked + .toggle-slider .icon-sun {
+      display: inline;
+    }
 
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    background: #f9faff;
-    color: #222;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
-  }
+    .course-list { margin-top: 1rem; }
+    .course-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #2e7d32;
+      margin: 0.8rem 0;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 8px;
+      padding: 8px 12px;
+      box-shadow: 2px 2px 6px rgb(0 0 0 / 0.15);
+    }
+    .course-title:hover,
+    .course-title:focus {
+      box-shadow: 4px 4px 12px rgb(0 0 0 / 0.25);
+      outline: none;
+    }
+    .arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .course-title[aria-expanded="true"] .arrow {
+      transform: rotate(180deg);
+    }
+    .course-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      background: #e8f5e9;
+      border-left: 4px solid #2e7d32;
+      padding: 0 1rem;
+      margin-bottom: 1rem;
+    }
+    .course-content.open {
+      max-height: 500px;
+      padding: 1rem;
+    }
+    .course-year-box {
+      background-color: #e0f2f1;
+      border-left: 4px solid #2e7d32;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      border-radius: 6px;
+    }
 
-  .container {
-    max-width: 900px;
-    margin: 2rem auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
-    padding: 2rem 3rem;
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  header {
-    border-bottom: 3px solid #2e7d32;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    position: relative;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2.2rem;
-    color: #2e7d32;
-  }
-  header p {
-    margin: 0.2rem 0 0;
-    font-weight: 600;
-    color: #555;
-  }
-
-  .dark-mode-switch {
-    position: absolute;
-    top: 5px;
-    right: 0;
-    display: inline-block;
-    cursor: pointer;
-    user-select: none;
-    width: 50px;
-    height: 26px;
-  }
-  .dark-mode-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  .toggle-slider {
-    position: relative;
-    width: 50px;
-    height: 26px;
-    background-color: #ccc;
-    border-radius: 26px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: white;
-    box-sizing: border-box;
-    padding: 0 5px;
-  }
-  .icon-moon,
-  .icon-sun {
-    position: static;
-    display: none;
-    pointer-events: none;
-  }
-  .toggle-slider .icon-moon {
-    display: inline;
-  }
-  input[type="checkbox"]:checked + .toggle-slider {
-    background-color: #2e7d32;
-  }
-  input[type="checkbox"]:checked + .toggle-slider .icon-moon {
-    display: none;
-  }
-  input[type="checkbox"]:checked + .toggle-slider .icon-sun {
-    display: inline;
-  }
-
-  .course-list {
-    margin-top: 1rem;
-  }
-  .course-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #2e7d32;
-    margin: 0.8rem 0;
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1.5px solid #a5d6a7;
-    border-radius: 8px;
-    padding: 8px 12px;
-    box-shadow: 2px 2px 6px rgb(0 0 0 / 0.15);
-    transition: box-shadow 0.3s ease;
-  }
-  .course-title:hover,
-  .course-title:focus {
-    box-shadow: 4px 4px 12px rgb(0 0 0 / 0.25);
-    outline: none;
-  }
-  .course-title .arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-  }
-  .course-title[aria-expanded="true"] .arrow {
-    transform: rotate(180deg);
-  }
-  .course-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.35s ease;
-    background: #e8f5e9;
-    border-left: 4px solid #2e7d32;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-  }
-  .course-content.open {
-    max-height: 500px;
-    padding: 1rem;
-  }
-  .course-content p {
-    margin: 0.4rem 0;
-  }
-
-  .course-year-box {
-    background-color: #e0f2f1;
-    border-left: 4px solid #2e7d32;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    border-radius: 6px;
-    box-shadow: 2px 2px 6px rgb(0 0 0 / 0.1);
-  }
-
-  /* Dark mode */
-  body.dark {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-  body.dark .container {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    box-shadow: 0 0 12px rgb(255 255 255 / 0.1);
-  }
-  body.dark header {
-    border-color: #66bb6a;
-  }
-  body.dark header h1 {
-    color: #66bb6a;
-  }
-  body.dark header p {
-    color: #aaa;
-  }
-  body.dark .course-title {
-    color: #66bb6a;
-    border-color: #4caf50;
-    box-shadow: 2px 2px 6px rgb(255 255 255 / 0.1);
-  }
-  body.dark .course-title:hover,
-  body.dark .course-title:focus {
-    box-shadow: 4px 4px 12px rgb(255 255 255 / 0.2);
-  }
-  body.dark .course-content {
-    background: #1b3c2f;
-    border-color: #66bb6a;
-  }
-  body.dark .course-year-box {
-    background-color: #2e3b32;
-    border-left-color: #66bb6a;
-    color: #c8e6c9;
-    box-shadow: 2px 2px 6px rgb(255 255 255 / 0.05);
-  }
-</style>
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark .container {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    body.dark header {
+      border-color: #66bb6a;
+    }
+    body.dark header h1 {
+      color: #66bb6a;
+    }
+    body.dark .course-title {
+      color: #66bb6a;
+      border-color: #4caf50;
+    }
+    body.dark .course-content {
+      background: #1b3c2f;
+      border-color: #66bb6a;
+    }
+    body.dark .course-year-box {
+      background-color: #2e3b32;
+      color: #c8e6c9;
+    }
+  </style>
 </head>
 <body>
 
@@ -202,8 +166,7 @@
   <header>
     <h1>วิชาเรียน F39-2</h1>
     <p>ภาคต้น 2568</p>
-
-    <label class="dark-mode-switch" aria-label="Toggle dark mode" role="switch" aria-checked="false" tabindex="0">
+    <label class="dark-mode-switch">
       <input type="checkbox" id="dark-mode-toggle" />
       <span class="toggle-slider">
         <span class="icon-moon">🌙</span>
@@ -215,11 +178,8 @@
   <div class="course-year-box">วิชาตามแผนปี 2</div>
 
   <section class="course-list">
-    <div>
-      <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">
-        011355103
-        <span class="arrow">▼</span>
-      </p>
+    <!-- รายวิชา -->
+    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">01355103<span class="arrow">▼</span></p>
       <div id="course-011355103-content" class="course-content" aria-hidden="true">
         <p><strong>ชื่อวิชา:</strong> ภาษาอังกฤษเพื่อโอกาสในการทำงาน</p>
         <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
@@ -229,22 +189,42 @@
         <p><strong>สถานที่:</strong> รอประกาศ</p>
       </div>
     </div>
-  </section>
-</div>
 
- <p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">
-        011355103
-        <span class="arrow">▼</span>
-      </p>
-      <div id="course-011355103-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> ภาษาอังกฤษเพื่อโอกาสในการทำงาน</p>
+    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175121-content">01175121<span class="arrow">▼</span></p>
+      <div id="course-01175121-content" class="course-content" aria-hidden="true">
+        <p><strong>ชื่อวิชา:</strong> การโปรแกรมเบื้องต้น</p>
         <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 703 - 707</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> กษิดิษฐ์ สุพรรณ</p>
-        <p><strong>วัน:</strong> จันทร์ พุธ 10:30 - 12:00</p>
-        <p><strong>สถานที่:</strong> รอประกาศ</p>
+        <p><strong>หมู่เรียน:</strong> 700</p>
+        <p><strong>ผู้จัดการรายวิชา:</strong> รศ.ดร. อภิชาติ วรรณวิจิตร</p>
+        <p><strong>วัน:</strong> จันทร์ 13:00 - 16:00</p>
+        <p><strong>สถานที่:</strong> SC1-201</p>
       </div>
     </div>
+
+    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175122-content">01175122<span class="arrow">▼</span></p>
+      <div id="course-01175122-content" class="course-content" aria-hidden="true">
+        <p><strong>ชื่อวิชา:</strong> คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์</p>
+        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
+        <p><strong>หมู่เรียน:</strong> 700</p>
+        <p><strong>ผู้จัดการรายวิชา:</strong> อาจารย์ปพนพัชร์ ศิริวันต์</p>
+        <p><strong>วัน:</strong> อังคาร 09:00 - 12:00</p>
+        <p><strong>สถานที่:</strong> SC1-202</p>
+      </div>
+    </div>
+
+    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175123-content">01175123<span class="arrow">▼</span></p>
+      <div id="course-01175123-content" class="course-content" aria-hidden="true">
+        <p><strong>ชื่อวิชา:</strong> โครงสร้างข้อมูล</p>
+        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
+        <p><strong>หมู่เรียน:</strong> 700</p>
+        <p><strong>ผู้จัดการรายวิชา:</strong> ดร.วรรณวิภา คงสุข</p>
+        <p><strong>วัน:</strong> พุธ 13:00 - 16:00</p>
+        <p><strong>สถานที่:</strong> SC1-201</p>
+      </div>
+    </div>
+
+    <!-- เพิ่มได้อีก 4 วิชาในรูปแบบเดียวกัน -->
+    <!-- ... -->
   </section>
 </div>
 
@@ -253,30 +233,22 @@
     title.addEventListener('click', () => {
       const content = title.nextElementSibling;
       const isOpen = content.classList.contains('open');
-
-      if (isOpen) {
-        content.classList.remove('open');
-        title.setAttribute('aria-expanded', 'false');
-        content.setAttribute('aria-hidden', 'true');
-      } else {
-        content.classList.add('open');
-        title.setAttribute('aria-expanded', 'true');
-        content.setAttribute('aria-hidden', 'false');
-      }
+      content.classList.toggle('open', !isOpen);
+      title.setAttribute('aria-expanded', String(!isOpen));
+      content.setAttribute('aria-hidden', String(isOpen));
     });
 
     title.addEventListener('keydown', (e) => {
-      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+      if (["Enter", " ", "Spacebar"].includes(e.key)) {
         e.preventDefault();
         title.click();
       }
     });
   });
 
-  const toggle = document.getElementById('dark-mode-toggle');
-  toggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark', toggle.checked);
-    toggle.setAttribute('aria-checked', toggle.checked);
+  document.getElementById('dark-mode-toggle').addEventListener('change', e => {
+    document.body.classList.toggle('dark', e.target.checked);
+    e.target.setAttribute('aria-checked', e.target.checked);
   });
 </script>
 
