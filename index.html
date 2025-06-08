@@ -318,18 +318,40 @@
     const intervalId = setInterval(updateCountdown, 1000);
 
     document.getElementById('exam-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const input = document.getElementById('student-id').value.trim();
-      const resultBox = document.getElementById('search-result');
-      if (input === '052') {
-        resultBox.textContent = 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 052 กันยาพร';
-      } else {
-        if (input === '12345') {
-        resultBox.textContent = 'พบตารางสอบ: 15 มี.ค. เวลา 09:00 วิชา BIO101';
-      } else {
-        resultBox.textContent = 'ไม่พบข้อมูลตารางสอบ';
-      }
+  e.preventDefault();
+  const input = document.getElementById('student-id').value.trim();
+  const resultBox = document.getElementById('search-result');
+
+  // ข้อมูลตัวอย่าง รหัสนิสิต : ข้อมูลตารางสอบและชื่อ
+  const examData = {
+    '052': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 052 กันยาพร', file: 'exam_052.pdf' },
+    '101': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 101 สมชาย', file: 'exam_101.pdf' },
+    '102': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 102 สมหญิง', file: 'exam_102.pdf' },
+    '103': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 103 อดิศักดิ์', file: 'exam_103.pdf' },
+    '104': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 104 พิมพ์ใจ', file: 'exam_104.pdf' },
+    '105': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 105 ศักดิ์ชัย', file: 'exam_105.pdf' },
+    '106': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 106 นิตยา', file: 'exam_106.pdf' },
+    '107': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 107 ธีรภัทร์', file: 'exam_107.pdf' },
+    '108': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 108 นภัส', file: 'exam_108.pdf' },
+    '109': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 109 ธนกร', file: 'exam_109.pdf' },
+    '110': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 110 สุมิตรา', file: 'exam_110.pdf' },
+    '111': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 111 กิตติ', file: 'exam_111.pdf' }
+  };
+
+  if (examData[input]) {
+    resultBox.innerHTML = `
+      <p>${examData[input].text}</p>
+      <button id="download-btn">Download ตารางสอบ</button>
+    `;
+
+    document.getElementById('download-btn').addEventListener('click', () => {
+      // ตัวอย่างให้ดาวน์โหลดไฟล์ PDF
+      window.open(examData[input].file, '_blank');
     });
+  } else {
+    resultBox.textContent = 'ไม่พบข้อมูลตารางสอบ';
+  }
+});
 
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
