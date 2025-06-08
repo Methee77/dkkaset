@@ -6,26 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: #f7f9fc;
-      margin: 0;
-      padding: 20px;
       transition: background-color 0.3s, color 0.3s;
     }
 
-    .dark-mode body {
+    .dark-mode html, .dark-mode body {
       background-color: #121212;
       color: #f1f1f1;
     }
 
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .container {
+      width: 100%;
       max-width: 900px;
-      margin: auto;
       background: #fff;
       border-radius: 10px;
       padding: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+      text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
 
@@ -38,7 +50,7 @@
       color: #333;
     }
 
-    .dark-mode h2, 
+    .dark-mode h2,
     .dark-mode .date,
     .dark-mode label {
       color: #f1f1f1;
@@ -60,7 +72,6 @@
       color: #856404;
       border: 1px solid #ffeeba;
       border-radius: 6px;
-      text-align: center;
     }
 
     .dark-mode .notice-box {
@@ -77,6 +88,12 @@
       justify-content: center;
     }
 
+    form > div {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
     input, select, button {
       padding: 10px;
       font-size: 1rem;
@@ -90,6 +107,17 @@
       background-color: #333;
       color: white;
       border: 1px solid #666;
+    }
+
+    input[readonly], select[disabled] {
+      background-color: #e9ecef;
+      color: #6c757d;
+    }
+
+    .dark-mode input[readonly],
+    .dark-mode select[disabled] {
+      background-color: #2c2c2c;
+      color: #aaa;
     }
 
     button {
@@ -127,6 +155,12 @@
       font-weight: bold;
     }
 
+    .registered-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
     .registered-info div {
       background-color: #f8f9fa;
       border: 1px solid #ccc;
@@ -145,25 +179,23 @@
     .theme-toggle {
       position: absolute;
       top: 20px;
-      right: 30px;
-      background: #444;
-      color: white;
+      right: 20px;
+      background: none;
       border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
+      font-size: 1.8rem;
       cursor: pointer;
+      transition: color 0.3s;
     }
 
     .dark-mode .theme-toggle {
-      background: #ccc;
-      color: #222;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">เปลี่ยนโหมด</button>
-
   <div class="container">
+    <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">🌙</button>
+
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
     <p class="date">วันอาทิตย์, 8 มิถุนายน 2568 <span class="term-tag">ภาคต้น 2568</span></p>
 
@@ -266,12 +298,18 @@
       document.documentElement.classList.toggle('dark-mode');
       const isDark = document.documentElement.classList.contains('dark-mode');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
     }
 
     // Load saved theme on page load
     window.onload = function () {
-      if (localStorage.getItem('theme') === 'dark') {
+      const savedTheme = localStorage.getItem('theme');
+      const toggleBtn = document.querySelector('.theme-toggle');
+      if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark-mode');
+        toggleBtn.textContent = '☀️';
+      } else {
+        toggleBtn.textContent = '🌙';
       }
     };
   </script>
