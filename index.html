@@ -321,7 +321,10 @@
       e.preventDefault();
       const input = document.getElementById('student-id').value.trim();
       const resultBox = document.getElementById('search-result');
-      if (input === '12345') {
+      if (input === '052') {
+        resultBox.textContent = 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ 052 กันยาพร';
+      } else {
+        if (input === '12345') {
         resultBox.textContent = 'พบตารางสอบ: 15 มี.ค. เวลา 09:00 วิชา BIO101';
       } else {
         resultBox.textContent = 'ไม่พบข้อมูลตารางสอบ';
