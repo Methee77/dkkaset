@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <title>ค้นหารายวิชาที่เปิดสอน</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: #f7f9fc;
       margin: 0;
       padding: 20px;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 900px;
       margin: auto;
       background: #fff;
       border-radius: 10px;
@@ -77,6 +78,11 @@
       border: 1px solid #ccc;
     }
 
+    input[readonly], select[disabled] {
+      background-color: #e9ecef;
+      color: #6c757d;
+    }
+
     button {
       background-color: #00bcd4;
       color: white;
@@ -95,57 +101,48 @@
     }
 
     .course-card {
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      border-left: 6px solid #3498db;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
+      padding: 16px;
+      background: #fdfdfd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .course-header {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .course-info {
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    .registered-info {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
-    .course-details {
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .course-meta {
-      text-align: right;
-      min-width: 150px;
-    }
-
-    .meta-box {
-      border: 1px solid #28a745;
+    .registered-info div {
+      background-color: #f8f9fa;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      text-align: center;
+      flex: 1;
+      margin: 0 5px;
+    }
+
+    .registered-info div strong {
+      display: block;
       color: #28a745;
-      font-weight: bold;
-    }
-
-    .meta-box.red {
-      border-color: #c0392b;
-      color: #c0392b;
-    }
-
-    .course-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .course-sub {
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .course-label {
-      color: #333;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -164,16 +161,20 @@
         <input type="text" id="course-code" placeholder="รหัสวิชา เช่น 01419211" required />
       </div>
       <div>
-        <label>วิทยาเขต *</label>
-        <input type="text" value="กำแพงแสน" readonly />
+        <label for="campus">วิทยาเขต *</label>
+        <input type="text" id="campus" value="กำแพงแสน" readonly />
       </div>
       <div>
-        <label>ปีการศึกษา *</label>
-        <input type="text" value="2568" readonly />
+        <label for="year">ปีการศึกษา *</label>
+        <select id="year" disabled>
+          <option value="2568" selected>2568</option>
+        </select>
       </div>
       <div>
-        <label>ภาคการศึกษา *</label>
-        <input type="text" value="ภาคต้น" readonly />
+        <label for="semester">ภาคการศึกษา *</label>
+        <select id="semester" disabled>
+          <option value="ภาคต้น" selected>ภาคต้น</option>
+        </select>
       </div>
       <div>
         <button type="submit">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
@@ -184,58 +185,51 @@
   </div>
 
   <script>
-    const courses = {
+    const availableCourses = {
       "01419211": {
-        code: "01419211-65",
-        name: "จุลชีววิทยาทั่วไป",
-        engName: "General Microbiology",
-        type: "ปกติ",
-        group: "700",
-        credit: 3,
-        schedule: [
-          { day: "THU", time: "10:30 - 12:00", room: "ห้อง ติดต่อผู้สอน" },
-          { day: "TUE", time: "10:30 - 12:00", room: "ห้อง ติดต่อผู้สอน" }
+        title: "จุลชีววิทยาทั่วไป",
+        english: "General Microbiology",
+        section: "700",
+        type: "บรรยาย",
+        unit: 3,
+        time: [
+          "THU 10:30 - 12:00 ห้อง ติดต่อผู้สอน",
+          "TUE 10:30 - 12:00 ห้อง ติดต่อผู้สอน"
         ],
-        status: "ยังไม่ประกาศให้ลงทะเบียน",
+        registered: 0,
         capacity: 350,
-        registered: 0
-      }
+        announce: false
+      },
+      // เพิ่มวิชาอื่นๆ ได้ที่นี่
     };
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const code = document.getElementById('course-code').value.trim();
       const resultBox = document.getElementById('result');
-      resultBox.innerHTML = '';
+      resultBox.innerHTML = "";
 
-      const course = courses[code];
-      if (course) {
-        const card = document.createElement('div');
-        card.className = 'course-card';
-
-        const details = `
-          <div class="course-details">
-            <div class="course-title">${course.code}</div>
-            <div class="course-sub">หมู่ ${course.group} <span class="term-tag">บรรยาย</span> ${course.credit} หน่วยกิต</div>
-            <div class="course-label">${course.name}<br>${course.engName}</div>
-            <div class="course-label">ประเภทหมู่เรียน: ${course.type}</div>
-            <div class="course-label">สามารถเรียนทดแทนวิชา: -</div>
-            <div class="course-label" style="color: #c0392b;">${course.status}</div>
-            ${course.schedule.map(s => `<div class="course-label">${s.day} ${s.time} ${s.room}</div>`).join('')}
+      if (availableCourses[code]) {
+        const course = availableCourses[code];
+        const html = `
+          <div class="course-card">
+            <div class="course-header">${code}-65 หมู่ ${course.section} ${course.type} ${course.unit} หน่วยกิต</div>
+            <div class="course-info">${course.title}<br>${course.english}</div>
+            <div class="course-info">ประเภทหมู่เรียน : ปกติ</div>
+            <div class="course-info">สามารถเรียนทดแทนวิชา : -</div>
+            <div class="course-info highlight">
+              ${course.announce ? 'เปิดลงทะเบียนแล้ว' : 'ยังไม่ประกาศให้ลงทะเบียน'}
+            </div>
+            ${course.time.map(t => `<div class="course-info">${t}</div>`).join('')}
+            <div class="registered-info">
+              <div><strong>${course.capacity}</strong>จำนวนรับ</div>
+              <div><strong>${course.registered}</strong>ลงทะเบียนแล้ว</div>
+            </div>
           </div>
         `;
-
-        const meta = `
-          <div class="course-meta">
-            <div class="meta-box">${course.capacity}<br>จำนวนรับ</div>
-            <div class="meta-box red">${course.registered}<br>ลงทะเบียนแล้ว</div>
-          </div>
-        `;
-
-        card.innerHTML = details + meta;
-        resultBox.appendChild(card);
+        resultBox.innerHTML = html;
       } else {
-        resultBox.innerHTML = '<div class="course-label" style="text-align:center;color:#c0392b;">ไม่พบข้อมูลวิชานี้ในระบบ</div>';
+        resultBox.innerHTML = `<p style="color: #c0392b; text-align: center; font-weight: bold;">ไม่พบข้อมูลวิชานี้ในระบบ</p>`;
       }
     });
   </script>
