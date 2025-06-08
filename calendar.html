@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ปฏิทินการศึกษา</title>
+  <style>
+    body { margin: 0; font-family: 'Tahoma', sans-serif; }
+
+    /* Navbar */
+    .navbar {
+      background-color: #004d99;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 10px;
+      display: block;
+    }
+
+    .navbar .menu a:hover {
+      background-color: #003366;
+    }
+
+    /* Responsive for small screen */
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu a {
+        width: 100%;
+      }
+    }
+
+    /* Page content */
+    .content {
+      padding: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 1000px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">ระบบการศึกษา</div>
+    <div class="menu">
+      <a href="#">หน้าหลัก</a>
+      <a href="#">หลักสูตร</a>
+      <a href="#">วิชาเรียน</a>
+      <a href="#">ปฏิทิน</a>
+      <a href="#">ติดต่อเรา</a>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="content">
+    <h2>ปฏิทินการศึกษา</h2>
+    <iframe src="https://academic.npru.ac.th/academiccalendar/" title="ปฏิทิน"></iframe>
+  </div>
+
+</body>
+</html>
