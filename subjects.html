@@ -133,7 +133,7 @@
       }
     }
 
-    /* 🔔 Floating Announcement */
+    /* 🟥 กล่องประกาศแบบลอย ปรับขนาดใหญ่ขึ้น */
     .floating-announcement {
       position: fixed;
       top: 20px;
@@ -142,42 +142,30 @@
       background-color: #ffebee;
       color: #c62828;
       border: 1px solid #e53935;
-      padding: 12px 16px;
-      border-radius: 8px;
-      max-width: 700px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      font-size: 14.5px;
-      line-height: 1.6;
+      padding: 20px 30px;
+      border-radius: 10px;
+      max-width: 900px;
+      width: 90%;
+      font-size: 16px;
+      line-height: 1.8;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      box-sizing: border-box;
       text-align: center;
+      box-sizing: border-box;
     }
 
     .floating-announcement a {
       color: #b71c1c;
       text-decoration: underline;
     }
-
-    .floating-announcement .close-btn {
-      position: absolute;
-      top: 6px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 18px;
-      color: #c62828;
-      cursor: pointer;
-      line-height: 1;
-    }
   </style>
 </head>
 <body data-theme="light">
 
-  <!-- 🔔 Floating Announcement -->
-  <div class="floating-announcement" id="announcementBox">
+  <!-- 🟥 กล่องประกาศแบบลอย -->
+  <div class="floating-announcement">
     🔔 วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ กรุณาตรวจสอบเองได้ที่
     <a href="https://my.ku.ac.th" target="_blank">myKU</a>
-    <button class="close-btn" onclick="document.getElementById('announcementBox').style.display='none'">×</button>
   </div>
 
   <div class="search-container">
