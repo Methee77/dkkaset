@@ -13,6 +13,8 @@
       --border-color: #ccc;
       --btn-bg: #00bcd4;
       --btn-hover: #0097a7;
+      --locked-bg: #e0e0e0;
+      --locked-color: #555;
     }
 
     [data-theme="dark"] {
@@ -23,6 +25,8 @@
       --border-color: #555;
       --btn-bg: #26c6da;
       --btn-hover: #00acc1;
+      --locked-bg: #333;
+      --locked-color: #ccc;
     }
 
     body {
@@ -38,23 +42,6 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    .announcement {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #f44336;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      font-size: 16px;
-      max-width: 90%;
-      z-index: 1000;
-      text-align: center;
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-    }
-
     .search-container {
       background: var(--box-bg);
       border-radius: 12px;
@@ -68,8 +55,20 @@
       transition: background 0.3s;
     }
 
+    .announcement-box {
+      background: #ffebee;
+      color: #c62828;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      font-weight: bold;
+    }
+
     h2 {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-align: center;
       font-size: 24px;
     }
@@ -116,11 +115,17 @@
 
     .text-display {
       padding: 10px 14px;
-      background-color: var(--input-bg);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       font-size: 16px;
       color: var(--text-color);
+      background-color: var(--input-bg);
+    }
+
+    .text-display.locked {
+      background-color: var(--locked-bg);
+      color: var(--locked-color);
+      font-weight: bold;
     }
 
     .clear-btn {
@@ -163,16 +168,16 @@
 </head>
 <body data-theme="light">
 
-  <div class="announcement">
-    วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ ตรวจสอบเองได้ที่ระบบ myKU
-  </div>
-
   <div class="search-container">
     <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">
       🌙
     </button>
 
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
+
+    <div class="announcement-box">
+      วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ ตรวจสอบเองได้ที่ระบบ myKU
+    </div>
 
     <div class="form-grid">
       <div class="form-group">
@@ -183,17 +188,17 @@
 
       <div class="form-group">
         <label>วิทยาเขต</label>
-        <div class="text-display">กำแพงแสน</div>
+        <div class="text-display locked">กำแพงแสน</div>
       </div>
 
       <div class="form-group">
         <label>ปีการศึกษา</label>
-        <div class="text-display">2568</div>
+        <div class="text-display locked">2568</div>
       </div>
 
       <div class="form-group">
         <label>ภาคการศึกษา</label>
-        <div class="text-display">ภาคต้น</div>
+        <div class="text-display locked">ภาคต้น</div>
       </div>
 
       <div class="form-group">
