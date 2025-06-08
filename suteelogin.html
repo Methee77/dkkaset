@@ -3,162 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>เข้าสู่ระบบ</title>
-
-  <!-- ฟอนต์ IBM Plex Sans Thai -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
-
+  <title>เข้าสู่ระบบ KU</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f4f4f4;
       margin: 0;
-      padding: 0;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      background-color: #f0f4f8;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      color: #222;
-      position: relative;
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .login-wrapper {
-      background-color: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      width: 320px;
-      text-align: center;
-      z-index: 1;
-    }
-
-    h2 {
-      margin-bottom: 24px;
-      font-weight: 600;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      font-family: 'IBM Plex Sans Thai', sans-serif; /* เพิ่มฟอนต์ */
+    .container {
+      display: flex;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 900px;
       width: 100%;
-      padding: 10px 12px;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      background-color: #004d40;
+      color: white;
+      flex: 1 1 300px;
+      padding: 40px 30px;
+    }
+
+    .left h2 {
+      font-size: 1.8rem;
       margin-bottom: 20px;
-      border: 1.5px solid #ccc;
+    }
+
+    .left ul {
+      padding-left: 20px;
+    }
+
+    .right {
+      flex: 1 1 300px;
+      padding: 40px 30px;
+    }
+
+    .right h2 {
+      margin-bottom: 20px;
+      color: #003366;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
-      box-sizing: border-box;
-      transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      border-color: #0070f3;
-      box-shadow: 0 0 6px #0070f3aa;
     }
 
     button {
-      font-family: 'IBM Plex Sans Thai', sans-serif; /* เพิ่มฟอนต์ */
-      width: 100%;
       padding: 12px;
-      background-color: #0070f3;
-      border: none;
-      border-radius: 6px;
+      background-color: #003366;
       color: white;
-      font-size: 1.1rem;
+      border: none;
+      font-size: 1rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.2s;
     }
 
     button:hover {
-      background-color: #005bb5;
+      background-color: #0055aa;
     }
 
-    /* แถบข้อความลอยด้านบน */
-    #message {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      min-width: 280px;
-      max-width: 90vw;
-      padding: 14px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      display: none;
-      z-index: 9999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      cursor: default;
-      user-select: none;
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
-    #message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1.5px solid #c3e6cb;
-    }
-
-    #message.success a {
-      color: #155724;
-      text-decoration: underline;
-      font-weight: 700;
-      margin-left: 6px;
-    }
-
-    #message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1.5px solid #f5c6cb;
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left, .right {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="login-wrapper">
-    <h2>สุธีเข้าระบบ Admin</h2>
-    <form id="login-form" autocomplete="off">
-      <label for="username">ชื่อผู้ใช้</label>
-      <input type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" required />
-
-      <label for="password">รหัสผ่าน</label>
-      <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" required />
-
-      <button type="submit">เข้าสู่ระบบ</button>
-    </form>
-
-    <div id="message" class="message"></div>
+  <div class="container">
+    <div class="left">
+      <h2>ข่าวประชาสัมพันธ์</h2>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div class="right">
+      <h2>เข้าสู่ระบบนิสิต</h2>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="ชื่อผู้ใช้" required />
+        <input type="password" id="password" placeholder="รหัสผ่าน" required />
+        <button type="submit">เข้าสู่ระบบ</button>
+        <div class="error" id="error-msg"></div>
+      </form>
+    </div>
   </div>
 
   <script>
     const form = document.getElementById('login-form');
-    const messageBox = document.getElementById('message');
+    const errorMsg = document.getElementById('error-msg');
 
-    form.addEventListener('submit', function(e){
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
 
-      if(username === 'sutee206494' && password === '206494') {
-        messageBox.className = 'message success';
-        messageBox.innerHTML = 'เข้าระบบสำเร็จ! กำลังไปยังระบบ...';
-        messageBox.style.display = 'block';
-
-        // รอ 0.5 วินาที แล้วลิงก์ไปหน้า GitHub อัตโนมัติ
-        setTimeout(() => {
-          window.location.href = 'https://github.com/Methee77/dkkaset';
-        }, 2000);
+      if (username === '206494' && password === '206494') {
+        window.location.href = 'home.html'; // เปลี่ยนไปหน้าอื่นตามต้องการ
       } else {
-        messageBox.className = 'message error';
-        messageBox.textContent = 'เข้าระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ่าน';
-        messageBox.style.display = 'block';
+        errorMsg.textContent = 'ไม่สามารถเข้าสู่ระบบได้';
       }
     });
   </script>
