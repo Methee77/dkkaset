@@ -1,92 +1,121 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ปฏิทินการศึกษา</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ปฏิทินการศึกษึกษา 2568</title>
   <style>
-    body { margin: 0; font-family: 'Tahoma', sans-serif; }
-
-    /* Navbar */
-    .navbar {
-      background-color: #004d99;
-      overflow: hidden;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-      color: white;
+    body {
+      margin: 0;
+      font-family: 'Sarabun', sans-serif;
+      background-color: #f5f5f5;
     }
-
-    .navbar .logo {
-      font-size: 20px;
+    header {
+      background-color: #1d3979;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8em;
       font-weight: bold;
     }
-
-    .navbar .menu {
+    .container {
+      padding: 30px;
+    }
+    .year-title {
+      color: red;
+      font-size: 1.6em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .section {
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
     }
-
-    .navbar .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 14px 10px;
-      display: block;
-    }
-
-    .navbar .menu a:hover {
-      background-color: #003366;
-    }
-
-    /* Responsive for small screen */
-    @media screen and (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .menu {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .menu a {
-        width: 100%;
-      }
-    }
-
-    /* Page content */
-    .content {
-      padding: 20px;
-    }
-
-    iframe {
+    .section-title {
       width: 100%;
-      height: 1000px;
-      border: none;
+      padding: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
     }
+    .normal-term {
+      background-color: #d71414;
+    }
+    .special-term {
+      background-color: #a07b00;
+    }
+    .term-boxes {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      width: 100%;
+    }
+    .term {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .term-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    .term-title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .term-red .term-icon { color: #8b0000; }
+    .term-green .term-icon { color: #006400; }
+    .term-purple .term-icon { color: #800080; }
+    .term-brown .term-icon { color: #a0522d; }
+    .term-indigo .term-icon { color: #4b0082; }
+    .term-blue .term-icon { color: #00aaff; }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+  <header>ปฏิทินการศึกษึกษา</header>
+  <div class="container">
+    <div class="year-title">🔥 ปีการศึกษึกษา 2568</div>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="logo">ระบบการศึกษา</div>
-    <div class="menu">
-      <a href="#">หน้าหลัก</a>
-      <a href="#">หลักสูตร</a>
-      <a href="#">วิชาเรียน</a>
-      <a href="#">ปฏิทิน</a>
-      <a href="#">ติดต่อเรา</a>
+    <div class="section">
+      <div class="section-title normal-term">ภาคปกติ</div>
+      <div class="term-boxes">
+        <div class="term term-red">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคเรียนที่ 1</div>
+        </div>
+        <div class="term term-green">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคเรียนที่ 2</div>
+        </div>
+        <div class="term term-purple">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคภฤรษร้อน</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title special-term">ภาค กศ.พ.</div>
+      <div class="term-boxes" style="background-color: #ffffe0;">
+        <div class="term term-brown">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคเรียนที่ 1</div>
+        </div>
+        <div class="term term-indigo">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคเรียนที่ 2</div>
+        </div>
+        <div class="term term-blue">
+          <div class="term-icon"><i class="fas fa-book"></i></div>
+          <div class="term-title">ภาคภฤรษร้อน</div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Page Content -->
-  <div class="content">
-    <h2>ปฏิทินการศึกษา</h2>
-    <iframe src="https://academic.npru.ac.th/academiccalendar/" title="ปฏิทิน"></iframe>
-  </div>
-
 </body>
 </html>
