@@ -13,7 +13,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: auto;
       background: #fff;
       border-radius: 10px;
@@ -77,12 +77,6 @@
       border: 1px solid #ccc;
     }
 
-    select[disabled], input[readonly] {
-      background-color: #eee;
-      color: #555;
-      cursor: not-allowed;
-    }
-
     button {
       background-color: #00bcd4;
       color: white;
@@ -98,9 +92,60 @@
 
     .result-box {
       margin-top: 30px;
-      text-align: center;
+    }
+
+    .course-card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-left: 6px solid #3498db;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .course-details {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .course-meta {
+      text-align: right;
+      min-width: 150px;
+    }
+
+    .meta-box {
+      border: 1px solid #28a745;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .meta-box.red {
+      border-color: #c0392b;
+      color: #c0392b;
+    }
+
+    .course-title {
       font-size: 1.1rem;
       font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .course-sub {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .course-label {
+      color: #333;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -118,33 +163,18 @@
         <label for="course-code">ค้นหารายวิชา *</label>
         <input type="text" id="course-code" placeholder="รหัสวิชา เช่น 01419211" required />
       </div>
-
       <div>
-        <label for="campus">วิทยาเขต *</label>
-        <input type="text" id="campus" value="กำแพงแสน" readonly />
+        <label>วิทยาเขต *</label>
+        <input type="text" value="กำแพงแสน" readonly />
       </div>
-
       <div>
-        <label for="year">ปีการศึกษา *</label>
-        <select id="year" disabled>
-          <option value="2568" selected>2568</option>
-        </select>
+        <label>ปีการศึกษา *</label>
+        <input type="text" value="2568" readonly />
       </div>
-
       <div>
-        <label for="semester">ภาคการศึกษา *</label>
-        <select id="semester" disabled>
-          <option value="ภาคต้น" selected>ภาคต้น</option>
-        </select>
+        <label>ภาคการศึกษา *</label>
+        <input type="text" value="ภาคต้น" readonly />
       </div>
-
-      <div>
-        <label for="exam-type">ประเภทการสอบ *</label>
-        <select id="exam-type">
-          <option value="ปลายภาค" selected>ปลายภาค</option>
-        </select>
-      </div>
-
       <div>
         <button type="submit">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
       </div>
@@ -154,22 +184,58 @@
   </div>
 
   <script>
-    const availableCourses = [
-      "01355103", "01419211", "01419214", "02181333", "02181261",
-      "02031474", "02999147", "01999021", "01424111"
-    ];
+    const courses = {
+      "01419211": {
+        code: "01419211-65",
+        name: "จุลชีววิทยาทั่วไป",
+        engName: "General Microbiology",
+        type: "ปกติ",
+        group: "700",
+        credit: 3,
+        schedule: [
+          { day: "THU", time: "10:30 - 12:00", room: "ห้อง ติดต่อผู้สอน" },
+          { day: "TUE", time: "10:30 - 12:00", room: "ห้อง ติดต่อผู้สอน" }
+        ],
+        status: "ยังไม่ประกาศให้ลงทะเบียน",
+        capacity: 350,
+        registered: 0
+      }
+    };
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const code = document.getElementById('course-code').value.trim();
       const resultBox = document.getElementById('result');
+      resultBox.innerHTML = '';
 
-      if (availableCourses.includes(code)) {
-        resultBox.textContent = `พบวิชา ${code} ในระบบสำหรับภาคต้น 2568 วิทยาเขตกำแพงแสน`;
-        resultBox.style.color = '#28a745';
+      const course = courses[code];
+      if (course) {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+
+        const details = `
+          <div class="course-details">
+            <div class="course-title">${course.code}</div>
+            <div class="course-sub">หมู่ ${course.group} <span class="term-tag">บรรยาย</span> ${course.credit} หน่วยกิต</div>
+            <div class="course-label">${course.name}<br>${course.engName}</div>
+            <div class="course-label">ประเภทหมู่เรียน: ${course.type}</div>
+            <div class="course-label">สามารถเรียนทดแทนวิชา: -</div>
+            <div class="course-label" style="color: #c0392b;">${course.status}</div>
+            ${course.schedule.map(s => `<div class="course-label">${s.day} ${s.time} ${s.room}</div>`).join('')}
+          </div>
+        `;
+
+        const meta = `
+          <div class="course-meta">
+            <div class="meta-box">${course.capacity}<br>จำนวนรับ</div>
+            <div class="meta-box red">${course.registered}<br>ลงทะเบียนแล้ว</div>
+          </div>
+        `;
+
+        card.innerHTML = details + meta;
+        resultBox.appendChild(card);
       } else {
-        resultBox.textContent = 'ไม่พบข้อมูลวิชานี้ในระบบ';
-        resultBox.style.color = '#c0392b';
+        resultBox.innerHTML = '<div class="course-label" style="text-align:center;color:#c0392b;">ไม่พบข้อมูลวิชานี้ในระบบ</div>';
       }
     });
   </script>
