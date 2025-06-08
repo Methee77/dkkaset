@@ -3,298 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>วิชาเรียน</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>ค้นหารายวิชา</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; }
     body {
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background: #f9faff;
-      color: #222;
       margin: 0;
       padding: 0;
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
+      background: #f8f8f8;
+      color: #333;
     }
     .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
-      padding: 2rem 3rem;
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    header {
-      border-bottom: 3px solid #2e7d32;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      position: relative;
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      color: #2e7d32;
-    }
-    header p {
-      margin: 0.2rem 0 0;
-      font-weight: 600;
-      color: #555;
-    }
-
-    .dark-mode-switch {
-      position: absolute;
-      top: 5px;
-      right: 0;
-      cursor: pointer;
-      width: 50px;
-      height: 26px;
-    }
-    .dark-mode-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .toggle-slider {
-      position: relative;
-      width: 50px;
-      height: 26px;
-      background-color: #ccc;
-      border-radius: 26px;
-      transition: background-color 0.3s ease;
+    .form-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: white;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
     }
-    .icon-moon, .icon-sun {
-      display: none;
-      pointer-events: none;
-    }
-    .toggle-slider .icon-moon { display: inline; }
-    input[type="checkbox"]:checked + .toggle-slider {
-      background-color: #2e7d32;
-    }
-    input[type="checkbox"]:checked + .toggle-slider .icon-moon {
-      display: none;
-    }
-    input[type="checkbox"]:checked + .toggle-slider .icon-sun {
-      display: inline;
-    }
-
-    .course-list { margin-top: 1rem; }
-    .course-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #2e7d32;
-      margin: 0.8rem 0;
-      cursor: pointer;
-      user-select: none;
+    .form-group {
+      flex: 1 1 200px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1.5px solid #a5d6a7;
-      border-radius: 8px;
-      padding: 8px 12px;
-      box-shadow: 2px 2px 6px rgb(0 0 0 / 0.15);
+      flex-direction: column;
     }
-    .course-title:hover,
-    .course-title:focus {
-      box-shadow: 4px 4px 12px rgb(0 0 0 / 0.25);
-      outline: none;
-    }
-    .arrow {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-    .course-title[aria-expanded="true"] .arrow {
-      transform: rotate(180deg);
-    }
-    .course-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
-      background: #e8f5e9;
-      border-left: 4px solid #2e7d32;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
-    }
-    .course-content.open {
-      max-height: 500px;
-      padding: 1rem;
-    }
-    .course-year-box {
-      background-color: #e0f2f1;
-      border-left: 4px solid #2e7d32;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1.5rem;
+    label {
+      margin-bottom: 5px;
       font-weight: 600;
+    }
+    input, select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
       border-radius: 6px;
     }
-
-    body.dark {
-      background-color: #121212;
-      color: #e0e0e0;
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #00bfa5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
     }
-    body.dark .container {
-      background-color: #1e1e1e;
-      color: #e0e0e0;
+    button:hover {
+      background: #009e88;
     }
-    body.dark header {
-      border-color: #66bb6a;
-    }
-    body.dark header h1 {
-      color: #66bb6a;
-    }
-    body.dark .course-title {
-      color: #66bb6a;
-      border-color: #4caf50;
-    }
-    body.dark .course-content {
-      background: #1b3c2f;
-      border-color: #66bb6a;
-    }
-    body.dark .course-year-box {
-      background-color: #2e3b32;
-      color: #c8e6c9;
+    .results {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e0f7fa;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>วิชาเรียน F39-2</h1>
-    <p>ภาคต้น 2568</p>
-    <label class="dark-mode-switch">
-      <input type="checkbox" id="dark-mode-toggle" />
-      <span class="toggle-slider">
-        <span class="icon-moon">🌙</span>
-        <span class="icon-sun">☀️</span>
-      </span>
-    </label>
-  </header>
+  <div class="container">
+    <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
+    <p style="text-align: center; color: gray;">วันอาทิตย์, 8 มิถุนายน 2568 - ภาคต้น 2568</p>
 
-  <div class="course-year-box">วิชาตามแผนปี 2</div>
-
-  <section class="course-list">
-    <!-- รายวิชา -->
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-011355103-content">01355103<span class="arrow">▼</span></p>
-      <div id="course-011355103-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> ภาษาอังกฤษเพื่อโอกาสในการทำงาน</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 703 - 707</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> กษิดิษฐ์ สุพรรณ</p>
-        <p><strong>วัน:</strong> จันทร์ พุธ 10:30 - 12:00</p>
-        <p><strong>สถานที่:</strong> รอประกาศ</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="search">ค้นหารายวิชา *</label>
+        <input type="text" id="search" placeholder="รหัสวิชา, ชื่อวิชา" />
+      </div>
+      <div class="form-group">
+        <label for="campus">วิทยาเขต *</label>
+        <select id="campus">
+          <option>กำแพงแสน</option>
+          <option>บางเขน</option>
+          <option>ศรีราชา</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="group">หมู่เรียน</label>
+        <input type="text" id="group" />
       </div>
     </div>
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-1419211-content">01419211<span class="arrow">▼</span></p>
-      <div id="course-01419211-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> จุลชีววิทยาทั่วไป</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> มลธิรา ศรีถาวร</p>
-        <p><strong>วัน:</strong> อังคาร พฤหัสบดี 13:00 - 16:00</p>
-        <p><strong>สถานที่:</strong> รอประกาศ</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="year">ปีการศึกษา *</label>
+        <select id="year">
+          <option>2568</option>
+          <option>2567</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="semester">ภาคการศึกษา *</label>
+        <select id="semester">
+          <option>ภาคต้น</option>
+          <option>ภาคปลาย</option>
+        </select>
       </div>
     </div>
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01419214-content">01419214<span class="arrow">▼</span></p>
-      <div id="course-01419214-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> จุลชีววิทยาพื้นฐานภาคปฏิบัติการ</p>
-        <p><strong>หน่วยกิต:</strong> 1 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 713 714 715</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> จุฑาทิพย์ โพธิ์อุบล</p>
-        <p><strong>วัน:</strong> จันทร์ 13:00 - 16:00</p>
-        <p><strong>สถานที่:</strong> SC14-422 SC14-423 SC14-424</p>
-      </div>
-    </div>
+    <button onclick="searchSubjects()">รายชื่อวิชาที่เปิดสอบทั้งหมด</button>
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175123-content">01175123<span class="arrow">▼</span></p>
-      <div id="course-01175123-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> โครงสร้างข้อมูล</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> ดร.วรรณวิภา คงสุข</p>
-        <p><strong>วัน:</strong> พุธ 13:00 - 16:00</p>
-        <p><strong>สถานที่:</strong> SC1-201</p>
-      </div>
-    </div>
+    <div id="results" class="results" style="display: none;"></div>
+  </div>
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175122-content">01175122<span class="arrow">▼</span></p>
-      <div id="course-01175122-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> อาจารย์ปพนพัชร์ ศิริวันต์</p>
-        <p><strong>วัน:</strong> อังคาร 09:00 - 12:00</p>
-        <p><strong>สถานที่:</strong> SC1-202</p>
-      </div>
-    </div>
+  <script>
+    const subjects = [
+      "01355103", "01419211", "01419214", "02181333",
+      "02181261", "02031474", "02999147", "01999021", "01424111"
+    ];
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175122-content">01175122<span class="arrow">▼</span></p>
-      <div id="course-01175122-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> อาจารย์ปพนพัชร์ ศิริวันต์</p>
-        <p><strong>วัน:</strong> อังคาร 09:00 - 12:00</p>
-        <p><strong>สถานที่:</strong> SC1-202</p>
-      </div>
-    </div>
+    function searchSubjects() {
+      const query = document.getElementById('search').value.trim();
+      const resultDiv = document.getElementById('results');
+      let filtered = [];
 
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175122-content">01175122<span class="arrow">▼</span></p>
-      <div id="course-01175122-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> อาจารย์ปพนพัชร์ ศิริวันต์</p>
-        <p><strong>วัน:</strong> อังคาร 09:00 - 12:00</p>
-        <p><strong>สถานที่:</strong> SC1-202</p>
-      </div>
-    </div>
-
-    <div><p class="course-title" tabindex="0" role="button" aria-expanded="false" aria-controls="course-01175122-content">01175122<span class="arrow">▼</span></p>
-      <div id="course-01175122-content" class="course-content" aria-hidden="true">
-        <p><strong>ชื่อวิชา:</strong> คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์</p>
-        <p><strong>หน่วยกิต:</strong> 3 หน่วยกิต</p>
-        <p><strong>หมู่เรียน:</strong> 700</p>
-        <p><strong>ผู้จัดการรายวิชา:</strong> อาจารย์ปพนพัชร์ ศิริวันต์</p>
-        <p><strong>วัน:</strong> อังคาร 09:00 - 12:00</p>
-        <p><strong>สถานที่:</strong> SC1-202</p>
-      </div>
-    </div>
-
-    <!-- เพิ่มได้อีก 4 วิชาในรูปแบบเดียวกัน -->
-    <!-- ... -->
-  </section>
-</div>
-
-<script>
-  document.querySelectorAll('.course-title').forEach(title => {
-    title.addEventListener('click', () => {
-      const content = title.nextElementSibling;
-      const isOpen = content.classList.contains('open');
-      content.classList.toggle('open', !isOpen);
-      title.setAttribute('aria-expanded', String(!isOpen));
-      content.setAttribute('aria-hidden', String(isOpen));
-    });
-
-    title.addEventListener('keydown', (e) => {
-      if (["Enter", " ", "Spacebar"].includes(e.key)) {
-        e.preventDefault();
-        title.click();
+      if (query === '') {
+        filtered = subjects;
+      } else {
+        filtered = subjects.filter(code => code.includes(query));
       }
-    });
-  });
 
-  document.getElementById('dark-mode-toggle').addEventListener('change', e => {
-    document.body.classList.toggle('dark', e.target.checked);
-    e.target.setAttribute('aria-checked', e.target.checked);
-  });
-</script>
+      if (filtered.length === 0) {
+        resultDiv.innerHTML = "ไม่พบรายวิชาที่ตรงกับคำค้นหา";
+      } else {
+        resultDiv.innerHTML = "<strong>รายวิชาที่พบ:</strong><ul>" +
+          filtered.map(code => `<li>${code}</li>`).join('') + "</ul>";
+      }
+      resultDiv.style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
