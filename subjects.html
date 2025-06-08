@@ -20,14 +20,13 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 600px;
       margin: auto;
       background: #fff;
       border-radius: 10px;
       padding: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       transition: background-color 0.3s, color 0.3s;
-      text-align: center;
     }
 
     .dark-mode .container {
@@ -35,260 +34,214 @@
       box-shadow: 0 0 10px rgba(255,255,255,0.05);
     }
 
-    h2, .date, label {
-      color: #333;
+    h2 {
+      text-align: center;
     }
 
-    .dark-mode h2, 
-    .dark-mode .date,
-    .dark-mode label {
+    .theme-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .theme-toggle button {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .dark-mode .theme-toggle button {
       color: #f1f1f1;
     }
 
-    .term-tag {
-      background: #007bff;
-      color: white;
-      padding: 4px 10px;
-      border-radius: 10px;
-      margin-left: 10px;
-      font-weight: bold;
-    }
-
-    .notice-box {
-      margin-top: 10px;
-      padding: 12px;
-      background-color: #fff3cd;
-      color: #856404;
-      border: 1px solid #ffeeba;
-      border-radius: 6px;
-    }
-
-    .dark-mode .notice-box {
-      background-color: #333;
-      color: #f1c40f;
-      border-color: #999;
-    }
-
     form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 30px;
-      justify-content: center;
-    }
-
-    form > div {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    input, select, button {
-      padding: 10px;
+    .search-box {
+      position: relative;
+      width: 300px;
+      max-width: 90%;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 35px 10px 10px;
       font-size: 1rem;
       border-radius: 5px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
-    .dark-mode input,
-    .dark-mode select,
-    .dark-mode button {
+    .dark-mode .search-box input {
       background-color: #333;
       color: white;
       border: 1px solid #666;
     }
 
+    .search-box i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+    }
+
     button[type="submit"] {
+      margin-top: 15px;
       background-color: #00bcd4;
       color: white;
       border: none;
-      cursor: pointer;
-      margin-top: 26px;
-      transition: background-color 0.3s ease;
       font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
-    button[type="submit"]:hover {
+    .dark-mode button[type="submit"] {
       background-color: #0097a7;
     }
 
-    .result-box {
+    .autocomplete-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-top: none;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .autocomplete-item {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .autocomplete-item:hover {
+      background: #f0f0f0;
+    }
+
+    .dark-mode .autocomplete-list {
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    #result {
       margin-top: 30px;
-      text-align: left;
     }
 
     .course-card {
-      border: 2px solid #007bff;
+      background: #f5f5f5;
+      padding: 15px;
       border-radius: 8px;
-      padding: 16px;
-      background: #f0f8ff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .dark-mode .course-card {
-      background: #2c2c2c;
-      border-color: #00bcd4;
+      background: #333;
+      color: #fff;
     }
 
-    .highlight {
-      color: #e74c3c;
-      font-weight: bold;
-    }
-
-    .registered-info {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .registered-info div {
-      background-color: #f8f9fa;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
-      flex: 1;
-    }
-
-    .dark-mode .registered-info div {
-      background-color: #3a3a3a;
-      border-color: #666;
-    }
-
-    .theme-toggle-wrapper {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .theme-toggle {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      font-size: 20px;
-      padding: 8px 16px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background-color: #0056b3;
-    }
-
-    .dark-mode .theme-toggle {
-      background-color: #f1c40f;
-      color: #222;
-    }
-
-    .dark-mode .theme-toggle:hover {
-      background-color: #d4ac0d;
-    }
   </style>
 </head>
 <body>
-  <div class="theme-toggle-wrapper">
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 เปลี่ยนโหมด</button>
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">🌓</button>
   </div>
 
   <div class="container">
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
-    <p class="date">วันอาทิตย์, 8 มิถุนายน 2568 <span class="term-tag">ภาคต้น 2568</span></p>
-
-    <div class="notice-box">
-      เป็นข้อมูลรายวิชาตามแผนการเรียนเท่านั้น วิชาเสรี หรือวิชาที่เรียนไปแล้วต้องการเรียนใหม่ ตรวจสอบได้เองที่ระบบ <strong>myKU</strong>
-    </div>
 
     <form id="search-form">
-      <div>
-        <label for="course-code">ค้นหารายวิชา *</label>
-        <input type="text" id="course-code" placeholder="รหัสวิชา เช่น 01419211" required />
+      <div class="search-box">
+        <input type="text" id="course-code" placeholder="พิมพ์รหัสวิชา เช่น 01419211" autocomplete="off" />
+        <i>🔍</i>
+        <div id="autocomplete-list" class="autocomplete-list" style="display:none;"></div>
       </div>
-      <div>
-        <label for="campus">วิทยาเขต *</label>
-        <input type="text" id="campus" value="กำแพงแสน" readonly />
-      </div>
-      <div>
-        <label for="year">ปีการศึกษา *</label>
-        <select id="year" disabled>
-          <option value="2568" selected>2568</option>
-        </select>
-      </div>
-      <div>
-        <label for="semester">ภาคการศึกษา *</label>
-        <select id="semester" disabled>
-          <option value="ภาคต้น" selected>ภาคต้น</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
-      </div>
+      <button type="submit">ค้นหา</button>
     </form>
 
-    <div id="result" class="result-box"></div>
+    <div id="result"></div>
   </div>
 
   <script>
     const availableCourses = {
       "01419211": {
         title: "จุลชีววิทยาทั่วไป",
-        english: "General Microbiology",
-        section: "700",
-        type: "บรรยาย",
-        unit: 3,
-        time: [
-          "THU 10:30 - 12:00 ห้อง ติดต่อผู้สอน",
-          "TUE 10:30 - 12:00 ห้อง ติดต่อผู้สอน"
-        ],
-        registered: 0,
-        capacity: 350,
-        announce: false
+        english: "General Microbiology"
       },
       "01999021": {
         title: "การพัฒนาทักษะการเรียนรู้และการใช้ชีวิตในมหาวิทยาลัย",
-        english: "Learning and Living Skills Development in University",
-        section: "701",
-        type: "บรรยาย",
-        unit: 1,
-        time: [
-          "MON 13:00 - 15:00 ห้อง A201"
-        ],
-        registered: 125,
-        capacity: 150,
-        announce: true
+        english: "Learning and Living Skills Development in University"
+      },
+      "01155111": {
+        title: "เคมีทั่วไป",
+        english: "General Chemistry"
       }
     };
 
-    document.getElementById('search-form').addEventListener('submit', function (e) {
+    const input = document.getElementById("course-code");
+    const listBox = document.getElementById("autocomplete-list");
+
+    input.addEventListener("input", function () {
+      const value = this.value.trim();
+      listBox.innerHTML = "";
+      listBox.style.display = "none";
+
+      if (!value) return;
+
+      const matches = Object.keys(availableCourses).filter(code =>
+        code.startsWith(value)
+      );
+
+      if (matches.length > 0) {
+        matches.forEach(code => {
+          const item = document.createElement("div");
+          item.classList.add("autocomplete-item");
+          item.textContent = `${code} - ${availableCourses[code].title}`;
+          item.addEventListener("click", function () {
+            input.value = code;
+            listBox.style.display = "none";
+          });
+          listBox.appendChild(item);
+        });
+        listBox.style.display = "block";
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!listBox.contains(e.target) && e.target !== input) {
+        listBox.style.display = "none";
+      }
+    });
+
+    document.getElementById("search-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      const code = document.getElementById('course-code').value.trim();
-      const resultBox = document.getElementById('result');
+      const code = input.value.trim();
+      const resultBox = document.getElementById("result");
       resultBox.innerHTML = "";
 
       if (availableCourses[code]) {
         const course = availableCourses[code];
-        const html = `
+        resultBox.innerHTML = `
           <div class="course-card">
-            <div class="course-header">${code}-65 หมู่ ${course.section} ${course.type} ${course.unit} หน่วยกิต</div>
-            <div class="course-info">${course.title}<br>${course.english}</div>
-            <div class="course-info">ประเภทหมู่เรียน : ปกติ</div>
-            <div class="course-info">สามารถเรียนทดแทนวิชา : -</div>
-            <div class="course-info highlight">
-              ${course.announce ? 'เปิดลงทะเบียนแล้ว' : 'ยังไม่ประกาศให้ลงทะเบียน'}
-            </div>
-            ${course.time.map(t => `<div class="course-info">${t}</div>`).join('')}
-            <div class="registered-info">
-              <div><strong>${course.capacity}</strong>จำนวนรับ</div>
-              <div><strong>${course.registered}</strong>ลงทะเบียนแล้ว</div>
-            </div>
+            <strong>${code}</strong><br>
+            ${course.title}<br>
+            <em>${course.english}</em>
           </div>
         `;
-        resultBox.innerHTML = html;
       } else {
-        resultBox.innerHTML = `<p style="color: #c0392b; text-align: center; font-weight: bold;">ไม่พบข้อมูลวิชานี้ในระบบ</p>`;
+        resultBox.innerHTML = `<p style="color: #c0392b; text-align: center; font-weight: bold;">ไม่พบข้อมูลวิชานี้</p>`;
       }
     });
 
+    // Theme
     function toggleTheme() {
       document.documentElement.classList.toggle('dark-mode');
       const isDark = document.documentElement.classList.contains('dark-mode');
