@@ -1,114 +1,29 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <title>ค้นหารายวิชา</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
-  <style>
-    /* ...[คงไว้เหมือนเดิมทั้งหมดใน <style>]... */
-  </style>
-</head>
-<body data-theme="light">
-  <div class="search-container">
-    <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">🌙</button>
-    <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
-    <div class="announcement-box">
-      วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ ตรวจสอบเองได้ที่ระบบ myKU
-    </div>
-
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="course-code">ค้นหารายวิชา <span style="color:red;">*</span></label>
-        <input type="text" id="course-code" placeholder="รหัสวิชา, ชื่อวิชา" oninput="renderCourses()">
-        <button class="clear-btn" onclick="document.getElementById('course-code').value=''; renderCourses();">×</button>
-      </div>
-
-      <div class="form-group">
-        <label>วิทยาเขต</label>
-        <div class="text-display locked">กำแพงแสน</div>
-      </div>
-
-      <div class="form-group">
-        <label>ปีการศึกษา</label>
-        <div class="text-display locked">2568</div>
-      </div>
-
-      <div class="form-group">
-        <label>ภาคการศึกษา</label>
-        <div class="text-display locked">ภาคต้น</div>
-      </div>
-
-      <div class="form-group">
-        <label for="group">หมู่เรียน</label>
-        <input type="text" id="group" placeholder="" oninput="renderCourses()">
-      </div>
-
-      <button class="search-button" onclick="renderCourses(true)">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
-    </div>
-
-    <div id="courseList" style="margin-top:30px;"></div>
+<div class="form-grid">
+  <div class="form-group">
+    <label for="course-code">ค้นหารายวิชา <span style="color:red;">*</span></label>
+    <input type="text" id="course-code" placeholder="รหัสวิชา, ชื่อวิชา">
+    <button class="clear-btn" onclick="document.getElementById('course-code').value=''">×</button>
   </div>
 
-  <script>
-    function toggleTheme() {
-      const body = document.body;
-      const button = document.querySelector('.theme-toggle');
-      const isDark = body.getAttribute('data-theme') === 'dark';
-      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      button.textContent = isDark ? '🌙' : '☀️';
-    }
+  <div class="form-group">
+    <label>วิทยาเขต <span style="color:red;">*</span></label>
+    <div class="text-display locked">กำแพงแสน</div>
+  </div>
 
-    const courses = [
-      { code: "01355103", name: "ภาษาอังกฤษเพื่อโอกาสในการทำงาน", engName: "English for Job Opportunities", group: "700", schedule: ["MON 8:30 - 10:00 ห้อง LH4-605", "WED 8:30 - 10:00 ห้อง LH4-605"], seats: 60, enrolled: 0 },
-      { code: "01355102", name: "ภาษาอังกฤษพื้นฐาน 2", engName: "Basic English II", group: "701", schedule: ["TUE 10:00 - 12:00 ห้อง LH2-102"], seats: 50, enrolled: 10 },
-      { code: "01355101", name: "ภาษาอังกฤษพื้นฐาน 1", engName: "Basic English I", group: "702", schedule: ["MON 13:00 - 15:00 ห้อง LH2-202"], seats: 55, enrolled: 20 },
-      { code: "01419211", name: "เทคโนโลยีสารสนเทศ", engName: "Information Technology", group: "703", schedule: ["WED 9:00 - 12:00 ห้อง LH1-305"], seats: 40, enrolled: 5 },
-      { code: "01419214", name: "การเขียนโปรแกรม", engName: "Programming", group: "704", schedule: ["THU 13:00 - 15:00 ห้อง LH1-404"], seats: 40, enrolled: 12 },
-      { code: "02181333", name: "เศรษฐศาสตร์เบื้องต้น", engName: "Basic Economics", group: "705", schedule: ["FRI 9:00 - 12:00 ห้อง LH3-101"], seats: 60, enrolled: 30 },
-      { code: "02181261", name: "การเงินเบื้องต้น", engName: "Basic Finance", group: "706", schedule: ["TUE 14:00 - 16:00 ห้อง LH3-102"], seats: 50, enrolled: 15 },
-      { code: "02031474", name: "พฤกษศาสตร์เบื้องต้น", engName: "Basic Botany", group: "707", schedule: ["MON 10:00 - 12:00 ห้อง LH1-103"], seats: 45, enrolled: 8 },
-      { code: "02999147", name: "วิทยาศาสตร์พื้นฐาน", engName: "Basic Science", group: "708", schedule: ["WED 13:00 - 15:00 ห้อง LH2-203"], seats: 45, enrolled: 10 },
-      { code: "01999021", name: "ศิลปะและวัฒนธรรม", engName: "Art and Culture", group: "709", schedule: ["FRI 13:00 - 15:00 ห้อง LH3-301"], seats: 50, enrolled: 25 }
-    ];
+  <div class="form-group">
+    <label>ปีการศึกษา <span style="color:red;">*</span></label>
+    <div class="text-display locked">2568</div>
+  </div>
 
-    function renderCourses(showAll = false) {
-      const search = document.getElementById('course-code').value.toLowerCase();
-      const groupSearch = document.getElementById('group').value.toLowerCase();
-      const list = document.getElementById('courseList');
-      list.innerHTML = '';
+  <div class="form-group">
+    <label>ภาคการศึกษา <span style="color:red;">*</span></label>
+    <div class="text-display locked">ภาคต้น</div>
+  </div>
 
-      courses
-        .filter(c => showAll || (
-          (c.code.includes(search) || c.name.toLowerCase().includes(search) || c.engName.toLowerCase().includes(search)) &&
-          (!groupSearch || c.group.includes(groupSearch))
-        ))
-        .forEach(course => {
-          const card = document.createElement('div');
-          card.className = 'course-card';
-          card.style = 'background: var(--box-bg); color: var(--text-color); border: 1px solid var(--border-color); border-left: 5px solid #00bcd4; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05)';
-          card.innerHTML = `
-            <div style="font-weight:bold; font-size:18px; margin-bottom:5px;">
-              ${course.code}-${course.group} <span style="border:1px solid #00bcd4; color:#00bcd4; border-radius:6px; padding:4px 10px; font-size:13px; margin-left:8px;">บรรยาย</span> <span>${3} หน่วยกิต</span>
-            </div>
-            <div style="margin: 8px 0;">
-              ${course.name}<br>${course.engName}<br>
-              <span>ประเภทหมู่เรียน : ปกติ</span><br>
-              <span>สามารถเรียนทดแทนวิชา : -</span>
-            </div>
-            <div style="color:#c62828; font-weight:bold; margin-bottom:8px;">ยังไม่ประกาศให้สมัครลงทะเบียน</div>
-            <div style="color:#3f51b5; margin-bottom:10px;">
-              ${course.schedule.map(s => `<div>${s}</div>`).join('')}
-            </div>
-            <div>
-              <span style="display:inline-block; border:1px solid #00bcd4; color:#00bcd4; border-radius:6px; padding:6px 12px; margin-right:10px;">จำนวนรับ<br>${course.seats}</span>
-              <span style="display:inline-block; border:1px solid #00bcd4; color:#00bcd4; border-radius:6px; padding:6px 12px;">ลงทะเบียนแล้ว<br>${course.enrolled}</span>
-            </div>
-          `;
-          list.appendChild(card);
-        });
-    }
+  <div class="form-group">
+    <label for="group">หมู่เรียน</label>
+    <input type="text" id="group" placeholder="">
+  </div>
 
-    window.onload = renderCourses;
-  </script>
-</body>
-</html>
+  <button class="search-button">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
+</div>
