@@ -242,40 +242,81 @@
       font-size: 0.9rem;
     }
 
-    /* ป๊อปอัปใหญ่กลางจอ + เครื่องหมายถูกอนิเมชัน */
+    /* ป๊อปอัพขนาดใหญ่ตรงกลางพร้อมอนิเมชันเครื่องหมายถูก */
     #popup {
       display: none;
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.7);
       background-color: var(--wrapper-bg);
       color: var(--text-color);
       border: 2px solid var(--button-bg);
       border-radius: 20px;
-      box-shadow: 0 10px 30px var(--shadow-color);
+      box-shadow: 0 15px 40px var(--shadow-color);
       padding: 40px 60px;
       z-index: 9999;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       text-align: center;
-      font-size: 1.6rem;
-      min-width: 320px;
-      user-select: none;
+      font-size: 1.4rem;
+      width: 320px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
     }
 
+    #popup.show {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* อนิเมชันเครื่องหมายถูก */
     .checkmark {
-      font-size: 5rem;
-      color: #28a745; /* สีเขียว */
-      animation: bounce 1.5s infinite;
-      margin-bottom: 15px;
+      width: 80px;
+      height: 80px;
+      stroke: #4caf50;
+      stroke-width: 4;
+      stroke-miterlimit: 10;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      margin-bottom: 20px;
+      animation: popScale 0.4s ease forwards;
     }
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
+    .checkmark__circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      animation: dash 0.6s ease forwards;
+    }
+
+    .checkmark__check {
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: dash 0.4s 0.6s ease forwards;
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
       }
-      50% {
-        transform: translateY(-20px);
+    }
+
+    @keyframes popScale {
+      0% {
+        transform: scale(0);
+      }
+      70% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
       }
     }
   </style>
@@ -286,39 +327,4 @@
       เด็กดีของเสดสิ่ง67
       <div class="header-buttons">
         <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
-        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
-      </div>
-    </header>
-
-    <div class="content">
-      <div class="countdown-container">
-        <div>ลงทะเบียนเรียนภาคต้น 2568<br>วันที่ 19 มิถุนายน 2568</div>
-        <div id="countdown" class="countdown-time"></div>
-      </div>
-
-      <h2 style="text-align: center;">ค้นหาตารางสอบ</h2>
-      <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">Updated 7 มิถุนายน 2568</p>
-
-      <div class="search-form">
-        <form id="exam-form">
-          <label for="student-id">รหัสนิสิต</label>
-          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required />
-          <label for="grade">ชั้น</label>
-          <select id="grade" name="grade" disabled>
-            <option value="F39-1" selected>F39-1</option>
-          </select>
-          <label for="term">ภาคการศึกษา</label>
-          <select id="term" name="term" disabled>
-            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
-          </select>
-          <label for="term">ประเภทการสอบ</label>
-          <select id="term" name="term" disabled>
-            <option value="ปลายภาค" selected>ปลายภาค</option>
-          </select>
-          <button type="submit">ค้นหา</button>
-        </form>
-        <div id="search-result" class="search-result"></div>
-      </div>
-
-      <div class="sub-menu">
-        <a href="kyos.html"><i
+        <button id="dark-mode-toggle" aria-label="สล
