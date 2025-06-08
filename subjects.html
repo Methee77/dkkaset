@@ -1,29 +1,141 @@
-<div class="form-grid">
-  <div class="form-group">
-    <label for="course-code">ค้นหารายวิชา <span style="color:red;">*</span></label>
-    <input type="text" id="course-code" placeholder="รหัสวิชา, ชื่อวิชา">
-    <button class="clear-btn" onclick="document.getElementById('course-code').value=''">×</button>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ค้นหารายวิชา</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px 30px;
+      align-items: flex-end;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .locked {
+      background-color: #e0e0e0;
+      color: #333;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0097a7;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="search">ค้นหารายวิชา *</label>
+        <input type="text" id="search" placeholder="รหัสวิชา, ชื่อวิชา">
+      </div>
+
+      <div class="form-group">
+        <label>วิทยาเขต *</label>
+        <input type="text" class="locked" value="กำแพงแสน" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>ปีการศึกษา *</label>
+        <input type="text" class="locked" value="2568" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>ภาคการศึกษา *</label>
+        <input type="text" class="locked" value="ภาคต้น" readonly>
+      </div>
+
+      <div class="form-group">
+        <label for="group">หมู่เรียน</label>
+        <input type="text" id="group">
+      </div>
+
+      <button class="btn" onclick="searchCourse()">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
+    </div>
+
+    <div class="result" id="result"></div>
   </div>
 
-  <div class="form-group">
-    <label>วิทยาเขต <span style="color:red;">*</span></label>
-    <div class="text-display locked">กำแพงแสน</div>
-  </div>
+  <script>
+    const courses = [
+      "01355103", "01355102", "01355101",
+      "01419211", "01419214",
+      "02181333", "02181261",
+      "02031474", "02999147", "01999021"
+    ];
 
-  <div class="form-group">
-    <label>ปีการศึกษา <span style="color:red;">*</span></label>
-    <div class="text-display locked">2568</div>
-  </div>
+    function searchCourse() {
+      const input = document.getElementById("search").value.trim();
+      const result = document.getElementById("result");
+      if (!input) {
+        result.textContent = "กรุณากรอกรหัสวิชาหรือชื่อวิชา";
+        result.style.color = "red";
+        return;
+      }
 
-  <div class="form-group">
-    <label>ภาคการศึกษา <span style="color:red;">*</span></label>
-    <div class="text-display locked">ภาคต้น</div>
-  </div>
+      const found = courses.some(code => input.includes(code));
+      result.textContent = found ? "✅ พบรายวิชาในระบบ" : "❌ ไม่พบรายวิชา";
+      result.style.color = found ? "green" : "red";
+    }
+  </script>
 
-  <div class="form-group">
-    <label for="group">หมู่เรียน</label>
-    <input type="text" id="group" placeholder="">
-  </div>
-
-  <button class="search-button">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
-</div>
+</body>
+</html>
