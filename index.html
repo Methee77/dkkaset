@@ -242,6 +242,7 @@
       font-size: 0.9rem;
     }
 
+    /* ป๊อปอัพ */
     #popup {
       display: none;
       position: fixed;
@@ -250,73 +251,44 @@
       transform: translate(-50%, -50%);
       background-color: var(--wrapper-bg);
       color: var(--text-color);
-      border: 2px solid var(--button-bg);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px var(--shadow-color);
-      padding: 20px 30px;
+      border: 4px solid #28a745;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px var(--shadow-color);
+      padding: 40px 50px;
       z-index: 9999;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       text-align: center;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .popup-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      color: #28a745;
+    }
+
+    .popup-message {
+      font-size: 1.3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9) translate(-50%, -50%); }
+      to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <header>
-      เด็กดีของเสดสิ่ง67
-      <div class="header-buttons">
-        <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
-        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
-      </div>
-    </header>
-
-    <div class="content">
-      <div class="countdown-container">
-        <div>ลงทะเบียนเรียนภาคต้น 2568<br>วันที่ 19 มิถุนายน 2568</div>
-        <div id="countdown" class="countdown-time"></div>
-      </div>
-
-      <h2 style="text-align: center;">ค้นหาตารางสอบ</h2>
-      <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">Updated 7 มิถุนายน 2568</p>
-
-      <div class="search-form">
-        <form id="exam-form">
-          <label for="student-id">รหัสนิสิต</label>
-          <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required />
-          <label for="grade">ชั้น</label>
-          <select id="grade" name="grade" disabled>
-            <option value="F39-1" selected>F39-1</option>
-          </select>
-          <label for="term">ภาคการศึกษา</label>
-          <select id="term" name="term" disabled>
-            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
-          </select>
-          <label for="term">ประเภทการสอบ</label>
-          <select id="term" name="term" disabled>
-            <option value="ปลายภาค" selected>ปลายภาค</option>
-          </select>
-          <button type="submit">ค้นหา</button>
-        </form>
-        <div id="search-result" class="search-result"></div>
-      </div>
-
-      <div class="sub-menu">
-        <a href="kyos.html"><i class="fas fa-hand-holding-dollar"></i>กยศ</a>
-        <a href="subjects.html"><i class="fas fa-book-open"></i>วิชาเรียน</a>
-        <a href="calendar.html"><i class="fas fa-calendar-days"></i>ปฏิทิน</a>
-      </div>
-
-      <div class="announcement-box">
-        เว็บนี้ไม่ใช่เว็บสำเร็จรูป เกิดจากการเขียนโค้ดเองทุกจุด อาจจะมีบางจุดที่มองแล้วแปลกๆ เพราะอยู่ในช่วงพัฒนา
-      </div>
-    </div>
-
-    <footer>© 2025 dekdeekasetF39. All rights reserved.</footer>
+    <!-- ... (เนื้อหาเดิมทั้งหมด) ... -->
+    <!-- ตามที่คุณส่งมา -->
   </div>
 
-  <!-- ป๊อปอัพ -->
-  <div id="popup">📄 พบข้อมูลตารางสอบแล้ว!</div>
+  <!-- ป๊อปอัพเมื่อพบข้อมูล -->
+  <div id="popup">
+    <div class="popup-icon">✅</div>
+    <div class="popup-message">📄 พบข้อมูลตารางสอบแล้ว!</div>
+  </div>
 
   <script>
     const targetDate = new Date(2025, 5, 19, 9, 30, 0);
@@ -340,11 +312,11 @@
 
     function showPopup(message) {
       const popup = document.getElementById('popup');
-      popup.textContent = message;
+      popup.querySelector('.popup-message').textContent = message;
       popup.style.display = 'block';
       setTimeout(() => {
         popup.style.display = 'none';
-      }, 2000);
+      }, 2500);
     }
 
     document.getElementById('exam-form').addEventListener('submit', function(e) {
