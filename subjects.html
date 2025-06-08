@@ -33,40 +33,9 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       min-height: 100vh;
       transition: background-color 0.3s, color 0.3s;
-      padding-top: 80px;
-    }
-
-    .announcement-box {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #ffebee;
-      color: #c62828;
-      border-bottom: 2px solid #e53935;
-      padding: 15px 20px;
-      box-sizing: border-box;
-      font-weight: bold;
-      z-index: 1000;
-    }
-
-    .announcement-box a {
-      color: #b71c1c;
-      text-decoration: underline;
-    }
-
-    .announcement-box .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 22px;
-      color: #c62828;
-      cursor: pointer;
     }
 
     .search-container {
@@ -156,6 +125,41 @@
       background: var(--btn-hover);
     }
 
+    /* 🔔 Floating Announcement Box */
+    .floating-announcement {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #e53935;
+      padding: 16px 20px;
+      border-radius: 8px;
+      max-width: 350px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      line-height: 1.6;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .floating-announcement a {
+      color: #b71c1c;
+      text-decoration: underline;
+    }
+
+    .floating-announcement .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #c62828;
+      cursor: pointer;
+      line-height: 1;
+    }
+
     @media (max-width: 600px) {
       .search-button {
         justify-self: stretch;
@@ -166,13 +170,14 @@
 </head>
 <body data-theme="light">
 
-  <!-- 🔔 ประกาศแบบกล่อง -->
-  <div class="announcement-box" id="announcementBox">
+  <!-- 🔔 Floating Announcement Box -->
+  <div class="floating-announcement" id="announcementBox">
     🔔 วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ กรุณาตรวจสอบเองได้ที่ 
     <a href="https://my.ku.ac.th" target="_blank">myKU</a>
     <button class="close-btn" onclick="document.getElementById('announcementBox').style.display='none'">×</button>
   </div>
 
+  <!-- 🔍 Main Search UI -->
   <div class="search-container">
     <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">
       🌙
@@ -232,5 +237,6 @@
       button.textContent = isDark ? '🌙' : '☀️';
     }
   </script>
+
 </body>
 </html>
