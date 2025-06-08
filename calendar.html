@@ -111,6 +111,10 @@
 
     .term.blue .term-icon { color: #1d3979; }
     .term.green .term-icon { color: #2b7a2b; }
+
+    a.term-link {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -125,10 +129,13 @@
     <div class="section">
       <div class="section-title">ภาคปกติ</div>
       <div class="term-boxes">
-        <div class="term blue">
-          <div class="term-icon"><i class="fas fa-book"></i></div>
-          <div class="term-title">ภาคต้น</div>
-        </div>
+        <!-- ภาคต้นมีลิงก์ -->
+        <a href="calefirst.html" class="term-link">
+          <div class="term blue">
+            <div class="term-icon"><i class="fas fa-book"></i></div>
+            <div class="term-title">ภาคต้น</div>
+          </div>
+        </a>
         <div class="term blue">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคปลาย</div>
