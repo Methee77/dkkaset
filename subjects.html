@@ -13,6 +13,7 @@
       --border-color: #ccc;
       --btn-bg: #00bcd4;
       --btn-hover: #0097a7;
+      --font-thai: 'IBM Plex Sans Thai', sans-serif;
     }
 
     [data-theme="dark"] {
@@ -26,7 +27,7 @@
     }
 
     body {
-      font-family: 'IBM Plex Sans Thai', sans-serif;
+      font-family: var(--font-thai);
       background-color: var(--bg-color);
       color: var(--text-color);
       margin: 0;
@@ -48,6 +49,7 @@
       box-sizing: border-box;
       position: relative;
       transition: background 0.3s;
+      font-family: var(--font-thai);
     }
 
     h2 {
@@ -73,6 +75,7 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 25px 30px;
       align-items: flex-end;
+      font-family: var(--font-thai);
     }
 
     .form-group {
@@ -95,6 +98,7 @@
       box-sizing: border-box;
       background-color: var(--input-bg);
       color: var(--text-color);
+      font-family: var(--font-thai);
     }
 
     .clear-btn {
@@ -106,6 +110,7 @@
       font-size: 18px;
       cursor: pointer;
       color: #999;
+      font-family: var(--font-thai);
     }
 
     .search-button {
@@ -120,6 +125,7 @@
       white-space: nowrap;
       justify-self: start;
       margin-top: 10px;
+      font-family: var(--font-thai);
     }
 
     .search-button:hover {
@@ -133,7 +139,6 @@
       }
     }
 
-    /* 🟥 กล่องประกาศแบบลอย ปรับขนาดใหญ่ขึ้น */
     .floating-announcement {
       position: fixed;
       top: 20px;
@@ -152,17 +157,19 @@
       z-index: 1000;
       text-align: center;
       box-sizing: border-box;
+      font-family: var(--font-thai);
     }
 
     .floating-announcement a {
       color: #b71c1c;
       text-decoration: underline;
+      font-family: var(--font-thai);
     }
   </style>
 </head>
 <body data-theme="light">
 
-  <!-- 🟥 กล่องประกาศแบบลอย -->
+  <!-- กล่องประกาศ -->
   <div class="floating-announcement">
     🔔 วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ กรุณาตรวจสอบเองได้ที่
     <a href="https://my.ku.ac.th" target="_blank">myKU</a>
