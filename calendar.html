@@ -14,36 +14,48 @@
     }
 
     header {
-      background-color: #1d3979;
-      color: white;
-      padding: 20px;
+      background-color: #e0e0e0;
+      color: #333;
+      padding: 20px 0;
       text-align: center;
       font-size: 1.8em;
       font-weight: bold;
+      max-width: 500px;
+      margin: 30px auto 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 30px 20px;
+      padding: 10px 20px 40px;
     }
 
     .year-box {
       background-color: #1d3979;
       color: white;
-      padding: 20px;
+      padding: 15px 20px;
       border-radius: 10px;
-      font-size: 1.6em;
+      font-size: 1.4em;
       font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
+      text-align: left;
+      margin: 30px 0 15px;
+    }
+
+    .year-box.green {
+      background-color: #2b7a2b;
     }
 
     .section {
       background-color: #e7ecf7;
       padding: 25px;
       border-radius: 10px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+    }
+
+    .section.green {
+      background-color: #e2f3e2;
     }
 
     .section-title {
@@ -55,6 +67,10 @@
       text-align: center;
       border-radius: 8px;
       margin-bottom: 25px;
+    }
+
+    .section-title.green {
+      background-color: #2b7a2b;
     }
 
     .term-boxes {
@@ -85,7 +101,6 @@
     .term-icon {
       font-size: 40px;
       margin-bottom: 10px;
-      color: #1d3979;
     }
 
     .term-title {
@@ -93,26 +108,32 @@
       font-size: 1.1em;
       color: #1c1c1c;
     }
+
+    .term.blue .term-icon { color: #1d3979; }
+    .term.green .term-icon { color: #2b7a2b; }
   </style>
 </head>
 <body>
+
+  <!-- หัวข้อหลัก -->
   <header>ปฏิทินการศึกษา</header>
+
   <div class="container">
 
     <!-- ปีการศึกษา 2568 -->
-    <div class="year-box">🔥ปีการศึกษา 2568</div>
+    <div class="year-box">🔥 ปีการศึกษา 2568</div>
     <div class="section">
       <div class="section-title">ภาคปกติ</div>
       <div class="term-boxes">
-        <div class="term">
+        <div class="term blue">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคเรียนที่ 1</div>
         </div>
-        <div class="term">
+        <div class="term blue">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคเรียนที่ 2</div>
         </div>
-        <div class="term">
+        <div class="term blue">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคฤดูร้อน</div>
         </div>
@@ -120,19 +141,19 @@
     </div>
 
     <!-- ปีการศึกษา 2567 -->
-    <div class="year-box">ปีการศึกษา 2567</div>
-    <div class="section">
-      <div class="section-title">ภาคปกติ</div>
+    <div class="year-box green">🔥 ปีการศึกษา 2567</div>
+    <div class="section green">
+      <div class="section-title green">ภาคปกติ</div>
       <div class="term-boxes">
-        <div class="term">
+        <div class="term green">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคเรียนที่ 1</div>
         </div>
-        <div class="term">
+        <div class="term green">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคเรียนที่ 2</div>
         </div>
-        <div class="term">
+        <div class="term green">
           <div class="term-icon"><i class="fas fa-book"></i></div>
           <div class="term-title">ภาคฤดูร้อน</div>
         </div>
@@ -140,5 +161,6 @@
     </div>
 
   </div>
+
 </body>
 </html>
