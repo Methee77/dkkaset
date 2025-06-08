@@ -29,6 +29,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
+      align-items: end;
     }
 
     .form-group {
@@ -62,9 +63,7 @@
     }
 
     .search-button {
-      grid-column: span 2;
-      justify-self: start;
-      padding: 12px 20px;
+      padding: 10px 18px;
       background: #00bcd4;
       border: none;
       color: #fff;
@@ -72,6 +71,8 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      white-space: nowrap;
+      justify-self: start;
     }
 
     .search-button:hover {
@@ -80,8 +81,8 @@
 
     @media(max-width: 600px) {
       .search-button {
-        grid-column: span 1;
         width: 100%;
+        justify-self: stretch;
       }
     }
   </style>
