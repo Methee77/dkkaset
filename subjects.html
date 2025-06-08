@@ -5,32 +5,66 @@
   <title>ค้นหารายวิชา</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --box-bg: #fff;
+      --input-bg: #fff;
+      --border-color: #ccc;
+      --btn-bg: #00bcd4;
+      --btn-hover: #0097a7;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --box-bg: #1e1e1e;
+      --input-bg: #2c2c2c;
+      --border-color: #555;
+      --btn-bg: #26c6da;
+      --btn-hover: #00acc1;
+    }
+
     body {
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f4f4f4;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .search-container {
-      background: #fff;
+      background: var(--box-bg);
       border-radius: 12px;
       padding: 40px 30px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       max-width: 1000px;
       width: 100%;
       box-sizing: border-box;
+      position: relative;
+      transition: background 0.3s;
     }
 
     h2 {
       margin-bottom: 30px;
       text-align: center;
       font-size: 24px;
-      color: #333;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-color);
     }
 
     .form-grid {
@@ -48,7 +82,6 @@
       font-weight: bold;
       display: block;
       margin-bottom: 8px;
-      color: #444;
     }
 
     input[type="text"],
@@ -56,9 +89,11 @@
       width: 100%;
       padding: 10px 14px;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-color);
       font-size: 16px;
       box-sizing: border-box;
+      background-color: var(--input-bg);
+      color: var(--text-color);
     }
 
     .clear-btn {
@@ -74,7 +109,7 @@
 
     .search-button {
       padding: 12px 20px;
-      background: #00bcd4;
+      background: var(--btn-bg);
       border: none;
       color: white;
       border-radius: 6px;
@@ -87,7 +122,7 @@
     }
 
     .search-button:hover {
-      background: #0097a7;
+      background: var(--btn-hover);
     }
 
     @media (max-width: 600px) {
@@ -98,9 +133,13 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="light">
 
   <div class="search-container">
+    <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">
+      🌙
+    </button>
+
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
 
     <div class="form-grid">
@@ -145,6 +184,16 @@
       <button class="search-button">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
     </div>
   </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const button = document.querySelector('.theme-toggle');
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      button.textContent = isDark ? '🌙' : '☀️';
+    }
+  </script>
 
 </body>
 </html>
