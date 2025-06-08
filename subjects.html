@@ -1,239 +1,26 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <title>ค้นหารายวิชา</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 40px 20px;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    input[type="text"], select {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .locked {
-      background-color: #e0e0e0;
-      font-weight: bold;
-      pointer-events: none;
-    }
-
-    .btn {
-      display: block;
-      margin: 25px auto 0;
-      padding: 12px 30px;
-      background: #00bcd4;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .result {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .course-card {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 20px;
-      max-width: 850px;
-      width: 100%;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .course-info {
-      max-width: 70%;
-    }
-
-    .course-code {
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .course-times {
-      color: #003366;
-      margin-top: 6px;
-    }
-
-    .course-status {
-      color: red;
-      margin: 8px 0;
-    }
-
-    .stats-box {
-      text-align: center;
-      border: 1px solid #00bcd4;
-      border-radius: 6px;
-      padding: 10px;
-      margin-left: 10px;
-      min-width: 90px;
-    }
-
-    .stats-box div {
-      font-size: 16px;
-      font-weight: bold;
-      color: #00bcd4;
-    }
-
-    .stats-label {
-      font-size: 13px;
-      color: #555;
-    }
-
-    @media (max-width: 768px) {
-      .course-info {
-        max-width: 100%;
-        margin-bottom: 15px;
-      }
-      .stats-box {
-        margin-left: 0;
-        margin-right: 10px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
-
-    <div class="form-grid">
-      <div class="form-group">
-        <label>ค้นหารายวิชา *</label>
-        <input type="text" id="search" placeholder="รหัสวิชา เช่น 01419211">
-      </div>
-      <div class="form-group">
-        <label>วิทยาเขต *</label>
-        <input type="text" class="locked" value="กำแพงแสน" readonly>
-      </div>
-      <div class="form-group">
-        <label>ปีการศึกษา *</label>
-        <input type="text" class="locked" value="2568" readonly>
-      </div>
-      <div class="form-group">
-        <label>ภาคการศึกษา *</label>
-        <input type="text" class="locked" value="ภาคต้น" readonly>
-      </div>
-      <div class="form-group">
-        <label>หมู่เรียน</label>
-        <input type="text">
-      </div>
-    </div>
-
-    <button class="btn" onclick="searchCourse()">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
-
-    <div class="result" id="result"></div>
+<div class="form-grid">
+  <div class="form-group">
+    <label>ค้นหารายวิชา *</label>
+    <input type="text" id="search" placeholder="รหัสวิชา เช่น 01419211">
   </div>
-
-  <script>
-    const courseData = {
-      "01419211": {
-        code: "01419211-65",
-        group: "700",
-        nameTH: "จุลชีววิทยาทั่วไป",
-        nameEN: "General Microbiology",
-        type: "ปกติ",
-        schedule: [
-          { day: "THU", time: "10:30 - 12:00", room: "ติดต่อผู้สอน" },
-          { day: "TUE", time: "10:30 - 12:00", room: "ติดต่อผู้สอน" }
-        ],
-        seats: 350,
-        registered: 0,
-        status: "ยังไม่ประกาศให้บันทึกรายวิชา"
-      }
-    };
-
-    function searchCourse() {
-      const input = document.getElementById("search").value.trim();
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = "";
-
-      if (!input) {
-        resultDiv.innerHTML = "<p style='color:red;'>กรุณากรอกรหัสวิชา</p>";
-        return;
-      }
-
-      const course = courseData[input];
-      if (course) {
-        let scheduleHTML = course.schedule.map(s => `${s.day} ${s.time} ห้อง ${s.room}`).join("<br>");
-        resultDiv.innerHTML = `
-          <div class="course-card">
-            <div class="course-info">
-              <div class="course-code">${course.code} หมู่ ${course.group}
-                <span style="background:#e0f7fa;padding:2px 8px;border-radius:4px;">บรรยาย</span> 3 หน่วยกิต
-              </div>
-              <div>${course.nameTH}<br>${course.nameEN}</div>
-              <div>ประเภทหมู่เรียน : ${course.type}</div>
-              <div class="course-status">${course.status}</div>
-              <div class="course-times">${scheduleHTML}</div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div class="stats-box">
-                <div>${course.seats}</div>
-                <div class="stats-label">จำนวนรับ</div>
-              </div>
-              <div class="stats-box">
-                <div>${course.registered}</div>
-                <div class="stats-label">ลงทะเบียนแล้ว</div>
-              </div>
-            </div>
-          </div>`;
-      } else {
-        resultDiv.innerHTML = "<p style='color:red;'>ไม่พบรายวิชา</p>";
-      }
-    }
-  </script>
-
-</body>
-</html>
+  <div class="form-group">
+    <label>วิทยาเขต *</label>
+    <input type="text" class="locked" value="กำแพงแสน" readonly>
+  </div>
+  <div class="form-group">
+    <label>ปีการศึกษา *</label>
+    <input type="text" class="locked" value="2568" readonly>
+  </div>
+  <div class="form-group">
+    <label>ภาคการศึกษา *</label>
+    <input type="text" class="locked" value="ภาคต้น" readonly>
+  </div>
+  <div class="form-group">
+    <label>หมู่เรียน</label>
+    <input type="text">
+  </div>
+  <div class="form-group">
+    <label style="visibility: hidden;">_</label> <!-- เพื่อดันให้ปุ่มอยู่แนวเดียวกับช่องหมู่เรียน -->
+    <button class="btn full" onclick="searchCourse()">ค้นหา</button>
+  </div>
+</div>
