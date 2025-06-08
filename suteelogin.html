@@ -1,138 +1,162 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>เข้าสู่ระบบ KU</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบ - KU Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f0f4f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    }
+
+    body, html {
+      height: 100%;
     }
 
     .container {
       display: flex;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 900px;
-      width: 100%;
-      flex-wrap: wrap;
+      height: 100vh;
+      flex-direction: row;
     }
 
-    .left {
-      background-color: #004d40;
-      color: white;
-      flex: 1 1 300px;
-      padding: 40px 30px;
-    }
-
-    .left h2 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-
-    .left ul {
-      padding-left: 20px;
-    }
-
-    .right {
-      flex: 1 1 300px;
-      padding: 40px 30px;
-    }
-
-    .right h2 {
-      margin-bottom: 20px;
+    .left-section {
+      flex: 1;
+      background-color: #f0f4f7;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       color: #003366;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
+    .left-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
-    input {
-      padding: 12px;
+    .left-section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .right-section {
+      flex: 1;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid #ccc;
+      padding: 40px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #003366;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
 
-    button {
-      padding: 12px;
+    .login-box button {
+      width: 100%;
       background-color: #003366;
       color: white;
-      border: none;
+      padding: 10px;
       font-size: 1rem;
+      border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.2s;
     }
 
-    button:hover {
+    .login-box button:hover {
       background-color: #0055aa;
     }
 
-    .error {
+    .error-message {
       color: red;
-      margin-top: 10px;
-      font-weight: bold;
+      font-size: 0.9rem;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #666;
     }
 
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
       }
-      .left, .right {
-        flex: 1 1 100%;
+
+      .left-section, .right-section {
+        flex: unset;
+        width: 100%;
+        height: auto;
+      }
+
+      .left-section {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .right-section {
+        padding-top: 20px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="left">
-      <h2>ข่าวประชาสัมพันธ์</h2>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+    <div class="left-section">
+      <h1>ข่าวประชาสัมพันธ์</h1>
+      <p>แจ้งนิสิตทุกคนให้ลงทะเบียนเรียนภาคต้น ภายในวันที่ 19 มิถุนายน 2568 หากมีข้อสงสัยกรุณาติดต่อที่งานทะเบียน</p>
+      <p style="margin-top: 20px;">เว็บไซต์นี้จัดทำขึ้นเพื่อความสะดวกในการเข้าสู่ระบบและตรวจสอบข้อมูลการศึกษา</p>
     </div>
-    <div class="right">
-      <h2>เข้าสู่ระบบนิสิต</h2>
-      <form id="login-form">
-        <input type="text" id="username" placeholder="ชื่อผู้ใช้" required />
-        <input type="password" id="password" placeholder="รหัสผ่าน" required />
-        <button type="submit">เข้าสู่ระบบ</button>
-        <div class="error" id="error-msg"></div>
-      </form>
+
+    <div class="right-section">
+      <div class="login-box">
+        <h2>เข้าสู่ระบบนิสิต</h2>
+        <input type="text" id="username" placeholder="รหัสนิสิต">
+        <input type="password" id="password" placeholder="รหัสผ่าน">
+        <div class="error-message" id="error-msg">ไม่สามารถเข้าสู่ระบบได้</div>
+        <button onclick="handleLogin()">เข้าสู่ระบบ</button>
+      </div>
+      <div class="footer">© 2025 Kasetsart University</div>
     </div>
   </div>
 
   <script>
-    const form = document.getElementById('login-form');
-    const errorMsg = document.getElementById('error-msg');
+    function handleLogin() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("error-msg");
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      if (username === '206494' && password === '206494') {
-        window.location.href = 'home.html'; // เปลี่ยนไปหน้าอื่นตามต้องการ
+      if (username === "206494" && password === "206494") {
+        window.location.href = "https://github.com/Methee77/dkkaset";
       } else {
-        errorMsg.textContent = 'ไม่สามารถเข้าสู่ระบบได้';
+        errorMsg.style.display = "block";
       }
-    });
+    }
   </script>
 </body>
 </html>
