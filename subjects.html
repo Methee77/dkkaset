@@ -7,135 +7,199 @@
   <style>
     body {
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
+      background-color: #f8f8f8;
       padding: 30px;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1000px;
       margin: auto;
       background: #fff;
-      padding: 30px 40px;
+      padding: 25px 30px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px 30px;
-      align-items: flex-end;
+      gap: 20px;
     }
 
     .form-group label {
-      display: block;
       font-weight: bold;
+      display: block;
       margin-bottom: 6px;
     }
 
     input[type="text"], select {
       width: 100%;
       padding: 10px;
-      font-size: 15px;
       border-radius: 6px;
       border: 1px solid #ccc;
-      box-sizing: border-box;
+      font-size: 15px;
     }
 
     .locked {
       background-color: #e0e0e0;
-      color: #333;
       font-weight: bold;
       pointer-events: none;
     }
 
     .btn {
       padding: 12px 20px;
-      background-color: #00bcd4;
+      background: #00bcd4;
       color: white;
       font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #0097a7;
+      margin-top: 10px;
     }
 
     .result {
-      margin-top: 25px;
-      padding: 15px;
+      margin-top: 30px;
+    }
+
+    .course-card {
+      background: #fefefe;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .course-info {
+      max-width: 70%;
+    }
+
+    .course-code {
       font-weight: bold;
-      color: green;
+      font-size: 18px;
+    }
+
+    .course-times {
+      color: #003366;
+      margin-top: 5px;
+    }
+
+    .course-status {
+      color: red;
+      margin: 8px 0;
+    }
+
+    .stats-box {
+      text-align: center;
+      border: 1px solid #00bcd4;
+      border-radius: 6px;
+      padding: 10px;
+      margin-left: 10px;
+      min-width: 90px;
+    }
+
+    .stats-box div {
+      font-size: 16px;
+      font-weight: bold;
+      color: #00bcd4;
+    }
+
+    .stats-label {
+      font-size: 13px;
+      color: #555;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
+
     <div class="form-grid">
       <div class="form-group">
-        <label for="search">ค้นหารายวิชา *</label>
-        <input type="text" id="search" placeholder="รหัสวิชา, ชื่อวิชา">
+        <label>ค้นหารายวิชา *</label>
+        <input type="text" id="search" placeholder="รหัสวิชา เช่น 01419211">
       </div>
-
       <div class="form-group">
         <label>วิทยาเขต *</label>
         <input type="text" class="locked" value="กำแพงแสน" readonly>
       </div>
-
       <div class="form-group">
         <label>ปีการศึกษา *</label>
         <input type="text" class="locked" value="2568" readonly>
       </div>
-
       <div class="form-group">
         <label>ภาคการศึกษา *</label>
         <input type="text" class="locked" value="ภาคต้น" readonly>
       </div>
-
       <div class="form-group">
-        <label for="group">หมู่เรียน</label>
-        <input type="text" id="group">
+        <label>หมู่เรียน</label>
+        <input type="text">
       </div>
-
-      <button class="btn" onclick="searchCourse()">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
     </div>
+
+    <button class="btn" onclick="searchCourse()">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
 
     <div class="result" id="result"></div>
   </div>
 
   <script>
-    const courses = [
-      "01355103", "01355102", "01355101",
-      "01419211", "01419214",
-      "02181333", "02181261",
-      "02031474", "02999147", "01999021"
-    ];
+    const courseData = {
+      "01419211": {
+        code: "01419211-65",
+        group: "700",
+        nameTH: "จุลชีววิทยาทั่วไป",
+        nameEN: "General Microbiology",
+        type: "ปกติ",
+        schedule: [
+          { day: "THU", time: "10:30 - 12:00", room: "ติดต่อผู้สอน" },
+          { day: "TUE", time: "10:30 - 12:00", room: "ติดต่อผู้สอน" }
+        ],
+        seats: 350,
+        registered: 0,
+        status: "ยังไม่ประกาศให้บันทึกรายวิชา"
+      }
+    };
 
     function searchCourse() {
       const input = document.getElementById("search").value.trim();
-      const result = document.getElementById("result");
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+
       if (!input) {
-        result.textContent = "กรุณากรอกรหัสวิชาหรือชื่อวิชา";
-        result.style.color = "red";
+        resultDiv.innerHTML = "<p style='color:red;'>กรุณากรอกรหัสวิชา</p>";
         return;
       }
 
-      const found = courses.some(code => input.includes(code));
-      result.textContent = found ? "✅ พบรายวิชาในระบบ" : "❌ ไม่พบรายวิชา";
-      result.style.color = found ? "green" : "red";
+      const course = courseData[input];
+      if (course) {
+        let scheduleHTML = course.schedule.map(s => `${s.day} ${s.time} ห้อง ${s.room}`).join("<br>");
+        resultDiv.innerHTML = `
+          <div class="course-card">
+            <div class="course-info">
+              <div class="course-code">${course.code} หมู่ ${course.group} <span style="background:#e0f7fa;padding:2px 8px;border-radius:4px;">บรรยาย</span> 3 หน่วยกิต</div>
+              <div>${course.nameTH}<br>${course.nameEN}</div>
+              <div>ประเภทหมู่เรียน : ${course.type}</div>
+              <div class="course-status">${course.status}</div>
+              <div class="course-times">${scheduleHTML}</div>
+            </div>
+            <div style="display:flex;">
+              <div class="stats-box">
+                <div>${course.seats}</div>
+                <div class="stats-label">จำนวนรับ</div>
+              </div>
+              <div class="stats-box">
+                <div>${course.registered}</div>
+                <div class="stats-label">ลงทะเบียนแล้ว</div>
+              </div>
+            </div>
+          </div>`;
+      } else {
+        resultDiv.innerHTML = "<p style='color:red;'>ไม่พบรายวิชา</p>";
+      }
     }
   </script>
-
 </body>
 </html>
