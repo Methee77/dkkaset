@@ -36,53 +36,37 @@
       align-items: flex-start;
       min-height: 100vh;
       transition: background-color 0.3s, color 0.3s;
-      padding-top: 60px;
+      padding-top: 80px;
     }
 
-    .announcement {
+    .announcement-box {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       background-color: #ffebee;
       color: #c62828;
-      font-weight: bold;
       border-bottom: 2px solid #e53935;
-      padding: 10px 50px 10px 16px;
+      padding: 15px 20px;
       box-sizing: border-box;
+      font-weight: bold;
       z-index: 1000;
-      overflow: hidden;
     }
 
-    .announcement .scrolling-text {
-      white-space: nowrap;
-      display: inline-block;
-      animation: scroll-left 15s linear infinite;
-    }
-
-    .announcement a {
+    .announcement-box a {
       color: #b71c1c;
       text-decoration: underline;
     }
 
-    .announcement .close-btn {
+    .announcement-box .close-btn {
       position: absolute;
-      top: 6px;
-      right: 16px;
+      top: 10px;
+      right: 20px;
       background: none;
       border: none;
       font-size: 22px;
       color: #c62828;
       cursor: pointer;
-    }
-
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
     }
 
     .search-container {
@@ -182,13 +166,11 @@
 </head>
 <body data-theme="light">
 
-  <!-- 🔔 ประกาศแจ้งเตือน -->
-  <div class="announcement" id="announcement">
-    <div class="scrolling-text">
-      🔔 วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ กรุณาตรวจสอบเองได้ที่ระบบ 
-      <a href="https://my.ku.ac.th" target="_blank">myKU</a>
-    </div>
-    <button class="close-btn" onclick="document.getElementById('announcement').style.display='none'">×</button>
+  <!-- 🔔 ประกาศแบบกล่อง -->
+  <div class="announcement-box" id="announcementBox">
+    🔔 วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ กรุณาตรวจสอบเองได้ที่ 
+    <a href="https://my.ku.ac.th" target="_blank">myKU</a>
+    <button class="close-btn" onclick="document.getElementById('announcementBox').style.display='none'">×</button>
   </div>
 
   <div class="search-container">
