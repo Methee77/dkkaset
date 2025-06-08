@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dekdeekasetF39</title>
+
+  <!-- ฟอนต์ IBM Plex Sans Thai -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
     :root {
       --bg-color: #f4f4f4;
@@ -201,16 +207,19 @@
       border-radius: 8px;
       font-weight: 500;
       width: 100px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px var(--shadow-color);
     }
 
     .sub-menu a:hover {
       background-color: var(--button-hover-bg);
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
-    .sub-menu svg {
-      margin-bottom: 6px;
-      width: 24px;
-      height: 24px;
+    .sub-menu a i {
+      font-size: 1.6rem;
+      margin-bottom: 5px;
     }
 
     .announcement-box {
@@ -240,7 +249,7 @@
       เด็กดีของเสดสิ่ง67
       <div class="header-buttons">
         <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
-        <button id="dark-mode-toggle">🌙</button>
+        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
       </div>
     </header>
 
@@ -271,18 +280,9 @@
       </div>
 
       <div class="sub-menu">
-        <a href="kyos.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1C7.589 1 4 4.589 4 9c0 3.52 2.611 6.432 6 6.92V20h-2v2h6v-2h-2v-4.08c3.389-.488 6-3.4 6-6.92 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4a4 4 0 0 1 0 8z"/></svg>
-          กยศ
-        </a>
-        <a href="subjects.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 2H9a2 2 0 0 0-2 2v16l6-3 6 3V4a2 2 0 0 0-2-2zM9 4h10v12l-5-2.5L9 16V4z"/></svg>
-          วิชาเรียน
-        </a>
-        <a href="calendar.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M7 11h5v5H7zM19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H5V9h14z"/></svg>
-          ปฏิทิน
-        </a>
+        <a href="kyos.html"><i class="fas fa-hand-holding-dollar"></i>กยศ</a>
+        <a href="subjects.html"><i class="fas fa-book-open"></i>วิชาเรียน</a>
+        <a href="calendar.html"><i class="fas fa-calendar-days"></i>ปฏิทิน</a>
       </div>
 
       <div class="announcement-box">
@@ -294,7 +294,7 @@
   </div>
 
   <script>
-    const targetDate = new Date(2568 - 543, 5, 19, 9, 30, 0);
+    const targetDate = new Date(2025, 5, 19, 9, 30, 0);
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
@@ -318,11 +318,9 @@
       const input = document.getElementById('student-id').value.trim();
       const resultBox = document.getElementById('search-result');
       if (input === '12345') {
-        resultBox.textContent = 'พบข้อมูล';
-        resultBox.style.color = 'green';
+        resultBox.textContent = 'พบตารางสอบ: 15 มี.ค. เวลา 09:00 วิชา BIO101';
       } else {
-        resultBox.textContent = 'ไม่พบข้อมูล';
-        resultBox.style.color = 'red';
+        resultBox.textContent = 'ไม่พบข้อมูลตารางสอบ';
       }
     });
 
@@ -332,10 +330,16 @@
       bodyElement.classList.add('dark-mode');
       toggleBtn.textContent = '☀️';
     }
+
     toggleBtn.addEventListener('click', () => {
       bodyElement.classList.toggle('dark-mode');
-      toggleBtn.textContent = bodyElement.classList.contains('dark-mode') ? '☀️' : '🌙';
-      localStorage.setItem('darkMode', bodyElement.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+      if (bodyElement.classList.contains('dark-mode')) {
+        toggleBtn.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        toggleBtn.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
+      }
     });
 
     document.getElementById('sutee-login').addEventListener('click', () => {
