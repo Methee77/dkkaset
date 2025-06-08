@@ -5,39 +5,53 @@
   <title>ค้นหารายวิชา</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: #f8f8f8;
-      padding: 30px;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 40px 20px;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 960px;
       margin: auto;
       background: #fff;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
+      justify-content: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
     }
 
     .form-group label {
       font-weight: bold;
-      display: block;
       margin-bottom: 6px;
     }
 
     input[type="text"], select {
-      width: 100%;
       padding: 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .locked {
@@ -47,14 +61,16 @@
     }
 
     .btn {
-      padding: 12px 20px;
+      display: block;
+      margin: 25px auto 0;
+      padding: 12px 30px;
       background: #00bcd4;
       color: white;
       font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
+      font-size: 16px;
     }
 
     .result {
@@ -64,17 +80,16 @@
     }
 
     .course-card {
-      background: #fefefe;
-      border: 1px solid #dcdcdc;
+      background: #fff;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 15px 20px;
+      padding: 20px;
+      max-width: 850px;
+      width: 100%;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      width: 100%;
-      max-width: 900px;
+      flex-wrap: wrap;
     }
 
     .course-info {
@@ -88,7 +103,7 @@
 
     .course-times {
       color: #003366;
-      margin-top: 5px;
+      margin-top: 6px;
     }
 
     .course-status {
@@ -115,9 +130,21 @@
       font-size: 13px;
       color: #555;
     }
+
+    @media (max-width: 768px) {
+      .course-info {
+        max-width: 100%;
+        margin-bottom: 15px;
+      }
+      .stats-box {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
 
@@ -183,13 +210,15 @@
         resultDiv.innerHTML = `
           <div class="course-card">
             <div class="course-info">
-              <div class="course-code">${course.code} หมู่ ${course.group} <span style="background:#e0f7fa;padding:2px 8px;border-radius:4px;">บรรยาย</span> 3 หน่วยกิต</div>
+              <div class="course-code">${course.code} หมู่ ${course.group}
+                <span style="background:#e0f7fa;padding:2px 8px;border-radius:4px;">บรรยาย</span> 3 หน่วยกิต
+              </div>
               <div>${course.nameTH}<br>${course.nameEN}</div>
               <div>ประเภทหมู่เรียน : ${course.type}</div>
               <div class="course-status">${course.status}</div>
               <div class="course-times">${scheduleHTML}</div>
             </div>
-            <div style="display:flex;">
+            <div style="display:flex;flex-direction:column;gap:10px;">
               <div class="stats-box">
                 <div>${course.seats}</div>
                 <div class="stats-label">จำนวนรับ</div>
@@ -205,5 +234,6 @@
       }
     }
   </script>
+
 </body>
 </html>
