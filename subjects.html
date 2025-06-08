@@ -5,219 +5,120 @@
   <title>ค้นหารายวิชา</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-color: #f4f4f4;
-      --text-color: #333;
-      --box-bg: #fff;
-      --input-bg: #fff;
-      --border-color: #ccc;
-      --btn-bg: #00bcd4;
-      --btn-hover: #0097a7;
-      --locked-bg: #e0e0e0;
-      --locked-color: #555;
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #eee;
-      --box-bg: #1e1e1e;
-      --input-bg: #2c2c2c;
-      --border-color: #555;
-      --btn-bg: #26c6da;
-      --btn-hover: #00acc1;
-      --locked-bg: #333;
-      --locked-color: #ccc;
-    }
-
     body {
       font-family: 'IBM Plex Sans Thai', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      transition: background-color 0.3s, color 0.3s;
+      background: #f4f4f4;
+      padding: 40px;
     }
-
-    .search-container {
-      background: var(--box-bg);
-      border-radius: 12px;
-      padding: 40px 30px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 1000px;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      margin-top: 80px;
-      transition: background 0.3s;
+    input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 16px;
     }
-
-    .announcement-box {
-      background: #ffebee;
-      color: #c62828;
+    .course-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-left: 5px solid #00bcd4;
       padding: 16px 20px;
       border-radius: 8px;
-      font-size: 15px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      font-weight: bold;
-    }
-
-    h2 {
       margin-bottom: 20px;
-      text-align: center;
-      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: var(--text-color);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px 30px;
-      align-items: flex-end;
-    }
-
-    .form-group {
-      position: relative;
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-    }
-
-    label {
+    .course-header {
       font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-      font-size: 16px;
-      box-sizing: border-box;
-      background-color: var(--input-bg);
-      color: var(--text-color);
-    }
-
-    .text-display {
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 16px;
-      color: var(--text-color);
-      background-color: var(--input-bg);
-    }
-
-    .text-display.locked {
-      background-color: var(--locked-bg);
-      color: var(--locked-color);
-      font-weight: bold;
-    }
-
-    .clear-btn {
-      position: absolute;
-      top: 38px;
-      right: 10px;
-      background: none;
-      border: none;
       font-size: 18px;
-      cursor: pointer;
-      color: #999;
+      margin-bottom: 5px;
     }
-
-    .search-button {
-      padding: 12px 20px;
-      background: var(--btn-bg);
-      border: none;
-      color: white;
+    .course-section {
+      margin: 8px 0;
+    }
+    .info-box {
+      display: inline-block;
+      border: 1px solid #00bcd4;
+      color: #00bcd4;
       border-radius: 6px;
-      font-size: 16px;
+      padding: 6px 12px;
+      margin-left: 10px;
+    }
+    .schedule {
+      color: #3f51b5;
+    }
+    .red {
+      color: #b71c1c;
       font-weight: bold;
-      cursor: pointer;
-      white-space: nowrap;
-      justify-self: start;
-      margin-top: 10px;
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-    }
-
-    .search-button:hover {
-      background: var(--btn-hover);
-    }
-
-    @media (max-width: 600px) {
-      .search-button {
-        justify-self: stretch;
-        width: 100%;
-      }
     }
   </style>
 </head>
-<body data-theme="light">
+<body>
 
-  <div class="search-container">
-    <button class="theme-toggle" onclick="toggleTheme()" title="สลับโหมด">
-      🌙
-    </button>
+  <h2>ค้นหารายวิชา</h2>
+  <input type="text" id="searchInput" placeholder="รหัสวิชา หรือ ชื่อวิชา" oninput="renderCourses()">
 
-    <h2>รายวิชาที่เปิดให้ลงทะเบียน</h2>
-
-    <div class="announcement-box">
-      วิชาที่ค้นหาได้เป็นแค่วิชาตามแผนเรียนของปีและภาคการศึกษานั้น วิชาเสรีและวิชาเรียนนอกแผนต้องการเรียนใหม่ ตรวจสอบเองได้ที่ระบบ myKU
-    </div>
-
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="course-code">ค้นหารายวิชา <span style="color:red;">*</span></label>
-        <input type="text" id="course-code" placeholder="รหัสวิชา, ชื่อวิชา">
-        <button class="clear-btn" onclick="document.getElementById('course-code').value=''">×</button>
-      </div>
-
-      <div class="form-group">
-        <label>วิทยาเขต</label>
-        <div class="text-display locked">กำแพงแสน</div>
-      </div>
-
-      <div class="form-group">
-        <label>ปีการศึกษา</label>
-        <div class="text-display locked">2568</div>
-      </div>
-
-      <div class="form-group">
-        <label>ภาคการศึกษา</label>
-        <div class="text-display locked">ภาคต้น</div>
-      </div>
-
-      <div class="form-group">
-        <label for="group">หมู่เรียน</label>
-        <input type="text" id="group" placeholder="">
-      </div>
-
-      <button class="search-button">รายชื่อวิชาที่เปิดสอนทั้งหมด</button>
-    </div>
-  </div>
+  <div id="courseList"></div>
 
   <script>
-    function toggleTheme() {
-      const body = document.body;
-      const button = document.querySelector('.theme-toggle');
-      const isDark = body.getAttribute('data-theme') === 'dark';
-      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      button.textContent = isDark ? '🌙' : '☀️';
+    const courses = [
+      {
+        code: "01355103",
+        name: "ภาษาอังกฤษเพื่อโอกาสในการทำงาน",
+        engName: "English for Job Opportunities",
+        group: "700",
+        type: "บรรยาย",
+        unit: 3,
+        regStatus: "ยังไม่ประกาศให้สมัครลงทะเบียน",
+        schedule: ["MON 8:30 - 10:00 ห้อง LH4-605", "WED 8:30 - 10:00 ห้อง LH4-605"],
+        seats: 60,
+        enrolled: 0
+      },
+      { code: "01355102", name: "ภาษาอังกฤษพื้นฐาน 2", engName: "Basic English II", group: "701", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["TUE 10:00 - 12:00 ห้อง LH2-102"], seats: 50, enrolled: 10 },
+      { code: "01355101", name: "ภาษาอังกฤษพื้นฐาน 1", engName: "Basic English I", group: "702", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["MON 13:00 - 15:00 ห้อง LH2-202"], seats: 55, enrolled: 20 },
+      { code: "01419211", name: "เทคโนโลยีสารสนเทศ", engName: "Information Technology", group: "703", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["WED 9:00 - 12:00 ห้อง LH1-305"], seats: 40, enrolled: 5 },
+      { code: "01419214", name: "การเขียนโปรแกรม", engName: "Programming", group: "704", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["THU 13:00 - 15:00 ห้อง LH1-404"], seats: 40, enrolled: 12 },
+      { code: "02181333", name: "เศรษฐศาสตร์เบื้องต้น", engName: "Basic Economics", group: "705", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["FRI 9:00 - 12:00 ห้อง LH3-101"], seats: 60, enrolled: 30 },
+      { code: "02181261", name: "การเงินเบื้องต้น", engName: "Basic Finance", group: "706", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["TUE 14:00 - 16:00 ห้อง LH3-102"], seats: 50, enrolled: 15 },
+      { code: "02031474", name: "พฤกษศาสตร์เบื้องต้น", engName: "Basic Botany", group: "707", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["MON 10:00 - 12:00 ห้อง LH1-103"], seats: 45, enrolled: 8 },
+      { code: "02999147", name: "วิทยาศาสตร์พื้นฐาน", engName: "Basic Science", group: "708", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["WED 13:00 - 15:00 ห้อง LH2-203"], seats: 45, enrolled: 10 },
+      { code: "01999021", name: "ศิลปะและวัฒนธรรม", engName: "Art and Culture", group: "709", type: "บรรยาย", unit: 3, regStatus: "เปิด", schedule: ["FRI 13:00 - 15:00 ห้อง LH3-301"], seats: 50, enrolled: 25 }
+    ];
+
+    function renderCourses() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const list = document.getElementById('courseList');
+      list.innerHTML = '';
+
+      courses
+        .filter(c => c.code.includes(search) || c.name.toLowerCase().includes(search) || c.engName.toLowerCase().includes(search))
+        .forEach(course => {
+          const card = document.createElement('div');
+          card.className = 'course-card';
+          card.innerHTML = `
+            <div class="course-header">${course.code}-${course.group} 
+              <span class="info-box">${course.type}</span> 
+              <span>${course.unit} หน่วยกิต</span>
+            </div>
+            <div class="course-section">
+              ${course.name}<br>
+              ${course.engName}<br>
+              <span>ประเภทหมู่เรียน : ปกติ</span><br>
+              <span>สามารถเรียนทดแทนวิชา : -</span>
+            </div>
+            <div class="course-section red">${course.regStatus}</div>
+            <div class="course-section schedule">
+              ${course.schedule.map(s => `<div>${s}</div>`).join('')}
+            </div>
+            <div class="course-section">
+              <span class="info-box">จำนวนรับ<br>${course.seats}</span>
+              <span class="info-box">ลงทะเบียนแล้ว<br>${course.enrolled}</span>
+            </div>
+          `;
+          list.appendChild(card);
+        });
     }
+
+    window.onload = renderCourses;
   </script>
 
 </body>
