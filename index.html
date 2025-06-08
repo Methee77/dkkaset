@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dekdeekasetF39</title>
-
-  <!-- ฟอนต์ IBM Plex Sans Thai -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg-color: #f4f4f4;
@@ -54,7 +51,6 @@
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .wrapper {
@@ -101,7 +97,6 @@
     #sutee-login:hover {
       background-color: var(--header-text);
       color: var(--header-bg);
-      border-color: var(--header-text);
     }
 
     .content {
@@ -115,13 +110,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       padding: 30px;
       margin-bottom: 40px;
       background: var(--countdown-bg);
       border-radius: 20px;
       box-shadow: 0 8px 32px var(--shadow-color);
-      border: 1px solid rgba(0, 0, 0, 0.1);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -138,7 +131,6 @@
     .countdown-time {
       font-size: 2.2rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
     }
 
     .search-form {
@@ -168,10 +160,6 @@
       color: var(--text-color);
     }
 
-    .search-form input::placeholder {
-      color: #999;
-    }
-
     .search-form button {
       background-color: var(--button-bg);
       color: white;
@@ -196,19 +184,23 @@
 
     .sub-menu {
       margin-top: 40px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
     }
 
     .sub-menu a {
-      display: inline-block;
-      margin: 0 15px;
-      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
       background-color: var(--sub-menu-bg);
       color: var(--sub-menu-text);
-      text-decoration: none;
-      border-radius: 6px;
+      padding: 12px 20px;
+      border-radius: 8px;
       font-weight: 500;
-      transition: background-color 0.3s ease;
+      width: 100px;
     }
 
     .sub-menu a:hover {
@@ -216,8 +208,9 @@
     }
 
     .sub-menu svg {
-      vertical-align: middle;
-      margin-right: 6px;
+      margin-bottom: 6px;
+      width: 24px;
+      height: 24px;
     }
 
     .announcement-box {
@@ -247,7 +240,7 @@
       เด็กดีของเสดสิ่ง67
       <div class="header-buttons">
         <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
-        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
+        <button id="dark-mode-toggle">🌙</button>
       </div>
     </header>
 
@@ -279,15 +272,15 @@
 
       <div class="sub-menu">
         <a href="kyos.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24"><path d="M12 1C7.589 1 4 4.589 4 9c0 3.52 2.611 6.432 6 6.92V20h-2v2h6v-2h-2v-4.08c3.389-.488 6-3.4 6-6.92 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4a4 4 0 0 1 0 8z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1C7.589 1 4 4.589 4 9c0 3.52 2.611 6.432 6 6.92V20h-2v2h6v-2h-2v-4.08c3.389-.488 6-3.4 6-6.92 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4a4 4 0 0 1 0 8z"/></svg>
           กยศ
         </a>
         <a href="subjects.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24"><path d="M19 2H9a2 2 0 0 0-2 2v16l6-3 6 3V4a2 2 0 0 0-2-2zM9 4h10v12l-5-2.5L9 16V4z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 2H9a2 2 0 0 0-2 2v16l6-3 6 3V4a2 2 0 0 0-2-2zM9 4h10v12l-5-2.5L9 16V4z"/></svg>
           วิชาเรียน
         </a>
         <a href="calendar.html">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24"><path d="M7 11h5v5H7zM19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H5V9h14z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M7 11h5v5H7zM19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H5V9h14z"/></svg>
           ปฏิทิน
         </a>
       </div>
@@ -341,13 +334,8 @@
     }
     toggleBtn.addEventListener('click', () => {
       bodyElement.classList.toggle('dark-mode');
-      if (bodyElement.classList.contains('dark-mode')) {
-        toggleBtn.textContent = '☀️';
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        toggleBtn.textContent = '🌙';
-        localStorage.setItem('darkMode', 'disabled');
-      }
+      toggleBtn.textContent = bodyElement.classList.contains('dark-mode') ? '☀️' : '🌙';
+      localStorage.setItem('darkMode', bodyElement.classList.contains('dark-mode') ? 'enabled' : 'disabled');
     });
 
     document.getElementById('sutee-login').addEventListener('click', () => {
