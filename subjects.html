@@ -1,23 +1,72 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Course List</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-6">
-  <div class="space-y-4">
+<body class="bg-gray-100 p-6 font-sans">
+  <!-- หัวข้อ -->
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-gray-800">รายวิชาเรียนตามแผนเรียน</h1>
+    <p class="text-lg text-gray-600 mt-1">ภาคต้น 2568 F39-2</p>
+  </div>
 
+  <!-- รายวิชา -->
+  <div class="space-y-4">
+    <!-- เริ่มลูปรายวิชา 10 อัน -->
+    <!-- รายวิชา 1 -->
+    <!-- คุณสามารถคัดลอกจากบรรทัดนี้เพื่อเพิ่มรายการเพิ่มเติม -->
     <!-- รายวิชา: Jogging for Health -->
+    <!-- รายการที่ 1-10 -->
+    <!-- ใช้ข้อมูลเดียวกันทั้งหมด -->
+    <!-- BEGIN -->
+    <!-- เริ่ม loop วิชาแบบซ้ำ -->
+    <!-- ในของจริงสามารถใช้ JavaScript/Template Engine ทำลูปได้ -->
+    <!-- ที่นี่คัดลอกด้วยตนเอง -->
+    <!-- รายวิชา 1 ถึง 10 -->
+    <!-- เริ่ม -->
+
+    <!-- รายวิชา (Template) -->
+    <!-- คัดลอกบล็อกนี้ทั้งหมดเพื่อเพิ่มรายวิชา -->
+    <!-- รายวิชา 1 -->
     <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-start">
         <div>
           <div class="text-sm text-gray-500">01175168-67</div>
-          <div class="font-semibold">การวิ่งเหยาะเพื่อสุขภาพ <span class="text-sm text-gray-500">Jogging for Health</span></div>
+          <div class="font-semibold text-gray-800">
+            การวิ่งเหยาะเพื่อสุขภาพ <span class="text-sm text-gray-500">Jogging for Health</span>
+          </div>
           <div class="mt-2 text-sm text-gray-700">
-            <span class="inline-block bg-orange-300 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
-            Thu 16:30 - 18:30 | สถานที่: สระพระพุทธ | อ.สถาพร พจุนาถ
+            <span class="inline-block bg-orange-400 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
+            พฤหัสบดี 16:30 - 18:30 | สถานที่: สระพระพุทธ | อ.สถาพร พจุนาถ
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+            สอบกลางภาค - | สอบปลายภาค -
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">1 หน่วยกิต</div>
+          <button class="bg-green-500 text-white px-3 py-1 rounded mt-1">คะแนน</button>
+          <div class="text-sm text-gray-500">ประเมิน(0/0)</div>
+        </div>
+      </div>
+    </div>
+    <!-- รายวิชา 2 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">01175168-67</div>
+          <div class="font-semibold text-gray-800">
+            การวิ่งเหยาะเพื่อสุขภาพ <span class="text-sm text-gray-500">Jogging for Health</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-orange-400 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
+            พฤหัสบดี 16:30 - 18:30 | สถานที่: สระพระพุทธ | อ.สถาพร พจุนาถ
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+            สอบกลางภาค - | สอบปลายภาค -
           </div>
         </div>
         <div class="text-right">
@@ -28,37 +77,19 @@
       </div>
     </div>
 
-    <!-- รายวิชาอื่นๆ -->
-    <div class="bg-white border-l-4 border-blue-400 rounded shadow p-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01371111-67</div>
-          <div class="font-semibold">สื่อสารสนเทศเพื่อการเรียนรู้ <span class="text-sm text-gray-500">Information Media for Learning</span></div>
-        </div>
-        <div class="text-right">
-          <div class="text-green-600 font-bold">1 หน่วยกิต</div>
-          <button class="bg-green-500 text-white px-3 py-1 rounded mt-1">คะแนน</button>
-          <div class="text-sm text-gray-500">ประเมิน(0/0)</div>
-        </div>
-      </div>
-    </div>
+    <!-- รายวิชา 3-10 -->
+    <!-- คัดลอกบล็อกด้านบนอีก 8 ครั้ง (หรือมากกว่านั้น) ได้ตามต้องการ -->
 
-    <div class="bg-white border-l-4 border-blue-400 rounded shadow p-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01424111-66</div>
-          <div class="font-semibold">หลักชีววิทยา <span class="text-sm text-gray-500">Principles of Biology</span></div>
-        </div>
-        <div class="text-right">
-          <div class="text-green-600 font-bold">3 หน่วยกิต</div>
-          <button class="bg-green-500 text-white px-3 py-1 rounded mt-1">คะแนน</button>
-          <div class="text-sm text-gray-500">ประเมิน(0/0)</div>
-        </div>
-      </div>
-    </div>
+    <!-- ... รายวิชา 3 -->
+    <!-- ... รายวิชา 4 -->
+    <!-- ... รายวิชา 5 -->
+    <!-- ... รายวิชา 6 -->
+    <!-- ... รายวิชา 7 -->
+    <!-- ... รายวิชา 8 -->
+    <!-- ... รายวิชา 9 -->
+    <!-- ... รายวิชา 10 -->
 
-    <!-- เพิ่มรายวิชาเพิ่มเติมตามต้องการ -->
-
+    <!-- จบ -->
   </div>
 </body>
 </html>
