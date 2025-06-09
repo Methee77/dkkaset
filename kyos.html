@@ -3,53 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ระบบกยศ./กรอ. มก.</title>
+  <title>ระบบกู้ยืมเงินนักศึกษา BSRU</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body { font-family: 'Prompt', sans-serif; }
-    .sidebar { width: 240px; background-color: #2c3e50; color: white; height: 100vh; }
-    .sidebar a { display: block; padding: 12px 20px; color: white; text-decoration: none; }
-    .sidebar a:hover { background-color: #34495e; }
-    .sidebar .submenu { padding-left: 20px; }
-    .content { flex-grow: 1; padding: 20px; }
+    .sidebar {
+      width: 260px;
+      background-color: #2d2d86;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding-top: 20px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar a, .sidebar button {
+      width: 100%;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      color: white;
+      background: none;
+      border: none;
+      text-align: left;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .sidebar a:hover, .sidebar button:hover {
+      background-color: #1f1f6a;
+    }
+    .sidebar i {
+      margin-right: 12px;
+    }
+    .submenu a {
+      padding-left: 48px;
+      font-size: 0.95rem;
+    }
+    .content {
+      margin-left: 260px;
+      padding: 24px;
+      background-color: #f0f0f5;
+      min-height: 100vh;
+    }
+    @media (max-width: 768px) {
+      .sidebar { left: -260px; }
+      .sidebar.open { left: 0; }
+      .toggle-btn {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: #2d2d86;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        z-index: 100;
+      }
+      .content { margin-left: 0; }
+    }
   </style>
 </head>
-<body class="flex">
+<body>
 
-  <aside class="sidebar">
-    <h2 class="text-xl font-semibold px-4 py-4">ระบบกยศ./กรอ.</h2>
-    <a href="#"><i class="fas fa-home mr-2"></i>หน้าหลัก</a>
-    <a href="#"><i class="fas fa-bullhorn mr-2"></i>ข่าวประชาสัมพันธ์</a>
-    <button id="toggleManuals" class="w-full text-left flex items-center px-4 py-2">
-      <i class="fas fa-file-alt mr-2"></i>วิธีการเข้าใช้งานระบบ
-      <i id="iconToggle" class="fas fa-chevron-down ml-auto"></i>
+  <button class="toggle-btn md:hidden" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <h2><i class="fas fa-graduation-cap"></i> ระบบกู้ยืม BSRU</h2>
+    <a href="#"><i class="fas fa-home"></i> หน้าหลัก</a>
+    <a href="#"><i class="fas fa-bullhorn"></i> ข่าวประชาสัมพันธ์</a>
+    <button onclick="toggleSubmenu('manuals')">
+      <i class="fas fa-book"></i> คู่มือการใช้งาน
+      <i class="fas fa-chevron-down ml-auto" id="icon-manuals"></i>
     </button>
-    <div id="manualsSubmenu" class="submenu hidden">
-      <a href="#" class="py-1">• คู่มือ PDF</a>
-      <a href="#" class="py-1">• คู่มือ e‑book</a>
+    <div class="submenu hidden" id="submenu-manuals">
+      <a href="#">• คู่มือ PDF</a>
+      <a href="#">• คู่มือ e‑Book</a>
     </div>
-    <a href="#"><i class="fas fa-list-alt mr-2"></i>ขั้นตอนการขอกู้ยืม</a>
-    <a href="#"><i class="fas fa-download mr-2"></i>เอกสารดาวน์โหลด</a>
-    <a href="#"><i class="fas fa-envelope mr-2"></i>ติดต่อสอบถาม</a>
+    <a href="#"><i class="fas fa-list"></i> ขั้นตอนการขอกู้ยืม</a>
+    <a href="#"><i class="fas fa-file-download"></i> เอกสารดาวน์โหลด</a>
+    <a href="#"><i class="fas fa-envelope"></i> ติดต่อสอบถาม</a>
   </aside>
 
   <div class="content">
-    <h1 class="text-2xl font-bold mb-4">ยินดีต้อนรับสู่ระบบกยศ./กรอ. มก.</h1>
-    <p>เนื้อหาหลักของระบบ จัดวางไว้ตรงนี้...</p>
+    <h1 class="text-2xl font-semibold">ยินดีต้อนรับเข้าสู่ระบบกู้ยืมเงินนักศึกษา BSRU</h1>
+    <p>เนื้อหาหลักของระบบจะแสดงตรงนี้...</p>
   </div>
 
   <script>
-    const btn = document.getElementById('toggleManuals');
-    const submenu = document.getElementById('manualsSubmenu');
-    const icon = document.getElementById('iconToggle');
-    btn.addEventListener('click', () => {
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById('submenu-' + id);
+      const icon = document.getElementById('icon-' + id);
       submenu.classList.toggle('hidden');
       icon.classList.toggle('fa-chevron-up');
-      icon.classList.toggle('fa-chevron-down');
-    });
+    }
   </script>
+
 </body>
 </html>
