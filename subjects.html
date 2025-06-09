@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="th" class="">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Course List</title>
-  <script>
-    tailwind.config = {
-      darkMode: 'class'
-    };
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- ใช้ฟอนต์ Prompt -->
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
   <style>
     body {
@@ -17,64 +13,219 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-6 transition-colors duration-300">
-
-  <!-- ปุ่มสลับ Dark Mode -->
-  <div class="flex justify-end mb-4">
-    <button id="darkToggle" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-300 transition">
-      สลับโหมดกลางคืน
-    </button>
-  </div>
-
+<body class="bg-gray-100 p-6">
   <!-- หัวข้อ -->
   <div class="mb-6 text-center">
-    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">รายวิชาเรียนตามแผนเรียน</h1>
-    <p class="text-lg text-gray-700 dark:text-gray-300 mt-2 inline-block border border-gray-300 dark:border-gray-600 rounded-full px-4 py-1">
+    <h1 class="text-2xl font-bold text-gray-800">รายวิชาเรียนตามแผนเรียน</h1>
+    <p class="text-lg text-gray-700 mt-2 inline-block border border-gray-300 rounded-full px-4 py-1">
       ภาคต้น 2568 F39-2
     </p>
   </div>
 
-  <!-- รายวิชา -->
+  <!-- รายวิชา (แสดง 2 รายการเป็นตัวอย่าง คุณสามารถคัดลอกเพื่อเพิ่มได้อีก 8) -->
   <div class="space-y-4">
     <!-- รายวิชา 1 -->
-    <div class="bg-white dark:bg-gray-800 border-l-4 border-green-400 rounded shadow p-4">
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
       <div class="flex justify-between items-start">
         <div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">01419214-65</div>
-          <div class="font-semibold text-gray-800 dark:text-white">
-            จุลชีววิทยาพื้นฐานภาคปฏิบัติการ <span class="text-sm text-gray-500 dark:text-gray-300">Laboratory in Fundamental Microbiology</span>
+          <div class="text-sm text-gray-500">01419214-65</div>
+          <div class="font-semibold text-gray-800">
+            จุลชีววิทยาพื้นฐานภาคปฏิบัติการ <span class="text-sm text-gray-500">Laboratory in Fundamental Microbiology</span>
           </div>
-          <div class="mt-2 text-sm text-gray-700 dark:text-gray-200">
+          <div class="mt-2 text-sm text-gray-700">
             <span class="inline-block bg-orange-400 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
             จันทร์ 13:00 - 16:00 | สถานที่: SC14-422,423,424 | อ.จุฑาทิพย์ โพธิ์อุบล
           </div>
-          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1 space-x-2">
-            <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
-            <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
           </div>
         </div>
         <div class="text-right">
-          <div class="text-green-600 dark:text-green-400 font-bold">1 หน่วยกิต</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">หมู่713-715</div>
+          <div class="text-green-600 font-bold">1 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่713-715</div>
         </div>
       </div>
     </div>
 
-    <!-- รายวิชา 2–10 (โค้ดของคุณเดิม) -->
-    <!-- >>> วางเนื้อหารายวิชาทั้งหมดไว้เหมือนเดิม <<< -->
-    <!-- เพียงแต่เพิ่ม class dark:... ไปตามที่เหมาะสม เช่น dark:bg-gray-800, dark:text-gray-100 เป็นต้น -->
+    <!-- รายวิชา 2 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">01355103-64</div>
+          <div class="font-semibold text-gray-800">
+            ภาษาอังกฤษเพื่อโอกาสในการทำงาน <span class="text-sm text-gray-500">English for Job Opportunities</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-blue-400 text-white px-2 py-1 rounded mr-2">บรรยาย</span>
+            จันทร์ พุธ 10:30 - 12:00 | สถานที่: LH4-607,608,609,610,611 | อ.กษิดิษฐ์ สุพรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">3 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่703-707</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- ... วางรายวิชา 2–10 เหมือนเดิมพร้อม dark mode class ... -->
+    <!-- รายวิชา 3 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181333-64</div>
+          <div class="font-semibold text-gray-800">
+            การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา <span class="text-sm text-gray-500">Computer Application in Agricultural and Environmental Education</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-orange-400 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
+            รอประกาศจากผู้สอน | สถานที่: รอประกาศจากผู้สอน | อ.ศุภรักษ์ อธิคมสุวรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">1 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่ -</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- รายวิชา 4 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181261</div>
+          <div class="font-semibold text-gray-800">
+            ประสบการณ์วิชาชีพทางเกษตรและสิ่งแวดล้อมศึกษา I <span class="text-sm text-gray-500">Field Experiences in Agricultural and Environmental Education I</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-orange-400 text-white px-2 py-1 rounded mr-2">ปฏิบัติ</span>
+            จันทร์ 13:00 - 16:00 | สถานที่: SC14-422,423,424 | อ.จุฑาทิพย์ โพธิ์อุบล
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">1 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่713-715</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- รายวิชา 5 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181333-64</div>
+          <div class="font-semibold text-gray-800">
+            การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา <span class="text-sm text-gray-500">Computer Application in Agricultural and Environmental Education</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-blue-400 text-white px-2 py-1 rounded mr-2">บรรยาย</span>
+            รอประกาศจากผู้สอน | สถานที่: รอประกาศจากผู้สอน | อ.ศุภรักษ์ อธิคมสุวรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">2 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่ -</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- รายวิชา 5 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181333-64</div>
+          <div class="font-semibold text-gray-800">
+            การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา <span class="text-sm text-gray-500">Computer Application in Agricultural and Environmental Education</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-blue-400 text-white px-2 py-1 rounded mr-2">บรรยาย</span>
+            รอประกาศจากผู้สอน | สถานที่: รอประกาศจากผู้สอน | อ.ศุภรักษ์ อธิคมสุวรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">2 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่ -</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- รายวิชา 5 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181333-64</div>
+          <div class="font-semibold text-gray-800">
+            การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา <span class="text-sm text-gray-500">Computer Application in Agricultural and Environmental Education</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-blue-400 text-white px-2 py-1 rounded mr-2">บรรยาย</span>
+            รอประกาศจากผู้สอน | สถานที่: รอประกาศจากผู้สอน | อ.ศุภรักษ์ อธิคมสุวรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">2 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่ -</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- รายวิชา 5 -->
+    <div class="bg-white border-l-4 border-green-400 rounded shadow p-4">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="text-sm text-gray-500">02181333-64</div>
+          <div class="font-semibold text-gray-800">
+            การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา <span class="text-sm text-gray-500">Computer Application in Agricultural and Environmental Education</span>
+          </div>
+          <div class="mt-2 text-sm text-gray-700">
+            <span class="inline-block bg-blue-400 text-white px-2 py-1 rounded mr-2">บรรยาย</span>
+            รอประกาศจากผู้สอน | สถานที่: รอประกาศจากผู้สอน | อ.ศุภรักษ์ อธิคมสุวรรณ
+          </div>
+          <div class="text-sm text-gray-500 mt-1 space-x-2">
+          <span class="inline-block bg-green-500 text-white px-2 py-1 rounded">สอบกลางภาค -</span>
+          <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded">สอบปลายภาค -</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-green-600 font-bold">2 หน่วยกิต</div>
+          <div class="text-sm text-gray-500">หมู่ -</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- หัวข้อ -->
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-gray-800">รายวิชาเรียนตามแผนเรียน</h1>
+    <p class="text-lg text-gray-700 mt-2 inline-block border border-gray-300 rounded-full px-4 py-1">
+      ภาคต้น 2568 F39-2
+    </p>
   </div>
 
-  <script>
-    const darkToggle = document.getElementById('darkToggle');
-    const html = document.documentElement;
+    <!-- เพิ่มอีก 8 รายการแบบนี้ต่อไปตามต้องการ -->
 
-    darkToggle.addEventListener('click', () => {
-      html.classList.toggle('dark');
-    });
-  </script>
+  </div>
 </body>
 </html>
