@@ -1,61 +1,110 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>กยศ NPRU - Navbar ตัวอย่าง</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-  <style> body { font-family: 'Prompt', sans-serif; }</style>
+  <meta charset="UTF-8">
+  <title>เมนูด้านข้าง กยศ.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #b71c1c;
+      color: white;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      transition: width 0.3s;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin: 0 0 20px 0;
+      font-size: 1.4em;
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: #d32f2f;
+    }
+
+    .sidebar i {
+      margin-right: 10px;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        position: absolute;
+        left: -250px;
+        top: 0;
+        height: 100%;
+        z-index: 10;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .toggle-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #b71c1c;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        z-index: 20;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
+<body>
 
-  <!-- Navbar -->
-  <nav class="bg-red-700 text-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <a href="#" class="text-xl font-bold">NPRU กยศ.</a>
-        </div>
+  <div class="sidebar" id="sidebar">
+    <h2>ระบบกยศ.</h2>
+    <a href="#"><i class="fas fa-home"></i>หน้าหลัก</a>
+    <a href="#"><i class="fas fa-user"></i>ข้อมูลนักศึกษา</a>
+    <a href="#"><i class="fas fa-file-alt"></i>ใบคำขอกู้</a>
+    <a href="#"><i class="fas fa-upload"></i>อัปโหลดเอกสาร</a>
+    <a href="#"><i class="fas fa-info-circle"></i>คู่มือ/ประกาศ</a>
+    <a href="#"><i class="fas fa-envelope"></i>ติดต่อ</a>
+  </div>
 
-        <!-- Menu Links -->
-        <div class="hidden md:flex space-x-8">
-          <a href="#" class="hover:underline">หน้าแรก</a>
-          <a href="#" class="hover:underline">ยื่นคำขอกู้</a>
-          <a href="#" class="hover:underline">เตรียมเอกสาร</a>
-          <a href="#" class="hover:underline">ตรวจสอบยอดหนี้</a>
-          <a href="#" class="hover:underline">ติดต่อ</a>
-        </div>
+  <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
 
-        <!-- Mobile menu icon -->
-        <div class="md:hidden">
-          <button id="menuBtn" class="focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-              viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden bg-red-600">
-      <a href="#" class="block px-4 py-2 hover:bg-red-500">หน้าแรก</a>
-      <a href="#" class="block px-4 py-2 hover:bg-red-500">ยื่นคำขอกู้</a>
-      <a href="#" class="block px-4 py-2 hover:bg-red-500">เตรียมเอกสาร</a>
-      <a href="#" class="block px-4 py-2 hover:bg-red-500">ตรวจสอบยอดหนี้</a>
-      <a href="#" class="block px-4 py-2 hover:bg-red-500">ติดต่อ</a>
-    </div>
-  </nav>
+  <div class="content">
+    <h1>ยินดีต้อนรับสู่ระบบกยศ.</h1>
+    <p>นี่คือหน้าหลักของระบบกู้ยืมเงินเพื่อการศึกษา กยศ. ประจำปีการศึกษา 2566</p>
+  </div>
 
   <script>
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
   </script>
 
 </body>
