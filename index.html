@@ -30,6 +30,14 @@
       --sub-menu-bg: #003366;
       --sub-menu-text: white;
       --shadow-color: rgba(0,0,0,0.1);
+
+      /* ตาราง */
+      --table-header-bg: #d9e4f5;
+      --table-header-text: #003366;
+      --table-row-bg-odd: #f9f9f9;
+      --table-row-bg-even: white;
+      --table-row-text: #222;
+      --table-border-color: #bbb;
     }
 
     .dark-mode {
@@ -50,6 +58,14 @@
       --sub-menu-bg: #0d47a1;
       --sub-menu-text: #fff;
       --shadow-color: rgba(0,0,0,0.7);
+
+      /* ตาราง dark */
+      --table-header-bg: #0d47a1;
+      --table-header-text: #fff;
+      --table-row-bg-odd: #252525;
+      --table-row-bg-even: #1e1e1e;
+      --table-row-text: #ddd;
+      --table-border-color: #444;
     }
 
     body {
@@ -137,6 +153,45 @@
     .countdown-time {
       font-size: 2.2rem;
       font-weight: 700;
+    }
+
+    /* ตาราง */
+    table.schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: var(--table-row-text);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    table.schedule-table thead {
+      background-color: var(--table-header-bg);
+      color: var(--table-header-text);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    table.schedule-table th,
+    table.schedule-table td {
+      border: 1px solid var(--table-border-color);
+      padding: 10px 12px;
+    }
+
+    table.schedule-table tbody tr:nth-child(odd) {
+      background-color: var(--table-row-bg-odd);
+    }
+
+    table.schedule-table tbody tr:nth-child(even) {
+      background-color: var(--table-row-bg-even);
+    }
+
+    table.schedule-table tbody tr:hover {
+      background-color: var(--button-hover-bg);
+      color: white;
+      cursor: default;
+      transition: background-color 0.3s ease;
     }
 
     .search-form {
@@ -270,8 +325,7 @@
       <div class="header-buttons">
         <button id="sutee-login">สำหรับสุธีเข้าระบบ</button>
         <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
-      </div>
-    </header>
+      </
 
     <div class="content">
       <div class="countdown-container">
