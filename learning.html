@@ -9,24 +9,24 @@
 
   <style>
     :root {
-      --bg-color: #f4f4f4;
-      --wrapper-bg: white;
+      --bg-color: #fef6f0;
+      --wrapper-bg: #ffffff;
       --text-color: #222;
-      --header-bg: #003366;
+      --header-bg: #ff6f00;          /* สีส้มเข้ม */
       --header-text: white;
-      --button-bg: #003366;
-      --button-hover-bg: #0055aa;
+      --button-bg: #ff9800;          /* สีส้มกลาง */
+      --button-hover-bg: #fb8c00;    /* ส้มอ่อนเมื่อ hover */
       --shadow-color: rgba(0,0,0,0.1);
     }
 
     .dark-mode {
-      --bg-color: #121212;
-      --wrapper-bg: #1e1e1e;
+      --bg-color: #1c1c1c;
+      --wrapper-bg: #2a2a2a;
       --text-color: #eee;
-      --header-bg: #0d47a1;
+      --header-bg: #ff8f00;
       --header-text: #fff;
-      --button-bg: #0d47a1;
-      --button-hover-bg: #1565c0;
+      --button-bg: #ffa726;
+      --button-hover-bg: #ffb74d;
       --shadow-color: rgba(0,0,0,0.7);
     }
 
@@ -35,6 +35,7 @@
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .wrapper {
@@ -44,6 +45,7 @@
       min-height: 100vh;
       box-shadow: 0 0 10px var(--shadow-color);
       padding: 20px;
+      transition: background-color 0.3s;
     }
 
     header {
@@ -54,6 +56,7 @@
       font-size: 2rem;
       font-weight: bold;
       position: relative;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .header-buttons {
@@ -71,6 +74,7 @@
       border-radius: 20px;
       cursor: pointer;
       font-size: 0.9rem;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .header-buttons button:hover {
@@ -122,6 +126,7 @@
       background-color: var(--header-bg);
       color: var(--header-text);
       margin-top: 40px;
+      transition: background-color 0.3s, color 0.3s;
     }
   </style>
 </head>
@@ -152,6 +157,7 @@
   <script>
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
+
     if (localStorage.getItem('darkMode') === 'enabled') {
       bodyElement.classList.add('dark-mode');
       toggleBtn.textContent = '☀️';
