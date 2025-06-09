@@ -1,137 +1,94 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กำหนดส่งเอกสารกู้ยืม กยศ. เทอมต้น 2568</title>
-    <style>
-        body {
-            font-family: 'Tahoma', sans-serif;
-            background-color: #f4f9f4;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #005f3c;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        .section {
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        h2 {
-            color: #005f3c;
-        }
-        .columns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .column {
-            flex: 1 1 calc(33% - 1rem);
-            background: #e8f5e9;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        ul {
-            padding-left: 1.2rem;
-        }
-        .highlight {
-            background: #ffcdd2;
-            padding: 0.5rem;
-            border-radius: 8px;
-        }
-        .footer {
-            font-size: 0.9rem;
-            color: #555;
-            text-align: center;
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>กยศ NPRU – ปี 2566</title>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Prompt', sans-serif; }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>กำหนดส่งเอกสารกู้ยืม กยศ. ภาคต้น 2568</h1>
-        <p>Updated 8 มิถุนายน 2568</p>
-    </header>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition p-6">
 
-    <div class="container">
-        <div class="section">
-            <h2>ช่วงส่งเอกสารครั้งที่ 1</h2>
-            <div class="columns">
-                <div class="column">
-                    <strong>7 - 9 กรกฎาคม</strong>
-                    <ul>
-                        <li>วนศาสตร์</li>
-                        <li>มนุษยศาสตร์</li>
-                        <li>วิศวกรรมศาสตร์</li>
-                        <li>เทคนิคการสัตวแพทย์</li>
-                        <li>วิทยาศาสตร์สุขภาพ</li>
-                        <li>วิทยาศาสตร์บูรณาการ</li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <strong>14 - 17 กรกฎาคม</strong>
-                    <ul>
-                        <li>สิ่งแวดล้อม</li>
-                        <li>สังคมศาสตร์</li>
-                        <li>แพทยศาสตร์</li>
-                        <li>เศรษฐศาสตร์</li>
-                        <li>อุตสาหกรรมเกษตร</li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <strong>21 - 24 กรกฎาคม</strong>
-                    <ul>
-                        <li>เกษตร</li>
-                        <li>เศรษฐศาสตร์</li>
-                        <li>ประมง</li>
-                        <li>บริหารธุรกิจ</li>
-                        <li>ศึกษาศาสตร์</li>
-                        <li>สัตวแพทยศาสตร์</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="column" style="margin-top: 1rem;">
-                <strong>29 - 31 กรกฎาคม</strong>
-                <p class="highlight">รอบส่งเอกสารล่าช้า (ไม่มีใบลาช้า)</p>
-            </div>
-            <div class="column" style="margin-top: 1rem;">
-                <strong>4 - 7 สิงหาคม</strong>
-                <p>นิสิตหลักสูตรนานาชาติ</p>
-            </div>
-        </div>
+  <!-- Dark mode toggle -->
+  <div class="flex justify-end mb-4">
+    <button id="darkToggle" class="px-4 py-2 bg-blue-600 dark:bg-yellow-500 text-white rounded">
+      โหมดมืด
+    </button>
+  </div>
 
-        <div class="section">
-            <h2>เอกสารที่ต้องยื่น</h2>
-            <ul>
-                <li>แบบฟอร์มเบิกเงิน เทอม 1/2568</li>
-                <li>สำเนาบัตรประชาชน (ผู้กู้/ผู้ปกครอง)</li>
-                <li>ใบรายงานผลการลงทะเบียน 2/2567</li>
-                <li>ใบลงนามรับทราบค่าครองชีพ</li>
-                <li>แบบรับรองสถานภาพนิสิต จากระบบ VAS</li>
-            </ul>
-        </div>
+  <!-- Header & Navigation -->
+  <header class="bg-red-700 dark:bg-red-900 text-white p-4 rounded">
+    <h1 class="text-2xl">กองทุนเงินให้กู้ยืมเพื่อการศึกษา (กยศ.) - NPRU</h1>
+    <nav class="mt-2 space-x-4">
+      <a href="#" class="hover:underline">Home</a>
+      <a href="#" class="hover:underline">เตรียมเอกสาร</a>
+      <a href="#" class="hover:underline">ระบบตรวจสอบผู้กู้</a>
+      <a href="#" class="hover:underline">Contact</a>
+    </nav>
+  </header>
 
-        <div class="section">
-            <p><strong>ยื่นความประสงค์กู้ยืมต่อเนื่องผ่าน Google Form:</strong> 26 มิ.ย. - 10 ก.ค. 68</p>
-            <p>ส่งเอกสารที่: หน่วยกองทุนเงินให้กู้ยืมเพื่อการศึกษา อาคารระพีสาคริก ชั้น 3</p>
-            <p>สอบถามเพิ่มเติมโทร: 02-1180176</p>
-        </div>
+  <!-- Main link blocks -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+    <a href="https://wsa.dsl.studentloan.or.th/" class="bg-blue-600 dark:bg-blue-800 text-white p-4 rounded shadow text-center">ตรวจสอบยอดหนี้</a>
+    <a href="https://play.google.com/store/apps/details?id=..." class="bg-blue-600 dark:bg-blue-800 text-white p-4 rounded shadow text-center">กยศ. Connect App</a>
+    <a href="https://epayslf.studentloan.or.th/" class="bg-blue-600 dark:bg-blue-800 text-white p-4 rounded shadow text-center">ระบบ e‑PaySLF</a>
+  </div>
 
-        <div class="footer">
-            &copy; 2025 Kasetsart University | ออกแบบตามต้นฉบับโปสเตอร์ประชาสัมพันธ์
-        </div>
+  <!-- Content sections -->
+  <section class="mt-8 space-y-6">
+    <div>
+      <h2 class="text-xl font-semibold">ลักษณะที่ 1: นักเรียน/นักศึกษาขาดแคลนทุน</h2>
+      <ul class="list-disc list-inside mt-2">
+        <li>รายได้ครอบครัวต่อปี ≤ 360,000 บาท</li>
+        <li>เลือกกู้ทั้งค่าเล่าเรียนและค่าครองชีพ</li>
+        <li>อายุไม่เกิน 30 ปีปีแรกที่กู้, ระยะเวลาชำระคืน 15 ปี</li>
+        <li>ปลอดหนี้ 2 ปีหลังจบ, ดอกเบี้ย 1% ต่อปี</li>
+      </ul>
+      <p class="mt-2 text-sm italic">ครอบคลุมหลักสูตร... (ตัวอย่างตามต้นฉบับ)</p>
     </div>
+
+    <div>
+      <h2 class="text-xl font-semibold">ลักษณะที่ 2: นักศึกษาสาขาความต้องการหลัก</h2>
+      <ul class="list-disc list-inside mt-2">
+        <li>รายได้ ≤ 360,000 บาท: กู้ทั้งสองประเภท</li>
+        <li>รายได้ > 360,000 บาท: กู้เฉพาะค่าเล่าเรียน</li>
+        <li>อายุ ≤ 30 ปี, ระยะเวลาชำระ 15 ปี, ปลอดหนี้ 2 ปีหลังจบ</li>
+        <li>ดอกเบี้ย 0.75% หรือ 1% ต่อปี</li>
+      </ul>
+    </div>
+
+    <!-- สามารถเพิ่มลักษณะที่ 3 และ 4 ได้ตามต้นฉบับ -->
+  </section>
+
+  <!-- Gallery section -->
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-center">ตัวอย่างเอกสารยื่นกู้</h2>
+    <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- ใช้ภาพตัวอย่าง gallery loan -->
+      <!-- Placeholder images -->
+      <img src="gallery1.jpg" alt="เอกสาร" class="rounded shadow">
+      <img src="gallery2.jpg" alt="เอกสาร" class="rounded shadow">
+    </div>
+    <p class="text-center mt-2"><a href="#" class="text-blue-600 dark:text-blue-400">ดูเพิ่มเติม</a></p>
+  </section>
+
+  <footer class="mt-12 bg-red-700 dark:bg-red-900 text-white p-4 rounded text-center">
+    © 2025 มหาวิทยาลัยราชภัฏนครปฐม — กองทุน กยศ.
+  </footer>
+
+  <script>
+    const btn = document.getElementById('darkToggle');
+    const html = document.documentElement;
+    btn.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      btn.textContent = html.classList.contains('dark') ? 'โหมดกลางวัน' : 'โหมดมืด';
+    });
+  </script>
 </body>
 </html>
