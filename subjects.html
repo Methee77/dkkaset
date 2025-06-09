@@ -218,6 +218,22 @@
 
     <!-- เพิ่มอีก 8 รายการแบบนี้ต่อไปตามต้องการ -->
 
+    <!-- Script สำหรับ toggle dark mode -->
+  <script>
+    feather.replace();
+    const toggle = document.getElementById("toggleDark");
+    const htmlEl = document.documentElement;
+
+    if (localStorage.theme === "dark") {
+      htmlEl.classList.add("dark");
+    }
+
+    toggle.addEventListener("click", () => {
+      htmlEl.classList.toggle("dark");
+      localStorage.theme = htmlEl.classList.contains("dark") ? "dark" : "light";
+    });
+  </script>
+
   </div>
 </body>
 </html>
