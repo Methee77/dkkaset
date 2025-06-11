@@ -142,7 +142,6 @@
       margin-top: 10px;
     }
 
-    /* ปุ่ม toggle dark mode */
     .toggle-btn {
       position: fixed;
       top: 20px;
@@ -165,26 +164,8 @@
 </head>
 <body>
 
-<script>
-  const toggleBtn = document.getElementById('toggle-icon');
-  const prefersDark = localStorage.getItem('darkMode') === 'true';
-
-  function updateIcon(isDark) {
-    toggleBtn.textContent = isDark ? '☀️' : '🌙';
-  }
-
-  function toggleMode() {
-    const isDark = document.body.classList.toggle('dark');
-    localStorage.setItem('darkMode', isDark);
-    updateIcon(isDark);
-  }
-
-  // เรียกตอนโหลดหน้าเว็บ
-  if (prefersDark) {
-    document.body.classList.add('dark');
-  }
-  updateIcon(prefersDark);
-</script>
+  <!-- ปุ่ม toggle dark mode -->
+  <button class="toggle-btn" id="toggle-icon" onclick="toggleMode()">🌙</button>
 
   <div class="container">
     <h1>ข้อมูล กยศ.</h1>
@@ -244,18 +225,28 @@
     </p>
   </div>
 
+  <!-- สคริปต์ toggle dark mode -->
   <script>
-    function toggleMode() {
-      const body = document.body;
-      body.classList.toggle('dark');
-      localStorage.setItem('darkMode', body.classList.contains('dark'));
+    const toggleBtn = document.getElementById('toggle-icon');
+    const prefersDark = localStorage.getItem('darkMode') === 'true';
+
+    function updateIcon(isDark) {
+      toggleBtn.textContent = isDark ? '☀️' : '🌙';
     }
 
-    // โหลดสถานะ dark mode จาก localStorage
-    if (localStorage.getItem('darkMode') === 'true') {
+    function toggleMode() {
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem('darkMode', isDark);
+      updateIcon(isDark);
+    }
+
+    // โหลด dark mode ตอนเปิดหน้า
+    if (prefersDark) {
       document.body.classList.add('dark');
     }
+    updateIcon(prefersDark);
   </script>
 
 </body>
 </html>
+
