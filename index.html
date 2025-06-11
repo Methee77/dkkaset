@@ -324,7 +324,7 @@
       </a>
     </div>
     <!-- ปุ่ม วิชาเสรีเก็บ A -->
-<div class="sub-menu" style="margin-top: 20px;">
+<div class="sub-menu" style="grid-column: 2 / 5;"> <!-- กำหนด span ให้ครอบ 3 ช่อง -->
   <a href="freeA.html" class="special-feature">
     <i class="fas fa-star"></i>
     <span>วิชาเสรีเก็บ A</span>
@@ -335,18 +335,18 @@
 <style>
   .special-feature {
     position: relative;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 220px; /* ปรับให้กว้างขึ้นตามพื้นที่ */
-    height: 100px;
     background-color: #003366;
     color: white;
     border-radius: 12px;
     text-decoration: none;
     font-size: 1rem;
     gap: 5px;
+    height: 100px;
+    width: 100%; /* ให้ขยายเต็มช่อง */
   }
 
   .special-feature i {
@@ -355,12 +355,12 @@
 
   .new-label {
     position: absolute;
-    bottom: 6px;
-    right: 10px;
+    bottom: 8px;
+    right: 12px;
     background-color: #ff4081;
     color: white;
     font-size: 0.65rem;
-    padding: 2px 6px;
+    padding: 3px 6px;
     border-radius: 12px;
     font-weight: bold;
   }
