@@ -12,8 +12,16 @@
       font-family: 'Kanit', sans-serif;
     }
     .slide-toggle {
-      transition: max-height 0.4s ease-in-out;
       overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .slide-toggle.open {
+      max-height: 300px; /* ปรับความสูงตามเนื้อหา */
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   </style>
 </head>
@@ -24,26 +32,26 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
 
-      <!-- กล่องวิชา: มนุษย์กับสิ่งแวดล้อม -->
+      <!-- กล่องวิชา -->
       <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center relative">
         <div class="p-6 flex flex-col items-center">
           <i class="fas fa-leaf text-4xl mb-4"></i>
           <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
         </div>
 
-        <!-- ปุ่มแสดง/ซ่อน -->
+        <!-- ปุ่มเมนู -->
         <button onclick="toggleDetail(this)" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
           ดูรายละเอียด
         </button>
 
-        <!-- กล่องรายละเอียดที่ซ่อนอยู่ภายในกล่อง -->
-        <div class="slide-toggle max-h-0 bg-white text-gray-800 text-left w-full px-4 py-3" style="z-index:1;">
+        <!-- กล่องรายละเอียด -->
+        <div class="slide-toggle bg-white text-gray-800 text-left w-full px-4">
           <h2 class="text-base font-semibold mb-1">รายละเอียดวิชา</h2>
           <p class="text-sm">ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
         </div>
       </div>
 
-      <!-- กล่องอื่นๆ -->
+      <!-- กล่องเปล่า -->
       <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
         <i class="fas fa-plus text-3xl mb-4"></i>
         <span>เพิ่มวิชา</span>
@@ -54,12 +62,8 @@
 
   <script>
     function toggleDetail(button) {
-      const box = button.nextElementSibling;
-      if (box.style.maxHeight && box.style.maxHeight !== "0px") {
-        box.style.maxHeight = "0px";
-      } else {
-        box.style.maxHeight = "200px"; // ปรับตามเนื้อหา
-      }
+      const detailBox = button.nextElementSibling;
+      detailBox.classList.toggle('open');
     }
   </script>
 
