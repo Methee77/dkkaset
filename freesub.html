@@ -44,48 +44,58 @@
   </div>
 
   <!-- กล่อง modal -->
-  <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-4xl relative overflow-hidden shadow-lg">
+<div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl w-full max-w-4xl relative overflow-hidden shadow-lg">
 
-      <!-- หัวข้อ -->
-      <div class="p-6 border-b">
-        <h2 class="text-xl font-semibold">ประกาศหมู่เรียน</h2>
-        <!-- ปุ่มปิด -->
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl">
-          &times;
-        </button>
+    <!-- หัวข้อ -->
+    <div class="p-6 border-b">
+      <h2 class="text-xl font-semibold">ประกาศหมู่เรียน</h2>
+      <!-- ปุ่มปิด -->
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl">
+        &times;
+      </button>
+    </div>
+
+    <!-- เนื้อหา -->
+    <div class="p-6 max-h-[70vh] overflow-y-auto bg-green-50 rounded-b-xl text-gray-800">
+      <h3 class="font-bold text-lg mb-2">03751111-67 มนุษย์กับสิ่งแวดล้อม</h3>
+      <p class="mb-2">
+        <strong>หมู่</strong> <span class="text-blue-700 font-bold">700</span>
+        <span class="bg-blue-100 text-blue-800 text-sm rounded px-2 py-0.5 ml-2">บรรยาย</span>
+        <span class="text-gray-600 ml-4">3 หน่วยกิต</span>
+      </p>
+
+      <p class="text-sm text-gray-600 mb-2">
+        <strong>Man and Environment</strong><br>
+        ประเภทหมู่เรียน : ปกติ<br>
+        สามารถเรียนทดแทนหมวดวิชา : -
+      </p>
+
+      <p class="text-sm text-red-600 font-semibold mb-3">ยังไม่ประกาศให้นิสิตลงทะเบียน</p>
+
+      <p class="text-sm text-gray-700 leading-relaxed">
+        MON 16:00 - 17:30 ห้อง LH3-301<br>
+        WED 16:00 - 17:30 ห้อง LH3-301
+      </p>
+
+      <div class="grid grid-cols-2 gap-4 mt-6 max-w-xs">
+        <div class="border border-green-400 rounded text-center py-2 text-green-700 font-bold">
+          300<br><span class="text-sm font-normal">จำนวนรับ</span>
+        </div>
+        <div class="border border-green-400 rounded text-center py-2 text-green-700 font-bold">
+          0<br><span class="text-sm font-normal">ลงทะเบียนแล้ว</span>
+        </div>
       </div>
 
-      <!-- เนื้อหา -->
-      <div class="p-6 max-h-[70vh] overflow-y-auto bg-green-50 rounded-b-xl text-gray-800">
-        <h3 class="font-bold text-lg mb-2">01419211-65 จุลชีววิทยาทั่วไป</h3>
-        <p class="mb-2"><strong>หมู่</strong> <span class="text-blue-700 font-bold">700</span> <span class="bg-blue-100 text-blue-800 text-sm rounded px-2 py-0.5 ml-2">บรรยาย</span></p>
-
-        <h4 class="font-semibold mt-4">รายละเอียด</h4>
-        <p class="text-sm mt-1 leading-relaxed">
-          ขอให้นิสิตเข้าไปในห้องเรียนตามลิงก์  
-          <a href="https://classroom.google.com/c/NzY2Mjk4NzgzMTYw?cjc=3vxetgnw" class="text-blue-600 underline" target="_blank">
-            https://classroom.google.com/c/NzY2Mjk4NzgzMTYw?cjc=3vxetgnw
-          </a><br><br>
-          แล้วใส่โค้ด: หมู่ 700 (บรรยาย) วันอังคาร และวันพฤหัสบดี<br>
-          เวลา 10:30–12:00 น. สถานที่สอน <strong>LH3-302</strong><br><br>
-          หมู่ 701 (บรรยาย) วันอังคาร
-        </p>
-
-        <div class="text-sm text-gray-500 mt-4">
-          📅 ประกาศเมื่อวันอังคาร, 10 มิถุนายน 2568<br>
-          <span class="font-bold text-black">โดย บางมลธีรา ศรีภาวร</span>
-        </div>
-
-        <!-- ปุ่มปิด -->
-        <div class="flex justify-end mt-6">
-          <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            Close
-          </button>
-        </div>
+      <!-- ปุ่มปิด -->
+      <div class="flex justify-end mt-6">
+        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+          Close
+        </button>
       </div>
     </div>
   </div>
+</div>
 
   <!-- JavaScript -->
   <script>
