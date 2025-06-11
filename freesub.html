@@ -24,22 +24,22 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
 
-      <!-- กล่องวิชา + เมนู -->
-      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
+      <!-- กล่องวิชา: มนุษย์กับสิ่งแวดล้อม -->
+      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center relative">
         <div class="p-6 flex flex-col items-center">
           <i class="fas fa-leaf text-4xl mb-4"></i>
           <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
         </div>
 
-        <!-- ปุ่มเมนู -->
-        <button onclick="toggleDetail()" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
+        <!-- ปุ่มแสดง/ซ่อน -->
+        <button onclick="toggleDetail(this)" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
           ดูรายละเอียด
         </button>
 
-        <!-- กล่องรายละเอียด -->
-        <div id="detailBox" class="w-full slide-toggle max-h-0 bg-white text-gray-800 p-4 text-left">
-          <h2 class="text-lg font-semibold mb-2">รายละเอียดวิชา: มนุษย์กับสิ่งแวดล้อม</h2>
-          <p>ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ การจัดการทรัพยากร และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
+        <!-- กล่องรายละเอียดที่ซ่อนอยู่ภายในกล่อง -->
+        <div class="slide-toggle max-h-0 bg-white text-gray-800 text-left w-full px-4 py-3" style="z-index:1;">
+          <h2 class="text-base font-semibold mb-1">รายละเอียดวิชา</h2>
+          <p class="text-sm">ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
         </div>
       </div>
 
@@ -53,15 +53,13 @@
   </div>
 
   <script>
-    let isOpen = false;
-    function toggleDetail() {
-      const detailBox = document.getElementById('detailBox');
-      if (!isOpen) {
-        detailBox.style.maxHeight = "300px";
+    function toggleDetail(button) {
+      const box = button.nextElementSibling;
+      if (box.style.maxHeight && box.style.maxHeight !== "0px") {
+        box.style.maxHeight = "0px";
       } else {
-        detailBox.style.maxHeight = "0px";
+        box.style.maxHeight = "200px"; // ปรับตามเนื้อหา
       }
-      isOpen = !isOpen;
     }
   </script>
 
