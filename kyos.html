@@ -6,22 +6,46 @@
   <style>
     body {
       font-family: sans-serif;
-      margin: 40px;
+      margin: 0;
       background-color: #f9f9f9;
+      scroll-behavior: smooth;
+    }
+
+    /* เมนูด้านบน */
+    nav {
+      background-color: #2c3e50;
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
       text-align: center;
       color: #2c3e50;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     img {
@@ -32,7 +56,12 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    p {
+    h2 {
+      color: #34495e;
+      margin-top: 40px;
+    }
+
+    p, li {
       font-size: 1.1rem;
       line-height: 1.8;
       color: #333;
@@ -42,46 +71,48 @@
       padding-left: 20px;
     }
 
-    li {
-      margin-bottom: 10px;
-    }
-
     a {
       color: #2980b9;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+
+  <!-- แถบเมนู -->
+  <nav>
+    <a href="#new">ผู้กู้รายใหม่</a>
+    <a href="#old">ผู้กู้รายเก่า</a>
+  </nav>
+
   <div class="container">
     <h1>ข้อมูล กยศ.</h1>
 
     <img src="photo-output.jpg" alt="กยศ.">
 
     <p>
-      กองทุนเงินให้กู้ยืมเพื่อการศึกษา (กยศ.) เป็นโครงการของรัฐบาลไทยเพื่อช่วยเหลือนักเรียนหรือนักศึกษาที่ขาดแคลนทุนทรัพย์ โดยให้นำไปใช้จ่ายในการศึกษาในระดับต่างๆ เช่น ระดับมัธยมปลาย อาชีวศึกษา และอุดมศึกษา
+      กองทุนเงินให้กู้ยืมเพื่อการศึกษา (กยศ.) เป็นโครงการของรัฐบาลเพื่อช่วยเหลือนักเรียนหรือนักศึกษาที่ขาดแคลนทุนทรัพย์ โดยให้นำไปใช้จ่ายในการศึกษาในระดับมัธยมปลาย อาชีวศึกษา และอุดมศึกษา
     </p>
 
-    <p><strong>คุณสมบัติของผู้กู้ กยศ.:</strong></p>
-    <ul>
-      <li>เป็นนักเรียนหรือนักศึกษาที่กำลังศึกษาอยู่ในระดับที่ กยศ. รองรับ</li>
-      <li>มีความประพฤติดี ขาดแคลนทุนทรัพย์</li>
-      <li>ได้รับการรับรองจากสถานศึกษา</li>
-    </ul>
-
-    <p><strong>ขั้นตอนการยื่นกู้:</strong></p>
+    <!-- ส่วน: ผู้กู้รายใหม่ -->
+    <h2 id="new">ผู้กู้รายใหม่</h2>
     <ul>
       <li>ลงทะเบียนผ่านระบบ e-Studentloan ที่เว็บไซต์ <a href="https://www.studentloan.or.th">www.studentloan.or.th</a></li>
-      <li>กรอกแบบฟอร์มข้อมูลส่วนตัว</li>
-      <li>แนบเอกสารประกอบ เช่น สำเนาบัตรประชาชน สำเนาทะเบียนบ้าน ฯลฯ</li>
-      <li>รอการอนุมัติจากสถานศึกษา</li>
+      <li>กรอกข้อมูลส่วนตัวและแบบคำขอกู้ยืม</li>
+      <li>แนบเอกสาร เช่น สำเนาบัตรประชาชน ทะเบียนบ้าน</li>
+      <li>ให้สถานศึกษารับรองสิทธิ์และสถานภาพ</li>
     </ul>
 
-    <p>สามารถดูรายละเอียดเพิ่มเติมได้ที่เว็บไซต์ <a href="https://www.studentloan.or.th" target="_blank">กยศ. www.studentloan.or.th</a></p>
+    <!-- ส่วน: ผู้กู้รายเก่า -->
+    <h2 id="old">ผู้กู้รายเก่า</h2>
+    <ul>
+      <li>เข้าสู่ระบบ e-Studentloan เพื่อยืนยันการกู้ต่อเนื่อง</li>
+      <li>อัปเดตข้อมูลส่วนตัวและผลการเรียน</li>
+      <li>ตรวจสอบกำหนดการเซ็นสัญญาและยื่นเอกสารเพิ่มเติม</li>
+      <li>ติดตามผลอนุมัติและการโอนเงิน</li>
+    </ul>
+
+    <p>ดูรายละเอียดเพิ่มเติมได้ที่เว็บไซต์ <a href="https://www.studentloan.or.th" target="_blank">กยศ. www.studentloan.or.th</a></p>
   </div>
+
 </body>
 </html>
