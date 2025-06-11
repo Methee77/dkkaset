@@ -3,70 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>วิชาเสรี</title>
+  <title>Modal Example</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    body {
-      font-family: 'Kanit', sans-serif;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Kanit', 'sans-serif'] }
+        }
+      }
     }
-  </style>
+  </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-start justify-center py-10">
+<body class="bg-gray-100 font-sans">
 
-  <!-- ส่วนเนื้อหา -->
-  <div class="w-full max-w-5xl text-center">
-    <h1 class="text-3xl font-bold mb-6">วิชาเสรี</h1>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
-
-      <!-- กล่องวิชา -->
-      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
-        <div class="p-6 flex flex-col items-center">
-          <i class="fas fa-leaf text-4xl mb-4"></i>
-          <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
-        </div>
-
-        <!-- ปุ่มเปิด modal -->
-        <button onclick="openModal()" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
-          ดูรายละเอียด
-        </button>
-      </div>
-
-      <!-- กล่องเปล่า -->
-      <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
-        <i class="fas fa-plus text-3xl mb-4"></i>
-        <span>เพิ่มวิชา</span>
-      </div>
-
-    </div>
+  <!-- ปุ่มเปิด modal -->
+  <div class="flex justify-center mt-10">
+    <button onclick="openModal()" class="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">
+      ดูรายละเอียด
+    </button>
   </div>
 
-  <!-- กล่อง modal -->
-  <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-xl max-w-2xl w-[90%] p-6 relative text-left shadow-lg">
-      <!-- ปุ่มปิด -->
-      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl">
-        <i class="fas fa-times"></i>
+  <!-- กรอบลอย (modal) -->
+  <div id="modal" class="fixed inset-0 bg-black/40 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white max-w-4xl w-full rounded-xl shadow-lg relative overflow-hidden">
+      
+      <!-- ปุ่มปิด (X) -->
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl">
+        &times;
       </button>
 
-      <h2 class="text-xl font-semibold mb-2">มนุษย์กับสิ่งแวดล้อม</h2>
-      <p class="text-sm text-gray-700">
-        ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน รวมถึงการวิเคราะห์ปัญหาสิ่งแวดล้อมร่วมสมัย และบทบาทของประชาชนในการดูแลโลกของเรา
-      </p>
+      <div class="p-6">
+        <h2 class="text-2xl font-semibold mb-4">ประกาศหมู่เรียน</h2>
+        <div class="bg-green-50 p-4 rounded-lg">
+          <h3 class="text-lg font-bold text-gray-800 mb-2">01419211-65 จุลชีววิทยาทั่วไป</h3>
+          <p><span class="font-bold">หมู่</span> <span class="text-blue-600 font-bold">700</span> <span class="bg-blue-100 text-blue-700 text-sm rounded px-2 py-0.5 ml-2">บรรยาย</span></p>
+
+          <h4 class="mt-4 font-semibold">รายละเอียด</h4>
+          <p class="text-sm mt-1 text-gray-700">
+            ขอให้นิสิตเข้าไปห้องเรียนตามลิงก์  
+            <a href="https://classroom.google.com/c/NzY2Mjk4NzgzMTYw?cjc=3vxetgnw" class="text-blue-600 underline" target="_blank">
+              https://classroom.google.com/c/NzY2Mjk4NzgzMTYw?cjc=3vxetgnw
+            </a>  
+            โดยจะมีประมวลการสอนใน Google Classroom เรียบร้อยแล้วค่ะ<br><br>
+            หมู่ 700 (บรรยาย) วันอังคาร และวันพฤหัสบดี<br>
+            เวลา 10:30–12:00 น. สถานที่สอน <span class="font-bold">LH3-302</span><br><br>
+            หมู่ 701 (บรรยาย) วันอังคาร
+          </p>
+
+          <div class="text-sm text-gray-500 mt-4">
+            📅 ประกาศเมื่อวันอังคาร, 10 มิถุนายน 2568<br>
+            <span class="font-bold text-black">โดย บางมลธีรา ศรีภาวร</span>
+          </div>
+        </div>
+
+        <!-- ปุ่มปิดด้านล่าง -->
+        <div class="flex justify-end mt-6">
+          <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- JavaScript ควบคุม modal -->
+  <!-- สคริปต์เปิด-ปิด modal -->
   <script>
     function openModal() {
       document.getElementById("modal").classList.remove("hidden");
       document.getElementById("modal").classList.add("flex");
     }
-
     function closeModal() {
-      document.getElementById("modal").classList.remove("flex");
       document.getElementById("modal").classList.add("hidden");
     }
   </script>
