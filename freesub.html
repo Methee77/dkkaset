@@ -15,17 +15,6 @@
 </head>
 <body class="bg-gray-100 min-h-screen flex items-start justify-center py-10">
 
-<!-- กรอบแจ้งเตือนลอย -->
-  <div id="floatingAlert" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-yellow-200 text-yellow-900 border border-yellow-400 rounded-lg shadow-lg px-6 py-4 z-50 max-w-xl flex items-start space-x-4">
-    <i class="fa-solid fa-circle-exclamation text-2xl mt-1"></i>
-    <div class="flex-1">
-      <h3 class="font-bold mb-1">แจ้งเตือน</h3>
-      <p>อยู่ระหว่างอัพเดตข้อมูล</p>
-      <p>12 มิถุนายน 2568 เวลา 00:37 น.</p>
-    </div>
-    <button onclick="dismissAlert()" class="text-yellow-900 hover:text-red-600 text-xl font-bold">&times;</button>
-  </div>
-
   <!-- ส่วนเนื้อหา -->
 <div class="w-full max-w-5xl text-center">
   <div class="bg-blue-900 text-white py-6 rounded-lg mb-6">
@@ -34,6 +23,7 @@
       ประจำภาคต้น ปีการศึกษา 2568
     </div>
     <div>Updated 11 มิถุนายน 2568</div>
+    <h2 class="text-3xl font-bold mb-2 font-[Kanit]">อยู่รหว่างอัพเดตข้อมูล 12 มิถุนายน 2568 เวลา 00:41 น.</h2>
   </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
@@ -325,12 +315,6 @@
       document.getElementById(id).classList.remove("flex");
       document.getElementById(id).classList.add("hidden");
     }
-    
-  // ✅ เพิ่มตรงนี้เพื่อให้แจ้งเตือนหายไปอัตโนมัติหลัง 5 วินาที
-  setTimeout(() => {
-    dismissAlert();
-  }, 5000);
-</script>
   </script>
 
 </body>
