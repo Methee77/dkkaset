@@ -11,17 +11,24 @@
     body {
       font-family: 'Kanit', sans-serif;
     }
-    .slide-toggle {
-      overflow: hidden;
+    .slide-down {
       max-height: 0;
-      transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
-      padding-top: 0;
-      padding-bottom: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background-color: white;
+      border-radius: 0 0 0.5rem 0.5rem;
+      padding: 0 1rem;
     }
-    .slide-toggle.open {
-      max-height: 300px; /* ปรับความสูงตามเนื้อหา */
+    .slide-down.open {
+      max-height: 200px;
       padding-top: 1rem;
       padding-bottom: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -33,21 +40,21 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
 
       <!-- กล่องวิชา -->
-      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center relative">
+      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center relative overflow-visible">
         <div class="p-6 flex flex-col items-center">
           <i class="fas fa-leaf text-4xl mb-4"></i>
           <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
         </div>
 
-        <!-- ปุ่มเมนู -->
+        <!-- ปุ่ม -->
         <button onclick="toggleDetail(this)" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
           ดูรายละเอียด
         </button>
 
-        <!-- กล่องรายละเอียด -->
-        <div class="slide-toggle bg-white text-gray-800 text-left w-full px-4">
+        <!-- รายละเอียด -->
+        <div class="slide-down">
           <h2 class="text-base font-semibold mb-1">รายละเอียดวิชา</h2>
-          <p class="text-sm">ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
+          <p class="text-sm pb-2">ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
         </div>
       </div>
 
@@ -62,8 +69,14 @@
 
   <script>
     function toggleDetail(button) {
-      const detailBox = button.nextElementSibling;
-      detailBox.classList.toggle('open');
+      const allDetails = document.querySelectorAll('.slide-down');
+      const currentDetail = button.nextElementSibling;
+
+      allDetails.forEach(detail => {
+        if (detail !== currentDetail) detail.classList.remove('open');
+      });
+
+      currentDetail.classList.toggle('open');
     }
   </script>
 
