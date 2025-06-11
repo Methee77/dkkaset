@@ -165,7 +165,23 @@
 </head>
 <body>
 
-  <button class="toggle-btn" onclick="toggleMode()">🌓</button>
+  const toggleBtn = document.getElementById('dark-mode-toggle');
+    const bodyElement = document.body;
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      bodyElement.classList.add('dark-mode');
+      toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      bodyElement.classList.toggle('dark-mode');
+      if (bodyElement.classList.contains('dark-mode')) {
+        toggleBtn.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        toggleBtn.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
 
   <div class="container">
     <h1>ข้อมูล กยศ.</h1>
