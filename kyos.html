@@ -2,52 +2,86 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>ประกาศ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+  <title>ข้อมูล กยศ.</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #ffffff;
-      font-family: 'Prompt', sans-serif;
+      font-family: sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
     }
 
-    .announcement-box {
-      border: 2px solid #000;
-      padding: 50px 60px;
-      background-color: #fff;
+    h1 {
       text-align: center;
-      font-size: 1.8rem;
-      max-width: 700px;
-      width: 90%;
+      color: #2c3e50;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      text-decoration: none;
-      background-color: #007BFF;
-      color: white;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      display: block;
+      margin: 30px auto 20px;
+      width: 300px;
       border-radius: 8px;
-      transition: background-color 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .back-link:hover {
-      background-color: #0056b3;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="announcement-box">
-    ถามทางกลุ่มหรือส่วนตัว อยู่ระหว่างพัฒนาระบบ<br>หรือติดตามข้อมูลผ่านเพจ กยศ.มอ.
-    <br><br>
-    <a href="index.html" class="back-link">กลับหน้าหลัก</a>
+  <div class="container">
+    <h1>ข้อมูล กยศ.</h1>
+
+    <img src="photo-output.jpg" alt="กยศ.">
+
+    <p>
+      กองทุนเงินให้กู้ยืมเพื่อการศึกษา (กยศ.) เป็นโครงการของรัฐบาลไทยเพื่อช่วยเหลือนักเรียนหรือนักศึกษาที่ขาดแคลนทุนทรัพย์ โดยให้นำไปใช้จ่ายในการศึกษาในระดับต่างๆ เช่น ระดับมัธยมปลาย อาชีวศึกษา และอุดมศึกษา
+    </p>
+
+    <p><strong>คุณสมบัติของผู้กู้ กยศ.:</strong></p>
+    <ul>
+      <li>เป็นนักเรียนหรือนักศึกษาที่กำลังศึกษาอยู่ในระดับที่ กยศ. รองรับ</li>
+      <li>มีความประพฤติดี ขาดแคลนทุนทรัพย์</li>
+      <li>ได้รับการรับรองจากสถานศึกษา</li>
+    </ul>
+
+    <p><strong>ขั้นตอนการยื่นกู้:</strong></p>
+    <ul>
+      <li>ลงทะเบียนผ่านระบบ e-Studentloan ที่เว็บไซต์ <a href="https://www.studentloan.or.th">www.studentloan.or.th</a></li>
+      <li>กรอกแบบฟอร์มข้อมูลส่วนตัว</li>
+      <li>แนบเอกสารประกอบ เช่น สำเนาบัตรประชาชน สำเนาทะเบียนบ้าน ฯลฯ</li>
+      <li>รอการอนุมัติจากสถานศึกษา</li>
+    </ul>
+
+    <p>สามารถดูรายละเอียดเพิ่มเติมได้ที่เว็บไซต์ <a href="https://www.studentloan.or.th" target="_blank">กยศ. www.studentloan.or.th</a></p>
   </div>
 </body>
 </html>
