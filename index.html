@@ -323,7 +323,41 @@
         <span>คลัง Slide</span>
       </a>
     </div>
+    <!-- เมนูใหม่ด้านล่าง -->
+<div class="sub-menu" style="margin-top: 10px;">
+  <a href="freeA.html" class="new-feature">
+    <i class="fas fa-star"></i>
+    <span>วิชาเสรีเก็บ A</span>
+    <span class="new-badge">NEW</span>
+  </a>
+</div>
 
+<!-- เพิ่มใน <style> -->
+<style>
+  .new-feature {
+    position: relative;
+  }
+
+  .new-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ff4081;
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 12px;
+    animation: pulse 1.5s infinite;
+    font-weight: bold;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>
+      
       <div class="announcement-box">
         เว็บนี้ไม่ใช่เว็บสำเร็จรูป เกิดจากการเขียนโค้ดเองทุกจุด อาจจะมีบางจุดที่มองแล้วแปลกๆเพราะอยู่ในช่วงพัฒนา ฉันจะต้องเป็นคนที่เขียนโค้ดได้โหดที่สุดในประเทศไทย
       </div>
