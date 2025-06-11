@@ -11,51 +11,27 @@
     body {
       font-family: 'Kanit', sans-serif;
     }
-    .slide-down {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      background-color: white;
-      border-radius: 0 0 0.5rem 0.5rem;
-      padding: 0 1rem;
-    }
-    .slide-down.open {
-      max-height: 200px;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-start justify-center py-10">
 
+  <!-- ส่วนเนื้อหา -->
   <div class="w-full max-w-5xl text-center">
     <h1 class="text-3xl font-bold mb-6">วิชาเสรี</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center">
 
       <!-- กล่องวิชา -->
-      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center relative overflow-visible">
+      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
         <div class="p-6 flex flex-col items-center">
           <i class="fas fa-leaf text-4xl mb-4"></i>
           <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
         </div>
 
-        <!-- ปุ่ม -->
-        <button onclick="toggleDetail(this)" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
+        <!-- ปุ่มเปิด modal -->
+        <button onclick="openModal()" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
           ดูรายละเอียด
         </button>
-
-        <!-- รายละเอียด -->
-        <div class="slide-down">
-          <h2 class="text-base font-semibold mb-1">รายละเอียดวิชา</h2>
-          <p class="text-sm pb-2">ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
-        </div>
       </div>
 
       <!-- กล่องเปล่า -->
@@ -67,16 +43,31 @@
     </div>
   </div>
 
+  <!-- กล่อง modal -->
+  <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl max-w-2xl w-[90%] p-6 relative text-left shadow-lg">
+      <!-- ปุ่มปิด -->
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <h2 class="text-xl font-semibold mb-2">มนุษย์กับสิ่งแวดล้อม</h2>
+      <p class="text-sm text-gray-700">
+        ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน รวมถึงการวิเคราะห์ปัญหาสิ่งแวดล้อมร่วมสมัย และบทบาทของประชาชนในการดูแลโลกของเรา
+      </p>
+    </div>
+  </div>
+
+  <!-- JavaScript ควบคุม modal -->
   <script>
-    function toggleDetail(button) {
-      const allDetails = document.querySelectorAll('.slide-down');
-      const currentDetail = button.nextElementSibling;
+    function openModal() {
+      document.getElementById("modal").classList.remove("hidden");
+      document.getElementById("modal").classList.add("flex");
+    }
 
-      allDetails.forEach(detail => {
-        if (detail !== currentDetail) detail.classList.remove('open');
-      });
-
-      currentDetail.classList.toggle('open');
+    function closeModal() {
+      document.getElementById("modal").classList.remove("flex");
+      document.getElementById("modal").classList.add("hidden");
     }
   </script>
 
