@@ -23,18 +23,18 @@
       margin-bottom: 10px;
     }
 
-    /* กรอบข้อความใต้หัวข้อ */
+    /* กล่องข้อความใต้หัวข้อ */
     .announcement-box {
       max-width: 320px;
       margin: 0 auto 40px auto;
       padding: 12px 20px;
-      border: 2px solid #3498db;
-      border-radius: 12px;
       background-color: #eaf4fb;
       color: #2c3e50;
       font-weight: bold;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+      border-radius: 12px;
+      border: none;
+      box-shadow: none;
       font-size: 1.1rem;
     }
 
@@ -103,12 +103,10 @@
   <div class="container">
     <h1>ข้อมูล กยศ.</h1>
 
-    <!-- กรอบข้อความ -->
     <div class="announcement-box">
       ประจำภาคต้น ปีการศึกษา 2568
     </div>
 
-    <!-- กล่องลิงก์ -->
     <div class="link-cards">
       <a href="#new" class="link-card">
         <div class="icon">🆕</div>
@@ -120,7 +118,6 @@
       </a>
     </div>
 
-    <!-- เนื้อหา: ผู้กู้รายใหม่ -->
     <div class="card" id="new">
       <h2>ผู้กู้รายใหม่</h2>
       <ul>
@@ -131,7 +128,6 @@
       </ul>
     </div>
 
-    <!-- เนื้อหา: ผู้กู้รายเก่า -->
     <div class="card" id="old">
       <h2>ผู้กู้รายเก่า</h2>
       <ul>
