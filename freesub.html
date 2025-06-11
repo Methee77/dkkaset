@@ -5,40 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>วิชาเสรี</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- โหลดฟอนต์ Kanit -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+    }
+    .slide-toggle {
+      transition: max-height 0.4s ease-in-out;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-start justify-center py-10">
 
-  <div class="w-full max-w-7xl text-center">
+  <div class="w-full max-w-5xl text-center">
     <h1 class="text-3xl font-bold mb-6">วิชาเสรี</h1>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center">
-      
-      <!-- วิชามนุษย์กับสิ่งแวดล้อม -->
-      <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-center">
+
+      <!-- กล่องวิชา: มนุษย์กับสิ่งแวดล้อม -->
+      <div onclick="toggleDetail()" class="cursor-pointer bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white">
         <i class="fas fa-leaf text-4xl mb-4"></i>
         <span>มนุษย์กับสิ่งแวดล้อม</span>
       </div>
 
-      <!-- กล่องเปล่า 20 ช่อง -->
-      <!-- ตัวอย่างแสดง 3 ช่อง -->
+      <!-- ตัวอย่างกล่องเปล่า -->
       <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
         <i class="fas fa-plus text-3xl mb-4"></i>
         <span>เพิ่มวิชา</span>
       </div>
-      <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
-        <i class="fas fa-plus text-3xl mb-4"></i>
-        <span>เพิ่มวิชา</span>
-      </div>
-      <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
-        <i class="fas fa-plus text-3xl mb-4"></i>
-        <span>เพิ่มวิชา</span>
-      </div>
-
-      <!-- คัดลอกอีก 17 กล่อง -->
 
     </div>
+
+    <!-- กล่องรายละเอียดที่แสดงแบบสไลด์ -->
+    <div id="detailBox" class="mt-6 slide-toggle max-h-0 bg-white rounded-lg shadow-md p-6 text-left text-gray-800 transition-all duration-500">
+      <h2 class="text-xl font-semibold mb-2">รายละเอียดวิชา: มนุษย์กับสิ่งแวดล้อม</h2>
+      <p>ศึกษาความสัมพันธ์ระหว่างมนุษย์กับสิ่งแวดล้อม หลักการอนุรักษ์ธรรมชาติ การจัดการทรัพยากร และแนวทางการพัฒนาอย่างยั่งยืนในสังคมปัจจุบัน</p>
+    </div>
+
   </div>
+
+  <script>
+    let isOpen = false;
+    function toggleDetail() {
+      const detailBox = document.getElementById('detailBox');
+      if (!isOpen) {
+        detailBox.style.maxHeight = "500px";
+      } else {
+        detailBox.style.maxHeight = "0px";
+      }
+      isOpen = !isOpen;
+    }
+  </script>
 
 </body>
 </html>
