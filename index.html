@@ -323,40 +323,27 @@
         <span>คลัง Slide</span>
       </a>
     </div>
-    <!-- ปุ่ม วิชาเสรีเก็บ A -->
-<div class="sub-menu" style="grid-column: 2 / 5;"> <!-- กำหนด span ให้ครอบ 3 ช่อง -->
-  <a href="freeA.html" class="special-feature">
-    <i class="fas fa-star"></i>
-    <span>วิชาเสรีเก็บ A</span>
-    <span class="new-label">NEW</span>
-  </a>
-</div>
-
-<style>
-  .special-feature {
-    position: relative;
+    <style>
+  /* ปรับปุ่มวิชาเสรีเก็บ A ให้ครอบกรอบซ้ายขวา */
+  .sub-menu.special-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #003366;
-    color: white;
-    border-radius: 12px;
-    text-decoration: none;
-    font-size: 1rem;
-    gap: 5px;
-    height: 100px;
-    width: 100%; /* ให้ขยายเต็มช่อง */
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
   }
 
-  .special-feature i {
-    font-size: 24px;
+  .sub-menu.special-container a.special-feature {
+    flex: 1; /* ให้ยืดเต็มพื้นที่ที่มี */
+    max-width: 48%; /* ครึ่งนิดๆ */
+    position: relative;
   }
 
-  .new-label {
+  .special-feature .new-label {
+    top: 8px;
+    left: 8px;
+    right: auto;
+    bottom: auto;
     position: absolute;
-    bottom: 8px;
-    right: 12px;
     background-color: #ff4081;
     color: white;
     font-size: 0.65rem;
