@@ -37,16 +37,7 @@
       <!-- กล่องเปล่า -->
       <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
         <i class="fas fa-plus text-3xl mb-4"></i>
-        <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
-        <div class="p-6 flex flex-col items-center">
-          <i class="fas fa-leaf text-4xl mb-4"></i>
-          <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
-        </div>
-
-        <!-- ปุ่มเปิด modal -->
-        <button onclick="openModal()" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
-          ดูรายละเอียด
-        </button>
+        <span>เพิ่มวิชา</span>
       </div>
 
     </div>
@@ -88,5 +79,63 @@
     }
   </script>
 
+  <!-- กล่องวิชา -->
+      <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
+        <div class="p-6 flex flex-col items-center">
+          <i class="fas fa-leaf text-4xl mb-4"></i>
+          <span class="text-lg">มนุษย์กับสิ่งแวดล้อม</span>
+        </div>
+
+        <!-- ปุ่มเปิด modal -->
+        <button onclick="openModal()" class="w-full bg-[#002244] hover:bg-[#001122] py-2 transition text-white">
+          ดูรายละเอียด
+        </button>
+      </div>
+
+      <!-- กล่องเปล่า -->
+      <div class="bg-[#003366] rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-white/50">
+        <i class="fas fa-plus text-3xl mb-4"></i>
+        <span>เพิ่มวิชา</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- กล่อง modal -->
+<div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl w-full max-w-4xl relative overflow-hidden shadow-lg">
+
+    <!-- หัวข้อ -->
+    <div class="p-6 border-b">
+      <h2 class="text-xl font-semibold">ภาคต้น 2568</h2>
+      <!-- ปุ่มปิด -->
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl">
+        &times;
+      </button>
+    </div>
+
+    <!-- เนื้อหา -->
+    <div class="p-6 max-h-[70vh] overflow-y-auto bg-green-50 rounded-b-xl text-gray-800">
+      <h3 class="font-bold text-lg mb-2">03751111-67 มนุษย์กับสิ่งแวดล้อม</h3>
+      <p class="mb-2">
+      </p>
+      <img src="03751111.jpg" alt="Me" width="5000"
+        style="display: block; margin: 0 auto 20px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+        </div>
+      </div>
+
+  <!-- JavaScript -->
+  <script>
+    function openModal() {
+      document.getElementById("modal").classList.remove("hidden");
+      document.getElementById("modal").classList.add("flex");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("flex");
+      document.getElementById("modal").classList.add("hidden");
+    }
+  </script>
+  
 </body>
 </html>
