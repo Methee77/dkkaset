@@ -66,9 +66,9 @@
       <!-- วิชา 4 -->
       <div class="bg-[#003366] rounded-lg shadow-md text-white flex flex-col items-center">
         <div class="p-6 flex flex-col items-center">
-          <i class="fa-solid fa-utensils text-4xl mb-4"></i>
-          <dav>01999011</dav>
-          <span class="text-lg">อาหารเพื่อมนุษย์</span>
+          <i class="fa-solid fa-face-smile-wink text-4xl mb-4"></i>
+          <dav>02999038</dav>
+          <span class="text-lg">ความสุขในศตวรรษที่ 21</span>
           <div>วิชาศึกษาทั่วไป</div>
           <div>กลุ่มสาระอยู่ดีมีสุข</div>
         </div>
@@ -131,6 +131,23 @@
     </div>
   </div>
 
+  <!-- Modal วิชา 4 -->
+  <div id="modal4" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl w-full max-w-4xl relative overflow-hidden shadow-lg">
+      <div class="p-6 border-b">
+        <h2 class="text-xl font-semibold">ภาคต้น 2568</h2>
+        <button onclick="closeModal('modal2')" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl">
+          &times;
+        </button>
+      </div>
+      <div class="p-6 max-h-[70vh] overflow-y-auto bg-green-50 rounded-b-xl text-gray-800">
+        <h3 class="font-bold text-lg mb-2">02999038-67 ความสุขในศตวรรษที่ 21</h3>
+        <img src="02999038.jpg" alt="เกษตรเพื่อโลกสีเขียว" width="100%"
+          style="display: block; margin: 0 auto 20px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.3); border-radius: 8px;">
+      </div>
+    </div>
+  </div>
+  
   <!-- JavaScript -->
   <script>
     function openModal(id) {
