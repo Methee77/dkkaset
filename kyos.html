@@ -8,57 +8,49 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg-light: #f9f9f9;
-      --bg-dark: #1e1e1e;
-      --text-light: #2c3e50;
-      --text-dark: #f0f0f0;
-      --card-light: #ffffff;
-      --card-dark: #2a2a2a;
-      --box-color: #2c3e50;
-    }
-
     body {
       font-family: 'Kanit', sans-serif;
       margin: 0;
-      background-color: var(--bg-light);
-      color: var(--text-light);
+      background-color: #f9f9f9;
       scroll-behavior: smooth;
       transition: background-color 0.3s, color 0.3s;
     }
 
     body.dark {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
+      background-color: #1e1e1e;
+      color: #f1f1f1;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 800px;
       margin: 40px auto;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      color: inherit;
+      color: #2c3e50;
       margin-bottom: 10px;
+    }
+    body.dark h1 {
+      color: #ffffff;
     }
 
     .announcement-box {
       max-width: 320px;
       margin: 0 auto 20px auto;
       padding: 12px 20px;
-      background-color: var(--box-color);
+      background-color: #2c3e50;
       color: #ffffff;
       font-weight: bold;
       text-align: center;
+      border-radius: 0;
       font-size: 1.1rem;
     }
 
     .source-note {
       text-align: center;
       font-size: 0.95rem;
-      color: gray;
       margin-bottom: 30px;
     }
 
@@ -71,20 +63,15 @@
     }
 
     .link-card {
-      background-color: var(--card-light);
+      background-color: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 20px 30px;
       width: 220px;
       text-align: center;
       text-decoration: none;
-      color: var(--text-light);
-      transition: all 0.3s;
-    }
-
-    body.dark .link-card {
-      background-color: var(--card-dark);
-      color: var(--text-dark);
+      color: #2c3e50;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .link-card:hover {
@@ -99,21 +86,22 @@
     }
 
     .card {
-      background-color: var(--card-light);
+      background-color: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 30px;
       margin: 30px 0;
-      max-width: 100%;
-      transition: background-color 0.3s, color 0.3s;
     }
-
-    body.dark .card {
-      background-color: var(--card-dark);
+    body.dark .card, body.dark .link-card {
+      background-color: #2c2c2c;
+      color: #f1f1f1;
     }
 
     h2 {
-      color: inherit;
+      color: #34495e;
+    }
+    body.dark h2 {
+      color: #f1f1f1;
     }
 
     ul {
@@ -123,56 +111,110 @@
     li {
       margin-bottom: 10px;
       font-size: 1.1rem;
+      color: #333;
+    }
+    body.dark li {
+      color: #ddd;
     }
 
     a {
       color: #2980b9;
     }
 
-    .card-content p {
-      margin-bottom: 10px;
-    }
-
-    .card-content a {
-      color: #2980b9;
-      text-decoration: underline;
-    }
-
-    .card-content ul {
-      margin-top: 10px;
-    }
-
-    /* ปุ่ม toggle dark mode */
-    .toggle-btn {
+    .dark-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
       z-index: 1000;
-      transition: background 0.3s;
     }
 
-    .toggle-btn:hover {
-      background: #2980b9;
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 32px;
+      cursor: pointer;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      height: 24px;
+      width: 24px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+      z-index: 2;
+    }
+
+    .switch::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 32px;
+      background-color: #ccc;
+      border-radius: 32px;
+      transition: background-color 0.4s;
+    }
+
+    input:checked + .switch::before {
+      background-color: #3498db;
+    }
+
+    input:checked + .switch .slider {
+      transform: translateX(28px);
+    }
+
+    .icon {
+      position: absolute;
+      top: 5px;
+      font-size: 18px;
+      z-index: 1;
+      transition: 0.4s;
+    }
+
+    .icon.sun {
+      left: 10px;
+      opacity: 1;
+    }
+
+    .icon.moon {
+      right: 10px;
+      opacity: 0;
+    }
+
+    input:checked + .switch .icon.sun {
+      opacity: 0;
+    }
+
+    input:checked + .switch .icon.moon {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
-  <button class="toggle-btn" onclick="toggleMode()">🌓 โหมดกลางคืน</button>
+  <!-- ปุ่ม toggle โหมดกลางคืน -->
+  <div class="dark-toggle">
+    <input type="checkbox" id="darkModeSwitch" onclick="toggleMode()">
+    <label for="darkModeSwitch" class="switch">
+      <span class="slider"></span>
+      <span class="icon sun">☀️</span>
+      <span class="icon moon">🌙</span>
+    </label>
+  </div>
 
   <div class="container">
     <h1>ข้อมูล กยศ.</h1>
 
-    <div class="announcement-box">
-      ประจำภาคต้น ปีการศึกษา 2568
-    </div>
+    <div class="announcement-box">ประจำภาคต้น ปีการศึกษา 2568</div>
 
     <div class="source-note">
       ข้อมูลจาก : เพจกองทุนให้กู้ยืมเพื่อการศึกษา มก.กพส. (11 มิถุนายน 2568)
@@ -191,23 +233,18 @@
 
     <div class="card" id="new">
       <h2>ผู้กู้รายใหม่</h2>
-      <img src="กยศรายใหม่.jpg" alt="Me" width="600"
+      <img src="กยศรายใหม่.jpg" alt="Me" width="600" 
         style="display: block; margin: 0 auto 20px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 8px;">
-
-      <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
-        <p>🌷ประกาศสำหรับผู้กู้รายใหม่ /รายเก่าจากมัธยมปลาย/ย้ายสถานศึกษา ยื่นกู้ ภาคต้น ปีการศึกษา 2568🌷</p>
-        <p>✅เอกสารอื่นๆที่เกี่ยวข้อง<br>
-          📌แบบฟอร์มหนังสือรับรองรายได้ครอบครัว กยศ 102<br>
-          ♦ <a href="https://www.studentloan.or.th/th/download/1617155909" target="_blank">https://www.studentloan.or.th/th/download/1617155909</a></p>
-        <ul>
-          <li>กรณีผู้ปกครองไม่มีรายได้ประจำ ให้ข้าราชการเซ็นรับรองรายได้และแนบสำเนาบัตรข้าราชการ พร้อมรับรองสำเนาถูกต้อง</li>
-          <li>กรณีผู้ปกครองทำงานประจำ ใช้หนังสือรับรองเงินเดือนจากบริษัทออกไว้ไม่เกิน 6 เดือน (ไม่ใช่เอกสารสลิปเงินเดือน)</li>
-        </ul>
-        <p><strong>คุณสมบัติและลักษณะการกู้ยืม ปีการศึกษา 2568</strong><br>
-          👉<a href="https://drive.google.com/drive/folders/1zMpeZTIzNmHPadHwtpntqBwg02SADlZh?usp=sharing" target="_blank">
-            คลิกเพื่อดูรายละเอียดใน Google Drive</a>👈
-        </p>
-      </div>
+      <p>
+        🌷ประกาศสำหรับผู้กู้รายใหม่ /รายเก่าจากมัธยมปลาย/ย้ายสถานศึกษา ยื่นกู้ ภาคต้น ปีการศึกษา 2568🌷<br><br>
+        ✅เอกสารอื่นๆที่เกี่ยวข้อง<br>
+        📌แบบฟอร์มหนังสือรับรองรายได้ครอบครัว กยศ 102<br>
+        ♦ <a href="https://www.studentloan.or.th/th/download/1617155909" target="_blank">ดาวน์โหลด</a><br><br>
+        (1) กรณีผู้ปกครองไม่มีรายได้ประจำ ให้ข้าราชการเซ็นรับรองรายได้และแนบสำเนาบัตรข้าราชการ พร้อมรับรองสำเนาถูกต้อง<br>
+        (2) กรณีผู้ปกครองทำงานประจำ ใช้หนังสือรับรองเงินเดือนจากบริษัทออกไว้ไม่เกิน 6 เดือน<br>
+        (ไม่ใช่เอกสารสลิปเงินเดือน)<br><br>
+        👉 <a href="https://drive.google.com/drive/folders/1zMpeZTIzNmHPadHwtpntqBwg02SADlZh?usp=sharing" target="_blank">คุณสมบัติและลักษณะการกู้ยืม ปีการศึกษา 2568</a> 👈
+      </p>
     </div>
 
     <div class="card" id="old">
@@ -228,15 +265,18 @@
   <script>
     function toggleMode() {
       const body = document.body;
+      const checkbox = document.getElementById('darkModeSwitch');
       body.classList.toggle('dark');
       localStorage.setItem('darkMode', body.classList.contains('dark'));
     }
 
-    // โหลดสถานะ dark mode จาก localStorage
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark');
-    }
+    // โหลดสถานะจาก localStorage
+    window.onload = () => {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+        document.getElementById('darkModeSwitch').checked = true;
+      }
+    };
   </script>
-
 </body>
 </html>
