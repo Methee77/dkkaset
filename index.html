@@ -323,33 +323,39 @@
         <span>คลัง Slide</span>
       </a>
     </div>
-    <!-- เมนูใหม่ด้านล่าง -->
-<div class="sub-menu" style="margin-top: 10px;">
-  <a href="freeA.html" class="new-feature">
+    <!-- เมนูใหม่ วิชาเสรีเก็บ A -->
+<div class="sub-menu" style="margin-top: 10px; padding-left: 10px; padding-right: 10px;">
+  <a href="freeA.html" class="new-feature" style="display: flex; align-items: center; gap: 8px;">
     <i class="fas fa-star"></i>
     <span>วิชาเสรีเก็บ A</span>
     <span class="new-badge">NEW</span>
   </a>
 </div>
 
-<!-- เพิ่มใน <style> -->
+<!-- CSS -->
 <style>
   .new-feature {
     position: relative;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .new-feature:hover {
+    background: #eaeaea;
   }
 
   .new-badge {
-    position: absolute;
-    top: -8px;
-    right: -10px;
     background-color: #ff4081;
     color: white;
     font-size: 0.65rem;
     padding: 2px 6px;
     border-radius: 12px;
-    animation: pulse 1.5s infinite;
     font-weight: bold;
   }
+</style>
 
   @keyframes pulse {
     0% { transform: scale(1); opacity: 1; }
