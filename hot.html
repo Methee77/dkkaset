@@ -1,38 +1,102 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>หน้าเว็บสองกล่อง</title>
+  <meta charset="UTF-8">
+  <title>ตารางเรียน</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-start">
-  <div class="w-full max-w-4xl px-4 py-6">
-    <!-- รูปภาพด้านบน -->
-    <img src="IMG_3938.JPG" alt="Me" class="mx-auto mb-6 rounded-lg shadow-lg w-full max-w-3xl">
-
-    <!-- กล่องเมนูซ้าย-ขวา -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- กล่องเมนูซ้าย -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">เมนูซ้าย</h2>
-        <ul class="space-y-2 text-gray-600">
-          <li><a href="#" class="hover:text-blue-500">ลิงก์ที่ 1</a></li>
-          <li><a href="#" class="hover:text-blue-500">ลิงก์ที่ 2</a></li>
-          <li><a href="#" class="hover:text-blue-500">ลิงก์ที่ 3</a></li>
-        </ul>
-      </div>
-
-      <!-- กล่องเมนูขวา -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">เมนูขวา</h2>
-        <ul class="space-y-2 text-gray-600">
-          <li><a href="#" class="hover:text-green-500">ลิงก์ A</a></li>
-          <li><a href="#" class="hover:text-green-500">ลิงก์ B</a></li>
-          <li><a href="#" class="hover:text-green-500">ลิงก์ C</a></li>
-        </ul>
-      </div>
-    </div>
+<body class="bg-gray-100 p-8">
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-300 bg-white text-sm text-center">
+      <thead class="bg-gray-200 text-gray-800">
+        <tr>
+          <th class="border px-2 py-1">วัน/เวลา</th>
+          <th class="border px-2 py-1">8-9</th>
+          <th class="border px-2 py-1">9-10</th>
+          <th class="border px-2 py-1">10-11</th>
+          <th class="border px-2 py-1">11-12</th>
+          <th class="border px-2 py-1">12-13</th>
+          <th class="border px-2 py-1">13-14</th>
+          <th class="border px-2 py-1">14-15</th>
+          <th class="border px-2 py-1">15-16</th>
+          <th class="border px-2 py-1">16-17</th>
+          <th class="border px-2 py-1">17-18</th>
+          <th class="border px-2 py-1">18-19</th>
+          <th class="border px-2 py-1">19-20</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- จันทร์ -->
+        <tr>
+          <td class="border px-2 py-1 bg-gray-100">จันทร์</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">01999021 (700)</td>
+          <td class="border px-2 py-1">01355103 /<br>01355209</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">01419214 (713–715)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-200">02181333 หรือ<br>02181351 (700)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+        </tr>
+        <!-- อังคาร -->
+        <tr>
+          <td class="border px-2 py-1 bg-gray-100">อังคาร</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">01419211 (700)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">02181261 หรือ<br>02181262 (711)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+        </tr>
+        <!-- พุธ -->
+        <tr>
+          <td class="border px-2 py-1 bg-gray-100">พุธ</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">01999021 (700)</td>
+          <td class="border px-2 py-1">01355103 /<br>01355209</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">02999147 (700)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+        </tr>
+        <!-- พฤหัส -->
+        <tr>
+          <td class="border px-2 py-1 bg-gray-100">พฤหัสฯ</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-300">01419211 (700)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1 bg-gray-200">02181333 หรือ<br>02181351 (711)</td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+          <td class="border px-2 py-1"></td>
+        </tr>
+        <!-- ศุกร์ -->
+        <tr>
+          <td class="border px-2 py-1 bg-gray-100">ศุกร์</td>
+          <td class="border px-2 py-1" colspan="12"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </body>
 </html>
