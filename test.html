@@ -23,6 +23,7 @@
       color: var(--text-light);
       padding: 20px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      margin: 0;
     }
 
     body.dark {
@@ -30,28 +31,36 @@
       color: var(--text-dark);
     }
 
-    .toggle-button {
-      background-color: #444;
-      color: #fff;
-      padding: 8px 16px;
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background-color: transparent;
       border: none;
-      border-radius: 8px;
+      font-size: 24px;
       cursor: pointer;
-      margin-bottom: 20px;
-      font-size: 1rem;
+      z-index: 1000;
+      transition: transform 0.3s ease;
     }
 
-    .toggle-button:hover {
-      background-color: #666;
+    .theme-toggle:hover {
+      transform: scale(1.2);
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .exam-card {
       background-color: var(--card-light);
       padding: 20px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      margin: 20px auto;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: background-color 0.3s ease;
+      text-align: left;
     }
 
     body.dark .exam-card {
@@ -82,25 +91,31 @@
 </head>
 <body>
 
-  <button class="toggle-button" onclick="toggleDarkMode()">สลับโหมดกลางคืน / กลางวัน</button>
+  <button class="theme-toggle" onclick="toggleDarkMode()" id="themeIcon">🌙</button>
 
-  <h1>กำหนดการสอบรายวิชา</h1>
+  <div class="container">
+    <h1>กำหนดการสอบรายวิชา ภาคต้น ปีการศึกษา 2568</h1>
+    <div>Updated 13 มิถุนายน 2568</div>
 
-  <div class="exam-card">
-    <div class="exam-title">วิชา 01999021</div>
-    <div class="exam-detail midterm">สอบกลางภาควันจันทร์ที่ 1 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
-    <div class="exam-detail final">สอบปลายภาควันจันทร์ที่ 1 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
-  </div>
+    <div class="exam-card">
+      <div class="exam-title">01999021 ภาษาไทยเพื่อการสื่อสารในงานวิชาการและวิชาชีพ</div>
+      <div class="exam-detail midterm">สอบกลางภาค วันจันทร์ที่ 11 สิงหาคม 2568 เวลา 09.00 - 11.00 น.</div>
+      <div class="exam-detail final">สอบปลายภาค วันอังคารที่ 21 ตุลาคม 2568 เวลา 09.00 - 11.00 น.</div>
+    </div>
 
-  <div class="exam-card">
-    <div class="exam-title">วิชา 01420101</div>
-    <div class="exam-detail midterm">สอบกลางภาควันอังคารที่ 2 มกราคม 2568 เวลา 13.00 - 15.00 น.</div>
-    <div class="exam-detail final">สอบปลายภาควันพฤหัสบดีที่ 25 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
+    <div class="exam-card">
+      <div class="exam-title">01419211 จุลชีวิทยาทั่วไป</div>
+      <div class="exam-detail midterm">สอบกลางภาค วันเสาร์ที่ 16 สิงหาคม 2568 เวลา 13.00 - 16.00 น.</div>
+      <div class="exam-detail final">สอบปลายภาค วันอังคารที่ 28 ตุลาคม 2568 เวลา 13.00 - 16.00 น.</div>
+    </div>
   </div>
 
   <script>
     function toggleDarkMode() {
-      document.body.classList.toggle("dark");
+      const body = document.body;
+      const icon = document.getElementById("themeIcon");
+      body.classList.toggle("dark");
+      icon.textContent = body.classList.contains("dark") ? "🌞" : "🌙";
     }
   </script>
 
