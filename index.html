@@ -312,6 +312,7 @@
       
       <h2 style="text-align: center;">ค้นหาตารางสอบ</h2>
       <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">Updated 7 มิถุนายน 2568</p>
+      <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">จะอัพโหลดไฟล์ให้ช่วงต้นเดือน สิงหาคม 2568</p>
       <p style="text-align: center; margin-top: -10px; font-size: 0.95rem; color: #666;">เริ่มใช้ตั้งแต่การสอบกลางภาค ภาคต้น 2568 เป็นต้นไป</p>
 
       <div class="search-form">
@@ -320,11 +321,11 @@
           <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required />
           <label for="grade">ชั้น</label>
           <select id="grade" name="grade" disabled>
-            <option value="F39-2" selected>F39-2</option>
+            <option value="F39-1" selected>F39-1</option>
           </select>
           <label for="term">ภาคการศึกษา</label>
           <select id="term" name="term" disabled>
-            <option value="ภาคปลาย 2568" selected>ภาคปลาย 2568</option>
+            <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
           </select>
           <label for="term">ประเภทการสอบ</label>
           <select id="term" name="term" disabled>
@@ -402,16 +403,16 @@
 
       const examData = {
         '052': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "052 กันยาพร"', file: '01355xxx.pdf' },
-        '028': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "028 กมลลักษณ์"', file: 'exam_101.pdf' },
-        '133': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "133 ชินพัธน์"', file: 'exam_102.pdf' },
-        '184': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "184 ธนพัฒน์"', file: 'exam_103.pdf' },
-        '214': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "214 นพรดา"', file: 'exam_104.pdf' },
-        '494': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "494 เมธี"', file: 'exam_105.pdf' },
-        '630': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "630 ศุภเสกย์"', file: 'exam_106.pdf' },
-        '656': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "656 สิทธิชาติ"', file: 'exam_107.pdf' },
-        '753': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "753 อนพัทย์"', file: 'exam_108.pdf' },
-        '647': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "647 ทรรณรต"', file: 'exam_109.pdf' },
-        '728': { text: 'ตารางสอบ-ปลายภาค- ภาคปลาย 2567 ของ "728 พชรพร"', file: 'exam_110.pdf' },
+        '028': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "028 กมลลักษณ์"', file: 'exam_101.pdf' },
+        '133': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "133 ชินพัธน์"', file: 'exam_102.pdf' },
+        '184': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "184 ธนพัฒน์"', file: 'exam_103.pdf' },
+        '214': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "214 นพรดา"', file: 'exam_104.pdf' },
+        '494': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "494 เมธี"', file: 'exam_105.pdf' },
+        '630': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "630 ศุภเสกย์"', file: 'exam_106.pdf' },
+        '656': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "656 สิทธิชาติ"', file: 'exam_107.pdf' },
+        '753': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "753 อนพัทย์"', file: 'exam_108.pdf' },
+        '647': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "647 ทรรณรต"', file: 'exam_109.pdf' },
+        '728': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "728 พชรพร"', file: 'exam_110.pdf' },
       };
 
       if (examData[input]) {
