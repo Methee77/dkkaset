@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>กำหนดการสอบรายวิชา</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-light: #f4f4f4;
+      --bg-dark: #1e1e1e;
+      --card-light: #ffffff;
+      --card-dark: #2c2c2c;
+      --text-light: #333;
+      --text-dark: #f0f0f0;
+      --midterm-bg: #003366;
+      --final-bg: #ffcc00;
+    }
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: 20px;
+      line-height: 1.8;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .exam-card {
+      background-color: var(--card-light);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease;
+    }
+
+    .exam-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .exam-detail {
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin: 5px 0;
+    }
+
+    .midterm {
+      background-color: var(--midterm-bg);
+      color: #fff;
+    }
+
+    .final {
+      background-color: var(--final-bg);
+      color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+      }
+      .exam-card {
+        background-color: var(--card-dark);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>กำหนดการสอบรายวิชา</h1>
+
+  <div class="exam-card">
+    <div class="exam-title">วิชา 01999021</div>
+    <div class="exam-detail midterm">สอบกลางภาควันจันทร์ที่ 1 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
+    <div class="exam-detail final">สอบปลายภาควันจันทร์ที่ 1 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
+  </div>
+
+  <div class="exam-card">
+    <div class="exam-title">วิชา 01420101</div>
+    <div class="exam-detail midterm">สอบกลางภาควันอังคารที่ 2 มกราคม 2568 เวลา 13.00 - 15.00 น.</div>
+    <div class="exam-detail final">สอบปลายภาควันพฤหัสบดีที่ 25 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
+  </div>
+
+</body>
+</html>
