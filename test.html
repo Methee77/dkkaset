@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>กำหนดการสอบรายวิชา</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-light: #f4f4f4;
@@ -22,8 +22,27 @@
       background-color: var(--bg-light);
       color: var(--text-light);
       padding: 20px;
-      line-height: 1.8;
       transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .toggle-button {
+      background-color: #444;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .toggle-button:hover {
+      background-color: #666;
     }
 
     .exam-card {
@@ -31,8 +50,12 @@
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: background-color 0.3s ease;
+    }
+
+    body.dark .exam-card {
+      background-color: var(--card-dark);
     }
 
     .exam-title {
@@ -55,19 +78,11 @@
       background-color: var(--final-bg);
       color: #000;
     }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: var(--bg-dark);
-        color: var(--text-dark);
-      }
-      .exam-card {
-        background-color: var(--card-dark);
-      }
-    }
   </style>
 </head>
 <body>
+
+  <button class="toggle-button" onclick="toggleDarkMode()">สลับโหมดกลางคืน / กลางวัน</button>
 
   <h1>กำหนดการสอบรายวิชา</h1>
 
@@ -82,6 +97,12 @@
     <div class="exam-detail midterm">สอบกลางภาควันอังคารที่ 2 มกราคม 2568 เวลา 13.00 - 15.00 น.</div>
     <div class="exam-detail final">สอบปลายภาควันพฤหัสบดีที่ 25 มกราคม 2568 เวลา 09.00 - 12.00 น.</div>
   </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
 
 </body>
 </html>
