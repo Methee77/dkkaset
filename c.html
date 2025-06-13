@@ -1,24 +1,90 @@
-<!-- โค้ดส่วน <body> ด้านในและ <script> อยู่ข้างล่างสุด (ใช้แทนของเดิมได้เลย) -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ระบบบันทึกเวลาเรียน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.5);
+    }
+  </style>
+</head>
 <body class="bg-gray-100 p-6">
 
-  <!-- ... ส่วนวิชาเหมือนเดิม ... -->
+  <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6">
+    <h1 class="text-2xl font-bold text-blue-800 mb-4 text-center">📘 ระบบบันทึกเวลาเรียน</h1>
 
-  <!-- ตาราง -->
-  <h2 class="text-xl font-semibold text-gray-700 mt-6">📝 รายการที่บันทึกแล้ว:</h2>
-  <table class="min-w-full text-sm mt-2 border border-gray-300">
-    <thead class="bg-blue-100 text-blue-900">
-      <tr>
-        <th class="px-4 py-2 border">วิชา</th>
-        <th class="px-4 py-2 border">วันที่</th>
-        <th class="px-4 py-2 border">เวลา</th>
-        <th class="px-4 py-2 border">สถานะ</th>
-      </tr>
-    </thead>
-    <tbody id="recordTable" class="bg-white"></tbody>
-  </table>
+    <!-- รายการวิชา -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <button onclick="showSubject('คณิตศาสตร์')" class="bg-blue-500 text-white px-4 py-2 rounded">คณิตศาสตร์</button>
+      <button onclick="showSubject('ภาษาอังกฤษ')" class="bg-green-500 text-white px-4 py-2 rounded">ภาษาอังกฤษ</button>
+      <button onclick="showSubject('วิทยาศาสตร์')" class="bg-purple-500 text-white px-4 py-2 rounded">วิทยาศาสตร์</button>
+      <button onclick="showSubject('สังคมศึกษา')" class="bg-orange-500 text-white px-4 py-2 rounded">สังคมศึกษา</button>
+    </div>
 
-  <!-- ... ป๊อปอัพเหมือนเดิม ... -->
+    <!-- รายละเอียดวิชา -->
+    <div id="subjectDetails" class="hidden border p-4 rounded bg-gray-50 mb-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">📖 รายละเอียดวิชา</h2>
+      <p id="subjectInfo" class="mb-4 text-gray-700"></p>
 
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <!-- เลือกวันที่ -->
+        <div>
+          <label class="block text-gray-700 mb-1">📅 เลือกวันที่:</label>
+          <input type="date" id="selectedDate" class="w-full border rounded px-3 py-2">
+        </div>
+
+        <!-- สถานะ -->
+        <div>
+          <label class="block text-gray-700 mb-1">📌 สถานะ:</label>
+          <select id="attendanceStatus" class="w-full border rounded px-3 py-2">
+            <option value="">-- เลือกสถานะ --</option>
+            <option value="มาเรียน">มาเรียน</option>
+            <option value="ขาดเรียน">ขาดเรียน</option>
+            <option value="ลา">ลา</option>
+          </select>
+        </div>
+
+        <!-- ปุ่มบันทึก -->
+        <div class="flex items-end">
+          <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">📤 บันทึก</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ตาราง -->
+    <h2 class="text-xl font-semibold text-gray-700 mt-6">📝 รายการที่บันทึกแล้ว:</h2>
+    <table class="min-w-full text-sm mt-2 border border-gray-300">
+      <thead class="bg-blue-100 text-blue-900">
+        <tr>
+          <th class="px-4 py-2 border">วิชา</th>
+          <th class="px-4 py-2 border">วันที่</th>
+          <th class="px-4 py-2 border">เวลา</th>
+          <th class="px-4 py-2 border">สถานะ</th>
+        </tr>
+      </thead>
+      <tbody id="recordTable" class="bg-white"></tbody>
+    </table>
+  </div>
+
+  <!-- ป๊อปอัพยืนยัน -->
+  <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg max-w-sm w-full shadow-lg text-center">
+      <p id="confirmText" class="text-lg font-semibold text-gray-800 mb-4">คุณต้องการบันทึกข้อมูลใช่หรือไม่?</p>
+      <div class="flex justify-center gap-4">
+        <button onclick="confirmSave()" class="bg-blue-600 text-white px-4 py-2 rounded">ยืนยัน</button>
+        <button onclick="closeModal()" class="bg-gray-400 text-white px-4 py-2 rounded">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
   <script>
     const subjects = {
       'คณิตศาสตร์': 'เรียนเกี่ยวกับพีชคณิต เรขาคณิต และสถิติ',
@@ -75,14 +141,11 @@
         status: status
       };
 
-      // บันทึกลง localStorage
       let records = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
       records.push(record);
       localStorage.setItem("attendanceRecords", JSON.stringify(records));
 
-      // แสดงในตาราง
       addRowToTable(record);
-
       closeModal();
     }
 
@@ -106,4 +169,6 @@
       });
     }
   </script>
+
 </body>
+</html>
