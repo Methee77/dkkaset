@@ -130,44 +130,37 @@
     }
 
     function confirmSave() {
-      const date = document.getElementById("selectedDate").value;
-      const status = document.getElementById("attendanceStatus").value;
-      const timeStr = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+  const date = document.getElementById("selectedDate").value;
+  const status = document.getElementById("attendanceStatus").value;
+  const timeStr = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
-      const record = {
-        subject: selectedSubject,
-        date: date,
-        time: timeStr,
-        status: status
-      };
+  const record = {
+    subject: selectedSubject,
+    date: date,
+    time: timeStr,
+    status: status
+  };
 
-      let records = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
-      records.push(record);
-      localStorage.setItem("attendanceRecords", JSON.stringify(records));
-
-      addRowToTable(record);
-      closeModal();
+  // ส่งข้อมูลไป Google Sheets Web App ที่คุณให้ไว้
+  fetch('https://script.google.com/macros/s/AKfycbwXlg45yKCZpej4sMfwSCEREu3i7kW1BCkFkH_ayB7cABGa6Xp0kW3pdI2pIF4m9XAj/exec', {
+    method: 'POST',
+    body: JSON.stringify(record),
+    headers: {
+      'Content-Type': 'application/json'
     }
-
-    function addRowToTable(record) {
-      const table = document.getElementById("recordTable");
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td class="border px-4 py-2">${record.subject}</td>
-        <td class="border px-4 py-2">${formatDate(record.date)}</td>
-        <td class="border px-4 py-2">${record.time}</td>
-        <td class="border px-4 py-2">${record.status}</td>
-      `;
-      table.appendChild(row);
+  }).then(res => {
+    if (res.ok) {
+      addRowToTable(record); // แสดงข้อมูลในตารางทันที
+      alert("✅ บันทึกสำเร็จลง Google Sheets แล้ว!");
+    } else {
+      alert("❌ บันทึกไม่สำเร็จ กรุณาลองใหม่");
     }
-
-    function formatDate(iso) {
-      const d = new Date(iso);
-      return d.toLocaleDateString('th-TH', {
-        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
-      });
-    }
+    closeModal();
+  }).catch(() => {
+    alert("❌ เกิดข้อผิดพลาดในการเชื่อมต่อ");
+    closeModal();
+  });
+}
   </script>
 
 </body>
