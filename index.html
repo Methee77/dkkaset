@@ -1,4 +1,4 @@
-3<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
@@ -12,46 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .date-banner {
-      background-color: #f0f0f0;
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 500;
-      color: #333;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="date-banner" id="current-date"></div>
-
-  <!-- ส่วนอื่นๆ ของเว็บตามเดิม -->
-
-  <script>
-    function formatThaiDate(date) {
-      const days = ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"];
-      const months = [
-        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-      ];
-
-      const dayName = days[date.getDay()];
-      const day = date.getDate();
-      const month = months[date.getMonth()];
-      const year = date.getFullYear() + 543;
-
-      return `วัน${dayName}ที่ ${day} ${month} พ.ศ. ${year}`;
-    }
-
-    document.getElementById("current-date").textContent = formatThaiDate(new Date());
-  </script>
-  
     :root {
       --bg-color: #f4f4f4;
       --wrapper-bg: white;
