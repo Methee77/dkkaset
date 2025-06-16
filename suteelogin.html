@@ -58,10 +58,10 @@
   const USERNAME = "206494";
   const PASSWORD = "880x39^C";
 
-  // โหลดประวัติ login จาก localStorage
+  // ฟังก์ชันโหลดประวัติจาก localStorage
   function loadLoginHistory() {
     const history = JSON.parse(localStorage.getItem('loginHistory')) || [];
-    loginHistory.innerHTML = ''; // เคลียร์ของเดิมก่อน
+    loginHistory.innerHTML = '';
     history.forEach(item => {
       const li = document.createElement('li');
       li.textContent = `เข้าสู่ระบบเมื่อ ${item}`;
@@ -69,17 +69,35 @@
     });
   }
 
-  // เพิ่มประวัติ login และบันทึกไว้
+  // ฟังก์ชันเพิ่มประวัติใหม่
   function addLoginRecord(time) {
     const history = JSON.parse(localStorage.getItem('loginHistory')) || [];
     history.push(time);
     localStorage.setItem('loginHistory', JSON.stringify(history));
-    loadLoginHistory(); // แสดงใหม่
+    localStorage.setItem('lastLoginDate', new Date().toDateString());
+    loadLoginHistory();
   }
 
-  // โหลดประวัติทันทีเมื่อเปิดหน้าเว็บ
-  window.onload = loadLoginHistory;
+  // ตรวจสอบว่าเป็นวันอาทิตย์และยังไม่เคยล้างในวันนี้
+  function clearHistoryIfSunday() {
+    const today = new Date();
+    const todayString = today.toDateString();
+    const lastLoginDate = localStorage.getItem('lastLoginDate');
+    const isSunday = today.getDay() === 0;
 
+    if (isSunday && lastLoginDate !== todayString) {
+      localStorage.removeItem('loginHistory');
+      localStorage.setItem('lastLoginDate', todayString);
+    }
+  }
+
+  // โหลดเมื่อเปิดหน้า
+  window.onload = function () {
+    clearHistoryIfSunday();
+    loadLoginHistory();
+  }
+
+  // เมื่อกดเข้าสู่ระบบ
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -91,13 +109,6 @@
       window.location.href = "https://github.com/Methee77/dkkaset";
     } else {
       errorMsg.classList.remove("hidden");
-    }
-  });
-
-  // รองรับกด Enter
-  window.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      form.dispatchEvent(new Event('submit'));
     }
   });
 </script>
