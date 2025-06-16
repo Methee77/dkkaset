@@ -2,161 +2,88 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เข้าสู่ระบบe</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เข้าสู่ระบบ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-    }
-
-    body, html {
-      height: 100%;
-    }
-
-    .container {
-      display: flex;
-      height: 100vh;
-      flex-direction: row;
-    }
-
-    .left-section {
-      flex: 1;
-      background-color: #f0f4f7;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      color: #003366;
-    }
-
-    .left-section h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .left-section p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    .right-section {
-      flex: 1;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-left: 1px solid #ccc;
-      padding: 40px;
-    }
-
-    .login-box {
-      width: 100%;
-      max-width: 360px;
-    }
-
-    .login-box h2 {
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: #003366;
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    .login-box button {
-      width: 100%;
-      background-color: #003366;
-      color: white;
-      padding: 10px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .login-box button:hover {
-      background-color: #0055aa;
-    }
-
-    .error-message {
-      color: red;
-      font-size: 0.9rem;
-      margin-top: -10px;
-      margin-bottom: 15px;
-      display: none;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      font-size: 0.85rem;
-      color: #666;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .left-section, .right-section {
-        flex: unset;
-        width: 100%;
-        height: auto;
-      }
-
-      .left-section {
-        border-bottom: 1px solid #ccc;
-      }
-
-      .right-section {
-        padding-top: 20px;
-      }
-    }
+    body { font-family: 'Kanit', sans-serif; }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="left-section">
-      <h1>ข่าวประชาสัมพันธ์</h1>
-      <p></p>
-      <p style="margin-top: 20px;"></p>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="w-full max-w-5xl bg-white shadow-lg rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+    
+    <!-- ฝั่งซ้าย: แถบประชาสัมพันธ์และประวัติ -->
+    <div class="bg-green-100 p-8">
+      <h2 class="text-2xl font-semibold text-green-700 mb-4">ข่าวประชาสัมพันธ์</h2>
+      <ul class="list-disc list-inside text-green-800 mb-6">
+        <li>ระบบเปิดให้บริการตลอด 24 ชม.</li>
+        <li>สอบถามเพิ่มเติมได้ที่ฝ่ายเทคโนโลยีสารสนเทศ</li>
+        <li>อย่าลืมออกจากระบบทุกครั้งหลังใช้งาน</li>
+      </ul>
+
+      <div class="mt-6">
+        <h3 class="text-xl font-medium text-green-700 mb-2">ประวัติการเข้าสู่ระบบ</h3>
+        <ul id="login-history" class="text-green-800 text-sm space-y-1">
+          <!-- ประวัติ login จะแสดงที่นี่ -->
+        </ul>
+      </div>
     </div>
 
-    <div class="right-section">
-      <div class="login-box">
-        <h2>สุธีเข้าระบบ Admin</h2>
-        <input type="text" id="username" placeholder="ชื่อผู้ใช้">
-        <input type="password" id="password" placeholder="รหัสผ่าน">
-        <div class="error-message" id="error-msg">ไม่สามารถเข้าสู่ระบบได้</div>
-        <button onclick="handleLogin()">เข้าสู่ระบบ</button>
-      </div>
-      <div class="footer">© 2025 สุธี</div>
+    <!-- ฝั่งขวา: ฟอร์มเข้าสู่ระบบ -->
+    <div class="p-8 flex flex-col justify-center bg-white">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">เข้าสู่ระบบ</h2>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="username" class="block text-gray-700">ชื่อผู้ใช้</label>
+          <input type="text" id="username" class="w-full border border-gray-300 rounded px-3 py-2 mt-1" required>
+        </div>
+        <div>
+          <label for="password" class="block text-gray-700">รหัสผ่าน</label>
+          <input type="password" id="password" class="w-full border border-gray-300 rounded px-3 py-2 mt-1" required>
+        </div>
+        <div>
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">เข้าสู่ระบบ</button>
+        </div>
+        <p id="error-msg" class="text-red-500 text-sm mt-2 hidden">ไม่สามารถเข้าสู่ระบบได้</p>
+      </form>
     </div>
   </div>
 
   <script>
-    function handleLogin() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const errorMsg = document.getElementById("error-msg");
+    const form = document.getElementById('login-form');
+    const errorMsg = document.getElementById('error-msg');
+    const loginHistory = document.getElementById('login-history');
 
-      if (username === "206494" && password === "206494") {
+    const USERNAME = "206494";
+    const PASSWORD = "880x39^C";
+
+    function addLoginRecord(time) {
+      const li = document.createElement('li');
+      li.textContent = `เข้าสู่ระบบเมื่อ ${time}`;
+      loginHistory.appendChild(li);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === USERNAME && password === PASSWORD) {
+        const now = new Date().toLocaleString("th-TH", { hour12: false });
+        addLoginRecord(now);
         window.location.href = "https://github.com/Methee77/dkkaset";
       } else {
-        errorMsg.style.display = "block";
+        errorMsg.classList.remove("hidden");
       }
-    }
+    });
+
+    // รองรับกด Enter
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        form.dispatchEvent(new Event('submit'));
+      }
+    });
   </script>
 </body>
 </html>
