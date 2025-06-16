@@ -298,17 +298,27 @@
       </div>
       
       <head>
+  <head>
   <style>
     .exam-box {
       position: relative;
-      background-color: #e0f0ff;
-      color: #003366;
       text-align: center;
       padding: 10px 20px;
       margin: 20px auto 5px auto;
       width: fit-content;
       border-radius: 8px;
       font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .exam-box.midterm {
+      background-color: #e0ffeb;
+      color: #004422;
+    }
+
+    .exam-box.final {
+      background-color: #e0f0ff;
+      color: #003366;
     }
 
     .badge-new {
@@ -328,12 +338,35 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
+
+    /* 🌙 Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #111;
+        color: #ddd;
+      }
+
+      .exam-box.midterm {
+        background-color: #2b4b3c;
+        color: #caffd3;
+      }
+
+      .exam-box.final {
+        background-color: #223b55;
+        color: #cce8ff;
+      }
+
+      .badge-new {
+        background-color: orange;
+        color: black;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- หัวข้อ ร่างตารางสอบกลางภาค -->
-  <div class="exam-box">
+  <!-- กล่องกลางภาค -->
+  <div class="exam-box midterm">
     ร่างตารางสอบกลางภาค ประจำภาคต้น 2568
     <div class="badge-new">NEW</div>
   </div>
@@ -341,17 +374,15 @@
   <img src="ร่างตารางสอบกลางภาค.JPG" alt="Me" width="800"
     style="display: block; margin: 0 auto 20px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 
-  <!-- หัวข้อ ร่างตารางสอบปลายภาค -->
-  <div class="exam-box">
+  <!-- กล่องปลายภาค -->
+  <div class="exam-box final">
     ร่างตารางสอบปลายภาค ประจำภาคต้น 2568
     <div class="badge-new">NEW</div>
   </div>
   <div style="text-align: center; margin-bottom: 10px;">Updated 16 มิถุนายน 2568</div>
   <img src="ร่างตาราสอบปลายภาค.JPG" alt="Me" width="800"
     style="display: block; margin: 0 auto 20px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 8px;">
-
 </body>
-
 
       <a href="hot.html" class="block">
   <div class="top-strip cursor-pointer hover:bg-gray-200 transition p-2 rounded">
