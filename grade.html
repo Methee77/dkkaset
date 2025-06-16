@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ระบบแสดงผลเกรด</title>
+  <title>รายงานเกรด</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Kanit', sans-serif;
@@ -14,75 +14,124 @@
 </head>
 <body class="bg-gray-100 p-6">
   <div class="max-w-4xl mx-auto">
+
+    <!-- หัวข้อ -->
+    <div class="bg-white border border-gray-300 rounded-lg p-4 mb-2 shadow-sm">
+      <h1 class="text-xl font-bold text-gray-800">รายงานการออกเกรด ประจำภาคต้น 2568</h1>
+    </div>
+    <p class="text-sm text-gray-700 mb-4">วันส่งเกรดวันสุดท้าย จ. 11 พ.ย. 68 ไม่เกินเที่ยงคืน</p>
+
+    <!-- ภาคการศึกษา -->
     <div class="flex justify-between items-center mb-4">
       <div class="bg-cyan-400 text-white px-4 py-1 rounded-full text-sm">ภาคต้น 2567</div>
       <div class="text-sm text-gray-600">หน่วยกิต <span class="font-semibold">18</span> เกรดเฉลี่ย <span class="text-cyan-600 font-bold">1.94</span></div>
     </div>
 
-    <!-- กล่องแต่ละรายวิชา -->
+    <!-- กล่องรายวิชาแบบใหม่ -->
     <div class="space-y-3">
-      <!-- รายวิชา -->
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">02717011 &nbsp; 3 หน่วยกิต</div>
-          <div class="font-semibold">ตนและการพัฒนาตน</div>
-          <div class="text-sm text-gray-500">Self and Self Development</div>
+      <!-- วิชา 1 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">02717011</span>
+          <span class="text-sm text-gray-600">3 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">ตนและการพัฒนาตน</div>
+            <div class="text-sm text-gray-500">Self and Self Development</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-cyan-800">B+</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-yellow-700">B+</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">02999144 &nbsp; 1 หน่วยกิต</div>
-          <div class="font-semibold">ทักษะชีวิตการเป็นนิสิตมหาวิทยาลัย</div>
-          <div class="text-sm text-gray-500">Life Skill for Undergraduate Student</div>
+      <!-- วิชา 2 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">02999144</span>
+          <span class="text-sm text-gray-600">1 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">ทักษะชีวิตการเป็นนิสิตมหาวิทยาลัย</div>
+            <div class="text-sm text-gray-500">Life Skill for Undergraduate Student</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-cyan-800">A</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-green-600">A</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01355101 &nbsp; 3 หน่วยกิต</div>
-          <div class="font-semibold">ภาษาอังกฤษในชีวิตประจำวัน</div>
-          <div class="text-sm text-gray-500">English for Everyday Life</div>
+      <!-- วิชา 3 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">01355101</span>
+          <span class="text-sm text-gray-600">3 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">ภาษาอังกฤษในชีวิตประจำวัน</div>
+            <div class="text-sm text-gray-500">English for Everyday Life</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-red-600">F</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-red-600">F</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01403111 &nbsp; 4 หน่วยกิต</div>
-          <div class="font-semibold">เคมีทั่วไป</div>
-          <div class="text-sm text-gray-500">General Chemistry</div>
+      <!-- วิชา 4 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">01403111</span>
+          <span class="text-sm text-gray-600">4 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">เคมีทั่วไป</div>
+            <div class="text-sm text-gray-500">General Chemistry</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-gray-400">W</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-blue-900">ยังไม่ออก</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01403112 &nbsp; 1 หน่วยกิต</div>
-          <div class="font-semibold">ปฏิบัติการเคมีทั่วไป</div>
-          <div class="text-sm text-gray-500">Laboratory in General Chemistry</div>
+      <!-- วิชา 5 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">01403112</span>
+          <span class="text-sm text-gray-600">1 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">ปฏิบัติการเคมีทั่วไป</div>
+            <div class="text-sm text-gray-500">Laboratory in General Chemistry</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-red-600">F</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-red-600">F</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">02181111 &nbsp; 3 หน่วยกิต</div>
-          <div class="font-semibold">เกษตรและสิ่งแวดล้อมศึกษาเบื้องต้น</div>
-          <div class="text-sm text-gray-500">Introduction to Agricultural and Environmental Education</div>
+      <!-- วิชา 6 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">02181111</span>
+          <span class="text-sm text-gray-600">3 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">เกษตรและสิ่งแวดล้อมศึกษาเบื้องต้น</div>
+            <div class="text-sm text-gray-500">Introduction to Agricultural and Environmental Education</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-yellow-600">C+</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-yellow-600">C+</span>
+        </div>
       </div>
 
-      <div class="bg-white shadow-sm rounded-lg p-4 flex justify-between items-center">
-        <div>
-          <div class="text-sm text-gray-500">01424111 &nbsp; 3 หน่วยกิต</div>
-          <div class="font-semibold">หลักชีววิทยา</div>
-          <div class="text-sm text-gray-500">Principles of Biology</div>
+      <!-- วิชา 7 -->
+      <div class="bg-white shadow-sm rounded-xl p-4 flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="font-bold">01424111</span>
+          <span class="text-sm text-gray-600">3 หน่วยกิต</span>
+          <div>
+            <div class="font-bold">หลักชีววิทยา</div>
+            <div class="text-sm text-gray-500">Principles of Biology</div>
+          </div>
         </div>
-        <div class="text-lg font-bold text-red-600">F</div>
+        <div class="border-l pl-4 text-right">
+          <span class="text-base font-bold text-red-600">F</span>
+        </div>
       </div>
     </div>
   </div>
