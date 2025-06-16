@@ -51,39 +51,55 @@
   </div>
 
   <script>
-    const form = document.getElementById('login-form');
-    const errorMsg = document.getElementById('error-msg');
-    const loginHistory = document.getElementById('login-history');
+  const form = document.getElementById('login-form');
+  const errorMsg = document.getElementById('error-msg');
+  const loginHistory = document.getElementById('login-history');
 
-    const USERNAME = "206494";
-    const PASSWORD = "880x39^C";
+  const USERNAME = "206494";
+  const PASSWORD = "880x39^C";
 
-    function addLoginRecord(time) {
+  // โหลดประวัติ login จาก localStorage
+  function loadLoginHistory() {
+    const history = JSON.parse(localStorage.getItem('loginHistory')) || [];
+    loginHistory.innerHTML = ''; // เคลียร์ของเดิมก่อน
+    history.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = `เข้าสู่ระบบเมื่อ ${time}`;
+      li.textContent = `เข้าสู่ระบบเมื่อ ${item}`;
       loginHistory.appendChild(li);
+    });
+  }
+
+  // เพิ่มประวัติ login และบันทึกไว้
+  function addLoginRecord(time) {
+    const history = JSON.parse(localStorage.getItem('loginHistory')) || [];
+    history.push(time);
+    localStorage.setItem('loginHistory', JSON.stringify(history));
+    loadLoginHistory(); // แสดงใหม่
+  }
+
+  // โหลดประวัติทันทีเมื่อเปิดหน้าเว็บ
+  window.onload = loadLoginHistory;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === USERNAME && password === PASSWORD) {
+      const now = new Date().toLocaleString("th-TH", { hour12: false });
+      addLoginRecord(now);
+      window.location.href = "https://github.com/Methee77/dkkaset";
+    } else {
+      errorMsg.classList.remove("hidden");
     }
+  });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if (username === USERNAME && password === PASSWORD) {
-        const now = new Date().toLocaleString("th-TH", { hour12: false });
-        addLoginRecord(now);
-        window.location.href = "https://github.com/Methee77/dkkaset";
-      } else {
-        errorMsg.classList.remove("hidden");
-      }
-    });
-
-    // รองรับกด Enter
-    window.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        form.dispatchEvent(new Event('submit'));
-      }
-    });
-  </script>
+  // รองรับกด Enter
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+</script>
 </body>
 </html>
