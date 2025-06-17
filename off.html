@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ระบบค้นหาตารางสอบ - ปิดปรับปรุง</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- โหลดฟอนต์ IBM Plex Sans Thai Looped -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+      background: #ffffff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #d9534f;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .countdown-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .countdown-box {
+      background: #f8f8f8;
+      padding: 20px 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      min-width: 80px;
+    }
+
+    .countdown-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .countdown-label {
+      font-size: 1rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .prefix-text {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚧 ปิดปรับปรุงระบบค้นหาตารางสอบ</h1>
+  <p>ระบบจะกลับมาเปิดให้บริการอีกครั้งในวันที่ 18 มิ.ย. 2568 เวลา 13:00 น.</p>
+  <div class="prefix-text">เหลืออีก</div>
+  <div class="countdown-container">
+    <div class="countdown-box">
+      <div class="countdown-number" id="days">00</div>
+      <div class="countdown-label">วัน</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-number" id="hours">00</div>
+      <div class="countdown-label">ชั่วโมง</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-number" id="minutes">00</div>
+      <div class="countdown-label">นาที</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-number" id="seconds">00</div>
+      <div class="countdown-label">วินาที</div>
+    </div>
+  </div>
+
+  <script>
+    const countdown = () => {
+      const now = new Date().getTime();
+      const target = new Date("2025-06-18T13:00:00+07:00").getTime();
+      const distance = target - now;
+
+      if (distance <= 0) {
+        document.querySelector(".prefix-text").textContent = "🎉 ระบบกลับมาเปิดใช้งานแล้ว";
+        document.querySelector(".countdown-container").style.display = "none";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(2, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    };
+
+    countdown();
+    setInterval(countdown, 1000);
+  </script>
+</body>
+</html>
