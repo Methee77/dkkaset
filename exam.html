@@ -118,62 +118,73 @@
       ]
     };
 
-    function searchSchedule() {
-      const id = document.getElementById("studentId").value.trim();
-      const result = document.getElementById("result");
-      result.innerHTML = "";
+    <script>
+  const schedules = {
+    // [เหมือนเดิม]
+  };
 
-      if (schedules[id]) {
-        const rows = schedules[id].map(row => `
-          <tr>
-            <td class="border px-3 py-2">${row.date}</td>
-            <td class="border px-3 py-2">${row.time}</td>
-            <td class="border px-3 py-2">${row.subject}</td>
-            <td class="border px-3 py-2">${row.room}</td>
-          </tr>
-        `).join("");
+  const fileUrls = {
+    "028": "files/exam_schedule_028.pdf",
+    "052": "files/exam_schedule_052.pdf",
+    "133": "files/exam_schedule_133.pdf",
+    "184": "files/exam_schedule_184.pdf",
+    "214": "files/exam_schedule_214.pdf",
+    "494": "files/exam_schedule_494.pdf",
+    "630": "files/exam_schedule_630.pdf",
+    "656": "files/exam_schedule_656.pdf",
+    "753": "files/exam_schedule_753.pdf",
+    "647": "files/exam_schedule_647.pdf",
+    "728": "files/exam_schedule_728.pdf"
+  };
 
-        const tableHtml = `
-          <div class="border border-gray-300 rounded-xl p-4 bg-green-50">
-            <h2 class="text-lg font-semibold mb-2">ตารางสอบของนิสิต ${id}</h2>
-            <table class="w-full border text-sm text-left">
-              <thead class="bg-green-100">
-                <tr>
-                  <th class="border px-3 py-2">วันที่</th>
-                  <th class="border px-3 py-2">เวลา</th>
-                  <th class="border px-3 py-2">รายวิชา</th>
-                  <th class="border px-3 py-2">ห้องสอบ</th>
-                </tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>
-            <button onclick="downloadFile('${id}')" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-              ดาวน์โหลดตารางสอบ
-            </button>
-          </div>
-        `;
-        result.innerHTML = tableHtml;
-      } else {
-        result.innerHTML = `<div class="text-red-600 font-medium mt-4">ไม่พบบันทึกตารางสอบของนิสิตรหัส ${id}</div>`;
-      }
+  function searchSchedule() {
+    const id = document.getElementById("studentId").value.trim();
+    const result = document.getElementById("result");
+    result.innerHTML = "";
+
+    if (schedules[id]) {
+      const rows = schedules[id].map(row => `
+        <tr>
+          <td class="border px-3 py-2">${row.date}</td>
+          <td class="border px-3 py-2">${row.time}</td>
+          <td class="border px-3 py-2">${row.subject}</td>
+          <td class="border px-3 py-2">${row.room}</td>
+        </tr>
+      `).join("");
+
+      const tableHtml = `
+        <div class="border border-gray-300 rounded-xl p-4 bg-green-50">
+          <h2 class="text-lg font-semibold mb-2">ตารางสอบของนิสิต ${id}</h2>
+          <table class="w-full border text-sm text-left">
+            <thead class="bg-green-100">
+              <tr>
+                <th class="border px-3 py-2">วันที่</th>
+                <th class="border px-3 py-2">เวลา</th>
+                <th class="border px-3 py-2">รายวิชา</th>
+                <th class="border px-3 py-2">ห้องสอบ</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+          <button onclick="downloadFile('${id}')" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+            ดาวน์โหลดตารางสอบ
+          </button>
+        </div>
+      `;
+      result.innerHTML = tableHtml;
+    } else {
+      result.innerHTML = `<div class="text-red-600 font-medium mt-4">ไม่พบบันทึกตารางสอบของนิสิตรหัส ${id}</div>`;
     }
+  }
 
-    function downloadFile(id) {
-      const rows = schedules[id] || [];
-      let content = `ตารางสอบของนิสิต ${id}\n\n`;
-      rows.forEach(row => {
-        content += `- ${row.date} | ${row.time} | ${row.subject} | ${row.room}\n`;
-      });
-
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `exam_schedule_${id}.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+  function downloadFile(id) {
+    const url = fileUrls[id];
+    if (url) {
+      window.open(url, "_blank");
+    } else {
+      alert("ไม่พบไฟล์ตารางสอบสำหรับนิสิตรหัสนี้");
     }
-  </script>
+  }
+</script>
 </body>
 </html>
