@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ค้นหาตารางสอบ</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- ฟอนต์ IBM Plex Sans Thai Looped -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'IBM Plex Sans Thai Looped', sans-serif;
@@ -17,61 +14,108 @@
 </head>
 <body class="bg-white min-h-screen flex items-center justify-center p-6">
   <div class="w-full max-w-2xl">
-
-    <!-- หัวข้อ -->
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold text-gray-800">ค้นหาตารางสอบ</h1>
       <p class="text-sm text-gray-600 mt-1">Updated 7 มิถุนายน 2568</p>
-      <p class="text-sm text-gray-500 mt-1">
-        เริ่มใช้ตั้งแต่ตารางสอบกลางภาค ภาคต้น 2568 ในช่วงเดือนสิงหาคม เป็นต้นไป
-      </p>
+      <p class="text-sm text-gray-500 mt-1">เริ่มใช้ตั้งแต่ตารางสอบกลางภาค ภาคต้น 2568 ในช่วงเดือนสิงหาคม เป็นต้นไป</p>
     </div>
 
-    <!-- กล่องฟอร์ม -->
     <div class="bg-gray-50 border border-gray-300 rounded-xl p-6 space-y-4">
-      
-      <!-- ช่อง: รหัสนิสิต -->
       <div>
         <label class="block text-gray-800 font-semibold mb-1">รหัสนิสิต 3 ตัวท้าย</label>
-        <input type="text" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" class="w-full border border-gray-300 rounded px-3 py-2">
+        <input id="studentId" type="text" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" class="w-full border border-gray-300 rounded px-3 py-2">
       </div>
 
-      <!-- ช่อง: ชั้น -->
       <div>
         <label class="block text-gray-800 font-semibold mb-1">ชั้น</label>
         <select class="w-full border border-gray-300 rounded px-3 py-2">
           <option>F39-1</option>
-          <option>F39-2</option>
-          <option>F39-3</option>
         </select>
       </div>
 
-      <!-- ช่อง: ภาคการศึกษา -->
       <div>
         <label class="block text-gray-800 font-semibold mb-1">ภาคการศึกษา</label>
         <select class="w-full border border-gray-300 rounded px-3 py-2">
           <option>ภาคปลาย 2567</option>
-          <option>ภาคต้น 2568</option>
         </select>
       </div>
 
-      <!-- ช่อง: ประเภทการสอบ -->
       <div>
         <label class="block text-gray-800 font-semibold mb-1">ประเภทการสอบ</label>
         <select class="w-full border border-gray-300 rounded px-3 py-2">
           <option>ปลายภาค</option>
-          <option>กลางภาค</option>
         </select>
       </div>
 
-      <!-- ปุ่ม -->
       <div class="pt-2">
-        <button class="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-2 rounded">
-          ค้นหา
-        </button>
+        <button onclick="searchSchedule()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-2 rounded">ค้นหา</button>
       </div>
-
     </div>
+
+    <!-- พื้นที่แสดงผลลัพธ์ -->
+    <div id="result" class="mt-6"></div>
   </div>
+
+  <script>
+    const allowedIds = ["028", "052", "133", "184", "214", "494", "630", "656", "753", "647", "728"];
+
+    function searchSchedule() {
+      const id = document.getElementById("studentId").value.trim();
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+
+      if (allowedIds.includes(id)) {
+        // สร้างตารางและปุ่มดาวน์โหลด
+        const tableHtml = `
+          <div class="border border-gray-300 rounded-xl p-4 bg-green-50">
+            <h2 class="text-lg font-semibold mb-2">ตารางสอบของนิสิต ${id}</h2>
+            <table class="w-full border text-sm text-left">
+              <thead class="bg-green-100">
+                <tr>
+                  <th class="border px-3 py-2">วันที่</th>
+                  <th class="border px-3 py-2">เวลา</th>
+                  <th class="border px-3 py-2">รายวิชา</th>
+                  <th class="border px-3 py-2">ห้องสอบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border px-3 py-2">10 พ.ย. 2568</td>
+                  <td class="border px-3 py-2">09:00-12:00</td>
+                  <td class="border px-3 py-2">GEN101</td>
+                  <td class="border px-3 py-2">B402</td>
+                </tr>
+                <tr>
+                  <td class="border px-3 py-2">14 พ.ย. 2568</td>
+                  <td class="border px-3 py-2">13:00-16:00</td>
+                  <td class="border px-3 py-2">MTH102</td>
+                  <td class="border px-3 py-2">C105</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button onclick="downloadFile('${id}')" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+              ดาวน์โหลดตารางสอบ
+            </button>
+          </div>
+        `;
+        result.innerHTML = tableHtml;
+      } else {
+        result.innerHTML = `<div class="text-red-600 font-medium mt-4">ไม่พบบันทึกตารางสอบของนิสิตรหัส ${id}</div>`;
+      }
+    }
+
+    function downloadFile(id) {
+      const content = `ตารางสอบของนิสิต ${id}\n\n- 10 พ.ย. 2568 | 09:00-12:00 | GEN101 | B402\n- 14 พ.ย. 2568 | 13:00-16:00 | MTH102 | C105`;
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `exam_schedule_${id}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
 </body>
 </html>
