@@ -16,8 +16,8 @@
   <div class="w-full max-w-2xl">
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold text-gray-800">ค้นหาตารางสอบ</h1>
-      <p class="text-sm text-gray-600 mt-1">Updated 7 มิถุนายน 2568</p>
-      <p class="text-sm text-gray-500 mt-1">เริ่มใช้ตั้งแต่ตารางสอบกลางภาค ภาคต้น 2568 ในช่วงเดือนสิงหาคม เป็นต้นไป</p>
+      <p class="text-sm text-gray-600 mt-1">Updated 17 มิถุนายน 2568</p>
+      <p class="text-sm text-gray-500 mt-1">เริ่มใช้ตั้งแต่ตารางสอบกลางภาค ภาคต้น 2568</p>
     </div>
 
     <div class="bg-gray-50 border border-gray-300 rounded-xl p-6 space-y-4">
@@ -36,7 +36,7 @@
       <div>
         <label class="block text-gray-800 font-semibold mb-1">ภาคการศึกษา</label>
         <select class="w-full border border-gray-300 rounded px-3 py-2">
-          <option>ภาคปลาย 2567</option>
+          <option>ภาคต้น 2568</option>
         </select>
       </div>
 
@@ -52,20 +52,72 @@
       </div>
     </div>
 
-    <!-- พื้นที่แสดงผลลัพธ์ -->
     <div id="result" class="mt-6"></div>
   </div>
 
   <script>
-    const allowedIds = ["028", "052", "133", "184", "214", "494", "630", "656", "753", "647", "728"];
+    const schedules = {
+      "028": [
+        { date: "10 พ.ย. 2568", time: "09:00-12:00", subject: "GEN101", room: "B402" },
+        { date: "14 พ.ย. 2568", time: "13:00-16:00", subject: "MTH102", room: "C105" }
+      ],
+      "052": [
+        { date: "11 พ.ย. 2568", time: "10:00-12:00", subject: "SCI210", room: "D201" },
+        { date: "15 พ.ย. 2568", time: "14:00-16:00", subject: "LAW100", room: "A301" }
+      ],
+      "133": [
+        { date: "12 พ.ย. 2568", time: "09:00-11:00", subject: "COM104", room: "C101" },
+        { date: "17 พ.ย. 2568", time: "13:00-15:00", subject: "MAT111", room: "C301" }
+      ],
+      "184": [
+        { date: "10 พ.ย. 2568", time: "08:30-10:30", subject: "HIS202", room: "B205" },
+        { date: "13 พ.ย. 2568", time: "14:00-16:00", subject: "ENG102", room: "A105" }
+      ],
+      "214": [
+        { date: "11 พ.ย. 2568", time: "13:00-15:00", subject: "PHY200", room: "C202" },
+        { date: "16 พ.ย. 2568", time: "09:00-11:00", subject: "CHE105", room: "B106" }
+      ],
+      "494": [
+        { date: "13 พ.ย. 2568", time: "10:00-12:00", subject: "SOC100", room: "D103" },
+        { date: "17 พ.ย. 2568", time: "15:00-17:00", subject: "THA101", room: "B209" }
+      ],
+      "630": [
+        { date: "14 พ.ย. 2568", time: "08:00-10:00", subject: "ENV200", room: "A102" },
+        { date: "18 พ.ย. 2568", time: "13:00-15:00", subject: "MTH103", room: "C109" }
+      ],
+      "656": [
+        { date: "15 พ.ย. 2568", time: "10:00-12:00", subject: "BIO150", room: "B202" },
+        { date: "19 พ.ย. 2568", time: "09:00-11:00", subject: "PHI101", room: "A108" }
+      ],
+      "753": [
+        { date: "10 พ.ย. 2568", time: "14:00-16:00", subject: "ART205", room: "C303" },
+        { date: "20 พ.ย. 2568", time: "10:00-12:00", subject: "GEN102", room: "C205" }
+      ],
+      "647": [
+        { date: "11 พ.ย. 2568", time: "08:30-10:30", subject: "MUS100", room: "D104" },
+        { date: "13 พ.ย. 2568", time: "13:00-15:00", subject: "ENG201", room: "B307" }
+      ],
+      "728": [
+        { date: "12 พ.ย. 2568", time: "09:00-11:00", subject: "LIT110", room: "A301" },
+        { date: "14 พ.ย. 2568", time: "13:30-15:30", subject: "SOC102", room: "D201" }
+      ]
+    };
 
     function searchSchedule() {
       const id = document.getElementById("studentId").value.trim();
       const result = document.getElementById("result");
       result.innerHTML = "";
 
-      if (allowedIds.includes(id)) {
-        // สร้างตารางและปุ่มดาวน์โหลด
+      if (schedules[id]) {
+        const rows = schedules[id].map(row => `
+          <tr>
+            <td class="border px-3 py-2">${row.date}</td>
+            <td class="border px-3 py-2">${row.time}</td>
+            <td class="border px-3 py-2">${row.subject}</td>
+            <td class="border px-3 py-2">${row.room}</td>
+          </tr>
+        `).join("");
+
         const tableHtml = `
           <div class="border border-gray-300 rounded-xl p-4 bg-green-50">
             <h2 class="text-lg font-semibold mb-2">ตารางสอบของนิสิต ${id}</h2>
@@ -78,22 +130,8 @@
                   <th class="border px-3 py-2">ห้องสอบ</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td class="border px-3 py-2">10 พ.ย. 2568</td>
-                  <td class="border px-3 py-2">09:00-12:00</td>
-                  <td class="border px-3 py-2">GEN101</td>
-                  <td class="border px-3 py-2">B402</td>
-                </tr>
-                <tr>
-                  <td class="border px-3 py-2">14 พ.ย. 2568</td>
-                  <td class="border px-3 py-2">13:00-16:00</td>
-                  <td class="border px-3 py-2">MTH102</td>
-                  <td class="border px-3 py-2">C105</td>
-                </tr>
-              </tbody>
+              <tbody>${rows}</tbody>
             </table>
-
             <button onclick="downloadFile('${id}')" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
               ดาวน์โหลดตารางสอบ
             </button>
@@ -106,7 +144,12 @@
     }
 
     function downloadFile(id) {
-      const content = `ตารางสอบของนิสิต ${id}\n\n- 10 พ.ย. 2568 | 09:00-12:00 | GEN101 | B402\n- 14 พ.ย. 2568 | 13:00-16:00 | MTH102 | C105`;
+      const rows = schedules[id] || [];
+      let content = `ตารางสอบของนิสิต ${id}\n\n`;
+      rows.forEach(row => {
+        content += `- ${row.date} | ${row.time} | ${row.subject} | ${row.room}\n`;
+      });
+
       const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
