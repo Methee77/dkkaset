@@ -3,42 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ระบบอยู่ระหว่างการแก้ไข</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <title>แจ้งเตือนระบบปิดปรับปรุง</title>
   <style>
     body {
+      font-family: "Sarabun", "Tahoma", sans-serif;
       margin: 0;
-      padding: 40px 20px;
-      font-family: 'Kanit', sans-serif;
-      background-color: #f8fafc;
-      color: #1f2937;
-      text-align: center;
+      padding: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
+      background-color: white;
+      color: black;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 600px;
+      padding: 0 20px;
     }
     h1 {
       font-size: 3rem;
-      margin-bottom: 30px;
-      color: #dc2626;
+      margin-bottom: 1rem;
     }
     p {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      line-height: 1.8;
+      font-size: 1.25rem;
+      margin: 1rem 0;
     }
-    .highlight {
-      font-weight: bold;
-      color: #0f766e;
-      font-size: 1.6rem;
+    .small-text {
+      font-size: 1rem;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <h1>เดี๋ยวเราจะกลับมา</h1>
-  <p>เนื่องจากขณะนี้มีบุคคลพยายามกดเข้าสู่ระบบแต่ไม่สำเร็จติดต่อกันหลายครั้ง</p>
-  <p>ทำให้ระบบหลังบ้านเกิดข้อผิดพลาด อยู่ระหว่างการดำเนินแก้ไข</p>
-  <p class="highlight">ระบบจะกลับมาในวันจันทร์ที่ 23 มิถุนายน 2568 เวลา 00:00 น.</p>
+  <div class="container">
+    <h1>เดี๋ยวเราจะกลับมา</h1>
+    <p>เนื่องจากขณะนี้มีบุคคลพยายามกดเข้าสู่ระบบแต่ไม่สำเร็จติดต่อกันหลายครั้ง</p>
+    <p>ทำให้ระบบหลังบ้านเกิดข้อผิดพลาด อยู่ระหว่างการดำเนินแก้ไข</p>
+    <p class="small-text">ระบบจะกลับมาเปิด จ. 23 มิ.ย. 68 เวลา 00:00 น.</p>
+  </div>
 </body>
 </html>
