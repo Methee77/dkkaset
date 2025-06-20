@@ -30,31 +30,14 @@
     p {
       font-size: 1.2rem;
       font-weight: 300;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #666;
-    }
-
-    .countdown-box {
-      background: #ffffff;
-      padding: 25px 40px;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-      min-width: 280px;
-    }
-
-    .countdown {
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: #8B0000;
-      letter-spacing: 1px;
+      max-width: 600px;
     }
 
     @media (max-width: 480px) {
       h1 {
         font-size: 2rem;
-      }
-      .countdown {
-        font-size: 1.4rem;
       }
     }
   </style>
@@ -63,32 +46,5 @@
   <h1>เดี๋ยวเราจะกลับมา</h1>
   <p>เนื่องจากขณะนี้มีบุคคลพยายามกดเข้าสู่ระบบแต่ไม่สำเร็จติดต่อกันหลายครั้ง ทำให้ระบบหลังบ้านเกิดข้อผิดพลาด อยู่ระหว่างการดำเนินแก้ไข</p>
   <p>ระบบจะกลับมาในวันจันทร์ที่ 23 มิถุนายน 2568 เวลา 00:00 น.</p>
-
-  <div class="countdown-box">
-    <div class="countdown" id="countdown">กำลังโหลด...</div>
-  </div>
-
-  <script>
-    const targetDate = new Date("2025-06-23T00:00:00+07:00").getTime();
-    const countdown = document.getElementById("countdown");
-
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance <= 0) {
-        clearInterval(interval);
-        countdown.innerHTML = "ระบบกลับมาใช้งานได้แล้ว!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days} วัน ${hours} ชม. ${minutes} นาที ${seconds} วินาที`;
-    }, 1000);
-  </script>
 </body>
 </html>
