@@ -5,112 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ค้นหาตารางสอบ</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: 'Kanit', sans-serif; }
+    body {
+      font-family: 'Kanit', sans-serif;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen">
+<body class="bg-gray-50 min-h-screen py-10 px-4">
 
-  <!-- กล่องค้นหาตารางสอบ -->
-  <div class="max-w-xl mx-auto mt-16 bg-white rounded-3xl shadow-xl border border-gray-300">
-    <div class="text-center p-8">
-      <div class="text-4xl text-blue-600 mb-4">📅</div>
-      <h1 class="text-2xl font-bold mb-2">ระบบค้นหาตารางสอบ</h1>
-      <p class="text-gray-600 text-sm mb-6">กรอกข้อมูลเพื่อค้นหาตารางสอบปลายภาค</p>
-
-      <!-- ฟอร์ม -->
-      <form id="examForm" class="space-y-4 text-left">
-        <div>
-          <label class="block text-sm mb-1">รหัสนิสิต</label>
-          <input id="studentId" type="text" class="w-full border px-4 py-2 rounded-lg" required />
-        </div>
-
-        <div>
-          <label class="block text-sm mb-1">ชั้นปี</label>
-          <select id="year" class="w-full border px-4 py-2 rounded-lg">
-            <option>ปี 1</option>
-            <option>ปี 2</option>
-            <option>ปี 3</option>
-            <option>ปี 4</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm mb-1">ภาคการศึกษา</label>
-          <select id="semester" class="w-full border px-4 py-2 rounded-lg">
-            <option>ต้น</option>
-            <option selected>ปลาย</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm mb-1">ประเภทการสอบ</label>
-          <input type="text" value="ปลายภาค" disabled class="w-full bg-gray-100 border px-4 py-2 rounded-lg text-gray-500" />
-        </div>
-
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl mt-4">ค้นหาตารางสอบ</button>
-      </form>
-    </div>
+  <!-- ส่วนหัว -->
+  <div class="max-w-xl mx-auto text-center">
+    <h1 class="text-3xl font-bold mb-2">ค้นหาตารางสอบ</h1>
+    <p class="text-base text-gray-600 font-medium">Updated 7 มิถุนายน 2568</p>
   </div>
 
-  <!-- ตารางผลลัพธ์ -->
-  <div id="resultBox" class="max-w-4xl mx-auto mt-10 hidden">
-    <div class="bg-white border border-green-200 shadow-md rounded-2xl p-6">
-      <h2 class="text-xl font-semibold text-green-600 mb-4">ผลการค้นหา</h2>
-      <table class="w-full border border-gray-300 table-auto text-sm text-center">
-        <thead class="bg-green-100">
-          <tr>
-            <th class="border px-2 py-2">รหัสวิชา</th>
-            <th class="border px-2 py-2">ชื่อวิชา</th>
-            <th class="border px-2 py-2">วันสอบ</th>
-            <th class="border px-2 py-2">เวลา</th>
-            <th class="border px-2 py-2">ห้องสอบ</th>
-          </tr>
-        </thead>
-        <tbody id="examTableBody" class="bg-white">
-          <!-- เพิ่มแถวจาก JS -->
-        </tbody>
-      </table>
-      <button onclick="downloadSchedule()" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl">⬇ ดาวน์โหลดตารางสอบ</button>
-    </div>
+  <!-- กล่องฟอร์ม -->
+  <div class="max-w-xl mx-auto mt-6 bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+    <form id="searchForm" class="space-y-4">
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">รหัสนิสิต 3 ตัวท้าย</label>
+        <input type="text" id="sid" maxlength="3" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">ชั้น</label>
+        <input type="text" value="F39-1" disabled class="w-full bg-gray-100 text-gray-700 border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">ภาคการศึกษา</label>
+        <input type="text" value="ภาคปลาย 2567" disabled class="w-full bg-gray-100 text-gray-700 border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">ประเภทการสอบ</label>
+        <input type="text" value="ปลายภาค" disabled class="w-full bg-gray-100 text-gray-700 border rounded-md px-4 py-2" />
+      </div>
+
+      <button type="submit" class="w-full bg-blue-800 hover:bg-blue-900 text-white py-2 rounded-lg font-medium">ค้นหา</button>
+    </form>
   </div>
 
-  <!-- JavaScript -->
   <script>
-    const form = document.getElementById('examForm');
-    const resultBox = document.getElementById('resultBox');
-    const tableBody = document.getElementById('examTableBody');
-
-    form.addEventListener('submit', function(e) {
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const studentId = document.getElementById('studentId').value;
-
-      const sampleData = [
-        { code: '01420111', name: 'ชีววิทยาเบื้องต้น', date: '15 พ.ย. 68', time: '09:00 - 12:00', room: 'SC1101' },
-        { code: '01231001', name: 'การเขียนโปรแกรม', date: '18 พ.ย. 68', time: '13:00 - 16:00', room: 'LAB302' },
-        { code: '01111111', name: 'คณิตศาสตร์พื้นฐาน', date: '21 พ.ย. 68', time: '09:00 - 12:00', room: 'MATH204' },
-      ];
-
-      tableBody.innerHTML = '';
-      sampleData.forEach(item => {
-        const row = `<tr>
-          <td class="border px-2 py-1">${item.code}</td>
-          <td class="border px-2 py-1">${item.name}</td>
-          <td class="border px-2 py-1">${item.date}</td>
-          <td class="border px-2 py-1">${item.time}</td>
-          <td class="border px-2 py-1">${item.room}</td>
-        </tr>`;
-        tableBody.innerHTML += row;
-      });
-
-      resultBox.classList.remove('hidden');
-      resultBox.scrollIntoView({ behavior: 'smooth' });
+      const sid = document.getElementById('sid').value;
+      alert("🔍 ค้นหาตารางสอบสำหรับรหัสนิสิต: " + sid);
     });
-
-    function downloadSchedule() {
-      alert("🔽 ระบบดาวน์โหลดตารางสอบจะเปิดเร็ว ๆ นี้");
-    }
   </script>
+
 </body>
 </html>
