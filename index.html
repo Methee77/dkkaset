@@ -139,6 +139,43 @@
       font-weight: 700;
     }
 
+      .course-box {
+    border: 2px solid #3b82f6; /* สีฟ้า */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .course-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  .course-box:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .course-code {
+    font-size: 2rem;
+    color: #2563eb;
+  }
+
+  .course-name {
+    margin-top: 15px;
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+
     .search-form {
       background-color: var(--form-bg);
       padding: 20px;
@@ -293,7 +330,13 @@
         <div>วันเสาร์ที่ 9 สิงหาคม 2568 - วันอาทิตย์ที่ 17 สิงหาคม 2568</div>
         <div id="countdown" class="countdown-time"></div>
       </div>
-      
+
+      <!-- ✅ กล่องรายวิชา Genchem -->
+<div class="course-box">
+  <div class="course-code">01403111</div>
+  <div class="course-name">Genchem เคมีทั่วไป</div>
+</div>
+
       <head>
   <head>
   <style>
