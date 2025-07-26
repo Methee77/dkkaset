@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -138,43 +139,6 @@
       font-size: 2.2rem;
       font-weight: 700;
     }
-
-      .course-box {
-    border: 2px solid #3b82f6; /* สีฟ้า */
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 300px;
-    margin: 20px auto;
-    text-align: center;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .course-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  }
-
-  .course-box:active {
-    transform: scale(0.98);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .course-code {
-    font-size: 2rem;
-    color: #2563eb;
-  }
-
-  .course-name {
-    margin-top: 15px;
-    background-color: #3b82f6;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: 600;
 
     .search-form {
       background-color: var(--form-bg);
@@ -326,17 +290,11 @@
 
     <div class="content">
       <div class="countdown-container">
-        <div>วันสอบกลางภาค ภาคต้น 2568</div>
-        <div>วันเสาร์ที่ 9 สิงหาคม 2568 - วันอาทิตย์ที่ 17 สิงหาคม 2568</div>
+        <div>วันลงทะเบียนเรียน (ล่าช้า)</div>
+        <div>วันที่ 30 มิถุายน 2025 - วันที่ 4 กรกฏาคม 2025 เวลา 10.30 น.</div>
         <div id="countdown" class="countdown-time"></div>
       </div>
-
-      <!-- ✅ กล่องรายวิชา Genchem -->
-<div class="course-box">
-  <div class="course-code">ค้นหาตารางสอบ</div>
-  <div class="course-name">ภาคต้น 2568</div>
-</div>
-
+      
       <head>
   <head>
   <style>
@@ -405,6 +363,21 @@
 </head>
 <body class="bg-gray-100 font-sans">
   <div class="max-w-6xl mx-auto px-4 py-12">
+
+    <!-- กรอบข้อความด้านบนสุด -->
+    <div class="mb-12 border border-gray-300 bg-white p-6 rounded-md text-gray-700 text-center text-sm leading-relaxed">
+      เว็บนี้สร้างขึ้นเพื่ออำนวยความสะดวกเท่านั้น ไม่ได้แสวงหาผลประโยชน์<br>
+      ดูแลระบบ พัฒนาระบบ และรันโค้ดของระบบ โดย เมธี ใจสุขดี<br>
+      พบปัญหาการใช้งานแจ้งอีเมลจะไวกว่า: <a href="mailto:methee.uhicrq49@gmail.com" class="text-blue-600 underline">methee.uhicrq49@gmail.com</a>
+    </div>
+
+  <!-- กล่องเมนูรายวิชาแบบแถบสี -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- 01424111 หลักชีววิทยา -->
+      <div class="border-4 border-green-500 bg-white text-center px-6 py-8">
+        <div class="text-5xl text-green-600 font-extrabold">01424111</div>
+        <div class="mt-5 bg-green-500 text-white text-2xl font-semibold py-3">Bio หลักชีววิทยา</div>
+      </div>
   
   <!-- กล่องกลางภาค -->
   <div class="exam-box midterm">
@@ -489,12 +462,12 @@
   <div id="popup">📄 พบข้อมูลตารางสอบแล้ว!</div>
 
   <script>
-    const targetDate = new Date(2025, 7, 9, 8, 30, 0);
+    const targetDate = new Date(2025, 5, 30, 10, 30, 0);
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
       if (diff <= 0) {
-        document.getElementById('countdown').textContent = 'วันสอบกลางภาค ประจำภาคต้น 2568';
+        document.getElementById('countdown').textContent = 'วันลงทะเบียนเรียน ประจำภาคต้น 2568';
         clearInterval(intervalId);
         return;
       }
