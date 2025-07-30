@@ -6,10 +6,17 @@
   <title>ค้นหาตารางสอบ</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
+
   <style>
+    @font-face {
+      font-family: 'THSarabunPSK';
+      src: url('THSarabunPSK.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
-      font-family: 'Kanit', sans-serif;
+      font-family: 'THSarabunPSK', sans-serif;
     }
   </style>
 </head>
@@ -49,7 +56,7 @@
       <div>ระหว่างวันเสาร์ที่ 9 สิงหาคม 2568 - วันอาทิตย์ที่ 17 สิงหาคม 2568
       </div>
 
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto mt-4">
         <table id="examTable" class="w-full table-fixed border border-gray-400"></table>
       </div>
 
@@ -60,7 +67,7 @@
           <li><strong>LH3</strong> หมายถึง อาคารศูนย์เรียนรวม 3</li>
           <li><strong>LH4</strong> หมายถึง อาคารศูนย์เรียนรวม 4</li>
           <li><strong>KH80</strong> หมายถึง อาคาร 80 ปี มหาวิทยาลัยเกษตรศาสตร์</li>
-        </div>
+        </ul>
       </div>
 
       <div class="text-right text-xs text-gray-500 mt-2">Updated 17 ก.ค. 2568</div>
