@@ -11,13 +11,16 @@
     body {
       font-family: 'Kanit', sans-serif;
     }
+    table td, table th {
+      word-break: break-word;
+    }
   </style>
 </head>
 <body class="bg-gray-50 min-h-screen py-10 px-4">
 
   <div class="max-w-xl mx-auto text-center">
     <h1 class="text-3xl font-bold mb-2">ค้นหาตารางสอบ</h1>
-    <p class="text-base text-gray-600 font-medium">Updated 18 กรกฎาคม 2568</p>
+    <p class="text-base text-gray-600 font-medium">Updated 31 กรกฎาคม 2568</p>
   </div>
 
   <div class="max-w-xl mx-auto mt-6 bg-white border border-gray-200 rounded-xl shadow-sm p-6">
@@ -43,17 +46,24 @@
   </div>
 
   <div id="resultBox" class="max-w-6xl mx-auto mt-10 text-sm hidden">
-    <div id="pdfContent" class="p-4">
+    <div id="pdfContent" class="p-4 bg-white rounded-xl shadow-sm border">
       <div class="text-center font-medium text-lg mb-4">
-      <span class="text-blue-600 underline">ตารางสอบกลางภาค</span> ภาคต้น 2568
-      <p class="text-base text-gray-600 font-medium">ระบบนี้สร้างมาเพื่ออำนวยความสะดวกให้กับทุกคน ไม่ได้แสวงหาผลประโยชน์</p>
+        <span class="text-blue-600 underline">ตารางสอบกลางภาค</span> ภาคต้น 2568
+        <p class="text-base text-gray-600 font-medium">ระบบนี้สร้างมาเพื่ออำนวยความสะดวกให้กับทุกคน ไม่ได้แสวงหาผลประโยชน์</p>
       </div>
 
       <div class="overflow-x-auto mt-4">
-        <table id="examTable" class="w-full table-fixed border border-gray-400"></table>
+        <table id="examTable" class="w-full table-fixed border border-gray-400 text-sm text-left">
+        </table>
       </div>
 
-      <div class="mt-4 text-sm text-gray-700">
+      <div class="text-center mt-6">
+        <button onclick="downloadPDF()" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg">
+          ดาวน์โหลดตารางสอบ (PDF)
+        </button>
+      </div>
+
+      <div class="mt-6 text-sm text-gray-700">
         <p class="font-semibold mb-1">หมายเหตุ</p>
         <ul class="list-disc list-inside space-y-1">
           <li><strong>LH2</strong> หมายถึง อาคารศูนย์เรียนรวม 2</li>
@@ -62,58 +72,63 @@
           <li><strong>KH80</strong> หมายถึง อาคาร 80 ปี มหาวิทยาลัยเกษตรศาสตร์</li>
         </ul>
       </div>
+    </div>
+  </div>
 
   <script>
     const examData = {
-      "028": [
-        ["01999021", "ภาษาไทยเพื่อการสื่อสารในงานวิชาการและวิชาชีพ", "จ. 21 ต.ค. 68", "09.00 – 11.00"],
-        ["01492141", "จุลชีววิทยาพื้นฐานภาคปฏิบัติการ", "พฤ. 23 ต.ค. 68", "13.00 – 16.00"]
-      ],
-      "052": [
-        ["02999147", "ไทยในพระราชนิยม", "พ. 22 ต.ค. 68", "13.00 – 15.00"],
-        ["01403112", "ปฏิบัติการเคมีทั่วไป", "ศ. 24 ต.ค. 68", "13.00 – 15.00"]
-      ],
       "494": [
-        ["01355101–64", "ภาษาอังกฤษในชีวิตประจำวัน", "อาทิตย์. 10 ส.ค. 68", "13.00 – 15.00", "709(ALL),704", "6720600079 - 6720600788", "LH4–304"],
-        ["01999021–67", "ภาษาไทยเพื่อการสื่อสารในงานวิชาการและวิชาชีพ", "จันทร์. 11 ส.ค. 68", "09.00 – 11.00", "หมู่เรียน 700", "LH2–302"],
-        ["01419214–65", "จุลชีววิทยาพื้นฐานภาคปฏิบัติการ", "พุธ. 13 ส.ค. 68", "13.00 – 16.00", "หมู่เรียน 713,715,717,719", "LH4–202"],
-        ["01403112–65", "ปฏิบัติการเคมีทั่วไป", "พฤหัสบดี. 14 ส.ค. 68", "13.00 – 15.00", "หมู่เรียน 724", "LH2–204"],
-        ["01419211–65", "จุลชีววิทยาทั่วไป", "เสาร์. 16 ส.ค. 68", "13.00 – 16.00", "หมู่เรียน 700", "LH2–203"]
+        ["01355101–64", "ภาษาอังกฤษในชีวิตประจำวัน", "อาทิตย์ 10 ส.ค. 68", "13.00 – 15.00", "หมู่เรียน 709 (ALL) และ 704", "นิสิต 6720600079 – 6720600788", "LH4-304"],
+        ["01999021–67", "ภาษาไทยเพื่อการสื่อสารในงานวิชาการและวิชาชีพ", "จันทร์ 11 ส.ค. 68", "09.00 – 11.00", "หมู่เรียน 700", "นิสิต 6720600206 – 6721603233", "LH2-302"],
+        ["01419214–65", "จุลชีววิทยาพื้นฐานภาคปฏิบัติการ", "พุธ 13 ส.ค. 68", "13.00 – 16.00", "หมู่เรียน 713,715,717,719", "-", "LH4-202"],
+        ["01403112–65", "ปฏิบัติการเคมีทั่วไป", "พฤหัสบดี 14 ส.ค. 68", "13.00 – 15.00", "หมู่เรียน 724", "-", "LH2-204"],
+        ["01419211–65", "จุลชีววิทยาทั่วไป", "เสาร์ 16 ส.ค. 68", "13.00 – 16.00", "หมู่เรียน 700", "นิสิต 6720600133 – 6720603795", "LH2-203"],
+        ["02738453–64", "เศรษฐกิจบัณฑิตชีววิจัย", "ประกาศข้อสอบ เสาร์ 9 สิงหาคม 68 ส่งข้อสอบภายใน อาทิตย์ 17 สิงหาคม 68", "-", "-", "-", "-", "<a href='https://www.biosciencekps.com' target='_blank' class='text-blue-600 underline'>www.biosciencekps.com</a>"],
+        ["02738473–64", "การประยุกต์คอมพิวเตอร์ทางวิทยาศาสตร์ชีวภาพ", "ดูในเว็บไซต์", "-", "-", "-", "-", "<a href='https://www.biosciencekps.com' target='_blank' class='text-blue-600 underline'>www.biosciencekps.com</a>"],
+        ["02181333–64", "การประยุกต์คอมพิวเตอร์ทางเกษตรและสิ่งแวดล้อมศึกษา", "พฤหัสบดี 21 ส.ค. 68", "16.00 – 18.00", "หมู่เรียน บรรยาย 700 / ปฏิบัติ 711", "-", "-"]
       ]
     };
 
     document.getElementById('searchForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const sid = document.getElementById('sid').value.trim();
+      const table = document.getElementById("examTable");
 
       if (examData[sid]) {
-        const table = document.getElementById("examTable");
         const data = examData[sid];
-
         table.innerHTML = `
-          <thead class="bg-gray-200 text-center text-sm">
+          <thead class="bg-gray-100 text-sm">
             <tr>
-              <th class="border border-gray-300 px-2 py-1">รหัสวิชา</th>
-              <th class="border border-gray-300 px-2 py-1">ชื่อวิชา</th>
-              <th class="border border-gray-300 px-2 py-1">วันสอบ</th>
-              <th class="border border-gray-300 px-2 py-1">เวลาสอบ</th>
-              <th class="border border-gray-300 px-2 py-1">หมู่เรียน</th>
-              <th class="border border-gray-300 px-2 py-1">นิสิตรหัส</th>
-              <th class="border border-gray-300 px-2 py-1">ห้องสอบ</th>
+              <th class="border border-gray-300 px-3 py-2">รหัสวิชา</th>
+              <th class="border border-gray-300 px-3 py-2">วิชา</th>
+              <th class="border border-gray-300 px-3 py-2">วันสอบ</th>
+              <th class="border border-gray-300 px-3 py-2">เวลาสอบ</th>
+              <th class="border border-gray-300 px-3 py-2">หมู่เรียน</th>
+              <th class="border border-gray-300 px-3 py-2">นิสิตรหัส</th>
+              <th class="border border-gray-300 px-3 py-2">ห้องสอบ</th>
             </tr>
           </thead>
-          <tbody class="text-center text-sm">
-            ${data.map((d, i) => `
-              <tr class="${i % 2 === 0 ? 'bg-green-100' : ''}">
-                <td class="border px-2 py-1">${d[0]}</td>
-                <td class="border px-2 py-1 text-left">${d[1]}</td>
-                <td class="border px-2 py-1">${d[2] || '-'}</td>
-                <td class="border px-2 py-1">${d[3] || '-'}</td>
-                <td class="border px-2 py-1">${d[4] || '-'}</td>
-                <td class="border px-2 py-1">${d[5] || '-'}</td>
-                <td class="border px-2 py-1">${d[6] || '-'}</td>
-              </tr>
-            `).join('')}
+          <tbody class="text-sm">
+            ${data.map((d, i) => {
+              if (d[7]) {
+                return `
+                  <tr>
+                    <td colspan="7" class="border px-3 py-2 text-blue-700">${d[2]}<br>${d[7]}</td>
+                  </tr>
+                `;
+              }
+              return `
+                <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
+                  <td class="border px-3 py-2">${d[0] || '–'}</td>
+                  <td class="border px-3 py-2">${d[1] || '–'}</td>
+                  <td class="border px-3 py-2">${d[2] || '–'}</td>
+                  <td class="border px-3 py-2">${d[3] || '–'}</td>
+                  <td class="border px-3 py-2">${d[4] || '–'}</td>
+                  <td class="border px-3 py-2">${d[5] || '–'}</td>
+                  <td class="border px-3 py-2">${d[6] || '–'}</td>
+                </tr>
+              `;
+            }).join('')}
           </tbody>
         `;
 
@@ -137,6 +152,5 @@
       html2pdf().set(opt).from(element).save();
     }
   </script>
-
 </body>
 </html>
