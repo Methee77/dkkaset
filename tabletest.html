@@ -43,20 +43,21 @@
   </div>
 
   <div class="max-w-xl mx-auto mt-4 flex justify-center gap-4">
-  <a href="https://example.com/midterm" target="_blank" class="border-2 border-green-500 text-green-700 px-5 py-2 rounded font-semibold hover:bg-green-100 transition">
-    ตารางสอบกลาง "กลางภาค"
-  </a>
-  <a href="https://example.com/final" target="_blank" class="border-2 border-red-600 text-red-700 px-5 py-2 rounded font-semibold hover:bg-red-100 transition">
-    ตารางสอบกลาง "ปลายภาค"
-  </a>
-</div>
-  
+    <a href="https://example.com/midterm" target="_blank" class="border-2 border-green-500 text-green-700 px-5 py-2 rounded font-semibold hover:bg-green-100 transition">
+      ตารางสอบกลาง "กลางภาค"
+    </a>
+    <a href="https://example.com/final" target="_blank" class="border-2 border-red-600 text-red-700 px-5 py-2 rounded font-semibold hover:bg-red-100 transition">
+      ตารางสอบกลาง "ปลายภาค"
+    </a>
+  </div>
+
   <!-- Result -->
   <div id="resultBox" class="max-w-3xl mx-auto mt-10 hidden">
     <div class="bg-white border rounded-xl shadow-sm p-6">
       <div class="text-lg font-semibold mb-2 text-blue-700">ข้อมูลตารางสอบของนิสิต</div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 mb-4">
         <div><strong>รหัสนิสิต:</strong> <span id="showSid"></span></div>
+        <div><strong>ชื่อ - สกุล:</strong> <span id="showName"></span></div>
         <div><strong>ภาคการศึกษา:</strong> ภาคต้น 2568</div>
         <div><strong>ประเภทการสอบ:</strong> กลางภาค</div>
       </div>
@@ -90,15 +91,21 @@
       const sid = document.getElementById('sid').value.trim();
       const image = document.getElementById("examImage");
       const showSid = document.getElementById("showSid");
+      const showName = document.getElementById("showName");
       const resultBox = document.getElementById("resultBox");
 
-      // ระบุรหัสที่มีข้อมูล
-      const availableIds = ["028", "052", "494"];
+      // รายชื่อนิสิต
+      const studentData = {
+        "028": "ปิยวัฒน์ ศรีสวัสดิ์",
+        "052": "ชนาธิป กล้าหาญ",
+        "494": "สุชานันท์ เที่ยงตรง"
+      };
 
-      if (availableIds.includes(sid)) {
+      if (studentData[sid]) {
         image.src = `./images/${sid}.jpg`;
         image.alt = `ตารางสอบของนิสิต ${sid}`;
         showSid.textContent = sid;
+        showName.textContent = studentData[sid];
         resultBox.classList.remove("hidden");
         resultBox.scrollIntoView({ behavior: "smooth" });
       } else {
