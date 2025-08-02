@@ -55,65 +55,6 @@
         <div><strong>ประเภทการสอบ:</strong> กลางภาค</div>
       </div>
 
-      <div class="mt-4 text-center">
-        <img id="examImage" src="" alt="ตารางสอบ" class="mx-auto rounded-lg shadow max-w-full border" />
-      </div>
-
-      <div class="text-center mt-6">
-        <button onclick="downloadPDF()" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg">
-          ดาวน์โหลดตารางสอบ PDF
-        </button>
-      </div>
-
-      <div class="mt-6 text-sm text-gray-700">
-        <p class="font-semibold mb-1">หมายเหตุ</p>
-        <ul class="list-disc list-inside space-y-1">
-          <li><strong>LH2</strong> หมายถึง อาคารศูนย์เรียนรวม 2</li>
-          <li><strong>LH3</strong> หมายถึง อาคารศูนย์เรียนรวม 3</li>
-          <li><strong>LH4</strong> หมายถึง อาคารศูนย์เรียนรวม 4</li>
-          <li><strong>KH80</strong> หมายถึง อาคาร 80 ปี มหาวิทยาลัยเกษตรศาสตร์</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Script -->
-  <script>
-    document.getElementById('searchForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const sid = document.getElementById('sid').value.trim();
-      const image = document.getElementById("examImage");
-      const showSid = document.getElementById("showSid");
-      const showName = document.getElementById("showName");
-      const resultBox = document.getElementById("resultBox");
-
-      // รายชื่อนิสิต
-      const studentData = {
-        "028": "กมลลักษณ์",
-        "052": "กันยาพร",
-        "494": "เมธี ใจสุขดี"
-      };
-
-      if (studentData[sid]) {
-        image.src = `./images/${sid}.jpg`;
-        image.alt = `ตารางสอบของนิสิต ${sid}`;
-        showSid.textContent = sid;
-        showName.textContent = studentData[sid];
-        resultBox.classList.remove("hidden");
-        resultBox.scrollIntoView({ behavior: "smooth" });
-      } else {
-        alert("ไม่พบตารางสอบของรหัส " + sid);
-        resultBox.classList.add("hidden");
-      }
-    });
-
-    function downloadPDF() {
-      const sid = document.getElementById('sid').value.trim();
-      const link = document.createElement('a');
-      link.href = `./pdf/${sid}.pdf`;
-      link.download = `ตารางสอบ_${sid}.pdf`;
-      link.click();
-    }
   </script>
 
 </body>
