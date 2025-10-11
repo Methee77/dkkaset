@@ -5,23 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>เด็กดีของเสดสิ่ง67</title>
 
+  <!-- ฟอนต์ -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --bg-color: #f4f4f4;
-      --wrapper-bg: white;
       --text-color: #222;
       --header-bg: #003366;
       --header-text: white;
       --countdown-bg: rgba(255, 255, 255, 0.7);
       --countdown-text: #003366;
-      --shadow-color: rgba(0, 0, 0, 0.1);
+      --shadow-color: rgba(0, 0, 0, 0.15);
     }
 
     .dark-mode {
       --bg-color: #121212;
-      --wrapper-bg: #1e1e1e;
       --text-color: #eee;
       --header-bg: #0d47a1;
       --header-text: #fff;
@@ -30,22 +29,18 @@
       --shadow-color: rgba(0, 0, 0, 0.7);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'IBM Plex Sans Thai', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-    }
-
-    .wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: var(--wrapper-bg);
-      box-shadow: 0 0 10px var(--shadow-color);
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
     header {
@@ -56,7 +51,7 @@
       font-size: 2rem;
       font-weight: 600;
       position: relative;
-      width: 100%;
+      flex-shrink: 0;
     }
 
     #dark-mode-toggle {
@@ -71,6 +66,7 @@
       border-radius: 20px;
       cursor: pointer;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
     }
 
     #dark-mode-toggle:hover {
@@ -78,57 +74,69 @@
       color: var(--header-bg);
     }
 
+    .countdown-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .countdown-container {
       text-align: center;
-      margin-top: 60px;
       background: var(--countdown-bg);
-      padding: 30px;
+      padding: 40px 60px;
       border-radius: 20px;
       box-shadow: 0 8px 32px var(--shadow-color);
       color: var(--countdown-text);
+      backdrop-filter: blur(8px);
     }
 
     .countdown-container div:first-child {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 10px;
     }
 
     .countdown-time {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 700;
+      animation: pulse 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.03); opacity: 0.9; }
     }
 
     footer {
-      margin-top: auto;
-      width: 100%;
+      text-align: center;
       background-color: var(--header-bg);
       color: var(--header-text);
-      text-align: center;
-      padding: 15px 0;
+      padding: 10px 0;
       font-size: 0.9rem;
+      flex-shrink: 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      เด็กดีของเสดสิ่ง67
-      <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
-    </header>
+  <header>
+    เด็กดีของเสดสิ่ง67
+    <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
+  </header>
 
+  <div class="countdown-wrapper">
     <div class="countdown-container">
       <div>วันสอบปลายภาค ภาคต้น 2568</div>
       <div>วันที่ 20 ตุลาคม 2025 - วันที่ 31 ตุลาคม 2025</div>
       <div id="countdown" class="countdown-time"></div>
     </div>
-
-    <footer>© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
   </div>
 
+  <footer>© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
+
   <script>
-    // นับถอยหลัง
+    // ฟังก์ชันนับถอยหลัง
     const targetDate = new Date(2025, 9, 20, 8, 30, 0);
     function updateCountdown() {
       const now = new Date();
