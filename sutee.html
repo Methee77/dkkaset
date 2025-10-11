@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>เด็กดีของเสดสิ่ง67</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --wrapper-bg: white;
+      --text-color: #222;
+      --header-bg: #003366;
+      --header-text: white;
+      --countdown-bg: rgba(255, 255, 255, 0.7);
+      --countdown-text: #003366;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode {
+      --bg-color: #121212;
+      --wrapper-bg: #1e1e1e;
+      --text-color: #eee;
+      --header-bg: #0d47a1;
+      --header-text: #fff;
+      --countdown-bg: rgba(33, 33, 33, 0.8);
+      --countdown-text: #90caf9;
+      --shadow-color: rgba(0, 0, 0, 0.7);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--wrapper-bg);
+      box-shadow: 0 0 10px var(--shadow-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background-color: var(--header-bg);
+      color: var(--header-text);
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      position: relative;
+      width: 100%;
+    }
+
+    #dark-mode-toggle {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: transparent;
+      border: 2px solid var(--header-text);
+      color: var(--header-text);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #dark-mode-toggle:hover {
+      background-color: var(--header-text);
+      color: var(--header-bg);
+    }
+
+    .countdown-container {
+      text-align: center;
+      margin-top: 60px;
+      background: var(--countdown-bg);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      color: var(--countdown-text);
+    }
+
+    .countdown-container div:first-child {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .countdown-time {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: auto;
+      width: 100%;
+      background-color: var(--header-bg);
+      color: var(--header-text);
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      เด็กดีของเสดสิ่ง67
+      <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
+    </header>
+
+    <div class="countdown-container">
+      <div>วันสอบปลายภาค ภาคต้น 2568</div>
+      <div>วันที่ 20 ตุลาคม 2025 - วันที่ 31 ตุลาคม 2025</div>
+      <div id="countdown" class="countdown-time"></div>
+    </div>
+
+    <footer>© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
+  </div>
+
+  <script>
+    // นับถอยหลัง
+    const targetDate = new Date(2025, 9, 20, 8, 30, 0);
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      const countdown = document.getElementById('countdown');
+
+      if (diff <= 0) {
+        countdown.textContent = 'เริ่มสอบแล้ว!';
+        clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdown.textContent = `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
+    }
+
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    // โหมดกลางคืน
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    const bodyElement = document.body;
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      bodyElement.classList.add('dark-mode');
+      toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      bodyElement.classList.toggle('dark-mode');
+      if (bodyElement.classList.contains('dark-mode')) {
+        toggleBtn.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        toggleBtn.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  </script>
+</body>
+</html>
