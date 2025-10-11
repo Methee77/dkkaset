@@ -79,10 +79,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
     }
 
     .countdown-container {
-      text-align: center;
       background: var(--countdown-bg);
       padding: 40px 60px;
       border-radius: 20px;
@@ -108,6 +108,13 @@
       to { transform: scale(1.03); opacity: 0.9; }
     }
 
+    .shutdown-text {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: crimson;
+    }
+
     footer {
       text-align: center;
       background-color: var(--header-bg);
@@ -130,6 +137,7 @@
       <div>วันสอบปลายภาค ภาคต้น 2568</div>
       <div>วันที่ 20 ตุลาคม 2025 - วันที่ 31 ตุลาคม 2025</div>
       <div id="countdown" class="countdown-time"></div>
+      <div class="shutdown-text">🚫 ปิดเว็บ 🚫</div>
     </div>
   </div>
 
