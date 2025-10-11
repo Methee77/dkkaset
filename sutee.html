@@ -74,9 +74,10 @@
       color: var(--header-bg);
     }
 
-    .countdown-wrapper {
+    .countdown-section {
       flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -109,10 +110,11 @@
     }
 
     .shutdown-text {
-      margin-top: 15px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: crimson;
+      text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
     }
 
     footer {
@@ -132,13 +134,13 @@
     <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
   </header>
 
-  <div class="countdown-wrapper">
+  <div class="countdown-section">
     <div class="countdown-container">
       <div>วันสอบปลายภาค ภาคต้น 2568</div>
       <div>วันที่ 20 ตุลาคม 2025 - วันที่ 31 ตุลาคม 2025</div>
       <div id="countdown" class="countdown-time"></div>
-      <div class="shutdown-text">🚫 ปิดเว็บ 🚫</div>
     </div>
+    <div class="shutdown-text">🚫 ปิดเว็บ 🚫</div>
   </div>
 
   <footer>© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
