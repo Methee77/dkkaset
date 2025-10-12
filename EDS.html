@@ -1,261 +1,332 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>โรงเรียนตัวอย่าง - เด็กดีของเสดสิ่ง67</title>
-  <style>
-    :root {
-      --main-color: #1c7c54;
-      --light-bg: #f8f9fa;
-      --text-color: #333;
-      --radius: 16px;
-    }
+// Project Choice App
+// Single-file React app (App.jsx) using Tailwind CSS and Firebase (Firestore + Auth)
+// Instructions:
+// 1) Create a new Vite React project (or CRA) and add Tailwind.
+//    npx create-vite@latest project-choice --template react
+//    cd project-choice
+//    npm install
+// 2) Install dependencies:
+//    npm install firebase
+// 3) Set up Tailwind (follow Tailwind docs for Vite).
+// 4) Create a file src/App.jsx and paste this code.
+// 5) Create a file src/firebaseConfig.js with your Firebase config (see below).
+// 6) In Firebase Console:
+//    - Enable Firestore (in test mode for development or set rules).
+//    - Enable Email/Password Authentication.
+//    - Create an admin user account (email/password) that will be allowed to access admin panel.
+// 7) Start dev server: npm run dev
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-      font-family: 'Prompt', sans-serif;
-    }
+/* ---------- src/firebaseConfig.js (create this file and export your config) ----------
+export const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
 
-    body {
-      background: var(--light-bg);
-      color: var(--text-color);
-    }
+// Optionally export an array of allowed admin emails: export const ALLOWED_ADMINS = ["admin@your.edu"];
+*/
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      z-index: 1000;
-    }
+import React, { useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  getDocs,
+  deleteDoc,
+  doc
+} from "firebase/firestore";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "firebase/auth";
+import { firebaseConfig as userConfig, ALLOWED_ADMINS } from "./firebaseConfig";
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+// Initialize Firebase
+const app = initializeApp(userConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-    .nav-container h1 {
-      font-size: 1.5rem;
-      color: var(--main-color);
-    }
+export default function App() {
+  const [view, setView] = useState("form"); // 'form' or 'admin'
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
+  return (
+    <div className="min-h-screen bg-white text-gray-900 flex items-start justify-center p-6">
+      <div className="w-full max-w-4xl">
+        <header className="mb-6">
+          <h1 className="text-2xl font-semibold">ระบบเลือกร่วมโครงการนิสิต</h1>
+          <p className="text-sm text-gray-600 mt-1">มินิมอล — ขาวสะอาด — Responsive</p>
+        </header>
 
-    nav a {
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+        <main className="bg-white shadow-sm rounded-lg p-6">
+          <nav className="flex gap-3 mb-4">
+            <button onClick={() => setView("form")} className={`px-3 py-1 rounded ${view === "form" ? "bg-gray-100" : "bg-white"}`}>หน้าสำหรับนิสิต</button>
+            <button onClick={() => setView("admin")} className={`px-3 py-1 rounded ${view === "admin" ? "bg-gray-100" : "bg-white"}`}>หน้าผู้ดูแล</button>
+          </nav>
 
-    nav a:hover {
-      color: var(--main-color);
-    }
+          {view === "form" ? <StudentForm /> : <AdminPanel />}
+        </main>
 
-    .hero {
-      margin-top: 80px;
-      position: relative;
-      overflow: hidden;
-      height: 70vh;
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 18s infinite;
-    }
-
-    .slides img {
-      width: 100%;
-      object-fit: cover;
-    }
-
-    @keyframes slide {
-      0%, 25% { transform: translateX(0); }
-      33%, 58% { transform: translateX(-100%); }
-      66%, 91% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
-    }
-
-    section {
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-
-    h2.section-title {
-      font-size: 1.8rem;
-      color: var(--main-color);
-      margin-bottom: 1.5rem;
-      border-left: 5px solid var(--main-color);
-      padding-left: 10px;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: white;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 1rem;
-    }
-
-    .card-content h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: var(--main-color);
-    }
-
-    .card-content p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #555;
-    }
-
-    footer {
-      background: var(--main-color);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    footer p {
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="nav-container">
-      <h1>โรงเรียนตัวอย่าง</h1>
-      <nav>
-        <ul>
-          <li><a href="#news">ข่าวสาร</a></li>
-          <li><a href="#activities">กิจกรรม</a></li>
-          <li><a href="#departments">หน่วยงาน</a></li>
-          <li><a href="#contact">ติดต่อ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <div class="hero">
-    <div class="slides">
-      <img src="https://source.unsplash.com/1200x700/?school" alt="slide1">
-      <img src="https://source.unsplash.com/1200x700/?students" alt="slide2">
-      <img src="https://source.unsplash.com/1200x700/?classroom" alt="slide3">
-    </div>
-  </div>
-
-  <section id="news">
-    <h2 class="section-title">ข่าวสาร</h2>
-    <div class="card-grid">
-      <div class="card">
-        <img src="https://source.unsplash.com/400x250/?education" alt="news1">
-        <div class="card-content">
-          <h3>ประชาสัมพันธ์โครงการใหม่</h3>
-          <p>โรงเรียนตัวอย่างจัดกิจกรรมพิเศษเพื่อพัฒนาผู้เรียนในศตวรรษที่ 21...</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://source.unsplash.com/400x250/?teacher" alt="news2">
-        <div class="card-content">
-          <h3>อบรมครูประจำปี</h3>
-          <p>จัดอบรมครูเพื่อยกระดับคุณภาพการศึกษาและเทคโนโลยีดิจิทัลในห้องเรียน...</p>
-        </div>
+        <footer className="text-xs text-gray-500 mt-4">ออกแบบโดย: ทีมงาน — ปรับแต่งตามต้องการ</footer>
       </div>
     </div>
-  </section>
+  );
+}
 
-  <section id="activities">
-    <h2 class="section-title">กิจกรรมล่าสุด</h2>
-    <div class="card-grid">
-      <div class="card">
-        <img src="https://source.unsplash.com/400x250/?students,activity" alt="act1">
-        <div class="card-content">
-          <h3>กิจกรรมวันครู</h3>
-          <p>รวมภาพบรรยากาศงานวันครู ประจำปี 2568...</p>
+function StudentForm() {
+  const [form, setForm] = useState({
+    studentId: "",
+    firstName: "",
+    lastName: "",
+    faculty: "",
+    year: "",
+    phone: "",
+    email: "",
+    project: ""
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const projects = [
+    "โครงการ A: พัฒนาโปรแกรม",
+    "โครงการ B: งานสังคม",
+    "โครงการ C: วิจัยนวัตกรรม",
+    "โครงการ D: ฝึกงานภาคสนาม"
+  ];
+
+  function update(field, value) {
+    setForm(prev => ({ ...prev, [field]: value }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      // basic validation
+      if (!form.studentId || !form.firstName || !form.project) {
+        setSuccess("กรุณากรอกข้อมูลให้ครบ (รหัส, ชื่อ, เลือกโครงการ)");
+        setLoading(false);
+        return;
+      }
+
+      const col = collection(db, "submissions");
+      await addDoc(col, {
+        ...form,
+        createdAt: serverTimestamp()
+      });
+
+      setSuccess("ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณครับ");
+      setForm({ studentId: "", firstName: "", lastName: "", faculty: "", year: "", phone: "", email: "", project: "" });
+    } catch (err) {
+      console.error(err);
+      setSuccess("เกิดข้อผิดพลาดในการส่งข้อมูล");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setSuccess(""), 4000);
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <Input label="รหัสนิสิต" value={form.studentId} onChange={v => update("studentId", v)} />
+        <Input label="ชื่อ" value={form.firstName} onChange={v => update("firstName", v)} />
+        <Input label="นามสกุล" value={form.lastName} onChange={v => update("lastName", v)} />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <Input label="คณะ" value={form.faculty} onChange={v => update("faculty", v)} />
+        <Input label="ปีการศึกษา" value={form.year} onChange={v => update("year", v)} />
+        <Input label="เบอร์โทร" value={form.phone} onChange={v => update("phone", v)} />
+      </div>
+
+      <Input label="อีเมล (ไม่บังคับ)" value={form.email} onChange={v => update("email", v)} />
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">เลือกโครงการ (หนึ่งตัวเลือก)</label>
+        <div className="space-y-2">
+          {projects.map(p => (
+            <label key={p} className="flex items-center gap-2">
+              <input type="radio" name="project" checked={form.project === p} onChange={() => update("project", p)} />
+              <span className="text-sm">{p}</span>
+            </label>
+          ))}
         </div>
       </div>
-      <div class="card">
-        <img src="https://source.unsplash.com/400x250/?school,volunteer" alt="act2">
-        <div class="card-content">
-          <h3>โครงการจิตอาสา</h3>
-          <p>นักเรียนร่วมกันทำความสะอาดและปลูกต้นไม้ในพื้นที่โรงเรียน...</p>
+
+      <div className="flex items-center gap-3">
+        <button type="submit" disabled={loading} className="px-4 py-2 rounded border">{loading ? "กำลังส่ง..." : "ส่งข้อมูล"}</button>
+        {success && <div className="text-sm text-green-600">{success}</div>}
+      </div>
+    </form>
+  );
+}
+
+function Input({ label, value, onChange }) {
+  return (
+    <label className="block">
+      <span className="text-sm text-gray-700">{label}</span>
+      <input value={value} onChange={e => onChange(e.target.value)} className="mt-1 block w-full border rounded px-3 py-2" />
+    </label>
+  );
+}
+
+function AdminPanel() {
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submissions, setSubmissions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, u => {
+      setUser(u);
+      if (u) fetchSubmissions();
+    });
+    return unsub;
+  }, []);
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    setError("");
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+      // check allowed admin
+      if (ALLOWED_ADMINS && Array.isArray(ALLOWED_ADMINS) && !ALLOWED_ADMINS.includes(cred.user.email)) {
+        setError("บัญชีนี้ไม่มีสิทธิ์เป็นผู้ดูแล");
+        await signOut(auth);
+        return;
+      }
+    } catch (err) {
+      console.error(err);
+      setError("ไม่สามารถเข้าสู่ระบบ: ตรวจสอบอีเมล/รหัสผ่าน");
+    }
+  }
+
+  async function fetchSubmissions() {
+    setLoading(true);
+    try {
+      const q = query(collection(db, "submissions"), orderBy("createdAt", "desc"));
+      const snap = await getDocs(q);
+      const rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      setSubmissions(rows);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDelete(id) {
+    if (!confirm("ลบรายการนี้จริงหรือไม่?")) return;
+    try {
+      await deleteDoc(doc(db, "submissions", id));
+      setSubmissions(prev => prev.filter(r => r.id !== id));
+    } catch (err) {
+      console.error(err);
+      alert("ไม่สามารถลบได้");
+    }
+  }
+
+  function downloadCSV() {
+    if (submissions.length === 0) return;
+    const keys = ["studentId","firstName","lastName","faculty","year","phone","email","project","createdAt"];
+    const rows = submissions.map(s => keys.map(k => {
+      let v = s[k] ?? "";
+      if (k === "createdAt" && v && v.seconds) {
+        v = new Date(v.seconds * 1000).toLocaleString();
+      }
+      // escape quotes
+      return `"${String(v).replace(/"/g, '""')}"`;
+    }).join(","));
+
+    const header = keys.join(",");
+    const csv = [header, ...rows].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `submissions_${new Date().toISOString()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  if (!user) {
+    return (
+      <div>
+        <h2 className="text-lg font-medium mb-2">เข้าสู่ระบบผู้ดูแล</h2>
+        <form onSubmit={handleLogin} className="space-y-3 max-w-sm">
+          <label className="block"><span className="text-sm">อีเมล</span><input value={email} onChange={e=>setEmail(e.target.value)} className="mt-1 block w-full border rounded px-3 py-2" /></label>
+          <label className="block"><span className="text-sm">รหัสผ่าน</span><input type="password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-1 block w-full border rounded px-3 py-2" /></label>
+          <div className="flex gap-2">
+            <button className="px-3 py-2 rounded border">เข้าสู่ระบบ</button>
+            <button type="button" onClick={fetchSubmissions} className="px-3 py-2 rounded border">รีเฟรช</button>
+          </div>
+          {error && <div className="text-sm text-red-600">{error}</div>}
+        </form>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-medium">แผงผู้ดูแล</h2>
+        <div className="flex gap-2">
+          <button onClick={downloadCSV} className="px-3 py-2 rounded border">ดาวน์โหลด CSV</button>
+          <button onClick={async ()=>{await signOut(auth);setUser(null)}} className="px-3 py-2 rounded border">ออกจากระบบ</button>
         </div>
       </div>
+
+      {loading ? <div>กำลังโหลด...</div> : (
+        <div className="overflow-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead className="text-left">
+              <tr>
+                <th className="p-2 border-b">รหัส</th>
+                <th className="p-2 border-b">ชื่อ</th>
+                <th className="p-2 border-b">คณะ/ปี</th>
+                <th className="p-2 border-b">โครงการ</th>
+                <th className="p-2 border-b">เวลา</th>
+                <th className="p-2 border-b">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {submissions.map(s => (
+                <tr key={s.id} className="align-top">
+                  <td className="p-2 border-b">{s.studentId}</td>
+                  <td className="p-2 border-b">{s.firstName} {s.lastName}<div className="text-xs text-gray-500">{s.email}</div></td>
+                  <td className="p-2 border-b">{s.faculty} / {s.year}</td>
+                  <td className="p-2 border-b">{s.project}</td>
+                  <td className="p-2 border-b">{s.createdAt && s.createdAt.seconds ? new Date(s.createdAt.seconds*1000).toLocaleString() : '-'}</td>
+                  <td className="p-2 border-b"><button onClick={()=>handleDelete(s.id)} className="px-2 py-1 rounded border text-sm">ลบ</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
-  </section>
+  );
+}
 
-  <section id="departments">
-    <h2 class="section-title">หน่วยงานภายใน</h2>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-content">
-          <h3>ฝ่ายวิชาการ</h3>
-          <p>ดูแลการจัดการเรียนการสอนและการประเมินผลผู้เรียน</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <h3>ฝ่ายบริหารทั่วไป</h3>
-          <p>รับผิดชอบงานบุคคล อาคารสถานที่ และกิจการนักเรียน</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <h3>ฝ่ายงบประมาณ</h3>
-          <p>จัดสรรและควบคุมงบประมาณให้เกิดประสิทธิภาพสูงสุด</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2 class="section-title">ติดต่อเรา</h2>
-    <p>ที่อยู่: 123 หมู่ 4 ตำบลตัวอย่าง อำเภอตัวอย่าง จังหวัดตัวอย่าง 12345</p>
-    <p>โทร: 012-345-6789 | อีเมล: info@school.ac.th</p>
-  </section>
-
-  <footer>
-    <p>© 2025 โรงเรียนตัวอย่าง. สงวนลิขสิทธิ์.</p>
-  </footer>
-</body>
-</html>
+/* Notes & Security
+ - For production, secure Firestore rules so only authenticated admins can read/delete the 'submissions' collection.
+ - Example rule (simplified):
+    match /databases/{database}/documents {
+      match /submissions/{doc} {
+        allow create: if true; // allow students to submit
+        allow read, delete: if request.auth != null && request.auth.token.email in ['admin@...'];
+      }
+    }
+ - Do NOT store admin emails or secrets in client-side code in production. Use a proper backend or Cloud Functions for admin actions if needed.
+*/
