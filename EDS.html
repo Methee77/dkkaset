@@ -17,6 +17,7 @@
       --countdown-bg: rgba(255, 255, 255, 0.7);
       --countdown-text: #003366;
       --shadow-color: rgba(0, 0, 0, 0.15);
+      --nav-hover: rgba(255,255,255,0.2);
     }
 
     .dark-mode {
@@ -27,6 +28,7 @@
       --countdown-bg: rgba(33, 33, 33, 0.8);
       --countdown-text: #90caf9;
       --shadow-color: rgba(0, 0, 0, 0.7);
+      --nav-hover: rgba(255,255,255,0.15);
     }
 
     * {
@@ -54,6 +56,7 @@
       flex-shrink: 0;
     }
 
+    /* 🔹 ปุ่มโหมดกลางคืน */
     #dark-mode-toggle {
       position: absolute;
       top: 50%;
@@ -74,6 +77,32 @@
       color: var(--header-bg);
     }
 
+    /* 🔹 แถบเมนู */
+    nav {
+      background-color: var(--header-bg);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    nav a {
+      color: var(--header-text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: background 0.3s ease, padding 0.3s;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    nav a:hover {
+      background-color: var(--nav-hover);
+    }
+
+    /* 🔹 เนื้อหา */
     .countdown-section {
       flex: 1;
       display: flex;
@@ -154,6 +183,15 @@
     <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
   </header>
 
+  <!-- 🔹 แถบเมนูหัวข้อ -->
+  <nav>
+    <a href="#">หน้าแรก</a>
+    <a href="#">ตารางสอบ</a>
+    <a href="#">ภาพกิจกรรม</a>
+    <a href="#">เกี่ยวกับ</a>
+    <a href="#">ติดต่อ</a>
+  </nav>
+
   <div class="countdown-section">
     <div class="countdown-container">
       <div>วันสอบปลายภาค ภาคต้น 2568</div>
@@ -177,7 +215,7 @@
   <footer>© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
 
   <script>
-    // ฟังก์ชันนับถอยหลัง
+    // 🔹 ฟังก์ชันนับถอยหลัง
     const targetDate = new Date(2025, 9, 20, 8, 30, 0);
     function updateCountdown() {
       const now = new Date();
