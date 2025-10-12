@@ -103,29 +103,31 @@
       font-weight: 700;
     }
 
-    /* แกลเลอรีรูปภาพ */
-    .image-gallery {
-      margin-top: 40px;
+    /* 🔹 สไลด์โชว์อัตโนมัติ */
+    .slider {
+      position: relative;
       width: 90%;
-      max-width: 900px;
-      overflow-x: auto;
+      max-width: 800px;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-top: 40px;
+      box-shadow: 0 6px 20px var(--shadow-color);
+    }
+
+    .slides {
       display: flex;
-      gap: 15px;
-      padding: 10px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
+      width: 100%;
+      height: 100%;
+      transition: transform 1s ease;
     }
 
-    .image-gallery img {
-      height: 200px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px var(--shadow-color);
-      scroll-snap-align: start;
-      transition: transform 0.3s ease;
-    }
-
-    .image-gallery img:hover {
-      transform: scale(1.05);
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 20px;
     }
 
     .shutdown-text {
@@ -159,13 +161,14 @@
       <div id="countdown" class="countdown-time"></div>
     </div>
 
-    <!-- 🔹 ส่วนรูปภาพเลื่อน -->
-    <div class="image-gallery">
-      <img src="https://picsum.photos/seed/a/400/200" alt="ภาพ 1" />
-      <img src="https://picsum.photos/seed/b/400/200" alt="ภาพ 2" />
-      <img src="https://picsum.photos/seed/c/400/200" alt="ภาพ 3" />
-      <img src="https://picsum.photos/seed/d/400/200" alt="ภาพ 4" />
-      <img src="https://picsum.photos/seed/e/400/200" alt="ภาพ 5" />
+    <!-- 🔹 สไลด์โชว์อัตโนมัติ -->
+    <div class="slider">
+      <div class="slides" id="slides">
+        <img src="https://picsum.photos/seed/a/800/250" alt="ภาพ 1">
+        <img src="https://picsum.photos/seed/b/800/250" alt="ภาพ 2">
+        <img src="https://picsum.photos/seed/c/800/250" alt="ภาพ 3">
+        <img src="https://picsum.photos/seed/d/800/250" alt="ภาพ 4">
+      </div>
     </div>
 
     <div class="shutdown-text">ปิดเว็บ</div>
@@ -197,7 +200,19 @@
     updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
 
-    // โหมดกลางคืน
+    // 🔹 สไลด์อัตโนมัติ
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+    let currentIndex = 0;
+
+    function autoSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(autoSlide, 3000); // เปลี่ยนรูปทุก 3 วินาที
+
+    // 🔹 โหมดกลางคืน
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
     if (localStorage.getItem('darkMode') === 'enabled') {
