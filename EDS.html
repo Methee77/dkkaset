@@ -1,202 +1,261 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>โรงเรียนสาธิต มศว - หน้าโฮม (สำเนา)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>โรงเรียนตัวอย่าง - เด็กดีของเสดสิ่ง67</title>
   <style>
-    :root{--accent:#0b6b4f;--muted:#666}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0;background:#fff;color:#111;line-height:1.45;transition:background .4s ease,color .4s ease}
-    a{color:var(--accent);text-decoration:none;transition:color .3s ease,opacity .3s ease}
-    a:hover{opacity:.8}
-    header{border-bottom:1px solid #eee;transition:background .4s ease,box-shadow .4s ease}
-    .topbar{display:flex;justify-content:space-between;align-items:center;padding:8px 18px;background:#f9f9f9;transition:background .4s ease}
-    .topbar small{color:var(--muted)}
-    .logo-row{display:flex;align-items:center;gap:18px;padding:18px;transition:all .3s ease}
-    .logo{display:flex;align-items:center;gap:14px;transition:transform .3s ease}
-    .logo img{height:64px;width:64px;object-fit:cover;border-radius:8px;transition:transform .3s ease}
-    .logo:hover img{transform:scale(1.06)}
-    nav{display:flex;gap:18px;align-items:center}
-    .nav-inner a{position:relative;padding-bottom:2px}
-    .nav-inner a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
-    .nav-inner a:hover::after{width:100%}
-    .container{max-width:1100px;margin:0 auto;padding:18px}
+    :root {
+      --main-color: #1c7c54;
+      --light-bg: #f8f9fa;
+      --text-color: #333;
+      --radius: 16px;
+    }
 
-    .grid{display:grid;grid-template-columns:1fr 340px;gap:28px;transition:gap .3s ease}
-    .card{background:#fff;border:1px solid #eee;padding:14px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:transform .3s ease,box-shadow .3s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(0,0,0,.08)}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Prompt', sans-serif;
+    }
 
-    .hero{position:relative;height:260px;border-radius:8px;overflow:hidden}
-    .slides{height:100%;display:flex;transition:transform 1s ease-in-out}
-    .slide{min-width:100%;height:100%;display:flex;align-items:center;background-size:cover;background-position:center;transition:opacity .6s ease}
-    .slide-inner{background:rgba(0,0,0,0.35);color:#fff;padding:18px;border-radius:8px;margin-left:18px;backdrop-filter:blur(4px)}
-    .hero-controls{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
-    .dot{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.6;transition:opacity .3s ease,transform .3s ease}
-    .dot.active{opacity:1;transform:scale(1.3)}
+    body {
+      background: var(--light-bg);
+      color: var(--text-color);
+    }
 
-    .news-list{display:flex;flex-direction:column;gap:12px;transition:all .3s ease}
-    .news-item{display:flex;gap:10px;align-items:flex-start;transition:background .3s ease,padding .3s ease}
-    .news-item:hover{background:#f7faf9;border-radius:6px;padding:6px}
-    .news-date{min-width:84px;background:#f2f7f5;border-radius:6px;padding:8px;text-align:center;font-size:13px;color:var(--accent);font-weight:700;transition:background .3s ease}
-    .news-content h4{margin:0 0 6px 0;transition:color .3s ease}
-    .news-content p{margin:0;color:var(--muted);font-size:14px}
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
 
-    .activities{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .activities img{width:100%;height:86px;object-fit:cover;border-radius:6px;transition:transform .4s ease,box-shadow .3s ease}
-    .activities img:hover{transform:scale(1.05);box-shadow:0 4px 8px rgba(0,0,0,.15)}
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-    footer{margin-top:28px;padding:18px;border-top:1px solid #eee;background:#fff;transition:background .4s ease}
+    .nav-container h1 {
+      font-size: 1.5rem;
+      color: var(--main-color);
+    }
 
-    @media (max-width:960px){.grid{grid-template-columns:1fr}.logo img{height:54px;width:54px}.hero{height:190px}}
-    @media (max-width:520px){.logo-row{flex-direction:column;align-items:flex-start}.topbar{flex-direction:column;align-items:flex-start;gap:6px}}
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
 
-    a:focus{outline:3px solid rgba(11,107,79,.18);outline-offset:2px}
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
 
-    .mobile-menu{display:none}
-    @media (max-width:720px){nav .nav-inner{display:none}.mobile-menu{display:block}}
+    nav a:hover {
+      color: var(--main-color);
+    }
+
+    .hero {
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+      height: 70vh;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 18s infinite;
+    }
+
+    .slides img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0%, 25% { transform: translateX(0); }
+      33%, 58% { transform: translateX(-100%); }
+      66%, 91% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    h2.section-title {
+      font-size: 1.8rem;
+      color: var(--main-color);
+      margin-bottom: 1.5rem;
+      border-left: 5px solid var(--main-color);
+      padding-left: 10px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .card-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--main-color);
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    footer {
+      background: var(--main-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="topbar container">
-      <div><small>Email: <a href="mailto:satitpsm.secondary@gmail.com">satitpsm.secondary@gmail.com</a></small> | <small>Call: 02-260-9986</small></div>
-      <div><small>176 ซ.สุขุมวิท 23 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110</small></div>
-    </div>
-    <div class="logo-row container">
-      <div class="logo">
-        <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/head-1.png" alt="โลโก้โรงเรียน">
-        <div>
-          <h1 style="margin:0;font-size:20px">โรงเรียนสาธิต มศว ประสานมิตร (ฝ่ายมัธยม)</h1>
-          <div style="color:var(--muted);font-size:14px">โรงเรียนสาธิตมหาวิทยาลัยศรีนครินทรวิโรฒ</div>
-        </div>
-      </div>
-      <nav style="margin-left:auto">
-        <div class="nav-inner">
-          <a href="#">โรงเรียน</a>
-          <a href="#news">ข่าวสาร</a>
-          <a href="#units">หน่วยงาน</a>
-          <a href="#curriculum">หลักสูตร</a>
-          <a href="#contact">ติดต่อ</a>
-        </div>
-        <div class="mobile-menu"><button onclick="toggleMenu()">เมนู</button></div>
+    <div class="nav-container">
+      <h1>โรงเรียนตัวอย่าง</h1>
+      <nav>
+        <ul>
+          <li><a href="#news">ข่าวสาร</a></li>
+          <li><a href="#activities">กิจกรรม</a></li>
+          <li><a href="#departments">หน่วยงาน</a></li>
+          <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <div class="grid">
-      <section>
-        <div class="hero card" aria-roledescription="carousel">
-          <div class="slides" id="slides">
-            <div class="slide" style="background-image:url('https://home.e-spsm.online/wp-content/uploads/2022/03/43.jpg')">
-              <div class="slide-inner"><h2>ข่าวเด่นวันนี้</h2><p>รายงานผลการเรียน ปีการศึกษา 1/2568</p></div>
-            </div>
-            <div class="slide" style="background-image:url('https://home.e-spsm.online/wp-content/uploads/2022/03/42.jpg')">
-              <div class="slide-inner"><h2>กิจกรรมล่าสุด</h2><p>SPSM ENVIRONHACK 2025</p></div>
-            </div>
-            <div class="slide" style="background-image:url('https://home.e-spsm.online/wp-content/uploads/2022/03/40.jpg')">
-              <div class="slide-inner"><h2>นิทรรศการออนไลน์</h2><p>73 ปี สาธิต มศว ประสานมิตร</p></div>
-            </div>
-          </div>
-          <div class="hero-controls" id="dots"></div>
-        </div>
-
-        <div class="card" style="margin-top:18px" id="news">
-          <h3 style="margin-top:0">ข่าวประชาสัมพันธ์</h3>
-          <div class="news-list">
-            <article class="news-item">
-              <div class="news-date">08 Oct<br><small style="display:block;font-weight:400;color:var(--muted)">2025</small></div>
-              <div class="news-content"><h4>รายงานผลการเรียน ปีการศึกษา 1/2568</h4><p>รายละเอียดและวิธีการตรวจสอบรายงานผลการเรียน</p></div>
-            </article>
-            <article class="news-item">
-              <div class="news-date">15 Sep<br><small style="display:block;font-weight:400;color:var(--muted)">2025</small></div>
-              <div class="news-content"><h4>โครงการเรียนเสริมพิเศษ (หลังเลิกเรียน)</h4><p>ข้อมูลการสมัครและตารางเรียน</p></div>
-            </article>
-            <article class="news-item">
-              <div class="news-date">04 Jul<br><small style="display:block;font-weight:400;color:var(--muted)">2025</small></div>
-              <div class="news-content"><h4>SPSM ENVIRONHACK 2025</h4><p>งานประกวดนวัตกรรมเพื่อสิ่งแวดล้อม</p></div>
-            </article>
-            <a href="#" style="display:inline-block;margin-top:10px">ดูทั้งหมด »</a>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:18px">
-          <h3 style="margin-top:0">กิจกรรมโรงเรียน</h3>
-          <div class="activities" role="list">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/25_1.jpg" alt="กิจกรรม 1">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/24_1.jpg" alt="กิจกรรม 2">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/85436_0.jpg" alt="กิจกรรม 3">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/22.jpg" alt="กิจกรรม 4">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/23.jpg" alt="กิจกรรม 5">
-            <img src="https://home.e-spsm.online/wp-content/uploads/2022/03/21.jpg" alt="กิจกรรม 6">
-          </div>
-        </div>
-      </section>
-
-      <aside>
-        <div class="card" id="units">
-          <h3 style="margin-top:0">หน่วยงานที่เกี่ยวข้อง</h3>
-          <ul style="padding-left:16px;margin:0">
-            <li><a href="#">ฝ่ายวิชาการ</a></li>
-            <li><a href="#">งานพัสดุ</a></li>
-            <li><a href="#">งานแนะแนว</a></li>
-            <li><a href="#">ฝ่ายวางแผนและพัฒนา</a></li>
-            <li><a href="#">งานสื่อสารองค์กร</a></li>
-          </ul>
-        </div>
-
-        <div class="card" style="margin-top:18px" id="curriculum">
-          <h3 style="margin-top:0">หลักสูตร</h3>
-          <p style="margin:0;color:var(--muted)">หลักสูตรนานาชาติ • รูปแบบการเรียนรู้ไตรภาษา</p>
-          <div style="margin-top:10px"><a href="#">ดาวน์โหลดคู่มือนักเรียน</a></div>
-        </div>
-
-        <div class="card" style="margin-top:18px" id="contact">
-          <h3 style="margin-top:0">ติดต่อ</h3>
-          <address style="font-style:normal">
-            176 ซอยสุขุมวิท 23 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110<br>
-            Email: <a href="mailto:satitpsm.secondary@gmail.com">satitpsm.secondary@gmail.com</a><br>
-            โทร: 02-260-9986
-          </address>
-        </div>
-      </aside>
+  <div class="hero">
+    <div class="slides">
+      <img src="https://source.unsplash.com/1200x700/?school" alt="slide1">
+      <img src="https://source.unsplash.com/1200x700/?students" alt="slide2">
+      <img src="https://source.unsplash.com/1200x700/?classroom" alt="slide3">
     </div>
+  </div>
 
-    <footer>
-      <div class="card" style="text-align:center;padding:12px">
-        <small>Copyright © 2022 โรงเรียนสาธิต มหาวิทยาลัยศรีนครินทรวิโรฒ ประสานมิตร (ฝ่ายมัธยม)</small>
+  <section id="news">
+    <h2 class="section-title">ข่าวสาร</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://source.unsplash.com/400x250/?education" alt="news1">
+        <div class="card-content">
+          <h3>ประชาสัมพันธ์โครงการใหม่</h3>
+          <p>โรงเรียนตัวอย่างจัดกิจกรรมพิเศษเพื่อพัฒนาผู้เรียนในศตวรรษที่ 21...</p>
+        </div>
       </div>
-    </footer>
-  </main>
+      <div class="card">
+        <img src="https://source.unsplash.com/400x250/?teacher" alt="news2">
+        <div class="card-content">
+          <h3>อบรมครูประจำปี</h3>
+          <p>จัดอบรมครูเพื่อยกระดับคุณภาพการศึกษาและเทคโนโลยีดิจิทัลในห้องเรียน...</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    (function(){
-      const slides=document.getElementById('slides');
-      const count=slides.children.length;
-      let idx=0;
-      const dots=document.getElementById('dots');
-      for(let i=0;i<count;i++){
-        const d=document.createElement('button');
-        d.className='dot';
-        d.setAttribute('aria-label','Go to slide '+(i+1));
-        d.addEventListener('click',()=>go(i));
-        dots.appendChild(d);
-      }
-      function updateDots(){Array.from(dots.children).forEach((d,i)=>d.classList.toggle('active',i===idx))}
-      function go(i){idx=i;slides.style.transform='translateX(' + (-idx*100) + '%)';updateDots()}
-      function next(){idx=(idx+1)%count;go(idx)}
-      updateDots();
-      let t=setInterval(next,5000);
-      slides.addEventListener('mouseenter',()=>clearInterval(t));
-      slides.addEventListener('mouseleave',()=>t=setInterval(next,5000));
-    })();
+  <section id="activities">
+    <h2 class="section-title">กิจกรรมล่าสุด</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://source.unsplash.com/400x250/?students,activity" alt="act1">
+        <div class="card-content">
+          <h3>กิจกรรมวันครู</h3>
+          <p>รวมภาพบรรยากาศงานวันครู ประจำปี 2568...</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/400x250/?school,volunteer" alt="act2">
+        <div class="card-content">
+          <h3>โครงการจิตอาสา</h3>
+          <p>นักเรียนร่วมกันทำความสะอาดและปลูกต้นไม้ในพื้นที่โรงเรียน...</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function toggleMenu(){const el=document.querySelector('.nav-inner');el.style.display=el.style.display==='flex'?'none':'flex';el.style.flexDirection='column';el.style.gap='12px';el.style.marginTop='10px';}
-  </script>
+  <section id="departments">
+    <h2 class="section-title">หน่วยงานภายใน</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-content">
+          <h3>ฝ่ายวิชาการ</h3>
+          <p>ดูแลการจัดการเรียนการสอนและการประเมินผลผู้เรียน</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>ฝ่ายบริหารทั่วไป</h3>
+          <p>รับผิดชอบงานบุคคล อาคารสถานที่ และกิจการนักเรียน</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>ฝ่ายงบประมาณ</h3>
+          <p>จัดสรรและควบคุมงบประมาณให้เกิดประสิทธิภาพสูงสุด</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">ติดต่อเรา</h2>
+    <p>ที่อยู่: 123 หมู่ 4 ตำบลตัวอย่าง อำเภอตัวอย่าง จังหวัดตัวอย่าง 12345</p>
+    <p>โทร: 012-345-6789 | อีเมล: info@school.ac.th</p>
+  </section>
+
+  <footer>
+    <p>© 2025 โรงเรียนตัวอย่าง. สงวนลิขสิทธิ์.</p>
+  </footer>
 </body>
 </html>
