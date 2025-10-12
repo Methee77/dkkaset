@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เลือกโครงการนิสิต</title>
+  <title>ระบบเลือกโครงการนิสิต</title>
   <style>
     body {
       font-family: 'Helvetica Neue', sans-serif;
@@ -12,25 +12,46 @@
       margin: 0;
       padding: 0;
     }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    nav button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: white;
+      color: #007bff;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    nav button:hover {
+      background-color: #e0f0ff;
+    }
     .container {
       max-width: 600px;
-      margin: 50px auto;
+      margin: 30px auto;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
     }
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
-    }
-    label {
-      font-weight: 500;
     }
     input, select, button {
       padding: 10px;
@@ -50,71 +71,85 @@
     button:hover {
       background-color: #0056b3;
     }
-    .success {
-      color: green;
+    .success, .error {
       text-align: center;
       margin-top: 10px;
+      font-weight: 500;
     }
+    .success { color: green; }
+    .error { color: red; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>เลือกโครงการนิสิต</h1>
+<header>
+  <h1>ระบบเลือกโครงการนิสิต</h1>
+  <nav>
+    <button onclick="showPage('student')">หน้าสำหรับนิสิต</button>
+    <button onclick="showPage('admin')">หน้าผู้ดูแล</button>
+  </nav>
+</header>
+
+<div id="studentPage" class="container">
+  <h2>กรอกข้อมูลและเลือกโครงการ</h2>
   <form id="projectForm">
-    <label for="studentId">รหัสนิสิต</label>
-    <input type="text" id="studentId" name="studentId" required>
-
-    <label for="firstName">ชื่อ</label>
-    <input type="text" id="firstName" name="firstName" required>
-
-    <label for="lastName">นามสกุล</label>
-    <input type="text" id="lastName" name="lastName" required>
-
-    <label for="faculty">คณะ</label>
-    <input type="text" id="faculty" name="faculty">
-
-    <label for="year">ปีการศึกษา</label>
-    <input type="text" id="year" name="year">
-
-    <label for="project">เลือกโครงการ</label>
-    <select id="project" name="project" required>
-      <option value="">-- กรุณาเลือกโครงการ --</option>
+    <input type="text" id="studentId" placeholder="รหัสนิสิต" required>
+    <input type="text" id="firstName" placeholder="ชื่อ" required>
+    <input type="text" id="lastName" placeholder="นามสกุล" required>
+    <input type="text" id="faculty" placeholder="คณะ">
+    <input type="text" id="year" placeholder="ปีการศึกษา">
+    <select id="project" required>
+      <option value="">-- เลือกโครงการ --</option>
       <option value="โครงการ A">โครงการ A: พัฒนาโปรแกรม</option>
       <option value="โครงการ B">โครงการ B: งานสังคม</option>
       <option value="โครงการ C">โครงการ C: วิจัยนวัตกรรม</option>
       <option value="โครงการ D">โครงการ D: ฝึกงานภาคสนาม</option>
     </select>
-
     <button type="submit">ส่งข้อมูล</button>
-    <div class="success" id="successMsg"></div>
+    <div class="success" id="studentSuccess"></div>
+  </form>
+</div>
+
+<div id="adminPage" class="container" style="display:none;">
+  <h2>เข้าสู่ระบบผู้ดูแล</h2>
+  <form id="loginForm">
+    <input type="email" id="adminEmail" placeholder="อีเมลผู้ดูแล" required>
+    <input type="password" id="adminPassword" placeholder="รหัสผ่าน" required>
+    <button type="submit">เข้าสู่ระบบ</button>
+    <div class="error" id="loginError"></div>
   </form>
 </div>
 
 <script>
-  const form = document.getElementById('projectForm');
-  const successMsg = document.getElementById('successMsg');
+function showPage(page) {
+  document.getElementById('studentPage').style.display = page === 'student' ? 'block' : 'none';
+  document.getElementById('adminPage').style.display = page === 'admin' ? 'block' : 'none';
+}
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const data = {
-      studentId: form.studentId.value,
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      faculty: form.faculty.value,
-      year: form.year.value,
-      project: form.project.value
-    };
+// Form ส่งข้อมูลนิสิต
+document.getElementById('projectForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = {
+    studentId: document.getElementById('studentId').value,
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    faculty: document.getElementById('faculty').value,
+    year: document.getElementById('year').value,
+    project: document.getElementById('project').value
+  };
+  console.log('ส่งข้อมูล:', data);
+  document.getElementById('studentSuccess').textContent = 'ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณครับ';
+  this.reset();
+});
 
-    console.log('ส่งข้อมูล:', data);
-
-    // แสดงข้อความส่งสำเร็จ (ยังไม่เชื่อม backend)
-    successMsg.textContent = 'ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณครับ';
-    
-    // ล้างฟอร์ม
-    form.reset();
-  });
+// ฟอร์มล็อกอินผู้ดูแล (ตัวอย่างยังไม่เชื่อม backend)
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email = document.getElementById('adminEmail').value;
+  const password = document.getElementById('adminPassword').value;
+  console.log('ล็อกอิน:', email, password);
+  document.getElementById('loginError').textContent = 'ระบบยังไม่เชื่อม backend';
+});
 </script>
 
 </body>
