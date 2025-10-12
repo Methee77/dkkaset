@@ -10,14 +10,14 @@
 
   <style>
     :root {
-      --bg-color: #f4f4f4;
+      --bg-color: #ffffff; /* พื้นหลังสีขาว */
       --text-color: #222;
       --header-bg: #003366;
       --header-text: white;
-      --countdown-bg: rgba(255, 255, 255, 0.7);
+      --countdown-bg: rgba(255, 255, 255, 0.8);
       --countdown-text: #003366;
       --shadow-color: rgba(0, 0, 0, 0.15);
-      --nav-hover: rgba(255,255,255,0.2);
+      --nav-hover: rgba(255,255,255,0.15);
     }
 
     .dark-mode {
@@ -56,7 +56,7 @@
       flex-shrink: 0;
     }
 
-    /* 🔹 ปุ่มโหมดกลางคืน */
+    /* ปุ่มสลับโหมดกลางวัน/กลางคืน */
     #dark-mode-toggle {
       position: absolute;
       top: 50%;
@@ -77,13 +77,13 @@
       color: var(--header-bg);
     }
 
-    /* 🔹 แถบเมนู */
+    /* 🔹 แถบเมนูหัวข้อ */
     nav {
       background-color: var(--header-bg);
       display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 10px 0;
+      justify-content: flex-start; /* ชิดซ้าย */
+      gap: 30px;
+      padding: 10px 40px;
       border-top: 1px solid rgba(255,255,255,0.2);
       border-bottom: 1px solid rgba(255,255,255,0.2);
     }
@@ -92,17 +92,17 @@
       color: var(--header-text);
       text-decoration: none;
       font-weight: 500;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       transition: background 0.3s ease, padding 0.3s;
-      padding: 5px 10px;
-      border-radius: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
     }
 
     nav a:hover {
       background-color: var(--nav-hover);
     }
 
-    /* 🔹 เนื้อหา */
+    /* 🔹 เนื้อหาหลัก */
     .countdown-section {
       flex: 1;
       display: flex;
@@ -110,6 +110,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      background-color: var(--bg-color);
     }
 
     .countdown-container {
@@ -183,7 +184,7 @@
     <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน">🌙</button>
   </header>
 
-  <!-- 🔹 แถบเมนูหัวข้อ -->
+  <!-- 🔹 เมนูหัวข้อ -->
   <nav>
     <a href="#">หน้าแรก</a>
     <a href="#">ตารางสอบ</a>
@@ -199,7 +200,7 @@
       <div id="countdown" class="countdown-time"></div>
     </div>
 
-    <!-- 🔹 สไลด์โชว์อัตโนมัติ -->
+    <!-- 🔹 สไลด์โชว์ -->
     <div class="slider">
       <div class="slides" id="slides">
         <img src="https://picsum.photos/seed/a/800/250" alt="ภาพ 1">
