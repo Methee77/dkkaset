@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปฏิทินวิชาการ - โทนสีดี</title>
+    <title>ปฏิทินวิชาการ - ขาวสลับเทา</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* ตั้งค่าสีใหม่ (โทนสีน้ำเงินเข้มและสีเทา) */
         :root {
-            --primary-color: #004d40; /* สีเขียวเข้ม/กรมท่า (Deep Teal) - ดูสงบ, น่าเชื่อถือ */
-            --secondary-color: #ffb300; /* สีส้มอมเหลือง (Amber) - ใช้เน้นกิจกรรม */
+            --primary-color: #004d40; /* สีเขียวเข้ม/กรมท่า (Deep Teal) */
+            --secondary-color: #ffb300; /* สีส้มอมเหลือง (Amber) */
             --text-color: #333;
-            --bg-light: #f4f7f6; /* สีเทาอ่อนมาก */
-            --bg-white: #ffffff;
+            --bg-light: #f9f9f9; /* สีเทาอ่อนมากสำหรับแถวสลับ */
+            --bg-white: #ffffff; /* สีขาวสำหรับแถวหลัก */
             --shadow-light: 0 6px 20px rgba(0, 0, 0, 0.05);
             --border-color: #e0e0e0;
         }
@@ -21,7 +21,7 @@
             font-family: 'Kanit', sans-serif;
             margin: 0;
             padding: 40px 20px;
-            background-color: var(--bg-light);
+            background-color: var(--bg-light); /* พื้นหลังโดยรวมเป็นสีเทาอ่อน */
             color: var(--text-color);
         }
 
@@ -58,9 +58,9 @@
         /* ตารางในรูปแบบ Grid */
         .calendar-grid {
             display: grid;
-            grid-template-columns: 140px 1fr 180px; /* ปรับความกว้างนิดหน่อย */
+            grid-template-columns: 140px 1fr 180px;
             gap: 1px;
-            background-color: var(--border-color); /* เส้นแบ่งที่นุ่มนวล */
+            background-color: var(--border-color);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -68,7 +68,7 @@
 
         /* Header Grid */
         .grid-header {
-            background-color: var(--primary-color); /* สีเข้มหลัก */
+            background-color: var(--primary-color);
             color: white;
             font-weight: 600;
             padding: 15px 15px;
@@ -89,22 +89,27 @@
         }
         
         .grid-cell {
-            background-color: var(--bg-white);
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-white); /* ค่าเริ่มต้นเป็นสีขาว */
         }
-
-        /* แถวสลับสี (Zebra Stripes) - ใช้สีเทาอ่อนที่ไม่เด่นเกินไป */
-        .grid-row:nth-child(odd) .grid-cell {
-            background-color: var(--bg-light); 
+        
+        /* ************************************************* */
+        /* การปรับสำหรับ สีขาวสลับเทาอ่อน */
+        /* ************************************************* */
+        .grid-row:nth-of-type(odd) .grid-cell {
+            background-color: var(--bg-white); /* แถวที่ 1, 3, 5... เป็นสีขาว */
+        }
+        .grid-row:nth-of-type(even) .grid-cell {
+            background-color: var(--bg-light); /* แถวที่ 2, 4, 6... เป็นสีเทาอ่อน */
         }
         
         /* สไตล์สำหรับคอลัมน์วันที่ */
         .grid-row .date-cell {
             font-weight: 600;
-            color: var(--primary-color); /* ใช้สีหลัก */
+            color: var(--primary-color);
             text-align: center;
-            background-color: #e0f2f1; /* สีพื้นหลังอ่อนมากสำหรับวันที่ (Light Teal) */
+            /* ลบพื้นหลังสีอ่อนเฉพาะวันที่ออก เพื่อให้เป็นขาวสลับเทา */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,17 +119,25 @@
         /* สไตล์สำหรับคอลัมน์หมายเหตุ */
         .grid-row .note-cell {
             font-style: italic;
-            color: #616161; /* สีเทาเข้ม */
+            color: #616161;
             font-size: 0.9em;
-            background-color: #fce4ec; /* สีชมพูอ่อนมาก (เพื่อแยกประเภทข้อมูล) */
+            /* ลบพื้นหลังสีชมพูอ่อนออก เพื่อให้เป็นขาวสลับเทา */
         }
         
         /* สไตล์พิเศษสำหรับกิจกรรมสำคัญ (วันหยุด/สอบ) */
         .highlight-activity {
-            color: #d32f2f; /* สีแดงเข้มมาตรฐาน */
+            color: #d32f2f;
             font-weight: 600;
-            background-color: #fffde7 !important; /* พื้นหลังสีครีมอ่อนมาก */
+            background-color: #fffde7 !important; /* ยังคงใช้สีครีมอ่อนเพื่อเน้นกิจกรรมสำคัญ (ยกเว้นสีขาว-เทาอ่อน) */
         }
+        /* ถ้าต้องการให้วันหยุดเป็นแค่สีขาว/เทาอ่อนด้วย ให้ลบโค้ดด้านบนออก */
+        /* ตัวอย่างถ้าต้องการให้วันหยุดเป็นแค่สีขาว/เทาอ่อน:
+        .highlight-activity {
+            color: #d32f2f;
+            font-weight: 600;
+            /* ลบบรรทัด background-color ออก */
+        }
+        */
 
         /* Footer */
         .footer-note {
