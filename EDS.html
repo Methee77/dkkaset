@@ -36,6 +36,8 @@
             color: #007bff;
             transition: color 0.2s;
         }
+        
+        /* --- ปุ่มหลัก (.btn-primary) --- */
         .btn-primary {
             background-color: #004d99;
             color: white;
@@ -88,9 +90,7 @@
         }
         .hero-content h1 { font-size: 2.5em; color: #004d99; margin: 0 0 10px 0; }
         .hero-content p { font-size: 1.2em; color: #333; margin-bottom: 20px; }
-        .countdown-container {
-            background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 20px;
-        }
+        .countdown-container { background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 20px; }
         .countdown-container h4 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; font-weight: 600; }
         #countdown-timer { display: flex; justify-content: center; gap: 15px; }
         .time-block { padding: 10px; background-color: rgba(0, 0, 0, 0.2); border-radius: 5px; min-width: 60px; }
@@ -98,11 +98,12 @@
         .time-block small { font-size: 0.8em; opacity: 0.8; }
 
 
-        /* -------------------- NEW: About Student Section (Section 2.5) -------------------- */
+        /* -------------------- 2.5 About Student Section (MODIFIED) -------------------- */
         .student-info-section {
-            background-color: white;
+            background-color: #fff; /* สีพื้นหลังขาว */
             padding: 30px 0;
             margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .student-info-section h2 {
             text-align: center;
@@ -110,28 +111,30 @@
             margin-bottom: 30px;
         }
         .info-card-grid {
+            /* แก้ไข: บังคับให้แสดง 4 คอลัมน์เท่ากันบนจอใหญ่ */
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 25px;
             text-align: center;
         }
         .info-card {
-            background-color: #f8f8f8; /* สีรอง */
-            border-radius: 10px;
-            padding: 20px 10px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            /* ปรับตามภาพตัวอย่าง: เน้นสีทึบด้านบน */
+            background-color: #A93226; /* สีแดงเข้มตามภาพตัวอย่าง */
+            border-radius: 15px; /* ทำให้โค้งมนมากขึ้น */
+            padding: 25px 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
             transition: all 0.3s;
             cursor: pointer;
-            border-top: 5px solid #004d99; /* สีเน้นหลัก */
+            color: white; /* ข้อความเป็นสีขาว */
         }
         .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            transform: scale(1.02); /* ขยายเล็กน้อยเมื่อ hover */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
         }
         .info-card .icon-circle {
-            background-color: #004d99; /* วงกลมไอคอน */
-            width: 60px;
-            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2); /* วงกลมไอคอนโปร่งแสง */
+            width: 70px; /* ขนาดใหญ่ขึ้น */
+            height: 70px;
             border-radius: 50%;
             margin: 0 auto 15px;
             display: flex;
@@ -140,14 +143,15 @@
         }
         .info-card .icon-circle i {
             color: white;
-            font-size: 2em;
+            font-size: 2.5em; /* ไอคอนใหญ่ขึ้น */
         }
         .info-card h3 {
             margin: 0;
-            font-size: 1.1em;
-            color: #333;
+            font-size: 1.2em;
+            color: white;
             font-weight: 600;
         }
+
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
@@ -167,30 +171,26 @@
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
         
+        /* Sidebar Styling (ไม่เปลี่ยนแปลงหลัก) */
         .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
-        
-        /* --- System Status Styling --- */
         .status-header { font-size: 1.1em; font-weight: 700; color: #004d99; margin: 15px 0 10px 0; padding-top: 10px; border-top: 1px dashed #eee; }
-        .status-header:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
         .status-item { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 0.9em; }
-        .status-label-control { font-weight: 500; color: #333; }
-        .radio-group label { margin-left: 10px; font-weight: normal; font-size: 0.9em; }
         .status-info-date { margin-top: 15px; font-size: 0.85em; color: #777; border-top: 1px solid #f0f0f0; padding-top: 10px; text-align: right; }
         .status-indicator { padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: 700; color: white; }
-        .status-ok { background-color: #28a745; }
-        .status-maintenance { background-color: #ffc107; color: #333; }
-        .status-offline { background-color: #dc3545; }
 
         /* -------------------- 5. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
         
+        /* Media Query สำหรับ Mobile */
+        @media (max-width: 1200px) { /* เริ่มเปลี่ยนจาก 4 เป็น 2 คอลัมน์เมื่อหน้าจอแคบลง */
+            .info-card-grid { grid-template-columns: repeat(2, 1fr); } 
+        }
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
-            .info-card-grid { grid-template-columns: repeat(2, 1fr); } /* ปรับสำหรับ mobile */
             .main-content-grid { grid-template-columns: 1fr; }
             .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
             .main-nav.active { display: flex; }
@@ -199,7 +199,7 @@
         }
         @media (max-width: 500px) {
             .quick-links-grid { grid-template-columns: 1fr; }
-            .info-card-grid { grid-template-columns: 1fr; } /* ปรับสำหรับ mobile เล็กสุด */
+            .info-card-grid { grid-template-columns: 1fr; } /* บนจอเล็กสุดเหลือ 1 คอลัมน์ */
             .hero-section { height: 350px; }
             .hero-content h1 { font-size: 1.8em; }
         }
