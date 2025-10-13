@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (ปรับปรุง Font และปุ่ม) */
         
-        /* -------------------- Base & Typography -------------------- */
+        /* -------------------- Base & Typography (ใช้ Kanit) -------------------- */
         body {
-            font-family: 'Sarabun', Tahoma, sans-serif;
+            font-family: 'Kanit', Tahoma, sans-serif; /* เปลี่ยนฟอนต์หลักเป็น Kanit */
             margin: 0;
             padding: 0;
             background-color: #f5f7fa;
@@ -36,14 +36,18 @@
             color: #007bff;
             transition: color 0.2s;
         }
+        
+        /* --- ปรับขนาดปุ่มหลัก (.btn-primary) ให้เล็กลง --- */
         .btn-primary {
             background-color: #004d99;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 15px; /* ลดขนาด padding */
             border-radius: 5px;
             font-weight: 600;
+            font-size: 0.9em; /* ลดขนาด font */
             display: inline-block;
             transition: background-color 0.3s;
+            margin-left: 10px; /* เพิ่มระยะห่างจากเมนูอื่นๆ */
         }
         .btn-primary:hover { background-color: #003366; }
 
@@ -71,7 +75,6 @@
             display: block;
         }
         
-        /* แก้ไข: ทำให้เมนูแสดงผลตามปกติบน Desktop */
         .main-nav {
             display: flex; 
             align-items: center;
@@ -81,9 +84,9 @@
             color: #333;
             font-weight: 500;
         }
-        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } /* ซ่อนบน Desktop */
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } 
 
-        /* -------------------- 2. Hero Section (Full Width Slider) -------------------- */
+        /* -------------------- 2. Hero Section -------------------- */
         .hero-section {
             background-color: #e0f0ff; 
             height: 450px; 
@@ -195,13 +198,13 @@
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
         
-        /* Media Query สำหรับ Mobile (ยุบเมนูเมื่อจอเล็ก) */
+        /* Media Query สำหรับ Mobile */
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
             .main-content-grid { grid-template-columns: 1fr; }
             
             .main-nav { 
-                display: none; /* ซ่อนบน Mobile ตามปกติ */
+                display: none; 
                 flex-direction: column; 
                 position: absolute; 
                 top: 70px; 
@@ -212,9 +215,9 @@
                 padding-bottom: 10px; 
                 z-index: 100; 
             }
-            .main-nav.active { display: flex; } /* แสดงเมื่อมีการคลิก toggle */
+            .main-nav.active { display: flex; }
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
-            .menu-toggle { display: block; } /* แสดงปุ่ม Hamburger */
+            .menu-toggle { display: block; }
         }
         @media (max-width: 500px) {
             .quick-links-grid { grid-template-columns: 1fr; }
@@ -256,7 +259,7 @@
                 </div>
             </div>
             
-            <a href="[URL_RESULTS]" class="btn-primary" style="margin-top:20px;">ตรวจสอบผลการเรียน</a>
+            <a href="[URL_RESULTS]" class="btn-primary" style="margin-top:20px; font-size: 1em; padding: 10px 20px;">ตรวจสอบผลการเรียน</a>
         </div>
     </section>
 
