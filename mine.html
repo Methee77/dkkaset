@@ -3,37 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>งานทะเบียนวัดผล</title>
-    <link rel="stylesheet" href="style.css">
+    <title>งานทะเบียนวัดผลและสารสนเทศ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* การตั้งค่าพื้นฐาน */
+        body {
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h2 {
+            color: #004d99; /* สีน้ำเงินเข้ม */
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* ส่วนหัว (Header) */
+        .header {
+            background-color: #004d99;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            /* ต้องมีไฟล์โลโก้ชื่อ logo.png หรือเปลี่ยนเป็นข้อความ */
+            height: 40px; 
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .logo span {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .nav li a:hover {
+            background-color: #003366;
+        }
+
+        /* ส่วนแบนเนอร์/ลิงก์ด่วน (Hero Section) */
+        .hero-section {
+            background: linear-gradient(rgba(0, 77, 153, 0.8), rgba(0, 77, 153, 0.8)), url('https://via.placeholder.com/1500x400.png?text=HERO+BACKGROUND') center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-section h2 {
+            color: white;
+            font-size: 2.5em;
+            border-bottom: none;
+        }
+
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap; /* ให้ปุ่มลงบรรทัดเมื่อจอเล็ก */
+        }
+
+        .link-item {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .link-item i {
+            margin-right: 10px;
+        }
+
+        .primary-btn {
+            background-color: #ffcc00; /* สีเหลืองทอง */
+            color: #004d99;
+        }
+        .primary-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: #33aaff; /* สีฟ้า */
+        }
+        .secondary-btn:hover {
+            background-color: #1a9cff;
+            transform: translateY(-2px);
+        }
+
+
+        /* ส่วนเนื้อหาหลัก */
+        .content-section {
+            padding: 40px 0;
+        }
+
+        /* ส่วนข่าว */
+        .news-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .news-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #ffcc00;
+        }
+
+        .news-date {
+            display: block;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .news-item h3 a {
+            color: #004d99;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.2s;
+        }
+        .news-item h3 a:hover {
+            color: #003366;
+        }
+
+        .view-all {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .view-all a {
+            color: #004d99;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        /* ส่วนดาวน์โหลด */
+        .downloads-section {
+            background-color: #e9ecef;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .download-card {
+            display: block;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-card i {
+            font-size: 2.5em;
+            color: #004d99;
+            margin-bottom: 15px;
+        }
+
+        .download-card h4 {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+
+        /* ส่วนท้าย (Footer) */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-info {
+            margin-bottom: 15px;
+        }
+
+        .footer-info h4 {
+            color: #ffcc00;
+            margin-top: 0;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .footer-info i {
+            margin-right: 10px;
+        }
+
+        .copyright {
+            border-top: 1px solid #555;
+            padding-top: 15px;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        /* Media Queries สำหรับมือถือ */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav li a {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+
+            .quick-links {
+                flex-direction: column;
+            }
+
+            .link-item {
+                width: 100%; /* ทำให้ปุ่มเต็มความกว้าง */
+                min-width: unset;
+                margin: 5px auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>งานทะเบียนวัดผล [ชื่อหน่วยงาน]</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">หน้าแรก</a></li>
-                <li><a href="news.html">ข่าวประชาสัมพันธ์</a></li>
-                <li><a href="services.html">บริการออนไลน์</a></li>
-                <li><a href="downloads.html">ดาวน์โหลด</a></li>
-                <li><a href="contact.html">ติดต่อเรา</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/40x40.png?text=L" alt="โลโก้หน่วยงาน">
+                <span>งานทะเบียนวัดผล [ชื่อหน่วยงาน]</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">หน้าแรก</a></li>
+                    <li><a href="#news">ข่าวประชาสัมพันธ์</a></li>
+                    <li><a href="#downloads">ดาวน์โหลด</a></li>
+                    <li><a href="#contact">ติดต่อเรา</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <h2>ยินดีต้อนรับ</h2>
-        <section>
-            <h3>ข่าวล่าสุด</h3>
-            </section>
-        <section>
-            <h3>ลิงก์ด่วน</h3>
-            </section>
+        <section class="hero-section">
+            <div class="container">
+                <h2>ระบบสารสนเทศนักเรียน</h2>
+                <p>บริการตรวจสอบผลการเรียน ข้อมูลนักเรียน และเอกสารคำร้องออนไลน์</p>
+                
+                <div class="quick-links">
+                    <a href="#" class="link-item primary-btn">
+                        <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน/ผู้ปกครอง
+                    </a>
+                    <a href="#" class="link-item secondary-btn">
+                        <i class="fas fa-poll"></i> ตรวจสอบผลการเรียน (SGS/อื่นๆ)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="content-section">
+            <div class="container">
+                <h2>📢 ข่าวประชาสัมพันธ์ล่าสุด</h2>
+                <div class="news-list">
+                    <article class="news-item">
+                        <span class="news-date">30 ก.ย. 2568</span>
+                        <h3><a href="#">ประกาศห้องสอบและรายชื่อนักเรียนสอบปลายภาค 1/2568</a></h3>
+                        <p>นักเรียนสามารถตรวจสอบห้องสอบและที่นั่งสอบได้โดยใช้รหัสประจำตัว และวันเดือนปีเกิด... <a href="#">อ่านต่อ</a></p>
+                    </article>
+                    <article class="news-item">
+                        <span class="news-date">22 ก.ย. 2568</span>
+                        <h3><a href="#">แจ้งผลการเรียนอย่างไม่เป็นทางการ ภาคเรียนที่ 1/2568</a></h3>
+                        <p>ให้นักเรียนเข้าตรวจสอบผลการเรียนเบื้องต้นผ่านระบบสารสนเทศ เพื่อทำการแก้ไขผลการเรียน 0, ร, มส... <a href="#">อ่านต่อ</a></p>
+                    </article>
+                </div>
+                <div class="view-all">
+                    <a href="#">ดูข่าวทั้งหมด <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="downloads" class="content-section downloads-section">
+            <div class="container">
+                <h2>📑 ดาวน์โหลดแบบฟอร์ม</h2>
+                <div class="download-grid">
+                    <a href="#" class="download-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <h4>แบบฟอร์มขอใบรับรองผลการเรียน (ปพ.1)</h4>
+                    </a>
+                    <a href="#" class="download-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>คำร้องขอแก้ไขข้อมูล/ผลการเรียน</h4>
+                    </a>
+                    <a href="#" class="download-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>ใบคำร้องขอย้าย/โอนสถานศึกษา</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 งานทะเบียนวัดผล | [ชื่อหน่วยงาน]</p>
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h4>ติดต่อเรา</h4>
+                <p><i class="fas fa-map-marker-alt"></i> อาคารทะเบียนวัดผล ชั้น 2, [ชื่อหน่วยงาน]</p>
+                <p><i class="fas fa-phone"></i> โทร: 02-XXX-XXXX ต่อ XXX</p>
+                <p><i class="fas fa-envelope"></i> อีเมล: regis@school.ac.th</p>
+            </div>
+            <p class="copyright">&copy; 2024 งานทะเบียนวัดผล | สงวนลิขสิทธิ์ทั้งหมด</p>
+        </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
