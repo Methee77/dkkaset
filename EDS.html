@@ -3,186 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Premium Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Professional Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Modern Premium / Glassmorphism */
+        /* CSS: Professional Ultra-Clean Minimalism */
         
         :root {
-            --primary-color: #0077b6; /* สีเน้นใหม่: ฟ้าครามเข้ม (Deep Sky Blue) */
-            --primary-light: #00b4d8;
-            --text-color: #2a3d4f; /* สีข้อความ: เทาอมน้ำเงินเข้ม */
-            --bg-light: #f5f8fc; /* พื้นหลังสว่างมาก */
-            --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* เงาที่ชัดเจนและนุ่มนวลขึ้น */
-            --border-radius-xl: 16px;
+            --primary-color: #004a7c; /* สีน้ำเงินเข้ม (Deep Navy Blue) */
+            --primary-light: #0077b6;
+            --accent-color: #ffb703; /* สีเหลืองทอง/ส้ม สำหรับเน้น */
+            --text-color: #333;
+            --text-light: #666;
+            --bg-ultra-light: #f7f9fc; /* พื้นหลังสว่างมาก */
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --border-radius-lg: 8px;
         }
 
         body {
             font-family: 'Sarabun', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-light);
+            background-color: var(--bg-ultra-light);
             color: var(--text-color);
             line-height: 1.6;
         }
 
         /* ------------------------------------------------------------------ */
-        /* HEADER (Top Bar - Minimal) */
+        /* HEADER (Top Bar - Clean) */
         /* ------------------------------------------------------------------ */
         .main-header {
             background-color: white;
-            border-bottom: 1px solid #ecf0f1;
-            padding: 15px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .logo h1 {
             margin: 0;
-            font-size: 1.6em;
+            font-size: 1.8em;
             color: var(--primary-color);
-            font-weight: 700;
+            font-weight: 800; /* เน้นตัวอักษรให้ดูแข็งแรง */
+            letter-spacing: -0.5px;
         }
         
-        /* Navigation (เหมือนเดิม แต่ปรับสี) */
+        /* Navigation (Minimalist) */
         .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        .main-nav ul li { position: relative; padding: 0 15px; }
-        .main-nav ul li a { color: var(--text-color); text-decoration: none; font-weight: 500; padding: 5px 0; display: block; transition: color 0.2s; }
-        .main-nav ul li a:hover { color: var(--primary-light); }
-        .dropdown-content { background-color: white; box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.15); border-top: 3px solid var(--primary-color); border-radius: 4px; overflow: hidden; }
-        .dropdown-content a { color: var(--text-color) !important; border-bottom: 1px solid #f0f0f0; }
-        .dropdown-content a:hover { background-color: #eef1f5; color: var(--primary-dark) !important; }
-
+        .main-nav ul li { position: relative; padding: 0 18px; }
+        .main-nav ul li a { 
+            color: var(--text-color); 
+            text-decoration: none; 
+            font-weight: 500; 
+            padding: 10px 0; 
+            display: block; 
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+        .main-nav ul li a:hover { 
+            color: var(--primary-light);
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        /* Dropdown */
+        .dropdown-content { background-color: white; box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.1); border-top: 3px solid var(--primary-light); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); overflow: hidden; }
+        .dropdown-content a { color: var(--text-color) !important; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; font-weight: 400; }
+        .dropdown-content a:hover { background-color: #f5f5f5; color: var(--primary-color) !important; }
 
         /* ------------------------------------------------------------------ */
-        /* HERO SECTION (Glassmorphism + Modern Gradient) */
+        /* HERO SECTION (เน้น Call-to-Action) */
         /* ------------------------------------------------------------------ */
         .hero-section {
+            padding: 60px 20px 80px 20px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
             text-align: center;
-            padding: 80px 20px;
-            /* พื้นหลังไล่เฉดสีใหม่ที่ดูพรีเมียม */
-            background: linear-gradient(135deg, #e0f2f7 0%, #ffffff 100%);
-            margin-bottom: 40px;
-            /* เพิ่มลูกเล่น Glassmorphism เบาๆ ให้ขอบ */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .hero-section h2 {
-            font-size: 2.8em; /* ตัวอักษรใหญ่และเด่น */
-            color: var(--text-color);
-            font-weight: 800; /* ตัวหนาพิเศษ */
-            margin-bottom: 15px;
+            font-size: 2.8em;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
         .hero-section p {
             font-size: 1.1em;
-            color: #5a7184;
+            color: var(--text-light);
             margin-bottom: 30px;
         }
 
         .hero-btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 16px 45px;
-            border-radius: 10px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 16px 50px;
+            border-radius: var(--border-radius-lg);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.2em;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 6px 15px rgba(0, 119, 182, 0.4);
+            box-shadow: 0 4px 10px rgba(255, 183, 3, 0.5);
         }
 
         .hero-btn:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.6);
+            background-color: #ffd15d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 183, 3, 0.7);
         }
 
         /* ------------------------------------------------------------------ */
-        /* MAIN CONTENT & BENTO GRID LAYOUT */
+        /* MAIN CONTENT & 3-Column Layout */
         /* ------------------------------------------------------------------ */
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 0 auto 50px auto;
-        }
-        
-        .bento-grid {
+            margin: 40px auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr); 
-            grid-auto-rows: minmax(180px, auto); /* เพิ่มความสูงขั้นต่ำ */
-            gap: 20px;
+            grid-template-columns: 2fr 1fr; /* ประกาศ/บริการหลัก (2 ส่วน) และ ข้อมูลด่วน (1 ส่วน) */
+            gap: 30px;
         }
         
-        .grid-item {
+        .main-section {
+            /* สำหรับ Announcements & Quick Links */
+        }
+
+        .sidebar-info {
+            /* สำหรับ Contact & Personnel */
+        }
+
+        /* Card Style (เน้นความสะอาด) */
+        .card {
             background-color: white;
-            border-radius: var(--border-radius-xl);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--card-shadow);
-            padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        /* Quick Link Grid (4-Column) */
+        .quick-link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 คอลัมน์สำหรับ Link */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quick-link-item {
+            display: block;
+            background-color: var(--bg-ultra-light);
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
             text-decoration: none;
             color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #e0e5ee; /* เพิ่มขอบบางๆ */
+            border: 1px solid #dee2e6;
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .quick-link-item:hover {
+            background-color: #e8eef6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .grid-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .grid-item h3 {
-            color: var(--primary-color);
-            font-size: 1.3em;
-            margin-top: 0;
-            font-weight: 700;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
-            width: fit-content;
-        }
-
-        /* การกำหนดขนาดพิเศษใน Bento Grid */
-        .item-1 { grid-column: span 2; } 
-        .item-4 { grid-row: span 2; }    
-        .item-7 { grid-column: span 2; } 
-
-        /* สไตล์สำหรับปุ่ม Quick Action (Item 6) */
-        .grid-item.quick-action {
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
-            color: white;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-        }
-        .grid-item.quick-action h3 {
-            color: white;
-            border-bottom: 3px solid white;
-            padding-bottom: 8px;
-        }
-        .grid-item.quick-action p {
-            font-weight: 500;
+        .quick-link-item strong {
+            display: block;
+            margin-top: 5px;
+            font-weight: 600;
             font-size: 1.1em;
-            color: #e0f2f7;
+            color: var(--primary-color);
+        }
+
+        .icon-large {
+            font-size: 2.5em;
+            color: var(--primary-light);
+            margin-bottom: 5px;
+        }
+        
+        /* Announcement List */
+        .announcement-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .announcement-list li {
+            border-bottom: 1px dashed #e9ecef;
+            padding: 10px 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .announcement-list li:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-list strong {
+            color: var(--accent-color);
+            min-width: 80px;
         }
         
         /* ------------------------------------------------------------------ */
         /* FOOTER */
         /* ------------------------------------------------------------------ */
         .main-footer {
-            background-color: var(--text-color);
+            background-color: var(--primary-color);
             color: white;
             text-align: center;
             padding: 25px 0;
         }
 
         .main-footer a {
-            color: var(--primary-light);
+            color: var(--accent-color);
             text-decoration: none;
         }
 
@@ -190,28 +232,21 @@
         /* MEDIA QUERIES (Mobile Responsiveness) */
         /* ------------------------------------------------------------------ */
         @media (max-width: 992px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: minmax(180px, auto);
+            .container {
+                grid-template-columns: 1fr; /* บน Tablet/Mobile ให้เป็นคอลัมน์เดียว */
             }
-            .item-1, .item-7 { grid-column: span 2; }
-            .item-4 { grid-row: span 1; grid-column: span 1; }
-            .hero-section h2 { font-size: 2.2em; }
-        }
-
-        @media (max-width: 576px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
+            .main-header { padding: 10px 20px; }
+            .main-nav ul { flex-wrap: wrap; justify-content: center; }
+            .quick-link-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             }
-            .item-1, .item-4, .item-7 { grid-column: span 1; grid-row: span 1; }
-            .main-nav ul { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
     <header class="main-header">
         <div class="logo">
-            <h1>REGISTRATION HUB</h1>
+            <h1>[ชื่อโรงเรียน] REGISTRY</h1>
         </div>
         <nav class="main-nav">
             <ul>
@@ -219,86 +254,108 @@
                 <li class="dropdown" onclick="toggleDropdown(this)">
                     <a href="#">ข้อมูลทั่วไป</a>
                     <div class="dropdown-content">
-                        <a href="#mission">วิสัยทัศน์/พันธกิจ</a>
-                        <a href="#scope">ขอบข่ายภาระงาน</a>
+                        <a href="#mission">วิสัยทัศน์</a>
+                        <a href="#scope">ภาระงาน</a>
                         <a href="#personnel">บุคลากร</a> 
                     </div>
                 </li>
                 <li class="dropdown" onclick="toggleDropdown(this)">
-                    <a href="#">งานทะเบียน</a>
+                    <a href="#">บริการทะเบียน</a>
                     <div class="dropdown-content">
                         <a href="#documents">ขอหลักฐาน ปพ.</a>
-                        <a href="#register-in">ย้ายเข้า/ย้ายออก</a>
+                        <a href="#register-in">ย้ายเข้า-ออก</a>
+                        <a href="#profile">แก้ไขข้อมูล</a>
                     </div>
                 </li>
-                <li><a href="#downloads">ดาวน์โหลด</a></li>
+                <li><a href="#downloads">แบบฟอร์ม</a></li>
                 <li><a href="#contact">ติดต่อ</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="hero-section">
-        <h2>ศูนย์บริหารจัดการ<br>ทะเบียนและวัดผลนักเรียน</h2>
-        <p>บริการที่รวดเร็วและแม่นยำสำหรับนักเรียน ผู้ปกครอง และครู</p>
-        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn">🔑 เข้าสู่ระบบ ตรวจสอบผลการเรียน</a>
+        <h2>ระบบงานทะเบียนและวัดผล<br>เพื่อการบริการที่รวดเร็วและแม่นยำ</h2>
+        <p>ศูนย์กลางข้อมูลผลการเรียน ประกาศสำคัญ และบริการทางการศึกษาของโรงเรียน</p>
+        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn">🚀 ตรวจสอบผลการเรียน (เข้าสู่ระบบ)</a>
     </div>
 
     <main class="container">
-        <div class="bento-grid">
+        <div class="main-section">
             
-            <div id="home" class="grid-item item-1">
-                <h3>🔔 ประกาศสำคัญล่าสุด</h3>
-                <ul style="padding-left: 20px; list-style-type: '• '; margin-top: 10px;">
-                    <li><strong>[10 ต.ค.]</strong> แจ้งกำหนดการยื่นคำร้องขอ ปพ.1 ม.6</li>
-                    <li><strong>[01 ต.ค.]</strong> ปฏิทินสอบปลายภาค 1/2568 (ฉบับปรับปรุง)</li>
-                    <li><a href="#" style="color: var(--primary-color); font-weight: 500;">ดูประกาศทั้งหมด...</a></li>
+            <div id="home" class="card">
+                <h3>🔔 ประกาศและข่าวสาร</h3>
+                <ul class="announcement-list">
+                    <li><strong>10 ต.ค.</strong> <p>กำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียน ม.6 (ฉบับล่าสุด)</p></li>
+                    <li><strong>01 ต.ค.</strong> <p>ปฏิทินสอบปลายภาค 1/2568 และแนวปฏิบัติการวัดผล</p></li>
+                    <li><strong>01 ก.ย.</strong> <p>คู่มือการปฏิบัติงานทะเบียนวัดผลสำหรับครูที่ปรึกษา</p></li>
+                    <li><a href="#" style="color: var(--primary-light); font-weight: 500;">ดูประกาศทั้งหมด</a></li>
                 </ul>
             </div>
 
-            <a href="#calendar" class="grid-item">
-                <h3>📅 ปฏิทินงานวัดผล</h3>
-                <p>กำหนดการส่งเกรด, วันสอบกลางภาค/ปลายภาค และการขอแก้ "ร"</p>
-            </a>
-
-            <a href="#policy" class="grid-item">
-                <h3>⚖️ ระเบียบการวัดผล</h3>
-                <p>นโยบายการประเมินผล, เกณฑ์การจบหลักสูตร และการเทียบโอน</p>
-            </a>
-
-            <div id="personnel" class="grid-item item-4" style="background-color: #f7fcff;">
-                <h3>🧑‍🏫 ติดต่อ/บุคลากรหลัก</h3>
-                <div style="margin-top: 10px;">
-                    <p style="font-weight: 600;">หัวหน้างาน: ครูสมชาย ใจดี</p>
-                    <p>โทร: 0X-XXX-XXXX ต่อ 101</p>
-                    <p style="font-weight: 600;">เจ้าหน้าที่: คุณสมหญิง ตั้งใจ</p>
-                    <p>โทร: 0X-XXX-XXXX ต่อ 102</p>
+            <div class="card">
+                <h3>🛠️ บริการที่ใช้บ่อย</h3>
+                <div class="quick-link-grid">
+                    
+                    <a href="online-form.html" class="quick-link-item">
+                        <span class="icon-large">📜</span>
+                        <strong>ขอเอกสาร ปพ. ออนไลน์</strong>
+                    </a>
+                    <a href="#policy" class="quick-link-item">
+                        <span class="icon-large">⚖️</span>
+                        <strong>ระเบียบการวัดผล</strong>
+                    </a>
+                    <a href="#downloads" class="quick-link-item">
+                        <span class="icon-large">⬇️</span>
+                        <strong>ดาวน์โหลดแบบฟอร์ม</strong>
+                    </a>
+                    <a href="#calendar" class="quick-link-item">
+                        <span class="icon-large">📅</span>
+                        <strong>ปฏิทินงานวัดผล</strong>
+                    </a>
+                    <a href="#register-in" class="quick-link-item">
+                        <span class="icon-large">🔄</span>
+                        <strong>ย้ายเข้า-ย้ายออก</strong>
+                    </a>
+                    <a href="#profile" class="quick-link-item">
+                        <span class="icon-large">📝</span>
+                        <strong>แก้ไขข้อมูลนักเรียน</strong>
+                    </a>
+                    
                 </div>
             </div>
+        </div>
 
-            <a href="#register-in" class="grid-item">
-                <h3>🔄 การย้ายเข้า/ย้ายออก</h3>
-                <p>ขั้นตอนการมอบตัว, เอกสารที่ต้องใช้ และการจำหน่ายนักเรียน</p>
-            </a>
+        <div class="sidebar-info">
             
-            <a href="online-form.html" class="grid-item quick-action">
-                <h3>📜 ขอเอกสาร ปพ. ออนไลน์</h3>
-                <p>ยื่นคำร้องและติดตามสถานะได้ที่นี่</p>
-            </a>
-
-            <a href="#downloads" class="grid-item item-7" style="background-color: #f0f3f7;">
-                <h3>⬇️ เอกสารดาวน์โหลดทั้งหมด</h3>
-                <p>รวมแบบฟอร์ม: คำร้องขอลาออก, ขอเปลี่ยนชื่อ-สกุล, แบบฟอร์มขอแก้ "ร" (ฉบับล่าสุด)</p>
-            </a>
+            <div id="personnel" class="card">
+                <h3>🧑‍🏫 ติดต่อ/บุคลากรหลัก</h3>
+                <p><strong>สำนักงาน:</strong> อาคาร [ชื่ออาคาร] ชั้น 1</p>
+                <p><strong>เวลาทำการ:</strong> จันทร์-ศุกร์ (8:30 - 16:30 น.)</p>
+                
+                <hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 15px 0;">
+                
+                <p><strong>หัวหน้างาน:</strong> ครูสมชาย ใจดี</p>
+                <p style="margin-bottom: 5px;">โทร: 0X-XXX-XXXX ต่อ 101</p>
+                
+                <p><strong>เจ้าหน้าที่ทะเบียน:</strong> คุณสมหญิง ตั้งใจ</p>
+                <p>โทร: 0X-XXX-XXXX ต่อ 102</p>
+            </div>
             
+            <div class="card" style="background-color: #fffaf0; border-color: #ffe08a;">
+                <h3>⚙️ สถานะระบบ</h3>
+                <p style="color: green; font-weight: 600;">✅ ระบบ SGS: เปิดใช้งานปกติ</p>
+                <p style="color: var(--text-light);">อัปเดตข้อมูลล่าสุด: 13 ต.ค. 68 เวลา 09:00 น.</p>
+                <small>*หากพบปัญหากรุณาติดต่อเจ้าหน้าที่ทันที</small>
+            </div>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 งานทะเบียนวัดผล [ชื่อโรงเรียน] | All Rights Reserved.</p>
+        <p>&copy; 2025 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Designed for Professional Usability</p>
     </footer>
 
     <script>
-        // JavaScript สำหรับการสลับ Dropdown
+        // JavaScript สำหรับการสลับ Dropdown (สำคัญสำหรับ Mobile)
         function toggleDropdown(element) {
             element.classList.toggle('active');
         }
