@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Smooth UI</title>
+    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Modular UI</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Smooth Professional UI */
+        /* CSS: Vibrant & Modular UI */
         
         :root {
-            --primary-color: #004a7c; 
+            --primary-color: #004a7c; /* Deep Navy Blue */
             --primary-light: #0077b6;
-            --accent-color: #ffb703;
+            --accent-color: #ff5722; /* สีเน้นใหม่: ส้มสดใส (Vibrant Orange) */
             --text-color: #333;
             --text-light: #666;
             --bg-ultra-light: #f7f9fc; 
-            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* ปรับเงาให้นุ่มนวลขึ้น */
-            --border-radius-xl: 12px; /* เพิ่มความโค้งมน */
-            --transition-speed: 0.3s; /* ความเร็ว transition ทั่วไป */
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* เงาที่ชัดและนุ่มนวล */
+            --border-radius-xl: 16px; /* โค้งมนมากขึ้น */
+            --transition-speed: 0.3s;
         }
 
         body {
@@ -27,16 +27,14 @@
             background-color: var(--bg-ultra-light);
             color: var(--text-color);
             line-height: 1.6;
-            transition: background-color var(--transition-speed); /* เพิ่ม transition ให้ Body */
         }
         
-        /* ใส่ Transition ทั่วไปให้กับองค์ประกอบที่ควรเคลื่อนไหว */
         * {
             transition: all var(--transition-speed) ease-in-out; 
         }
-
+        
         /* ------------------------------------------------------------------ */
-        /* HEADER (Top Bar - Clean) */
+        /* HEADER (Sticky) */
         /* ------------------------------------------------------------------ */
         .main-header {
             background-color: white;
@@ -45,8 +43,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* เพิ่มเงาเบาๆ ให้ Header เพื่อความลอยตัว */
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            
+            /* ทำให้ Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100; 
         }
 
         .logo h1 {
@@ -68,44 +70,47 @@
             display: block; 
         }
         .main-nav ul li a:hover { 
-            color: var(--primary-light);
-            border-bottom: 2px solid var(--primary-light);
+            color: var(--accent-color); /* Hover สีส้ม */
+            border-bottom: 2px solid var(--accent-color);
         }
         
-        /* Dropdown */
-        .dropdown-content { background-color: white; box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.1); border-top: 3px solid var(--primary-light); border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl); overflow: hidden; }
+        /* Dropdown (โค้งมน) */
+        .dropdown-content { background-color: white; box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.15); border-top: 3px solid var(--primary-light); border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl); overflow: hidden; }
         .dropdown-content a { color: var(--text-color) !important; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; font-weight: 400; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: var(--primary-color) !important; }
 
         /* ------------------------------------------------------------------ */
-        /* HERO SECTION */
+        /* HERO SECTION (Gradient Accent) */
         /* ------------------------------------------------------------------ */
         .hero-section {
-            padding: 60px 20px 80px 20px;
-            background-color: white;
-            border-bottom: 1px solid #eee;
+            padding: 80px 20px 100px 20px;
+            /* พื้นหลัง Gradient ที่มีสี Accent */
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0077b6 100%);
+            border-bottom: 5px solid var(--accent-color);
             text-align: center;
+            color: white;
         }
         
-        .hero-section h2 { font-size: 2.8em; color: var(--primary-color); font-weight: 800; margin-bottom: 10px; }
-        .hero-section p { font-size: 1.1em; color: var(--text-light); margin-bottom: 30px; }
+        .hero-section h2 { font-size: 3em; font-weight: 800; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+        .hero-section p { font-size: 1.2em; color: #e0f2f7; margin-bottom: 30px; }
 
         .hero-btn {
             display: inline-block;
             background-color: var(--accent-color);
-            color: var(--primary-color);
-            padding: 16px 50px;
-            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
+            color: white;
+            padding: 18px 60px;
+            border-radius: 100px; /* เป็นปุ่มกลม */
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.2em;
-            box-shadow: 0 4px 10px rgba(255, 183, 3, 0.4);
+            font-size: 1.3em;
+            box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4);
+            border: 2px solid white; /* ขอบขาวตัดกับสี Accent */
         }
 
         .hero-btn:hover {
-            background-color: #ffd15d;
-            transform: translateY(-3px); /* เพิ่มการเคลื่อนที่ขึ้นที่สมูท */
-            box-shadow: 0 8px 20px rgba(255, 183, 3, 0.6); /* เงาที่กว้างและชัดขึ้นเมื่อ Hover */
+            background-color: #e64a19;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(255, 87, 34, 0.7);
         }
 
         /* ------------------------------------------------------------------ */
@@ -120,48 +125,64 @@
             gap: 30px;
         }
         
-        /* Card Style (Smooth Shadow and Radius) */
+        /* Card Style (โค้งมนและนุ่มนวล) */
         .card {
             background-color: white;
             border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
             box-shadow: var(--card-shadow);
             padding: 30px;
             margin-bottom: 30px;
-            border: 1px solid #e9ecef;
+            border: none; /* ไม่มีขอบแข็ง */
         }
 
-        .card h3 { font-size: 1.5em; color: var(--primary-color); font-weight: 700; border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-top: 0; margin-bottom: 20px; }
+        .card h3 { 
+            font-size: 1.6em; 
+            color: var(--primary-color); 
+            font-weight: 700; 
+            border-bottom: 3px solid var(--accent-color); 
+            padding-bottom: 10px; 
+            margin-top: 0; 
+            margin-bottom: 25px; 
+            width: fit-content;
+        }
         
-        /* Quick Link Grid */
-        .quick-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
+        /* Quick Link Grid (Modular / Bento Style) */
+        .quick-link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
         .quick-link-item {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background-color: var(--bg-ultra-light);
-            padding: 20px;
-            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
+            padding: 25px;
+            border-radius: var(--border-radius-xl);
             text-align: center;
             text-decoration: none;
             color: var(--text-color);
-            border: 1px solid #dee2e6;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* เพิ่มเงาเบาๆ */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
         }
         
         .quick-link-item:hover {
-            background-color: #e8eef6;
-            transform: translateY(-5px); /* เพิ่มการเคลื่อนที่ขึ้นที่สมูท */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* เพิ่มความลึกของเงาเมื่อ Hover */
+            background: linear-gradient(135deg, #fff 0%, #e0f2f7 100%); /* Hover Gradient */
+            transform: scale(1.05); /* เพิ่มการขยายตัวที่ดูสมูท */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .quick-link-item strong { display: block; margin-top: 5px; font-weight: 600; font-size: 1.1em; color: var(--primary-color); }
-        .icon-large { font-size: 2.5em; color: var(--primary-light); margin-bottom: 5px; }
+        .icon-large { font-size: 3em; color: var(--accent-color); margin-bottom: 10px; }
+        .quick-link-item strong { font-weight: 700; font-size: 1.1em; color: var(--primary-color); }
         
         /* Announcement List */
         .announcement-list { list-style: none; padding: 0; }
-        .announcement-list li { border-bottom: 1px dashed #e9ecef; padding: 10px 0; display: flex; gap: 15px; }
-        .announcement-list li:hover { background-color: #fafbfd; } /* เพิ่ม Hover Effect ที่สมูท */
-        .announcement-list li:last-child { border-bottom: none; }
-        .announcement-list strong { color: var(--accent-color); min-width: 80px; }
+        .announcement-list li { border-bottom: 1px dashed #e9ecef; padding: 12px 0; display: flex; gap: 15px; }
+        .announcement-list li:hover { background-color: #fafbfd; cursor: pointer; }
+        .announcement-list strong { color: var(--accent-color); min-width: 90px; font-weight: 600; }
         
         /* ------------------------------------------------------------------ */
         /* FOOTER */
@@ -171,21 +192,17 @@
             color: white;
             text-align: center;
             padding: 25px 0;
-        }
-
-        .main-footer a {
-            color: var(--accent-color);
-            text-decoration: none;
+            border-top: 5px solid var(--accent-color);
         }
 
         /* ------------------------------------------------------------------ */
-        /* MEDIA QUERIES (Mobile Responsiveness) */
+        /* MEDIA QUERIES */
         /* ------------------------------------------------------------------ */
         @media (max-width: 992px) {
             .container { grid-template-columns: 1fr; } 
-            .main-header { padding: 10px 20px; }
-            .main-nav ul { flex-wrap: wrap; justify-content: center; }
-            .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .hero-section { padding: 50px 20px 70px 20px; }
+            .hero-section h2 { font-size: 2.2em; }
+            .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
         }
     </style>
 </head>
@@ -220,16 +237,48 @@
     </header>
 
     <div class="hero-section">
-        <h2>ระบบงานทะเบียนและวัดผล<br>เพื่อการบริการที่รวดเร็วและแม่นยำ</h2>
-        <p>ศูนย์กลางข้อมูลผลการเรียน ประกาศสำคัญ และบริการทางการศึกษาของโรงเรียน</p>
-        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn">🚀 ตรวจสอบผลการเรียน (เข้าสู่ระบบ)</a>
+        <h2>ศูนย์กลางข้อมูลการศึกษา<br>งานทะเบียนและวัดผล</h2>
+        <p>บริการที่รวดเร็วและแม่นยำด้วยระบบบริหารจัดการที่ทันสมัย</p>
+        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn">🔑 เข้าสู่ระบบ ตรวจสอบผลการเรียน</a>
     </div>
 
     <main class="container">
         <div class="main-section">
             
+            <div class="card" style="margin-bottom: 40px;">
+                <h3>🛠️ ระบบบริการด่วน</h3>
+                <div class="quick-link-grid">
+                    
+                    <a href="online-form.html" class="quick-link-item">
+                        <span class="icon-large">📜</span>
+                        <strong>ขอเอกสาร ปพ.</strong>
+                    </a>
+                    <a href="#calendar" class="quick-link-item">
+                        <span class="icon-large">📅</span>
+                        <strong>ปฏิทินวัดผล</strong>
+                    </a>
+                    <a href="#downloads" class="quick-link-item">
+                        <span class="icon-large">⬇️</span>
+                        <strong>ดาวน์โหลดฟอร์ม</strong>
+                    </a>
+                    <a href="#policy" class="quick-link-item">
+                        <span class="icon-large">⚖️</span>
+                        <strong>ระเบียบการวัดผล</strong>
+                    </a>
+                    <a href="#register-in" class="quick-link-item">
+                        <span class="icon-large">🔄</span>
+                        <strong>ย้ายเข้า-ออก</strong>
+                    </a>
+                    <a href="#profile" class="quick-link-item">
+                        <span class="icon-large">📝</span>
+                        <strong>แก้ไขข้อมูล</strong>
+                    </a>
+                    
+                </div>
+            </div>
+            
             <div id="home" class="card">
-                <h3>🔔 ประกาศและข่าวสาร</h3>
+                <h3>🔔 ข่าวสารล่าสุด</h3>
                 <ul class="announcement-list">
                     <li><strong>10 ต.ค.</strong> <p>กำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียน ม.6 (ฉบับล่าสุด)</p></li>
                     <li><strong>01 ต.ค.</strong> <p>ปฏิทินสอบปลายภาค 1/2568 และแนวปฏิบัติการวัดผล</p></li>
@@ -237,67 +286,35 @@
                     <li><a href="#" style="color: var(--primary-light); font-weight: 500;">ดูประกาศทั้งหมด</a></li>
                 </ul>
             </div>
-
-            <div class="card">
-                <h3>🛠️ บริการที่ใช้บ่อย</h3>
-                <div class="quick-link-grid">
-                    
-                    <a href="online-form.html" class="quick-link-item">
-                        <span class="icon-large">📜</span>
-                        <strong>ขอเอกสาร ปพ. ออนไลน์</strong>
-                    </a>
-                    <a href="#policy" class="quick-link-item">
-                        <span class="icon-large">⚖️</span>
-                        <strong>ระเบียบการวัดผล</strong>
-                    </a>
-                    <a href="#downloads" class="quick-link-item">
-                        <span class="icon-large">⬇️</span>
-                        <strong>ดาวน์โหลดแบบฟอร์ม</strong>
-                    </a>
-                    <a href="#calendar" class="quick-link-item">
-                        <span class="icon-large">📅</span>
-                        <strong>ปฏิทินงานวัดผล</strong>
-                    </a>
-                    <a href="#register-in" class="quick-link-item">
-                        <span class="icon-large">🔄</span>
-                        <strong>ย้ายเข้า-ย้ายออก</strong>
-                    </a>
-                    <a href="#profile" class="quick-link-item">
-                        <span class="icon-large">📝</span>
-                        <strong>แก้ไขข้อมูลนักเรียน</strong>
-                    </a>
-                    
-                </div>
-            </div>
         </div>
 
         <div class="sidebar-info">
             
             <div id="personnel" class="card">
-                <h3>🧑‍🏫 ติดต่อ/บุคลากรหลัก</h3>
+                <h3>🧑‍🏫 ติดต่อเจ้าหน้าที่</h3>
                 <p><strong>สำนักงาน:</strong> อาคาร [ชื่ออาคาร] ชั้น 1</p>
                 <p><strong>เวลาทำการ:</strong> จันทร์-ศุกร์ (8:30 - 16:30 น.)</p>
                 
                 <hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 15px 0;">
                 
-                <p><strong>หัวหน้างาน:</strong> ครูสมชาย ใจดี</p>
-                <p style="margin-bottom: 5px;">โทร: 0X-XXX-XXXX ต่อ 101</p>
+                <p style="font-weight: 600;">หัวหน้างาน: ครูสมชาย ใจดี</p>
+                <p style="margin-bottom: 10px;">โทร: 0X-XXX-XXXX ต่อ 101</p>
                 
-                <p><strong>เจ้าหน้าที่ทะเบียน:</strong> คุณสมหญิง ตั้งใจ</p>
+                <p style="font-weight: 600;">เจ้าหน้าที่ทะเบียน: คุณสมหญิง ตั้งใจ</p>
                 <p>โทร: 0X-XXX-XXXX ต่อ 102</p>
             </div>
             
-            <div class="card" style="background-color: #fffaf0; border-color: #ffe08a;">
+            <div class="card" style="background-color: #f0fcf5; border: 1px solid #c8e6c9;">
                 <h3>⚙️ สถานะระบบ</h3>
-                <p style="color: green; font-weight: 600;">✅ ระบบ SGS: เปิดใช้งานปกติ</p>
-                <p style="color: var(--text-light);">อัปเดตข้อมูลล่าสุด: 13 ต.ค. 68 เวลา 09:00 น.</p>
-                <small>*หากพบปัญหากรุณาติดต่อเจ้าหน้าที่ทันที</small>
+                <p style="color: #4caf50; font-weight: 700;">✅ ระบบ SGS: เปิดใช้งานปกติ</p>
+                <p style="color: var(--text-light);">อัปเดตข้อมูลล่าสุด: 13 ต.ค. 68 เวลา 10:00 น.</p>
+                <small>*รายงานปัญหาโทร 101</small>
             </div>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Smooth Experience</p>
+        <p>&copy; 2025 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Modular & Vibrant UI</p>
     </footer>
 
     <script>
