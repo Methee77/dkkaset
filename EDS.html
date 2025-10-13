@@ -36,8 +36,6 @@
             color: #007bff;
             transition: color 0.2s;
         }
-        
-        /* --- ปุ่มหลัก (.btn-primary) --- */
         .btn-primary {
             background-color: #004d99;
             color: white;
@@ -60,30 +58,11 @@
             align-items: center;
             padding: 15px 5%;
         }
-        .logo-area {
-            line-height: 1.2;
-            cursor: pointer;
-        }
-        .logo-text {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #004d99;
-        }
-        .school-name {
-            font-size: 0.8em;
-            color: #666;
-            display: block;
-        }
-        
-        .main-nav {
-            display: flex; 
-            align-items: center;
-        }
-        .main-nav a:not(.btn-primary) {
-            margin-left: 20px;
-            color: #333;
-            font-weight: 500;
-        }
+        .logo-area { line-height: 1.2; cursor: pointer; }
+        .logo-text { font-size: 1.5em; font-weight: 700; color: #004d99; }
+        .school-name { font-size: 0.8em; color: #666; display: block; }
+        .main-nav { display: flex; align-items: center; }
+        .main-nav a:not(.btn-primary) { margin-left: 20px; color: #333; font-weight: 500; }
         .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } 
 
         /* -------------------- 2. Hero Section -------------------- */
@@ -107,51 +86,67 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
-        .hero-content h1 {
-            font-size: 2.5em;
-            color: #004d99;
-            margin: 0 0 10px 0;
-        }
-        .hero-content p {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        
-        /* --- Countdown Timer Style --- */
+        .hero-content h1 { font-size: 2.5em; color: #004d99; margin: 0 0 10px 0; }
+        .hero-content p { font-size: 1.2em; color: #333; margin-bottom: 20px; }
         .countdown-container {
-            background-color: #dc3545; 
-            color: white;
-            padding: 15px 25px;
+            background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 20px;
+        }
+        .countdown-container h4 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; font-weight: 600; }
+        #countdown-timer { display: flex; justify-content: center; gap: 15px; }
+        .time-block { padding: 10px; background-color: rgba(0, 0, 0, 0.2); border-radius: 5px; min-width: 60px; }
+        .time-block span { display: block; font-size: 2em; font-weight: 700; line-height: 1; }
+        .time-block small { font-size: 0.8em; opacity: 0.8; }
+
+
+        /* -------------------- NEW: About Student Section (Section 2.5) -------------------- */
+        .student-info-section {
+            background-color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        .student-info-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .info-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .info-card {
+            background-color: #f8f8f8; /* สีรอง */
             border-radius: 10px;
-            margin-top: 20px;
+            padding: 20px 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border-top: 5px solid #004d99; /* สีเน้นหลัก */
         }
-        .countdown-container h4 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-            font-weight: 600;
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
-        #countdown-timer {
+        .info-card .icon-circle {
+            background-color: #004d99; /* วงกลมไอคอน */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
         }
-        .time-block {
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            min-width: 60px;
-        }
-        .time-block span {
-            display: block;
+        .info-card .icon-circle i {
+            color: white;
             font-size: 2em;
-            font-weight: 700;
-            line-height: 1;
         }
-        .time-block small {
-            font-size: 0.8em;
-            opacity: 0.8;
+        .info-card h3 {
+            margin: 0;
+            font-size: 1.1em;
+            color: #333;
+            font-weight: 600;
         }
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
@@ -169,82 +164,21 @@
         .news-list ul { list-style: none; padding: 0; }
         .news-list li { padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 1.05em; }
         .news-tag { font-size: 0.75em; font-weight: 700; color: white; padding: 4px 8px; border-radius: 3px; margin-right: 15px; display: inline-block; }
-        .tag-red { background-color: #dc3545; }
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
         
-        /* --- Sidebar Services (รวมสถานะระบบ) --- */
-        .sidebar-services { 
-            background-color: white; 
-            padding: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-        }
-        .sidebar-services h2 { 
-            text-align: left; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 10px; 
-            margin-bottom: 15px; 
-        }
-        .service-link { 
-            background-color: #f8f8f8; 
-            padding: 12px; 
-            margin-bottom: 10px; 
-            border-radius: 5px; 
-            display: block; 
-            transition: background-color 0.2s; 
-            color: #333; 
-            font-weight: 500; 
-        }
-        .service-link:hover { background-color: #e6e6e6; color: #004d99; }
+        .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
         
-        /* --- System Status Styling (NEW/MODIFIED) --- */
-        .status-header {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #004d99;
-            margin: 15px 0 10px 0;
-            padding-top: 10px;
-            border-top: 1px dashed #eee;
-        }
-        .status-header:first-of-type {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-        }
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-            font-size: 0.9em;
-        }
-        .status-label-control {
-            font-weight: 500;
-            color: #333;
-        }
-        .radio-group label {
-            margin-left: 10px;
-            font-weight: normal;
-            font-size: 0.9em;
-        }
-        .status-info-date {
-            margin-top: 15px;
-            font-size: 0.85em;
-            color: #777;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 10px;
-            text-align: right;
-        }
-        
-        /* --- Indicator Styling --- */
-        .status-indicator {
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 700;
-            color: white;
-        }
+        /* --- System Status Styling --- */
+        .status-header { font-size: 1.1em; font-weight: 700; color: #004d99; margin: 15px 0 10px 0; padding-top: 10px; border-top: 1px dashed #eee; }
+        .status-header:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+        .status-item { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 0.9em; }
+        .status-label-control { font-weight: 500; color: #333; }
+        .radio-group label { margin-left: 10px; font-weight: normal; font-size: 0.9em; }
+        .status-info-date { margin-top: 15px; font-size: 0.85em; color: #777; border-top: 1px solid #f0f0f0; padding-top: 10px; text-align: right; }
+        .status-indicator { padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: 700; color: white; }
         .status-ok { background-color: #28a745; }
         .status-maintenance { background-color: #ffc107; color: #333; }
         .status-offline { background-color: #dc3545; }
@@ -254,14 +188,20 @@
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
         
-        /* Media Query สำหรับ Mobile */
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .info-card-grid { grid-template-columns: repeat(2, 1fr); } /* ปรับสำหรับ mobile */
             .main-content-grid { grid-template-columns: 1fr; }
             .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
             .main-nav.active { display: flex; }
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
             .menu-toggle { display: block; }
+        }
+        @media (max-width: 500px) {
+            .quick-links-grid { grid-template-columns: 1fr; }
+            .info-card-grid { grid-template-columns: 1fr; } /* ปรับสำหรับ mobile เล็กสุด */
+            .hero-section { height: 350px; }
+            .hero-content h1 { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -269,8 +209,8 @@
 
     <header class="main-header">
         <div class="logo-area" onclick="window.location.href='#'">
-            <span class="logo-text">งานทะเบียนวัดผล ฝ่ายประมวลผล GPA</span>
-            <span class="school-name">บรรหารแจ่มใสวิทยา 1</span>
+            <span class="logo-text">งานทะเบียนวัดผล</span>
+            <span class="school-name">[ชื่อโรงเรียน]</span>
         </div>
         
         <div class="menu-toggle" id="menuToggle">&#9776;</div> 
@@ -302,6 +242,46 @@
         </div>
     </section>
 
+    <section class="student-info-section">
+        <div class="container">
+            <h2>เกี่ยวกับนักเรียน</h2>
+            <div class="info-card-grid">
+                <a href="[URL_INFO_STUDENT]" class="info-card">
+                    <div class="icon-circle"><i>🎓</i></div>
+                    <h3>สารสนเทศนักเรียน</h3>
+                </a>
+                <a href="[URL_INFO_TEACHER]" class="info-card">
+                    <div class="icon-circle"><i>🧑‍🏫</i></div>
+                    <h3>สารสนเทศอาจารย์</h3>
+                </a>
+                <a href="[URL_APP]" class="info-card">
+                    <div class="icon-circle"><i>📱</i></div>
+                    <h3>Mobile App SGS</h3>
+                </a>
+                <a href="[URL_REQUEST_FORM]" class="info-card">
+                    <div class="icon-circle"><i>📝</i></div>
+                    <h3>แบบคำร้องขอ/ลา</h3>
+                </a>
+                <a href="[URL_ACADEMIC]" class="info-card">
+                    <div class="icon-circle"><i>📚</i></div>
+                    <h3>ฝ่ายวิชาการ</h3>
+                </a>
+                <a href="[URL_DEPARTMENT]" class="info-card">
+                    <div class="icon-circle"><i>🏛️</i></div>
+                    <h3>สาขาวิชา</h3>
+                </a>
+                <a href="[URL_UNIT]" class="info-card">
+                    <div class="icon-circle"><i>💼</i></div>
+                    <h3>หน่วยงาน</h3>
+                </a>
+                <a href="[URL_ALL_FORMS]" class="info-card">
+                    <div class="icon-circle"><i>📑</i></div>
+                    <h3>แบบฟอร์มต่างๆ</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+    
     <div class="container">
         <section class="quick-access-strip">
             <div class="quick-links-grid">
@@ -350,11 +330,11 @@
                 <div class="system-status-container">
                     <div class="status-item">
                         <span class="status-label-control">ระบบ SGS (นักเรียน/ผู้ปกครอง)</span>
-                        <span id="status-sgs" class="status-indicator status-maintenance">ยังไม่ประกาศผล</span>
+                        <span id="status-sgs" class="status-indicator status-ok">ใช้งานได้ปกติ</span>
                     </div>
                     <div class="status-item">
                         <span class="status-label-control">ระบบ SGS (สำหรับครู)</span>
-                        <span id="status-teacher" class="status-indicator status-off">ปิดระบบ</span>
+                        <span id="status-teacher" class="status-indicator status-maintenance">กำลังปรับปรุง</span>
                     </div>
                     <div class="status-item">
                         <span class="status-label-control">ระบบขอเอกสารออนไลน์</span>
@@ -388,7 +368,7 @@
                     
                     <div class="status-info-date">
                         ปีการศึกษาปัจจุบัน 2568 | ภาคเรียน 1
-                        </div>
+                    </div>
                 </div>
                 <h2>บริการหลัก (Main Services)</h2>
                 <a href="#" class="service-link">🎓 คู่มือการใช้งานระบบ SGS</a>
@@ -463,8 +443,6 @@
         // =========================================================
         // JS สำหรับ System Status (จำลองการดึงสถานะระบบภายนอก)
         function updateSystemStatus() {
-            // โค้ดจริง: ใช้ AJAX/Fetch ดึงสถานะจาก Server
-            // นี่คือการจำลองสถานะระบบภายนอก:
             var statuses = {
                 'status-sgs': { text: 'ใช้งานได้ปกติ', class: 'status-ok' },
                 'status-teacher': { text: 'กำลังปรับปรุง', class: 'status-maintenance' },
