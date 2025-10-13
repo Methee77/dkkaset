@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Official KN Website - โรงเรียนกาญจนานุเคราะห์</title>
+    <title>งานทะเบียนและวัดผล - [ชื่อโรงเรียน/สถาบัน]</title>
     <style>
-        /* CSS องค์กร: จำลองสีโรงเรียน */
+        /* CSS องค์กร: ใช้สีน้ำเงินและโทนสว่าง */
         :root {
             --primary-color: #007bff; /* น้ำเงินเข้ม */
             --secondary-color: #ffc107; /* เหลือง/ทอง */
@@ -21,12 +21,19 @@
             color: var(--text-color);
         }
 
+        /* การจัดวาง: เนื้อหาอยู่ตรงกลาง มีขอบเท่ากัน */
+        .content-area {
+            max-width: 1200px; /* กำหนดความกว้างสูงสุด */
+            margin: 0 auto; /* จัดให้อยู่กึ่งกลาง */
+            padding: 0 20px; /* ขอบซ้ายขวาเล็กน้อย */
+        }
+        
         /* 1. Header และเมนูหลัก */
         .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 5%;
+            padding: 15px 0;
             background-color: white;
         }
         .logo-section {
@@ -34,21 +41,21 @@
             align-items: center;
         }
         .logo-section img {
-            width: 70px; /* ขนาดโลโก้ */
+            width: 60px;
             height: auto;
             margin-right: 15px;
         }
         .logo-text h1 {
             color: var(--primary-color);
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.8em;
         }
         .logo-text p {
             margin: 0;
-            font-size: 0.8em;
+            font-size: 0.9em;
             color: #555;
         }
-        
+
         /* Menu Bar ใต้ Header */
         nav.main-menu {
             background-color: var(--primary-color);
@@ -57,10 +64,14 @@
         nav.main-menu ul {
             list-style: none;
             padding: 0;
-            margin: 0 auto;
+            margin: 0;
             display: flex;
             justify-content: flex-start;
+        }
+        nav.main-menu .menu-wrapper {
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; /* ขอบเมนูตามเนื้อหา */
         }
         nav.main-menu ul li a {
             display: block;
@@ -75,41 +86,38 @@
             color: var(--primary-color);
         }
 
-        /* 2. Banner/Slider (ส่วนประกาศสำคัญ) */
-        .hero-banner {
-            background-color: #e6f7ff; /* โทนฟ้าอ่อน */
-            padding: 60px 5%;
+        /* 2. Banner/Announcement */
+        .announcement-banner {
+            background-color: var(--light-bg);
+            padding: 30px 0;
             text-align: center;
-            border-bottom: 5px solid var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
         }
-        .hero-banner h2 {
+        .announcement-banner h2 {
+            color: #d9534f; /* สีแดงแจ้งเตือน */
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .announcement-banner p {
             color: var(--primary-color);
-            font-size: 2em;
-        }
-        .read-more-btn {
-            display: inline-block;
-            padding: 10px 30px;
-            background-color: #28a745; /* สีเขียวสำหรับปุ่ม */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-            transition: background-color 0.3s;
+            font-size: 1.1em;
         }
 
         /* 3. Content Sections: ข่าวสารและลิงก์บริการ */
         .content-wrapper {
             display: flex;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 40px 0;
             gap: 30px;
         }
-
-        /* Quick Links (ลิงก์บริการด้านขวา) */
+        
+        /* Quick Links (ระบบบริการด้านขวา) */
         .quick-links {
             width: 30%;
             min-width: 250px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            height: fit-content; /* ปรับให้ความสูงพอดีเนื้อหา */
         }
         .quick-links h3 {
             background-color: var(--primary-color);
@@ -123,9 +131,6 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-top: none;
         }
         .link-list a {
             display: block;
@@ -133,10 +138,10 @@
             border-bottom: 1px solid #eee;
             color: var(--primary-color);
             text-decoration: none;
-            transition: background-color 0.3s;
+            font-weight: 500;
         }
         .link-list a:hover {
-            background-color: #f0f0f0;
+            background-color: #eaf6ff;
         }
 
         /* News & Announcements (ข่าวสารหลักด้านซ้าย) */
@@ -147,39 +152,38 @@
             color: var(--primary-color);
             border-left: 5px solid var(--secondary-color);
             padding-left: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         .news-item {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 15px;
-        }
-        .news-item img {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            margin-right: 15px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 5px;
+            transition: box-shadow 0.3s;
+        }
+        .news-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .news-item-content a {
+            font-size: 1.1em;
             font-weight: bold;
-            color: var(--primary-color);
+            color: #2c3e50;
             text-decoration: none;
         }
         .news-item-content p {
             font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
         }
-
+        
         /* 4. Footer */
         footer {
             background-color: #333;
             color: white;
-            text-align: center;
-            padding: 30px 5%;
+            padding: 30px 0;
             margin-top: 40px;
             font-size: 0.8em;
+            text-align: center;
         }
         footer a {
             color: var(--secondary-color);
@@ -197,101 +201,111 @@
             }
             .quick-links {
                 width: 100%;
-                order: -1; /* ย้าย Quick Links ไปด้านบนในมุมมองมือถือ */
-            }
-            .news-section {
-                padding-top: 20px;
+                margin-bottom: 20px;
             }
             nav.main-menu ul {
                 justify-content: space-around;
-            }
-            nav.main-menu ul li a {
-                padding: 10px 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-main">
-        <div class="logo-section">
-            <img src="school_logo.png" alt="โลโก้โรงเรียน">
-            <div class="logo-text">
-                <h1>โรงเรียนกาญจนานุเคราะห์</h1>
-                <p>KANCHANANUKROH SCHOOL</p>
+    <div class="content-area">
+        <div class="header-main">
+            <div class="logo-section">
+                <img src="school_logo.png" alt="โลโก้โรงเรียน"> 
+                <div class="logo-text">
+                    <h1>[ชื่อโรงเรียน/สถาบัน]</h1>
+                    <p>KANCHANANUKROH SCHOOL</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p>โทร. 034-511-060 | Email: regis@school.ac.th</p>
             </div>
         </div>
-        <div class="contact-info">
-            <p>โทร. 034-511-060 | Email: info@kn.ac.th</p>
-        </div>
     </div>
+    
     <nav class="main-menu">
-        <ul>
-            <li><a href="#" class="active">หน้าหลัก</a></li>
-            <li><a href="#">ข้อมูลพื้นฐาน</a></li>
-            <li><a href="#">กลุ่มสาระฯ</a></li>
-            <li><a href="#">งานวิชาการ</a></li>
-            <li><a href="#">ติดต่อ</a></li>
-        </ul>
+        <div class="menu-wrapper">
+            <ul>
+                <li><a href="#" class="active">หน้าหลักงานทะเบียน</a></li>
+                <li><a href="#">ระเบียบการศึกษา</a></li>
+                <li><a href="#">การขอเอกสาร</a></li>
+                <li><a href="#">ปฏิทินวัดผล</a></li>
+                <li><a href="#">ติดต่อเจ้าหน้าที่</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="hero-banner">
-        <h2>"โรงเรียนมาตรฐานสากล มุ่งสู่ความเป็นเลิศ"</h2>
-        <p>เปิดรับสมัครนักเรียนใหม่ ปีการศึกษา 2569 - ดูรายละเอียดการรับสมัครห้องเรียนพิเศษ</p>
-        <a href="#" class="read-more-btn">อ่านรายละเอียดเพิ่มเติม</a>
+    <div class="announcement-banner">
+        <div class="content-area">
+            <h2>⚠️ ประกาศด่วน! กำหนดการสุดท้ายในการบันทึกผลการเรียน</h2>
+            <p>ครูผู้สอนทุกท่าน โปรดบันทึกและส่งผลการเรียน (ตัดเกรด) ภายในวันที่ **30 ตุลาคม 2568** เพื่อประมวลผล GPA รายภาค</p>
+        </div>
     </div>
 
-    <div class="content-wrapper">
-        
-        <div class="news-section">
-            <h3>📢 ข่าวสารและประชาสัมพันธ์</h3>
+    <div class="content-area">
+        <div class="content-wrapper">
+            
+            <div class="news-section">
+                <h3>📢 ข่าวสารและประกาศงานวัดผล</h3>
 
-            <div class="news-item">
-                <img src="news_image1.jpg" alt="ภาพข่าว 1">
-                <div class="news-item-content">
-                    <p style="font-size: 0.8em; color: #999;">[12 ต.ค. 2568] - ข่าวประชาสัมพันธ์</p>
-                    <a href="#">พิธีมอบเกียรติบัตรนักเรียนที่มีผลการเรียนยอดเยี่ยม ประจำภาคเรียนที่ 1/2568</a>
-                    <p>ผู้บริหารและคณะครูร่วมแสดงความยินดีกับนักเรียนที่สร้างชื่อเสียง...</p>
+                <div class="news-item">
+                    <div class="news-item-content">
+                        <p style="font-size: 0.8em; color: #999;">[12 ต.ค. 2568] - เอกสารสำคัญ</p>
+                        <a href="#">ดาวน์โหลดฟอร์มคำร้องขอใบรับรองผลการศึกษา (ปพ. 7)</a>
+                        <p>สำหรับนักเรียนที่ต้องการนำไปใช้สมัครเรียนต่อหรือยื่นเอกสารต่างๆ</p>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-content">
+                        <p style="font-size: 0.8em; color: #999;">[05 ต.ค. 2568] - กำหนดการ</p>
+                        <a href="#">ปฏิทินการขอแก้ไข "เกรด 0" และ "เกรด มส." ภาคเรียนที่ 1/2568</a>
+                        <p>ให้นักเรียนที่มีผลการเรียนไม่สมบูรณ์ติดต่อครูผู้สอนตามวันเวลาที่กำหนด</p>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-content">
+                        <p style="font-size: 0.8em; color: #999;">[01 ต.ค. 2568] - ระเบียบ</p>
+                        <a href="#">ระเบียบการคำนวณ GPAX สะสมใหม่ สำหรับปีการศึกษา 2568</a>
+                        <p>อธิบายหลักเกณฑ์การคิดเกรดเฉลี่ยสะสมและหน่วยกิตตามหลักสูตรใหม่</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: right; margin-top: 15px;">
+                    <a href="#" style="color: var(--primary-color); font-weight: bold;">ดูประกาศทั้งหมด ></a>
                 </div>
             </div>
             
-            <div class="news-item">
-                <img src="news_image2.jpg" alt="ภาพข่าว 2">
-                <div class="news-item-content">
-                    <p style="font-size: 0.8em; color: #999;">[10 ต.ค. 2568] - ข่าวกิจกรรม</p>
-                    <a href="#">กิจกรรมสัปดาห์วิทยาศาสตร์และเทคโนโลยี ประจำปี 2568</a>
-                    <p>เชิญชวนนักเรียนเข้าร่วมกิจกรรมฐานความรู้และนิทรรศการนวัตกรรม...</p>
+            <div class="quick-links">
+                <h3>ระบบบริการ (e-Service)</h3>
+                <ul class="link-list">
+                    <li><a href="#">💻 ระบบบันทึกผลการเรียน (สำหรับครู)</a></li>
+                    <li><a href="#">🔍 ตรวจสอบ GPA / GPAX รายบุคคล</a></li>
+                    <li><a href="#">📄 พิมพ์ใบรับรองผลการศึกษาออนไลน์</a></li>
+                    <li><a href="#">📥 ดาวน์โหลดแบบฟอร์มคำร้อง</a></li>
+                    <li><a href="#">🗓️ ปฏิทินวัดผลประจำปี</a></li>
+                </ul>
+                
+                <h3 style="background-color: #3498db; margin-top: 20px;">ติดต่อเจ้าหน้าที่</h3>
+                <div style="padding: 15px; font-size: 0.9em;">
+                    <p><strong>เบอร์โทรศัพท์:</strong> 034-511-060 ต่อ 102</p>
+                    <p><strong>ห้องทำงาน:</strong> อาคารวิชาการ ชั้น 1</p>
+                    <p><strong>เวลาทำการ:</strong> จันทร์ - ศุกร์ (08:30 - 16:30 น.)</p>
                 </div>
             </div>
-            
-            <div style="text-align: right; margin-top: 15px;">
-                <a href="#" style="color: var(--primary-color); font-weight: bold;">ดูข่าวทั้งหมด ></a>
-            </div>
-        </div>
-        
-        <div class="quick-links">
-            <h3>KN SERVICE</h3>
-            <ul class="link-list">
-                <li><a href="#">📝 ระบบบริหารงานบุคคล</a></li>
-                <li><a href="#">📊 ระบบคลังข้อมูล BIG DATA</a></li>
-                <li><a href="#">💰 พิมพ์สลิปเงินเดือน</a></li>
-                <li><a href="#">📚 ระบบงานวัดผลและทะเบียน</a></li>
-                <li><a href="#">📧 Email องค์กร (G-Suite)</a></li>
-            </ul>
-            
-            <h3 style="background-color: #f0f0f0; color: var(--text-color); margin-top: 20px;">ติดต่อเรา</h3>
-            <div style="padding: 15px; background-color: white; border: 1px solid #ddd; border-top: none; font-size: 0.9em;">
-                <p>ร.ร. กาญจนานุเคราะห์</p>
-                <p>โทร: 034-511-060</p>
-                <p>ที่ตั้ง: 65 ต.บ้านเหนือ อ.เมือง กาญจนบุรี</p>
-            </div>
-        </div>
 
+        </div>
     </div>
 
     <footer>
-        <p>Copyright © 2024 KANCHANANUKROH SCHOOL |  | <a href="#">นโยบายเว็บไซต์</a></p>
-        <p>พัฒนาโดย: [ชื่อผู้พัฒนา/ฝ่ายเทคโนโลยีสารสนเทศ]</p>
+        <div class="content-area">
+            <p>Copyright © 2024 งานทะเบียนและวัดผล โรงเรียน [ชื่อโรงเรียน/สถาบัน]</p>
+            <p>นโยบายเว็บไซต์ | <a href="#">แผนผังเว็บไซต์</a></p>
+        </div>
     </footer>
 
 </body>
