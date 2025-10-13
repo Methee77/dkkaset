@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
         
-        /* -------------------- Base & Typography (ใช้ Kanit) -------------------- */
+        /* -------------------- 0. Base Styles & Global Utilities -------------------- */
         body {
             font-family: 'Kanit', Tahoma, sans-serif;
             margin: 0;
@@ -41,7 +41,7 @@
         .btn-primary {
             background-color: #004d99;
             color: white;
-            padding: 8px 15px;
+            padding: 8px 15px; /* ปุ่มเล็กตามต้องการ */
             border-radius: 5px;
             font-weight: 600;
             font-size: 0.9em;
@@ -51,10 +51,10 @@
         }
         .btn-primary:hover { background-color: #003366; }
 
-        /* -------------------- 0. Image Slider Area (ด้านบนสุด) -------------------- */
+        /* -------------------- 1. Image Slider Area (ด้านบนสุด) -------------------- */
         #slider-area {
             width: 100%;
-            height: 350px; /* กำหนดความสูงของกรอบสไลด์ */
+            height: 350px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -65,13 +65,11 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            display: none; 
-            /* ภาพตัวอย่างแรกแสดงผลทันที */
-            background-image: url('https://via.placeholder.com/1500x350/A93226/FFFFFF?text=Slide+1%3A+งานทะเบียนวัดผล'); 
+            display: none;
         }
         #slide-1 { display: block; } 
-        
-        /* -------------------- 1. Header & Navigation -------------------- */
+
+        /* -------------------- 2. Header & Navigation (Sticky) -------------------- */
         .main-header {
             background-color: white;
             box-shadow: 0 1px 5px rgba(0,0,0,0.1);
@@ -90,7 +88,7 @@
         .main-nav a:not(.btn-primary) { margin-left: 20px; color: #333; font-weight: 500; }
         .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } 
 
-        /* -------------------- 2. Hero Section (ปรับมาอยู่ใต้ Header) -------------------- */
+        /* -------------------- 3. Hero Section (ใต้ Header - ไม่มีนับถอยหลัง) -------------------- */
         .hero-section {
             background-color: #e0f0ff; 
             height: auto; 
@@ -113,14 +111,9 @@
         .hero-content h1 { font-size: 2.2em; color: #004d99; margin: 0 0 10px 0; }
         .hero-content p { font-size: 1.1em; color: #333; margin-bottom: 20px; }
         
-        /* --- Countdown Timer Style (ย้ายไปรวมกับ News Section) --- */
+        /* --- Countdown Timer Style (ถูกย้ายไปที่ News Section) --- */
         .countdown-container { 
-            background-color: #dc3545; 
-            color: white; 
-            padding: 15px 25px; 
-            border-radius: 10px; 
-            margin-top: 15px; 
-            margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างสำหรับ News Section */
+            background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 15px; margin-bottom: 15px; 
         }
         .countdown-container h4 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; font-weight: 600; text-align: center; }
         #countdown-timer { display: flex; justify-content: center; gap: 15px; }
@@ -129,18 +122,37 @@
         .time-block small { font-size: 0.8em; opacity: 0.8; }
 
 
-        /* -------------------- 2.5 About Student Section -------------------- */
-        .student-info-section { background-color: #fff; padding: 30px 0; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .student-info-section h2 { text-align: center; color: #333; margin-bottom: 30px; }
-        .info-card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; text-align: center; }
-        .info-card { background-color: #A93226; border-radius: 15px; padding: 25px 10px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); transition: all 0.3s; cursor: pointer; color: white; }
+        /* -------------------- 4. About Student Section (4-Column Grid) -------------------- */
+        .student-info-section { 
+            background-color: #fff; padding: 30px 0; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+        }
+        .student-info-section h2 { 
+            color: #333; 
+            margin-bottom: 30px; 
+        }
+        .info-card-grid {
+            /* บังคับ 4 คอลัมน์บนจอใหญ่ */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 25px;
+            text-align: center;
+        }
+        .info-card {
+            background-color: #A93226; 
+            border-radius: 15px; 
+            padding: 25px 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            color: white; 
+        }
         .info-card:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.25); }
         .info-card .icon-circle { background-color: rgba(255, 255, 255, 0.2); width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; }
         .info-card .icon-circle i { color: white; font-size: 2.5em; }
         .info-card h3 { margin: 0; font-size: 1.2em; color: white; font-weight: 600; }
 
 
-        /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
+        /* -------------------- 5. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
         .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .quick-card { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent; }
@@ -150,14 +162,9 @@
         .card-green { border-top-color: #28a745; color: #28a745; }
         .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
 
-        /* -------------------- 4. News & Service Blocks (Grid 2 คอลัมน์) -------------------- */
+        /* -------------------- 6. Main Content & Sidebar -------------------- */
         .main-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
-        .news-section { 
-            background-color: white; 
-            padding: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-        }
+        .news-section { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .news-section h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .news-list ul { list-style: none; padding: 0; }
         .news-list li { padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 1.05em; }
@@ -165,7 +172,7 @@
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
         
-        /* Sidebar Styling (ไม่เปลี่ยนแปลงหลัก) */
+        /* Sidebar Styling */
         .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
@@ -177,7 +184,7 @@
         .status-maintenance { background-color: #ffc107; color: #333; }
         .status-offline { background-color: #dc3545; }
 
-        /* -------------------- 5. Footer and Responsive Design -------------------- */
+        /* -------------------- 7. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
@@ -374,6 +381,7 @@
                         ปีการศึกษาปัจจุบัน 2568 | ภาคเรียน 1
                     </div>
                 </div>
+
                 <h2>บริการหลัก (Main Services)</h2>
                 <a href="#" class="service-link">🎓 คู่มือการใช้งานระบบ SGS</a>
                 <a href="[URL_TEACHER_LOGIN]" class="service-link">🧑‍🏫 ระบบบันทึกผลการเรียน (สำหรับครู)</a>
@@ -451,16 +459,23 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            // ตรวจสอบว่า element มีอยู่หรือไม่ก่อนที่จะใส่ค่า (ป้องกัน error เพราะย้ายตำแหน่ง)
+            const daysEl = document.getElementById("days");
+            if (daysEl) daysEl.innerHTML = days.toString().padStart(2, '0');
+            const hoursEl = document.getElementById("hours");
+            if (hoursEl) hoursEl.innerHTML = hours.toString().padStart(2, '0');
+            const minutesEl = document.getElementById("minutes");
+            if (minutesEl) minutesEl.innerHTML = minutes.toString().padStart(2, '0');
+            const secondsEl = document.getElementById("seconds");
+            if (secondsEl) secondsEl.innerHTML = seconds.toString().padStart(2, '0');
 
             if (distance < 0) {
                 clearInterval(x);
                 var containerDiv = document.querySelector(".countdown-container");
-                containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#28a745; color:white; border-radius:5px; padding:10px 15px;'>เข้าสู่ระบบตรวจสอบผล</a>";
-                containerDiv.style.backgroundColor = '#28a745';
+                if (containerDiv) {
+                    containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#28a745; color:white; border-radius:5px; padding:10px 15px;'>เข้าสู่ระบบตรวจสอบผล</a>";
+                    containerDiv.style.backgroundColor = '#28a745';
+                }
             }
         }, 1000); 
 
