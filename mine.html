@@ -3,240 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนและวัดผล - ฝ่ายประมวลผล GPA</title>
+    <title>ระบบรับสมัครนักศึกษาใหม่ - มหาวิทยาลัย (จำลอง)</title>
     <style>
-        /* CSS หลักสำหรับโครงสร้าง Dashboard */
+        /* CSS องค์กร: ใช้สีเขียวและโทนสว่าง */
+        :root {
+            --primary-color: #006400; /* เขียวเข้ม (Kasetsart Green) */
+            --secondary-color: #ffd700; /* สีทอง/เหลือง */
+            --text-color: #333;
+            --light-bg: #f8f8f8;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Tahoma', 'Arial', sans-serif;
             margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .container {
-            display: flex;
-            min-height: 100vh;
+            padding: 0;
+            background-color: #ffffff;
+            color: var(--text-color);
         }
 
-        /* เมนู Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: #2c3e50;
+        /* 1. Header (ส่วนหัว) */
+        .header-top {
+            background-color: var(--primary-color);
             color: white;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 5%;
+            font-size: 0.9em;
+            text-align: right;
         }
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.3em;
-            color: #ecf0f1;
-        }
-        .sidebar a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #ecf0f1;
-            border-left: 5px solid transparent;
-            transition: background-color 0.3s, border-left-color 0.3s;
-        }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #34495e;
-            border-left-color: #007bff;
-        }
-
-        /* ส่วนเนื้อหาหลัก */
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
-        }
-        .header-bar {
+        .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ddd;
+            padding: 20px 5%;
+            border-bottom: 3px solid var(--secondary-color);
         }
-        
-        /* สไตล์สำหรับโมดูลงานทะเบียน */
-        .registration-module {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 40px;
+        .logo-section h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.8em;
         }
-        .registration-module h3 {
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 0;
+        .logo-section p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #555;
         }
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .action-btn {
-            padding: 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
+        .login-btn {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1em;
-        }
-        .action-btn:hover {
-            background-color: #0056b3;
-        }
-        
-        /* สไตล์สำหรับตารางประมวลผล GPA */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        .data-table th {
-            background-color: #2ecc71; /* สีเขียวสำหรับส่วน GPA */
-            color: white;
-            text-align: center;
-        }
-        .data-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .gpa-button {
-            padding: 8px 15px;
-            background-color: #e67e22; /* สีส้มสำหรับปุ่มคำนวณ */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
             transition: background-color 0.3s;
         }
-        .gpa-button:hover {
-            background-color: #d35400;
+        .login-btn:hover {
+            background-color: #ffc107;
         }
 
-        /* Responsive Design */
+        /* 2. Navigation (เมนูนำทาง) */
+        nav {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* 3. Hero/Banner (ส่วนประกาศหลัก) */
+        .hero-banner {
+            background: url('hero-bg.jpg') no-repeat center center/cover; /* สมมติว่ามีรูปภาพ */
+            background-color: #e6ffe6;
+            padding: 50px 5%;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .hero-banner h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .hero-banner p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        /* 4. Content Sections */
+        .content-section {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+        .admission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background-color: var(--light-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        .apply-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e74c3c; /* สีแดงเน้น */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 5%;
+            margin-top: 40px;
+            font-size: 0.85em;
+        }
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
+            .header-main {
+                flex-direction: column;
+                text-align: center;
+            }
+            .login-btn {
+                margin-top: 15px;
+            }
+            nav ul {
                 flex-direction: column;
             }
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-            .sidebar a {
-                border-left: none;
-                border-bottom: 1px solid #34495e;
-            }
-            .main-content {
-                padding: 20px;
-            }
-            .action-grid {
-                grid-template-columns: 1fr;
+            nav ul li a {
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="sidebar">
-            <h2>ระบบงานทะเบียน & วัดผล</h2>
-            <a href="#registration" class="active">📚 งานทะเบียน (ข้อมูลหลัก)</a>
-            <a href="#grading">📝 ประมวลผล GPA</a>
-            <a href="#reports">📊 รายงานและเอกสาร</a>
-            <a href="#logout">🚪 ออกจากระบบ</a>
+    <div class="header-top">
+        <a href="#" style="color: white;">ติดต่อเรา</a> | <a href="#" style="color: white;">EN</a> | <a href="#" style="color: white;">TH</a>
+    </div>
+    <div class="header-main">
+        <div class="logo-section">
+            <h1>มหาวิทยาลัย [ชื่อมหาวิทยาลัย]</h1>
+            <p>กองบริการการศึกษา | ระบบรับสมัครนักศึกษา</p>
         </div>
+        <a href="#" class="login-btn">เข้าสู่ระบบ / สมัครเรียนออนไลน์</a>
+    </div>
 
-        <div class="main-content">
-            <div class="header-bar">
-                <h1>แดชบอร์ดหลัก: เจ้าหน้าที่งานทะเบียนวัดผล</h1>
-                <span>ผู้ใช้งาน: นายทะเบียน (A001)</span>
+    <nav>
+        <ul>
+            <li><a href="#">หน้าหลัก</a></li>
+            <li><a href="#">หลักสูตรที่เปิดรับ</a></li>
+            <li><a href="#">ระเบียบการสมัคร</a></li>
+            <li><a href="#">ปฏิทินรับสมัคร</a></li>
+            <li><a href="#">ดาวน์โหลดเอกสาร</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-banner">
+        <h2>ประกาศรับสมัครนักศึกษาใหม่ ประจำปีการศึกษา 2569</h2>
+        <p>เปิดรับสมัคร **TCAS รอบ Portfolio** ตั้งแต่วันที่ 1 พ.ย. 2568 - 30 พ.ย. 2568</p>
+        <a href="#" class="apply-btn" style="display: inline-block; padding: 15px 40px; font-size: 1.2em;">สมัครเรียนตอนนี้!</a>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-header">รอบการรับสมัครที่สำคัญ (TCAS 69)</h2>
+
+        <div class="admission-grid">
+            
+            <div class="card">
+                <h3>รอบที่ 1: Portfolio</h3>
+                <p><strong>ประเภท:</strong> โครงการพิเศษ, โครงการความสามารถ</p>
+                <p><strong>กำหนดการ:</strong> 1 พ.ย. - 30 พ.ย. 2568</p>
+                <p><strong>คุณสมบัติ:</strong> ไม่ต้องสอบข้อเขียน ใช้แฟ้มสะสมผลงานและสัมภาษณ์</p>
+                <a href="#" class="apply-btn">ดูรายละเอียดและสมัคร</a>
             </div>
 
-            <section id="registration" class="registration-module">
-                <h2>📚 โมดูล: จัดการข้อมูลหลัก (งานทะเบียน)</h2>
-                
-                <div class="action-grid">
-                    <button class="action-btn">จัดการข้อมูลนักเรียน</button>
-                    <button class="action-btn">จัดการหลักสูตรและวิชา</button>
-                    <button class="action-btn">ตั้งค่าภาคเรียน/ปีการศึกษา</button>
-                    <button class="action-btn">กำหนดเกณฑ์การตัดเกรด</button>
-                </div>
-
-                <h3 style="margin-top: 30px;">สรุปข้อมูลล่าสุด:</h3>
-                <p>จำนวนนักเรียนปัจจุบัน: **1,250 คน** | หลักสูตรที่ใช้งาน: **2** | ภาคเรียนปัจจุบัน: **1/2568**</p>
-                <p>⚠️ **แจ้งเตือน:** มีนักเรียน 5 ราย ยื่นเรื่องขอแก้ไขข้อมูลส่วนตัว (เปลี่ยนชื่อ-สกุล) รอการอนุมัติ</p>
-            </section>
-
-            <hr>
-
-            <section id="grading" class="registration-module">
-                <h2>📝 โมดูล: ตรวจสอบและประมวลผล GPA</h2>
-                
-                <p>สถานะการประมวลผลผลการเรียน ณ วันที่ 13 ต.ค. 2568</p>
-
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>ระดับชั้น</th>
-                            <th>หน่วยกิตรวม (ภาค)</th>
-                            <th>สถานะการบันทึกเกรด</th>
-                            <th>การดำเนินการ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ม.4</td>
-                            <td>20.5</td>
-                            <td style="color: green; font-weight: bold;">ครบถ้วน (100%)</td>
-                            <td style="text-align: center;">
-                                <button class="gpa-button">ประมวลผล GPA/GPAX</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>ม.5</td>
-                            <td>21.0</td>
-                            <td style="color: orange;">98% (รอ 2 วิชา)</td>
-                            <td style="text-align: center;">
-                                <button class="gpa-button" style="background-color: #3498db;">แจ้งเตือนครูวิชาการ</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>ม.6</td>
-                            <td>18.0</td>
-                            <td style="color: green; font-weight: bold;">ครบถ้วน (100%)</td>
-                            <td style="text-align: center;">
-                                <button class="gpa-button">ประมวลผลสุดท้าย & ปพ.3</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <div class="card">
+                <h3>รอบที่ 2: Quota</h3>
+                <p><strong>ประเภท:</strong> โควตาพื้นที่, โควตาโรงเรียนเครือข่าย</p>
+                <p><strong>กำหนดการ:</strong> 15 ธ.ค. 2568 - 15 ก.พ. 2569</p>
+                <p><strong>คุณสมบัติ:</strong> ใช้คะแนน TGAT/TPAT (บางส่วน) และคะแนนสอบเฉพาะ</p>
+                <a href="#" class="apply-btn">ดูรายละเอียดและสมัคร</a>
+            </div>
             
-            <hr>
-            
-            <section id="reports" class="registration-module">
-                 <h2>📊 โมดูล: รายงานและเอกสาร</h2>
-                 <div class="action-grid">
-                     <button class="action-btn" style="background-color: #1abc9c;">พิมพ์ ปพ. 1 (Transcript)</button>
-                     <button class="action-btn" style="background-color: #1abc9c;">พิมพ์ ปพ. 7 (ใบรับรองผล)</button>
-                     <button class="action-btn" style="background-color: #e74c3c;">รายงานนักเรียนติด '0' / เกรดต่ำ</button>
-                     <button class="action-btn" style="background-color: #9b59b6;">รายงานสถิติ GPAX (จัดอันดับ)</button>
-                 </div>
-            </section>
-
+            <div class="card">
+                <h3>รอบที่ 3: Admission</h3>
+                <p><strong>ประเภท:</strong> รับรวมจาก ทปอ. (A1, A2, A3)</p>
+                <p><strong>กำหนดการ:</strong> เม.ย. - พ.ค. 2569</p>
+                <p><strong>คุณสมบัติ:</strong> ใช้คะแนน A-Level และ TGAT/TPAT ตามเกณฑ์ที่กำหนด</p>
+                <a href="#" class="apply-btn">ดูระเบียบการ ทปอ.</a>
+            </div>
         </div>
+        
+        <br><br>
+        <h2 class="section-header">ขั้นตอนการสมัครออนไลน์</h2>
+        <ol style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+            <li>**ลงทะเบียนเข้าสู่ระบบ/สมัครสมาชิก:** สำหรับผู้สมัครใหม่</li>
+            <li>**กรอกข้อมูลการสมัคร:** เลือกสาขาวิชา และกรอกข้อมูลส่วนตัวให้ครบถ้วน</li>
+            <li>**อัปโหลดเอกสาร:** อัปโหลด Portfolio, สำเนาวุฒิการศึกษา, และรูปถ่าย</li>
+            <li>**ชำระค่าธรรมเนียม:** ชำระผ่าน Mobile Banking หรือช่องทางอื่น ๆ ที่ระบุ</li>
+            <li>**พิมพ์ใบสมัครและตรวจสอบสถานะ:** ติดตามผลการสมัครและประกาศผล</li>
+        </ol>
+
     </div>
+
+    <footer>
+        <p>Copyright © 2024 มหาวิทยาลัย [ชื่อมหาวิทยาลัย] | <a href="#">นโยบายความเป็นส่วนตัว</a></p>
+        <p>โทร. 0XXX-XXXXXX | E-mail: admission@uni.ac.th</p>
+    </footer>
 
 </body>
 </html>
