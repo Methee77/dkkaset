@@ -1,0 +1,70 @@
+/* การตั้งค่าพื้นฐานสำหรับทั้งหน้าเว็บ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* สีพื้นหลังอ่อน */
+    display: flex; 
+    justify-content: center; /* จัดองค์ประกอบตามแนวนอนตรงกลาง */
+    align-items: center; /* จัดองค์ประกอบตามแนวตั้งตรงกลาง */
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* กล่องบรรจุฟอร์มล็อกอิน */
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    max-width: 400px; /* จำกัดความกว้าง */
+    text-align: center;
+}
+
+/* กลุ่มของช่อง input และ label */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* ช่อง input */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    font-size: 16px;
+}
+
+/* ปุ่มล็อกอิน */
+.login-button {
+    background-color: #007bff; /* สีน้ำเงิน */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* สีน้ำเงินเข้มขึ้นเมื่อชี้เมาส์ */
+}
+
+/* ลิงก์เพิ่มเติม */
+.forgot-password a, .signup a {
+    text-decoration: none;
+}
+
+.forgot-password a {
+    color: #007bff;
+}
+
+.signup a {
+    color: #28a745; /* สีเขียว */
+    font-weight: bold;
+}
