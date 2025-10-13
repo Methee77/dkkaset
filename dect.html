@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แดชบอร์ดรายงานผลการเรียนรวม (จัดกลาง)</title>
+    <title>แดชบอร์ดรายงานผลการเรียนรวม (ขอบมน)</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Variables */
@@ -11,35 +11,32 @@
             --primary-color: #007bff; /* สีน้ำเงินหลัก */
             --secondary-color: #28a745; 
             --danger-color: #dc3545; 
-            --bg-body: #e9ecef; /* พื้นหลังด้านนอก (ขอบ) - สีเทาอ่อน */
-            --bg-main: #ffffff; /* พื้นหลังเนื้อหาหลัก - สีขาว */
+            --bg-body: #e9ecef; 
+            --bg-main: #ffffff; 
             --text-color: #343a40; 
+            --radius-large: 12px; /* ขอบมนขนาดใหญ่ (ใช้กับ Container หลัก) */
+            --radius-medium: 8px;  /* ขอบมนขนาดกลาง (ใช้กับการ์ดและแผนภูมิ) */
+            --radius-small: 4px;   /* ขอบมนขนาดเล็ก (ใช้กับ Placeholder) */
         }
 
         body {
             font-family: 'Kanit', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-body); /* พื้นหลังโดยรวม */
+            background-color: var(--bg-body); 
             color: var(--text-color);
         }
 
-        /* **************************************** */
-        /* การปรับเพื่อจัดเนื้อหาให้อยู่ตรงกลาง (Centralized Container) */
-        /* **************************************** */
+        /* 1. Container หลัก - ขอบมนขนาดใหญ่ */
         .dashboard-container {
-            max-width: 1200px; /* กำหนดความกว้างสูงสุดของเนื้อหา */
-            margin: 30px auto; /* 'auto' สำหรับการจัดกึ่งกลางแนวนอน */
-            padding: 30px; /* ขอบ padding ภายในเพื่อให้เนื้อหาไม่ติดขอบ */
-            background-color: var(--bg-main); /* กำหนดพื้นหลังของกล่องเนื้อหาหลัก */
-            border-radius: 12px; /* ขอบโค้งมน */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* เงาให้ดูมีมิติ */
+            max-width: 1200px; 
+            margin: 30px auto; 
+            padding: 30px; 
+            background-color: var(--bg-main); 
+            border-radius: var(--radius-large); /* ใช้ขอบมนขนาดใหญ่ 12px */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
         }
         
-        /* **************************************** */
-        /* การปรับส่วนที่เหลือ (เหมือนเดิมแต่เน้นความเป็นระเบียบ) */
-        /* **************************************** */
-
         h1 {
             color: var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
@@ -48,7 +45,7 @@
             font-weight: 700;
         }
 
-        /* 1. สรุปภาพรวม (Stat Cards) */
+        /* 2. Stat Cards - ขอบมนขนาดกลาง */
         .summary-cards {
             display: flex;
             gap: 20px;
@@ -58,15 +55,19 @@
 
         .card {
             flex: 1;
-            min-width: 200px; /* ลดความกว้างขั้นต่ำเล็กน้อย */
+            min-width: 200px;
             background-color: var(--bg-main);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* เงาเบาลง */
-            border-left: 5px solid var(--primary-color); /* เพิ่มเส้นสีเน้นด้านซ้าย */
+            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+            border-left: 5px solid var(--primary-color); 
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px); /* เพิ่มลูกเล่นเล็กน้อย */
         }
         
-        /* กำหนดสีเส้นเน้นด้านซ้าย */
         .card.gpa { border-left-color: var(--secondary-color); }
         .card.fail { border-left-color: var(--danger-color); }
         .card.students { border-left-color: var(--primary-color); }
@@ -83,7 +84,7 @@
             font-weight: 700;
         }
         
-        /* 2. ส่วนแสดงแผนภูมิ (Charts) */
+        /* 3. กล่องแผนภูมิ (Charts) - ขอบมนขนาดกลาง */
         .chart-section {
             display: grid;
             grid-template-columns: 2fr 1fr; 
@@ -94,15 +95,15 @@
         .chart-box {
             background-color: var(--bg-main);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border: 1px solid #eee; /* เพิ่มขอบบางๆ */
+            border: 1px solid #eee; 
         }
         
         .chart-placeholder {
             height: 300px;
             background-color: #f1f1f1;
-            border-radius: 4px;
+            border-radius: var(--radius-small); /* ใช้ขอบมนขนาดเล็ก 4px */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -110,14 +111,15 @@
             font-weight: 600;
         }
 
-        /* 3. ตารางรายละเอียด (Table) */
+        /* 4. ตารางรายละเอียด (Table) - ขอบมนขนาดกลาง */
         .detail-table-section {
             background-color: var(--bg-main);
-            padding: 20px 0; /* ลบ padding ด้านข้างออกเพราะ container มี padding แล้ว */
-            border-radius: 8px;
-            overflow-x: auto; 
+            padding: 20px 0; 
+            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
+            overflow: hidden; /* สำคัญ! ใช้เพื่อซ่อนขอบบน/ล่างของตารางไม่ให้ทะลุขอบมน */
         }
-
+        
+        /* ... (CSS ส่วนอื่นของตารางเหมือนเดิม) ... */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -137,15 +139,15 @@
         }
         
         tr:nth-child(even) {
-            background-color: #f8f9fa; /* สีพื้นหลังแถวคู่ */
+            background-color: #f8f9fa; 
         }
-        
+
         /* Responsive */
         @media (max-width: 900px) {
             .dashboard-container {
-                margin: 0; /* ลบ margin เมื่ออยู่บนมือถือ */
+                margin: 0; 
                 padding: 15px;
-                border-radius: 0; /* ลบขอบโค้งมนเมื่ออยู่บนมือถือ */
+                border-radius: 0; 
             }
             .chart-section {
                 grid-template-columns: 1fr;
@@ -161,18 +163,18 @@
     <div class="summary-cards">
         
         <div class="card gpa">
-            <div class="card-title">จำนวนนักเรียนทั้งหมด</div>
-            <div class="card-value">2026</div>
+            <div class="card-title">GPA เฉลี่ยรวมทั้งโรงเรียน</div>
+            <div class="card-value">3.25</div>
         </div>
 
         <div class="card fail">
             <div class="card-title">จำนวนนักเรียนที่ติด 'ร','มส' หรือ เกรด 0</div>
-            <div class="card-value">254</div>
+            <div class="card-value">45</div>
         </div>
         
         <div class="card students">
-            <div class="card-title">จำนวนนักเรียนที่มีผลการเรียน 4.00</div>
-            <div class="card-value">99</div>
+            <div class="card-title">จำนวนนักเรียนทั้งหมด</div>
+            <div class="card-value">1,250</div>
         </div>
         
         <div class="card progress">
