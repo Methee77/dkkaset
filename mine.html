@@ -9,12 +9,16 @@
     <style>
         /* -------------------------- CSS STYLES (KANNASOOT-Inspired) -------------------------- */
         
+        /* 1. นำเข้าฟอนต์ IBM Plex Sans Thai */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap');
+        
         /* การตั้งค่าพื้นฐาน */
         body {
-            font-family: 'Tahoma', sans-serif;
+            /* 2. ใช้ฟอนต์ IBM Plex Sans Thai เป็นหลัก */
+            font-family: 'IBM Plex Sans Thai', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0; /* พื้นหลังสีเทาอ่อน */
+            background-color: #f0f0f0;
             color: #333;
             line-height: 1.6;
         }
@@ -23,7 +27,7 @@
             width: 95%;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: white; /* พื้นที่ทำงานสีขาว */
+            background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -179,7 +183,7 @@
             padding: 10px 0;
             text-align: center;
             font-size: 0.8em;
-            clear: both; /* เคลียร์ float ถ้ามีการใช้ float ใน main-container */
+            clear: both;
         }
 
         /* Media Queries */
@@ -240,7 +244,7 @@
                 
                 <section class="countdown-section">
                     <h3>⏳ นับถอยหลังสู่การประกาศผลการเรียน</h3>
-                    <p>กำหนดประกาศ: 31 ตุลาคม 2568 เวลา 09:00 น.</p>
+                    <p>กำหนดประกาศ: 31 ตุลาคม 2568 เวลา 09:00 น.</p> 
                     <div id="timer" class="timer-display">
                         <div class="time-unit">
                             <span id="days" class="number">00</span>
@@ -290,7 +294,7 @@
 
     <script>
         // 1. *** กรุณาเปลี่ยนค่านี้ให้เป็นวันที่ประกาศผลการเรียนจริง ***
-        // รูปแบบ: YYYY-MM-DDTHH:MM:SS (เช่น 2025-10-31T09:00:00)
+        // รูปแบบ: YYYY-MM-DDTHH:MM:SS (ปัจจุบันคือ 2025-10-13 15:55:02)
         const countdownDate = new Date("2025-10-31T09:00:00").getTime(); 
 
         // 2. ฟังก์ชันอัปเดตการนับถอยหลังทุกๆ 1 วินาที
