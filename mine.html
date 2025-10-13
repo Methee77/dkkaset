@@ -91,6 +91,61 @@
             background-color: #ffe08a; /* สีเหลืองอ่อน */
             border-left: 5px solid #ffcc00;
         }
+        
+        /* สไตล์สำหรับลิงก์เข้าสู่ระบบที่กำหนดเอง */
+        .sidebar ul li a[style*="background-color: #004d99;"]:not(.status-link) {
+            color: white;
+        }
+
+        /* --- CSS เพิ่มเติมสำหรับสถานะงานทะเบียน --- */
+        
+        /* สไตล์หลักของลิงก์สถานะ */
+        .status-link {
+            display: flex; /* ทำให้เนื้อหาจัดเรียงในแนวนอน */
+            justify-content: space-between; /* จัดเนื้อหาและสถานะให้ชิดซ้าย-ขวา */
+            align-items: center;
+            font-size: 0.95em;
+            font-weight: 600 !important;
+            padding: 10px 15px !important;
+            border-radius: 4px;
+            margin-top: 10px;
+            color: #333 !important;
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
+        }
+        
+        .status-link:hover {
+            transform: translateY(-2px);
+            border-left: 5px solid #ffcc00 !important;
+        }
+        
+        /* สไตล์สำหรับป้ายสถานะ (Badge) */
+        .status-badge {
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* สถานะ: เปิดใช้งาน */
+        .status-active {
+            background-color: #28a745; /* สีเขียว */
+        }
+        
+        /* สถานะ: ปิดใช้งาน */
+        .status-closed {
+            background-color: #dc3545; /* สีแดง */
+        }
+        
+        /* สถานะ: อยู่ระหว่างดำเนินการ */
+        .status-pending {
+            background-color: #ffc107; /* สีเหลือง/ส้ม */
+            color: #333;
+        }
+
+        /* ------------------------------------------------ */
 
         /* เนื้อหาหลัก (Content) */
         .content {
@@ -106,9 +161,9 @@
             margin-bottom: 20px;
         }
         
-        /* ส่วนนับถอยหลัง (Countdown Section) */
+        /* ส่วนนับถอยหลัง (Countdown Section) - คงเดิม */
         .countdown-section {
-            background-color: #ffcc00; /* สีเหลืองเน้น */
+            background-color: #ffcc00; 
             color: #000080;
             padding: 15px;
             margin-bottom: 20px;
@@ -156,7 +211,7 @@
             display: none;
         }
 
-        /* กล่องข่าวสาร/ลิงก์ด่วน */
+        /* กล่องข่าวสาร/ลิงก์ด่วน - คงเดิม */
         .news-box, .service-box {
             border: 1px solid #ddd;
             padding: 15px;
@@ -176,14 +231,14 @@
             text-decoration: underline;
         }
 
-        /* สไตล์สำหรับ GIF NEW */
+        /* สไตล์สำหรับ GIF NEW - คงเดิม */
         .new-gif {
-            height: 18px; /* ปรับขนาดให้เหมาะสมกับบรรทัดข้อความ */
+            height: 18px; 
             vertical-align: middle;
             margin-left: 5px;
         }
         
-        /* ส่วนท้าย (Footer) */
+        /* ส่วนท้าย (Footer) - คงเดิม */
         .footer {
             background-color: #000080;
             color: white;
@@ -193,7 +248,7 @@
             clear: both;
         }
 
-        /* Media Queries */
+        /* Media Queries - คงเดิม */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -245,6 +300,20 @@
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน</a></li>
                     <li><a href="#" style="background-color: #ffcc00; color: #000080;"><i class="fas fa-chalkboard-teacher"></i> เข้าสู่ระบบครู</a></li>
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-wrench"></i> สำหรับ Addmin</a></li>
+                    
+                    <li>
+                        <a href="#" class="status-link">
+                            <span><i class="fas fa-database"></i> สถานะระบบ SGS/GPA</span>
+                            <span class="status-badge status-active">เปิดใช้งาน</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="status-link">
+                            <span><i class="fas fa-envelope-open-text"></i> สถานะงานคำร้อง </span>
+                            <span class="status-badge status-pending">กำลังดำเนินการ</span>
+                        </a>
+                    </li>
 
                 </ul>
             </aside>
