@@ -6,7 +6,8 @@
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (ส่วนที่เพิ่ม/แก้ไขเน้นที่นี่) */
+        
         /* -------------------- Base & Typography -------------------- */
         body {
             font-family: 'Sarabun', Tahoma, sans-serif;
@@ -46,59 +47,26 @@
         }
         .btn-primary:hover { background-color: #003366; }
 
-        /* -------------------- 1. Header & Navigation -------------------- */
-        .main-header {
-            background-color: white;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-        }
-        .logo-area {
-            line-height: 1.2;
-            cursor: pointer;
-        }
-        .logo-text {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #004d99;
-        }
-        .school-name {
-            font-size: 0.8em;
-            color: #666;
-            display: block;
-        }
-        .main-nav {
-            display: flex;
-            align-items: center;
-        }
-        .main-nav a:not(.btn-primary) {
-            margin-left: 20px;
-            color: #333;
-            font-weight: 500;
-        }
-        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; }
-
         /* -------------------- 2. Hero Section (Full Width Slider) -------------------- */
         .hero-section {
-            background-color: #e0f0ff; /* สีรองสำหรับ Hero */
-            height: 350px; /* ความสูงของ Slider */
+            background-color: #e0f0ff; 
+            height: 450px; /* เพิ่มความสูงเพื่อรองรับตัวนับถอยหลัง */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            /* แทนที่ด้วยภาพสไลด์จริง */
-            background-image: url('[ใส่ URL รูปภาพ Hero ที่นี่]'); 
+            background-image: url('https://via.placeholder.com/1500x450/e0f0ff/004d99?text=Online+Registration+System'); /* ภาพตัวอย่าง */
             background-size: cover;
             background-position: center;
+            position: relative; /* สำคัญสำหรับกรอบนับถอยหลัง */
         }
         .hero-content {
-            background-color: rgba(255, 255, 255, 0.85); /* พื้นหลังโปร่งแสงสำหรับข้อความ */
-            padding: 20px 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px 40px;
             border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         .hero-content h1 {
             font-size: 2.5em;
@@ -110,125 +78,99 @@
             color: #333;
             margin-bottom: 20px;
         }
+        
+        /* --- NEW: Countdown Timer Style --- */
+        .countdown-container {
+            background-color: #dc3545; /* สีแดงเด่น */
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .countdown-container h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        #countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .time-block {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            min-width: 60px;
+        }
+        .time-block span {
+            display: block;
+            font-size: 2em;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .time-block small {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+        /* ถ้าประกาศผลแล้ว */
+        #countdown-timer.expired {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ffc107;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        /* --- End Countdown Timer Style --- */
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
-        .quick-access-strip {
-            padding: 20px 0;
-        }
-        .quick-links-grid {
-            display: grid;
-            /* 4 คอลัมน์บนจอใหญ่ */
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 20px;
-        }
+        .quick-access-strip { padding: 20px 0; }
+        .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .quick-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-            text-align: center;
-            border-top: 5px solid transparent; /* สำหรับสีเน้นด้านบน */
+            background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent;
         }
-        .quick-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-        }
+        .quick-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
         .icon-lg { font-size: 3em; display: block; margin-bottom: 10px; }
         .quick-card h3 { margin: 5px 0 0; font-size: 1.2em; }
         .quick-card p { margin: 0; font-size: 0.85em; color: #666; }
-
-        /* สีเน้น Card (คล้ายเว็บไซต์อ้างอิง) */
         .card-red { border-top-color: #dc3545; color: #dc3545; }
         .card-blue { border-top-color: #007bff; color: #007bff; }
         .card-green { border-top-color: #28a745; color: #28a745; }
         .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
 
-
         /* -------------------- 4. News & Service Blocks (Grid 2 คอลัมน์) -------------------- */
-        .main-content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr; /* ข่าว 2/3, บริการ 1/3 */
-            gap: 30px;
-            margin-top: 30px;
-        }
-        /* News Section (ซ้ายมือ) */
-        .news-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        .main-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
+        .news-section { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .news-section h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .news-list ul { list-style: none; padding: 0; }
         .news-list li { padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 1.05em; }
-        .news-list li:last-child { border-bottom: none; }
-        .news-tag {
-            font-size: 0.75em; font-weight: 700; color: white; padding: 4px 8px; border-radius: 3px; margin-right: 15px; display: inline-block;
-        }
+        .news-tag { font-size: 0.75em; font-weight: 700; color: white; padding: 4px 8px; border-radius: 3px; margin-right: 15px; display: inline-block; }
         .tag-red { background-color: #dc3545; }
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
-
-        /* Service Sidebar (ขวามือ) */
-        .sidebar-services {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .service-link {
-            background-color: #f8f8f8;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: block;
-            transition: background-color 0.2s;
-            color: #333;
-            font-weight: 500;
-        }
+        .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
         .service-link:hover { background-color: #e6e6e6; color: #004d99; }
 
 
-        /* -------------------- 5. Footer -------------------- */
-        .main-footer {
-            background-color: #343a40;
-            color: white;
-            padding: 30px 5%;
-            margin-top: 40px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            border-bottom: 1px solid #495057;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
+        /* -------------------- 5. Footer and Responsive Design (ไม่มีการเปลี่ยนแปลงหลัก) -------------------- */
+        .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
-
-        /* -------------------- Responsive Design -------------------- */
         @media (max-width: 900px) {
-            .quick-links-grid {
-                grid-template-columns: repeat(2, 1fr); /* บนมือถือเหลือ 2 คอลัมน์ */
-            }
-            .main-content-grid {
-                grid-template-columns: 1fr; /* บนมือถือเหลือ 1 คอลัมน์ (เรียงซ้อนกัน) */
-            }
-            .news-section h2, .sidebar-services h2 { text-align: center; }
-
-            /* Mobile Menu */
+            .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-content-grid { grid-template-columns: 1fr; }
             .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
             .main-nav.active { display: flex; }
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
             .menu-toggle { display: block; }
         }
         @media (max-width: 500px) {
-            .quick-links-grid {
-                grid-template-columns: 1fr; /* บนจอเล็กมากเหลือ 1 คอลัมน์ */
-            }
-            .hero-section { height: 250px; }
+            .quick-links-grid { grid-template-columns: 1fr; }
+            .hero-section { height: 350px; }
             .hero-content h1 { font-size: 1.8em; }
         }
     </style>
@@ -255,7 +197,18 @@
         <div class="hero-content">
             <h1>ศูนย์รวมบริการงานทะเบียนวัดผลออนไลน์</h1>
             <p>ตรวจสอบผลการเรียน ขอเอกสาร ย้ายเข้า-ออก ได้ง่ายและรวดเร็ว</p>
-            <a href="[URL_RESULTS]" class="btn-primary">เริ่มต้นใช้งาน</a>
+            
+            <div class="countdown-container">
+                <h4>🎉 กำหนดประกาศผลการเรียนภาคเรียนที่ 1/2569 จะเริ่มใน:</h4>
+                <div id="countdown-timer">
+                    <div class="time-block"><span id="days">00</span><small>วัน</small></div>
+                    <div class="time-block"><span id="hours">00</span><small>ชั่วโมง</small></div>
+                    <div class="time-block"><span id="minutes">00</span><small>นาที</small></div>
+                    <div class="time-block"><span id="seconds">00</span><small>วินาที</small></div>
+                </div>
+            </div>
+            
+            <a href="[URL_RESULTS]" class="btn-primary" style="margin-top:20px;">ตรวจสอบผลการเรียน</a>
         </div>
     </section>
 
@@ -333,18 +286,50 @@
     </footer>
 
     <script>
+        // JS สำหรับ Mobile Menu
         document.getElementById('menuToggle').addEventListener('click', function() {
             var nav = document.getElementById('mainNav');
             nav.classList.toggle('active');
         });
-        
-        // เมื่อคลิกที่ลิงก์ในเมนูมือถือ ให้ซ่อนเมนู
         var navLinks = document.querySelectorAll('#mainNav a');
         navLinks.forEach(function(link) {
             link.addEventListener('click', function() {
                 document.getElementById('mainNav').classList.remove('active');
             });
         });
+
+        // =========================================================
+        // JS สำหรับ Countdown Timer
+        // ** ต้องเปลี่ยนวันที่ประกาศผลการเรียนจริงที่นี่ (ปี, เดือน-1, วัน, ชั่วโมง, นาที, วินาที) **
+        // ตัวอย่าง: 25 พฤศจิกายน 2569 เวลา 10:00:00 น.
+        var countDownDate = new Date("Nov 25, 2026 10:00:00").getTime();
+        
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // ใส่ค่าลงใน element
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            // เมื่อสิ้นสุดการนับถอยหลัง
+            if (distance < 0) {
+                clearInterval(x);
+                var timerDiv = document.getElementById("countdown-timer");
+                var containerDiv = document.querySelector(".countdown-container");
+                
+                // เปลี่ยนข้อความและดีไซน์
+                containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#ffc107; color:#333;'>เข้าสู่ระบบตรวจสอบผล</a>";
+                containerDiv.style.backgroundColor = '#28a745'; // เปลี่ยนเป็นสีเขียวเมื่อประกาศผล
+            }
+        }, 1000); 
     </script>
 
 </body>
