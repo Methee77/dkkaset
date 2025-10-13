@@ -91,61 +91,6 @@
             background-color: #ffe08a; /* สีเหลืองอ่อน */
             border-left: 5px solid #ffcc00;
         }
-        
-        /* สไตล์สำหรับลิงก์เข้าสู่ระบบที่กำหนดเอง */
-        .sidebar ul li a[style*="background-color: #004d99;"]:not(.status-link) {
-            color: white;
-        }
-
-        /* --- CSS เพิ่มเติมสำหรับสถานะงานทะเบียน --- */
-        
-        /* สไตล์หลักของลิงก์สถานะ */
-        .status-link {
-            display: flex; /* ทำให้เนื้อหาจัดเรียงในแนวนอน */
-            justify-content: space-between; /* จัดเนื้อหาและสถานะให้ชิดซ้าย-ขวา */
-            align-items: center;
-            font-size: 0.95em;
-            font-weight: 600 !important;
-            padding: 10px 15px !important;
-            border-radius: 4px;
-            margin-top: 10px;
-            color: #333 !important;
-            border: 1px solid #ddd;
-            transition: transform 0.2s;
-        }
-        
-        .status-link:hover {
-            transform: translateY(-2px);
-            border-left: 5px solid #ffcc00 !important;
-        }
-        
-        /* สไตล์สำหรับป้ายสถานะ (Badge) */
-        .status-badge {
-            font-size: 0.7em;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-        }
-
-        /* สถานะ: เปิดใช้งาน */
-        .status-active {
-            background-color: #28a745; /* สีเขียว */
-        }
-        
-        /* สถานะ: ปิดใช้งาน */
-        .status-closed {
-            background-color: #dc3545; /* สีแดง */
-        }
-        
-        /* สถานะ: อยู่ระหว่างดำเนินการ */
-        .status-pending {
-            background-color: #ffc107; /* สีเหลือง/ส้ม */
-            color: #333;
-        }
-
-        /* ------------------------------------------------ */
 
         /* เนื้อหาหลัก (Content) */
         .content {
@@ -161,9 +106,9 @@
             margin-bottom: 20px;
         }
         
-        /* ส่วนนับถอยหลัง (Countdown Section) - คงเดิม */
+        /* ส่วนนับถอยหลัง (Countdown Section) */
         .countdown-section {
-            background-color: #ffcc00; 
+            background-color: #ffcc00; /* สีเหลืองเน้น */
             color: #000080;
             padding: 15px;
             margin-bottom: 20px;
@@ -211,7 +156,7 @@
             display: none;
         }
 
-        /* กล่องข่าวสาร/ลิงก์ด่วน - คงเดิม */
+        /* กล่องข่าวสาร/ลิงก์ด่วน */
         .news-box, .service-box {
             border: 1px solid #ddd;
             padding: 15px;
@@ -231,14 +176,62 @@
             text-decoration: underline;
         }
 
-        /* สไตล์สำหรับ GIF NEW - คงเดิม */
+        /* สไตล์สำหรับ GIF NEW */
         .new-gif {
-            height: 18px; 
+            height: 18px; /* ปรับขนาดให้เหมาะสมกับบรรทัดข้อความ */
             vertical-align: middle;
             margin-left: 5px;
         }
         
-        /* ส่วนท้าย (Footer) - คงเดิม */
+        /* --- CSS สำหรับส่วนแสดงสถานะงานทะเบียนใน Content --- */
+        
+        .status-admin-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        }
+
+        .status-header {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #000080;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .status-item-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .status-options-group label {
+            margin-left: 15px;
+            font-weight: normal;
+            color: #333;
+            cursor: default; /* ปิดการโต้ตอบ */
+        }
+
+        .status-options-group input[type="radio"] {
+            accent-color: #000080;
+        }
+        
+        .metadata {
+            margin-top: 15px;
+            font-size: 0.85em;
+            text-align: right;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        /* ----------------------------------------------------------------- */
+        
+        /* ส่วนท้าย (Footer) */
         .footer {
             background-color: #000080;
             color: white;
@@ -248,7 +241,7 @@
             clear: both;
         }
 
-        /* Media Queries - คงเดิม */
+        /* Media Queries */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -300,21 +293,6 @@
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน</a></li>
                     <li><a href="#" style="background-color: #ffcc00; color: #000080;"><i class="fas fa-chalkboard-teacher"></i> เข้าสู่ระบบครู</a></li>
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-wrench"></i> สำหรับ Addmin</a></li>
-                    
-                    <li>
-                        <a href="#" class="status-link">
-                            <span><i class="fas fa-database"></i> สถานะระบบ SGS/GPA</span>
-                            <span class="status-badge status-active">เปิดใช้งาน</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#" class="status-link">
-                            <span><i class="fas fa-envelope-open-text"></i> สถานะงานคำร้อง </span>
-                            <span class="status-badge status-pending">กำลังดำเนินการ</span>
-                        </a>
-                    </li>
-
                 </ul>
             </aside>
 
@@ -366,7 +344,56 @@
                     <a href="#" style="background-color: #004d99; color: white; padding: 8px 15px; display: inline-block; text-decoration: none; border-radius: 4px;"><i class="fas fa-file-pdf"></i> ดาวน์โหลดแบบฟอร์ม ปพ.1/คำร้อง</a>
                 </div>
 
-            </main>
+                <div class="status-admin-box">
+                    <div class="status-header">
+                        <i class="fas fa-cogs"></i> สถานะระบบงานทะเบียนวัดผล (ผู้ใช้งานทั่วไป)
+                    </div>
+                    
+                    <div class="status-item-line">
+                        <span>ปีการศึกษาปัจจุบัน: 2568</span>
+                        <span>ภาคเรียนปัจจุบัน: 1</span>
+                    </div>
+
+                    <div class="status-item-line">
+                        <span>กลาง/ปลายภาค:</span>
+                        <div class="status-options-group">
+                            <label><input type="radio" name="term-type" value="mid" disabled> กลางภาค</label>
+                            <label><input type="radio" name="term-type" value="final" checked disabled> ปลายภาค</label>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 10px 0; border: none; border-top: 1px dashed #ccc;">
+                    
+                    <div class="status-item-line">
+                        <span>บันทึกผลการเรียน:</span>
+                        <div class="status-options-group">
+                            <label><input type="radio" name="rec-status" value="closed" checked disabled> ปิด</label>
+                            <label><input type="radio" name="rec-status" value="open" disabled> เปิด</label>
+                        </div>
+                    </div>
+
+                    <div class="status-item-line">
+                        <span>ประกาศผลการเรียนทุกชั้น:</span>
+                        <div class="status-options-group">
+                            <label><input type="radio" name="pub-all-status" value="closed" disabled> ปิด</label>
+                            <label><input type="radio" name="pub-all-status" value="open" checked disabled> เปิด</label>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item-line">
+                        <span>บันทึกผลสอบแก้ตัว:</span>
+                        <div class="status-options-group">
+                            <label><input type="radio" name="res-status" value="closed" checked disabled> ปิด</label>
+                            <label><input type="radio" name="res-status" value="open" disabled> เปิด</label>
+                        </div>
+                    </div>
+
+                    <div class="metadata">
+                        ผู้บันทึก: 331 นางวรางคณา พรหมชนะ<br>
+                        เวลาที่บันทึก: 10 ต.ค. 68 10:59
+                    </div>
+                </div>
+                </main>
         </div>
 
         <footer class="footer">
