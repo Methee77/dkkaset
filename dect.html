@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แดชบอร์ดรายงานผลการเรียนรวม (ขอบมน)</title>
+    <title>แดชบอร์ดผลการเรียน (KPIs หลัก)</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Variables */
         :root {
             --primary-color: #007bff; /* สีน้ำเงินหลัก */
-            --secondary-color: #28a745; 
-            --danger-color: #dc3545; 
-            --bg-body: #e9ecef; 
-            --bg-main: #ffffff; 
+            --secondary-color: #28a745; /* สีเขียวสำหรับความสำเร็จ (GPA 4.00) */
+            --danger-color: #dc3545; /* สีแดงสำหรับปัญหา (0/ร/มส) */
+            --bg-body: #e9ecef; /* พื้นหลังด้านนอก */
+            --bg-main: #ffffff; /* พื้นหลังเนื้อหาหลัก */
             --text-color: #343a40; 
-            --radius-large: 12px; /* ขอบมนขนาดใหญ่ (ใช้กับ Container หลัก) */
-            --radius-medium: 8px;  /* ขอบมนขนาดกลาง (ใช้กับการ์ดและแผนภูมิ) */
-            --radius-small: 4px;   /* ขอบมนขนาดเล็ก (ใช้กับ Placeholder) */
+            --radius-large: 12px; 
+            --radius-medium: 8px;  
+            --radius-small: 4px;   
         }
 
         body {
@@ -27,13 +27,13 @@
             color: var(--text-color);
         }
 
-        /* 1. Container หลัก - ขอบมนขนาดใหญ่ */
+        /* 1. Container หลัก - จัดกึ่งกลางและมีขอบมน */
         .dashboard-container {
             max-width: 1200px; 
             margin: 30px auto; 
             padding: 30px; 
             background-color: var(--bg-main); 
-            border-radius: var(--radius-large); /* ใช้ขอบมนขนาดใหญ่ 12px */
+            border-radius: var(--radius-large); 
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
         }
         
@@ -45,7 +45,7 @@
             font-weight: 700;
         }
 
-        /* 2. Stat Cards - ขอบมนขนาดกลาง */
+        /* 2. สรุปภาพรวม (Stat Cards) */
         .summary-cards {
             display: flex;
             gap: 20px;
@@ -55,36 +55,41 @@
 
         .card {
             flex: 1;
-            min-width: 200px;
+            min-width: 250px; /* ปรับให้การ์ดมีขนาดใหญ่ขึ้นเล็กน้อย */
             background-color: var(--bg-main);
-            padding: 20px;
-            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
+            padding: 25px; /* เพิ่ม Padding ให้การ์ดดูโปร่งขึ้น */
+            border-radius: var(--radius-medium); 
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
-            border-left: 5px solid var(--primary-color); 
+            border-left: 6px solid var(--primary-color); /* เพิ่มเส้นหนาขึ้น */
             transition: transform 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-3px); /* เพิ่มลูกเล่นเล็กน้อย */
+            transform: translateY(-3px);
         }
         
-        .card.gpa { border-left-color: var(--secondary-color); }
+        /* กำหนดสีเส้นและตัวอักษรเฉพาะการ์ด */
+        .card.total { border-left-color: var(--primary-color); }
         .card.fail { border-left-color: var(--danger-color); }
-        .card.students { border-left-color: var(--primary-color); }
-        .card.progress { border-left-color: #ffc107; }
+        .card.perfect { border-left-color: var(--secondary-color); } 
+        
+        .card.fail .card-value { color: var(--danger-color); }
+        .card.perfect .card-value { color: var(--secondary-color); }
+        .card.total .card-value { color: var(--primary-color); }
 
         .card-title {
-            font-size: 1.0em;
+            font-size: 1.1em;
             color: #6c757d;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: 400;
         }
 
         .card-value {
-            font-size: 2.2em;
+            font-size: 2.8em;
             font-weight: 700;
         }
         
-        /* 3. กล่องแผนภูมิ (Charts) - ขอบมนขนาดกลาง */
+        /* 3. กล่องแผนภูมิและตาราง (รูปแบบเดิม) */
         .chart-section {
             display: grid;
             grid-template-columns: 2fr 1fr; 
@@ -95,7 +100,7 @@
         .chart-box {
             background-color: var(--bg-main);
             padding: 20px;
-            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
+            border-radius: var(--radius-medium);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #eee; 
         }
@@ -103,7 +108,7 @@
         .chart-placeholder {
             height: 300px;
             background-color: #f1f1f1;
-            border-radius: var(--radius-small); /* ใช้ขอบมนขนาดเล็ก 4px */
+            border-radius: var(--radius-small);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -111,15 +116,13 @@
             font-weight: 600;
         }
 
-        /* 4. ตารางรายละเอียด (Table) - ขอบมนขนาดกลาง */
         .detail-table-section {
             background-color: var(--bg-main);
             padding: 20px 0; 
-            border-radius: var(--radius-medium); /* ใช้ขอบมนขนาดกลาง 8px */
-            overflow: hidden; /* สำคัญ! ใช้เพื่อซ่อนขอบบน/ล่างของตารางไม่ให้ทะลุขอบมน */
+            border-radius: var(--radius-medium); 
+            overflow: hidden; 
         }
-        
-        /* ... (CSS ส่วนอื่นของตารางเหมือนเดิม) ... */
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -141,7 +144,7 @@
         tr:nth-child(even) {
             background-color: #f8f9fa; 
         }
-
+        
         /* Responsive */
         @media (max-width: 900px) {
             .dashboard-container {
@@ -162,27 +165,24 @@
     
     <div class="summary-cards">
         
-        <div class="card gpa">
-            <div class="card-title">GPA เฉลี่ยรวมทั้งโรงเรียน</div>
-            <div class="card-value">3.25</div>
-        </div>
-
-        <div class="card fail">
-            <div class="card-title">จำนวนนักเรียนที่ติด 'ร','มส' หรือ เกรด 0</div>
-            <div class="card-value">45</div>
-        </div>
-        
-        <div class="card students">
+        <div class="card total">
             <div class="card-title">จำนวนนักเรียนทั้งหมด</div>
             <div class="card-value">1,250</div>
         </div>
-        
-        <div class="card progress">
-            <div class="card-title">ค่าเฉลี่ยความก้าวหน้า (จากเทอมที่แล้ว)</div>
-            <div class="card-value">↑ +0.12</div>
-        </div>
 
+        <div class="card fail">
+            <div class="card-title">จำนวนนักเรียนที่ติด 0/ร/มส</div>
+            <div class="card-value">45</div>
+        </div>
+        
+        <div class="card perfect">
+            <div class="card-title">จำนวนนักเรียน GPA 4.00</div>
+            <div class="card-value">128</div>
+        </div>
+        
     </div>
+
+    <hr style="border: 0; border-top: 1px solid #ccc; margin: 30px 0;">
 
     <div class="chart-section">
         
