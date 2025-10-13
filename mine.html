@@ -21,12 +21,14 @@
             color: var(--text-color);
         }
 
-        /* การจัดวาง: เนื้อหาอยู่ตรงกลาง มีขอบเท่ากัน */
+        /* ****************************************************** */
+        /* การจัดวาง: เนื้อหาอยู่ตรงกลาง มีขอบเท่ากัน (Key Part) */
         .content-area {
-            max-width: 1200px; /* กำหนดความกว้างสูงสุด */
-            margin: 0 auto; /* จัดให้อยู่กึ่งกลาง */
-            padding: 0 20px; /* ขอบซ้ายขวาเล็กน้อย */
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
         }
+        /* ****************************************************** */
         
         /* 1. Header และเมนูหลัก */
         .header-main {
@@ -71,7 +73,7 @@
         nav.main-menu .menu-wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px; /* ขอบเมนูตามเนื้อหา */
+            padding: 0 20px; 
         }
         nav.main-menu ul li a {
             display: block;
@@ -94,7 +96,7 @@
             border-bottom: 3px solid var(--secondary-color);
         }
         .announcement-banner h2 {
-            color: #d9534f; /* สีแดงแจ้งเตือน */
+            color: #d9534f;
             font-size: 1.5em;
             margin-bottom: 10px;
         }
@@ -117,7 +119,7 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
-            height: fit-content; /* ปรับให้ความสูงพอดีเนื้อหา */
+            height: fit-content;
         }
         .quick-links h3 {
             background-color: var(--primary-color);
@@ -227,8 +229,7 @@
     </div>
     
     <nav class="main-menu">
-        <div class="menu-wrapper">
-            <ul>
+        <div class="menu-wrapper"> <ul>
                 <li><a href="#" class="active">หน้าหลักงานทะเบียน</a></li>
                 <li><a href="#">ระเบียบการศึกษา</a></li>
                 <li><a href="#">การขอเอกสาร</a></li>
