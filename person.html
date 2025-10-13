@@ -57,19 +57,23 @@
         .director-main .manager-info {
             margin-left: 0;
             margin-top: 15px;
+            /* ปรับแก้: จัดข้อความในส่วนข้อมูลผู้อำนวยการให้อยู่ตรงกลาง */
+            text-align: center; 
         }
 
         /* รูปภาพผู้บริหาร */
         .manager-photo img {
-            width: 150px; /* ขนาดรูปภาพใหญ่ขึ้นสำหรับ CEO */
-            height: 150px;
+            /* ปรับแก้: ขยายรูปภาพผู้อำนวยการ */
+            width: 180px; 
+            height: 180px;
             border-radius: 50%; /* ทำให้เป็นวงกลม */
             object-fit: cover;
             border: 5px solid #004d40;
         }
         .deputy-group .manager-photo img {
-            width: 100px; /* ขนาดรูปภาพรองผู้อำนวยการ */
-            height: 100px;
+            /* ปรับแก้: ขยายรูปภาพรองผู้อำนวยการ */
+            width: 130px; 
+            height: 130px;
             border-color: #00796b;
         }
 
@@ -77,7 +81,7 @@
         .manager-info {
             margin-left: 25px;
             flex-grow: 1; 
-            text-align: left;
+            text-align: left; /* ยังคงให้รองผู้อำนวยการจัดซ้าย */
         }
 
         .manager-info .title, .manager-info .group-title {
@@ -132,6 +136,8 @@
             .manager-info {
                 margin-left: 0;
                 margin-top: 15px;
+                /* ปรับแก้: ให้ข้อความรองผู้อำนวยการอยู่ตรงกลางเมื่ออยู่บนมือถือ */
+                text-align: center !important; 
             }
             .sub-unit {
                 text-align: center;
@@ -164,7 +170,7 @@
 
         <div class="manager-card deputy-group">
             <div class="manager-photo">
-                 <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep1" alt="รูปภาพรองผู้อำนวยการ 1">
+                 <img src="https://via.placeholder.com/130/00796B/FFFFFF?text=Dep1" alt="รูปภาพรองผู้อำนวยการ 1">
             </div>
             <div class="manager-info">
                 <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารงบประมาณ นโยบายและแผน</h3>
@@ -178,7 +184,7 @@
 
         <div class="manager-card deputy-group">
             <div class="manager-photo">
-                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep2" alt="รูปภาพรองผู้อำนวยการ 2">
+                <img src="https://via.placeholder.com/130/00796B/FFFFFF?text=Dep2" alt="รูปภาพรองผู้อำนวยการ 2">
             </div>
             <div class="manager-info">
                 <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารวิชาการ และบริหารทั่วไป</h3>
@@ -192,7 +198,7 @@
 
         <div class="manager-card deputy-group">
             <div class="manager-photo">
-                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep3" alt="รูปภาพรองผู้อำนวยการ 3">
+                <img src="https://via.placeholder.com/130/00796B/FFFFFF?text=Dep3" alt="รูปภาพรองผู้อำนวยการ 3">
             </div>
             <div class="manager-info">
                 <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารกิจการนักเรียน</h3>
@@ -205,7 +211,7 @@
         
         <div class="manager-card deputy-group">
             <div class="manager-photo">
-                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep4" alt="รูปภาพรองผู้อำนวยการ 4">
+                <img src="https://via.placeholder.com/130/00796B/FFFFFF?text=Dep4" alt="รูปภาพรองผู้อำนวยการ 4">
             </div>
             <div class="manager-info">
                 <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารงานบุคคล</h3>
