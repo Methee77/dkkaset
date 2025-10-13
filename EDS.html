@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS ภายในแท็ก style เพื่อรวมโค้ดทั้งหมด */
+        /* โค้ด CSS ได้รับการจัดรูปแบบเพื่อเน้นแถบเมนูด้านบน */
         
         /* การตั้งค่าพื้นฐาน */
         body {
@@ -19,7 +19,9 @@
             line-height: 1.6;
         }
 
-        /* Header และ Navigation */
+        /* ------------------------------------------------------------------ */
+        /* HEADER & NAVIGATION (แถบเมนูด้านบน) */
+        /* ------------------------------------------------------------------ */
         .main-header {
             background-color: #004d99; /* สีน้ำเงินเข้มหลัก */
             color: white;
@@ -41,11 +43,12 @@
             font-weight: 300;
         }
 
+        /* แถบเมนูหลัก */
         .main-nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
+            display: flex; /* จัดเรียงเมนูหลักในแนวนอน */
         }
 
         .main-nav ul li {
@@ -65,20 +68,20 @@
             color: #ffcc00; /* สีทอง */
         }
 
-        /* Dropdown Menu */
+        /* เมนูย่อย (Dropdown) - แสดงเป็นแถบลงมาด้านล่างเมนูหลัก */
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #0059b3; /* น้ำเงินสว่างขึ้น */
             min-width: 200px;
-            z-index: 10; /* ให้แสดงทับองค์ประกอบอื่น */
+            z-index: 10; 
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            top: 100%; 
+            top: 100%; /* ให้เมนูย่อยอยู่ใต้เมนูหลัก */
             left: 0;
         }
 
         .dropdown:hover .dropdown-content,
-        .dropdown.active .dropdown-content { /* เพิ่ม .active สำหรับการทำงานบนมือถือ */
+        .dropdown.active .dropdown-content { 
             display: block;
         }
 
@@ -96,7 +99,9 @@
             color: #ffcc00 !important;
         }
         
-        /* Main Content */
+        /* ------------------------------------------------------------------ */
+        /* ส่วนเนื้อหาหลัก */
+        /* ------------------------------------------------------------------ */
         .container {
             width: 90%;
             max-width: 1200px;
@@ -104,16 +109,15 @@
             padding: 20px;
         }
 
-        /* Announcement Section */
-        .announcement {
+        .announcement, .quick-links, .contact {
             background-color: white;
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
 
-        .announcement h2 {
+        .announcement h2, .quick-links h2, .contact h2 {
             color: #004d99;
             border-bottom: 3px solid #ffcc00;
             padding-bottom: 10px;
@@ -121,33 +125,8 @@
             font-weight: 600;
         }
 
-        .news-item {
-            padding: 10px 0;
-            border-bottom: 1px dashed #ccc;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .news-item strong {
-            color: #d9534f; /* สีแดงสำหรับวันที่ */
-            min-width: 100px;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        /* Quick Links */
-        .quick-links {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .quick-links h2 {
-            color: #004d99;
-            margin-bottom: 15px;
-        }
-
+        /* Quick Links Buttons */
+        .quick-links { text-align: center; }
         .quick-btn {
             display: inline-block;
             padding: 15px 30px;
@@ -159,47 +138,10 @@
             min-width: 250px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .primary { background-color: #28a745; color: white; }
+        .secondary { background-color: #ffc107; color: #333; }
+        .tertiary { background-color: #17a2b8; color: white; }
 
-        .quick-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-
-        .primary {
-            background-color: #28a745; /* สีเขียว */
-            color: white;
-        }
-
-        .primary:hover {
-            background-color: #218838;
-        }
-
-        .secondary {
-            background-color: #ffc107; /* สีเหลือง */
-            color: #333;
-        }
-
-        .secondary:hover {
-            background-color: #e0a800;
-        }
-
-        .tertiary {
-            background-color: #17a2b8; /* สีฟ้า */
-            color: white;
-        }
-
-        .tertiary:hover {
-            background-color: #138496;
-        }
-        
-        /* Contact Section Placeholder */
-        .contact {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
         /* Footer */
         .main-footer {
             background-color: #333;
@@ -209,44 +151,14 @@
             margin-top: 30px;
         }
 
-        .main-footer a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-        
-        /* Media Queries สำหรับมือถือ */
+        /* Media Queries (สำหรับมือถือ) */
         @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .main-nav {
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            .main-nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .main-nav ul li {
-                width: 100%;
-                padding: 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .dropdown-content {
-                position: static; /* ให้ Dropdown แสดงต่อด้านล่าง */
-                width: 100%;
-                box-shadow: none;
-            }
-            
-            .quick-btn {
-                min-width: 80%;
-                display: block;
-            }
+            .main-header { flex-direction: column; text-align: center; }
+            .main-nav { width: 100%; margin-top: 10px; }
+            .main-nav ul { flex-direction: column; align-items: center; }
+            .main-nav ul li { width: 100%; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+            .dropdown-content { position: static; width: 100%; box-shadow: none; }
+            .quick-btn { min-width: 80%; display: block; }
         }
     </style>
 </head>
@@ -265,7 +177,8 @@
                     <div class="dropdown-content">
                         <a href="#mission">วิสัยทัศน์/พันธกิจ</a>
                         <a href="#scope">ขอบข่ายภาระงาน</a>
-                        <a href="#personnel">บุคลากร 🧑‍🏫</a> </div>
+                        <a href="#personnel">บุคลากร 🧑‍🏫</a> 
+                    </div>
                 </li>
                 
                 <li class="dropdown" onclick="toggleDropdown(this)">
@@ -276,6 +189,7 @@
                         <a href="#profile">การแก้ไขข้อมูลส่วนตัว</a>
                     </div>
                 </li>
+                
                 <li class="dropdown" onclick="toggleDropdown(this)">
                     <a href="#">งานวัดผล</a>
                     <div class="dropdown-content">
@@ -284,6 +198,7 @@
                         <a href="#onet">ข้อมูล O-NET</a>
                     </div>
                 </li>
+                
                 <li><a href="#downloads">เอกสารดาวน์โหลด</a></li>
                 <li><a href="login.html" target="_blank">ระบบตรวจสอบผลการเรียน</a></li>
                 <li><a href="#contact">ติดต่อเรา</a></li>
@@ -298,10 +213,7 @@
                 <strong>10 ต.ค. 68:</strong> <p>แจ้งกำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียนชั้น ม.6 ที่จะจบการศึกษาในปีนี้</p>
             </div>
             <div class="news-item">
-                <strong>01 ต.ค. 68:</strong> <p>ปฏิทินสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2568 (ดาวน์โหลดเอกสารได้ที่หน้าเอกสารดาวน์โหลด)</p>
-            </div>
-             <div class="news-item">
-                <strong>01 ก.ย. 68:</strong> <p>คู่มือการปฏิบัติงานทะเบียนวัดผลสำหรับครูที่ปรึกษา ปีการศึกษา 2568</p>
+                <strong>01 ต.ค. 68:</strong> <p>ปฏิทินสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2568</p>
             </div>
         </section>
 
@@ -322,7 +234,6 @@
                 <p><strong>เจ้าหน้าที่ทะเบียน:</strong> คุณสมหญิง ตั้งใจ</p>
                 <p><strong>เบอร์ติดต่อ:</strong> 0X-XXX-XXXX ต่อ 102</p>
             </div>
-            <small>*กรุณาติดต่อในช่วงเวลาทำการเท่านั้น</small>
         </section>
         
         <section id="contact" class="contact" style="margin-top: 30px;">
@@ -330,20 +241,17 @@
             <p><strong>ที่ตั้งสำนักงาน:</strong> อาคาร [ชื่ออาคาร], ชั้น 1 งานทะเบียนวัดผล โรงเรียน [ชื่อโรงเรียนของคุณ]</p>
             <p><strong>เบอร์โทรศัพท์กลาง:</strong> 0X-XXX-XXXX ต่อ [เบอร์ภายใน]</p>
             <p><strong>E-mail:</strong> reg_[schoolname]@school.ac.th</p>
-            <p><strong>เวลาทำการ:</strong> วันจันทร์ - วันศุกร์ เวลา 08:30 - 16:30 น. (ยกเว้นวันหยุดราชการ)</p>
         </section>
 
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 งานทะเบียนวัดผล [ชื่อโรงเรียน] | <a href="privacy.html">นโยบายความเป็นส่วนตัว</a> | ออกแบบโดย [ชื่อคุณ/หน่วยงาน]</p>
+        <p>&copy; 2025 งานทะเบียนวัดผล [ชื่อโรงเรียน] | <a href="privacy.html">นโยบายความเป็นส่วนตัว</a></p>
     </footer>
 
     <script>
         // JavaScript สำหรับการสลับ Dropdown (สำคัญสำหรับมือถือ)
         function toggleDropdown(element) {
-            // เมื่อคลิกที่เมนูหลัก (li.dropdown) ให้สลับคลาส 'active'
-            // ซึ่งจะทำให้ dropdown-content แสดง/ซ่อน ตาม CSS ด้านบน
             element.classList.toggle('active');
         }
     </script>
