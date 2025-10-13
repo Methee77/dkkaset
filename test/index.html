@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เข้าสู่ระบบ</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <title>เข้าสู่ระบบ | MyKU - มหาวิทยาลัยเกษตรศาสตร์</title>
+    <link rel="stylesheet" href="myku_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
-    <div class="login-container">
-        <h2>เข้าสู่ระบบ</h2>
-        <form action="/login" method="POST"> <div class="input-group">
-                <label for="username">ชื่อผู้ใช้ / อีเมล:</label>
-                <input type="text" id="username" name="username" required>
+    <div class="login-page">
+        <header class="header">
+            <div class="header-logo">
+                <span class="ku-logo">KU</span>
+                <span class="ku-title">KASETSART UNIVERSITY</span>
             </div>
-            <div class="input-group">
-                <label for="password">รหัสผ่าน:</label>
-                <input type="password" id="password" name="password" required>
+        </header>
+
+        <div class="login-card">
+            <div class="card-header">
+                <h3>KU ALL-Login</h3>
+                <p>เข้าสู่ระบบด้วย Nontri Account</p>
             </div>
-            <button type="submit" class="login-button">ล็อกอิน</button>
-        </form>
-        <p class="forgot-password">
-            <a href="#">ลืมรหัสผ่าน?</a>
-        </p>
-        <p class="signup">
-            ยังไม่มีบัญชี? <a href="#">สมัครสมาชิกที่นี่</a>
-        </p>
+            
+            <form action="/myku/authenticate" method="POST">
+                <div class="input-group">
+                    <label for="username">ชื่อผู้ใช้ (Nontri Account / รหัสนิสิต)</label>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" placeholder="เช่น b6140xxxxxx หรือ username@ku.th" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-button">
+                    <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <a href="#">ลืมรหัสผ่าน / ดูบัญชี Nontri Account</a>
+                <p class="mfa-note">
+                    <i class="fas fa-shield-alt"></i> ระบบนี้ใช้ KU ALL-Login และต้องการ <a href="#">Multi-Factor Authentication (MFA)</a>
+                </p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2025 มหาวิทยาลัยเกษตรศาสตร์. พัฒนาโดย สำนักบริการคอมพิวเตอร์.</p>
+        </footer>
     </div>
 </body>
 </html>
