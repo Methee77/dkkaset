@@ -51,6 +51,26 @@
         }
         .btn-primary:hover { background-color: #003366; }
 
+        /* -------------------- NEW: 0. Image Slider Area (ด้านบนสุด) -------------------- */
+        #slider-area {
+            width: 100%;
+            height: 350px; /* กำหนดความสูงของกรอบสไลด์ */
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0; /* ชิดกับ Header */
+        }
+        .slide-item {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: none; /* ซ่อนไว้ก่อน, ต้องใช้ JS สำหรับสลับภาพ */
+            /* ภาพตัวอย่างแรกแสดงผลทันที */
+            background-image: url('https://via.placeholder.com/1500x350/A93226/FFFFFF?text=Slide+1%3A+%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5'); 
+        }
+        #slide-1 { display: block; } /* แสดงภาพแรก */
+        
         /* -------------------- 1. Header & Navigation -------------------- */
         .main-header {
             background-color: white;
@@ -59,6 +79,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
+            position: sticky; /* ทำให้แถบเมนูติดอยู่ด้านบนเมื่อเลื่อนลง */
+            top: 0;
+            z-index: 1000; /* ให้อยู่เหนือเนื้อหาอื่นๆ */
         }
         .logo-area { line-height: 1.2; cursor: pointer; }
         .logo-text { font-size: 1.5em; font-weight: 700; color: #004d99; }
@@ -67,29 +90,28 @@
         .main-nav a:not(.btn-primary) { margin-left: 20px; color: #333; font-weight: 500; }
         .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } 
 
-        /* -------------------- 2. Hero Section -------------------- */
+        /* -------------------- 2. Hero Section (ปรับให้สั้นลง เพราะ Slider อยู่ด้านบน) -------------------- */
         .hero-section {
             background-color: #e0f0ff; 
-            height: 450px; 
+            height: auto; /* ไม่กำหนดความสูงตายตัว */
+            padding: 30px 0; /* เพิ่ม padding แทน */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            background-image: url('https://via.placeholder.com/1500x450/e0f0ff/004d99?text=Online+Registration+System');
-            background-size: cover;
-            background-position: center;
+            background-image: none; /* ลบภาพพื้นหลังเดิมออก */
             position: relative; 
         }
         .hero-content {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
         }
-        .hero-content h1 { font-size: 2.5em; color: #004d99; margin: 0 0 10px 0; }
-        .hero-content p { font-size: 1.2em; color: #333; margin-bottom: 20px; }
+        .hero-content h1 { font-size: 2.2em; color: #004d99; margin: 0 0 10px 0; }
+        .hero-content p { font-size: 1.1em; color: #333; margin-bottom: 20px; }
         .countdown-container { background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 20px; }
         .countdown-container h4 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; font-weight: 600; }
         #countdown-timer { display: flex; justify-content: center; gap: 15px; }
@@ -98,68 +120,26 @@
         .time-block small { font-size: 0.8em; opacity: 0.8; }
 
 
-        /* -------------------- 2.5 About Student Section (MODIFIED) -------------------- */
-        .student-info-section {
-            background-color: #fff; /* สีพื้นหลังขาว */
-            padding: 30px 0;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .student-info-section h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .info-card-grid {
-            /* แก้ไข: บังคับให้แสดง 4 คอลัมน์เท่ากันบนจอใหญ่ */
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 25px;
-            text-align: center;
-        }
-        .info-card {
-            /* ปรับตามภาพตัวอย่าง: เน้นสีทึบด้านบน */
-            background-color: #A93226; /* สีแดงเข้มตามภาพตัวอย่าง */
-            border-radius: 15px; /* ทำให้โค้งมนมากขึ้น */
-            padding: 25px 10px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-            color: white; /* ข้อความเป็นสีขาว */
-        }
-        .info-card:hover {
-            transform: scale(1.02); /* ขยายเล็กน้อยเมื่อ hover */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-        }
-        .info-card .icon-circle {
-            background-color: rgba(255, 255, 255, 0.2); /* วงกลมไอคอนโปร่งแสง */
-            width: 70px; /* ขนาดใหญ่ขึ้น */
-            height: 70px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .info-card .icon-circle i {
-            color: white;
-            font-size: 2.5em; /* ไอคอนใหญ่ขึ้น */
-        }
-        .info-card h3 {
-            margin: 0;
-            font-size: 1.2em;
-            color: white;
-            font-weight: 600;
-        }
+        /* -------------------- 2.5 About Student Section -------------------- */
+        .student-info-section { background-color: #fff; padding: 30px 0; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .student-info-section h2 { text-align: center; color: #333; margin-bottom: 30px; }
+        .info-card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; text-align: center; }
+        .info-card { background-color: #A93226; border-radius: 15px; padding: 25px 10px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); transition: all 0.3s; cursor: pointer; color: white; }
+        .info-card:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.25); }
+        .info-card .icon-circle { background-color: rgba(255, 255, 255, 0.2); width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; }
+        .info-card .icon-circle i { color: white; font-size: 2.5em; }
+        .info-card h3 { margin: 0; font-size: 1.2em; color: white; font-weight: 600; }
 
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
         .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .quick-card {
-            background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent;
-        }
+        .quick-card { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent; }
         .icon-lg { font-size: 3em; display: block; margin-bottom: 10px; }
+        .card-red { border-top-color: #dc3545; color: #dc3545; }
+        .card-blue { border-top-color: #007bff; color: #007bff; }
+        .card-green { border-top-color: #28a745; color: #28a745; }
+        .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
 
         /* -------------------- 4. News & Service Blocks (Grid 2 คอลัมน์) -------------------- */
         .main-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
@@ -171,7 +151,7 @@
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
         
-        /* Sidebar Styling (ไม่เปลี่ยนแปลงหลัก) */
+        /* Sidebar Styling */
         .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
@@ -179,6 +159,9 @@
         .status-item { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 0.9em; }
         .status-info-date { margin-top: 15px; font-size: 0.85em; color: #777; border-top: 1px solid #f0f0f0; padding-top: 10px; text-align: right; }
         .status-indicator { padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: 700; color: white; }
+        .status-ok { background-color: #28a745; }
+        .status-maintenance { background-color: #ffc107; color: #333; }
+        .status-offline { background-color: #dc3545; }
 
         /* -------------------- 5. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
@@ -186,12 +169,13 @@
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
         
         /* Media Query สำหรับ Mobile */
-        @media (max-width: 1200px) { /* เริ่มเปลี่ยนจาก 4 เป็น 2 คอลัมน์เมื่อหน้าจอแคบลง */
+        @media (max-width: 1200px) { 
             .info-card-grid { grid-template-columns: repeat(2, 1fr); } 
         }
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
             .main-content-grid { grid-template-columns: 1fr; }
+            
             .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
             .main-nav.active { display: flex; }
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
@@ -199,13 +183,18 @@
         }
         @media (max-width: 500px) {
             .quick-links-grid { grid-template-columns: 1fr; }
-            .info-card-grid { grid-template-columns: 1fr; } /* บนจอเล็กสุดเหลือ 1 คอลัมน์ */
-            .hero-section { height: 350px; }
+            .info-card-grid { grid-template-columns: 1fr; } 
+            .hero-section { height: auto; padding: 20px 0; }
             .hero-content h1 { font-size: 1.8em; }
         }
     </style>
 </head>
 <body>
+
+    <section id="slider-area">
+        <div class="slide-item" id="slide-1" style="background-image: url('https://via.placeholder.com/1500x350/A93226/FFFFFF?text=Slide+1%3A+%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5');"></div>
+        <div class="slide-item" id="slide-2" style="background-image: url('https://via.placeholder.com/1500x350/004d99/FFFFFF?text=Slide+2%3A+%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%A5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99');"></div>
+    </section>
 
     <header class="main-header">
         <div class="logo-area" onclick="window.location.href='#'">
@@ -413,6 +402,29 @@
                 document.getElementById('mainNav').classList.remove('active');
             });
         });
+
+        // =========================================================
+        // JS สำหรับ Image Slider (Simple Logic)
+        let slideIndex = 1;
+        const slides = document.getElementsByClassName("slide-item");
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 5000); // เปลี่ยนภาพทุก 5 วินาที
+        }
+        
+        // เริ่มต้น Slider เมื่อโหลดหน้าเว็บ
+        // แก้ไข: เรียกใช้ showSlides() แทนการรันครั้งแรกเพื่อให้ JS ควบคุมทั้งหมด
+        if (slides.length > 0) {
+             slides[0].style.display = "block"; // แสดงภาพแรก
+             setTimeout(showSlides, 5000); // เริ่มนับถอยหลัง 5 วิ
+        }
+
 
         // =========================================================
         // JS สำหรับ Countdown Timer (กำหนดวันประกาศผล)
