@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Professional Hub</title>
+    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Smooth UI</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Professional Ultra-Clean Minimalism */
+        /* CSS: Smooth Professional UI */
         
         :root {
-            --primary-color: #004a7c; /* สีน้ำเงินเข้ม (Deep Navy Blue) */
+            --primary-color: #004a7c; 
             --primary-light: #0077b6;
-            --accent-color: #ffb703; /* สีเหลืองทอง/ส้ม สำหรับเน้น */
+            --accent-color: #ffb703;
             --text-color: #333;
             --text-light: #666;
-            --bg-ultra-light: #f7f9fc; /* พื้นหลังสว่างมาก */
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            --border-radius-lg: 8px;
+            --bg-ultra-light: #f7f9fc; 
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* ปรับเงาให้นุ่มนวลขึ้น */
+            --border-radius-xl: 12px; /* เพิ่มความโค้งมน */
+            --transition-speed: 0.3s; /* ความเร็ว transition ทั่วไป */
         }
 
         body {
@@ -26,6 +27,12 @@
             background-color: var(--bg-ultra-light);
             color: var(--text-color);
             line-height: 1.6;
+            transition: background-color var(--transition-speed); /* เพิ่ม transition ให้ Body */
+        }
+        
+        /* ใส่ Transition ทั่วไปให้กับองค์ประกอบที่ควรเคลื่อนไหว */
+        * {
+            transition: all var(--transition-speed) ease-in-out; 
         }
 
         /* ------------------------------------------------------------------ */
@@ -38,17 +45,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* เพิ่มเงาเบาๆ ให้ Header เพื่อความลอยตัว */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
         }
 
         .logo h1 {
             margin: 0;
             font-size: 1.8em;
             color: var(--primary-color);
-            font-weight: 800; /* เน้นตัวอักษรให้ดูแข็งแรง */
+            font-weight: 800;
             letter-spacing: -0.5px;
         }
         
-        /* Navigation (Minimalist) */
+        /* Navigation (Smooth Hover) */
         .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
         .main-nav ul li { position: relative; padding: 0 18px; }
         .main-nav ul li a { 
@@ -57,7 +66,6 @@
             font-weight: 500; 
             padding: 10px 0; 
             display: block; 
-            transition: color 0.2s, border-bottom 0.2s;
         }
         .main-nav ul li a:hover { 
             color: var(--primary-light);
@@ -65,12 +73,12 @@
         }
         
         /* Dropdown */
-        .dropdown-content { background-color: white; box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.1); border-top: 3px solid var(--primary-light); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); overflow: hidden; }
+        .dropdown-content { background-color: white; box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.1); border-top: 3px solid var(--primary-light); border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl); overflow: hidden; }
         .dropdown-content a { color: var(--text-color) !important; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; font-weight: 400; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: var(--primary-color) !important; }
 
         /* ------------------------------------------------------------------ */
-        /* HERO SECTION (เน้น Call-to-Action) */
+        /* HERO SECTION */
         /* ------------------------------------------------------------------ */
         .hero-section {
             padding: 60px 20px 80px 20px;
@@ -79,139 +87,81 @@
             text-align: center;
         }
         
-        .hero-section h2 {
-            font-size: 2.8em;
-            color: var(--primary-color);
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .hero-section p {
-            font-size: 1.1em;
-            color: var(--text-light);
-            margin-bottom: 30px;
-        }
+        .hero-section h2 { font-size: 2.8em; color: var(--primary-color); font-weight: 800; margin-bottom: 10px; }
+        .hero-section p { font-size: 1.1em; color: var(--text-light); margin-bottom: 30px; }
 
         .hero-btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: var(--primary-color);
             padding: 16px 50px;
-            border-radius: var(--border-radius-lg);
+            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
             text-decoration: none;
             font-weight: 700;
             font-size: 1.2em;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(255, 183, 3, 0.5);
+            box-shadow: 0 4px 10px rgba(255, 183, 3, 0.4);
         }
 
         .hero-btn:hover {
             background-color: #ffd15d;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 183, 3, 0.7);
+            transform: translateY(-3px); /* เพิ่มการเคลื่อนที่ขึ้นที่สมูท */
+            box-shadow: 0 8px 20px rgba(255, 183, 3, 0.6); /* เงาที่กว้างและชัดขึ้นเมื่อ Hover */
         }
 
         /* ------------------------------------------------------------------ */
-        /* MAIN CONTENT & 3-Column Layout */
+        /* MAIN CONTENT & Layout */
         /* ------------------------------------------------------------------ */
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 40px auto;
             display: grid;
-            grid-template-columns: 2fr 1fr; /* ประกาศ/บริการหลัก (2 ส่วน) และ ข้อมูลด่วน (1 ส่วน) */
+            grid-template-columns: 2fr 1fr;
             gap: 30px;
         }
         
-        .main-section {
-            /* สำหรับ Announcements & Quick Links */
-        }
-
-        .sidebar-info {
-            /* สำหรับ Contact & Personnel */
-        }
-
-        /* Card Style (เน้นความสะอาด) */
+        /* Card Style (Smooth Shadow and Radius) */
         .card {
             background-color: white;
-            border-radius: var(--border-radius-lg);
+            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
             box-shadow: var(--card-shadow);
             padding: 30px;
             margin-bottom: 30px;
             border: 1px solid #e9ecef;
         }
 
-        .card h3 {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            font-weight: 700;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
+        .card h3 { font-size: 1.5em; color: var(--primary-color); font-weight: 700; border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-top: 0; margin-bottom: 20px; }
         
-        /* Quick Link Grid (4-Column) */
-        .quick-link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 คอลัมน์สำหรับ Link */
-            gap: 15px;
-            margin-top: 20px;
-        }
+        /* Quick Link Grid */
+        .quick-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
 
         .quick-link-item {
             display: block;
             background-color: var(--bg-ultra-light);
             padding: 20px;
-            border-radius: var(--border-radius-lg);
+            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
             text-align: center;
             text-decoration: none;
             color: var(--text-color);
             border: 1px solid #dee2e6;
-            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* เพิ่มเงาเบาๆ */
         }
         
         .quick-link-item:hover {
             background-color: #e8eef6;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px); /* เพิ่มการเคลื่อนที่ขึ้นที่สมูท */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* เพิ่มความลึกของเงาเมื่อ Hover */
         }
 
-        .quick-link-item strong {
-            display: block;
-            margin-top: 5px;
-            font-weight: 600;
-            font-size: 1.1em;
-            color: var(--primary-color);
-        }
-
-        .icon-large {
-            font-size: 2.5em;
-            color: var(--primary-light);
-            margin-bottom: 5px;
-        }
+        .quick-link-item strong { display: block; margin-top: 5px; font-weight: 600; font-size: 1.1em; color: var(--primary-color); }
+        .icon-large { font-size: 2.5em; color: var(--primary-light); margin-bottom: 5px; }
         
         /* Announcement List */
-        .announcement-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .announcement-list li {
-            border-bottom: 1px dashed #e9ecef;
-            padding: 10px 0;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .announcement-list li:last-child {
-            border-bottom: none;
-        }
-
-        .announcement-list strong {
-            color: var(--accent-color);
-            min-width: 80px;
-        }
+        .announcement-list { list-style: none; padding: 0; }
+        .announcement-list li { border-bottom: 1px dashed #e9ecef; padding: 10px 0; display: flex; gap: 15px; }
+        .announcement-list li:hover { background-color: #fafbfd; } /* เพิ่ม Hover Effect ที่สมูท */
+        .announcement-list li:last-child { border-bottom: none; }
+        .announcement-list strong { color: var(--accent-color); min-width: 80px; }
         
         /* ------------------------------------------------------------------ */
         /* FOOTER */
@@ -232,14 +182,10 @@
         /* MEDIA QUERIES (Mobile Responsiveness) */
         /* ------------------------------------------------------------------ */
         @media (max-width: 992px) {
-            .container {
-                grid-template-columns: 1fr; /* บน Tablet/Mobile ให้เป็นคอลัมน์เดียว */
-            }
+            .container { grid-template-columns: 1fr; } 
             .main-header { padding: 10px 20px; }
             .main-nav ul { flex-wrap: wrap; justify-content: center; }
-            .quick-link-grid {
-                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            }
+            .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
         }
     </style>
 </head>
@@ -351,7 +297,7 @@
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Designed for Professional Usability</p>
+        <p>&copy; 2025 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Smooth Experience</p>
     </footer>
 
     <script>
