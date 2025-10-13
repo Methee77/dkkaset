@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบรับสมัครนักศึกษาใหม่ - มหาวิทยาลัย (จำลอง)</title>
+    <title>Welcome to Official KN Website - โรงเรียนกาญจนานุเคราะห์</title>
     <style>
-        /* CSS องค์กร: ใช้สีเขียวและโทนสว่าง */
+        /* CSS องค์กร: จำลองสีโรงเรียน */
         :root {
-            --primary-color: #006400; /* เขียวเข้ม (Kasetsart Green) */
-            --secondary-color: #ffd700; /* สีทอง/เหลือง */
+            --primary-color: #007bff; /* น้ำเงินเข้ม */
+            --secondary-color: #ffc107; /* เหลือง/ทอง */
             --text-color: #333;
             --light-bg: #f8f8f8;
         }
@@ -21,137 +21,165 @@
             color: var(--text-color);
         }
 
-        /* 1. Header (ส่วนหัว) */
-        .header-top {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 5%;
-            font-size: 0.9em;
-            text-align: right;
-        }
+        /* 1. Header และเมนูหลัก */
         .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 5%;
+            background-color: white;
         }
-        .logo-section h1 {
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        .logo-section img {
+            width: 70px; /* ขนาดโลโก้ */
+            height: auto;
+            margin-right: 15px;
+        }
+        .logo-text h1 {
             color: var(--primary-color);
             margin: 0;
-            font-size: 1.8em;
+            font-size: 1.5em;
         }
-        .logo-section p {
+        .logo-text p {
             margin: 0;
             font-size: 0.8em;
             color: #555;
         }
-        .login-btn {
-            padding: 10px 20px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .login-btn:hover {
-            background-color: #ffc107;
-        }
-
-        /* 2. Navigation (เมนูนำทาง) */
-        nav {
+        
+        /* Menu Bar ใต้ Header */
+        nav.main-menu {
             background-color: var(--primary-color);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        nav ul {
+        nav.main-menu ul {
             list-style: none;
             padding: 0;
             margin: 0 auto;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
+            max-width: 1200px;
         }
-        nav ul li a {
+        nav.main-menu ul li a {
             display: block;
-            padding: 15px 25px;
+            padding: 15px 20px;
             text-decoration: none;
             color: white;
             font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s;
         }
-        nav ul li a:hover {
+        nav.main-menu ul li a:hover {
             background-color: var(--secondary-color);
             color: var(--primary-color);
         }
 
-        /* 3. Hero/Banner (ส่วนประกาศหลัก) */
+        /* 2. Banner/Slider (ส่วนประกาศสำคัญ) */
         .hero-banner {
-            background: url('hero-bg.jpg') no-repeat center center/cover; /* สมมติว่ามีรูปภาพ */
-            background-color: #e6ffe6;
-            padding: 50px 5%;
+            background-color: #e6f7ff; /* โทนฟ้าอ่อน */
+            padding: 60px 5%;
             text-align: center;
-            color: var(--primary-color);
+            border-bottom: 5px solid var(--secondary-color);
         }
         .hero-banner h2 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 2em;
         }
-        .hero-banner p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: var(--text-color);
+        .read-more-btn {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #28a745; /* สีเขียวสำหรับปุ่ม */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
         }
 
-        /* 4. Content Sections */
-        .content-section {
-            padding: 40px 5%;
+        /* 3. Content Sections: ข่าวสารและลิงก์บริการ */
+        .content-wrapper {
+            display: flex;
             max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-        }
-        .admission-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin: 40px auto;
+            padding: 0 20px;
             gap: 30px;
         }
-        .card {
-            background-color: var(--light-bg);
-            border-left: 5px solid var(--primary-color);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+
+        /* Quick Links (ลิงก์บริการด้านขวา) */
+        .quick-links {
+            width: 30%;
+            min-width: 250px;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-        .apply-btn {
-            display: block;
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #e74c3c; /* สีแดงเน้น */
+        .quick-links h3 {
+            background-color: var(--primary-color);
             color: white;
+            padding: 15px;
+            margin: 0;
+            border-radius: 5px 5px 0 0;
             text-align: center;
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        .link-list a {
+            display: block;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .link-list a:hover {
+            background-color: #f0f0f0;
         }
 
-        /* Footer */
+        /* News & Announcements (ข่าวสารหลักด้านซ้าย) */
+        .news-section {
+            flex-grow: 1;
+        }
+        .news-section h3 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .news-item {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 15px;
+        }
+        .news-item img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .news-item-content a {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .news-item-content p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* 4. Footer */
         footer {
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 20px 5%;
+            padding: 30px 5%;
             margin-top: 40px;
-            font-size: 0.85em;
+            font-size: 0.8em;
         }
         footer a {
             color: var(--secondary-color);
@@ -164,92 +192,106 @@
                 flex-direction: column;
                 text-align: center;
             }
-            .login-btn {
-                margin-top: 15px;
-            }
-            nav ul {
+            .content-wrapper {
                 flex-direction: column;
             }
-            nav ul li a {
-                text-align: center;
+            .quick-links {
+                width: 100%;
+                order: -1; /* ย้าย Quick Links ไปด้านบนในมุมมองมือถือ */
+            }
+            .news-section {
+                padding-top: 20px;
+            }
+            nav.main-menu ul {
+                justify-content: space-around;
+            }
+            nav.main-menu ul li a {
+                padding: 10px 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-top">
-        <a href="#" style="color: white;">ติดต่อเรา</a> | <a href="#" style="color: white;">EN</a> | <a href="#" style="color: white;">TH</a>
-    </div>
     <div class="header-main">
         <div class="logo-section">
-            <h1>มหาวิทยาลัย [ชื่อมหาวิทยาลัย]</h1>
-            <p>กองบริการการศึกษา | ระบบรับสมัครนักศึกษา</p>
+            <img src="school_logo.png" alt="โลโก้โรงเรียน">
+            <div class="logo-text">
+                <h1>โรงเรียนกาญจนานุเคราะห์</h1>
+                <p>KANCHANANUKROH SCHOOL</p>
+            </div>
         </div>
-        <a href="#" class="login-btn">เข้าสู่ระบบ / สมัครเรียนออนไลน์</a>
+        <div class="contact-info">
+            <p>โทร. 034-511-060 | Email: info@kn.ac.th</p>
+        </div>
     </div>
-
-    <nav>
+    <nav class="main-menu">
         <ul>
-            <li><a href="#">หน้าหลัก</a></li>
-            <li><a href="#">หลักสูตรที่เปิดรับ</a></li>
-            <li><a href="#">ระเบียบการสมัคร</a></li>
-            <li><a href="#">ปฏิทินรับสมัคร</a></li>
-            <li><a href="#">ดาวน์โหลดเอกสาร</a></li>
+            <li><a href="#" class="active">หน้าหลัก</a></li>
+            <li><a href="#">ข้อมูลพื้นฐาน</a></li>
+            <li><a href="#">กลุ่มสาระฯ</a></li>
+            <li><a href="#">งานวิชาการ</a></li>
+            <li><a href="#">ติดต่อ</a></li>
         </ul>
     </nav>
 
     <div class="hero-banner">
-        <h2>ประกาศรับสมัครนักศึกษาใหม่ ประจำปีการศึกษา 2569</h2>
-        <p>เปิดรับสมัคร **TCAS รอบ Portfolio** ตั้งแต่วันที่ 1 พ.ย. 2568 - 30 พ.ย. 2568</p>
-        <a href="#" class="apply-btn" style="display: inline-block; padding: 15px 40px; font-size: 1.2em;">สมัครเรียนตอนนี้!</a>
+        <h2>"โรงเรียนมาตรฐานสากล มุ่งสู่ความเป็นเลิศ"</h2>
+        <p>เปิดรับสมัครนักเรียนใหม่ ปีการศึกษา 2569 - ดูรายละเอียดการรับสมัครห้องเรียนพิเศษ</p>
+        <a href="#" class="read-more-btn">อ่านรายละเอียดเพิ่มเติม</a>
     </div>
 
-    <div class="content-section">
-        <h2 class="section-header">รอบการรับสมัครที่สำคัญ (TCAS 69)</h2>
+    <div class="content-wrapper">
+        
+        <div class="news-section">
+            <h3>📢 ข่าวสารและประชาสัมพันธ์</h3>
 
-        <div class="admission-grid">
-            
-            <div class="card">
-                <h3>รอบที่ 1: Portfolio</h3>
-                <p><strong>ประเภท:</strong> โครงการพิเศษ, โครงการความสามารถ</p>
-                <p><strong>กำหนดการ:</strong> 1 พ.ย. - 30 พ.ย. 2568</p>
-                <p><strong>คุณสมบัติ:</strong> ไม่ต้องสอบข้อเขียน ใช้แฟ้มสะสมผลงานและสัมภาษณ์</p>
-                <a href="#" class="apply-btn">ดูรายละเอียดและสมัคร</a>
-            </div>
-
-            <div class="card">
-                <h3>รอบที่ 2: Quota</h3>
-                <p><strong>ประเภท:</strong> โควตาพื้นที่, โควตาโรงเรียนเครือข่าย</p>
-                <p><strong>กำหนดการ:</strong> 15 ธ.ค. 2568 - 15 ก.พ. 2569</p>
-                <p><strong>คุณสมบัติ:</strong> ใช้คะแนน TGAT/TPAT (บางส่วน) และคะแนนสอบเฉพาะ</p>
-                <a href="#" class="apply-btn">ดูรายละเอียดและสมัคร</a>
+            <div class="news-item">
+                <img src="news_image1.jpg" alt="ภาพข่าว 1">
+                <div class="news-item-content">
+                    <p style="font-size: 0.8em; color: #999;">[12 ต.ค. 2568] - ข่าวประชาสัมพันธ์</p>
+                    <a href="#">พิธีมอบเกียรติบัตรนักเรียนที่มีผลการเรียนยอดเยี่ยม ประจำภาคเรียนที่ 1/2568</a>
+                    <p>ผู้บริหารและคณะครูร่วมแสดงความยินดีกับนักเรียนที่สร้างชื่อเสียง...</p>
+                </div>
             </div>
             
-            <div class="card">
-                <h3>รอบที่ 3: Admission</h3>
-                <p><strong>ประเภท:</strong> รับรวมจาก ทปอ. (A1, A2, A3)</p>
-                <p><strong>กำหนดการ:</strong> เม.ย. - พ.ค. 2569</p>
-                <p><strong>คุณสมบัติ:</strong> ใช้คะแนน A-Level และ TGAT/TPAT ตามเกณฑ์ที่กำหนด</p>
-                <a href="#" class="apply-btn">ดูระเบียบการ ทปอ.</a>
+            <div class="news-item">
+                <img src="news_image2.jpg" alt="ภาพข่าว 2">
+                <div class="news-item-content">
+                    <p style="font-size: 0.8em; color: #999;">[10 ต.ค. 2568] - ข่าวกิจกรรม</p>
+                    <a href="#">กิจกรรมสัปดาห์วิทยาศาสตร์และเทคโนโลยี ประจำปี 2568</a>
+                    <p>เชิญชวนนักเรียนเข้าร่วมกิจกรรมฐานความรู้และนิทรรศการนวัตกรรม...</p>
+                </div>
+            </div>
+            
+            <div style="text-align: right; margin-top: 15px;">
+                <a href="#" style="color: var(--primary-color); font-weight: bold;">ดูข่าวทั้งหมด ></a>
             </div>
         </div>
         
-        <br><br>
-        <h2 class="section-header">ขั้นตอนการสมัครออนไลน์</h2>
-        <ol style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
-            <li>**ลงทะเบียนเข้าสู่ระบบ/สมัครสมาชิก:** สำหรับผู้สมัครใหม่</li>
-            <li>**กรอกข้อมูลการสมัคร:** เลือกสาขาวิชา และกรอกข้อมูลส่วนตัวให้ครบถ้วน</li>
-            <li>**อัปโหลดเอกสาร:** อัปโหลด Portfolio, สำเนาวุฒิการศึกษา, และรูปถ่าย</li>
-            <li>**ชำระค่าธรรมเนียม:** ชำระผ่าน Mobile Banking หรือช่องทางอื่น ๆ ที่ระบุ</li>
-            <li>**พิมพ์ใบสมัครและตรวจสอบสถานะ:** ติดตามผลการสมัครและประกาศผล</li>
-        </ol>
+        <div class="quick-links">
+            <h3>KN SERVICE</h3>
+            <ul class="link-list">
+                <li><a href="#">📝 ระบบบริหารงานบุคคล</a></li>
+                <li><a href="#">📊 ระบบคลังข้อมูล BIG DATA</a></li>
+                <li><a href="#">💰 พิมพ์สลิปเงินเดือน</a></li>
+                <li><a href="#">📚 ระบบงานวัดผลและทะเบียน</a></li>
+                <li><a href="#">📧 Email องค์กร (G-Suite)</a></li>
+            </ul>
+            
+            <h3 style="background-color: #f0f0f0; color: var(--text-color); margin-top: 20px;">ติดต่อเรา</h3>
+            <div style="padding: 15px; background-color: white; border: 1px solid #ddd; border-top: none; font-size: 0.9em;">
+                <p>ร.ร. กาญจนานุเคราะห์</p>
+                <p>โทร: 034-511-060</p>
+                <p>ที่ตั้ง: 65 ต.บ้านเหนือ อ.เมือง กาญจนบุรี</p>
+            </div>
+        </div>
 
     </div>
 
     <footer>
-        <p>Copyright © 2024 มหาวิทยาลัย [ชื่อมหาวิทยาลัย] | <a href="#">นโยบายความเป็นส่วนตัว</a></p>
-        <p>โทร. 0XXX-XXXXXX | E-mail: admission@uni.ac.th</p>
+        <p>Copyright © 2024 KANCHANANUKROH SCHOOL |  | <a href="#">นโยบายเว็บไซต์</a></p>
+        <p>พัฒนาโดย: [ชื่อผู้พัฒนา/ฝ่ายเทคโนโลยีสารสนเทศ]</p>
     </footer>
 
 </body>
