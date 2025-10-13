@@ -51,25 +51,7 @@
         }
         .btn-primary:hover { background-color: #003366; }
 
-        /* -------------------- 1. Image Slider Area (ด้านบนสุด) -------------------- */
-        #slider-area {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            margin-bottom: 0;
-        }
-        .slide-item {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            display: none;
-        }
-        #slide-1 { display: block; } 
-
-        /* -------------------- 2. Header & Navigation (Sticky) -------------------- */
+        /* -------------------- 1. Header & Navigation (Sticky) -------------------- */
         .main-header {
             background-color: white;
             box-shadow: 0 1px 5px rgba(0,0,0,0.1);
@@ -88,30 +70,33 @@
         .main-nav a:not(.btn-primary) { margin-left: 20px; color: #333; font-weight: 500; }
         .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } 
 
-        /* -------------------- 3. Hero Section (ใต้ Header - ไม่มีนับถอยหลัง) -------------------- */
+        /* -------------------- 2. Hero Section (Banner หลัก) -------------------- */
         .hero-section {
+            /* ใช้เป็น Banner หลักเต็มความกว้าง */
             background-color: #e0f0ff; 
-            height: auto; 
-            padding: 30px 0; 
+            height: 350px; /* ปรับความสูงตามความเหมาะสมของ Banner */
+            padding: 0; 
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            background-image: none; 
+            background-image: url('https://via.placeholder.com/1500x350/e0f0ff/004d99?text=Online+Registration+System'); /* ใส่ภาพ Banner ตรงนี้ */
+            background-size: cover;
+            background-position: center;
             position: relative; 
         }
         .hero-content {
-            background-color: transparent; 
-            padding: 0;
-            border-radius: 0;
-            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0.9); /* มีกรอบขาวโปร่งแสง */
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         .hero-content h1 { font-size: 2.2em; color: #004d99; margin: 0 0 10px 0; }
         .hero-content p { font-size: 1.1em; color: #333; margin-bottom: 20px; }
         
-        /* --- Countdown Timer Style (ถูกย้ายไปที่ News Section) --- */
+        /* --- Countdown Timer Style (ย้ายไป News Section) --- */
         .countdown-container { 
             background-color: #dc3545; color: white; padding: 15px 25px; border-radius: 10px; margin-top: 15px; margin-bottom: 15px; 
         }
@@ -122,7 +107,7 @@
         .time-block small { font-size: 0.8em; opacity: 0.8; }
 
 
-        /* -------------------- 4. About Student Section (4-Column Grid) -------------------- */
+        /* -------------------- 3. About Student Section (4-Column Grid) -------------------- */
         .student-info-section { 
             background-color: #fff; padding: 30px 0; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
         }
@@ -131,7 +116,7 @@
             margin-bottom: 30px; 
         }
         .info-card-grid {
-            /* บังคับ 4 คอลัมน์บนจอใหญ่ */
+            /* 4 คอลัมน์ต่อแถว */
             display: grid;
             grid-template-columns: repeat(4, 1fr); 
             gap: 25px;
@@ -152,7 +137,7 @@
         .info-card h3 { margin: 0; font-size: 1.2em; color: white; font-weight: 600; }
 
 
-        /* -------------------- 5. Quick Access (4 Cards in a Row) -------------------- */
+        /* -------------------- 4. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
         .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .quick-card { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent; }
@@ -162,7 +147,7 @@
         .card-green { border-top-color: #28a745; color: #28a745; }
         .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
 
-        /* -------------------- 6. Main Content & Sidebar -------------------- */
+        /* -------------------- 5. Main Content & Sidebar -------------------- */
         .main-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
         .news-section { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .news-section h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
@@ -184,7 +169,7 @@
         .status-maintenance { background-color: #ffc107; color: #333; }
         .status-offline { background-color: #dc3545; }
 
-        /* -------------------- 7. Footer and Responsive Design -------------------- */
+        /* -------------------- 6. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
@@ -211,11 +196,6 @@
     </style>
 </head>
 <body>
-
-    <section id="slider-area">
-        <div class="slide-item" id="slide-1" style="background-image: url('https://via.placeholder.com/1500x350/A93226/FFFFFF?text=Slide+1%3A+%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5');"></div>
-        <div class="slide-item" id="slide-2" style="background-image: url('https://via.placeholder.com/1500x350/004d99/FFFFFF?text=Slide+2%3A+%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%A5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99');"></div>
-    </section>
 
     <header class="main-header">
         <div class="logo-area" onclick="window.location.href='#'">
@@ -427,26 +407,6 @@
         });
 
         // =========================================================
-        // JS สำหรับ Image Slider (Simple Logic)
-        let slideIndex = 1;
-        const slides = document.getElementsByClassName("slide-item");
-
-        function showSlides() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 5000); // เปลี่ยนภาพทุก 5 วินาที
-        }
-        
-        if (slides.length > 0) {
-             slides[0].style.display = "block";
-             setTimeout(showSlides, 5000);
-        }
-
-        // =========================================================
         // JS สำหรับ Countdown Timer (กำหนดวันประกาศผล)
         var countDownDate = new Date("Nov 25, 2026 10:00:00").getTime(); // **เปลี่ยนวันที่นี่**
         
@@ -459,7 +419,7 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            // ตรวจสอบว่า element มีอยู่หรือไม่ก่อนที่จะใส่ค่า (ป้องกัน error เพราะย้ายตำแหน่ง)
+            // ตรวจสอบว่า element มีอยู่หรือไม่ก่อนที่จะใส่ค่า 
             const daysEl = document.getElementById("days");
             if (daysEl) daysEl.innerHTML = days.toString().padStart(2, '0');
             const hoursEl = document.getElementById("hours");
