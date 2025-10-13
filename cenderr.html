@@ -3,131 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปฏิทินวิชาการ</title>
+    <title>ปฏิทินวิชาการ - ทันสมัย</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* ตั้งค่าพื้นฐาน */
+        :root {
+            --primary-color: #3f51b5; /* สีน้ำเงินเข้ม */
+            --secondary-color: #ff9800; /* สีส้มเน้น */
+            --text-color: #333;
+            --bg-light: #f9f9fb;
+            --bg-white: #ffffff;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-light);
+            color: var(--text-color);
         }
-        .calendar-container {
-            max-width: 900px;
+
+        /* Container หลัก */
+        .calendar-modern-container {
+            max-width: 1100px;
             margin: auto;
-            background-color: #fff;
-            padding: 20px;
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            padding: 30px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #777;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        /* ตารางในรูปแบบ Grid (สำหรับความทันสมัย) */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr 180px; /* คอลัมน์: วันที่ | กิจกรรม | หมายเหตุ */
+            gap: 1px; /* ช่องว่างระหว่างแถว/คอลัมน์ */
+            background-color: #ddd; /* เส้นแบ่งเบาๆ */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* ซ่อนเส้นที่ไม่ต้องการ */
         }
-        h1 {
-            text-align: center;
-            color: #333;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #007bff;
+
+        /* Header Grid */
+        .grid-header {
+            background-color: var(--primary-color);
             color: white;
-            font-weight: bold;
+            font-weight: 600;
+            padding: 15px 15px;
             text-transform: uppercase;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #e9e9e9;
-        }
-        .date-col {
-            width: 15%;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
             text-align: center;
-            font-weight: bold;
-            color: #d9534f; /* สีแดงสำหรับวันที่ */
         }
-        .activity-col {
-            width: 65%;
+        /* จัด Header ให้เต็ม Grid column */
+        .calendar-grid .grid-header:first-child { grid-column: 1; }
+        .calendar-grid .grid-header:nth-child(2) { grid-column: 2; }
+        .calendar-grid .grid-header:last-child { grid-column: 3; }
+
+
+        /* แถวข้อมูล */
+        .grid-row {
+            display: contents; /* ให้ children ถูกจัดวางใน Grid หลัก */
         }
-        .note-col {
-            width: 20%;
+        
+        /* Cell ข้อมูล */
+        .grid-cell {
+            background-color: var(--bg-white);
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            /* การปรับสไตล์เฉพาะคอลัมน์ */
+        }
+
+        .grid-row:nth-child(even) .grid-cell {
+            background-color: var(--bg-light); /* แถวสลับสี */
+        }
+        
+        /* สไตล์สำหรับคอลัมน์วันที่ */
+        .grid-row .date-cell {
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-align: center;
+            background-color: #e8eaf6; /* สีพื้นหลังอ่อนๆ สำหรับวันที่ */
+            display: flex; /* ใช้ Flexbox จัดวันที่ให้อยู่กึ่งกลางใน Cell */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* สไตล์สำหรับคอลัมน์หมายเหตุ */
+        .grid-row .note-cell {
             font-style: italic;
-            color: #5cb85c; /* สีเขียวสำหรับหมายเหตุ */
+            color: #666;
+            font-size: 0.9em;
+            background-color: #f1f8e9;
+        }
+        
+        /* สไตล์พิเศษสำหรับกิจกรรมสำคัญ */
+        .highlight-activity {
+            color: #d32f2f; /* สีแดงสำหรับเน้น */
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #999;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
         }
     </style>
 </head>
 <body>
 
-<div class="calendar-container">
-    <h1>ปฏิทินวิชาการ ภาคเรียนที่ 1 ปีการศึกษา 2568</h1>
+<div class="calendar-modern-container">
+    <header>
+        <h1>ปฏิทินวิชาการ</h1>
+        <p>ภาคเรียนที่ 1 ปีการศึกษา 2568 | มหาวิทยาลัยเทคโนโลยีนำสมัย</p>
+    </header>
     
-    <table>
-        <thead>
-            <tr>
-                <th class="date-col">วันที่</th>
-                <th class="activity-col">กิจกรรม/กำหนดการ</th>
-                <th class="note-col">หมายเหตุ</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="date-col">1 ส.ค. 2568</td>
-                <td class="activity-col">วันเปิดภาคเรียน/ปฐมนิเทศนักศึกษาใหม่</td>
-                <td class="note-col">ชั้นปีที่ 1 ทุกสาขา</td>
-            </tr>
-            <tr>
-                <td class="date-col">5 ส.ค. 2568</td>
-                <td class="activity-col">เริ่มการเรียนการสอนทุกรายวิชา</td>
-                <td class="note-col"></td>
-            </tr>
-            <tr>
-                <td class="date-col">12 ส.ค. 2568</td>
-                <td class="activity-col">วันหยุดราชการ: วันเฉลิมพระชนมพรรษา สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง</td>
-                <td class="note-col">หยุดชดเชย</td>
-            </tr>
-            <tr>
-                <td class="date-col">20 - 24 ส.ค. 2568</td>
-                <td class="activity-col">สัปดาห์การเพิ่ม-ถอนรายวิชา (Late Registration)</td>
-                <td class="note-col">มีค่าธรรมเนียม</td>
-            </tr>
+    <div class="calendar-grid">
+        <div class="grid-header">วันที่</div>
+        <div class="grid-header">กิจกรรม/กำหนดการ</div>
+        <div class="grid-header">หมายเหตุ</div>
+        
+        <div class="grid-row">
+            <div class="grid-cell date-cell">1 ส.ค. 2568</div>
+            <div class="grid-cell">วันเปิดภาคเรียน/ปฐมนิเทศนักศึกษาใหม่</div>
+            <div class="grid-cell note-cell">ชั้นปีที่ 1 (รายงานตัวที่หอประชุม)</div>
+        </div>
+        
+        <div class="grid-row">
+            <div class="grid-cell date-cell">5 ส.ค. 2568</div>
+            <div class="grid-cell">เริ่มการเรียนการสอนทุกรายวิชา</div>
+            <div class="grid-cell note-cell"></div>
+        </div>
+        
+        <div class="grid-row">
+            <div class="grid-cell date-cell highlight-activity">12 ส.ค. 2568</div>
+            <div class="grid-cell highlight-activity">วันหยุดราชการ: วันแม่แห่งชาติ (วันหยุดชดเชย)</div>
+            <div class="grid-cell note-cell highlight-activity"></div>
+        </div>
 
-            <tr>
-                <td class="date-col">15 - 19 ก.ย. 2568</td>
-                <td class="activity-col">สัปดาห์สอบกลางภาค (Mid-term Examination)</td>
-                <td class="note-col">ตรวจสอบตารางสอบ</td>
-            </tr>
-            <tr>
-                <td class="date-col">22 ก.ย. 2568</td>
-                <td class="activity-col">วันสุดท้ายของการขอลาพักการศึกษา (Leave of Absence)</td>
-                <td class="note-col">ยื่นคำร้องที่สำนักทะเบียน</td>
-            </tr>
+        <div class="grid-row">
+            <div class="grid-cell date-cell">20 - 24 ส.ค. 2568</div>
+            <div class="grid-cell">สัปดาห์การเพิ่ม-ถอนรายวิชา (Late Registration)</div>
+            <div class="grid-cell note-cell">ยื่นคำร้องผ่านระบบออนไลน์</div>
+        </div>
+        
+        <div class="grid-row">
+            <div class="grid-cell date-cell">15 - 19 ก.ย. 2568</div>
+            <div class="grid-cell highlight-activity">สัปดาห์สอบกลางภาค (Mid-term Examination)</div>
+            <div class="grid-cell note-cell">ตรวจสอบตารางสอบได้ตั้งแต่วันที่ 1 ก.ย.</div>
+        </div>
 
-            <tr>
-                <td class="date-col">10 ต.ค. 2568</td>
-                <td class="activity-col">วันสุดท้ายของการเรียนการสอน</td>
-                <td class="note-col"></td>
-            </tr>
-            <tr>
-                <td class="date-col">13 - 17 ต.ค. 2568</td>
-                <td class="activity-col">สัปดาห์สอบปลายภาค (Final Examination)</td>
-                <td class="note-col">นักศึกษาต้องเคลียร์ค่าเทอมก่อนสอบ</td>
-            </tr>
-            <tr>
-                <td class="date-col">30 ต.ค. 2568</td>
-                <td class="activity-col">ประกาศผลการเรียนภาคเรียนที่ 1</td>
-                <td class="note-col">ผ่านระบบออนไลน์</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="grid-row">
+            <div class="grid-cell date-cell">13 - 17 ต.ค. 2568</div>
+            <div class="grid-cell highlight-activity">สัปดาห์สอบปลายภาค (Final Examination)</div>
+            <div class="grid-cell note-cell">นักศึกษาต้องชำระค่าเทอมให้ครบก่อนสอบ</div>
+        </div>
+        
+        <div class="grid-row">
+            <div class="grid-cell date-cell">30 ต.ค. 2568</div>
+            <div class="grid-cell">ประกาศผลการเรียนภาคเรียนที่ 1</div>
+            <div class="grid-cell note-cell">ตรวจสอบเกรดผ่านหน้าเว็บไซต์</div>
+        </div>
+        
+    </div>
     
-    <p style="margin-top: 30px; text-align: center; color: #666;">*กำหนดการอาจมีการเปลี่ยนแปลงตามความเหมาะสม</p>
+    <div class="footer-note">
+        *กำหนดการนี้เป็นฉบับร่าง อาจมีการเปลี่ยนแปลงได้ตามประกาศของมหาวิทยาลัย
+    </div>
 </div>
 
 </body>
