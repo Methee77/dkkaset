@@ -1,156 +1,329 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ระบบเลือกโครงการนิสิต</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #ffffff;
-      color: #111;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #007bff;
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    nav button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: white;
-      color: #007bff;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    nav button:hover {
-      background-color: #e0f0ff;
-    }
-    .container {
-      max-width: 600px;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    input, select, button {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .success, .error {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: 500;
-    }
-    .success { color: green; }
-    .error { color: red; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>งานทะเบียนวัดผล [ชื่อโรงเรียนของคุณ]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS ภายในแท็ก style เพื่อรวมโค้ดทั้งหมด */
+        
+        /* การตั้งค่าพื้นฐาน */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header และ Navigation */
+        .main-header {
+            background-color: #004d99; /* สีน้ำเงินเข้มหลัก */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 0.9em;
+            font-weight: 300;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .main-nav ul li {
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            display: block;
+        }
+
+        .main-nav ul li a:hover {
+            color: #ffcc00; /* สีทอง */
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #0059b3; /* น้ำเงินสว่างขึ้น */
+            min-width: 200px;
+            z-index: 10; /* ให้แสดงทับองค์ประกอบอื่น */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            top: 100%; 
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content { /* เพิ่ม .active สำหรับการทำงานบนมือถือ */
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-weight: 400;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #007bff;
+            color: #ffcc00 !important;
+        }
+        
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* Announcement Section */
+        .announcement {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .announcement h2 {
+            color: #004d99;
+            border-bottom: 3px solid #ffcc00;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-weight: 600;
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .news-item strong {
+            color: #d9534f; /* สีแดงสำหรับวันที่ */
+            min-width: 100px;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quick-links h2 {
+            color: #004d99;
+            margin-bottom: 15px;
+        }
+
+        .quick-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 250px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .primary {
+            background-color: #28a745; /* สีเขียว */
+            color: white;
+        }
+
+        .primary:hover {
+            background-color: #218838;
+        }
+
+        .secondary {
+            background-color: #ffc107; /* สีเหลือง */
+            color: #333;
+        }
+
+        .secondary:hover {
+            background-color: #e0a800;
+        }
+
+        .tertiary {
+            background-color: #17a2b8; /* สีฟ้า */
+            color: white;
+        }
+
+        .tertiary:hover {
+            background-color: #138496;
+        }
+        
+        /* Contact Section Placeholder */
+        .contact {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        .main-footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        
+        /* Media Queries สำหรับมือถือ */
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .main-nav {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-nav ul li {
+                width: 100%;
+                padding: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-content {
+                position: static; /* ให้ Dropdown แสดงต่อด้านล่าง */
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .quick-btn {
+                min-width: 80%;
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header class="main-header">
+        <div class="logo">
+            <h1>งานทะเบียนวัดผล</h1>
+            <p>[ชื่อโรงเรียนของคุณ]</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home">หน้าแรก</a></li>
+                <li class="dropdown" onclick="toggleDropdown(this)">
+                    <a href="#">งานทะเบียน</a>
+                    <div class="dropdown-content">
+                        <a href="#register-in">การรับย้ายเข้า/ย้ายออก</a>
+                        <a href="#documents">การขอหลักฐานทางการศึกษา (ปพ.)</a>
+                        <a href="#profile">การแก้ไขข้อมูลส่วนตัว</a>
+                    </div>
+                </li>
+                <li class="dropdown" onclick="toggleDropdown(this)">
+                    <a href="#">งานวัดผล</a>
+                    <div class="dropdown-content">
+                        <a href="#evaluation-policy">ระเบียบการวัดผล</a>
+                        <a href="#calendar">ปฏิทินงานวัดผล</a>
+                        <a href="#onet">ข้อมูล O-NET</a>
+                    </div>
+                </li>
+                <li><a href="#downloads">เอกสารดาวน์โหลด</a></li>
+                <li><a href="login.html" target="_blank">ระบบตรวจสอบผลการเรียน</a></li>
+                <li><a href="#contact">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
-  <h1>ระบบเลือกโครงการนิสิต</h1>
-  <nav>
-    <button onclick="showPage('student')">หน้าสำหรับนิสิต</button>
-    <button onclick="showPage('admin')">หน้าผู้ดูแล</button>
-  </nav>
-</header>
+    <main class="container">
+        <section id="home" class="announcement">
+            <h2>📢 ประกาศและข่าวสารล่าสุด</h2>
+            <div class="news-item">
+                <strong>10 ต.ค. 68:</strong> <p>แจ้งกำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียนชั้น ม.6 ที่จะจบการศึกษาในปีนี้</p>
+            </div>
+            <div class="news-item">
+                <strong>01 ต.ค. 68:</strong> <p>ปฏิทินสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2568 (ดาวน์โหลดเอกสารได้ที่หน้าเอกสารดาวน์โหลด)</p>
+            </div>
+             <div class="news-item">
+                <strong>01 ก.ย. 68:</strong> <p>คู่มือการปฏิบัติงานทะเบียนวัดผลสำหรับครูที่ปรึกษา ปีการศึกษา 2568</p>
+            </div>
+        </section>
 
-<div id="studentPage" class="container">
-  <h2>กรอกข้อมูลและเลือกโครงการ</h2>
-  <form id="projectForm">
-    <input type="text" id="studentId" placeholder="รหัสนิสิต" required>
-    <input type="text" id="firstName" placeholder="ชื่อ" required>
-    <input type="text" id="lastName" placeholder="นามสกุล" required>
-    <input type="text" id="faculty" placeholder="คณะ">
-    <input type="text" id="year" placeholder="ปีการศึกษา">
-    <select id="project" required>
-      <option value="">-- เลือกโครงการ --</option>
-      <option value="โครงการ A">โครงการ A: พัฒนาโปรแกรม</option>
-      <option value="โครงการ B">โครงการ B: งานสังคม</option>
-      <option value="โครงการ C">โครงการ C: วิจัยนวัตกรรม</option>
-      <option value="โครงการ D">โครงการ D: ฝึกงานภาคสนาม</option>
-    </select>
-    <button type="submit">ส่งข้อมูล</button>
-    <div class="success" id="studentSuccess"></div>
-  </form>
-</div>
+        <section class="quick-links">
+            <h2>บริการด่วนสำหรับนักเรียน/ผู้ปกครอง</h2>
+            <a href="online-form.html" class="quick-btn primary">📝 ขอเอกสาร ปพ. ออนไลน์</a>
+            <a href="https://your-sgs-system.com" target="_blank" class="quick-btn secondary">💻 เข้าสู่ระบบตรวจสอบเกรด (SGS)</a>
+            <a href="#downloads" class="quick-btn tertiary">⬇️ ดาวน์โหลดแบบฟอร์มทั้งหมด</a>
+        </section>
+        
+        <section id="contact" class="contact">
+            <h2>📞 ติดต่อเรา</h2>
+            <p><strong>ที่ตั้งสำนักงาน:</strong> อาคาร [ชื่ออาคาร], ชั้น 1 งานทะเบียนวัดผล โรงเรียน [ชื่อโรงเรียนของคุณ]</p>
+            <p><strong>เบอร์โทรศัพท์:</strong> 0X-XXX-XXXX ต่อ [เบอร์ภายใน]</p>
+            <p><strong>E-mail:</strong> reg_[schoolname]@school.ac.th</p>
+            <p><strong>เวลาทำการ:</strong> วันจันทร์ - วันศุกร์ เวลา 08:30 - 16:30 น. (ยกเว้นวันหยุดราชการ)</p>
+        </section>
 
-<div id="adminPage" class="container" style="display:none;">
-  <h2>เข้าสู่ระบบผู้ดูแล</h2>
-  <form id="loginForm">
-    <input type="email" id="adminEmail" placeholder="อีเมลผู้ดูแล" required>
-    <input type="password" id="adminPassword" placeholder="รหัสผ่าน" required>
-    <button type="submit">เข้าสู่ระบบ</button>
-    <div class="error" id="loginError"></div>
-  </form>
-</div>
+    </main>
 
-<script>
-function showPage(page) {
-  document.getElementById('studentPage').style.display = page === 'student' ? 'block' : 'none';
-  document.getElementById('adminPage').style.display = page === 'admin' ? 'block' : 'none';
-}
+    <footer class="main-footer">
+        <p>&copy; 2025 งานทะเบียนวัดผล [ชื่อโรงเรียน] | <a href="privacy.html">นโยบายความเป็นส่วนตัว</a> | ออกแบบโดย [ชื่อคุณ/หน่วยงาน]</p>
+    </footer>
 
-// Form ส่งข้อมูลนิสิต
-document.getElementById('projectForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const data = {
-    studentId: document.getElementById('studentId').value,
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    faculty: document.getElementById('faculty').value,
-    year: document.getElementById('year').value,
-    project: document.getElementById('project').value
-  };
-  console.log('ส่งข้อมูล:', data);
-  document.getElementById('studentSuccess').textContent = 'ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณครับ';
-  this.reset();
-});
-
-// ฟอร์มล็อกอินผู้ดูแล (ตัวอย่างยังไม่เชื่อม backend)
-document.getElementById('loginForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const email = document.getElementById('adminEmail').value;
-  const password = document.getElementById('adminPassword').value;
-  console.log('ล็อกอิน:', email, password);
-  document.getElementById('loginError').textContent = 'ระบบยังไม่เชื่อม backend';
-});
-</script>
-
+    <script>
+        // JavaScript สำหรับการสลับ Dropdown (สำคัญสำหรับมือถือ)
+        function toggleDropdown(element) {
+            // เมื่อคลิกที่เมนูหลัก (li.dropdown) ให้สลับคลาส 'active'
+            // ซึ่งจะทำให้ dropdown-content แสดง/ซ่อน ตาม CSS ด้านบน
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
