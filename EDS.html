@@ -6,7 +6,7 @@
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (Kanit, ปุ่มเล็ก, สถานะระบบ) */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
         
         /* -------------------- Base & Typography (ใช้ Kanit) -------------------- */
         body {
@@ -41,10 +41,10 @@
         .btn-primary {
             background-color: #004d99;
             color: white;
-            padding: 8px 15px; /* ลดขนาด padding */
+            padding: 8px 15px;
             border-radius: 5px;
             font-weight: 600;
-            font-size: 0.9em; /* ลดขนาด font */
+            font-size: 0.9em;
             display: inline-block;
             transition: background-color 0.3s;
             margin-left: 10px;
@@ -74,6 +74,7 @@
             color: #666;
             display: block;
         }
+        
         .main-nav {
             display: flex; 
             align-items: center;
@@ -152,14 +153,6 @@
             font-size: 0.8em;
             opacity: 0.8;
         }
-        #countdown-timer.expired {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #ffc107;
-            background-color: #333;
-            padding: 15px;
-            border-radius: 5px;
-        }
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
@@ -167,90 +160,7 @@
         .quick-card {
             background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; border-top: 5px solid transparent;
         }
-        .quick-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
         .icon-lg { font-size: 3em; display: block; margin-bottom: 10px; }
-        .quick-card h3 { margin: 5px 0 0; font-size: 1.2em; }
-        .quick-card p { margin: 0; font-size: 0.85em; color: #666; }
-        .card-red { border-top-color: #dc3545; color: #dc3545; }
-        .card-blue { border-top-color: #007bff; color: #007bff; }
-        .card-green { border-top-color: #28a745; color: #28a745; }
-        .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
-
-        /* -------------------- Status Control Container (NEW) -------------------- */
-        .status-control-container {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            margin-top: 30px;
-        }
-        .status-control-container h2 {
-            text-align: left;
-            border-bottom: 2px solid #004d99; 
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: #004d99;
-        }
-        .status-item-control {
-            padding: 15px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        .status-item-control:last-child {
-            border-bottom: none;
-        }
-        .control-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #555;
-            font-size: 1.05em;
-        }
-        .control-label-detail {
-             font-weight: normal; 
-             font-size: 0.9em;
-             margin-top: 5px;
-        }
-        .radio-group label {
-            margin-right: 20px;
-            font-weight: normal;
-            cursor: pointer;
-        }
-        .status-info-date {
-            margin-top: 15px;
-            font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 10px;
-            text-align: right;
-        }
-        .separator-line {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 20px 0;
-        }
-        
-        /* --- System Status Styling (NEW) --- */
-        .system-status-container {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-            font-size: 0.95em;
-        }
-        .status-item:last-child { border-bottom: none; }
-        .status-label { font-weight: 600; }
-        .status-indicator { padding: 3px 8px; border-radius: 5px; font-size: 0.8em; font-weight: 700; color: white; }
-        .status-ok { background-color: #28a745; } 
-        .status-maintenance { background-color: #ffc107; } 
-        .status-offline { background-color: #dc3545; } 
 
         /* -------------------- 4. News & Service Blocks (Grid 2 คอลัมน์) -------------------- */
         .main-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
@@ -262,10 +172,82 @@
         .tag-red { background-color: #dc3545; }
         .news-date { float: right; color: #999; font-size: 0.9em; }
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
-        .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
+        
+        /* --- Sidebar Services (รวมสถานะระบบ) --- */
+        .sidebar-services { 
+            background-color: white; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        .sidebar-services h2 { 
+            text-align: left; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+        }
+        .service-link { 
+            background-color: #f8f8f8; 
+            padding: 12px; 
+            margin-bottom: 10px; 
+            border-radius: 5px; 
+            display: block; 
+            transition: background-color 0.2s; 
+            color: #333; 
+            font-weight: 500; 
+        }
         .service-link:hover { background-color: #e6e6e6; color: #004d99; }
+        
+        /* --- System Status Styling (NEW/MODIFIED) --- */
+        .status-header {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #004d99;
+            margin: 15px 0 10px 0;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+        }
+        .status-header:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.9em;
+        }
+        .status-label-control {
+            font-weight: 500;
+            color: #333;
+        }
+        .radio-group label {
+            margin-left: 10px;
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+        .status-info-date {
+            margin-top: 15px;
+            font-size: 0.85em;
+            color: #777;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+            text-align: right;
+        }
+        
+        /* --- Indicator Styling --- */
+        .status-indicator {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: white;
+        }
+        .status-ok { background-color: #28a745; }
+        .status-maintenance { background-color: #ffc107; color: #333; }
+        .status-offline { background-color: #dc3545; }
 
         /* -------------------- 5. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
@@ -276,26 +258,10 @@
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
             .main-content-grid { grid-template-columns: 1fr; }
-            .main-nav { 
-                display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 70px; 
-                left: 0; 
-                width: 100%; 
-                background-color: white; 
-                box-shadow: 0 4px 5px rgba(0,0,0,0.1); 
-                padding-bottom: 10px; 
-                z-index: 100; 
-            }
+            .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
             .main-nav.active { display: flex; }
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
             .menu-toggle { display: block; }
-        }
-        @media (max-width: 500px) {
-            .quick-links-grid { grid-template-columns: 1fr; }
-            .hero-section { height: 350px; }
-            .hero-content h1 { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -337,52 +303,6 @@
     </section>
 
     <div class="container">
-        
-        <section class="status-control-container">
-            <h2>📊 สถานะการดำเนินการวัดผล</h2>
-            
-            <div class="status-item-control">
-                <span class="control-label">ปีการศึกษาปัจจุบัน 2568 | ภาคเรียนปัจจุบัน 1</span>
-                
-                <span class="control-label control-label-detail">กลาง/ปลายภาค</span>
-                <div class="radio-group">
-                    <label><input type="radio" name="term_type" value="midterm" checked> กลางภาค</label>
-                    <label><input type="radio" name="term_type" value="final"> ปลายภาค</label>
-                </div>
-            </div>
-            
-            <hr class="separator-line"> <div class="status-item-control">
-                <span class="control-label">บันทึกผลการเรียน</span>
-                <div class="radio-group">
-                    <label><input type="radio" name="record_status" value="closed" checked> ปิด</label>
-                    <label><input type="radio" name="record_status" value="open"> เปิด</label>
-                </div>
-                <span class="control-label control-label-detail">ปิดการบันทึกผลการเรียนชั้น ม. [ระบุชั้นเรียน]</span>
-            </div>
-            
-            <div class="status-item-control">
-                <span class="control-label">ประกาศผลการเรียนทุกชั้น</span>
-                <div class="radio-group">
-                    <label><input type="radio" name="publish_all" value="closed" checked> ปิด</label>
-                    <label><input type="radio" name="publish_all" value="open"> เปิด</label>
-                </div>
-                <span class="control-label control-label-detail">ประกาศผลการเรียนชั้น ม. [ระบุชั้นเรียน]</span>
-            </div>
-            
-            <div class="status-item-control">
-                <span class="control-label">บันทึกผลสอบแก้ตัว</span>
-                <div class="radio-group">
-                    <label><input type="radio" name="remedial_status" value="closed" checked> ปิด</label>
-                    <label><input type="radio" name="remedial_status" value="open"> เปิด</label>
-                </div>
-            </div>
-
-            <hr class="separator-line"> <div class="status-info-date">
-                ผู้บันทึก 331 นางวรางคณา พรหมชนะ<br>
-                เวลาที่บันทึก 10 ต.ค. 68 10:59
-            </div>
-            
-        </section>
         <section class="quick-access-strip">
             <div class="quick-links-grid">
                 <a href="[URL_RESULTS]" class="quick-card card-blue">
@@ -429,17 +349,46 @@
                 <h2>⚡ สถานะระบบบริการ (Service Status)</h2>
                 <div class="system-status-container">
                     <div class="status-item">
-                        <span class="status-label">ระบบ SGS (นักเรียน/ผู้ปกครอง)</span>
+                        <span class="status-label-control">ระบบ SGS (นักเรียน/ผู้ปกครอง)</span>
                         <span id="status-sgs" class="status-indicator status-ok">ใช้งานได้ปกติ</span>
                     </div>
                     <div class="status-item">
-                        <span class="status-label">ระบบ SGS (สำหรับครู)</span>
+                        <span class="status-label-control">ระบบ SGS (สำหรับครู)</span>
                         <span id="status-teacher" class="status-indicator status-maintenance">กำลังปรับปรุง</span>
                     </div>
                     <div class="status-item">
-                        <span class="status-label">ระบบขอเอกสารออนไลน์</span>
+                        <span class="status-label-control">ระบบขอเอกสารออนไลน์</span>
                         <span id="status-request" class="status-indicator status-ok">ใช้งานได้ปกติ</span>
                     </div>
+                </div>
+
+                <div class="status-header">⚙️ สถานะดำเนินการวัดผล</div>
+                <div class="system-status-container">
+                    <div class="status-item">
+                        <span class="status-label-control">บันทึกผลการเรียน</span>
+                        <div class="radio-group">
+                            <label><input type="radio" name="record_status" value="closed" checked> ปิด</label>
+                            <label><input type="radio" name="record_status" value="open"> เปิด</label>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label-control">ประกาศผลการเรียน</span>
+                        <div class="radio-group">
+                            <label><input type="radio" name="publish_all" value="closed" checked> ปิด</label>
+                            <label><input type="radio" name="publish_all" value="open"> เปิด</label>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label-control">บันทึกผลสอบแก้ตัว</span>
+                        <div class="radio-group">
+                            <label><input type="radio" name="remedial_status" value="closed" checked> ปิด</label>
+                            <label><input type="radio" name="remedial_status" value="open"> เปิด</label>
+                        </div>
+                    </div>
+                    
+                    <div class="status-info-date">
+                        ปีการศึกษาปัจจุบัน 2568 | ภาคเรียน 1
+                        </div>
                 </div>
                 <h2>บริการหลัก (Main Services)</h2>
                 <a href="#" class="service-link">🎓 คู่มือการใช้งานระบบ SGS</a>
@@ -487,12 +436,52 @@
 
         // =========================================================
         // JS สำหรับ Countdown Timer (กำหนดวันประกาศผล)
-        // ** ต้องเปลี่ยนวันที่ประกาศผลการเรียนจริงที่นี่ **
-        var countDownDate = new Date("Nov 25, 2026 10:00:00").getTime(); 
+        var countDownDate = new Date("Nov 25, 2026 10:00:00").getTime(); // **เปลี่ยนวันที่นี่**
         
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate - now;
 
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                var containerDiv = document.querySelector(".countdown-container");
+                containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#28a745; color:white; border-radius:5px; padding:10px 15px;'>เข้าสู่ระบบตรวจสอบผล</a>";
+                containerDiv.style.backgroundColor = '#28a745';
+            }
+        }, 1000); 
+
+        // =========================================================
+        // JS สำหรับ System Status (จำลองการดึงสถานะระบบภายนอก)
+        function updateSystemStatus() {
+            // โค้ดจริง: ใช้ AJAX/Fetch ดึงสถานะจาก Server
+            // นี่คือการจำลองสถานะระบบภายนอก:
+            var statuses = {
+                'status-sgs': { text: 'ใช้งานได้ปกติ', class: 'status-ok' },
+                'status-teacher': { text: 'กำลังปรับปรุง', class: 'status-maintenance' },
+                'status-request': { text: 'ใช้งานได้ปกติ', class: 'status-ok' }
+            };
+
+            for (const id in statuses) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = statuses[id].text;
+                    element.className = 'status-indicator ' + statuses[id].class;
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateSystemStatus);
+    </script>
+
+</body>
+</html>
