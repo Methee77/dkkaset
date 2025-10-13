@@ -4,18 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS จะอยู่ด้านล่าง */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
+        /* -------------------- Base & Typography -------------------- */
+        body {
+            font-family: 'Sarabun', Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa; /* สีพื้นหลังเบาๆ */
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนที่ไม่ต้องการ */
+        }
+        .container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.2s;
+        }
+        .btn-primary {
+            background-color: #004d99; /* สีหลักโรงเรียน (น้ำเงินเข้ม) */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover { background-color: #003366; }
+
+        /* -------------------- 1. Header & Navigation -------------------- */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        .logo-area {
+            line-height: 1.2;
+            cursor: pointer;
+        }
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #004d99;
+        }
+        .school-name {
+            font-size: 0.8em;
+            color: #666;
+            display: block;
+        }
+        .main-nav {
+            display: flex; /* แสดงเมนูในบรรทัดเดียวกัน */
+            align-items: center;
+        }
+        .main-nav a:not(.btn-primary) {
+            margin-left: 20px;
+            color: #333;
+            font-weight: 500;
+        }
+        /* สำหรับ Mobile Menu (ซ่อนบน Desktop) */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        /* -------------------- 2. Quick Access Strip -------------------- */
+        .quick-access-strip {
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+        .portal-title {
+            font-size: 2em;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .quick-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid transparent; /* สำหรับสีเน้น */
+            text-align: left; /* จัดชิดซ้าย */
+        }
+        .quick-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .icon-lg { font-size: 3.5em; display: block; margin-bottom: 15px; }
+        .quick-card h3 { margin: 0 0 5px 0; color: #1a1a1a; font-size: 1.4em; }
+        .quick-card p { margin: 0; font-size: 0.9em; color: #666; }
+
+        /* สีเน้น Card */
+        .card-blue { border-left-color: #007bff; color: #007bff; }
+        .card-green { border-left-color: #28a745; color: #28a745; }
+        .card-orange { border-left-color: #ffc107; color: #ffc107; }
+
+        /* -------------------- 3. Service Blocks -------------------- */
+        .service-blocks-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 คอลัมน์บนจอใหญ่ */
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .service-block {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .service-block h2 {
+            font-size: 1.3em;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            color: #004d99;
+        }
+        .block-content-grid {
+            display: flex;
+            flex-direction: column;
+        }
+        .service-link {
+            background-color: #f8f8f8;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s, color 0.2s;
+            color: #333;
+            font-weight: 500;
+        }
+        .service-link:hover {
+            background-color: #e6e6e6;
+            color: #004d99;
+        }
+
+        /* -------------------- 4. News & Announcements -------------------- */
+        .news-updates-strip {
+            margin: 40px 0;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .news-updates-strip h2 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .news-updates-strip ul {
+            list-style: none;
+            padding: 0;
+        }
+        .news-updates-strip li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 1.05em;
+        }
+        .news-updates-strip li:last-child {
+            border-bottom: none;
+        }
+        .news-tag {
+            font-size: 0.75em;
+            font-weight: 700;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            margin-right: 15px;
+            display: inline-block;
+        }
+        .tag-red { background-color: #dc3545; }
+        .tag-blue { background-color: #007bff; }
+        .tag-green { background-color: #28a745; }
+        .news-date {
+            float: right;
+            color: #999;
+            font-size: 0.9em;
+        }
+        .view-all {
+            text-align: right;
+            padding-top: 15px !important;
+            border-top: 1px solid #eee;
+        }
+
+        /* -------------------- 5. Footer -------------------- */
+        .main-footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 5%;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            border-bottom: 1px solid #495057;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .footer-grid h3 { color: #ccc; font-size: 1.2em; }
+        .footer-grid p { margin: 5px 0; font-size: 0.9em; color: #aaa; }
+        .footer-grid a { color: #f8f9fa; }
+        .copyright {
+            text-align: center;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        /* -------------------- Responsive Design (Mobile-First) -------------------- */
+        @media (max-width: 900px) {
+            /* 1. Header */
+            .main-nav {
+                display: none; /* ซ่อนเมนูหลักเมื่อจอเล็ก */
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* ใต้ header */
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+                padding-bottom: 10px;
+                z-index: 100;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .main-nav a {
+                margin: 10px 0;
+                padding: 5px 20px;
+                width: 90%;
+            }
+            .menu-toggle {
+                display: block; /* แสดงปุ่มเมนู */
+            }
+
+            /* 2. Service Blocks */
+            .service-blocks-wrapper {
+                grid-template-columns: 1fr; /* บนจอเล็กเหลือ 1 คอลัมน์ */
+            }
+        }
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <div class="logo-area">
+        <div class="logo-area" onclick="window.location.href='#'">
             <span class="logo-text">งานทะเบียนวัดผล</span>
             <span class="school-name">[ชื่อโรงเรียน]</span>
         </div>
-        <nav class="main-nav">
+        
+        <div class="menu-toggle" id="menuToggle">&#9776;</div> 
+
+        <nav class="main-nav" id="mainNav">
             <a href="#">หน้าหลัก</a>
             <a href="#contact-section">ติดต่อเรา</a>
             <a href="[URL_LOGIN_หลัก]" class="btn-primary">เข้าสู่ระบบ</a>
@@ -106,6 +358,21 @@
         </div>
         <p class="copyright">&copy; 2569 [ชื่อโรงเรียน] </p>
     </footer>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            var nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        });
+        
+        // เมื่อคลิกที่ลิงก์ในเมนูมือถือ ให้ซ่อนเมนู
+        var navLinks = document.querySelectorAll('#mainNav a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
