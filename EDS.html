@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Official System UI</title>
+    <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Futuristic Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* CSS: Official Modern System UI */
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <style>
+        /* CSS: Futuristic Government Portal UI */
         
         :root {
-            --official-blue: #003366; /* สีน้ำเงินกรมท่า/ราชการ */
-            --official-gold: #c39243; /* สีทอง/เหลืองอ่อนราชการ */
-            --primary-light: #005a99;
-            --text-color: #2c3e50;
-            --text-light: #7f8c8d;
-            --bg-ultra-light: #f9fbfd; /* พื้นหลังขาวสะอาด */
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-            --border-radius-md: 6px; 
+            --primary-color: #1a73e8; /* Google Blue - Modern & Trustworthy */
+            --primary-dark: #0f4f9e;
+            --accent-color: #34a853; /* Google Green - สดใส */
+            --text-color: #3c4043; /* Dark Grey - อ่านง่าย */
+            --text-light: #5f6368;
+            --bg-body: #f1f3f4; /* Light Grey - พื้นหลังสะอาด */
+            --bg-card: #ffffff; /* White - Card พื้นขาว */
+            --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --border-radius-lg: 10px;
             --transition-speed: 0.3s;
         }
 
@@ -24,161 +26,182 @@
             font-family: 'Sarabun', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-ultra-light);
+            background-color: var(--bg-body);
             color: var(--text-color);
             line-height: 1.6;
         }
         
         * {
+            box-sizing: border-box; /* สำคัญสำหรับการจัดวางแบบ Grid/Flex */
             transition: all var(--transition-speed) ease-in-out; 
         }
-        
+
         /* ------------------------------------------------------------------ */
-        /* HEADER (Compact & Official) */
+        /* HEADER (Minimal & Functional) */
         /* ------------------------------------------------------------------ */
         .main-header {
-            background-color: white;
-            border-bottom: 3px solid var(--official-gold); /* ขอบสีทองราชการ */
-            padding: 8px 40px; 
+            background-color: var(--bg-card);
+            border-bottom: 1px solid #dadce0;
+            padding: 12px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-light);
             position: sticky;
             top: 0;
             z-index: 100; 
         }
         
-        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-section { display: flex; align-items: center; gap: 15px; }
 
-        .school-logo { width: 32px; height: 32px; object-fit: contain; }
+        .school-logo { width: 40px; height: 40px; object-fit: contain; }
 
-        .logo h1 {
-            font-size: 1.5em; /* เล็กลงกว่าเดิม */
-            color: var(--official-blue);
-            font-weight: 800;
-            letter-spacing: 0;
+        .logo-section h1 {
+            font-size: 1.6em;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0;
         }
         
-        /* Navigation */
-        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        .main-nav ul li { position: relative; padding: 0 15px; }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 25px; }
         .main-nav ul li a { 
             color: var(--text-color); 
-            font-weight: 600; /* เน้นตัวอักษร */
-            padding: 8px 0; 
-            display: block; 
+            text-decoration: none; 
+            font-weight: 500; 
+            padding: 5px 0; 
+            position: relative;
         }
-        .main-nav ul li a:hover { 
-            color: var(--official-gold); 
-            border-bottom: 2px solid var(--official-gold);
+        .main-nav ul li a::after { /* Underline effect on hover */
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
         }
+        .main-nav ul li a:hover::after { width: 100%; }
         
-        /* Dropdown (โค้งมนและสะอาด) */
-        .dropdown-content { background-color: white; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); border-top: 3px solid var(--official-gold); border-radius: var(--border-radius-md); overflow: hidden; }
-        .dropdown-content a { color: var(--text-color) !important; padding: 10px 15px; border-bottom: 1px solid #ecf0f1; font-weight: 400; }
-        .dropdown-content a:hover { background-color: #f5f5f5; color: var(--official-blue) !important; }
+        /* Dropdown (Modern, Rounded) */
+        .dropdown-content { 
+            background-color: var(--bg-card); 
+            box-shadow: var(--shadow-hover); 
+            border-radius: var(--border-radius-lg); 
+            overflow: hidden; 
+            border: 1px solid #e0e0e0;
+            min-width: 200px;
+        }
+        .dropdown-content a { 
+            color: var(--text-color) !important; 
+            padding: 10px 15px; 
+            border-bottom: 1px solid #f1f3f4; 
+            font-weight: 400; 
+            display: block;
+        }
+        .dropdown-content a:hover { background-color: #e8f0fe; color: var(--primary-color) !important; }
 
         /* ------------------------------------------------------------------ */
-        /* HERO SECTION (เน้น Search และ CTA) */
+        /* HERO SECTION (Search-Focused) */
         /* ------------------------------------------------------------------ */
         .hero-section {
-            padding: 60px 20px 80px 20px;
-            background-color: var(--official-blue); /* พื้นหลังสีหลักราชการ */
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            padding: 70px 20px 80px 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .hero-section h2 { font-size: 2.5em; font-weight: 800; margin-bottom: 15px; }
-        .hero-section p { font-size: 1.1em; color: #e0f2f7; margin-bottom: 30px; }
+        .hero-section h2 { font-size: 2.8em; font-weight: 800; margin-bottom: 15px; }
+        .hero-section p { font-size: 1.1em; opacity: 0.9; margin-bottom: 35px; }
 
-        /* Search Bar Style */
         .search-container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 30px auto;
             display: flex;
-            background-color: white;
-            border-radius: var(--border-radius-md);
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .search-container input {
             flex-grow: 1;
-            padding: 12px 20px;
+            padding: 15px 20px;
             border: none;
-            font-size: 1em;
+            font-size: 1.1em;
             color: var(--text-color);
+            outline: none;
         }
 
         .search-container button {
-            background-color: var(--official-gold);
-            color: var(--official-blue);
-            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
             border: none;
             cursor: pointer;
-            font-weight: 700;
-            transition: background-color var(--transition-speed);
+            font-weight: 600;
+            font-size: 1.1em;
         }
-        .search-container button:hover {
-            background-color: #d1a66c;
-        }
+        .search-container button:hover { background-color: #2e8b4e; }
 
         .hero-btn {
-            display: inline-block;
-            background-color: var(--official-gold);
-            color: var(--official-blue);
-            padding: 12px 40px;
-            border-radius: var(--border-radius-md);
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 14px 35px;
+            border-radius: var(--border-radius-lg);
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 1.1em;
-            box-shadow: 0 4px 10px rgba(195, 146, 67, 0.4);
+            box-shadow: 0 4px 10px rgba(52, 168, 83, 0.4);
         }
-
+        .hero-btn i { margin-right: 10px; }
         .hero-btn:hover {
-            background-color: #d1a66c;
+            background-color: #2e8b4e;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 168, 83, 0.6);
         }
 
         /* ------------------------------------------------------------------ */
-        /* MAIN CONTENT & Layout */
+        /* MAIN CONTENT & Layout (Grid-based) */
         /* ------------------------------------------------------------------ */
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 40px auto;
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2fr 1fr; /* Main Content (2), Sidebar (1) */
             gap: 30px;
         }
         
-        /* Card Style (Professional) */
+        /* Card Style (Elevated) */
         .card {
-            background-color: white;
-            border-radius: var(--border-radius-md); /* โค้งมนแบบเป็นทางการ */
-            box-shadow: var(--card-shadow);
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
             padding: 30px;
-            margin-bottom: 30px;
-            border: 1px solid #e0e0e0;
+            margin-bottom: 25px;
+            border: 1px solid #e8eaed;
         }
 
         .card h3 { 
-            font-size: 1.5em; 
-            color: var(--official-blue); 
+            font-size: 1.6em; 
+            color: var(--primary-dark); 
             font-weight: 700; 
-            border-bottom: 3px solid var(--official-gold); 
-            padding-bottom: 10px; 
             margin-top: 0; 
-            margin-bottom: 25px; 
-            width: 100%;
+            margin-bottom: 20px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        .card h3 i { color: var(--accent-color); font-size: 0.9em; }
         
-        /* Quick Link Grid (Modular / Service Blocks) */
+        /* Quick Links Grid (Flexible, Icon-Focused) */
         .quick-link-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* ปรับขนาดให้ยืดหยุ่น */
             gap: 15px;
             margin-top: 20px;
         }
@@ -186,179 +209,240 @@
         .quick-link-item {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            background-color: #f0f4f7; /* พื้นหลังสีเทาอ่อนสำหรับ Link */
-            padding: 20px;
-            border-radius: var(--border-radius-md);
+            background-color: #f8faff; /* สีอ่อนกว่าพื้นหลังเล็กน้อย */
+            padding: 25px 15px;
+            border-radius: var(--border-radius-lg);
             text-align: center;
             text-decoration: none;
             color: var(--text-color);
-            border: 1px solid #dcdcdc;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e6f1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+            min-height: 150px; /* เพิ่มความสูงขั้นต่ำ */
+            justify-content: center;
         }
         
         .quick-link-item:hover {
-            background-color: #e5eef5;
-            transform: translateY(-2px);
+            background-color: #e8f0fe;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
             border-color: var(--primary-light);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .icon-large { font-size: 2.5em; color: var(--official-gold); margin-bottom: 10px; }
-        .quick-link-item strong { font-weight: 700; font-size: 1em; color: var(--official-blue); }
+        .quick-link-item i { font-size: 2.8em; color: var(--primary-color); margin-bottom: 12px; }
+        .quick-link-item strong { font-weight: 600; font-size: 1em; color: var(--text-color); }
         
         /* Announcement List */
         .announcement-list { list-style: none; padding: 0; }
-        .announcement-list li { border-bottom: 1px dashed #e9ecef; padding: 10px 0; display: flex; gap: 15px; }
-        .announcement-list li:hover { background-color: #fafbfd; cursor: pointer; }
-        .announcement-list strong { color: var(--official-gold); min-width: 90px; font-weight: 600; }
+        .announcement-list li { 
+            border-bottom: 1px solid #eceff1; 
+            padding: 12px 0; 
+            display: flex; 
+            gap: 15px; 
+            align-items: flex-start;
+        }
+        .announcement-list li:last-child { border-bottom: none; }
+        .announcement-list li:hover { background-color: #f8f8f8; cursor: pointer; }
+        .announcement-list .date { 
+            font-weight: 600; 
+            color: var(--accent-color); 
+            min-width: 100px; 
+            text-align: right;
+            font-size: 0.95em;
+        }
+        .announcement-list .title { 
+            flex-grow: 1; 
+            color: var(--text-color); 
+            text-decoration: none;
+        }
+        .announcement-list .title:hover { text-decoration: underline; color: var(--primary-color); }
+
+        /* Sidebar Info */
+        .sidebar-info .card p { margin-bottom: 8px; }
+        .sidebar-info .card hr { border: 0; border-top: 1px solid #f0f0f0; margin: 15px 0; }
+        .sidebar-info .card strong { color: var(--primary-dark); }
         
+        /* System Status Card */
+        .status-card { background-color: #e6f4ea; border-color: #c8e6c9; }
+        .status-card h3 i { color: #34a853; }
+        .status-card p { color: #1e8e3e; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .status-card p i { font-size: 1.2em; }
+        .status-card small { color: var(--text-light); }
+
         /* ------------------------------------------------------------------ */
-        /* FOOTER */
+        /* FOOTER (Modern & Minimal) */
         /* ------------------------------------------------------------------ */
         .main-footer {
-            background-color: var(--official-blue);
+            background-color: var(--primary-dark);
             color: white;
             text-align: center;
-            padding: 20px 0;
-            border-top: 3px solid var(--official-gold);
+            padding: 25px 0;
+            font-size: 0.9em;
+            border-top: 5px solid var(--accent-color);
         }
 
         .main-footer a {
-            color: var(--official-gold);
+            color: var(--accent-color);
             text-decoration: none;
         }
 
         /* ------------------------------------------------------------------ */
-        /* MEDIA QUERIES */
+        /* MEDIA QUERIES (Responsive Design) */
         /* ------------------------------------------------------------------ */
         @media (max-width: 992px) {
             .container { grid-template-columns: 1fr; } 
-            .main-header { padding: 8px 20px; }
-            .hero-section { padding: 40px 20px 60px 20px; }
-            .hero-section h2 { font-size: 2em; }
-            .main-nav ul { flex-wrap: wrap; justify-content: center; }
-            .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .main-header { padding: 10px 20px; }
+            .logo-section h1 { font-size: 1.4em; }
+            .school-logo { width: 35px; height: 35px; }
+            .main-nav { display: none; } /* Hide main nav on smaller screens, use a hamburger menu if needed */
+            .hero-section { padding: 50px 20px 60px 20px; }
+            .hero-section h2 { font-size: 2.2em; }
+            .search-container input { padding: 12px 15px; font-size: 1em; }
+            .search-container button { padding: 12px 20px; font-size: 1em; }
+            .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            .quick-link-item { min-height: 120px; padding: 15px 10px; }
+            .quick-link-item i { font-size: 2em; margin-bottom: 8px; }
+            .quick-link-item strong { font-size: 0.9em; }
+            .card h3 { font-size: 1.4em; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section h2 { font-size: 1.8em; }
+            .hero-section p { font-size: 0.9em; }
+            .search-container { flex-direction: column; }
+            .search-container input { border-radius: var(--border-radius-lg); margin-bottom: 10px; }
+            .search-container button { border-radius: var(--border-radius-lg); width: 100%; }
+            .main-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .logo-section { width: 100%; justify-content: center; } /* Center logo on very small screens */
+            .logo-section h1 { font-size: 1.3em; }
         }
     </style>
 </head>
 <body>
     <header class="main-header">
-        <div class="logo">
+        <div class="logo-section">
             <img src="path/to/your/logo.png" alt="ตราโรงเรียน" class="school-logo">
-            <h1>[ชื่อโรงเรียน] REGISTRY SYSTEM</h1>
+            <h1>[ชื่อโรงเรียน] REGISTRY PORTAL</h1>
         </div>
         <nav class="main-nav">
             <ul>
                 <li><a href="#home">หน้าแรก</a></li>
                 <li class="dropdown" onclick="toggleDropdown(this)">
-                    <a href="#">ข้อมูลทั่วไป</a>
+                    <a href="#">ข้อมูลหน่วยงาน</a>
                     <div class="dropdown-content">
-                        <a href="#mission">วิสัยทัศน์</a>
-                        <a href="#scope">ภาระงาน</a>
+                        <a href="#mission">วิสัยทัศน์/พันธกิจ</a>
+                        <a href="#scope">โครงสร้างองค์กร</a>
                         <a href="#personnel">บุคลากร</a> 
                     </div>
                 </li>
                 <li class="dropdown" onclick="toggleDropdown(this)">
-                    <a href="#">บริการทะเบียน</a>
+                    <a href="#">บริการประชาชน</a>
                     <div class="dropdown-content">
-                        <a href="#documents">ขอหลักฐาน ปพ.</a>
-                        <a href="#register-in">ย้ายเข้า-ออก</a>
-                        <a href="#profile">แก้ไขข้อมูล</a>
+                        <a href="#documents">ขอเอกสาร ปพ.</a>
+                        <a href="#register-in">ย้ายเข้า-ย้ายออก</a>
+                        <a href="#profile">แก้ไขข้อมูลนักเรียน</a>
                     </div>
                 </li>
-                <li><a href="#downloads">แบบฟอร์ม</a></li>
+                <li><a href="#downloads">ศูนย์ดาวน์โหลด</a></li>
                 <li><a href="#contact">ติดต่อ</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="hero-section">
-        <h2>ระบบบริหารจัดการงานทะเบียนและวัดผล</h2>
-        <p>ค้นหาข้อมูลและเข้าถึงบริการราชการได้อย่างรวดเร็วและเป็นระบบ</p>
+        <h2>ระบบงานทะเบียนและวัดผล<br>เพื่อการบริการสาธารณะยุคดิจิทัล</h2>
+        <p>ค้นหา เข้าถึง และจัดการข้อมูลการศึกษาได้อย่างรวดเร็วและปลอดภัย</p>
         
         <div class="search-container">
-            <input type="text" placeholder="ค้นหารหัสวิชา, เอกสาร ปพ. หรือประกาศ..." aria-label="ค้นหาข้อมูล">
-            <button type="submit">ค้นหา</button>
+            <input type="text" placeholder="ค้นหาประกาศ, ระเบียบ, หรือบริการ..." aria-label="ค้นหาข้อมูล">
+            <button type="submit"><i class="fas fa-search"></i> ค้นหา</button>
         </div>
 
-        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn">🔑 เข้าสู่ระบบ SGS/MIS (ครู/นักเรียน)</a>
+        <a href="https://your-sgs-system.com" target="_blank" class="hero-btn"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ SGS/MIS</a>
     </div>
 
     <main class="container">
         <div class="main-section">
             
-            <div id="home" class="card">
-                <h3>🔔 ประกาศและข่าวสารอย่างเป็นทางการ</h3>
-                <ul class="announcement-list">
-                    <li><strong>10 ต.ค.</strong> <p>กำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียน ม.6 (ฉบับล่าสุด)</p></li>
-                    <li><strong>01 ต.ค.</strong> <p>ปฏิทินสอบปลายภาค 1/2568 และแนวปฏิบัติการวัดผล</p></li>
-                    <li><strong>01 ก.ย.</strong> <p>คู่มือการปฏิบัติงานทะเบียนวัดผลสำหรับครูที่ปรึกษา</p></li>
-                    <li><a href="#" style="color: var(--primary-light); font-weight: 500;">ดูประกาศทั้งหมด</a></li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>🛠️ ระบบบริการด่วนสำหรับประชาชน</h3>
+            <div class="card" style="margin-bottom: 40px;">
+                <h3><i class="fas fa-tools"></i> บริการออนไลน์ยอดนิยม</h3>
                 <div class="quick-link-grid">
                     
                     <a href="online-form.html" class="quick-link-item">
-                        <span class="icon-large">📜</span>
-                        <strong>ขอเอกสาร ปพ. ออนไลน์</strong>
+                        <i class="fas fa-file-invoice"></i>
+                        <strong>ขอเอกสาร ปพ.</strong>
                     </a>
                     <a href="#policy" class="quick-link-item">
-                        <span class="icon-large">⚖️</span>
+                        <i class="fas fa-gavel"></i>
                         <strong>ระเบียบการวัดผล</strong>
                     </a>
                     <a href="#downloads" class="quick-link-item">
-                        <span class="icon-large">⬇️</span>
-                        <strong>ดาวน์โหลดแบบฟอร์ม</strong>
+                        <i class="fas fa-download"></i>
+                        <strong>ศูนย์ดาวน์โหลด</strong>
                     </a>
                     <a href="#calendar" class="quick-link-item">
-                        <span class="icon-large">📅</span>
+                        <i class="fas fa-calendar-alt"></i>
                         <strong>ปฏิทินงานวัดผล</strong>
                     </a>
                     <a href="#register-in" class="quick-link-item">
-                        <span class="icon-large">🔄</span>
+                        <i class="fas fa-exchange-alt"></i>
                         <strong>ย้ายเข้า-ย้ายออก</strong>
                     </a>
                     <a href="#profile" class="quick-link-item">
-                        <span class="icon-large">📝</span>
-                        <strong>แก้ไขข้อมูลทะเบียน</strong>
+                        <i class="fas fa-user-edit"></i>
+                        <strong>แก้ไขข้อมูล</strong>
+                    </a>
+                    <a href="#faq" class="quick-link-item">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>คำถามที่พบบ่อย</strong>
+                    </a>
+                    <a href="#feedback" class="quick-link-item">
+                        <i class="fas fa-comment-dots"></i>
+                        <strong>เสนอแนะ</strong>
                     </a>
                     
                 </div>
+            </div>
+            
+            <div id="home" class="card">
+                <h3><i class="fas fa-bullhorn"></i> ข่าวสารและประกาศสำคัญ</h3>
+                <ul class="announcement-list">
+                    <li><strong class="date">2568-10-10</strong> <a href="#" class="title">แจ้งกำหนดการยื่นคำร้องขอ ปพ.1 สำหรับนักเรียน ม.6 (ฉบับปรับปรุง)</a></li>
+                    <li><strong class="date">2568-10-01</strong> <a href="#" class="title">ประกาศปฏิทินสอบปลายภาคเรียนที่ 1/2568 และแนวปฏิบัติ</a></li>
+                    <li><strong class="date">2568-09-15</strong> <a href="#" class="title">คู่มือการปฏิบัติงานทะเบียนวัดผลสำหรับครูที่ปรึกษา</a></li>
+                    <li><strong class="date">2568-08-20</strong> <a href="#" class="title">ประกาศผลการสอบแก้ตัวภาคเรียนที่ 2/2567</a></li>
+                    <li><a href="#" style="color: var(--primary-light); font-weight: 500; display: block; text-align: right; margin-top: 10px;">ดูประกาศทั้งหมด <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
             </div>
         </div>
 
         <div class="sidebar-info">
             
             <div id="personnel" class="card">
-                <h3>🧑‍🏫 ติดต่อ/ข้อมูลบุคลากร</h3>
-                <p><strong>สำนักงาน:</strong> อาคาร [ชื่ออาคาร] ชั้น 1</p>
+                <h3><i class="fas fa-users"></i> ติดต่อเจ้าหน้าที่</h3>
+                <p><strong>ที่ตั้ง:</strong> อาคาร [ชื่ออาคาร] ชั้น 1</p>
                 <p><strong>เวลาทำการ:</strong> จันทร์-ศุกร์ (08:30 - 16:30 น.)</p>
                 
-                <hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 15px 0;">
+                <hr>
                 
-                <p style="font-weight: 600;">หัวหน้างาน: ครูสมชาย ใจดี</p>
-                <p style="margin-bottom: 10px;">โทร: 0X-XXX-XXXX ต่อ 101</p>
+                <p><strong>หัวหน้างาน:</strong> ครูสมชาย ใจดี</p>
+                <p style="margin-bottom: 10px;"><i class="fas fa-phone-alt"></i> 0X-XXX-XXXX ต่อ 101</p>
                 
-                <p style="font-weight: 600;">เจ้าหน้าที่ทะเบียน: คุณสมหญิง ตั้งใจ</p>
-                <p>โทร: 0X-XXX-XXXX ต่อ 102</p>
+                <p><strong>เจ้าหน้าที่ทะเบียน:</strong> คุณสมหญิง ตั้งใจ</p>
+                <p><i class="fas fa-phone-alt"></i> 0X-XXX-XXXX ต่อ 102</p>
             </div>
             
-            <div class="card" style="background-color: #f0fcf5; border: 1px solid #c8e6c9;">
-                <h3>⚙️ สถานะระบบออนไลน์</h3>
-                <p style="color: #27ae60; font-weight: 700;">✅ ระบบ SGS/MIS: เปิดใช้งานปกติ</p>
-                <p style="color: var(--text-light);">อัปเดตล่าสุด: 13 ต.ค. 68 เวลา 10:00 น.</p>
-                <small>*รายงานปัญหาโทร 101 (งาน ICT)</small>
+            <div class="card status-card">
+                <h3><i class="fas fa-info-circle"></i> สถานะระบบ</h3>
+                <p><i class="fas fa-check-circle"></i> ระบบ SGS/MIS: <span style="color: var(--accent-color);">เปิดใช้งานปกติ</span></p>
+                <small>อัปเดตล่าสุด: 13 ต.ค. 2568 เวลา 10:00 น.</small>
+                <small style="display: block; margin-top: 10px;">*หากพบปัญหากรุณาติดต่อฝ่าย ICT โทร 101</small>
             </div>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2568 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | Thailand Official System UI</p>
+        <p>&copy; 2568 [ชื่อโรงเรียน] | งานทะเบียนและวัดผล | ออกแบบโดยทีมงาน ICT</p>
     </footer>
 
     <script>
