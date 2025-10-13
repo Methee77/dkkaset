@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานทะเบียนวัดผล - ฝ่ายประมวลผล GPA</title>
+    <title>ระบบงานทะเบียนและวัดผล - ฝ่ายประมวลผล GPA</title>
     <style>
         /* CSS หลักสำหรับโครงสร้าง Dashboard */
         body {
@@ -20,7 +20,7 @@
         /* เมนู Sidebar */
         .sidebar {
             width: 250px;
-            background-color: #2c3e50; /* สีเข้มสำหรับเมนู */
+            background-color: #2c3e50;
             color: white;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -41,14 +41,13 @@
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #34495e;
-            border-left-color: #007bff; /* สีน้ำเงินเน้น */
+            border-left-color: #007bff;
         }
 
         /* ส่วนเนื้อหาหลัก */
         .main-content {
             flex-grow: 1;
             padding: 40px;
-            background-color: #ffffff;
         }
         .header-bar {
             display: flex;
@@ -58,25 +57,42 @@
             padding-bottom: 15px;
             border-bottom: 2px solid #ddd;
         }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        
+        /* สไตล์สำหรับโมดูลงานทะเบียน */
+        .registration-module {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             margin-bottom: 40px;
         }
-        .stat-card {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .stat-card h3 {
+        .registration-module h3 {
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
             margin-top: 0;
-            color: #007bff;
         }
-
-        /* ตารางผลการประมวลผล */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .action-btn {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .action-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* สไตล์สำหรับตารางประมวลผล GPA */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -88,24 +104,24 @@
             text-align: left;
         }
         .data-table th {
-            background-color: #007bff;
+            background-color: #2ecc71; /* สีเขียวสำหรับส่วน GPA */
             color: white;
             text-align: center;
         }
         .data-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        .action-button {
+        .gpa-button {
             padding: 8px 15px;
-            background-color: #28a745;
+            background-color: #e67e22; /* สีส้มสำหรับปุ่มคำนวณ */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .action-button:hover {
-            background-color: #1e7e34;
+        .gpa-button:hover {
+            background-color: #d35400;
         }
 
         /* Responsive Design */
@@ -118,66 +134,62 @@
                 height: auto;
             }
             .sidebar a {
-                padding: 10px 20px;
                 border-left: none;
                 border-bottom: 1px solid #34495e;
             }
             .main-content {
                 padding: 20px;
             }
-            .stats-grid {
+            .action-grid {
                 grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="sidebar">
-            <h2>ระบบงานทะเบียน</h2>
-            <a href="#master" class="active">📚 จัดการข้อมูลหลัก</a>
-            <a href="#grading">📝 บันทึก/ประมวลผล GPA</a>
-            <a href="#approval">✅ การอนุมัติผล</a>
+            <h2>ระบบงานทะเบียน & วัดผล</h2>
+            <a href="#registration" class="active">📚 งานทะเบียน (ข้อมูลหลัก)</a>
+            <a href="#grading">📝 ประมวลผล GPA</a>
             <a href="#reports">📊 รายงานและเอกสาร</a>
             <a href="#logout">🚪 ออกจากระบบ</a>
         </div>
 
         <div class="main-content">
             <div class="header-bar">
-                <h1>แดชบอร์ด: การประมวลผล GPA ภาคเรียนที่ 1/2568</h1>
-                <span>ผู้ใช้งาน: เจ้าหน้าที่ทะเบียน (A001)</span>
+                <h1>แดชบอร์ดหลัก: เจ้าหน้าที่งานทะเบียนวัดผล</h1>
+                <span>ผู้ใช้งาน: นายทะเบียน (A001)</span>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>นักเรียนทั้งหมด</h3>
-                    <p>1,250 คน</p>
-                </div>
-                <div class="stat-card">
-                    <h3>สถานะคะแนน</h3>
-                    <p>95% บันทึกครบถ้วน</p>
-                </div>
-                <div class="stat-card">
-                    <h3>รออนุมัติผล</h3>
-                    <p style="color: red; font-size: 1.5em; font-weight: bold;">3 ระดับชั้น</p>
-                </div>
-                <div class="stat-card">
-                    <h3>ค่าเฉลี่ย GPAX สะสม</h3>
-                    <p>3.25</p>
-                </div>
-            </div>
-
-            <section id="processing">
-                <h2>📝 ตรวจสอบและประมวลผล GPA รายภาค</h2>
+            <section id="registration" class="registration-module">
+                <h2>📚 โมดูล: จัดการข้อมูลหลัก (งานทะเบียน)</h2>
                 
+                <div class="action-grid">
+                    <button class="action-btn">จัดการข้อมูลนักเรียน</button>
+                    <button class="action-btn">จัดการหลักสูตรและวิชา</button>
+                    <button class="action-btn">ตั้งค่าภาคเรียน/ปีการศึกษา</button>
+                    <button class="action-btn">กำหนดเกณฑ์การตัดเกรด</button>
+                </div>
+
+                <h3 style="margin-top: 30px;">สรุปข้อมูลล่าสุด:</h3>
+                <p>จำนวนนักเรียนปัจจุบัน: **1,250 คน** | หลักสูตรที่ใช้งาน: **2** | ภาคเรียนปัจจุบัน: **1/2568**</p>
+                <p>⚠️ **แจ้งเตือน:** มีนักเรียน 5 ราย ยื่นเรื่องขอแก้ไขข้อมูลส่วนตัว (เปลี่ยนชื่อ-สกุล) รอการอนุมัติ</p>
+            </section>
+
+            <hr>
+
+            <section id="grading" class="registration-module">
+                <h2>📝 โมดูล: ตรวจสอบและประมวลผล GPA</h2>
+                
+                <p>สถานะการประมวลผลผลการเรียน ณ วันที่ 13 ต.ค. 2568</p>
+
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>ระดับชั้น</th>
-                            <th>จำนวนนักเรียน</th>
-                            <th>หน่วยกิตรวม</th>
+                            <th>หน่วยกิตรวม (ภาค)</th>
                             <th>สถานะการบันทึกเกรด</th>
                             <th>การดำเนินการ</th>
                         </tr>
@@ -185,46 +197,42 @@
                     <tbody>
                         <tr>
                             <td>ม.4</td>
-                            <td>320</td>
                             <td>20.5</td>
-                            <td>ครบถ้วน (100%)</td>
+                            <td style="color: green; font-weight: bold;">ครบถ้วน (100%)</td>
                             <td style="text-align: center;">
-                                <button class="action-button">คำนวณ GPA</button>
+                                <button class="gpa-button">ประมวลผล GPA/GPAX</button>
                             </td>
                         </tr>
                         <tr>
                             <td>ม.5</td>
-                            <td>305</td>
                             <td>21.0</td>
-                            <td>98% (เหลือ 2 วิชา)</td>
+                            <td style="color: orange;">98% (รอ 2 วิชา)</td>
                             <td style="text-align: center;">
-                                <button class="action-button" style="background-color: #ffc107; color: #333;">แจ้งเตือนครู</button>
+                                <button class="gpa-button" style="background-color: #3498db;">แจ้งเตือนครูวิชาการ</button>
                             </td>
                         </tr>
                         <tr>
                             <td>ม.6</td>
-                            <td>310</td>
                             <td>18.0</td>
-                            <td>ครบถ้วน (100%)</td>
+                            <td style="color: green; font-weight: bold;">ครบถ้วน (100%)</td>
                             <td style="text-align: center;">
-                                <button class="action-button">คำนวณ GPAX & ปพ.3</button>
+                                <button class="gpa-button">ประมวลผลสุดท้าย & ปพ.3</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
-                <p style="margin-top: 30px; font-style: italic;">**หมายเหตุ:** การคำนวณ GPAX จะทำงานโดยอัตโนมัติเมื่อ GPA รายภาคได้รับการอนุมัติขั้นสุดท้ายจากผู้บริหาร</p>
             </section>
             
             <hr>
             
-            <section id="reports-section" style="text-align: left;">
-                 <h2>📊 ฟังก์ชันออกรายงาน</h2>
-                 <ul>
-                     <li><a href="#" style="color: #007bff;">พิมพ์ระเบียนแสดงผลการเรียน (ปพ. 1)</a> สำหรับผู้สำเร็จการศึกษา ม.6</li>
-                     <li><a href="#" style="color: #007bff;">รายงานสรุป GPA ต่ำกว่า 2.00</a> (เพื่อดำเนินการช่วยเหลือ)</li>
-                     <li><a href="#" style="color: #007bff;">สร้างไฟล์ส่งออกข้อมูล GPAX</a> (สำหรับระบบรับสมัครมหาวิทยาลัย)</li>
-                 </ul>
+            <section id="reports" class="registration-module">
+                 <h2>📊 โมดูล: รายงานและเอกสาร</h2>
+                 <div class="action-grid">
+                     <button class="action-btn" style="background-color: #1abc9c;">พิมพ์ ปพ. 1 (Transcript)</button>
+                     <button class="action-btn" style="background-color: #1abc9c;">พิมพ์ ปพ. 7 (ใบรับรองผล)</button>
+                     <button class="action-btn" style="background-color: #e74c3c;">รายงานนักเรียนติด '0' / เกรดต่ำ</button>
+                     <button class="action-btn" style="background-color: #9b59b6;">รายงานสถิติ GPAX (จัดอันดับ)</button>
+                 </div>
             </section>
 
         </div>
