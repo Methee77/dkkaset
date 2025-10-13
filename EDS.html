@@ -12,10 +12,10 @@
             font-family: 'Sarabun', Tahoma, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa; /* สีพื้นหลังเบาๆ */
+            background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนที่ไม่ต้องการ */
+            overflow-x: hidden;
         }
         .container {
             width: 90%;
@@ -23,13 +23,20 @@
             margin: 0 auto;
             padding: 20px 0;
         }
+        h2 {
+            font-size: 1.8em;
+            color: #004d99;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
         a {
             text-decoration: none;
             color: #007bff;
             transition: color 0.2s;
         }
         .btn-primary {
-            background-color: #004d99; /* สีหลักโรงเรียน (น้ำเงินเข้ม) */
+            background-color: #004d99;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -63,7 +70,7 @@
             display: block;
         }
         .main-nav {
-            display: flex; /* แสดงเมนูในบรรทัดเดียวกัน */
+            display: flex;
             align-items: center;
         }
         .main-nav a:not(.btn-primary) {
@@ -71,140 +78,125 @@
             color: #333;
             font-weight: 500;
         }
-        /* สำหรับ Mobile Menu (ซ่อนบน Desktop) */
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5em;
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; }
+
+        /* -------------------- 2. Hero Section (Full Width Slider) -------------------- */
+        .hero-section {
+            background-color: #e0f0ff; /* สีรองสำหรับ Hero */
+            height: 350px; /* ความสูงของ Slider */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            /* แทนที่ด้วยภาพสไลด์จริง */
+            background-image: url('[ใส่ URL รูปภาพ Hero ที่นี่]'); 
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-content {
+            background-color: rgba(255, 255, 255, 0.85); /* พื้นหลังโปร่งแสงสำหรับข้อความ */
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+        .hero-content h1 {
+            font-size: 2.5em;
+            color: #004d99;
+            margin: 0 0 10px 0;
+        }
+        .hero-content p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        /* -------------------- 2. Quick Access Strip -------------------- */
+        /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip {
-            text-align: center;
-            padding: 40px 0 20px 0;
-        }
-        .portal-title {
-            font-size: 2em;
-            color: #1a1a1a;
-            margin-bottom: 30px;
+            padding: 20px 0;
         }
         .quick-links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            /* 4 คอลัมน์บนจอใหญ่ */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
         }
         .quick-card {
             background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border-left: 5px solid transparent; /* สำหรับสีเน้น */
-            text-align: left; /* จัดชิดซ้าย */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 5px solid transparent; /* สำหรับสีเน้นด้านบน */
         }
         .quick-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
-        .icon-lg { font-size: 3.5em; display: block; margin-bottom: 15px; }
-        .quick-card h3 { margin: 0 0 5px 0; color: #1a1a1a; font-size: 1.4em; }
-        .quick-card p { margin: 0; font-size: 0.9em; color: #666; }
+        .icon-lg { font-size: 3em; display: block; margin-bottom: 10px; }
+        .quick-card h3 { margin: 5px 0 0; font-size: 1.2em; }
+        .quick-card p { margin: 0; font-size: 0.85em; color: #666; }
 
-        /* สีเน้น Card */
-        .card-blue { border-left-color: #007bff; color: #007bff; }
-        .card-green { border-left-color: #28a745; color: #28a745; }
-        .card-orange { border-left-color: #ffc107; color: #ffc107; }
+        /* สีเน้น Card (คล้ายเว็บไซต์อ้างอิง) */
+        .card-red { border-top-color: #dc3545; color: #dc3545; }
+        .card-blue { border-top-color: #007bff; color: #007bff; }
+        .card-green { border-top-color: #28a745; color: #28a745; }
+        .card-purple { border-top-color: #6f42c1; color: #6f42c1; }
 
-        /* -------------------- 3. Service Blocks -------------------- */
-        .service-blocks-wrapper {
+
+        /* -------------------- 4. News & Service Blocks (Grid 2 คอลัมน์) -------------------- */
+        .main-content-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 คอลัมน์บนจอใหญ่ */
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: 2fr 1fr; /* ข่าว 2/3, บริการ 1/3 */
+            gap: 30px;
+            margin-top: 30px;
         }
-        .service-block {
+        /* News Section (ซ้ายมือ) */
+        .news-section {
             background-color: white;
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .service-block h2 {
-            font-size: 1.3em;
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-            color: #004d99;
+        .news-section h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .news-list ul { list-style: none; padding: 0; }
+        .news-list li { padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 1.05em; }
+        .news-list li:last-child { border-bottom: none; }
+        .news-tag {
+            font-size: 0.75em; font-weight: 700; color: white; padding: 4px 8px; border-radius: 3px; margin-right: 15px; display: inline-block;
         }
-        .block-content-grid {
-            display: flex;
-            flex-direction: column;
+        .tag-red { background-color: #dc3545; }
+        .news-date { float: right; color: #999; font-size: 0.9em; }
+        .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
+
+        /* Service Sidebar (ขวามือ) */
+        .sidebar-services {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .service-link {
             background-color: #f8f8f8;
             padding: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             border-radius: 5px;
-            transition: background-color 0.2s, color 0.2s;
+            display: block;
+            transition: background-color 0.2s;
             color: #333;
             font-weight: 500;
         }
-        .service-link:hover {
-            background-color: #e6e6e6;
-            color: #004d99;
-        }
+        .service-link:hover { background-color: #e6e6e6; color: #004d99; }
 
-        /* -------------------- 4. News & Announcements -------------------- */
-        .news-updates-strip {
-            margin: 40px 0;
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .news-updates-strip h2 {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .news-updates-strip ul {
-            list-style: none;
-            padding: 0;
-        }
-        .news-updates-strip li {
-            padding: 10px 0;
-            border-bottom: 1px dashed #eee;
-            font-size: 1.05em;
-        }
-        .news-updates-strip li:last-child {
-            border-bottom: none;
-        }
-        .news-tag {
-            font-size: 0.75em;
-            font-weight: 700;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 3px;
-            margin-right: 15px;
-            display: inline-block;
-        }
-        .tag-red { background-color: #dc3545; }
-        .tag-blue { background-color: #007bff; }
-        .tag-green { background-color: #28a745; }
-        .news-date {
-            float: right;
-            color: #999;
-            font-size: 0.9em;
-        }
-        .view-all {
-            text-align: right;
-            padding-top: 15px !important;
-            border-top: 1px solid #eee;
-        }
 
         /* -------------------- 5. Footer -------------------- */
         .main-footer {
             background-color: #343a40;
             color: white;
             padding: 30px 5%;
+            margin-top: 40px;
         }
         .footer-grid {
             display: grid;
@@ -214,46 +206,30 @@
             padding-bottom: 20px;
             margin-bottom: 20px;
         }
-        .footer-grid h3 { color: #ccc; font-size: 1.2em; }
-        .footer-grid p { margin: 5px 0; font-size: 0.9em; color: #aaa; }
-        .footer-grid a { color: #f8f9fa; }
-        .copyright {
-            text-align: center;
-            font-size: 0.8em;
-            color: #aaa;
-        }
+        .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
 
-        /* -------------------- Responsive Design (Mobile-First) -------------------- */
+        /* -------------------- Responsive Design -------------------- */
         @media (max-width: 900px) {
-            /* 1. Header */
-            .main-nav {
-                display: none; /* ซ่อนเมนูหลักเมื่อจอเล็ก */
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* ใต้ header */
-                left: 0;
-                width: 100%;
-                background-color: white;
-                box-shadow: 0 4px 5px rgba(0,0,0,0.1);
-                padding-bottom: 10px;
-                z-index: 100;
+            .quick-links-grid {
+                grid-template-columns: repeat(2, 1fr); /* บนมือถือเหลือ 2 คอลัมน์ */
             }
-            .main-nav.active {
-                display: flex;
+            .main-content-grid {
+                grid-template-columns: 1fr; /* บนมือถือเหลือ 1 คอลัมน์ (เรียงซ้อนกัน) */
             }
-            .main-nav a {
-                margin: 10px 0;
-                padding: 5px 20px;
-                width: 90%;
-            }
-            .menu-toggle {
-                display: block; /* แสดงปุ่มเมนู */
-            }
+            .news-section h2, .sidebar-services h2 { text-align: center; }
 
-            /* 2. Service Blocks */
-            .service-blocks-wrapper {
-                grid-template-columns: 1fr; /* บนจอเล็กเหลือ 1 คอลัมน์ */
+            /* Mobile Menu */
+            .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
+            .main-nav.active { display: flex; }
+            .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
+            .menu-toggle { display: block; }
+        }
+        @media (max-width: 500px) {
+            .quick-links-grid {
+                grid-template-columns: 1fr; /* บนจอเล็กมากเหลือ 1 คอลัมน์ */
             }
+            .hero-section { height: 250px; }
+            .hero-content h1 { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -269,14 +245,22 @@
 
         <nav class="main-nav" id="mainNav">
             <a href="#">หน้าหลัก</a>
-            <a href="#contact-section">ติดต่อเรา</a>
+            <a href="[URL_โครงสร้าง]">โครงสร้าง</a>
+            <a href="[URL_ติดต่อ]">ติดต่อเรา</a>
             <a href="[URL_LOGIN_หลัก]" class="btn-primary">เข้าสู่ระบบ</a>
         </nav>
     </header>
 
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>ศูนย์รวมบริการงานทะเบียนวัดผลออนไลน์</h1>
+            <p>ตรวจสอบผลการเรียน ขอเอกสาร ย้ายเข้า-ออก ได้ง่ายและรวดเร็ว</p>
+            <a href="[URL_RESULTS]" class="btn-primary">เริ่มต้นใช้งาน</a>
+        </div>
+    </section>
+
     <div class="container">
         <section class="quick-access-strip">
-            <h1 class="portal-title">เข้าถึงทุกบริการงานทะเบียนวัดผลได้ทันที</h1>
             <div class="quick-links-grid">
                 <a href="[URL_RESULTS]" class="quick-card card-blue">
                     <i class="icon-lg">🖥️</i>
@@ -288,56 +272,43 @@
                     <h3>ขอเอกสารออนไลน์</h3>
                     <p>ปพ.1, ปพ.2, ใบรับรอง</p>
                 </a>
-                <a href="[URL_FORMS]" class="quick-card card-orange">
+                <a href="[URL_FORMS]" class="quick-card card-red">
                     <i class="icon-lg">⬇️</i>
                     <h3>ดาวน์โหลดแบบฟอร์ม</h3>
                     <p>ย้ายเข้า, ลาออก, คำร้อง</p>
                 </a>
+                <a href="[URL_O-NET]" class="quick-card card-purple">
+                    <i class="icon-lg">🏅</i>
+                    <h3>ผลสอบระดับชาติ</h3>
+                    <p>O-NET, N-NET, สทศ.</p>
+                </a>
             </div>
         </section>
 
-        <section class="service-blocks-wrapper">
-
-            <div class="service-block block-student">
-                <h2><i class="icon-sm">🎓</i> บริการสำหรับนักเรียน</h2>
-                <div class="block-content-grid">
-                    <a href="#" class="service-link">คู่มือการใช้ระบบ SGS</a>
-                    <a href="#" class="service-link">เกณฑ์การจบหลักสูตร</a>
-                    <a href="#" class="service-link">การขอหลักฐานทางการศึกษา</a>
-                    <a href="#" class="service-link">ติดต่อขอวุฒิการศึกษา</a>
+        <section class="main-content-grid">
+            
+            <div class="news-section">
+                <h2>📢 ข่าวสารและประกาศสำคัญ</h2>
+                <div class="news-list">
+                    <ul>
+                        <li><span class="news-tag tag-red">#O-NET</span> กำหนดการสอบ O-NET และสนามสอบ ปีการศึกษา 2569 <span class="news-date">12 ต.ค. 2569</span></li>
+                        <li><span class="news-tag tag-blue">#ทะเบียน</span> ขยายเวลารับเอกสารมอบตัวนักเรียน ม.1 <span class="news-date">8 ต.ค. 2569</span></li>
+                        <li><span class="news-tag tag-green">#เอกสาร</span> ประกาศผลการดำเนินการขอเอกสาร ปพ. <span class="news-date">1 ต.ค. 2569</span></li>
+                        <li><span class="news-tag tag-red">#วัดผล</span> ปฏิทินสอบซ่อมกลางภาคเรียนที่ 1/2569 <span class="news-date">28 ก.ย. 2569</span></li>
+                        <li><span class="news-tag tag-blue">#ย้ายเข้า</span> เอกสารที่ต้องใช้สำหรับการย้ายเข้านักเรียน <span class="news-date">20 ก.ย. 2569</span></li>
+                        <li class="view-all"><a href="#">ดูประกาศทั้งหมด ></a></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="service-block block-teacher">
-                <h2><i class="icon-sm">🧑‍🏫</i> แหล่งข้อมูลครู/บุคลากร</h2>
-                <div class="block-content-grid">
-                    <a href="[URL_TEACHER_LOGIN]" class="service-link">เข้าสู่ระบบ SGS (ครู)</a>
-                    <a href="[URL_GUIDELINE]" class="service-link">แนวปฏิบัติการวัดและประเมินผล</a>
-                    <a href="[URL_FORMS_TEACHER]" class="service-link">แบบฟอร์ม ปพ.5, ปพ.6</a>
-                    <a href="#" class="service-link">ปฏิทินงานวัดผล</a>
-                </div>
+            <div class="sidebar-services">
+                <h2>บริการหลัก (Main Services)</h2>
+                <a href="#" class="service-link">🎓 คู่มือการใช้งานระบบ SGS</a>
+                <a href="[URL_TEACHER_LOGIN]" class="service-link">🧑‍🏫 ระบบบันทึกผลการเรียน (สำหรับครู)</a>
+                <a href="#" class="service-link">📑 ตรวจสอบสถานะการขอเอกสาร</a>
+                <a href="#" class="service-link">📄 แนวปฏิบัติการวัดและประเมินผล</a>
+                <a href="#" class="service-link">📞 ติดต่อเจ้าหน้าที่งานทะเบียน</a>
             </div>
-
-            <div class="service-block block-transfer">
-                <h2><i class="icon-sm">🔄</i> งานทะเบียนและสถิติ</h2>
-                <div class="block-content-grid">
-                    <a href="#" class="service-link">ขั้นตอนการรับ/ย้ายนักเรียนเข้า</a>
-                    <a href="#" class="service-link">การย้ายออก/ลาออก/พักการเรียน</a>
-                    <a href="#" class="service-link">ตรวจสอบรายชื่อนักเรียน</a>
-                    <a href="#" class="service-link">สถิติจำนวนนักเรียนปัจจุบัน</a>
-                </div>
-            </div>
-
-        </section>
-
-        <section class="news-updates-strip">
-            <h2>📢 ข่าวสารและประกาศสำคัญ</h2>
-            <ul>
-                <li><span class="news-tag tag-red">#O-NET</span> กำหนดการสอบ O-NET และสนามสอบ ปีการศึกษา 2569 <span class="news-date">12 ต.ค. 2569</span></li>
-                <li><span class="news-tag tag-blue">#ทะเบียน</span> ขยายเวลารับเอกสารมอบตัวนักเรียน ม.1 <span class="news-date">8 ต.ค. 2569</span></li>
-                <li><span class="news-tag tag-green">#เอกสาร</span> ประกาศผลการดำเนินการขอเอกสาร ปพ. <span class="news-date">1 ต.ค. 2569</span></li>
-                <li class="view-all"><a href="#">ดูประกาศทั้งหมด ></a></li>
-            </ul>
         </section>
 
     </div> <footer id="contact-section" class="main-footer">
@@ -345,6 +316,7 @@
             <div>
                 <h3>งานทะเบียนวัดผล</h3>
                 <p>กลุ่มบริหารงานวิชาการ [ชื่อโรงเรียนเต็ม]</p>
+                <p>เน้นการบริการที่รวดเร็ว ถูกต้อง และทันสมัย</p>
             </div>
             <div>
                 <h3>ติดต่อเรา</h3>
@@ -352,8 +324,9 @@
                 <p>อีเมล: regis@[school.ac.th]</p>
             </div>
             <div>
-                <h3>ที่ตั้ง</h3>
-                <p>[ที่อยู่โรงเรียน]</p>
+                <h3>ลิงก์ด่วน</h3>
+                <p><a href="#">เว็บไซต์หลักโรงเรียน</a></p>
+                <p><a href="#">ระบบ SGS</a></p>
             </div>
         </div>
         <p class="copyright">&copy; 2569 [ชื่อโรงเรียน] </p>
