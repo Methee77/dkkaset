@@ -6,7 +6,7 @@
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (ส่วนที่เพิ่ม/แก้ไขเน้นที่นี่) */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด */
         
         /* -------------------- Base & Typography -------------------- */
         body {
@@ -47,20 +47,56 @@
         }
         .btn-primary:hover { background-color: #003366; }
 
+        /* -------------------- 1. Header & Navigation -------------------- */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        .logo-area {
+            line-height: 1.2;
+            cursor: pointer;
+        }
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #004d99;
+        }
+        .school-name {
+            font-size: 0.8em;
+            color: #666;
+            display: block;
+        }
+        
+        /* แก้ไข: ทำให้เมนูแสดงผลตามปกติบน Desktop */
+        .main-nav {
+            display: flex; 
+            align-items: center;
+        }
+        .main-nav a:not(.btn-primary) {
+            margin-left: 20px;
+            color: #333;
+            font-weight: 500;
+        }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; } /* ซ่อนบน Desktop */
+
         /* -------------------- 2. Hero Section (Full Width Slider) -------------------- */
         .hero-section {
             background-color: #e0f0ff; 
-            height: 450px; /* เพิ่มความสูงเพื่อรองรับตัวนับถอยหลัง */
+            height: 450px; 
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            background-image: url('https://via.placeholder.com/1500x450/e0f0ff/004d99?text=Online+Registration+System'); /* ภาพตัวอย่าง */
+            background-image: url('https://via.placeholder.com/1500x450/e0f0ff/004d99?text=Online+Registration+System');
             background-size: cover;
             background-position: center;
-            position: relative; /* สำคัญสำหรับกรอบนับถอยหลัง */
+            position: relative; 
         }
         .hero-content {
             background-color: rgba(255, 255, 255, 0.9);
@@ -79,9 +115,9 @@
             margin-bottom: 20px;
         }
         
-        /* --- NEW: Countdown Timer Style --- */
+        /* --- Countdown Timer Style --- */
         .countdown-container {
-            background-color: #dc3545; /* สีแดงเด่น */
+            background-color: #dc3545; 
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
@@ -114,7 +150,6 @@
             font-size: 0.8em;
             opacity: 0.8;
         }
-        /* ถ้าประกาศผลแล้ว */
         #countdown-timer.expired {
             font-size: 1.5em;
             font-weight: 700;
@@ -123,7 +158,6 @@
             padding: 15px;
             border-radius: 5px;
         }
-        /* --- End Countdown Timer Style --- */
 
         /* -------------------- 3. Quick Access (4 Cards in a Row) -------------------- */
         .quick-access-strip { padding: 20px 0; }
@@ -156,17 +190,31 @@
         .service-link:hover { background-color: #e6e6e6; color: #004d99; }
 
 
-        /* -------------------- 5. Footer and Responsive Design (ไม่มีการเปลี่ยนแปลงหลัก) -------------------- */
+        /* -------------------- 5. Footer and Responsive Design -------------------- */
         .main-footer { background-color: #343a40; color: white; padding: 30px 5%; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px; }
         .copyright { text-align: center; font-size: 0.8em; color: #aaa; }
+        
+        /* Media Query สำหรับ Mobile (ยุบเมนูเมื่อจอเล็ก) */
         @media (max-width: 900px) {
             .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
             .main-content-grid { grid-template-columns: 1fr; }
-            .main-nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); padding-bottom: 10px; z-index: 100; }
-            .main-nav.active { display: flex; }
+            
+            .main-nav { 
+                display: none; /* ซ่อนบน Mobile ตามปกติ */
+                flex-direction: column; 
+                position: absolute; 
+                top: 70px; 
+                left: 0; 
+                width: 100%; 
+                background-color: white; 
+                box-shadow: 0 4px 5px rgba(0,0,0,0.1); 
+                padding-bottom: 10px; 
+                z-index: 100; 
+            }
+            .main-nav.active { display: flex; } /* แสดงเมื่อมีการคลิก toggle */
             .main-nav a { margin: 10px 0; padding: 5px 20px; width: 90%; }
-            .menu-toggle { display: block; }
+            .menu-toggle { display: block; } /* แสดงปุ่ม Hamburger */
         }
         @media (max-width: 500px) {
             .quick-links-grid { grid-template-columns: 1fr; }
@@ -291,6 +339,7 @@
             var nav = document.getElementById('mainNav');
             nav.classList.toggle('active');
         });
+        
         var navLinks = document.querySelectorAll('#mainNav a');
         navLinks.forEach(function(link) {
             link.addEventListener('click', function() {
@@ -322,12 +371,11 @@
             // เมื่อสิ้นสุดการนับถอยหลัง
             if (distance < 0) {
                 clearInterval(x);
-                var timerDiv = document.getElementById("countdown-timer");
                 var containerDiv = document.querySelector(".countdown-container");
                 
                 // เปลี่ยนข้อความและดีไซน์
-                containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#ffc107; color:#333;'>เข้าสู่ระบบตรวจสอบผล</a>";
-                containerDiv.style.backgroundColor = '#28a745'; // เปลี่ยนเป็นสีเขียวเมื่อประกาศผล
+                containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#28a745; color:white; border-radius:5px; padding:10px 15px;'>เข้าสู่ระบบตรวจสอบผล</a>";
+                containerDiv.style.backgroundColor = '#28a745'; // สีเขียว
             }
         }, 1000); 
     </script>
