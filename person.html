@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โครงสร้างผู้บริหาร - ตัวอย่างโรงเรียน</title>
+    <style>
+        /* CSS Stylesheet (รวมมาในไฟล์เดียวกัน) */
+        body {
+            font-family: 'Sukhumvit Set', 'Sarabun', Arial, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .management-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #00796b; /* สีเขียวอมฟ้า */
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        /* การจัดรูปแบบ Card สำหรับผู้บริหารแต่ละคน */
+        .manager-card {
+            display: flex; /* ใช้ Flexbox เพื่อจัดเรียงเนื้อหา */
+            align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+            border: 1px solid #b2dfdb;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e0f2f1; /* สีพื้นหลังอ่อนๆ */
+            transition: transform 0.3s ease;
+        }
+
+        .manager-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* รูปแบบพิเศษสำหรับผู้อำนวยการหลัก */
+        .director-main {
+            background-color: #80cbc4; 
+            border-color: #004d40;
+            flex-direction: column; /* จัดรูปและข้อมูลตรงกลางสำหรับ CEO */
+            text-align: center;
+            padding: 25px;
+        }
+
+        .director-main .manager-info {
+            margin-left: 0;
+            margin-top: 15px;
+        }
+
+        /* รูปภาพผู้บริหาร */
+        .manager-photo img {
+            width: 150px; /* ขนาดรูปภาพใหญ่ขึ้นสำหรับ CEO */
+            height: 150px;
+            border-radius: 50%; /* ทำให้เป็นวงกลม */
+            object-fit: cover;
+            border: 5px solid #004d40;
+        }
+        .deputy-group .manager-photo img {
+            width: 100px; /* ขนาดรูปภาพรองผู้อำนวยการ */
+            height: 100px;
+            border-color: #00796b;
+        }
+
+        /* ข้อมูลผู้บริหาร */
+        .manager-info {
+            margin-left: 25px;
+            flex-grow: 1; 
+            text-align: left;
+        }
+
+        .manager-info .title, .manager-info .group-title {
+            color: #004d40;
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 3px;
+        }
+
+        .manager-info .name {
+            font-weight: 700;
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .director-main .name {
+            font-size: 1.8em;
+        }
+
+        .contact {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .sub-unit {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+            border-top: 1px dashed #4db6ac;
+            padding-top: 10px;
+        }
+
+        .sub-unit li {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #004d40, rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+        
+        /* การปรับให้ตอบสนอง (Responsive) */
+        @media (max-width: 600px) {
+            .manager-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .manager-info {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            .sub-unit {
+                text-align: center;
+            }
+            .manager-photo {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="management-container">
+        <h1>โครงสร้างคณะผู้บริหาร</h1>
+        
+        <div class="manager-card director-main">
+            <div class="manager-photo">
+                <img src="https://via.placeholder.com/150/004D40/FFFFFF?text=Director" alt="รูปภาพผู้อำนวยการ">
+            </div>
+            <div class="manager-info">
+                <p class="title">ตำแหน่ง</p>
+                <h2 class="name">ดร.ขนิษฐา พลายเพ็ชร์</h2>
+                <h3 class="title">ผู้อำนวยการสถานศึกษา</h3>
+                <p class="contact">โทร: 08x-xxx-xxxx | อีเมล: director@school.ac.th</p>
+            </div>
+        </div>
+        
+        <hr>
+
+        <h2>รองผู้อำนวยการและหัวหน้ากลุ่มงานบริหาร</h2>
+
+        <div class="manager-card deputy-group">
+            <div class="manager-photo">
+                 <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep1" alt="รูปภาพรองผู้อำนวยการ 1">
+            </div>
+            <div class="manager-info">
+                <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารงบประมาณ นโยบายและแผน</h3>
+                <p class="name">นายอนุชา ผ้าขาว</p>
+                <ul class="sub-unit">
+                    <li>**หัวหน้างานงบประมาณ:** นางสาวช่อลดา ประไพ</li>
+                    <li>**หัวหน้างานนโยบายและแผน:** นายเอกชัย ลวดคำ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="manager-card deputy-group">
+            <div class="manager-photo">
+                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep2" alt="รูปภาพรองผู้อำนวยการ 2">
+            </div>
+            <div class="manager-info">
+                <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารวิชาการ และบริหารทั่วไป</h3>
+                <p class="name">นางสาวน้ำผึ้ง ทวีสุข</p>
+                <ul class="sub-unit">
+                    <li>**หัวหน้ากลุ่มงานบริหารวิชาการ:** นายกรณ์พงศ์ พัฒนปกรณ์พงษ์</li>
+                    <li>**หัวหน้ากลุ่มงานบริหารทั่วไป:** นายนครินทร์ กล้าหาญ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="manager-card deputy-group">
+            <div class="manager-photo">
+                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep3" alt="รูปภาพรองผู้อำนวยการ 3">
+            </div>
+            <div class="manager-info">
+                <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารกิจการนักเรียน</h3>
+                <p class="name">นางสาวประกายดาว ชุมภูบาง</p>
+                <ul class="sub-unit">
+                    <li>**หัวหน้ากลุ่มงานบริหารงานกิจการนักเรียน:** นางสาวอังคณา ดวงเกตุ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="manager-card deputy-group">
+            <div class="manager-photo">
+                <img src="https://via.placeholder.com/100/00796B/FFFFFF?text=Dep4" alt="รูปภาพรองผู้อำนวยการ 4">
+            </div>
+            <div class="manager-info">
+                <h3 class="group-title">รองผู้อำนวยการ กลุ่มงานบริหารงานบุคคล</h3>
+                <p class="name">นางปานใจ ภัทรสุวรรณกิจ</p>
+                <ul class="sub-unit">
+                    <li>**หัวหน้ากลุ่มงานบริหารงานบุคคล:** นายไชยพร แย้มมี</li>
+                </ul>
+            </div>
+        </div>
+        
+
+    </div>
+
+</body>
+</html>
