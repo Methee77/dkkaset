@@ -6,17 +6,17 @@
     <title>ระบบงานทะเบียนวัดผล | [ชื่อโรงเรียน] - Modular UI</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Vibrant & Modular UI */
+        /* CSS: Compact Header & Logo Integration */
         
         :root {
-            --primary-color: #004a7c; /* Deep Navy Blue */
+            --primary-color: #004a7c; 
             --primary-light: #0077b6;
-            --accent-color: #ff5722; /* สีเน้นใหม่: ส้มสดใส (Vibrant Orange) */
+            --accent-color: #ff5722; 
             --text-color: #333;
             --text-light: #666;
             --bg-ultra-light: #f7f9fc; 
-            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* เงาที่ชัดและนุ่มนวล */
-            --border-radius-xl: 16px; /* โค้งมนมากขึ้น */
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
+            --border-radius-xl: 16px; 
             --transition-speed: 0.3s;
         }
 
@@ -34,43 +34,57 @@
         }
         
         /* ------------------------------------------------------------------ */
-        /* HEADER (Sticky) */
+        /* HEADER (ปรับให้เล็กลง) */
         /* ------------------------------------------------------------------ */
         .main-header {
             background-color: white;
             border-bottom: 1px solid #e0e0e0;
-            padding: 10px 40px;
+            /* ลด Padding จาก 10px เป็น 8px */
+            padding: 8px 40px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            
-            /* ทำให้ Sticky */
             position: sticky;
             top: 0;
             z-index: 100; 
         }
+        
+        /* จัดวาง Logo และ ชื่อเว็บไซต์ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* ระยะห่างระหว่างโลโก้กับชื่อเว็บไซต์ */
+        }
+
+        .school-logo {
+            /* กำหนดขนาดของตราโรงเรียนให้เล็กลง */
+            width: 36px; 
+            height: 36px;
+            object-fit: contain;
+        }
 
         .logo h1 {
             margin: 0;
-            font-size: 1.8em;
+            /* ลดขนาดตัวอักษรลงเล็กน้อย */
+            font-size: 1.6em; 
             color: var(--primary-color);
             font-weight: 800;
             letter-spacing: -0.5px;
         }
         
-        /* Navigation (Smooth Hover) */
+        /* Navigation (ปรับให้เล็กลง) */
         .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        .main-nav ul li { position: relative; padding: 0 18px; }
+        .main-nav ul li { position: relative; padding: 0 15px; } /* ลด Padding */
         .main-nav ul li a { 
             color: var(--text-color); 
             text-decoration: none; 
             font-weight: 500; 
-            padding: 10px 0; 
+            padding: 8px 0; /* ลด Padding */
             display: block; 
         }
         .main-nav ul li a:hover { 
-            color: var(--accent-color); /* Hover สีส้ม */
+            color: var(--accent-color); 
             border-bottom: 2px solid var(--accent-color);
         }
         
@@ -80,11 +94,10 @@
         .dropdown-content a:hover { background-color: #f5f5f5; color: var(--primary-color) !important; }
 
         /* ------------------------------------------------------------------ */
-        /* HERO SECTION (Gradient Accent) */
+        /* HERO SECTION (Gradient Accent) - เนื้อหาส่วนอื่นๆ คงเดิม */
         /* ------------------------------------------------------------------ */
         .hero-section {
             padding: 80px 20px 100px 20px;
-            /* พื้นหลัง Gradient ที่มีสี Accent */
             background: linear-gradient(135deg, var(--primary-color) 0%, #0077b6 100%);
             border-bottom: 5px solid var(--accent-color);
             text-align: center;
@@ -99,12 +112,12 @@
             background-color: var(--accent-color);
             color: white;
             padding: 18px 60px;
-            border-radius: 100px; /* เป็นปุ่มกลม */
+            border-radius: 100px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.3em;
             box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4);
-            border: 2px solid white; /* ขอบขาวตัดกับสี Accent */
+            border: 2px solid white; 
         }
 
         .hero-btn:hover {
@@ -114,101 +127,42 @@
         }
 
         /* ------------------------------------------------------------------ */
-        /* MAIN CONTENT & Layout */
+        /* MAIN CONTENT & FOOTER (ใช้โค้ดเดิม) */
         /* ------------------------------------------------------------------ */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-        }
-        
-        /* Card Style (โค้งมนและนุ่มนวล) */
-        .card {
-            background-color: white;
-            border-radius: var(--border-radius-xl); /* โค้งมนมากขึ้น */
-            box-shadow: var(--card-shadow);
-            padding: 30px;
-            margin-bottom: 30px;
-            border: none; /* ไม่มีขอบแข็ง */
-        }
-
-        .card h3 { 
-            font-size: 1.6em; 
-            color: var(--primary-color); 
-            font-weight: 700; 
-            border-bottom: 3px solid var(--accent-color); 
-            padding-bottom: 10px; 
-            margin-top: 0; 
-            margin-bottom: 25px; 
-            width: fit-content;
-        }
-        
-        /* Quick Link Grid (Modular / Bento Style) */
-        .quick-link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .quick-link-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--bg-ultra-light);
-            padding: 25px;
-            border-radius: var(--border-radius-xl);
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e0e0e0;
-        }
-        
-        .quick-link-item:hover {
-            background: linear-gradient(135deg, #fff 0%, #e0f2f7 100%); /* Hover Gradient */
-            transform: scale(1.05); /* เพิ่มการขยายตัวที่ดูสมูท */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
+        .container { width: 90%; max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .card { background-color: white; border-radius: var(--border-radius-xl); box-shadow: var(--card-shadow); padding: 30px; margin-bottom: 30px; border: none; }
+        .card h3 { font-size: 1.6em; color: var(--primary-color); font-weight: 700; border-bottom: 3px solid var(--accent-color); padding-bottom: 10px; margin-top: 0; margin-bottom: 25px; width: fit-content; }
+        .quick-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 20px; }
+        .quick-link-item { display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--bg-ultra-light); padding: 25px; border-radius: var(--border-radius-xl); text-align: center; text-decoration: none; color: var(--text-color); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border: 1px solid #e0e0e0; }
+        .quick-link-item:hover { background: linear-gradient(135deg, #fff 0%, #e0f2f7 100%); transform: scale(1.05); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
         .icon-large { font-size: 3em; color: var(--accent-color); margin-bottom: 10px; }
         .quick-link-item strong { font-weight: 700; font-size: 1.1em; color: var(--primary-color); }
-        
-        /* Announcement List */
         .announcement-list { list-style: none; padding: 0; }
         .announcement-list li { border-bottom: 1px dashed #e9ecef; padding: 12px 0; display: flex; gap: 15px; }
         .announcement-list li:hover { background-color: #fafbfd; cursor: pointer; }
         .announcement-list strong { color: var(--accent-color); min-width: 90px; font-weight: 600; }
-        
-        /* ------------------------------------------------------------------ */
-        /* FOOTER */
-        /* ------------------------------------------------------------------ */
-        .main-footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 25px 0;
-            border-top: 5px solid var(--accent-color);
-        }
+        .main-footer { background-color: var(--primary-color); color: white; text-align: center; padding: 25px 0; border-top: 5px solid var(--accent-color); }
 
         /* ------------------------------------------------------------------ */
-        /* MEDIA QUERIES */
+        /* MEDIA QUERIES (ปรับให้ Header เล็กลงบน Mobile ด้วย) */
         /* ------------------------------------------------------------------ */
         @media (max-width: 992px) {
             .container { grid-template-columns: 1fr; } 
             .hero-section { padding: 50px 20px 70px 20px; }
             .hero-section h2 { font-size: 2.2em; }
             .quick-link-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            
+            /* ปรับ Header บน Tablet/Mobile ให้เล็กลง */
+            .main-header { padding: 8px 20px; }
+            .logo h1 { font-size: 1.4em; }
+            .school-logo { width: 30px; height: 30px; }
         }
     </style>
 </head>
 <body>
     <header class="main-header">
         <div class="logo">
+            <img src="path/to/your/logo.png" alt="ตราโรงเรียน" class="school-logo">
             <h1>[ชื่อโรงเรียน] REGISTRY</h1>
         </div>
         <nav class="main-nav">
