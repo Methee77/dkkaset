@@ -9,10 +9,12 @@
     <style>
         /* -------------------------- CSS STYLES (KANNASOOT-Inspired) -------------------------- */
         
+        /* 1. นำเข้าฟอนต์ IBM Plex Sans Thai */
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap');
         
         /* การตั้งค่าพื้นฐาน */
         body {
+            /* 2. ใช้ฟอนต์ IBM Plex Sans Thai เป็นหลัก */
             font-family: 'IBM Plex Sans Thai', sans-serif;
             margin: 0;
             padding: 0;
@@ -91,59 +93,61 @@
         }
         
         /* สไตล์สำหรับลิงก์เข้าสู่ระบบที่กำหนดเอง */
-        .sidebar ul li a[style*="background-color: #004d99;"]:not(.status-item a) {
+        .sidebar ul li a[style*="background-color: #004d99;"]:not(.status-link) {
             color: white;
         }
 
-        /* --- CSS เพิ่มเติมสำหรับสถานะงานทะเบียนแบบ Radio Button --- */
+        /* --- CSS เพิ่มเติมสำหรับสถานะงานทะเบียน --- */
         
-        /* กล่องสถานะรวม */
-        .status-box {
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fff;
-        }
-
-        /* รายการสถานะ */
-        .status-item {
-            display: flex;
-            justify-content: space-between;
+        /* สไตล์หลักของลิงก์สถานะ */
+        .status-link {
+            display: flex; /* ทำให้เนื้อหาจัดเรียงในแนวนอน */
+            justify-content: space-between; /* จัดเนื้อหาและสถานะให้ชิดซ้าย-ขวา */
             align-items: center;
-            padding: 5px 0;
-            font-size: 0.9em;
-            font-weight: 400;
-            color: #333;
+            font-size: 0.95em;
+            font-weight: 600 !important;
+            padding: 10px 15px !important;
+            border-radius: 4px;
+            margin-top: 10px;
+            color: #333 !important;
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
         }
         
-        .status-item span {
-            font-weight: 600;
-            color: #000080;
-        }
-
-        /* กลุ่มปุ่มวิทยุ (Radio Buttons) */
-        .status-options label {
-            margin-left: 10px;
-            font-weight: normal;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .status-options input[type="radio"] {
-            /* กำหนดสีเพื่อให้มองเห็นชัดเจนในหน้านี้ (อาจไม่จำเป็นถ้าใช้สไตล์เบราว์เซอร์ปกติ) */
-            accent-color: #000080;
+        .status-link:hover {
+            transform: translateY(-2px);
+            border-left: 5px solid #ffcc00 !important;
         }
         
-        /* สไตล์เส้นคั่น */
-        .status-divider {
-            border-top: 1px solid #eee;
-            margin: 5px 0;
+        /* สไตล์สำหรับป้ายสถานะ (Badge) */
+        .status-badge {
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* สถานะ: เปิดใช้งาน */
+        .status-active {
+            background-color: #28a745; /* สีเขียว */
+        }
+        
+        /* สถานะ: ปิดใช้งาน */
+        .status-closed {
+            background-color: #dc3545; /* สีแดง */
+        }
+        
+        /* สถานะ: อยู่ระหว่างดำเนินการ */
+        .status-pending {
+            background-color: #ffc107; /* สีเหลือง/ส้ม */
+            color: #333;
         }
 
         /* ------------------------------------------------ */
 
-        /* เนื้อหาหลัก (Content) - คงเดิม */
+        /* เนื้อหาหลัก (Content) */
         .content {
             flex-grow: 1;
             padding: 20px;
@@ -168,6 +172,72 @@
             border: 1px solid #e6b800;
         }
 
+        .countdown-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background-color: #000080;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            min-width: 60px;
+        }
+
+        .time-unit .number {
+            display: block;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .time-unit .label {
+            display: block;
+            font-size: 0.75em;
+        }
+
+        #countdown-message {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #cc0000;
+            padding: 10px;
+            display: none;
+        }
+
+        /* กล่องข่าวสาร/ลิงก์ด่วน - คงเดิม */
+        .news-box, .service-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .news-list a {
+            display: block;
+            color: #333;
+            padding: 5px 0;
+            border-bottom: 1px dotted #eee;
+            text-decoration: none;
+        }
+        .news-list a:hover {
+            color: #000080;
+            text-decoration: underline;
+        }
+
+        /* สไตล์สำหรับ GIF NEW - คงเดิม */
+        .new-gif {
+            height: 18px; 
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
         /* ส่วนท้าย (Footer) - คงเดิม */
         .footer {
             background-color: #000080;
@@ -230,36 +300,22 @@
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน</a></li>
                     <li><a href="#" style="background-color: #ffcc00; color: #000080;"><i class="fas fa-chalkboard-teacher"></i> เข้าสู่ระบบครู</a></li>
                     <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-wrench"></i> สำหรับ Addmin</a></li>
-                </ul>
-                
-                <h3>สถานะงานทะเบียนวัดผล (1/2568)</h3>
-                <div class="status-box">
-                    <div class="status-item">
-                        <span><i class="fas fa-keyboard"></i> บันทึกผลการเรียน</span>
-                        <div class="status-options">
-                            <label><input type="radio" name="rec-status" value="closed" checked disabled> ปิด</label>
-                            <label><input type="radio" name="rec-status" value="open" disabled> เปิด</label>
-                        </div>
-                    </div>
                     
-                    <div class="status-divider"></div>
+                    <li>
+                        <a href="#" class="status-link">
+                            <span><i class="fas fa-database"></i> สถานะระบบ SGS/GPA</span>
+                            <span class="status-badge status-active">เปิดใช้งาน</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="status-link">
+                            <span><i class="fas fa-envelope-open-text"></i> สถานะงานคำร้อง </span>
+                            <span class="status-badge status-pending">กำลังดำเนินการ</span>
+                        </a>
+                    </li>
 
-                    <div class="status-item">
-                        <span><i class="fas fa-bullhorn"></i> ประกาศผลการเรียน</span>
-                        <div class="status-options">
-                            <label><input type="radio" name="pub-status" value="closed" disabled> ปิด</label>
-                            <label><input type="radio" name="pub-status" value="open" checked disabled> เปิด</label>
-                        </div>
-                    </div>
-
-                    <div class="status-item">
-                        <span><i class="fas fa-redo"></i> บันทึกผลสอบแก้ตัว</span>
-                        <div class="status-options">
-                            <label><input type="radio" name="res-status" value="closed" checked disabled> ปิด</label>
-                            <label><input type="radio" name="res-status" value="open" disabled> เปิด</label>
-                        </div>
-                    </div>
-                </div>
+                </ul>
             </aside>
 
             <main class="content">
