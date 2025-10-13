@@ -1,70 +1,180 @@
-/* การตั้งค่าพื้นฐานสำหรับทั้งหน้าเว็บ */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9; /* สีพื้นหลังอ่อน */
-    display: flex; 
-    justify-content: center; /* จัดองค์ประกอบตามแนวนอนตรงกลาง */
-    align-items: center; /* จัดองค์ประกอบตามแนวตั้งตรงกลาง */
-    min-height: 100vh;
-    margin: 0;
+/* สีหลักของ ม.เกษตรฯ */
+:root {
+    --ku-green: #006633; /* เขียวเข้ม */
+    --ku-yellow: #FFCC00; /* เหลือง */
+    --ku-light-gray: #f9f9f9;
+    --ku-shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* กล่องบรรจุฟอร์มล็อกอิน */
-.login-container {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+body {
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    background-color: var(--ku-light-gray);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* จัดให้อยู่ด้านบนเล็กน้อยเพื่อให้มีพื้นที่ด้านล่าง */
+    min-height: 100vh;
+    padding-top: 50px; /* เว้นระยะห่างจากขอบด้านบน */
+}
+
+a {
+    color: var(--ku-green);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------- HEADER ------------------- */
+.header {
+    background-color: var(--ku-green);
+    color: white;
     width: 100%;
-    max-width: 400px; /* จำกัดความกว้าง */
+    position: fixed; /* ตรึงไว้ด้านบน */
+    top: 0;
+    left: 0;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px var(--ku-shadow);
+    z-index: 100;
     text-align: center;
 }
 
-/* กลุ่มของช่อง input และ label */
+.header-logo {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.ku-logo {
+    background-color: var(--ku-yellow);
+    color: var(--ku-green);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.ku-title {
+    font-size: 1em;
+}
+
+
+/* ------------------- LOGIN CARD ------------------- */
+.login-card {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px var(--ku-shadow);
+    width: 100%;
+    max-width: 420px;
+    margin-top: 50px; /* ให้ต่ำกว่า Header */
+}
+
+.card-header {
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid var(--ku-light-gray);
+    padding-bottom: 15px;
+}
+
+.card-header h3 {
+    color: var(--ku-green);
+    margin: 0 0 5px 0;
+    font-size: 1.8em;
+}
+
+.card-header p {
+    color: #666;
+    margin: 0;
+    font-size: 1em;
+}
+
+/* ------------------- FORM INPUTS ------------------- */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
-/* ช่อง input */
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-    font-size: 16px;
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
 }
 
-/* ปุ่มล็อกอิน */
+.input-field {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 10px;
+}
+
+.input-field i {
+    color: var(--ku-green);
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.input-field input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 5px 0;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* ------------------- BUTTON ------------------- */
 .login-button {
-    background-color: #007bff; /* สีน้ำเงิน */
+    background-color: var(--ku-green);
     color: white;
-    padding: 12px 20px;
+    padding: 12px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    font-size: 18px;
-    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 15px;
     transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-    background-color: #0056b3; /* สีน้ำเงินเข้มขึ้นเมื่อชี้เมาส์ */
+    background-color: #004d26; /* เขียวเข้มขึ้น */
 }
 
-/* ลิงก์เพิ่มเติม */
-.forgot-password a, .signup a {
-    text-decoration: none;
+.login-button i {
+    margin-right: 8px;
 }
 
-.forgot-password a {
-    color: #007bff;
+/* ------------------- FOOTER ------------------- */
+.card-footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
 }
 
-.signup a {
-    color: #28a745; /* สีเขียว */
-    font-weight: bold;
+.mfa-note {
+    margin-top: 10px;
+    color: #888;
+}
+
+.mfa-note i {
+    color: orange;
+    margin-right: 5px;
+}
+
+/* Footer ล่างสุดของหน้าเว็บ */
+.footer {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px 0;
+    font-size: 0.85em;
+    color: #888;
 }
