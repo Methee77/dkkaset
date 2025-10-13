@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปฏิทินวิชาการ - ทันสมัย</title>
+    <title>ปฏิทินวิชาการ - โทนสีดี</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ตั้งค่าพื้นฐาน */
+        /* ตั้งค่าสีใหม่ (โทนสีน้ำเงินเข้มและสีเทา) */
         :root {
-            --primary-color: #3f51b5; /* สีน้ำเงินเข้ม */
-            --secondary-color: #ff9800; /* สีส้มเน้น */
+            --primary-color: #004d40; /* สีเขียวเข้ม/กรมท่า (Deep Teal) - ดูสงบ, น่าเชื่อถือ */
+            --secondary-color: #ffb300; /* สีส้มอมเหลือง (Amber) - ใช้เน้นกิจกรรม */
             --text-color: #333;
-            --bg-light: #f9f9fb;
+            --bg-light: #f4f7f6; /* สีเทาอ่อนมาก */
             --bg-white: #ffffff;
-            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-light: 0 6px 20px rgba(0, 0, 0, 0.05);
+            --border-color: #e0e0e0;
         }
 
         body {
@@ -24,7 +25,6 @@
             color: var(--text-color);
         }
 
-        /* Container หลัก */
         .calendar-modern-container {
             max-width: 1100px;
             margin: auto;
@@ -55,19 +55,20 @@
             font-weight: 300;
         }
 
-        /* ตารางในรูปแบบ Grid (สำหรับความทันสมัย) */
+        /* ตารางในรูปแบบ Grid */
         .calendar-grid {
             display: grid;
-            grid-template-columns: 150px 1fr 180px; /* คอลัมน์: วันที่ | กิจกรรม | หมายเหตุ */
-            gap: 1px; /* ช่องว่างระหว่างแถว/คอลัมน์ */
-            background-color: #ddd; /* เส้นแบ่งเบาๆ */
+            grid-template-columns: 140px 1fr 180px; /* ปรับความกว้างนิดหน่อย */
+            gap: 1px;
+            background-color: var(--border-color); /* เส้นแบ่งที่นุ่มนวล */
             border-radius: 8px;
-            overflow: hidden; /* ซ่อนเส้นที่ไม่ต้องการ */
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         /* Header Grid */
         .grid-header {
-            background-color: var(--primary-color);
+            background-color: var(--primary-color); /* สีเข้มหลัก */
             color: white;
             font-weight: 600;
             padding: 15px 15px;
@@ -76,52 +77,53 @@
             font-size: 0.9em;
             text-align: center;
         }
-        /* จัด Header ให้เต็ม Grid column */
+        
         .calendar-grid .grid-header:first-child { grid-column: 1; }
         .calendar-grid .grid-header:nth-child(2) { grid-column: 2; }
         .calendar-grid .grid-header:last-child { grid-column: 3; }
 
 
-        /* แถวข้อมูล */
+        /* Cell ข้อมูล */
         .grid-row {
-            display: contents; /* ให้ children ถูกจัดวางใน Grid หลัก */
+            display: contents;
         }
         
-        /* Cell ข้อมูล */
         .grid-cell {
             background-color: var(--bg-white);
             padding: 15px;
-            border-bottom: 1px solid #eee;
-            /* การปรับสไตล์เฉพาะคอลัมน์ */
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .grid-row:nth-child(even) .grid-cell {
-            background-color: var(--bg-light); /* แถวสลับสี */
+        /* แถวสลับสี (Zebra Stripes) - ใช้สีเทาอ่อนที่ไม่เด่นเกินไป */
+        .grid-row:nth-child(odd) .grid-cell {
+            background-color: var(--bg-light); 
         }
         
         /* สไตล์สำหรับคอลัมน์วันที่ */
         .grid-row .date-cell {
             font-weight: 600;
-            color: var(--secondary-color);
+            color: var(--primary-color); /* ใช้สีหลัก */
             text-align: center;
-            background-color: #e8eaf6; /* สีพื้นหลังอ่อนๆ สำหรับวันที่ */
-            display: flex; /* ใช้ Flexbox จัดวันที่ให้อยู่กึ่งกลางใน Cell */
+            background-color: #e0f2f1; /* สีพื้นหลังอ่อนมากสำหรับวันที่ (Light Teal) */
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.05em;
         }
 
         /* สไตล์สำหรับคอลัมน์หมายเหตุ */
         .grid-row .note-cell {
             font-style: italic;
-            color: #666;
+            color: #616161; /* สีเทาเข้ม */
             font-size: 0.9em;
-            background-color: #f1f8e9;
+            background-color: #fce4ec; /* สีชมพูอ่อนมาก (เพื่อแยกประเภทข้อมูล) */
         }
         
-        /* สไตล์พิเศษสำหรับกิจกรรมสำคัญ */
+        /* สไตล์พิเศษสำหรับกิจกรรมสำคัญ (วันหยุด/สอบ) */
         .highlight-activity {
-            color: #d32f2f; /* สีแดงสำหรับเน้น */
+            color: #d32f2f; /* สีแดงเข้มมาตรฐาน */
             font-weight: 600;
+            background-color: #fffde7 !important; /* พื้นหลังสีครีมอ่อนมาก */
         }
 
         /* Footer */
@@ -162,26 +164,26 @@
         
         <div class="grid-row">
             <div class="grid-cell date-cell highlight-activity">12 ส.ค. 2568</div>
-            <div class="grid-cell highlight-activity">วันหยุดราชการ: วันแม่แห่งชาติ (วันหยุดชดเชย)</div>
-            <div class="grid-cell note-cell highlight-activity"></div>
+            <div class="grid-cell highlight-activity">วันหยุดราชการ: วันแม่แห่งชาติ</div>
+            <div class="grid-cell note-cell highlight-activity">หยุดชดเชย</div>
         </div>
 
         <div class="grid-row">
             <div class="grid-cell date-cell">20 - 24 ส.ค. 2568</div>
-            <div class="grid-cell">สัปดาห์การเพิ่ม-ถอนรายวิชา (Late Registration)</div>
+            <div class="grid-cell">สัปดาห์การเพิ่ม-ถอนรายวิชา</div>
             <div class="grid-cell note-cell">ยื่นคำร้องผ่านระบบออนไลน์</div>
         </div>
         
         <div class="grid-row">
-            <div class="grid-cell date-cell">15 - 19 ก.ย. 2568</div>
+            <div class="grid-cell date-cell highlight-activity">15 - 19 ก.ย. 2568</div>
             <div class="grid-cell highlight-activity">สัปดาห์สอบกลางภาค (Mid-term Examination)</div>
-            <div class="grid-cell note-cell">ตรวจสอบตารางสอบได้ตั้งแต่วันที่ 1 ก.ย.</div>
+            <div class="grid-cell note-cell highlight-activity">ตรวจสอบตารางสอบได้ตั้งแต่วันที่ 1 ก.ย.</div>
         </div>
 
         <div class="grid-row">
-            <div class="grid-cell date-cell">13 - 17 ต.ค. 2568</div>
+            <div class="grid-cell date-cell highlight-activity">13 - 17 ต.ค. 2568</div>
             <div class="grid-cell highlight-activity">สัปดาห์สอบปลายภาค (Final Examination)</div>
-            <div class="grid-cell note-cell">นักศึกษาต้องชำระค่าเทอมให้ครบก่อนสอบ</div>
+            <div class="grid-cell note-cell highlight-activity">นักศึกษาต้องชำระค่าเทอมให้ครบก่อนสอบ</div>
         </div>
         
         <div class="grid-row">
