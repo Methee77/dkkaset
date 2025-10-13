@@ -6,11 +6,11 @@
     <title>งานทะเบียนวัดผลดิจิทัล | [ชื่อโรงเรียน]</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (ปรับปรุง Font และปุ่ม) */
+        /* CSS Style สำหรับเว็บไซต์ทั้งหมด (พร้อมสถานะระบบ) */
         
         /* -------------------- Base & Typography (ใช้ Kanit) -------------------- */
         body {
-            font-family: 'Kanit', Tahoma, sans-serif; /* เปลี่ยนฟอนต์หลักเป็น Kanit */
+            font-family: 'Kanit', Tahoma, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f7fa;
@@ -37,17 +37,17 @@
             transition: color 0.2s;
         }
         
-        /* --- ปรับขนาดปุ่มหลัก (.btn-primary) ให้เล็กลง --- */
+        /* --- ปุ่มหลัก (.btn-primary) --- */
         .btn-primary {
             background-color: #004d99;
             color: white;
-            padding: 8px 15px; /* ลดขนาด padding */
+            padding: 8px 15px;
             border-radius: 5px;
             font-weight: 600;
-            font-size: 0.9em; /* ลดขนาด font */
+            font-size: 0.9em;
             display: inline-block;
             transition: background-color 0.3s;
-            margin-left: 10px; /* เพิ่มระยะห่างจากเมนูอื่นๆ */
+            margin-left: 10px;
         }
         .btn-primary:hover { background-color: #003366; }
 
@@ -189,6 +189,39 @@
         .view-all { text-align: right; padding-top: 15px !important; border-top: 1px solid #eee; }
         .sidebar-services { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sidebar-services h2 { text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        /* --- System Status Styling (NEW) --- */
+        .system-status-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.95em;
+        }
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        .status-label {
+            font-weight: 600;
+        }
+        .status-indicator {
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: 700;
+            color: white;
+        }
+        .status-ok { background-color: #28a745; } /* สีเขียว */
+        .status-maintenance { background-color: #ffc107; } /* สีเหลือง */
+        .status-offline { background-color: #dc3545; } /* สีแดง */
+
         .service-link { background-color: #f8f8f8; padding: 12px; margin-bottom: 10px; border-radius: 5px; display: block; transition: background-color 0.2s; color: #333; font-weight: 500; }
         .service-link:hover { background-color: #e6e6e6; color: #004d99; }
 
@@ -250,7 +283,7 @@
             <p>ตรวจสอบผลการเรียน ขอเอกสาร ย้ายเข้า-ออก ได้ง่ายและรวดเร็ว</p>
             
             <div class="countdown-container">
-                <h4>🎉 ประกาศผลการเรียน ภาคเรียนที่ 1 ปีการศึกษา 2568 จะเริ่มใน:</h4>
+                <h4>🎉 กำหนดประกาศผลการเรียน ภาคเรียนที่ 1 ปีการศึกษา 2568 จะเริ่มใน:</h4>
                 <div id="countdown-timer">
                     <div class="time-block"><span id="days">00</span><small>วัน</small></div>
                     <div class="time-block"><span id="hours">00</span><small>ชั่วโมง</small></div>
@@ -306,6 +339,22 @@
             </div>
 
             <div class="sidebar-services">
+                
+                <h2>⚡ สถานะระบบบริการ (Service Status)</h2>
+                <div class="system-status-container">
+                    <div class="status-item">
+                        <span class="status-label">ระบบ SGS (นักเรียน/ผู้ปกครอง)</span>
+                        <span id="status-sgs" class="status-indicator status-ok">ใช้งานได้ปกติ</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">ระบบ SGS (สำหรับครู)</span>
+                        <span id="status-teacher" class="status-indicator status-maintenance">กำลังปรับปรุง</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">ระบบขอเอกสารออนไลน์</span>
+                        <span id="status-request" class="status-indicator status-ok">ใช้งานได้ปกติ</span>
+                    </div>
+                </div>
                 <h2>บริการหลัก (Main Services)</h2>
                 <a href="#" class="service-link">🎓 คู่มือการใช้งานระบบ SGS</a>
                 <a href="[URL_TEACHER_LOGIN]" class="service-link">🧑‍🏫 ระบบบันทึกผลการเรียน (สำหรับครู)</a>
@@ -351,10 +400,8 @@
         });
 
         // =========================================================
-        // JS สำหรับ Countdown Timer
-        // ** ต้องเปลี่ยนวันที่ประกาศผลการเรียนจริงที่นี่ (ปี, เดือน-1, วัน, ชั่วโมง, นาที, วินาที) **
-        // ตัวอย่าง: 25 พฤศจิกายน 2569 เวลา 10:00:00 น.
-        var countDownDate = new Date("Oct 14, 2025 13:00:00").getTime();
+        // JS สำหรับ Countdown Timer (กำหนดวันประกาศผล)
+        var countDownDate = new Date("Nov 25, 2026 10:00:00").getTime(); // **เปลี่ยนวันที่นี่**
         
         var x = setInterval(function() {
             var now = new Date().getTime();
@@ -365,22 +412,41 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            // ใส่ค่าลงใน element
             document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
             document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
             document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
             document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
 
-            // เมื่อสิ้นสุดการนับถอยหลัง
             if (distance < 0) {
                 clearInterval(x);
                 var containerDiv = document.querySelector(".countdown-container");
-                
-                // เปลี่ยนข้อความและดีไซน์
                 containerDiv.innerHTML = "<h4>✨ ประกาศผลการเรียนแล้ว!</h4><a href='[URL_RESULTS]' class='btn-primary' style='background-color:#28a745; color:white; border-radius:5px; padding:10px 15px;'>เข้าสู่ระบบตรวจสอบผล</a>";
-                containerDiv.style.backgroundColor = '#28a745'; // สีเขียว
+                containerDiv.style.backgroundColor = '#28a745';
             }
         }, 1000); 
+
+        // =========================================================
+        // JS สำหรับ System Status (จำลองการดึงสถานะระบบ)
+        function updateSystemStatus() {
+            // โค้ดจริง: ใช้ AJAX/Fetch ดึงสถานะจาก Server
+            // นี่คือการจำลองสถานะ:
+            var statuses = {
+                'status-sgs': { text: 'ใช้งานได้ปกติ', class: 'status-ok' },
+                'status-teacher': { text: 'กำลังปรับปรุง', class: 'status-maintenance' },
+                'status-request': { text: 'ใช้งานได้ปกติ', class: 'status-ok' }
+            };
+
+            for (const id in statuses) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = statuses[id].text;
+                    element.className = 'status-indicator ' + statuses[id].class;
+                }
+            }
+        }
+        
+        // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเว็บ
+        document.addEventListener('DOMContentLoaded', updateSystemStatus);
     </script>
 
 </body>
