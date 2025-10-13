@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>งานทะเบียนและวัดผล - [ชื่อโรงเรียน/สถาบัน]</title>
+    <title>งานทะเบียนและวัดผล - [ชื่อสถาบัน]</title>
     <style>
-        /* CSS องค์กร: ใช้สีน้ำเงินและโทนสว่าง */
+        /* CSS องค์กร: ใช้โทนสีขาว-เทา เน้นความสะอาด */
         :root {
-            --primary-color: #007bff; /* น้ำเงินเข้ม */
-            --secondary-color: #ffc107; /* เหลือง/ทอง */
+            --primary-color: #2c3e50; /* เทาเข้ม/น้ำเงินกรมท่า */
+            --highlight-color: #3498db; /* น้ำเงินสว่างเน้นข้อความ */
             --text-color: #333;
-            --light-bg: #f8f8f8;
+            --light-bg: #fdfdfd;
         }
 
         body {
@@ -19,49 +19,51 @@
             padding: 0;
             background-color: #ffffff;
             color: var(--text-color);
+            line-height: 1.6;
         }
 
         /* ****************************************************** */
-        /* การจัดวาง: เนื้อหาอยู่ตรงกลาง มีขอบเท่ากัน (Key Part) */
+        /* การจัดวาง: เนื้อหาอยู่ตรงกลาง มีขอบกว้างมาก (Key Part) */
         .content-area {
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
+            /* กำหนดความกว้างสูงสุดแคบลงเหลือ 900px เพื่อให้ขอบข้างกว้างขึ้น */
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         /* ****************************************************** */
         
-        /* 1. Header และเมนูหลัก */
+        /* 1. Header (ส่วนบนสุด) */
+        .header-top {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.85em;
+        }
         .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            background-color: white;
-        }
-        .logo-section {
-            display: flex;
-            align-items: center;
-        }
-        .logo-section img {
-            width: 60px;
-            height: auto;
-            margin-right: 15px;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
         }
         .logo-text h1 {
             color: var(--primary-color);
             margin: 0;
-            font-size: 1.8em;
+            font-size: 1.6em;
+            font-weight: 700;
         }
         .logo-text p {
             margin: 0;
             font-size: 0.9em;
-            color: #555;
+            color: #777;
         }
 
-        /* Menu Bar ใต้ Header */
+        /* Menu Bar (ใต้ Header) */
         nav.main-menu {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: var(--light-bg);
+            border-bottom: 2px solid var(--highlight-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
         nav.main-menu ul {
             list-style: none;
@@ -70,63 +72,68 @@
             display: flex;
             justify-content: flex-start;
         }
-        nav.main-menu .menu-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px; 
-        }
         nav.main-menu ul li a {
             display: block;
-            padding: 15px 20px;
+            padding: 12px 25px;
             text-decoration: none;
-            color: white;
+            color: var(--text-color);
             font-weight: 500;
             transition: background-color 0.3s;
         }
         nav.main-menu ul li a:hover {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
+            background-color: #ebebeb;
+            color: var(--highlight-color);
         }
 
-        /* 2. Banner/Announcement */
-        .announcement-banner {
-            background-color: var(--light-bg);
-            padding: 30px 0;
-            text-align: center;
-            border-bottom: 3px solid var(--secondary-color);
-        }
-        .announcement-banner h2 {
-            color: #d9534f;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .announcement-banner p {
-            color: var(--primary-color);
-            font-size: 1.1em;
-        }
-
-        /* 3. Content Sections: ข่าวสารและลิงก์บริการ */
-        .content-wrapper {
+        /* 2. Main Content Layout (ข่าวสารและลิงก์) */
+        .content-layout {
             display: flex;
             margin: 40px 0;
-            gap: 30px;
+            gap: 40px;
         }
         
-        /* Quick Links (ระบบบริการด้านขวา) */
+        /* 2.1 ข่าวสารหลัก (ซ้าย) */
+        .news-section {
+            flex-grow: 1;
+        }
+        .news-section h3 {
+            color: var(--highlight-color);
+            font-size: 1.4em;
+            margin-bottom: 25px;
+        }
+        .news-item {
+            border-bottom: 1px dashed #ddd;
+            padding: 15px 0;
+        }
+        .news-item-content a {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        .news-item-content a:hover {
+            color: var(--highlight-color);
+        }
+        .news-meta {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* 2.2 ลิงก์บริการ (ขวา) */
         .quick-links {
-            width: 30%;
-            min-width: 250px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            width: 300px; /* กำหนดความกว้างคงที่ */
+            background-color: var(--light-bg);
+            border: 1px solid #ddd;
             border-radius: 5px;
             height: fit-content;
         }
         .quick-links h3 {
-            background-color: var(--primary-color);
+            background-color: var(--highlight-color);
             color: white;
             padding: 15px;
             margin: 0;
-            border-radius: 5px 5px 0 0;
+            border-radius: 4px 4px 0 0;
             text-align: center;
         }
         .link-list {
@@ -143,42 +150,16 @@
             font-weight: 500;
         }
         .link-list a:hover {
-            background-color: #eaf6ff;
+            background-color: #f0f0f0;
+        }
+        .contact-info {
+            padding: 15px;
+            font-size: 0.9em;
+            color: #555;
+            border-top: 1px solid #ddd;
         }
 
-        /* News & Announcements (ข่าวสารหลักด้านซ้าย) */
-        .news-section {
-            flex-grow: 1;
-        }
-        .news-section h3 {
-            color: var(--primary-color);
-            border-left: 5px solid var(--secondary-color);
-            padding-left: 10px;
-            margin-bottom: 25px;
-        }
-        .news-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            transition: box-shadow 0.3s;
-        }
-        .news-item:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .news-item-content a {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-        .news-item-content p {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        /* 4. Footer */
+        /* 3. Footer */
         footer {
             background-color: #333;
             color: white;
@@ -188,114 +169,99 @@
             text-align: center;
         }
         footer a {
-            color: var(--secondary-color);
+            color: var(--highlight-color);
             text-decoration: none;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .header-main {
+        @media (max-width: 950px) {
+            .content-layout {
                 flex-direction: column;
-                text-align: center;
-            }
-            .content-wrapper {
-                flex-direction: column;
+                gap: 20px;
             }
             .quick-links {
                 width: 100%;
-                margin-bottom: 20px;
-            }
-            nav.main-menu ul {
-                justify-content: space-around;
+                order: -1; /* ย้ายไปด้านบนในมุมมองมือถือ */
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="header-top">
+        <div class="content-area">
+            ระบบงานทะเบียนและวัดผล [ชื่อสถาบัน] | TH | EN
+        </div>
+    </div>
+    
     <div class="content-area">
         <div class="header-main">
-            <div class="logo-section">
-                <img src="school_logo.png" alt="โลโก้โรงเรียน"> 
-                <div class="logo-text">
-                    <h1>[ชื่อโรงเรียน/สถาบัน]</h1>
-                    <p>KANCHANANUKROH SCHOOL</p>
-                </div>
+            <div class="logo-text">
+                <h1>สำนัก/กองทะเบียนและวัดผล</h1>
+                <p>REGISTRATION AND EVALUATION OFFICE</p>
             </div>
-            <div class="contact-info">
-                <p>โทร. 034-511-060 | Email: regis@school.ac.th</p>
-            </div>
+            <a href="#" style="text-decoration: none; color: var(--primary-color); font-weight: bold;">เข้าสู่ระบบสำหรับครู/เจ้าหน้าที่</a>
         </div>
     </div>
     
     <nav class="main-menu">
-        <div class="menu-wrapper"> <ul>
-                <li><a href="#" class="active">หน้าหลักงานทะเบียน</a></li>
+        <div class="content-area">
+            <ul>
+                <li><a href="#" class="active">หน้าหลัก</a></li>
                 <li><a href="#">ระเบียบการศึกษา</a></li>
-                <li><a href="#">การขอเอกสาร</a></li>
-                <li><a href="#">ปฏิทินวัดผล</a></li>
-                <li><a href="#">ติดต่อเจ้าหน้าที่</a></li>
+                <li><a href="#">การขอเอกสาร (ปพ. 7)</a></li>
+                <li><a href="#">ปฏิทินวัดผล GPA</a></li>
+                <li><a href="#">คู่มือ/คำร้อง</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="announcement-banner">
-        <div class="content-area">
-            <h2>⚠️ ประกาศด่วน! กำหนดการสุดท้ายในการบันทึกผลการเรียน</h2>
-            <p>ครูผู้สอนทุกท่าน โปรดบันทึกและส่งผลการเรียน (ตัดเกรด) ภายในวันที่ **30 ตุลาคม 2568** เพื่อประมวลผล GPA รายภาค</p>
-        </div>
-    </div>
-
     <div class="content-area">
-        <div class="content-wrapper">
+        <div class="content-layout">
             
             <div class="news-section">
-                <h3>📢 ข่าวสารและประกาศงานวัดผล</h3>
+                <h3>📌 ประกาศและข่าวสารสำคัญ</h3>
 
                 <div class="news-item">
                     <div class="news-item-content">
-                        <p style="font-size: 0.8em; color: #999;">[12 ต.ค. 2568] - เอกสารสำคัญ</p>
-                        <a href="#">ดาวน์โหลดฟอร์มคำร้องขอใบรับรองผลการศึกษา (ปพ. 7)</a>
-                        <p>สำหรับนักเรียนที่ต้องการนำไปใช้สมัครเรียนต่อหรือยื่นเอกสารต่างๆ</p>
+                        <a href="#">กำหนดการสุดท้ายในการบันทึกผลการเรียน (ตัดเกรด) ภาคเรียนที่ 1/2568</a>
+                        <p class="news-meta">ประกาศ: 13 ตุลาคม 2568 | สำหรับครูผู้สอน</p>
                     </div>
                 </div>
                 
                 <div class="news-item">
                     <div class="news-item-content">
-                        <p style="font-size: 0.8em; color: #999;">[05 ต.ค. 2568] - กำหนดการ</p>
-                        <a href="#">ปฏิทินการขอแก้ไข "เกรด 0" และ "เกรด มส." ภาคเรียนที่ 1/2568</a>
-                        <p>ให้นักเรียนที่มีผลการเรียนไม่สมบูรณ์ติดต่อครูผู้สอนตามวันเวลาที่กำหนด</p>
+                        <a href="#">ระเบียบการคำนวณ GPAX สะสมใหม่ สำหรับนักเรียนปีการศึกษา 2568</a>
+                        <p class="news-meta">ระเบียบ: 01 ตุลาคม 2568 | ดาวน์โหลดเอกสาร</p>
                     </div>
                 </div>
                 
                 <div class="news-item">
                     <div class="news-item-content">
-                        <p style="font-size: 0.8em; color: #999;">[01 ต.ค. 2568] - ระเบียบ</p>
-                        <a href="#">ระเบียบการคำนวณ GPAX สะสมใหม่ สำหรับปีการศึกษา 2568</a>
-                        <p>อธิบายหลักเกณฑ์การคิดเกรดเฉลี่ยสะสมและหน่วยกิตตามหลักสูตรใหม่</p>
+                        <a href="#">คำชี้แจง: ขั้นตอนการยื่นคำร้องขอแก้ไขเกรด "0" และ "มส."</a>
+                        <p class="news-meta">ข่าว: 25 กันยายน 2568 | สำหรับนักเรียน</p>
                     </div>
                 </div>
                 
-                <div style="text-align: right; margin-top: 15px;">
-                    <a href="#" style="color: var(--primary-color); font-weight: bold;">ดูประกาศทั้งหมด ></a>
+                <div style="text-align: right; margin-top: 25px;">
+                    <a href="#" style="color: var(--highlight-color); font-weight: bold;">ดูประกาศทั้งหมด ></a>
                 </div>
             </div>
             
             <div class="quick-links">
-                <h3>ระบบบริการ (e-Service)</h3>
+                <h3>ระบบบริการ (E-Service)</h3>
                 <ul class="link-list">
-                    <li><a href="#">💻 ระบบบันทึกผลการเรียน (สำหรับครู)</a></li>
                     <li><a href="#">🔍 ตรวจสอบ GPA / GPAX รายบุคคล</a></li>
-                    <li><a href="#">📄 พิมพ์ใบรับรองผลการศึกษาออนไลน์</a></li>
+                    <li><a href="#">💻 ระบบบันทึกผลการเรียน (สำหรับครู)</a></li>
+                    <li><a href="#">📄 พิมพ์ใบรับรองผลการศึกษา (ปพ. 7)</a></li>
                     <li><a href="#">📥 ดาวน์โหลดแบบฟอร์มคำร้อง</a></li>
                     <li><a href="#">🗓️ ปฏิทินวัดผลประจำปี</a></li>
                 </ul>
                 
-                <h3 style="background-color: #3498db; margin-top: 20px;">ติดต่อเจ้าหน้าที่</h3>
-                <div style="padding: 15px; font-size: 0.9em;">
-                    <p><strong>เบอร์โทรศัพท์:</strong> 034-511-060 ต่อ 102</p>
-                    <p><strong>ห้องทำงาน:</strong> อาคารวิชาการ ชั้น 1</p>
-                    <p><strong>เวลาทำการ:</strong> จันทร์ - ศุกร์ (08:30 - 16:30 น.)</p>
+                <div class="contact-info">
+                    <p><strong>ติดต่อสอบถามงานทะเบียน</strong></p>
+                    <p>โทร: 034-511-060 ต่อ 102</p>
+                    <p>Email: regis@school.ac.th</p>
                 </div>
             </div>
 
@@ -304,8 +270,8 @@
 
     <footer>
         <div class="content-area">
-            <p>Copyright © 2024 งานทะเบียนและวัดผล โรงเรียน [ชื่อโรงเรียน/สถาบัน]</p>
-            <p>นโยบายเว็บไซต์ | <a href="#">แผนผังเว็บไซต์</a></p>
+            <p>Copyright © 2024 งานทะเบียนและวัดผล โรงเรียน [ชื่อสถาบัน]</p>
+            <p><a href="#">นโยบายเว็บไซต์</a> | <a href="#">แผนผังเว็บไซต์</a></p>
         </div>
     </footer>
 
