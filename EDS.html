@@ -1,37 +1,104 @@
-<div class="header">
-    <div class="logo-area">
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>งานทะเบียนวัดผลดิจิทัล | โรงเรียน (ชื่อโรงเรียน)</title>
+    <style>
+        /* CSS จะอยู่ด้านล่าง */
+    </style>
+    </head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="logo-text">งานทะเบียนวัดผล</span>
+            <span class="school-name">[ชื่อโรงเรียน]</span>
         </div>
-    <nav class="main-nav">
+        <nav class="main-nav">
+            <a href="#">หน้าหลัก</a>
+            <a href="#contact-section">ติดต่อเรา</a>
+            <a href="[URL_LOGIN]" class="btn-primary">เข้าสู่ระบบ</a>
         </nav>
-    <a href="[Login_URL]" class="btn-primary">เข้าสู่ระบบ</a>
-    </div>
+    </header>
 
-<section class="hero-section">
-    <div class="hero-content">
-        <h1>งานทะเบียนวัดผลดิจิทัล</h1>
-        <p>บริการรวดเร็ว เข้าถึงง่าย ทุกที่ ทุกเวลา</p>
-    </div>
-</section>
+    <div class="container">
+        <section class="quick-access-strip">
+            <h1 class="portal-title">เข้าถึงทุกบริการงานทะเบียนวัดผลได้ทันที</h1>
+            <div class="quick-links-grid">
+                <a href="[URL_RESULTS]" class="quick-card card-blue">
+                    <i class="icon-lg">🖥️</i>
+                    <h3>ตรวจสอบผลการเรียน</h3>
+                </a>
+                <a href="[URL_REQUEST]" class="quick-card card-green">
+                    <i class="icon-lg">📝</i>
+                    <h3>ขอเอกสารออนไลน์</h3>
+                </a>
+                <a href="[URL_CALENDAR]" class="quick-card card-orange">
+                    <i class="icon-lg">📅</i>
+                    <h3>ปฏิทินวิชาการ</h3>
+                </a>
+            </div>
+        </section>
 
-<section class="quick-services">
-    <div class="service-card">
-        <i class="icon icon-results"></i>
-        <h3>ตรวจสอบผลการเรียน</h3>
-        <p>Student Portal/SGS</p>
-        <a href="[URL]" class="btn-link">ไปยังระบบ ></a>
-    </div>
-    </section>
+        <section class="service-blocks-wrapper">
 
-<section class="news-updates">
-    <h2>📣 ข่าวสารล่าสุด</h2>
-    <div class="news-list">
-        <article class="news-item">
-            <h4>ประกาศ: กำหนดการสอบปลายภาค 1/2569</h4>
-            <span class="date">10 ต.ค. 2569</span>
-            <p>ตรวจสอบตารางสอบได้ที่นี่...</p>
-        </article>
+            <div class="service-block block-student">
+                <h2><i class="icon-sm">🎓</i> สำหรับนักเรียน/ผู้ปกครอง</h2>
+                <div class="block-content-grid">
+                    <a href="#" class="service-link">คู่มือการใช้งานระบบ SGS</a>
+                    <a href="#" class="service-link">เกณฑ์การจบหลักสูตร</a>
+                    <a href="#" class="service-link">การขอ/รับเอกสารคืน</a>
+                </div>
+            </div>
+
+            <div class="service-block block-teacher">
+                <h2><i class="icon-sm">🧑‍🏫</i> สำหรับครู/บุคลากร</h2>
+                <div class="block-content-grid">
+                    <a href="[URL_TEACHER_LOGIN]" class="service-link">เข้าสู่ระบบ SGS (ครู)</a>
+                    <a href="[URL_FORMS]" class="service-link">ดาวน์โหลดแบบฟอร์ม ปพ.</a>
+                    <a href="#" class="service-link">แนวทางการวัดผลรายวิชา</a>
+                </div>
+            </div>
+
+            <div class="service-block block-transfer">
+                <h2><i class="icon-sm">📄</i> งานทะเบียนและการย้าย</h2>
+                <div class="block-content-grid">
+                    <a href="#" class="service-link">ขั้นตอนการย้ายเข้า</a>
+                    <a href="#" class="service-link">การลาออก/ย้ายออก</a>
+                    <a href="#" class="service-link">ติดต่อขอตรวจสอบวุฒิ</a>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="news-updates-strip">
+            <h2>📢 ข่าวสารและประกาศ</h2>
+            <ul>
+                <li><span class="news-tag tag-red">#O-NET</span> ประกาศผลการสอบ O-NET ปีการศึกษา 2568 <span class="news-date">10 ต.ค. 69</span></li>
+                <li><span class="news-tag tag-blue">#มอบตัว</span> ขยายเวลารับมอบตัวนักเรียนใหม่ ถึงวันที่ 30 ต.ค. <span class="news-date">5 ต.ค. 69</span></li>
+                <li><span class="news-tag tag-green">#เอกสาร</span> กำหนดการขอ ปพ.1/ปพ.2 สำหรับนักเรียนจบปี 67 <span class="news-date">1 ต.ค. 69</span></li>
+                </ul>
+        </section>
+
+    </div> <footer id="contact-section" class="main-footer">
+        <div class="footer-grid">
+            <div>
+                <h3>งานทะเบียนวัดผล</h3>
+                <p>กลุ่มบริหารงานวิชาการ [ชื่อโรงเรียนเต็ม]</p>
+            </div>
+            <div>
+                <h3>ติดต่อเรา</h3>
+                <p>โทรศัพท์: <a href="tel:0xxxxxxxxxx">0X-XXX-XXXX</a></p>
+                <p>อีเมล: regis@[school.ac.th]</p>
+            </div>
+            <div>
+                <h3>ที่ตั้ง</h3>
+                <p>[ที่อยู่โรงเรียน]</p>
+                </div>
         </div>
-</section>
+        <p class="copyright">&copy; 2569 [ชื่อโรงเรียน] | พัฒนาโดย... </p>
+    </footer>
 
-<div class="footer">
-    </div>
+</body>
+</html>
