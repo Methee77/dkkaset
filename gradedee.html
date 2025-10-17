@@ -3,159 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบผลการเรียนดีเด่น 4.00 (Minimalist)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ระบบตรวจสอบนักเรียนดีเด่น (MyTCAS Style)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base and Layout */
+        /* Base and Layout - MyTCAS Theme */
         body {
             font-family: 'Kanit', sans-serif;
-            background-color: #ffffff; /* พื้นหลังสีขาวสะอาด */
-            color: #1f2937; /* ข้อความสีเทาเข้ม */
+            background-color: #f5f5f5; /* สีพื้นหลังอ่อน */
+            color: #333;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: grid; 
-            place-items: center;
         }
 
-        /* Container - Card หลักที่ดูเบาบาง */
-        .container {
-            background-color: #f9fafb; /* พื้นหลัง Card สีขาวเทาอ่อน */
-            padding: 48px;
-            border-radius: 16px; /* ขอบโค้งมนมากขึ้น */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* เงาที่ดูเบาและนุ่มนวล */
-            width: 90%; 
-            max-width: 550px; /* จำกัดความกว้างให้ดูสมาร์ทขึ้น */
+        /* ------------------------------------- */
+        /* 1. Navigation Bar (แถบนำทางด้านบน) */
+        /* ------------------------------------- */
+        .navbar {
+            background-color: #007bff; /* สีน้ำเงินเข้ม/ฟ้าหลัก */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo a {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Header Styling */
+        /* ------------------------------------- */
+        /* 2. Main Content Layout */
+        /* ------------------------------------- */
+        .main-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        .search-card {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 600px;
+            border-left: 5px solid #28a745; /* สีเขียวเน้นความสำเร็จ */
+        }
+        
+        /* Header & Subtitle */
         h1 {
-            color: #10b981; /* สีเขียวสดใสเน้น */
+            color: #007bff;
+            font-size: 2em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 5px;
             text-align: center;
-            margin-bottom: 8px;
-            font-weight: 700; /* ตัวหนามาก */
-            font-size: 2.25rem;
         }
-        p.subtitle {
+        .card-subtitle {
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 1em;
             text-align: center;
-            color: #6b7280;
-            margin-bottom: 32px;
-            font-size: 1rem;
-            font-weight: 400;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 15px;
         }
 
-        /* Search Form Styling */
+        /* Search Form */
         .search-form {
             display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: 10px;
+            margin-bottom: 30px;
         }
         input[type="text"] {
             flex-grow: 1;
-            padding: 14px 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s;
         }
         input[type="text"]:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* Focus ring สีเขียว */
+            border-color: #007bff;
         }
         button {
-            padding: 14px 24px;
-            background-color: #10b981;
+            padding: 12px 25px;
+            background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 500;
             transition: background-color 0.2s;
         }
         button:hover {
-            background-color: #059669;
+            background-color: #1e7e34;
         }
 
-        /* Result Display */
-        h2 {
-            font-size: 1.125rem;
-            color: #1f2937;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+        /* ------------------------------------- */
+        /* 3. Result Display (ปรับให้เป็นทางการ) */
+        /* ------------------------------------- */
+        h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
             font-weight: 600;
-            border-bottom: 1px solid #e5e7eb; /* เส้นแบ่งที่เบาบาง */
-            text-align: center;
         }
         #result {
-            padding: 24px;
-            border-radius: 12px;
+            padding: 15px 20px;
+            border-radius: 6px;
+            min-height: 80px;
             line-height: 1.6;
-            min-height: 100px;
-            transition: all 0.3s ease-in-out;
-            font-weight: 500;
+            transition: all 0.3s ease;
         }
-
-        /* ---------------------------------------------------- */
-        /* การปรับปรุงส่วนแสดงผลลัพธ์แบบ Minimalist/Modern */
-        /* ---------------------------------------------------- */
-
-        /* Grid Layout สำหรับแสดงรายละเอียด */
-        .result-details {
+        
+        /* Grid Layout สำหรับแสดงรายละเอียดนักเรียน */
+        .student-data-grid {
             display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 8px 16px;
-            margin-top: 15px;
-        }
-        .result-details strong {
-            font-weight: 500; /* หัวข้อไม่หนาเกินไป */
-            color: #4b5563; 
-        }
-
-        /* Feedback Status */
-        .status-message {
-            font-size: 1.25rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .gpa-display {
-            font-size: 2.5rem; /* ตัวเลข GPA ใหญ่และชัดเจน */
-            font-weight: 700;
+            grid-template-columns: 120px 1fr;
+            gap: 5px 10px;
             margin-top: 10px;
+        }
+        .student-data-grid strong {
+            font-weight: 500;
+            color: #495057;
+        }
+        .gpa-main {
+            font-size: 2em;
+            font-weight: 700;
+            margin-top: 15px;
             text-align: center;
         }
 
-        /* Feedback Styles (สีที่ดู Professional) */
-        .result-success { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-        .result-warning { background-color: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
-        .result-error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-        .result-info { background-color: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; text-align: center; }
+        /* Feedback Styles (สีตามสถานะ) */
+        .result-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .result-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .result-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .result-info { background-color: #e9ecef; color: #6c757d; border: 1px solid #ced4da; }
 
         /* Media Queries */
-        @media (max-width: 600px) {
-            .container { padding: 32px; width: 95%; }
-            h1 { font-size: 1.8rem; }
-            .search-form { flex-direction: column; gap: 10px; }
-            .gpa-display { font-size: 2rem; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* ซ่อนลิงก์เพิ่มเติมบนมือถือ */
+            .main-container { padding: 20px 10px; }
+            .search-card { padding: 25px; }
+            .search-form { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>ระบบตรวจสอบนักเรียนดีเด่น</h1>
-    <p class="subtitle">กรุณาป้อนรหัสนักเรียนเพื่อตรวจสอบผลการเรียน 4.00</p>
-
-    <div class="search-form">
-        <input type="text" id="studentId" placeholder="รหัสนักเรียน (เช่น 12345)" maxlength="5" />
-        <button onclick="searchStudent()">ตรวจสอบ</button>
+<div class="navbar">
+    <div class="nav-content">
+        <div class="logo"><a href="#">TCAS (จำลอง)</a></div>
+        <div class="nav-links">
+            <a href="#">หน้าแรก</a>
+            <a href="#">ข้อมูลหลักสูตร</a>
+            <a href="#">ข่าวประกาศ</a>
+            <a href="#">เข้าสู่ระบบ</a>
+        </div>
     </div>
-    
-    <h2>ผลการค้นหา</h2>
-    <div id="result" class="result-info">
-        <p>รอการป้อนรหัสเพื่อตรวจสอบข้อมูล...</p>
+</div>
+
+<div class="main-container">
+    <div class="search-card">
+        <h1>ตรวจสอบนักเรียนดีเด่น 4.00</h1>
+        <p class="card-subtitle">ใช้รหัสนักเรียนในการค้นหาผลการเรียนเฉลี่ยสะสม 4.00</p>
+
+        <div class="search-form">
+            <input type="text" id="studentId" placeholder="ป้อนรหัสนักเรียน 5 หลัก" maxlength="5" />
+            <button onclick="searchStudent()">ตรวจสอบสถานะ</button>
+        </div>
+        
+        <h3>ผลการตรวจสอบสถานะ:</h3>
+        <div id="result" class="result-info">
+            <p style="text-align: center; margin: 0;">กรุณาป้อนรหัสนักเรียนและกดปุ่ม 'ตรวจสอบสถานะ'</p>
+        </div>
     </div>
 </div>
 
@@ -178,7 +222,7 @@
         resultDiv.className = ''; 
 
         if (inputId === '') {
-            resultDiv.innerHTML = '<p class="status-message" style="color:#d97706;">⚠️ กรุณาป้อนรหัสนักเรียน</p>';
+            resultDiv.innerHTML = '<p style="text-align: center;">กรุณาป้อนรหัสนักเรียน</p>';
             resultDiv.classList.add('result-warning');
             return;
         }
@@ -188,7 +232,7 @@
         if (student) {
             // โครงสร้าง Grid สำหรับรายละเอียด
             const detailsHtml = `
-                <div class="result-details">
+                <div class="student-data-grid">
                     <strong>รหัสนักเรียน:</strong> <span>${student.id}</span>
                     <strong>ชื่อ-สกุล:</strong> <span>${student.name}</span>
                 </div>
@@ -197,26 +241,23 @@
             if (student.is400) {
                 // เกรด 4.00 (Success)
                 resultDiv.innerHTML = `
-                    <p class="status-message" style="color: #065f46;">✨ ยอดเยี่ยม! คุณคือ นักเรียน 4.00</p>
+                    <p style="font-weight: 700; color: #155724; text-align: center; margin-bottom: 5px;">✅ ยืนยันผล: นักเรียนดีเด่น</p>
                     ${detailsHtml}
-                    <div class="gpa-display" style="color: #10b981;">GPA: ${student.gpa}</div>
+                    <div class="gpa-main" style="color: #28a745;">GPA: ${student.gpa}</div>
                 `;
                 resultDiv.classList.add('result-success');
             } else {
                 // ไม่ใช่ 4.00 (Warning)
                 resultDiv.innerHTML = `
-                    <p class="status-message" style="color: #92400e;">⚠️ ผลการเรียนยังไม่ถึงเกณฑ์ (4.00)</p>
+                    <p style="font-weight: 700; color: #856404; text-align: center; margin-bottom: 5px;">❌ ผลการเรียนยังไม่ถึง 4.00</p>
                     ${detailsHtml}
-                    <div class="gpa-display" style="color: #f59e0b;">GPA: ${student.gpa}</div>
+                    <div class="gpa-main" style="color: #856404; font-size: 1.5em;">GPA: ${student.gpa}</div>
                 `;
                 resultDiv.classList.add('result-warning');
             }
         } else {
             // ไม่พบข้อมูล (Error)
-            resultDiv.innerHTML = `
-                <p class="status-message" style="color: #991b1b;">❌ ไม่พบข้อมูลนักเรียน</p>
-                <p style="text-align: center; font-weight: 400;">รหัสที่คุณป้อนไม่ตรงกับข้อมูลในระบบ</p>
-            `;
+            resultDiv.innerHTML = '<p style="font-weight: 700; text-align: center;">ไม่พบข้อมูลรหัสนักเรียนในระบบ</p>';
             resultDiv.classList.add('result-error');
         }
     }
