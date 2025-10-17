@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบผลการเรียนดีเด่น</title>
+    <title>ระบบตรวจสอบนักเรียนเกรด 4.00</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset และ Base Styling */
+        /* Base Styling - ใช้ Kanit เพื่อความเป็นไทยที่ทันสมัย */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f9fc; /* สีพื้นหลังอ่อน */
-            color: #333;
+            font-family: 'Kanit', sans-serif;
+            background-color: #e9ecef; /* โทนสีเทาอ่อน สไตล์เว็บไซต์ระบบ */
+            color: #343a40; /* สีข้อความหลัก */
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,29 +18,38 @@
             align-items: center;
             min-height: 100vh;
         }
+
+        /* Container - Card หลัก */
         .container {
             background-color: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* เงาที่ดูทันสมัย */
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* เงาที่ชัดเจนขึ้น */
             width: 100%;
-            max-width: 500px;
-            border-top: 5px solid #007bff; /* แถบสีเน้นหัวข้อ */
+            max-width: 450px;
+            border-top: 4px solid #17a2b8; /* สีฟ้าเทอร์คอยซ์ คุมโทนระบบ */
+            transition: transform 0.3s ease;
         }
+        .container:hover {
+             transform: translateY(-2px); /* เอฟเฟกต์เล็กน้อยเมื่อวางเมาส์ */
+        }
+
+        /* Header Styling */
         h1 {
-            color: #007bff; /* สีน้ำเงินหลัก */
+            color: #17a2b8;
             text-align: center;
             margin-bottom: 5px;
             font-weight: 600;
+            font-size: 1.8em;
         }
         p.subtitle {
             text-align: center;
             color: #6c757d;
             margin-bottom: 25px;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
-        /* Search Form Styling */
+        /* Form Controls */
         .search-form {
             display: flex;
             gap: 10px;
@@ -48,145 +58,140 @@
         input[type="text"] {
             flex-grow: 1;
             padding: 12px;
-            border: 2px solid #ced4da;
-            border-radius: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
             font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
             outline: none;
+            transition: border-color 0.3s;
         }
         input[type="text"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            border-color: #17a2b8;
         }
         button {
             padding: 12px 20px;
-            background-color: #28a745; /* สีเขียวสำหรับปุ่มค้นหา */
+            background-color: #28a745; /* สีเขียวสำหรับปุ่มหลัก */
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.3s, transform 0.1s;
+            font-weight: 400;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #1e7e34;
         }
-        button:active {
-            transform: scale(0.98);
-        }
 
-        /* Result Display Styling */
+        /* Result Display */
         h2 {
-            font-size: 1.2em;
-            color: #333;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
+            font-size: 1.1em;
+            color: #343a40;
+            margin-top: 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e9ecef;
             margin-bottom: 15px;
         }
         #result {
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            min-height: 50px;
             line-height: 1.6;
+            transition: all 0.3s;
+            min-height: 50px;
         }
 
-        /* Specific Result Styles (Feedback) */
+        /* Feedback Styles (คุมโทนสีตามสถานะ) */
         .result-success {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: #d4edda; /* พื้นหลังเขียวอ่อน */
+            color: #155724; /* ข้อความเขียวเข้ม */
             border: 1px solid #c3e6cb;
         }
         .result-warning {
-            background-color: #fff3cd;
-            color: #856404;
+            background-color: #fff3cd; /* พื้นหลังเหลืองอ่อน */
+            color: #856404; /* ข้อความเหลืองเข้ม */
             border: 1px solid #ffeeba;
         }
         .result-error {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #f8d7da; /* พื้นหลังแดงอ่อน */
+            color: #721c24; /* ข้อความแดงเข้ม */
             border: 1px solid #f5c6cb;
         }
-        .result-default {
-            background-color: #f0f0f0;
-            color: #6c757d;
+        .result-info {
+            background-color: #cce5ff; /* พื้นหลังฟ้าอ่อน */
+            color: #004085; /* ข้อความฟ้าน้ำเงิน */
+            border: 1px solid #b8daff;
         }
-
+        
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>ระบบตรวจสอบผลการเรียนดีเด่น</h1>
-    <p class="subtitle">ตรวจสอบรายชื่อนักเรียนที่มีผลการเรียนเฉลี่ย 4.00</p>
+    <p class="subtitle">กรุณาป้อนรหัสนักเรียนเพื่อตรวจสอบสถานะผลการเรียน 4.00</p>
 
     <div class="search-form">
-        <input type="text" id="studentId" placeholder="ป้อนรหัสนักเรียนที่ต้องการค้นหา" maxlength="10" />
-        <button onclick="searchStudent()">ตรวจสอบ</button>
+        <input type="text" id="studentId" placeholder="ป้อนรหัสนักเรียน 5 หลัก" maxlength="5" />
+        <button onclick="searchStudent()">ค้นหา</button>
     </div>
     
-    <h2>สถานะผลการเรียน</h2>
-    <div id="result" class="result-default">
-        <p>กรุณาป้อนรหัสนักเรียนและกดปุ่ม 'ตรวจสอบ'</p>
+    <h2>ผลการตรวจสอบ</h2>
+    <div id="result" class="result-info">
+        <p>ข้อมูลจะแสดงขึ้นที่นี่หลังจากทำการค้นหา</p>
     </div>
 </div>
 
 <script>
     // ข้อมูลนักเรียนจำลอง (ใช้ในการสาธิต)
     const studentData = [
-        { id: '12345', name: 'นายสมชาย ใจดี', gpa: '4.00', is400: true },
-        { id: '67890', name: 'นางสาวสุดา งามยิ่ง', gpa: '3.95', is400: false },
-        { id: '11223', name: 'เด็กชายมานะ เพียรเรียน', gpa: '4.00', is400: true },
-        { id: '44556', name: 'เด็กหญิงปรีดา มั่นคง', gpa: '3.80', is400: false }
+        { id: '12345', name: 'สมชาย ใจดี', gpa: '4.00', is400: true },
+        { id: '67890', name: 'สุดา งามยิ่ง', gpa: '3.95', is400: false },
+        { id: '11223', name: 'มานะ เพียรเรียน', gpa: '4.00', is400: true },
+        { id: '44556', name: 'ปรีดา มั่นคง', gpa: '3.80', is400: false }
     ];
 
     /**
      * ฟังก์ชันสำหรับค้นหานักเรียนและแสดงผลลัพธ์
      */
     function searchStudent() {
-        // 1. รับค่าจากช่องป้อนข้อมูล
         const inputId = document.getElementById('studentId').value.trim();
         const resultDiv = document.getElementById('result');
         
-        // ล้าง Class เก่าทั้งหมด
+        // ล้าง Class และเปลี่ยนเป็นสถานะเริ่มต้น
         resultDiv.className = ''; 
 
         if (inputId === '') {
-            resultDiv.innerHTML = '<p>กรุณาป้อนรหัสนักเรียนเพื่อดำเนินการค้นหา</p>';
-            resultDiv.classList.add('result-error');
+            resultDiv.innerHTML = '<p>⚠️ กรุณาป้อนรหัสนักเรียน</p>';
+            resultDiv.classList.add('result-warning');
             return;
         }
 
-        // 2. ค้นหาข้อมูลใน array จำลอง
+        // ค้นหาข้อมูล
         const student = studentData.find(s => s.id === inputId);
 
-        // 3. แสดงผลลัพธ์
+        // แสดงผลลัพธ์
         if (student) {
             if (student.is400) {
-                // เกรด 4.00
+                // เกรด 4.00 - สถานะสำเร็จ (Success)
                 resultDiv.innerHTML = `
-                    <p style="font-weight: 600; font-size: 1.1em;">✓ ยินดีด้วย! คุณมีผลการเรียนดีเด่น</p>
-                    <hr style="border: 0; border-top: 1px solid #c3e6cb; margin: 10px 0;">
-                    <p>รหัสนักเรียน: <strong>${student.id}</strong></p>
-                    <p>ชื่อ: <strong>${student.name}</strong></p>
-                    <p>เกรดเฉลี่ย: <strong>${student.gpa}</strong></p>
+                    <p style="font-weight: 600; font-size: 1.1em; margin-bottom: 5px;">✅ ผลการเรียนดีเด่น 4.00</p>
+                    <p>รหัส: <strong>${student.id}</strong></p>
+                    <p>ชื่อ-สกุล: <strong>${student.name}</strong></p>
+                    <p style="font-size: 1.2em; color: #155724; font-weight: 600;">GPA: ${student.gpa}</p>
                 `;
                 resultDiv.classList.add('result-success');
             } else {
-                // ไม่ใช่ 4.00
+                // ไม่ใช่ 4.00 - สถานะคำเตือน (Warning)
                 resultDiv.innerHTML = `
-                    <p style="font-weight: 600; font-size: 1.1em;">- ผลการเรียนยังไม่ถึงเกณฑ์</p>
-                    <hr style="border: 0; border-top: 1px solid #ffeeba; margin: 10px 0;">
-                    <p>รหัสนักเรียน: <strong>${student.id}</strong></p>
-                    <p>ชื่อ: <strong>${student.name}</strong></p>
-                    <p>เกรดเฉลี่ย: <strong>${student.gpa}</strong></p>
-                    <p style="font-size: 0.9em; margin-top: 10px;">(เกณฑ์ที่กำหนดคือ 4.00)</p>
+                    <p style="font-weight: 600; font-size: 1.1em; margin-bottom: 5px;">❌ ผลการเรียนยังไม่ถึงเกณฑ์</p>
+                    <p>รหัส: <strong>${student.id}</strong></p>
+                    <p>ชื่อ-สกุล: <strong>${student.name}</strong></p>
+                    <p>GPA: <strong>${student.gpa}</strong> (เกณฑ์คือ 4.00)</p>
                 `;
                 resultDiv.classList.add('result-warning');
             }
         } else {
-            // ไม่พบข้อมูล
-            resultDiv.innerHTML = '<p style="font-weight: 600;">× ไม่พบรหัสนักเรียนในระบบ</p><p>กรุณาตรวจสอบรหัสอีกครั้ง</p>';
+            // ไม่พบข้อมูล - สถานะข้อผิดพลาด (Error)
+            resultDiv.innerHTML = '<p style="font-weight: 600;">ข้อมูลไม่ถูกต้อง</p><p>รหัสนักเรียนนี้ไม่มีในระบบ กรุณาตรวจสอบอีกครั้ง</p>';
             resultDiv.classList.add('result-error');
         }
     }
