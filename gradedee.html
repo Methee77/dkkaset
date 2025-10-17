@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบผลการเรียนดีเด่น 4.00</title>
+    <title>ระบบตรวจสอบผลการเรียนดีเด่น 4.00 (ขยายเต็มหน้า)</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* Base Styling และ Full-Page Layout */
@@ -13,23 +13,23 @@
             color: #343a40;
             margin: 0;
             padding: 0;
-            /* ทำให้เนื้อหาอยู่กึ่งกลางหน้าจอทั้งหมด */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            /* การตั้งค่าเพื่อให้ Body ขยายเต็มหน้าจอ */
             min-height: 100vh;
-            text-align: left; /* ตั้งค่า Text-align ให้กลับเป็นซ้าย */
+            display: grid; /* ใช้ Grid สำหรับการจัดวางตรงกลาง */
+            place-items: center; /* จัดวางให้อยู่กึ่งกลางทั้งแนวตั้งและแนวนอน */
         }
 
-        /* Container - Card หลัก */
+        /* Container - Card หลัก ถูกขยายให้กว้างขึ้น */
         .container {
             background-color: #ffffff;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* เงาที่ดูมีมิติ */
-            width: 100%;
-            max-width: 500px;
-            border-top: 5px solid #007bff; /* สีน้ำเงินสดใสสำหรับเน้น */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            /* ปรับขนาดเพื่อให้กว้างขึ้น แต่ไม่เกินขอบเขตที่เหมาะสม */
+            width: 90%; /* กว้าง 90% ของพื้นที่จอ */
+            max-width: 800px; /* จำกัดความกว้างสูงสุด */
+            min-height: 350px; /* กำหนดความสูงขั้นต่ำให้ดูเต็มขึ้น */
+            border-top: 5px solid #007bff; 
         }
 
         /* Header Styling */
@@ -38,27 +38,30 @@
             text-align: center;
             margin-bottom: 5px;
             font-weight: 600;
-            font-size: 2em;
+            font-size: 2.2em; /* ขยายขนาดหัวข้อ */
         }
         p.subtitle {
             text-align: center;
             color: #6c757d;
-            margin-bottom: 30px;
-            font-size: 1em;
+            margin-bottom: 35px;
+            font-size: 1.1em;
         }
 
         /* Search Form Styling (Flexbox) */
         .search-form {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 15px; /* เพิ่มช่องว่าง */
+            margin-bottom: 40px;
+            max-width: 550px; /* จำกัดความกว้างของฟอร์มค้นหาให้อยู่ตรงกลาง */
+            margin-left: auto;
+            margin-right: auto;
         }
         input[type="text"] {
             flex-grow: 1;
-            padding: 14px;
+            padding: 15px;
             border: 1px solid #ced4da;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 17px;
             outline: none;
             transition: border-color 0.3s;
         }
@@ -67,15 +70,15 @@
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
         button {
-            padding: 14px 25px;
+            padding: 15px 30px;
             background-color: #28a745;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 500;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #1e7e34;
@@ -83,41 +86,46 @@
 
         /* Result Display */
         h2 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #343a40;
             border-bottom: 1px solid #e9ecef;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            text-align: center; /* จัดหัวข้อผลลัพธ์ให้อยู่ตรงกลาง */
         }
         #result {
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             line-height: 1.8;
-            min-height: 50px;
+            min-height: 80px; /* เพิ่มความสูงขั้นต่ำ */
+            max-width: 600px; /* จำกัดความกว้างของผลลัพธ์ */
+            margin: 0 auto; /* จัดผลลัพธ์ให้อยู่ตรงกลาง */
         }
 
         /* Feedback Styles */
-        .result-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+        .result-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .result-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .result-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .result-info { background-color: #e9ecef; color: #6c757d; border: 1px solid #ced4da; }
+
+        /* Media Queries สำหรับหน้าจอขนาดเล็ก (มือถือ) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+                width: 95%;
+                margin: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .search-form {
+                flex-direction: column; /* เปลี่ยนให้ Input และ Button อยู่คนละบรรทัด */
+                gap: 10px;
+            }
+            input[type="text"], button {
+                width: 100%;
+            }
         }
-        .result-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
-        .result-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .result-info {
-            background-color: #e9ecef;
-            color: #6c757d;
-            border: 1px solid #ced4da;
-        }
-        
     </style>
 </head>
 <body>
@@ -133,7 +141,7 @@
     
     <h2>ผลการตรวจสอบ</h2>
     <div id="result" class="result-info">
-        <p>กรุณาป้อนรหัสนักเรียนเพื่อเริ่มการค้นหา</p>
+        <p style="text-align: center;">กรุณาป้อนรหัสนักเรียนเพื่อเริ่มการค้นหา</p>
     </div>
 </div>
 
@@ -153,42 +161,41 @@
         const inputId = document.getElementById('studentId').value.trim();
         const resultDiv = document.getElementById('result');
         
-        // ล้าง Class เก่าทั้งหมด
         resultDiv.className = ''; 
 
         if (inputId === '') {
-            resultDiv.innerHTML = '<p>⚠️ กรุณาป้อนรหัสนักเรียนเพื่อค้นหา</p>';
+            resultDiv.innerHTML = '<p style="text-align: center;">⚠️ กรุณาป้อนรหัสนักเรียนเพื่อค้นหา</p>';
             resultDiv.classList.add('result-warning');
             return;
         }
 
-        // ค้นหาข้อมูล
         const student = studentData.find(s => s.id === inputId);
 
-        // แสดงผลลัพธ์
         if (student) {
             if (student.is400) {
                 // เกรด 4.00 (Success)
                 resultDiv.innerHTML = `
-                    <p style="font-weight: 600; font-size: 1.1em; color: #155724;">✅ ยืนยัน: มีผลการเรียน 4.00</p>
+                    <p style="font-weight: 600; font-size: 1.2em; color: #155724; text-align: center;">✅ ยืนยัน: คุณมีผลการเรียน 4.00 ยอดเยี่ยม!</p>
+                    <hr style="border: 0; border-top: 1px solid #c3e6cb; margin: 15px 0;">
                     <p>รหัส: <strong>${student.id}</strong></p>
                     <p>ชื่อ-สกุล: <strong>${student.name}</strong></p>
-                    <p style="font-size: 1.3em; font-weight: 600;">GPA: ${student.gpa}</p>
+                    <p style="font-size: 1.4em; font-weight: 600;">GPA: ${student.gpa}</p>
                 `;
                 resultDiv.classList.add('result-success');
             } else {
                 // ไม่ใช่ 4.00 (Warning)
                 resultDiv.innerHTML = `
-                    <p style="font-weight: 600; font-size: 1.1em; color: #856404;">❌ สถานะ: ผลการเรียนไม่ถึง 4.00</p>
+                    <p style="font-weight: 600; font-size: 1.2em; color: #856404; text-align: center;">❌ สถานะ: ผลการเรียนไม่ถึง 4.00</p>
+                    <hr style="border: 0; border-top: 1px solid #ffeeba; margin: 15px 0;">
                     <p>รหัส: <strong>${student.id}</strong></p>
                     <p>ชื่อ-สกุล: <strong>${student.name}</strong></p>
-                    <p>GPA: <strong>${student.gpa}</strong></p>
+                    <p>GPA: <strong>${student.gpa}</strong> (เกณฑ์ดีเด่นคือ 4.00)</p>
                 `;
                 resultDiv.classList.add('result-warning');
             }
         } else {
             // ไม่พบข้อมูล (Error)
-            resultDiv.innerHTML = '<p style="font-weight: 600;">ข้อมูลไม่พบ</p><p>ไม่พบรหัสนักเรียนนี้ในฐานข้อมูล</p>';
+            resultDiv.innerHTML = '<p style="font-weight: 600; text-align: center;">ข้อมูลไม่พบ</p><p style="text-align: center;">ไม่พบรหัสนักเรียนนี้ในฐานข้อมูล กรุณาตรวจสอบอีกครั้ง</p>';
             resultDiv.classList.add('result-error');
         }
     }
