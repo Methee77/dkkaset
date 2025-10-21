@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบผลการเรียน</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="container">
+        <h1>ระบบตรวจสอบผลการเรียน 🎓</h1>
+
+        <div class="search-form">
+            <h2>ค้นหาผลการเรียน</h2>
+            <form id="gradeCheckForm">
+                <div class="form-group">
+                    <label for="studentId">รหัสประจำตัวนักเรียน/นักศึกษา:</label>
+                    <input type="text" id="studentId" name="studentId" required placeholder="เช่น 65012345">
+                </div>
+                <div class="form-group">
+                    <label for="semester">ภาคเรียน:</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">--เลือกภาคเรียน--</option>
+                        <option value="1/2567">ภาคเรียนที่ 1 ปีการศึกษา 2567</option>
+                        <option value="2/2567">ภาคเรียนที่ 2 ปีการศึกษา 2567</option>
+                        <option value="summer/2567">ภาคเรียนฤดูร้อน ปีการศึกษา 2567</option>
+                        </select>
+                </div>
+                <button type="submit" class="btn-check">ตรวจสอบผลการเรียน</button>
+            </form>
+        </div>
+
+        <div class="results-area" id="resultsArea">
+            <h2>ผลการเรียน</h2>
+            <p id="message">กรุณากรอกข้อมูลและกดปุ่ม "ตรวจสอบผลการเรียน"</p>
+            <table id="gradesTable" class="hidden">
+                <thead>
+                    <tr>
+                        <th>รหัสวิชา</th>
+                        <th>ชื่อวิชา</th>
+                        <th>หน่วยกิต</th>
+                        <th>เกรด</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">GPA ภาคเรียน:</td>
+                        <td id="gpaSemester"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">GPA สะสม:</td>
+                        <td id="gpaCumulative"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script> </body>
+</html>
