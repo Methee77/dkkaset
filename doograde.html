@@ -336,9 +336,10 @@
                         <label for="semester">ภาคเรียน</label>
                         <select id="semester" name="semester" required>
                             <option value="">--เลือกภาคเรียน--</option>
-                            <option value="1/2567">ภาคเรียนที่ 1 ปีการศึกษา 2567</option>
-                            <option value="2/2567">ภาคเรียนที่ 2 ปีการศึกษา 2567</option>
-                            <option value="summer/2567">ภาคเรียนฤดูร้อน ปีการศึกษา 2567</option>
+                            <option value="1/2567">ภาคต้น ปีการศึกษา 2567</option>
+                            <option value="2/2567">ภาคปลาย ปีการศึกษา 2567</option>
+                            <option value="summer/2567">ภาคฤดูร้อน พ.ศ. 2568</option>
+                            <option value="1/2568">ภาคต้น ปีการศึกษา 2568</option>
                         </select>
                     </div>
                     <div class="form-group" style="padding-top: 27px;">
@@ -411,9 +412,9 @@
             setTimeout(() => {
                 // ข้อมูลจำลอง (Mock Data)
                 const mockGrades = {
-                    '65012345': {
+                    '6720600494': {
                         '1/2567': [
-                            { code: 'CS101', name: 'การเขียนโปรแกรมเบื้องต้น', credit: 3, grade: 'A' },
+                            { code: '01355101', name: 'English for Everyday Life', credit: 3, grade: 'F' },
                             { code: 'MA105', name: 'คณิตศาสตร์สำหรับคอมพิวเตอร์', credit: 3, grade: 'B+' },
                             { code: 'GE101', name: 'พลเมืองดิจิทัล', credit: 2, grade: 'A' },
                             { code: 'EL101', name: 'ภาษาอังกฤษเพื่อการสื่อสาร', credit: 3, grade: 'B' },
