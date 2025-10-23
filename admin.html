@@ -29,7 +29,7 @@
             padding: 20px;
         }
 
-        /* --- Login Card/Container (ขยาย Max-width และ Padding) --- */
+        /* --- Login Card/Container (ปรับให้กระชับและกว้าง) --- */
         .login-container {
             /* Glassmorphism Effect */
             background: rgba(255, 255, 255, 0.95);
@@ -37,26 +37,26 @@
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             
-            padding: 60px; /* เพิ่ม Padding */
+            padding: 35px 50px; /* ลด Padding แนวตั้ง (35px) และคง Padding แนวนอนไว้ที่ 50px */
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 550px; /* ขยายความกว้างสูงสุดเป็น 550px */
+            max-width: 520px; /* ลดความกว้างสูงสุดลงเล็กน้อย */
             text-align: center;
         }
 
         /* --- Logo & Title --- */
         .logo-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px; /* ลดระยะห่างเล็กน้อย */
         }
 
         .logo-section img {
-            width: 100px; /* ขยายขนาดตราโรงเรียน */
-            height: 100px; /* ขยายขนาดตราโรงเรียน */
+            width: 80px; /* ลดขนาดตราโรงเรียน */
+            height: 80px; /* ลดขนาดตราโรงเรียน */
             margin-bottom: 10px;
         }
 
         .logo-section h2 {
-            font-size: 2.2em; /* ขยายขนาดหัวข้อ */
+            font-size: 2.0em; /* ลดขนาดหัวข้อ */
             color: #1c1c1c; 
             margin: 0;
             font-weight: 700;
@@ -70,14 +70,14 @@
 
         .logo-section p {
              color: #6c757d;
-             font-size: 1em; /* เพิ่มขนาดเล็กน้อย */
+             font-size: 1em; 
              margin-top: 5px;
         }
 
         /* --- Floating Label Input Group --- */
         .input-group {
             position: relative;
-            margin-bottom: 30px; /* เพิ่มระยะห่างระหว่าง Input */
+            margin-bottom: 25px; /* ลดระยะห่างระหว่าง Input */
             text-align: left;
         }
 
@@ -119,16 +119,16 @@
         /* --- Submit Button --- */
         .login-button {
             width: 100%;
-            padding: 14px; /* ขยายขนาดปุ่ม */
+            padding: 12px; /* ลดขนาดปุ่มเล็กน้อย */
             background-color: #FFC300; 
             color: #1c1c1c; 
             border: none;
             border-radius: 8px;
-            font-size: 1.2em; /* ขยายขนาดตัวอักษรในปุ่ม */
+            font-size: 1.1em; /* ลดขนาดตัวอักษรในปุ่มเล็กน้อย */
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 25px; 
+            margin-top: 20px; /* ลดระยะห่างก่อนปุ่ม */
             font-family: 'Kanit', sans-serif;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -141,15 +141,15 @@
         /* --- Responsive Adjustments --- */
         @media (max-width: 480px) {
             .login-container {
-                padding: 30px 20px;
-                max-width: 100%; /* ให้เต็มความกว้างของจอในมือถือ */
+                padding: 25px 20px; 
+                max-width: 100%; 
             }
             .logo-section h2 {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
             .logo-section img {
-                width: 80px; /* ลดขนาดโลโก้เล็กน้อยบนมือถือ */
-                height: 80px;
+                width: 70px; 
+                height: 70px;
             }
         }
     </style>
@@ -160,7 +160,7 @@
         
         <div class="logo-section">
             <!-- URL ตราโรงเรียนที่ผู้ใช้ให้มามีปัญหาเล็กน้อย (ขาด "alt") จึงปรับเป็น Placeholder ให้ถูกต้อง -->
-            <img src="https://placehold.co/100x100/1c1c1c/FFC300?text=LOGO" alt="ตราโรงเรียน">
+            <img src="20613895_1396847330350433_1746720751_n.png/80x80/1c1c1c/FFC300?text=LOGO" alt="ตราโรงเรียน">
             <h2>ฝ่ายประมวลผล GPA บรรหาร 1 <br> Admin <span>Login</span></h2>
             <p>กรุณาใช้บัญชีผู้ดูแลระบบในการเข้าถึง</p>
         </div>
