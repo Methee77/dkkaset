@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปฏิทินวิชาการ โรงเรียนตัวอย่าง</title>
+    <title>ปฏิทินการศึกษา - สำนักส่งเสริมวิชาการและงานทะเบียน</title>
     
     <style>
         /* --- โค้ด CSS สำหรับจัดรูปแบบ --- */
@@ -11,22 +11,21 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f0f3f5; /* พื้นหลังสีเทาอ่อน */
             color: #333;
         }
 
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 95%;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Header */
+        /* Header (แถบนำทางด้านบน) */
         .header {
             background-color: #004d99; /* สีน้ำเงินเข้ม */
             color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
         }
 
         .header .container {
@@ -35,94 +34,114 @@
             align-items: center;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
         .logo h1 {
-            font-size: 1.5em;
-            margin-left: 10px;
+            font-size: 1.6em;
+            margin: 0;
         }
 
         .main-nav a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
+            margin-left: 15px;
+            font-size: 0.9em;
         }
 
-        .main-nav a:hover {
+        /* Layout หลัก: Sidebar + Content */
+        .main-layout {
+            display: flex;
+            padding: 20px 0;
+            gap: 20px;
+        }
+
+        /* Sidebar (ส่วนตัวกรอง) */
+        .sidebar {
+            width: 280px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            flex-shrink: 0; /* ไม่ให้ sidebar ย่อลง */
+        }
+
+        .sidebar h3 {
+            color: #004d99;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-size: 1.2em;
+        }
+
+        .filter-group {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .filter-group > li {
+            margin-bottom: 5px;
+        }
+
+        .filter-group a {
+            display: block;
+            padding: 8px 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+            font-size: 0.95em;
+        }
+
+        .filter-group a:hover {
+            background-color: #e6f7ff;
+        }
+
+        .filter-group a.active {
             background-color: #0066cc;
-            border-radius: 4px;
+            color: white;
+            font-weight: bold;
         }
 
-        /* Main Content */
-        .main-content {
-            padding: 30px 0;
+        .sub-group {
+            padding-left: 15px;
+            border-left: 2px solid #ddd;
+            list-style: none;
+            margin-top: 5px;
+        }
+
+        .sub-group a {
+            padding: 5px 10px;
+        }
+        
+        /* Main Content (ส่วนแสดงปฏิทิน) */
+        .content-area {
+            flex-grow: 1;
         }
 
         .page-title {
             color: #004d99;
-            border-bottom: 3px solid #ffcc00; /* สีเหลืองเน้น */
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            font-size: 2em;
+            margin-top: 0;
         }
 
-        /* Controls */
-        .calendar-controls {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 20px;
-        }
-
-        .selector-group label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .term-tabs .tab {
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            background-color: #eee;
-            cursor: pointer;
-            margin-right: 5px;
-            transition: all 0.3s;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .term-tabs .tab.active {
-            background-color: #004d99;
-            color: white;
-            border-color: #004d99;
-            border-bottom: 1px solid #004d99; 
-        }
-
-        /* Download Button */
-        .download-btn {
-            display: inline-block;
-            background-color: #ff6600; 
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
+        .calendar-section {
+            background-color: white;
+            padding: 25px;
             border-radius: 5px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         }
 
-        .download-btn:hover {
-            background-color: #cc5200;
+        .calendar-section h4 {
+            color: #333;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        /* Calendar Table */
+        /* ตารางปฏิทิน */
         .calendar-list table {
             width: 100%;
             border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
         .calendar-list th, .calendar-list td {
@@ -135,90 +154,68 @@
             background-color: #0066cc;
             color: white;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
-        /* Color Coding for Rows */
-        .event-holiday { background-color: #ffdddd; } /* แดงอ่อน: วันหยุด */
-        .event-school-day { background-color: #e6f7ff; } /* ฟ้าอ่อน: วันเปิด/ปิดเรียน */
-        .event-school-activity { background-color: #e6ffe6; } /* เขียวอ่อน: กิจกรรมโรงเรียน */
-        .event-exam { background-color: #fff9e6; } /* เหลืองอ่อน: สอบ */
-        .event-parent { background-color: #ffe6cc; } /* ส้มอ่อน: กิจกรรมผู้ปกครอง */
-
-        /* Color Key */
-        .color-key {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px dashed #ccc;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-
-        .color-key h4 {
-            margin-top: 0;
-            color: #004d99;
-        }
-
-        .key-item {
-            display: inline-block;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-        }
-
-        .key-color {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            border: 1px solid #ccc;
-            vertical-align: middle;
-            margin-right: 5px;
-            border-radius: 3px;
-        }
-
-        .key-color.holiday { background-color: #ffdddd; }
-        .key-color.school-day { background-color: #e6f7ff; }
-        .key-color.school-activity { background-color: #e6ffe6; }
-        .key-color.exam { background-color: #fff9e6; }
-        .key-color.parent { background-color: #ffe6cc; }
+        /* รหัสสีสำหรับแถว (University style) */
+        .event-holiday { background-color: #ffdddd; } /* วันหยุด */
+        .event-add-drop { background-color: #e6ffe6; } /* เพิ่ม/ถอนรายวิชา */
+        .event-start-end { background-color: #e6f7ff; } /* เริ่ม/สิ้นสุดภาคเรียน */
+        .event-exam { background-color: #fff9e6; } /* สอบ */
 
         /* Footer */
         .footer {
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 15px 0;
+            padding: 20px 0;
             margin-top: 40px;
             font-size: 0.9em;
         }
 
-        /* Responsive Design (Mobile) */
-        @media (max-width: 768px) {
-            .header .container {
+        /* --- Responsive Design (Mobile) --- */
+        @media (max-width: 900px) {
+            .main-layout {
                 flex-direction: column;
-                text-align: center;
             }
-            .main-nav { margin-top: 10px; }
-            .main-nav a { display: block; margin: 5px 0; }
-            .calendar-controls { flex-direction: column; align-items: stretch; }
-            .term-tabs { display: flex; justify-content: space-around; width: 100%; }
+            
+            .sidebar {
+                width: 100%;
+            }
+
+            .sidebar h3 {
+                cursor: pointer;
+                padding-right: 30px;
+                position: relative;
+            }
+
+            .sidebar h3::after {
+                content: '▶'; /* ไอคอนสำหรับมือถือ (คลิกเพื่อเปิด/ปิด) */
+                position: absolute;
+                right: 0;
+                top: 0;
+                transition: transform 0.3s;
+            }
+
+            .sidebar h3.expanded::after {
+                content: '▼';
+            }
+
+            .filter-group {
+                display: none; /* ซ่อน Filter List เริ่มต้นบนมือถือ */
+            }
 
             /* Table adjustments for mobile */
             .calendar-list table, .calendar-list thead, .calendar-list tbody, 
             .calendar-list th, .calendar-list td, .calendar-list tr { display: block; }
             .calendar-list thead { display: none; }
-            .calendar-list tr {
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            }
+            .calendar-list tr { margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
             .calendar-list td {
                 border: none;
                 position: relative;
                 padding-left: 50%; 
                 text-align: right;
             }
-            /* แสดงชื่อคอลัมน์จำลองด้วย data-label ที่เพิ่มใน HTML */
             .calendar-list td::before {
                 content: attr(data-label);
                 position: absolute;
@@ -230,7 +227,6 @@
                 text-align: left;
                 color: #004d99;
             }
-            .key-item { display: block; }
         }
     </style>
 </head>
@@ -239,153 +235,198 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <img src="https://via.placeholder.com/50x50?text=LOGO" alt="โลโก้โรงเรียน" style="height: 50px;">
-                <h1>โรงเรียนตัวอย่าง</h1>
+                <h1>ปฏิทินการศึกษา</h1>
             </div>
             <nav class="main-nav">
-                <a href="#">หน้าหลัก</a>
-                <a href="#">ข่าวสาร</a>
+                <a href="#">ระบบบริการ</a>
+                <a href="#">ระบบรับสมัคร</a>
                 <a href="#">ติดต่อเรา</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-content container">
-        <h2 class="page-title">ปฏิทินวิชาการ ปีการศึกษา 2568</h2>
+    <div class="container main-layout">
+        
+        <aside class="sidebar">
+            <h3 id="sidebar-title">เลือกปีการศึกษา / ภาคเรียน</h3>
+            
+            <ul class="filter-group">
+                <li>
+                    <strong>ปีการศึกษา 2568</strong>
+                    <ul class="sub-group">
+                        <li>
+                            <a href="#" class="filter-link active" data-id="2568-normal-1">ภาคปกติ - ภาคเรียนที่ 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter-link" data-id="2568-normal-2">ภาคปกติ - ภาคเรียนที่ 2</a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter-link" data-id="2568-normal-s">ภาคปกติ - ภาคฤดูร้อน</a>
+                        </li>
+                    </ul>
+                    <ul class="sub-group">
+                        <li>
+                            <a href="#" class="filter-link" data-id="2568-kp-1">ภาค กศ.พป. - ภาคเรียนที่ 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter-link" data-id="2568-kp-2">ภาค กศ.พป. - ภาคเรียนที่ 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-        <div class="calendar-controls">
-            <div class="selector-group">
-                <label for="year-select">เลือกปี:</label>
-                <select id="year-select">
-                    <option value="2568" selected>ปีการศึกษา 2568</option>
-                    <option value="2569">ปีการศึกษา 2569</option>
-                </select>
-            </div>
-            <div class="term-tabs">
-                <button class="tab active" data-term="term1">เทอม 1</button>
-                <button class="tab" data-term="term2">เทอม 2</button>
-            </div>
-        </div>
+            <ul class="filter-group">
+                <li>
+                    <strong>ปีการศึกษา 2567</strong>
+                    <ul class="sub-group">
+                        <li>
+                            <a href="#" class="filter-link" data-id="2567-normal-1">ภาคปกติ - ภาคเรียนที่ 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter-link" data-id="2567-normal-2">ภาคปกติ - ภาคเรียนที่ 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-        <a href="academic_calendar_2568.pdf" class="download-btn" download>
-            ดาวน์โหลดปฏิทิน (PDF)
-        </a>
+            <a href="#" class="filter-link">ดูปฏิทินทั้งหมด</a>
+        </aside>
 
-        <section class="calendar-list active" id="term1-calendar">
-            <h3>กิจกรรมในเทอม 1 (ส.ค. - ต.ค. 2568)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-date">วันที่</th>
-                        <th class="col-activity">กิจกรรม</th>
-                        <th class="col-notes">หมายเหตุ/กลุ่มเป้าหมาย</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="event-holiday">
-                        <td data-label="วันที่">12 ส.ค.</td>
-                        <td data-label="กิจกรรม">วันหยุด: วันแม่แห่งชาติ</td>
-                        <td data-label="หมายเหตุ">ไม่มีการเรียนการสอน</td>
-                    </tr>
-                    <tr class="event-school-day">
-                        <td data-label="วันที่">15 ส.ค.</td>
-                        <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 1/2568</td>
-                        <td data-label="หมายเหตุ">วันแรกของการเรียนการสอนปกติ</td>
-                    </tr>
-                    <tr class="event-exam">
-                        <td data-label="วันที่">1-5 ต.ค.</td>
-                        <td data-label="กิจกรรม">สัปดาห์สอบกลางภาคเรียน</td>
-                        <td data-label="หมายเหตุ">ตรวจสอบตารางสอบรายวิชา</td>
-                    </tr>
-                    <tr class="event-parent">
-                        <td data-label="วันที่">18 ต.ค.</td>
-                        <td data-label="กิจกรรม">วันประชุมผู้ปกครอง (PTM)</td>
-                        <td data-label="หมายเหตุ">รับผลการเรียนกลางภาค</td>
-                    </tr>
-                </tbody>
-            </table>
+        <section class="content-area">
+            <h2 class="page-title">ปฏิทินการศึกษา มหาวิทยาลัยราชภัฏนครปฐม</h2>
+
+            <div class="calendar-display">
+                
+                <div class="calendar-section" id="2568-normal-1">
+                    <h4>ปีการศึกษา 2568 ภาคปกติ: ภาคเรียนที่ 1</h4>
+                    <div class="calendar-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>วันที่</th>
+                                    <th>กิจกรรม</th>
+                                    <th>หมายเหตุ / กลุ่มเป้าหมาย</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="event-start-end">
+                                    <td data-label="วันที่">1-15 ส.ค.</td>
+                                    <td data-label="กิจกรรม">การลงทะเบียนเรียน (Registration Period)</td>
+                                    <td data-label="หมายเหตุ">สำหรับนักศึกษาปัจจุบัน</td>
+                                </tr>
+                                <tr class="event-start-end">
+                                    <td data-label="วันที่">19 ส.ค.</td>
+                                    <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 1</td>
+                                    <td data-label="หมายเหตุ">วันแรกของการเรียนการสอน</td>
+                                </tr>
+                                <tr class="event-add-drop">
+                                    <td data-label="วันที่">20-30 ส.ค.</td>
+                                    <td data-label="กิจกรรม">เพิ่ม/ถอนรายวิชา (Add/Drop)</td>
+                                    <td data-label="หมายเหตุ">ดำเนินการผ่านระบบบริการการศึกษา</td>
+                                </tr>
+                                <tr class="event-holiday">
+                                    <td data-label="วันที่">23 ต.ค.</td>
+                                    <td data-label="กิจกรรม">วันหยุด: วันปิยมหาราช</td>
+                                    <td data-label="หมายเหตุ">ไม่มีการเรียนการสอน</td>
+                                </tr>
+                                <tr class="event-exam">
+                                    <td data-label="วันที่">9-16 ธ.ค.</td>
+                                    <td data-label="กิจกรรม">สัปดาห์สอบปลายภาคเรียน</td>
+                                    <td data-label="หมายเหตุ">ตรวจสอบตารางสอบของแต่ละวิชา</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="calendar-section" id="2568-normal-2" style="display:none;">
+                    <h4>ปีการศึกษา 2568 ภาคปกติ: ภาคเรียนที่ 2</h4>
+                    <div class="calendar-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>วันที่</th>
+                                    <th>กิจกรรม</th>
+                                    <th>หมายเหตุ / กลุ่มเป้าหมาย</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="event-start-end">
+                                    <td data-label="วันที่">13 ม.ค.</td>
+                                    <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 2</td>
+                                    <td data-label="หมายเหตุ">วันแรกของการเรียนการสอน</td>
+                                </tr>
+                                <tr class="event-add-drop">
+                                    <td data-label="วันที่">14-24 ม.ค.</td>
+                                    <td data-label="กิจกรรม">เพิ่ม/ถอนรายวิชา (Add/Drop)</td>
+                                    <td data-label="หมายเหตุ">ดำเนินการผ่านระบบบริการฯ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="calendar-section" id="2568-normal-s" style="display:none;">
+                    <h4>ปีการศึกษา 2568 ภาคปกติ: ภาคฤดูร้อน</h4>
+                    <p>ไม่มีข้อมูลปฏิทินภาคฤดูร้อนในขณะนี้</p>
+                </div>
+
+                </div>
         </section>
         
-        <section class="calendar-list" id="term2-calendar" style="display:none;">
-            <h3>กิจกรรมในเทอม 2 (พ.ย. 2568 - มี.ค. 2569)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-date">วันที่</th>
-                        <th class="col-activity">กิจกรรม</th>
-                        <th class="col-notes">หมายเหตุ/กลุ่มเป้าหมาย</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="event-school-day">
-                        <td data-label="วันที่">11 พ.ย.</td>
-                        <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 2/2568</td>
-                        <td data-label="หมายเหตุ">วันแรกของการเรียนการสอนปกติ</td>
-                    </tr>
-                    <tr class="event-school-activity">
-                        <td data-label="วันที่">20-22 ธ.ค.</td>
-                        <td data-label="กิจกรรม">กิจกรรมกีฬาสีประจำปี</td>
-                        <td data-label="หมายเหตุ">งดการเรียนการสอนปกติ</td>
-                    </tr>
-                    <tr class="event-holiday">
-                        <td data-label="วันที่">1-3 ม.ค.</td>
-                        <td data-label="กิจกรรม">วันหยุดเทศกาลปีใหม่</td>
-                        <td data-label="หมายเหตุ">ไม่มีการเรียนการสอน</td>
-                    </tr>
-                    <tr class="event-exam">
-                        <td data-label="วันที่">10-14 มี.ค.</td>
-                        <td data-label="กิจกรรม">สัปดาห์สอบปลายภาคเรียน</td>
-                        <td data-label="หมายเหตุ">ตรวจสอบตารางสอบรายวิชา</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="color-key">
-            <h4>คำอธิบายรหัสสี</h4>
-            <div class="key-item"><span class="key-color holiday"></span> วันหยุด/นักขัตฤกษ์</div>
-            <div class="key-item"><span class="key-color school-day"></span> วันเปิด/ปิดภาคเรียน</div>
-            <div class="key-item"><span class="key-color school-activity"></span> กิจกรรมโรงเรียน</div>
-            <div class="key-item"><span class="key-color exam"></span> ช่วงการสอบ</div>
-            <div class="key-item"><span class="key-color parent"></span> กิจกรรมผู้ปกครอง</div>
-        </section>
-
-    </main>
+    </div>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2568 โรงเรียนตัวอย่าง | ติดต่อ: 02-XXX-XXXX</p>
+            <p>© 2568 สำนักส่งเสริมวิชาการและงานทะเบียน มหาวิทยาลัยตัวอย่าง</p>
+            <p>85 ถนน มาลัยแมน อำเภอ เมือง จังหวัด นครปฐม 73000</p>
         </div>
     </footer>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.term-tabs .tab');
-            const calendarSections = {
-                'term1': document.getElementById('term1-calendar'),
-                'term2': document.getElementById('term2-calendar')
-            };
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarTitle = document.getElementById('sidebar-title');
+            const filterLinks = document.querySelectorAll('.filter-link');
+            const calendarDisplay = document.querySelector('.calendar-display');
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const targetTerm = this.getAttribute('data-term');
+            // 1. ฟังก์ชันสลับการแสดงผลปฏิทิน
+            filterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('data-id');
 
-                    // 1. จัดการ Active Class บนปุ่ม Tab
-                    tabs.forEach(t => t.classList.remove('active'));
+                    // 1.1 จัดการ Active Class บนลิงก์
+                    filterLinks.forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
 
-                    // 2. จัดการการแสดงผลของตารางปฏิทิน
-                    for (const term in calendarSections) {
-                        if (calendarSections.hasOwnProperty(term)) {
-                            if (term === targetTerm) {
-                                calendarSections[term].style.display = 'block';
-                            } else {
-                                calendarSections[term].style.display = 'none';
-                            }
+                    // 1.2 สลับการแสดงผลของ Calendar Section
+                    document.querySelectorAll('.calendar-section').forEach(section => {
+                        if (section.id === targetId) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
                         }
-                    }
+                    });
                 });
             });
+
+            // 2. ฟังก์ชันยุบ/ขยาย Sidebar บนมือถือ (Responsive Toggle)
+            if (window.innerWidth <= 900) {
+                sidebarTitle.classList.add('expanded');
+                // เริ่มต้นให้แสดง Filter Group (เพื่อให้ผู้ใช้เห็นว่ามีตัวเลือก)
+                document.querySelectorAll('.filter-group').forEach(group => {
+                    group.style.display = 'block';
+                });
+
+                sidebarTitle.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    document.querySelectorAll('.filter-group').forEach(group => {
+                        group.style.display = group.style.display === 'none' || group.style.display === '' ? 'block' : 'none';
+                    });
+                });
+            }
         });
     </script> 
 </body>
