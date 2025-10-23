@@ -19,8 +19,8 @@
 
         body {
             font-family: 'Kanit', sans-serif;
-            /* พื้นหลังสีเข้มผสมสีฟ้าและเขียวอ่อนๆ เพื่อให้ดูสงบและทันสมัย */
-            background: linear-gradient(135deg, #004085 0%, #17a2b8 100%); 
+            /* พื้นหลังไล่เฉดสีดำ/เทาเข้มเพื่อให้องค์ประกอบสีเหลืองโดดเด่น */
+            background: linear-gradient(135deg, #1c1c1c 0%, #333333 100%); 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,16 +28,16 @@
             padding: 20px;
         }
 
-        /* --- Login Card/Container (ใช้ Glassmorphism Effect) --- */
+        /* --- Login Card/Container (สีขาวเพื่อให้ตัดกับพื้นหลัง) --- */
         .login-container {
             /* Glassmorphism Effect */
-            background: rgba(255, 255, 255, 0.9); /* พื้นหลังเกือบโปร่งใส */
-            backdrop-filter: blur(8px); /* เบลอพื้นหลังที่อยู่ด้านล่าง */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             
             padding: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 380px; 
             text-align: center;
@@ -49,21 +49,21 @@
         }
 
         .logo-section img {
-            width: 70px; /* ขนาดของตราโรงเรียน */
+            width: 70px;
             height: 70px;
             margin-bottom: 10px;
         }
 
         .logo-section h2 {
             font-size: 1.8em;
-            color: #004085; /* สีน้ำเงินเข้ม */
+            color: #1c1c1c; /* สีดำ */
             margin: 0;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
 
         .logo-section span {
-            color: #17a2b8; /* สีฟ้าอ่อนสำหรับคำว่า Login */
+            color: #FFC300; /* สีเหลืองทอง/เหลืองสว่าง */
             font-weight: 500;
         }
 
@@ -73,7 +73,7 @@
              margin-top: 5px;
         }
 
-        /* --- Floating Label Input Group (ปรับปรุงจากเดิม) --- */
+        /* --- Floating Label Input Group --- */
         .input-group {
             position: relative;
             margin-bottom: 25px;
@@ -103,23 +103,24 @@
             transition: 0.3s ease-out;
         }
 
+        /* Floating effect: Active Colors */
         .input-group input:focus ~ label,
         .input-group input:not(:placeholder-shown) ~ label {
             top: -5px; 
             font-size: 12px;
-            color: #004085; 
+            color: #FFC300; /* สีเหลืองเมื่อ Active */
         }
 
         .input-group input:focus {
-            border-bottom-color: #004085; 
+            border-bottom-color: #FFC300; /* เส้นใต้ Input เปลี่ยนเป็นสีเหลืองเมื่อ Focus */
         }
         
         /* --- Submit Button --- */
         .login-button {
             width: 100%;
             padding: 12px;
-            background-color: #17a2b8; /* ใช้สีฟ้าอ่อนของแบรนด์ */
-            color: white;
+            background-color: #FFC300; /* ปุ่มสีเหลือง */
+            color: #1c1c1c; /* ข้อความในปุ่มสีดำ */
             border: none;
             border-radius: 8px;
             font-size: 1.1em;
@@ -132,7 +133,8 @@
         }
 
         .login-button:hover {
-            background-color: #0c8392;
+            background-color: #ffda66; /* สีเหลืองอ่อนลงเมื่อ Hover */
+            color: #1c1c1c;
         }
 
         /* --- Responsive Adjustments --- */
@@ -148,8 +150,8 @@
     <div class="login-container">
         
         <div class="logo-section">
-            <img src="https://via.placeholder.com/70x70?text=LOGO" alt="ตราโรงเรียน">
-            <h2>[ชื่อย่อโรงเรียน] <br> Admin <span style="font-weight: 300;">Login</span></h2>
+            <img src="20613895_1396847330350433_1746720751_n.png"ตราโรงเรียน">
+            <h2>[ชื่อย่อโรงเรียน] <br> Admin <span>Login</span></h2>
             <p>กรุณาใช้บัญชีผู้ดูแลระบบในการเข้าถึง</p>
         </div>
 
