@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ปฏิทินการศึกษา - สำนักส่งเสริมวิชาการและงานทะเบียน</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         /* --- โค้ด CSS สำหรับจัดรูปแบบ --- */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Kanit', sans-serif; /* ใช้ Kanit เป็นฟอนต์หลัก */
             margin: 0;
             padding: 0;
-            background-color: #f0f3f5; /* พื้นหลังสีเทาอ่อน */
+            background-color: #f0f3f5; 
             color: #333;
         }
 
@@ -23,7 +27,7 @@
 
         /* Header (แถบนำทางด้านบน) */
         .header {
-            background-color: #004d99; /* สีน้ำเงินเข้ม */
+            background-color: #004d99; 
             color: white;
             padding: 10px 0;
         }
@@ -37,6 +41,7 @@
         .logo h1 {
             font-size: 1.6em;
             margin: 0;
+            font-weight: 600;
         }
 
         .main-nav a {
@@ -44,6 +49,7 @@
             text-decoration: none;
             margin-left: 15px;
             font-size: 0.9em;
+            font-weight: 300;
         }
 
         /* Layout หลัก: Sidebar + Content */
@@ -60,7 +66,7 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
-            flex-shrink: 0; /* ไม่ให้ sidebar ย่อลง */
+            flex-shrink: 0; 
         }
 
         .sidebar h3 {
@@ -89,6 +95,7 @@
             border-radius: 3px;
             transition: background-color 0.2s;
             font-size: 0.95em;
+            font-weight: 400;
         }
 
         .filter-group a:hover {
@@ -98,7 +105,7 @@
         .filter-group a.active {
             background-color: #0066cc;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .sub-group {
@@ -121,6 +128,7 @@
             color: #004d99;
             font-size: 2em;
             margin-top: 0;
+            font-weight: 600;
         }
 
         .calendar-section {
@@ -136,6 +144,7 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
             margin-bottom: 15px;
+            font-weight: 600;
         }
 
         /* ตารางปฏิทิน */
@@ -153,11 +162,11 @@
         .calendar-list th {
             background-color: #0066cc;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             text-transform: uppercase;
         }
 
-        /* รหัสสีสำหรับแถว (University style) */
+        /* รหัสสีสำหรับแถว */
         .event-holiday { background-color: #ffdddd; } /* วันหยุด */
         .event-add-drop { background-color: #e6ffe6; } /* เพิ่ม/ถอนรายวิชา */
         .event-start-end { background-color: #e6f7ff; } /* เริ่ม/สิ้นสุดภาคเรียน */
@@ -171,6 +180,7 @@
             padding: 20px 0;
             margin-top: 40px;
             font-size: 0.9em;
+            font-weight: 300;
         }
 
         /* --- Responsive Design (Mobile) --- */
@@ -190,11 +200,12 @@
             }
 
             .sidebar h3::after {
-                content: '▶'; /* ไอคอนสำหรับมือถือ (คลิกเพื่อเปิด/ปิด) */
+                content: '▶'; 
                 position: absolute;
                 right: 0;
                 top: 0;
                 transition: transform 0.3s;
+                font-weight: 600;
             }
 
             .sidebar h3.expanded::after {
@@ -202,7 +213,7 @@
             }
 
             .filter-group {
-                display: none; /* ซ่อน Filter List เริ่มต้นบนมือถือ */
+                display: none; 
             }
 
             /* Table adjustments for mobile */
@@ -223,7 +234,7 @@
                 width: 45%;
                 padding-right: 10px;
                 white-space: nowrap;
-                font-weight: bold;
+                font-weight: 600; /* เน้นหัวข้อในมุมมองมือถือ */
                 text-align: left;
                 color: #004d99;
             }
@@ -289,11 +300,11 @@
                 </li>
             </ul>
 
-            <a href="#" class="filter-link">ดูปฏิทินทั้งหมด</a>
+            <a href="#" class="filter-link" data-id="view-all">ดูปฏิทินทั้งหมด</a>
         </aside>
 
         <section class="content-area">
-            <h2 class="page-title">ปฏิทินการศึกษา มหาวิทยาลัยราชภัฏนครปฐม</h2>
+            <h2 class="page-title">ปฏิทินการศึกษา มหาวิทยาลัยตัวอย่าง</h2>
 
             <div class="calendar-display">
                 
@@ -371,7 +382,12 @@
                     <p>ไม่มีข้อมูลปฏิทินภาคฤดูร้อนในขณะนี้</p>
                 </div>
 
-                </div>
+                <div class="calendar-section" id="2568-kp-1" style="display:none;"><h4>ปีการศึกษา 2568 ภาค กศ.พป.: ภาคเรียนที่ 1</h4><p>ข้อมูลสำหรับภาค กศ.พป. ภาคเรียนที่ 1</p></div>
+                <div class="calendar-section" id="2568-kp-2" style="display:none;"><h4>ปีการศึกษา 2568 ภาค กศ.พป.: ภาคเรียนที่ 2</h4><p>ข้อมูลสำหรับภาค กศ.พป. ภาคเรียนที่ 2</p></div>
+                <div class="calendar-section" id="2567-normal-1" style="display:none;"><h4>ปีการศึกษา 2567 ภาคปกติ: ภาคเรียนที่ 1</h4><p>ข้อมูลปี 2567 ภาคเรียนที่ 1</p></div>
+                <div class="calendar-section" id="2567-normal-2" style="display:none;"><h4>ปีการศึกษา 2567 ภาคปกติ: ภาคเรียนที่ 2</h4><p>ข้อมูลปี 2567 ภาคเรียนที่ 2</p></div>
+                
+            </div>
         </section>
         
     </div>
@@ -385,10 +401,8 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.querySelector('.sidebar');
             const sidebarTitle = document.getElementById('sidebar-title');
             const filterLinks = document.querySelectorAll('.filter-link');
-            const calendarDisplay = document.querySelector('.calendar-display');
 
             // 1. ฟังก์ชันสลับการแสดงผลปฏิทิน
             filterLinks.forEach(link => {
@@ -403,10 +417,13 @@
 
                     // 1.2 สลับการแสดงผลของ Calendar Section
                     document.querySelectorAll('.calendar-section').forEach(section => {
-                        if (section.id === targetId) {
-                            section.style.display = 'block';
-                        } else {
-                            section.style.display = 'none';
+                        // ถ้าเป็น 'view-all' ให้แสดงทั้งหมด (ถ้ามีโค้ดดูทั้งหมด)
+                        if (targetId === 'view-all') {
+                            section.style.display = 'block'; 
+                        }
+                        // ถ้าไม่ใช่ 'view-all' ให้แสดงเฉพาะที่ตรงกับ id
+                        else {
+                            section.style.display = section.id === targetId ? 'block' : 'none';
                         }
                     });
                 });
@@ -414,17 +431,17 @@
 
             // 2. ฟังก์ชันยุบ/ขยาย Sidebar บนมือถือ (Responsive Toggle)
             if (window.innerWidth <= 900) {
-                sidebarTitle.classList.add('expanded');
-                // เริ่มต้นให้แสดง Filter Group (เพื่อให้ผู้ใช้เห็นว่ามีตัวเลือก)
-                document.querySelectorAll('.filter-group').forEach(group => {
-                    group.style.display = 'block';
-                });
-
                 sidebarTitle.addEventListener('click', function() {
                     this.classList.toggle('expanded');
                     document.querySelectorAll('.filter-group').forEach(group => {
+                        // สลับการแสดงผลระหว่าง block และ none
                         group.style.display = group.style.display === 'none' || group.style.display === '' ? 'block' : 'none';
                     });
+                });
+                
+                // ซ่อนรายการใน Sidebar เมื่อโหลดบนมือถือครั้งแรก
+                document.querySelectorAll('.filter-group').forEach(group => {
+                    group.style.display = 'none';
                 });
             }
         });
