@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>งานทะเบียนวัดผล [ชื่อหน่วยงาน] (รูปแบบดั้งเดิม)</title>
+    <title>งานทะเบียนวัดผล [ชื่อหน่วยงาน] (รูปแบบไว้อาลัย)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* -------------------------- CSS STYLES (KANNASOOT-Inspired) -------------------------- */
+        /* -------------------------- CSS STYLES (KANNASOOT-Inspired - MOURNING THEME) -------------------------- */
         
         /* 1. นำเข้าฟอนต์ IBM Plex Sans Thai */
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap');
@@ -18,8 +18,10 @@
             font-family: 'IBM Plex Sans Thai', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            /* เปลี่ยนพื้นหลังหลักเป็นสีเทาเข้ม */
+            background-color: #333; 
+            /* เปลี่ยนสีตัวอักษรหลักเป็นสีเทาอ่อน */
+            color: #bbb; 
             line-height: 1.6;
         }
 
@@ -27,13 +29,15 @@
             width: 95%;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* เปลี่ยนพื้นหลัง Wrapper เป็นสีเทาอ่อน */
+            background-color: #555; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         /* ส่วนหัว (Header) */
         .header {
-            background-color: #000080; /* สีน้ำเงินเข้ม (Navy Blue) */
+            /* เปลี่ยนสีเป็นสีดำสนิท */
+            background-color: #111; 
             color: white;
             padding: 20px 20px;
             text-align: center;
@@ -55,19 +59,23 @@
         .sidebar {
             width: 250px;
             flex-shrink: 0;
-            background-color: #f9f9f9;
-            border-right: 1px solid #ddd;
+            /* เปลี่ยนพื้นหลัง Sidebar เป็นสีเทาเข้มปานกลาง */
+            background-color: #444; 
+            border-right: 1px solid #222;
             padding: 15px 0;
         }
 
         .sidebar h3 {
-            background-color: #000080; /* สีน้ำเงินเข้ม */
-            color: #ffcc00; /* สีเหลือง */
+            /* เปลี่ยนสีพื้นหลังเป็นสีดำสนิท */
+            background-color: #111; 
+            /* เปลี่ยนสีเน้นเป็นสีขาว/เทาอ่อน */
+            color: #fff; 
             padding: 10px 15px;
             margin-top: 0;
             font-size: 1.1em;
             text-align: center;
-            border-bottom: 2px solid #ffcc00;
+            /* เปลี่ยนเส้นขอบเป็นสีขาว */
+            border-bottom: 2px solid #fff; 
         }
         
         .sidebar ul {
@@ -81,16 +89,30 @@
             padding: 8px 10px;
             margin-bottom: 5px;
             text-decoration: none;
-            color: #000080;
+            /* เปลี่ยนสีลิงก์เป็นสีเทาอ่อน */
+            color: #ccc; 
             border-left: 5px solid transparent;
-            font-weight: bold;
+            font-weight: normal; /* ลดความเด่น */
             transition: background-color 0.2s, border-left 0.2s;
         }
 
         .sidebar ul li a:hover {
-            background-color: #ffe08a; /* สีเหลืองอ่อน */
-            border-left: 5px solid #ffcc00;
+            /* เปลี่ยนสี Hover เป็นเทาอ่อนลง */
+            background-color: #666; 
+            /* เปลี่ยนสีเน้น Border เป็นสีขาว */
+            border-left: 5px solid #fff; 
         }
+        
+        /* สไตล์พิเศษสำหรับลิงก์เข้าสู่ระบบ */
+        .sidebar ul li a[style*="background-color: #004d99"] {
+            background-color: #333 !important; /* ดำคล้ำ */
+            color: white !important;
+        }
+        .sidebar ul li a[style*="background-color: #ffcc00"] {
+            background-color: #777 !important; /* เทาเข้ม */
+            color: white !important;
+        }
+
 
         /* เนื้อหาหลัก (Content) */
         .content {
@@ -99,22 +121,26 @@
         }
         
         .content h2 {
-            color: #000080;
+            /* เปลี่ยนสีหัวข้อเป็นสีขาว */
+            color: #fff; 
             font-size: 1.5em;
-            border-bottom: 2px dotted #ffcc00;
+            /* เปลี่ยนเส้นขอบเป็นสีขาว */
+            border-bottom: 2px dotted #fff; 
             padding-bottom: 5px;
             margin-bottom: 20px;
         }
         
         /* ส่วนนับถอยหลัง (Countdown Section) */
         .countdown-section {
-            background-color: #ffcc00; /* สีเหลืองเน้น */
-            color: #000080;
+            /* เปลี่ยนสีพื้นหลังเน้นเป็นสีเทาขาว */
+            background-color: #aaa; 
+            /* เปลี่ยนสีตัวอักษรเป็นสีดำ */
+            color: #000; 
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 5px;
             text-align: center;
-            border: 1px solid #e6b800;
+            border: 1px solid #777;
         }
 
         .countdown-section h3 {
@@ -130,7 +156,8 @@
         }
 
         .time-unit {
-            background-color: #000080;
+            /* เปลี่ยนสีพื้นหลังเป็นสีดำ */
+            background-color: #111; 
             color: white;
             padding: 8px 12px;
             border-radius: 4px;
@@ -151,89 +178,81 @@
         #countdown-message {
             font-size: 1.2em;
             font-weight: bold;
-            color: #cc0000;
+            /* คงสีแดงไว้เพื่อการแจ้งเตือน */
+            color: #cc0000; 
             padding: 10px;
             display: none;
         }
 
         /* กล่องข่าวสาร/ลิงก์ด่วน */
         .news-box, .service-box {
-            border: 1px solid #ddd;
+            border: 1px solid #222;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 4px;
+            /* เปลี่ยนพื้นหลังกล่องเป็นเทาเข้ม */
+            background-color: #444; 
         }
 
         .news-list a {
             display: block;
-            color: #333;
+            /* เปลี่ยนสีลิงก์เป็นเทาอ่อน */
+            color: #bbb; 
             padding: 5px 0;
-            border-bottom: 1px dotted #eee;
+            border-bottom: 1px dotted #222;
             text-decoration: none;
         }
         .news-list a:hover {
-            color: #000080;
+            color: white;
             text-decoration: underline;
-        }
-
-        /* สไตล์สำหรับ GIF NEW */
-        .new-gif {
-            height: 18px; /* ปรับขนาดให้เหมาะสมกับบรรทัดข้อความ */
-            vertical-align: middle;
-            margin-left: 5px;
         }
         
         /* --- CSS สำหรับส่วนแสดงสถานะงานทะเบียนใน Content --- */
         
         .status-admin-box {
-            border: 1px solid #ddd;
+            border: 1px solid #222;
             padding: 15px;
             margin-top: 20px;
             border-radius: 4px;
-            background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+            background-color: #444; /* พื้นหลังสีอ่อน */
         }
 
         .status-header {
             font-size: 1.1em;
             font-weight: 600;
-            color: #000080;
-            border-bottom: 1px solid #ccc;
+            /* เปลี่ยนสีเป็นสีขาว */
+            color: #fff; 
+            border-bottom: 1px solid #222;
             padding-bottom: 5px;
             margin-bottom: 10px;
         }
 
-        .status-item-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-            font-size: 0.95em;
-        }
-        
         .status-options-group label {
             margin-left: 15px;
             font-weight: normal;
-            color: #333;
+            color: #bbb;
             cursor: default; /* ปิดการโต้ตอบ */
         }
 
         .status-options-group input[type="radio"] {
-            accent-color: #000080;
+            /* เปลี่ยนสี accent color ให้เป็นเทาเข้ม */
+            accent-color: #666; 
         }
         
         .metadata {
             margin-top: 15px;
             font-size: 0.85em;
             text-align: right;
-            color: #666;
-            border-top: 1px solid #eee;
+            color: #999;
+            border-top: 1px solid #222;
             padding-top: 10px;
         }
         /* ----------------------------------------------------------------- */
         
         /* ส่วนท้าย (Footer) */
         .footer {
-            background-color: #000080;
+            /* เปลี่ยนสีเป็นสีดำสนิท */
+            background-color: #111; 
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -241,7 +260,7 @@
             clear: both;
         }
 
-        /* Media Queries */
+        /* Media Queries - ปรับสีตามรูปแบบใหม่ */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -249,7 +268,7 @@
             .sidebar {
                 width: 100%;
                 border-right: none;
-                border-bottom: 1px solid #ddd;
+                border-bottom: 1px solid #222;
             }
             .sidebar ul {
                 display: flex;
@@ -263,7 +282,8 @@
             }
             .sidebar ul li a:hover {
                 border-left: none;
-                border-bottom: 3px solid #ffcc00;
+                /* เปลี่ยนสีเน้นเป็นสีขาว */
+                border-bottom: 3px solid #fff; 
                 background-color: transparent;
             }
         }
@@ -290,9 +310,9 @@
                 
                 <h3>ลิงก์เข้าสู่ระบบ</h3>
                 <ul>
-                    <li><a href="#" style="background-color: #004d99; color: white;"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน</a></li>
-                    <li><a href="#" style="background-color: #ffcc00; color: #000080;"><i class="fas fa-chalkboard-teacher"></i> เข้าสู่ระบบครู</a></li>
-                    <li><a href="admin.html" style="background-color: #004d99; color: white;"><i class="fas fa-wrench"></i> สำหรับ Addmin</a></li>
+                    <li><a href="#" style="background-color: #333; color: white;"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบนักเรียน</a></li>
+                    <li><a href="#" style="background-color: #777; color: white;"><i class="fas fa-chalkboard-teacher"></i> เข้าสู่ระบบครู</a></li>
+                    <li><a href="admin.html" style="background-color: #333; color: white;"><i class="fas fa-wrench"></i> สำหรับ Addmin</a></li>
                 </ul>
             </aside>
 
@@ -301,8 +321,7 @@
                 <section class="countdown-section">
                     <h3>ประกาศผลการเรียน ภาคเรียนที่ 1 ปีการศึกษา 2568</h3>
                     <p>วันอังคารที่ 14 ตุลาคม 2568 เวลา 10:00 น.เป็นต้นไป</p> 
-                    <div id="timer" class="timer-display">
-                        <div class="time-unit">
+                    <div id="timer" class="timer-display" style="display: none;"> <div class="time-unit">
                             <span id="days" class="number">00</span>
                             <span class="label">วัน</span>
                         </div>
@@ -319,7 +338,7 @@
                             <span class="label">วินาที</span>
                         </div>
                     </div>
-                    <div id="countdown-message">
+                    <div id="countdown-message" style="display: block;"> 
                         🎉 ประกาศผลการเรียนแล้ว!
                     </div>
                 </section>
@@ -341,7 +360,7 @@
                 <h2>📚 บริการและเอกสารคำร้องออนไลน์</h2>
                 <div class="service-box">
                     <p>สามารถดาวน์โหลดแบบฟอร์มคำร้องต่างๆ ได้ที่นี่</p>
-                    <a href="#" style="background-color: #004d99; color: white; padding: 8px 15px; display: inline-block; text-decoration: none; border-radius: 4px;"><i class="fas fa-file-pdf"></i> ดาวน์โหลดแบบฟอร์ม ปพ.1/คำร้อง</a>
+                    <a href="#" style="background-color: #333; color: white; padding: 8px 15px; display: inline-block; text-decoration: none; border-radius: 4px;"><i class="fas fa-file-pdf"></i> ดาวน์โหลดแบบฟอร์ม ปพ.1/คำร้อง</a>
                 </div>
 
                 <div class="status-admin-box">
@@ -362,7 +381,7 @@
                         </div>
                     </div>
 
-                    <hr style="margin: 10px 0; border: none; border-top: 1px dashed #ccc;">
+                    <hr style="margin: 10px 0; border: none; border-top: 1px dashed #222;">
                     
                     <div class="status-item-line">
                         <span>บันทึกผลการเรียน:</span>
@@ -424,6 +443,10 @@
                 document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
                 document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
                 document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+                
+                // ตรวจสอบให้แน่ใจว่าได้ซ่อนข้อความแล้ว
+                timerDisplay.style.display = "flex";
+                countdownMessage.style.display = "none";
             } else {
                 clearInterval(x); // หยุดการอัปเดต
                 
