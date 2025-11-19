@@ -1,337 +1,299 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>เด็กดีของเสดสิ่ง67 (Modern)</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ภาควิชาเคมี - คณะศิลปศาสตร์และวิทยาศาสตร์</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd/r9V/U08U+R+qF+vL2+D9lKzQ4/7n09R9iTzX0n/51d6zE7q88P1tWdY5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd/r9V/U08U+R+qF+vL2+D9lKzQ4/7n09R9iTzX0n/51d6zE7q88P1tWdY5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <style>
-    /* Customization for Tailwind's dark mode and font */
-    :root {
-      --header-bg: #1e3a8a; /* Blue-800 */
-      --button-bg: #1d4ed8; /* Blue-700 */
-      --button-hover-bg: #2563eb; /* Blue-600 */
-    }
+    <style>
+        /* Custom Font and Scrollbar */
+        body {
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+        }
 
-    body {
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-    }
-
-    /* Override dark mode for countdown container and header buttons */
-    .dark .countdown-container {
-      background: rgba(30, 41, 59, 0.7); /* Slate-800 */
-      color: #93c5fd; /* Blue-300 */
-    }
-
-    .dark .header-buttons button {
-        border-color: #f3f4f6;
-        color: #f3f4f6;
-    }
-
-    .dark .header-buttons button:hover {
-        background-color: #f3f4f6;
-        color: #1e3a8a; /* Blue-800 */
-    }
-
-    /* Keyframes for badge blink */
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .badge-new {
-      animation: blink 1s infinite;
-    }
-
-    /* Popup style */
-    #popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      border: 3px solid #1d4ed8;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      padding: 24px 32px;
-      z-index: 9999;
-      font-family: 'IBM Plex Sans Thai', sans-serif;
-      text-align: center;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #1e3a8a;
-    }
-
-    .dark #popup {
-        background-color: #1f2937; /* Gray-800 */
-        border-color: #60a5fa; /* Blue-400 */
-        color: #dbeafe; /* Blue-100 */
-    }
-
-  </style>
-
-  <script>
-    // Enable/Disable dark mode class on the root element
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.documentElement.classList.add('dark');
-    }
-
-    // Tailwind Configuration to allow custom colors and enable dark mode via class
-    tailwind.config = {
-        darkMode: 'class',
-        theme: {
-            extend: {
-                colors: {
-                    'header-blue': '#1e3a8a',
-                    'accent-blue': '#1d4ed8',
-                },
-                boxShadow: {
-                    'soft': '0 4px 12px rgba(0, 0, 0, 0.08)',
-                    'md-soft': '0 6px 16px rgba(0, 0, 0, 0.12)',
+        /* Custom Colors for Academic Look (Deep Blue/Green Accents) */
+        /* Tailwind Custom Configuration for Colors */
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'ku-blue': '#104E8B', /* Deep Academic Blue */
+                        'ku-green': '#3CB371', /* Mid Green Accent */
+                        'ku-green-light': '#D6F5E3', /* Light Green for background */
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 12px rgba(0, 0, 0, 0.08)',
+                    }
                 }
             }
         }
-    }
-  </script>
+        
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto bg-white dark:bg-gray-800 shadow-2xl min-h-screen flex flex-col">
-    
-    <header class="bg-header-blue text-white p-6 md:p-8 text-3xl font-bold text-center relative">
-      เด็กดีของเสดสิ่ง67
-      <div class="header-buttons absolute top-1/2 right-5 transform -translate-y-1/2 flex gap-3">
-        <button id="dark-mode-toggle" aria-label="สลับโหมดกลางวัน/กลางคืน"
-                class="bg-transparent border-2 border-white text-white p-2 rounded-full cursor-pointer text-base w-10 h-10 hover:bg-white hover:text-header-blue transition-all duration-300">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-    </header>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
 
-    <div class="content flex-1 p-6 md:p-10 lg:p-12">
-      
-      <div class="countdown-container flex flex-col items-center p-8 mb-10 bg-blue-50 border border-blue-200 rounded-xl shadow-md-soft max-w-xl mx-auto text-center text-accent-blue dark:bg-slate-800 dark:text-blue-300 transition-colors duration-300">
-        <div class="text-lg font-semibold mb-2">วันสอบปลายภาค ภาคต้น 2568</div>
-        <div class="text-base font-medium mb-3">วันที่ 20 ตุลาคม 2025 - วันที่ 31 ตุลาคม 2025</div>
-        <div id="countdown" class="countdown-time text-4xl md:text-5xl font-extrabold"></div>
-      </div>
-      
-      <section class="mb-10">
-        <style>
-          .exam-box { position: relative; padding: 10px 20px; border-radius: 8px; font-weight: 700; transition: all 0.3s ease; }
-          .exam-box.midterm { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; } /* Emerald */
-          .exam-box.final { background-color: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; } /* Blue */
-          .dark .exam-box.midterm { background-color: #134e4a; color: #a7f3d0; border-color: #14b8a6; }
-          .dark .exam-box.final { background-color: #1e3a8a; color: #bfdbfe; border-color: #60a5fa; }
-        </style>
+    <div class="max-w-7xl mx-auto bg-white dark:bg-gray-800 shadow-2xl min-h-screen flex flex-col">
 
-        <div class="exam-box midterm w-fit mx-auto shadow-sm">
-          (-ร่าง-) ตารางสอบกลางภาค ประจำภาคต้น 2568
-          <div class="badge-new absolute top-[-10px] right-[-10px] bg-red-600 text-white text-xs px-2 py-1 rounded-full font-bold dark:bg-orange-400 dark:text-gray-900">NEW</div>
-        </div>
-        <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">Updated 16 มิถุนายน 2568</p>
-        
-        <img src="https://via.placeholder.com/800x400.png?text=Midterm+Exam+Schedule+Draft" alt="ร่างตารางสอบกลางภาค" class="block w-full max-w-3xl mx-auto mb-8 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700">
+        <header class="p-4 md:p-6 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-ku-green-light rounded-full flex items-center justify-center text-3xl text-ku-green font-bold">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-ku-blue dark:text-ku-green">
+                            ภาควิชาเคมี
+                        </h1>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3 mt-4 md:mt-0">
+                    <button id="dark-mode-toggle" aria-label="สลับโหมด" 
+                            class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 p-3 rounded-full hover:bg-ku-green hover:text-white transition duration-200">
+                        <i class="fas fa-moon" id="toggle-icon"></i>
+                    </button>
+                    <div class="relative hidden sm:block">
+                        <input type="text" placeholder="ค้นหา..."
+                               class="py-2 pl-10 pr-4 border border-gray-300 dark:border-gray-600 rounded-full focus:ring-ku-blue focus:border-ku-blue dark:bg-gray-700 dark:text-white transition duration-200" />
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-        <div class="exam-box final w-fit mx-auto shadow-sm">
-          (-ร่าง-) ตารางสอบปลายภาค ประจำภาคต้น 2568
-          <div class="badge-new absolute top-[-10px] right-[-10px] bg-red-600 text-white text-xs px-2 py-1 rounded-full font-bold dark:bg-orange-400 dark:text-gray-900">NEW</div>
-        </div>
-        <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">Updated 16 มิถุนายน 2568</p>
-        
-        <img src="https://via.placeholder.com/800x400.png?text=Final+Exam+Schedule+Draft" alt="ร่างตาราสอบปลายภาค" class="block w-full max-w-3xl mx-auto mb-8 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700">
-      </section>
-      
-      <a href="hot.html" class="block max-w-xl mx-auto mb-10 transition duration-300">
-        <div class="top-strip bg-blue-800 hover:bg-blue-700 text-white p-4 font-semibold text-center rounded-xl shadow-lg transform hover:scale-[1.01] transition-all duration-300">
-          <span class="text-lg">🔥 วิชาเรียนโหดๆ</span>
-          <div class="text-xs opacity-80 mt-1">Updated 12 มิถุนายน 2568</div>
-        </div>
-      </a>
- 
-      <h2 class="text-2xl font-bold text-center mb-1">ค้นหาตารางสอบ</h2>
-      <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-1">Updated 7 มิถุนายน 2568</p>
-      <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">เริ่มใช้ตั้งแต่การสอบกลางภาค ภาคต้น 2568 ในช่วงเดือนสิงหาคม เป็นต้นไป</p>
+        <nav class="sticky-nav bg-ku-blue dark:bg-ku-green shadow-lg">
+            <div class="flex overflow-x-auto justify-start md:justify-center">
+                <a href="#" class="nav-item">
+                    <i class="fas fa-home mr-1"></i> หน้าแรก
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-info-circle mr-1"></i> เกี่ยวกับเรา
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users mr-1"></i> บุคลากร
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-book-open mr-1"></i> หลักสูตร
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-graduation-cap mr-1"></i> สำหรับนิสิต
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-map-marker-alt mr-1"></i> ติดต่อเรา
+                </a>
+                <div class="relative group">
+                    <button class="nav-item flex items-center">
+                        ลิงก์ภายใน <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block w-48 bg-white dark:bg-gray-700 shadow-xl rounded-md transition duration-300 z-10">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">ระบบบริหารการศึกษา</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">KU E-Mail</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Webmail</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-      <div class="search-form max-w-md mx-auto p-6 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg transition-colors duration-300">
-        <form id="exam-form" class="space-y-4">
-          <div>
-            <label for="student-id" class="block text-sm font-medium mb-2">รหัสนิสิต 3 ตัวท้าย</label>
-            <input type="text" id="student-id" name="student-id" placeholder="กรอกรหัสนิสิต 3 ตัวท้าย" required maxlength="3"
-                   class="w-full p-3 border border-gray-300 dark:border-gray-500 rounded-lg text-base bg-white dark:bg-gray-800 dark:text-gray-100 focus:ring-accent-blue focus:border-accent-blue transition duration-200" />
-          </div>
-          <div>
-            <label for="grade" class="block text-sm font-medium mb-2">ชั้น</label>
-            <select id="grade" name="grade" disabled
-                    class="w-full p-3 border border-gray-300 dark:border-gray-500 rounded-lg text-base bg-gray-100 dark:bg-gray-600 dark:text-gray-300 cursor-not-allowed">
-              <option value="F39-1" selected>F39-1</option>
-            </select>
-          </div>
-          <div>
-            <label for="term" class="block text-sm font-medium mb-2">ภาคการศึกษา</label>
-            <select id="term" name="term" disabled
-                    class="w-full p-3 border border-gray-300 dark:border-gray-500 rounded-lg text-base bg-gray-100 dark:bg-gray-600 dark:text-gray-300 cursor-not-allowed">
-              <option value="ภาคปลาย 2567" selected>ภาคปลาย 2567</option>
-            </select>
-          </div>
-          <div>
-            <label for="exam-type" class="block text-sm font-medium mb-2">ประเภทการสอบ</label>
-            <select id="exam-type" name="exam-type" disabled
-                    class="w-full p-3 border border-gray-300 dark:border-gray-500 rounded-lg text-base bg-gray-100 dark:bg-gray-600 dark:text-gray-300 cursor-not-allowed">
-              <option value="ปลายภาค" selected>ปลายภาค</option>
-            </select>
-          </div>
-          <button type="submit"
-                  class="bg-accent-blue text-white p-3 font-semibold text-lg rounded-lg cursor-pointer w-full hover:bg-blue-600 transition duration-300 shadow-md">
-            ค้นหา
-          </button>
-        </form>
-        <div id="search-result" class="search-result text-center mt-6 font-bold text-lg"></div>
-      </div>
+        <main class="flex-1 p-6 md:p-8 lg:p-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <section class="lg:col-span-2 space-y-8">
+                    
+                    <div class="bg-gray-100 dark:bg-gray-700 h-64 md:h-96 rounded-xl overflow-hidden shadow-lg flex items-center justify-center">
+                        <h2 class="text-2xl md:text-4xl font-extrabold text-ku-blue dark:text-ku-green-light p-4 text-center">
+                            ภาพสไลด์กิจกรรม/ประชาสัมพันธ์หลัก
+                        </h2>
+                    </div>
 
-      <div class="sub-menu mt-12 flex justify-center gap-4 md:gap-8 flex-wrap">
-        <a href="kyos.html" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-header-blue text-white rounded-xl font-medium transition-all duration-300 shadow-md hover:bg-accent-blue hover:shadow-xl hover:scale-105">
-            <i class="fas fa-hand-holding-dollar text-2xl mb-1"></i>
-            <span>กยศ</span>
-        </a>
-        <a href="#" onclick="alert('ฟีเจอร์นี้ปิดการใช้งานชั่วคราว'); return false;" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-gray-400 text-gray-800 rounded-xl font-medium shadow-inner cursor-not-allowed">
-            <i class="fas fa-book-open text-2xl mb-1"></i>
-            <span>วิชาเรียน</span>
-            <small class="text-xs mt-1 text-red-700 font-bold dark:text-red-300">ปิดชั่วคราว</small>
-        </a>
-        <a href="calendar.html" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-header-blue text-white rounded-xl font-medium transition-all duration-300 shadow-md hover:bg-accent-blue hover:shadow-xl hover:scale-105">
-            <i class="fas fa-calendar-days text-2xl mb-1"></i>
-            <span>ปฏิทิน</span>
-        </a>
-        <a href="tabletest.html" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-header-blue text-white rounded-xl font-medium transition-all duration-300 shadow-md hover:bg-accent-blue hover:shadow-xl hover:scale-105">
-            <i class="fas fa-calendar-alt text-2xl mb-1"></i>
-            <span>ตารางสอบ</span>
-        </a>
-        <a href="#" onclick="alert('ฟีเจอร์นี้อยู่ระหว่างการพัฒนา'); return false;" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-yellow-600 text-white rounded-xl font-medium shadow-md cursor-not-allowed">
-            <i class="fas fa-graduation-cap text-2xl mb-1"></i>
-            <span>เกรด</span>
-            <small class="text-xs mt-1 text-yellow-100 font-bold">กำลังพัฒนา</small>
-        </a>
-        <a href="learning.html" class="flex flex-col items-center justify-center text-center w-24 p-3 bg-header-blue text-white rounded-xl font-medium transition-all duration-300 shadow-md hover:bg-accent-blue hover:shadow-xl hover:scale-105">
-            <i class="fas fa-file-powerpoint text-2xl mb-1"></i>
-            <span>คลัง Slide</span>
-        </a>
-      </div>
+                    <div class="bg-white dark:bg-gray-700 p-5 rounded-xl shadow-soft">
+                        <h3 class="text-2xl font-bold mb-4 border-b-2 pb-2 border-ku-green-light text-ku-blue dark:text-ku-green">
+                            <i class="fas fa-bullhorn mr-2"></i> ข่าวสารและประกาศล่าสุด
+                        </h3>
+                        
+                        <div class="flex items-start space-x-4 border-b border-gray-100 dark:border-gray-600 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-200 rounded-md">
+                            <div class="text-center p-2 bg-ku-green text-white rounded-md flex-shrink-0">
+                                <p class="text-xl font-bold">15</p>
+                                <p class="text-xs">มิ.ย.</p>
+                            </div>
+                            <a href="#" class="flex-grow">
+                                <p class="text-lg font-semibold text-ku-blue dark:text-gray-100 hover:text-ku-green transition duration-200">
+                                    ประกาศรายชื่อผู้มีสิทธิ์สอบสัมภาษณ์ หลักสูตร วท.บ. เคมี ปี 2568
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                    [ข่าวรับเข้าศึกษา] ภาควิชาเคมีจะประกาศผลการคัดเลือกรอบแรกในวันที่ 20 มิถุนายน 2568...
+                                </p>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 border-b border-gray-100 dark:border-gray-600 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-200 rounded-md">
+                            <div class="text-center p-2 bg-ku-blue text-white rounded-md flex-shrink-0">
+                                <p class="text-xl font-bold">10</p>
+                                <p class="text-xs">มิ.ย.</p>
+                            </div>
+                            <a href="#" class="flex-grow">
+                                <p class="text-lg font-semibold text-ku-blue dark:text-gray-100 hover:text-ku-green transition duration-200">
+                                    ขอเชิญร่วมงานสัมมนาวิชาการด้านเคมี ครั้งที่ 30
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                    [ข่าววิชาการ] จัดขึ้น ณ ห้องประชุมอาคาร 9 ในวันที่ 28-29 กรกฎาคม 2568...
+                                </p>
+                            </a>
+                        </div>
+                        
+                        <div class="text-right mt-4">
+                            <a href="#" class="text-ku-blue dark:text-ku-green font-medium hover:underline">ดูข่าวสารทั้งหมด <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </section>
+                
+                <aside class="space-y-8">
+                    
+                    <div class="bg-ku-green-light dark:bg-gray-700 p-5 rounded-xl shadow-soft">
+                        <h3 class="text-xl font-bold mb-4 text-ku-blue dark:text-ku-green">
+                            <i class="fas fa-flask mr-2"></i> หลักสูตรของเรา
+                        </h3>
+                        <nav class="space-y-2">
+                            <a href="#" class="sidebar-link">
+                                วท.บ. (เคมี) <i class="fas fa-external-link-alt text-xs ml-2"></i>
+                            </a>
+                            <a href="#" class="sidebar-link">
+                                วท.ม. (เคมี) <i class="fas fa-external-link-alt text-xs ml-2"></i>
+                            </a>
+                            <a href="#" class="sidebar-link">
+                                ปร.ด. (เคมี) <i class="fas fa-external-link-alt text-xs ml-2"></i>
+                            </a>
+                        </nav>
+                    </div>
 
-      <div class="announcement-box max-w-xl mx-auto mt-12 p-5 border-2 border-red-500 bg-red-50 text-red-800 rounded-xl font-semibold text-center dark:bg-red-950 dark:border-red-400 dark:text-red-200 transition-colors duration-300 shadow-md">
-        เว็บนี้ไม่ใช่เว็บสำเร็จรูป เกิดจากการเขียนโค้ดเองทุกจุด อาจจะมีบางจุดที่มองแล้วแปลกๆเพราะอยู่ในช่วงพัฒนา ฉันจะต้องเป็นคนที่เขียนโค้ดได้โหดที่สุดในประเทศไทย
-      </div>
+                    <div class="bg-white dark:bg-gray-700 p-5 rounded-xl shadow-soft border border-gray-100 dark:border-gray-600">
+                        <h3 class="text-xl font-bold mb-4 text-ku-blue dark:text-ku-green">
+                            <i class="fas fa-link mr-2"></i> ลิงก์สำหรับนิสิต
+                        </h3>
+                        <nav class="space-y-2">
+                            <a href="#" class="sidebar-link-secondary">
+                                <i class="fas fa-download w-4"></i> แบบฟอร์มต่างๆ
+                            </a>
+                            <a href="#" class="sidebar-link-secondary">
+                                <i class="fas fa-book w-4"></i> คู่มือการใช้เครื่องมือ
+                            </a>
+                            <a href="#" class="sidebar-link-secondary">
+                                <i class="fas fa-laptop-code w-4"></i> ระบบบริหารการศึกษา
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold mb-3">ติดตามเรา</h3>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" aria-label="Facebook" class="social-icon bg-blue-600"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="YouTube" class="social-icon bg-red-600"><i class="fab fa-youtube"></i></a>
+                            <a href="#" aria-label="TikTok" class="social-icon bg-gray-700"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+        </main>
+
+        <footer class="bg-ku-blue dark:bg-gray-900 text-white p-6 md:p-10 mt-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div>
+                    <h4 class="text-lg font-bold mb-3 text-ku-green">ภาควิชาเคมี</h4>
+                    <p class="text-sm text-gray-300">
+                        คณะศิลปศาสตร์และวิทยาศาสตร์ <br> มหาวิทยาลัยเกษตรศาสตร์ <br> วิทยาเขตกำแพงแสน <br> นครปฐม 73140
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3 text-ku-green">เมนูหลัก</h4>
+                    <nav class="space-y-2">
+                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">หน้าแรก</a>
+                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">บุคลากร</a>
+                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">หลักสูตร</a>
+                    </nav>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3 text-ku-green">ติดต่อ</h4>
+                    <p class="text-sm text-gray-300">
+                        โทรศัพท์: 0-3435-xxx <br>
+                        โทรสาร: 0-3435-xxx <br>
+                        อีเมล: chem@ku.ac.th
+                    </p>
+                </div>
+                <div class="md:col-span-1">
+                    <h4 class="text-lg font-bold mb-3 text-ku-green">แผนที่</h4>
+                    <div class="bg-gray-700 h-24 rounded-lg flex items-center justify-center text-sm text-gray-400">
+                        [แผนที่ Google Maps]
+                    </div>
+                </div>
+            </div>
+            <div class="text-center border-t border-gray-700 mt-6 pt-4 text-sm text-gray-400">
+                &copy; 2025 ภาควิชาเคมี มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน.
+            </div>
+        </footer>
+
     </div>
 
-    <footer class="bg-header-blue text-white text-center p-4 text-sm mt-auto">© 2025 ผู้พัฒนา : สุธี. All rights reserved.</footer>
-  </div>
+    <script>
+        // --- Custom Tailwind CSS for components (outside of utility classes) ---
+        // Navigation Item Style
+        const navStyle = "px-4 py-3 md:py-4 text-sm font-medium text-white hover:bg-ku-green dark:hover:bg-ku-blue dark:text-gray-900 dark:hover:text-white transition-colors duration-200 whitespace-nowrap";
+        document.querySelectorAll('.nav-item').forEach(el => el.className += ' ' + navStyle);
 
-  <div id="popup" class="shadow-2xl">📄 พบข้อมูลตารางสอบแล้ว!</div>
+        // Sidebar Primary Link Style
+        const sidebarLinkStyle = "flex items-center justify-between p-3 bg-white dark:bg-gray-800 border-l-4 border-ku-green text-ku-blue dark:text-gray-100 font-medium rounded-r-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-200 shadow-sm";
+        document.querySelectorAll('.sidebar-link').forEach(el => el.className += ' ' + sidebarLinkStyle);
 
-  <script>
-    // Initial setup for dark mode toggle button icon
-    document.addEventListener('DOMContentLoaded', () => {
+        // Sidebar Secondary Link Style
+        const sidebarLinkSecondaryStyle = "flex items-center space-x-2 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition duration-200";
+        document.querySelectorAll('.sidebar-link-secondary').forEach(el => el.className += ' ' + sidebarLinkSecondaryStyle);
+
+        // Social Icon Style
+        const socialIconStyle = "w-10 h-10 rounded-full flex items-center justify-center text-white text-lg hover:opacity-80 transition duration-200";
+        document.querySelectorAll('.social-icon').forEach(el => el.className += ' ' + socialIconStyle);
+
+        // --- Dark Mode Toggle Logic ---
         const toggleBtn = document.getElementById('dark-mode-toggle');
-        if (document.documentElement.classList.contains('dark')) {
-            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        const icon = document.getElementById('toggle-icon');
+        
+        // Initial setup
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
         } else {
-            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
         }
-    });
 
-    // Dark Mode Toggle Logic
-    document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-      const isDarkMode = document.documentElement.classList.toggle('dark');
-      const toggleBtn = document.getElementById('dark-mode-toggle');
-      if (isDarkMode) {
-        localStorage.setItem('darkMode', 'enabled');
-        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-      } else {
-        localStorage.setItem('darkMode', 'disabled');
-        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-      }
-    });
-
-    // Countdown Logic
-    const targetDate = new Date(2025, 9, 20, 8, 30, 0);
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-      const countdownElement = document.getElementById('countdown');
-
-      if (diff <= 0) {
-        countdownElement.textContent = 'วันสอบปลายภาค ประจำภาคต้น 2568';
-        clearInterval(intervalId);
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      // Using spans for better styling control if needed
-      countdownElement.innerHTML = `
-        <span class="text-3xl md:text-5xl font-extrabold">${days}</span> วัน 
-        <span class="text-3xl md:text-5xl font-extrabold">${hours}</span> ชม. 
-        <span class="text-3xl md:text-5xl font-extrabold">${minutes}</span> น. 
-        <span class="text-3xl md:text-5xl font-extrabold">${seconds}</span> วิ.
-      `;
-    }
-    updateCountdown();
-    const intervalId = setInterval(updateCountdown, 1000);
-
-    // Popup Logic
-    function showPopup(message) {
-      const popup = document.getElementById('popup');
-      popup.textContent = message;
-      popup.style.display = 'block';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 2000);
-    }
-
-    // Exam Form Submission Logic
-    document.getElementById('exam-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const input = document.getElementById('student-id').value.trim();
-      const resultBox = document.getElementById('search-result');
-
-      const examData = {
-        '052': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "052 กันยาพร"', file: '01355xxx.pdf' },
-        '028': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "028 กมลลักษณ์"', file: 'exam_101.pdf' },
-        '133': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "133 ชินพัธน์"', file: 'exam_102.pdf' },
-        '184': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "184 ธนพัฒน์"', file: 'exam_103.pdf' },
-        '214': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "214 นพรดา"', file: 'exam_104.pdf' },
-        '494': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "494 เมธี"', file: 'exam_105.pdf' },
-        '630': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "630 ศุภเสกย์"', file: 'exam_106.pdf' },
-        '656': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "656 สิทธิชาติ"', file: 'exam_107.pdf' },
-        '753': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "753 อนพัทย์"', file: 'exam_108.pdf' },
-        '647': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "647 ทรรณรต"', file: 'exam_109.pdf' },
-        '728': { text: 'ตารางสอบปลายภาค ภาคปลาย 2567 ของ "728 พชรพร"', file: 'exam_110.pdf' },
-      };
-
-      if (examData[input]) {
-        showPopup('📄 พบข้อมูลตารางสอบแล้ว!');
-        resultBox.innerHTML = `
-          <p class="mb-3">${examData[input].text}</p>
-          <button id="download-btn" class="bg-green-600 text-white p-3 font-semibold text-base rounded-lg cursor-pointer hover:bg-green-700 transition duration-300 shadow-lg">
-            <i class="fas fa-download mr-2"></i> Download ตารางสอบ
-          </button>
-        `;
-        document.getElementById('download-btn').addEventListener('click', () => {
-          window.open(examData[input].file, '_blank');
+        toggleBtn.addEventListener('click', () => {
+            const isDarkMode = document.documentElement.classList.toggle('dark');
+            if (isDarkMode) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
         });
-      } else {
-        resultBox.textContent = 'ไม่พบข้อมูลตารางสอบ';
-      }
-    });
-
-  </script>
+    </script>
 </body>
 </html>
