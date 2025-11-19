@@ -120,18 +120,22 @@
                         </h2>
                     </div>
 
-                    <div class="countdown-container flex flex-col items-center p-6 md:p-8 bg-ku-green-light dark:bg-gray-700 rounded-xl shadow-md border border-ku-green dark:border-gray-600 text-ku-blue dark:text-ku-green transition-colors duration-300">
-                        <div class="text-xl md:text-2xl font-bold mb-2 text-ku-blue dark:text-ku-green">
-                            วันลงทะเบียนเรียน ภาคปลาย 2568
-                        </div>
-                        <div class="text-base text-gray-700 dark:text-gray-300 mb-4">
-                            นิสิตสามารถลงทะเบียนเรียนได้ตามวันเวลาดังนี้
-                            <div>วันศุกร์, 21 พฤศจิกายน 2025 เวลา 09:30 - 16:00 น.</div>
-                            <div>วันศุกร์, 21 พฤศจิกายน 2025 เวลา 18:00 - 00:00 น.</div>
-                        </div>
-                        <div id="main-countdown" class="countdown-time text-4xl md:text-5xl font-extrabold text-ku-blue dark:text-white">
-                            </div>
-                    </div>
+                    <div class="countdown-container flex flex-col items-center p-6 md:p-8 bg-ku-green-light dark:bg-gray-700 rounded-xl shadow-md border border-ku-green dark:border-gray-600 text-ku-blue dark:text-ku-green transition-colors duration-300 **text-center**">
+    
+    <div class="text-xl md:text-2xl font-bold mb-2 text-ku-blue dark:text-ku-green">
+        วันลงทะเบียนเรียน ภาคปลาย 2568
+    </div>
+    
+    <div class="text-base text-gray-700 dark:text-gray-300 mb-4">
+        นิสิตสามารถลงทะเบียนเรียนได้ตามวันเวลาดังนี้
+        <div>วันศุกร์, 21 พฤศจิกายน 2025 เวลา 09:30 - 16:00 น.</div>
+        <div>วันศุกร์, 21 พฤศจิกายน 2025 เวลา 18:00 - 00:00 น.</div>
+    </div>
+    
+    <div id="main-countdown" class="countdown-time text-4xl md:text-5xl font-extrabold text-ku-blue dark:text-white">
+    </div>
+
+</div>
                     <div class="bg-white dark:bg-gray-700 p-5 rounded-xl shadow-soft">
                         <h3 class="text-2xl font-bold mb-4 border-b-2 pb-2 border-ku-green-light text-ku-blue dark:text-ku-green">
                             <i class="fas fa-bullhorn mr-2"></i> ข่าวสารและประกาศล่าสุด
@@ -310,7 +314,7 @@
         // **สามารถแก้ไขวันที่เป้าหมายได้ที่นี่**
         // ตั้งค่าวันเวลาเป้าหมาย (ปัจจุบันตั้งไว้ที่ 21 พฤศจิกายน 2025 เวลา 09:30:00 น.)
         // เดือนใน JavaScript เริ่มจาก 0 (ม.ค.=0, ก.ย.=8)
-        const targetDateChemistry = new Date(2025, 11, 21, 9, 30, 0); 
+        const targetDateChemistry = new Date(2025, 21, 11, 9, 30, 0); 
 
         function updateChemistryCountdown() {
             const now = new Date();
