@@ -15,6 +15,8 @@
         /* Custom Font and Scrollbar */
         body {
             font-family: 'IBM Plex Sans Thai', sans-serif;
+            /* **เพิ่ม** เพื่อให้ Smooth Scroll ทำงานได้ดีขึ้นใน Chrome/Safari */
+            scroll-behavior: smooth; 
         }
 
         /* Custom Colors for Academic Look (Deep Blue/Green Accents) */
@@ -48,6 +50,10 @@
             border-radius: 6px;
             font-weight: 500;
             transition: all 0.2s;
+            color: #1f2937; /* Default text color */
+        }
+        .dark .sub-nav-link {
+            color: #d1d5db; /* Default dark text color */
         }
         .sub-nav-link:hover {
             background-color: #f3f4f6; /* gray-100 */
@@ -55,16 +61,24 @@
         }
         .dark .sub-nav-link:hover {
             background-color: #374151; /* gray-700 */
-            color: #3CB371; /* ku-green */
+            color: #D6F5E3; /* ku-green-light */
         }
+        /* Active State for Scrollspy */
         .sub-nav-link.active {
             background-color: #104E8B; /* ku-blue */
             color: white;
             box-shadow: 0 2px 8px rgba(16, 78, 139, 0.3);
+            font-weight: 600;
         }
         .dark .sub-nav-link.active {
             background-color: #3CB371; /* ku-green */
             color: #1f2937; /* gray-800 */
+        }
+
+        /* **เพิ่ม** Padding ด้านบนสำหรับเวลาลิงก์ Anchor เพื่อให้เนื้อหาไม่ถูก Header บัง */
+        .content-section {
+            padding-top: 100px; /* Space for the sticky header */
+            margin-top: -100px; /* Compensate the space */
         }
     </style>
 </head>
@@ -148,8 +162,8 @@
                         <h3 class="text-lg font-bold mb-3 border-b pb-2 border-gray-300 dark:border-gray-600 text-ku-blue dark:text-ku-green">
                             สารบัญ
                         </h3>
-                        <nav class="space-y-1 text-sm">
-                            <a href="#history" class="sub-nav-link active">
+                        <nav id="sub-nav-list" class="space-y-1 text-sm">
+                            <a href="#history" class="sub-nav-link">
                                 <i class="fas fa-file-alt mr-2"></i> ประวัติความเป็นมา
                             </a>
                             <a href="#vision" class="sub-nav-link">
@@ -165,9 +179,9 @@
                     </div>
                 </aside>
 
-                <section class="lg:col-span-3 space-y-10">
+                <section id="content-blocks" class="lg:col-span-3 space-y-10">
                     
-                    <div id="history" class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
+                    <div id="history" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
                         <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
                             1. ประวัติความเป็นมา
                         </h2>
@@ -188,7 +202,7 @@
                         </p>
                     </div>
                     
-                    <div id="vision" class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
+                    <div id="vision" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
                         <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
                             2. วิสัยทัศน์ (Vision)
                         </h2>
@@ -198,107 +212,9 @@
                         </p>
                     </div>
 
-                    <div id="mission" class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
+                    <div id="mission" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
                         <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
                             3. พันธกิจ (Mission)
                         </h2>
                         <ul class="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2 leading-relaxed">
                             <li>ผลิตบัณฑิตที่มีความรู้ความสามารถทางเคมีและทักษะที่จำเป็นในการแข่งขันในโลกยุคปัจจุบัน</li>
-                            <li>สร้างสรรค์งานวิจัยที่มีคุณภาพสูงและเป็นที่ยอมรับในระดับนานาชาติ</li>
-                            <li>ให้บริการวิชาการและถ่ายทอดความรู้ด้านเคมีสู่ชุมชนและภาคอุตสาหกรรม</li>
-                            <li>ทำนุบำรุงศิลปวัฒนธรรมและรักษาสิ่งแวดล้อม</li>
-                        </ul>
-                    </div>
-                    
-                    <div id="philosophy" class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
-                        <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
-                            4. ปรัชญาและอัตลักษณ์
-                        </h2>
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                            **ปรัชญา:** "เคมีสร้างสรรค์ นวัตกรรมยั่งยืน" (Creative Chemistry, Sustainable Innovation)
-                            <br><br>
-                            **อัตลักษณ์:** บัณฑิตมีความเชี่ยวชาญด้านเคมี มีคุณธรรม และสามารถประยุกต์ใช้ความรู้เพื่อพัฒนาประเทศ
-                        </p>
-                    </div>
-
-                </section>
-
-            </div>
-        </main>
-
-        <footer class="bg-ku-blue dark:bg-gray-900 text-white p-6 md:p-10 mt-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-ku-green">ภาควิชาเคมี</h4>
-                    <p class="text-sm text-gray-300">
-                        คณะศิลปศาสตร์และวิทยาศาสตร์ <br> มหาวิทยาลัยเกษตรศาสตร์ <br> วิทยาเขตกำแพงแสน <br> นครปฐม 73140
-                    </p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-ku-green">เมนูหลัก</h4>
-                    <nav class="space-y-2">
-                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">หน้าแรก</a>
-                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">บุคลากร</a>
-                        <a href="#" class="text-sm text-gray-300 hover:text-white transition duration-200 block">หลักสูตร</a>
-                    </nav>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-ku-green">ติดต่อ</h4>
-                    <p class="text-sm text-gray-300">
-                        โทรศัพท์: 0-3435-xxx <br>
-                        โทรสาร: 0-3435-xxx <br>
-                        อีเมล: chem@ku.ac.th
-                    </p>
-                </div>
-                <div class="md:col-span-1">
-                    <h4 class="text-lg font-bold mb-3 text-ku-green">แผนที่</h4>
-                    <div class="bg-gray-700 h-24 rounded-lg flex items-center justify-center text-sm text-gray-400">
-                        [แผนที่ Google Maps]
-                    </div>
-                </div>
-            </div>
-            <div class="text-center border-t border-gray-700 mt-6 pt-4 text-sm text-gray-400">
-                &copy; 2025 ภาควิชาเคมี มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน.
-            </div>
-        </footer>
-
-    </div>
-
-    <script>
-        // --- Custom Tailwind CSS for components (outside of utility classes) ---
-        // Navigation Item Style
-        const navStyle = "px-4 py-3 md:py-4 text-sm font-medium text-white hover:bg-ku-green dark:hover:bg-ku-blue dark:text-gray-900 dark:hover:text-white transition-colors duration-200 whitespace-nowrap";
-        document.querySelectorAll('.nav-item').forEach(el => el.className += ' ' + navStyle);
-
-        // Active Navigation Class (for 'เกี่ยวกับเรา')
-        document.querySelector('.active-nav').classList.add('bg-ku-green', 'dark:bg-ku-blue', 'dark:text-white');
-        
-        // --- Dark Mode Toggle Logic ---
-        const toggleBtn = document.getElementById('dark-mode-toggle');
-        const icon = document.getElementById('toggle-icon');
-        
-        // Initial setup
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            const isDarkMode = document.documentElement.classList.toggle('dark');
-            if (isDarkMode) {
-                localStorage.setItem('theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                localStorage.setItem('theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        });
-    </script>
-</body>
-</html>
