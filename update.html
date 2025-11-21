@@ -5,40 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ขณะนี้เว็บไซต์ปิดปรับปรุง</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
     body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background: #f5f7fa;
-      color: #333;
+      font-family: 'Kanit', sans-serif;
+      background: linear-gradient(135deg, #7dd3fc, #818cf8, #c084fc);
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease infinite;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
       text-align: center;
     }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .box {
-      padding: 24px 32px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      max-width: 360px;
+      padding: 28px 36px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 420px;
       width: 90%;
+      border: 1px solid rgba(255,255,255,0.25);
     }
     h1 {
       margin: 0 0 10px;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 600;
     }
-    p { margin: 6px 0; }
-    .small { font-size: 13px; color: #777; margin-top: 14px; }
+    p { margin: 8px 0; font-size: 16px; }
+    .small { font-size: 13px; margin-top: 16px; opacity: .9; }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>ขณะนี้เว็บไซต์ปิดปรับปรุง</h1>
+    <div class="icon">⚙️</div>
+    <h1>เว็บไซต์ปิดปรับปรุงชั่วคราว</h1>
     <p>ปิดปรับปรุงระบบชั่วคราว เพื่อเพิ่มประสิทธิภาพฐานข้อมูล</p>
-    <p>และอัปเดตข้อมูลให้เป็นปัจจุบัน กรุณากลับมาใหม่อีกครั้งในภายหลัง</p>
+    <p>และอัปเดตข้อมูลให้เป็นปัจจุบัน กรุณากลับมาใหม่อีกครั้ง</p>
     <div class="small">© เว็บไซต์ของคุณ</div>
   </div>
 </body>
