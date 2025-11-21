@@ -1,220 +1,296 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>เกี่ยวกับเรา - ภาควิชาเคมี</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd/r9V/U08U+R+qF+vL2+D9lKzQ4/7n09R9iTzX0n/51d6zE7q88P1tWdY5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภาควิชาเคมี คณะศิลปศาสตร์และวิทยาศาสตร์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom Font and Scrollbar */
-        body {
-            font-family: 'IBM Plex Sans Thai', sans-serif;
-            /* **เพิ่ม** เพื่อให้ Smooth Scroll ทำงานได้ดีขึ้นใน Chrome/Safari */
-            scroll-behavior: smooth; 
+        /* กำหนดค่าเริ่มต้นและสี */
+        :root {
+            --ku-green: #006633; /* เขียว มก. */
+            --ku-yellow: #FFCC00; /* เหลือง มก. */
+            --text-color: #333;
+            --bg-light: #f4f4f4;
         }
 
-        /* Custom Colors for Academic Look (Deep Blue/Green Accents) */
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'ku-blue': '#104E8B', /* Deep Academic Blue */
-                        'ku-green': '#3CB371', /* Mid Green Accent */
-                        'ku-green-light': '#D6F5E3', /* Light Green for background */
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 12px rgba(0, 0, 0, 0.08)',
-                    }
-                }
-            }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        /* 1. ส่วนหัว (Header) */
+        .main-header {
+            background-color: var(--bg-light);
+            color: var(--ku-green);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-area img {
+            width: 60px;
+            margin-right: 15px;
+            /* **คุณต้องเพิ่มไฟล์ภาพ ku_logo.png เอง** */
+        }
+
+        .logo-area h1 {
+            font-size: 1.8em;
+            margin-bottom: 0;
         }
         
-        /* Sticky Navigation */
-        .sticky-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
+        .logo-area p {
+            font-size: 0.9em;
+            margin-top: -5px;
+            color: #666;
         }
 
-        /* Sub-Navigation Link Styling */
-        .sub-nav-link {
-            padding: 8px 16px;
-            display: block;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: all 0.2s;
-            color: #1f2937; /* Default text color */
-        }
-        .dark .sub-nav-link {
-            color: #d1d5db; /* Default dark text color */
-        }
-        .sub-nav-link:hover {
-            background-color: #f3f4f6; /* gray-100 */
-            color: #104E8B; /* ku-blue */
-        }
-        .dark .sub-nav-link:hover {
-            background-color: #374151; /* gray-700 */
-            color: #D6F5E3; /* ku-green-light */
-        }
-        /* Active State for Scrollspy */
-        .sub-nav-link.active {
-            background-color: #104E8B; /* ku-blue */
-            color: white;
-            box-shadow: 0 2px 8px rgba(16, 78, 139, 0.3);
+        .top-nav a {
+            color: var(--ku-green);
+            margin-left: 10px;
+            text-decoration: none;
             font-weight: 600;
         }
-        .dark .sub-nav-link.active {
-            background-color: #3CB371; /* ku-green */
-            color: #1f2937; /* gray-800 */
+        
+        .top-nav input[type="search"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 15px;
         }
 
-        /* **เพิ่ม** Padding ด้านบนสำหรับเวลาลิงก์ Anchor เพื่อให้เนื้อหาไม่ถูก Header บัง */
-        .content-section {
-            padding-top: 100px; /* Space for the sticky header */
-            margin-top: -100px; /* Compensate the space */
+        /* 2. แถบเมนูหลัก (Navigation Bar) */
+        .main-nav {
+            background-color: var(--ku-green);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .main-nav li a {
+            color: #fff;
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .main-nav li a:hover {
+            background-color: var(--ku-yellow);
+            color: var(--ku-green);
+        }
+
+        /* 3. ส่วนเนื้อหาหลัก (Layout 2 คอลัมน์) */
+        .hero-slider {
+            background-color: #e0e0e0;
+            padding: 80px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .main-content {
+            flex: 3;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .sidebar h3 {
+            color: var(--ku-green);
+            border-bottom: 2px solid var(--ku-yellow);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .news-item {
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h4 {
+            color: var(--ku-green);
+            margin-bottom: 5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar li a {
+            display: block;
+            padding: 5px 0;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .sidebar li a:hover {
+            color: var(--ku-green);
+            text-decoration: underline;
+        }
+
+        /* 4. ส่วนท้าย (Footer) */
+        .main-footer {
+            background-color: var(--ku-green);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .copyright {
+            margin-top: 10px;
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        /* Responsive สำหรับ Mobile */
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .content-wrapper {
+                flex-direction: column; /* เปลี่ยนเนื้อหาหลักและ Sidebar ให้เรียงซ้อนกัน */
+            }
+
+            .main-nav ul {
+                flex-direction: column; /* เมนูหลักเรียงลงมา */
+                align-items: stretch;
+            }
+            
+            .main-nav li a {
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+<body>
 
-    <div class="max-w-7xl mx-auto bg-white dark:bg-gray-800 shadow-2xl min-h-screen flex flex-col">
-
-        <header class="p-4 md:p-6 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="w-16 h-16 bg-ku-green-light rounded-full flex items-center justify-center text-3xl text-ku-green font-bold">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-bold text-ku-blue dark:text-ku-green">
-                            ภาควิชาเคมี
-                        </h1>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
-                            คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-3 mt-4 md:mt-0">
-                    <button id="dark-mode-toggle" aria-label="สลับโหมด" 
-                            class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 p-3 rounded-full hover:bg-ku-green hover:text-white transition duration-200">
-                        <i class="fas fa-moon" id="toggle-icon"></i>
-                    </button>
-                    <div class="relative hidden sm:block">
-                        <input type="text" placeholder="ค้นหา..."
-                               class="py-2 pl-10 pr-4 border border-gray-300 dark:border-gray-600 rounded-full focus:ring-ku-blue focus:border-ku-blue dark:bg-gray-700 dark:text-white transition duration-200" />
-                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                </div>
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="ku_logo.png" alt="ตราสัญลักษณ์ มก.">
+            <div>
+                <h1>ภาควิชาเคมี</h1>
+                <p>คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
             </div>
-        </header>
-
-        <nav class="sticky-nav bg-ku-blue dark:bg-ku-green shadow-lg">
-            <div class="flex overflow-x-auto justify-start md:justify-center">
-                <a href="index.html" class="nav-item">
-                    <i class="fas fa-home mr-1"></i> หน้าแรก
-                </a>
-                <a href="#" class="nav-item active-nav">
-                    <i class="fas fa-info-circle mr-1"></i> เกี่ยวกับเรา
-                </a>
-                <a href="personnel.html" class="nav-item">
-                    <i class="fas fa-users mr-1"></i> บุคลากร
-                </a>
-                <a href="programs.html" class="nav-item">
-                    <i class="fas fa-book-open mr-1"></i> หลักสูตร
-                </a>
-                <a href="students.html" class="nav-item">
-                    <i class="fas fa-graduation-cap mr-1"></i> สำหรับนิสิต
-                </a>
-                <a href="contact.html" class="nav-item">
-                    <i class="fas fa-map-marker-alt mr-1"></i> ติดต่อเรา
-                </a>
-                <div class="relative group">
-                    <button class="nav-item flex items-center">
-                        ลิงก์ภายใน <i class="fas fa-chevron-down ml-2 text-xs"></i>
-                    </button>
-                    <div class="absolute hidden group-hover:block w-48 bg-white dark:bg-gray-700 shadow-xl rounded-md transition duration-300 z-10">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">ระบบบริหารการศึกษา</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">KU E-Mail</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Webmail</a>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <nav class="top-nav">
+            <a href="#">TH</a> | <a href="#">EN</a>
+            <input type="search" placeholder="ค้นหา...">
         </nav>
+    </header>
 
-        <main class="flex-1 p-6 md:p-8 lg:p-10">
-            
-            <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue dark:text-ku-green mb-8 border-b-2 pb-2 border-ku-green-light">
-                <i class="fas fa-info-circle mr-2"></i> เกี่ยวกับภาควิชาเคมี
-            </h1>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับภาควิชา</a></li>
+            <li><a href="personnel.html">บุคลากร</a></li>
+            <li><a href="curriculum.html">หลักสูตร</a></li>
+            <li><a href="research.html">งานวิจัย</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
 
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                
-                <aside class="lg:col-span-1">
-                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl shadow-soft sticky top-24">
-                        <h3 class="text-lg font-bold mb-3 border-b pb-2 border-gray-300 dark:border-gray-600 text-ku-blue dark:text-ku-green">
-                            สารบัญ
-                        </h3>
-                        <nav id="sub-nav-list" class="space-y-1 text-sm">
-                            <a href="#history" class="sub-nav-link">
-                                <i class="fas fa-file-alt mr-2"></i> ประวัติความเป็นมา
-                            </a>
-                            <a href="#vision" class="sub-nav-link">
-                                <i class="fas fa-eye mr-2"></i> วิสัยทัศน์
-                            </a>
-                            <a href="#mission" class="sub-nav-link">
-                                <i class="fas fa-tasks mr-2"></i> พันธกิจ
-                            </a>
-                            <a href="#philosophy" class="sub-nav-link">
-                                <i class="fas fa-lightbulb mr-2"></i> ปรัชญาและอัตลักษณ์
-                            </a>
-                        </nav>
-                    </div>
-                </aside>
+    <main class="container">
+        <section class="hero-slider">
+            <h2>[พื้นที่สำหรับ Image Slider/Carousel]</h2>
+            <p>ภาพกิจกรรม, ข่าวเด่น หรือ Banner โปรโมทหลักสูตร</p>
+        </section>
 
-                <section id="content-blocks" class="lg:col-span-3 space-y-10">
-                    
-                    <div id="history" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
-                        <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
-                            1. ประวัติความเป็นมา
-                        </h2>
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
-                            <p>
-                            ภาควิชาเคมี ได้ก่อตั้งขึ้นพร้อมกับการจัดตั้งคณะศิลปศาสตร์และวิทยาศาสตร์ 
-                            เมื่อปี พ.ศ. 2535 โดยเป็นส่วนหนึ่งของโครงการขยายวิทยาเขตของมหาวิทยาลัยเกษตรศาสตร์ 
-                            ที่วิทยาเขตกำแพงแสน โดยมีจุดมุ่งหมายหลักเพื่อสนับสนุนการเรียนการสอนด้านวิทยาศาสตร์พื้นฐาน 
-                            ให้กับนิสิตในทุกสาขาวิชาของวิทยาเขต รวมถึงการผลิตบัณฑิตสาขาเคมีที่มีความรู้ความสามารถ 
-                            และจริยธรรมในการประกอบวิชาชีพและศึกษาต่อในระดับสูง
-                            </p>
-                            <p>
-                            ในช่วงแรกของการก่อตั้ง ภาควิชาฯ ได้เน้นการพัฒนาบุคลากรและโครงสร้างพื้นฐานด้านห้องปฏิบัติการ 
-                            เพื่อให้สามารถรองรับงานวิจัยและบริการวิชาการได้อย่างมีมาตรฐาน ปัจจุบัน ภาควิชาเคมี 
-                            ได้เปิดสอนทั้งหลักสูตรระดับปริญญาตรี (วท.บ. เคมี) และระดับบัณฑิตศึกษา (วท.ม. และ ปร.ด. เคมี) 
-                            โดยมีงานวิจัยที่ได้รับการยอมรับในระดับชาติและนานาชาติอย่างต่อเนื่อง.
-                            </p>
-                        </p>
-                    </div>
-                    
-                    <div id="vision" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
-                        <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
-                            2. วิสัยทัศน์ (Vision)
-                        </h2>
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                            "เป็นผู้นำด้านการวิจัยและการผลิตบัณฑิตสาขาเคมีที่มีคุณภาพระดับสากล 
-                            มุ่งเน้นการสร้างสรรค์นวัตกรรมเพื่อความยั่งยืนของสังคมไทยและภูมิภาค"
-                        </p>
-                    </div>
+        <div class="content-wrapper">
+            <section class="main-content">
+                <h3>📢 ข่าวสารและประกาศล่าสุด</h3>
+                <article class="news-item">
+                    <h4>ทุนสนับสนุนการวิจัยสำหรับนักศึกษาปริญญาโท</h4>
+                    <p>ขอเชิญนักศึกษาที่สนใจยื่นข้อเสนอโครงการวิจัยเพื่อรับทุนสนับสนุนประจำปีการศึกษา 2567...</p>
+                    <a href="#">อ่านต่อ</a>
+                </article>
+                <article class="news-item">
+                    <h4>กำหนดการลงทะเบียนเรียน ภาคปลาย</h4>
+                    <p>ประกาศกำหนดการลงทะเบียนเรียนและชำระค่าธรรมเนียมการศึกษา ภาคปลาย ปีการศึกษา 2567...</p>
+                    <a href="#">อ่านต่อ</a>
+                </article>
+                <a href="#" class="all-news-link" style="display: block; margin-top: 15px; color: var(--ku-green); font-weight: 600;">👉 ดูข่าวทั้งหมด</a>
+            </section>
 
-                    <div id="mission" class="content-section bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
-                        <h2 class="text-2xl font-bold mb-4 text-ku-blue dark:text-ku-green border-b-2 pb-1 border-ku-green-light">
-                            3. พันธกิจ (Mission)
-                        </h2>
-                        <ul class="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2 leading-relaxed">
-                            <li>ผลิตบัณฑิตที่มีความรู้ความสามารถทางเคมีและทักษะที่จำเป็นในการแข่งขันในโลกยุคปัจจุบัน</li>
+            <aside class="sidebar">
+                <h3>📌 ลิงก์ด่วน</h3>
+                <ul>
+                    <li><a href="#">ระบบบริการการศึกษา KU-KPS</a></li>
+                    <li><a href="#">ปฏิทินวิชาการ</a></li>
+                    <li><a href="#">Download แบบฟอร์ม</a></li>
+                    <li><a href="#">วารสารวิชาการภาควิชา</a></li>
+                </ul>
+                <div class="social-media" style="margin-top: 20px;">
+                    <h3>สื่อสังคมออนไลน์</h3>
+                    <p>🔗 Facebook, YouTube, Line Official</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-info">
+            <p>ภาควิชาเคมี คณะศิลปศาสตร์และวิทยาศาสตร์</p>
+            <p>ที่อยู่: 195 ม.1 ต.กำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140</p>
+            <p>โทร: 0-3435-1896 | อีเมล: chem.flas@ku.ac.th</p>
+        </div>
+        <p class="copyright">© 2024. Department of Chemistry, FLAS, Kasetsart University. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
