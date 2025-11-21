@@ -2,174 +2,44 @@
 <html lang="th">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ขณะนี้ปิดปรับปรุงเว็บไซต์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ขณะนี้เว็บไซต์ปิดปรับปรุง</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#9aa4b2}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(6,182,212,0.06), transparent),
-                  radial-gradient(800px 500px at 90% 90%, rgba(99,102,241,0.04), transparent),
-                  var(--bg);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:24px;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
     }
-    .card{width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;padding:32px;box-shadow: 0 10px 30px rgba(2,6,23,0.6);display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
-    @media (max-width:880px){.card{grid-template-columns:1fr;max-width:720px;padding:20px}.right{order:2}}
-
-    .logo{display:flex;gap:12px;align-items:center}
-    .logo .mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
-    h1{margin:6px 0 6px;font-size:22px}
-    p.lead{margin:0;color:var(--muted)}
-
-    .meta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-    .meta .item{background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:10px;font-size:13px;color:var(--muted)}
-
-    .cta{margin-top:22px;display:flex;gap:12px;align-items:center}
-    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#072031}
-    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
-
-    .right{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:20px;border-radius:12px}
-    .countdown{display:flex;gap:8px;align-items:center;justify-content:center}
-    .countdown .unit{background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;min-width:64px;text-align:center}
-    .unit .num{font-size:20px;font-weight:700}
-    .unit .label{font-size:12px;color:var(--muted)}
-
-    .support{margin-top:18px;font-size:13px;color:var(--muted)}
-    .small{font-size:12px;color:var(--muted)}
-
-    footer{margin-top:14px;font-size:12px;color:var(--muted);text-align:center}
+    .box {
+      padding: 24px 32px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      max-width: 360px;
+      width: 90%;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    p { margin: 6px 0; }
+    .small { font-size: 13px; color: #777; margin-top: 14px; }
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <section class="left">
-      <div class="logo">
-        <div class="mark">WS</div>
-        <div>
-          <div style="font-size:13px;color:var(--muted)">เว็บไซต์ของคุณ</div>
-          <h1>ขณะนี้เว็บไซต์อยู่ระหว่างการปรับปรุง</h1>
-          <p class="lead">เรากำลังอัปเดตระบบเพื่อประสบการณ์ที่ดียิ่งขึ้น — ขอบคุณที่รอคอยนะคะ/ครับ</p>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="item">กำหนดกลับมา: <strong id="returnDate">--</strong></div>
-        <div class="item">สถานะ: <strong id="status">กำลังปรับปรุง</strong></div>
-        <div class="item">ผู้ติดต่อ: <a id="contactLink" href="mailto:admin@example.com" style="color:inherit;text-decoration:underline">admin@example.com</a></div>
-      </div>
-
-      <div class="cta">
-        <button class="btn btn-primary" id="refreshBtn">ลองเชื่อมต่อใหม่</button>
-        <button class="btn btn-ghost" id="subscribeBtn">แจ้งเมื่อพร้อม</button>
-        <div style="margin-left:auto" class="small">หากเป็นเจ้าของเว็บ เพิ่ม <code>?admin=1</code> เพื่อเข้าชม</div>
-      </div>
-
-      <div class="support">ต้องการข้อมูลเพิ่มเติม ติดต่อทีมเทคนิคผ่านอีเมลด้านบน หรือช่องทางอื่นที่คุณตั้งไว้</div>
-    </section>
-
-    <aside class="right">
-      <div style="text-align:center">
-        <h2 style="margin:6px 0">เหลือเวลาอีก</h2>
-        <div class="countdown" aria-live="polite">
-          <div class="unit"><div class="num" id="days">--</div><div class="label">วัน</div></div>
-          <div class="unit"><div class="num" id="hours">--</div><div class="label">ชั่วโมง</div></div>
-          <div class="unit"><div class="num" id="minutes">--</div><div class="label">นาที</div></div>
-          <div class="unit"><div class="num" id="seconds">--</div><div class="label">วินาที</div></div>
-        </div>
-
-        <div class="small" style="margin-top:12px">(เวลาที่แสดงเป็นโซนเวลาของเซิร์ฟเวอร์)</div>
-      </div>
-
-      <div style="margin-top:18px;background:rgba(255,255,255,0.01);padding:12px;border-radius:10px">
-        <div style="font-weight:700">หมายเหตุสำหรับแอดมิน</div>
-        <ul class="small" style="margin:8px 0 0 18px;color:var(--muted)">
-          <li>ถ้าต้องการย้อนกลับเป็นสถานะออนไลน์ ให้ลบไฟล์ <code>maintenance.flag</code> หรือปิด middleware ที่บังคับไปยังหน้านี้</li>
-          <li>พารามิเตอร์ตัวอย่างสำหรับข้าม: <code>?admin=1</code> (ใช้งานภายในเท่านั้น)</li>
-        </ul>
-      </div>
-    </aside>
-  </main>
-
-  <footer style="position:fixed;left:16px;right:16px;bottom:16px">© <span id="year"></span> เว็บไซต์ของคุณ</footer>
-
-  <script>
-    // ====== Configuration (แก้ได้ตรงนี้) ======
-    const CONFIG = {
-      // กำหนดเวลาเปิดให้บริการ: ISO 8601 (UTC หรือ พร้อมโซน) หรือ null หากไม่ต้องการ
-      returnIso: new Date(Date.now() + 1000 * 60 * 60 * 6).toISOString(), // ตัวอย่าง: 6 ชั่วโมงจากตอนนี้
-      contactEmail: 'admin@example.com',
-      statusText: 'กำลังปรับปรุง',
-      retryPing: '/', // endpoint เพื่อเช็กสถานะ (เรียกแบบ GET)
-    };
-
-    // ====== ฟังก์ชันแสดงผล ======
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('contactLink').href = 'mailto:' + CONFIG.contactEmail;
-    document.getElementById('status').textContent = CONFIG.statusText;
-
-    function pad(n){return String(n).padStart(2,'0')}
-
-    function updateCountdown(){
-      const now = new Date();
-      const target = CONFIG.returnIso ? new Date(CONFIG.returnIso) : null;
-      document.getElementById('returnDate').textContent = target ? target.toLocaleString() : 'ไม่ระบุ';
-      if(!target){['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='--');return}
-      const diff = Math.max(0, target - now);
-      const s = Math.floor(diff/1000);
-      const days = Math.floor(s/86400);
-      const hours = Math.floor((s%86400)/3600);
-      const minutes = Math.floor((s%3600)/60);
-      const seconds = s%60;
-      document.getElementById('days').textContent = pad(days);
-      document.getElementById('hours').textContent = pad(hours);
-      document.getElementById('minutes').textContent = pad(minutes);
-      document.getElementById('seconds').textContent = pad(seconds);
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // ====== ปุ่มและการลองเชื่อมต่อ ======
-    document.getElementById('refreshBtn').addEventListener('click', async ()=>{
-      // พยายามเช็ก endpoint ว่ายัง redirect มาหน้านี้หรือไม่
-      try{
-        const res = await fetch(CONFIG.retryPing, {method:'GET', cache:'no-store'});
-        if(res.ok){
-          alert('คำขอส่งสำเร็จ — ลองรีเฟรชหน้าซ้ำอีกครั้ง');
-          window.location.reload();
-        } else {
-          alert('ยังไม่ออนไลน์: สถานะ ' + res.status);
-        }
-      }catch(e){
-        alert('ไม่สามารถติดต่อเซิร์ฟเวอร์ได้');
-      }
-    });
-
-    // นำไปเชื่อมต่อกับระบบสมัครแจ้งเตือน (ฟังก์ชันตัวอย่าง)
-    document.getElementById('subscribeBtn').addEventListener('click', ()=>{
-      const email = prompt('กรุณากรอกอีเมลเพื่อลงทะเบียนรับแจ้งเมื่อไซต์กลับมาทำงาน:');
-      if(email && /@/.test(email)){
-        // ตัวอย่าง: ส่งไปยัง endpoint ของคุณ
-        fetch('/api/subscribe', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})})
-          .then(r=>{ if(r.ok) alert('สมัครสำเร็จ! เราจะแจ้งให้คุณทราบทันที'); else alert('สมัครไม่สำเร็จ กรุณาลองใหม่') })
-          .catch(()=>alert('เกิดข้อผิดพลาดในการเชื่อมต่อ'));
-      }
-    });
-
-    // ====== Admin bypass (ตัวอย่างง่ายๆ) ======
-    (function adminBypass(){
-      const qp = new URLSearchParams(location.search);
-      if(qp.get('admin') === '1'){
-        // ทำการรีไดเรกต์ไปยังหน้าโฮม (สำหรับแอดมิน)
-        // ปรับเป็นการตรวจสอบ token หรือ cookie แทนการใช้ query param ในการใช้งานจริง
-        if(confirm('เข้าชมในฐานะแอดมิน? (ระบบตัวอย่าง)')){
-          location.href = '/';
-        }
-      }
-    })();
-
-  </script>
+  <div class="box">
+    <h1>ขณะนี้เว็บไซต์ปิดปรับปรุง</h1>
+    <p>เรากำลังปรับปรุงระบบชั่วคราว</p>
+    <p>กรุณากลับมาใหม่อีกครั้งในภายหลัง</p>
+    <div class="small">© เว็บไซต์ของคุณ</div>
+  </div>
 </body>
 </html>
