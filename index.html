@@ -1,296 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ภาควิชาเคมี คณะศิลปศาสตร์และวิทยาศาสตร์</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ภาควิชาเคมี - ตัวอย่างหน้าเว็บ</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#0b66c2; /* ม่วงน้ำเงิน */
+      --muted:#6b7280;
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --radius:14px;
+      font-family: 'Kanit', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#ffffff);color:#0b1220}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
 
-    <style>
-        /* กำหนดค่าเริ่มต้นและสี */
-        :root {
-            --ku-green: #006633; /* เขียว มก. */
-            --ku-yellow: #FFCC00; /* เหลือง มก. */
-            --text-color: #333;
-            --bg-light: #f4f4f4;
-        }
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0ba3c2);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:18px;align-items:center}
+    .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(11,102,194,0.06)}
+    .hero h1{margin:0;font-size:28px;color:var(--accent)}
+    .hero p{color:var(--muted);margin-top:10px;line-height:1.5}
+    .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid rgba(11,102,194,0.12);color:var(--accent)}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    .side-card{background:linear-gradient(180deg,rgba(11,102,194,0.06),transparent);padding:18px;border-radius:12px}
+    .announce{font-weight:700;color:#093e6b}
 
-        body {
-            font-family: 'Sarabun', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #fff;
-        }
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .news{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,30,0.04)}
+    .news h3{margin:0 0 8px 0}
+    .meta{color:var(--muted);font-size:13px}
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px 0;
-        }
+    .events{margin-top:18px;display:flex;gap:12px}
+    .event{flex:1;background:linear-gradient(180deg,white, #fbfdff);padding:14px;border-radius:12px;border:1px solid rgba(11,102,194,0.04)}
 
-        /* 1. ส่วนหัว (Header) */
-        .main-header {
-            background-color: var(--bg-light);
-            color: var(--ku-green);
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:13px;text-align:center}
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-area img {
-            width: 60px;
-            margin-right: 15px;
-            /* **คุณต้องเพิ่มไฟล์ภาพ ku_logo.png เอง** */
-        }
-
-        .logo-area h1 {
-            font-size: 1.8em;
-            margin-bottom: 0;
-        }
-        
-        .logo-area p {
-            font-size: 0.9em;
-            margin-top: -5px;
-            color: #666;
-        }
-
-        .top-nav a {
-            color: var(--ku-green);
-            margin-left: 10px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .top-nav input[type="search"] {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-left: 15px;
-        }
-
-        /* 2. แถบเมนูหลัก (Navigation Bar) */
-        .main-nav {
-            background-color: var(--ku-green);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .main-nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-        }
-
-        .main-nav li a {
-            color: #fff;
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-
-        .main-nav li a:hover {
-            background-color: var(--ku-yellow);
-            color: var(--ku-green);
-        }
-
-        /* 3. ส่วนเนื้อหาหลัก (Layout 2 คอลัมน์) */
-        .hero-slider {
-            background-color: #e0e0e0;
-            padding: 80px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-
-        .content-wrapper {
-            display: flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .main-content {
-            flex: 3;
-        }
-
-        .sidebar {
-            flex: 1;
-            background-color: var(--bg-light);
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .sidebar h3 {
-            color: var(--ku-green);
-            border-bottom: 2px solid var(--ku-yellow);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .news-item {
-            border-bottom: 1px dashed #ccc;
-            padding: 15px 0;
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-item h4 {
-            color: var(--ku-green);
-            margin-bottom: 5px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .sidebar li a {
-            display: block;
-            padding: 5px 0;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        .sidebar li a:hover {
-            color: var(--ku-green);
-            text-decoration: underline;
-        }
-
-        /* 4. ส่วนท้าย (Footer) */
-        .main-footer {
-            background-color: var(--ku-green);
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-        .footer-info p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .copyright {
-            margin-top: 10px;
-            font-size: 0.8em;
-            opacity: 0.8;
-        }
-
-        /* Responsive สำหรับ Mobile */
-        @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .content-wrapper {
-                flex-direction: column; /* เปลี่ยนเนื้อหาหลักและ Sidebar ให้เรียงซ้อนกัน */
-            }
-
-            .main-nav ul {
-                flex-direction: column; /* เมนูหลักเรียงลงมา */
-                align-items: stretch;
-            }
-            
-            .main-nav li a {
-                text-align: center;
-                border-top: 1px solid rgba(255, 255, 255, 0.2);
-            }
-        }
-    </style>
+    /* responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:640px){
+      .grid{grid-template-columns:1fr}
+      nav a{display:none}
+      .logo{width:52px;height:52px}
+      .hero h1{font-size:22px}
+    }
+  </style>
 </head>
 <body>
-
-    <header class="main-header">
-        <div class="logo-area">
-            <img src="ku_logo.png" alt="ตราสัญลักษณ์ มก.">
-            <div>
-                <h1>ภาควิชาเคมี</h1>
-                <p>คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
-            </div>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">KU</div>
+        <div>
+          <div style="font-weight:800;font-size:18px">ภาควิชาเคมี</div>
+          <div style="color:var(--muted);font-size:13px">คณะวิทยาศาสตร์ ม.เกษตรศาสตร์</div>
         </div>
-        <nav class="top-nav">
-            <a href="#">TH</a> | <a href="#">EN</a>
-            <input type="search" placeholder="ค้นหา...">
-        </nav>
+      </div>
+      <nav>
+        <a href="#">หน้าแรก</a>
+        <a href="#news">ข่าวสาร</a>
+        <a href="#people">บุคลากร</a>
+        <a href="#contact">ติดต่อ</a>
+      </nav>
     </header>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html">หน้าแรก</a></li>
-            <li><a href="about.html">เกี่ยวกับภาควิชา</a></li>
-            <li><a href="personnel.html">บุคลากร</a></li>
-            <li><a href="curriculum.html">หลักสูตร</a></li>
-            <li><a href="research.html">งานวิจัย</a></li>
-            <li><a href="contact.html">ติดต่อเรา</a></li>
-        </ul>
-    </nav>
-
-    <main class="container">
-        <section class="hero-slider">
-            <h2>[พื้นที่สำหรับ Image Slider/Carousel]</h2>
-            <p>ภาพกิจกรรม, ข่าวเด่น หรือ Banner โปรโมทหลักสูตร</p>
-        </section>
-
-        <div class="content-wrapper">
-            <section class="main-content">
-                <h3>📢 ข่าวสารและประกาศล่าสุด</h3>
-                <article class="news-item">
-                    <h4>ทุนสนับสนุนการวิจัยสำหรับนักศึกษาปริญญาโท</h4>
-                    <p>ขอเชิญนักศึกษาที่สนใจยื่นข้อเสนอโครงการวิจัยเพื่อรับทุนสนับสนุนประจำปีการศึกษา 2567...</p>
-                    <a href="#">อ่านต่อ</a>
-                </article>
-                <article class="news-item">
-                    <h4>กำหนดการลงทะเบียนเรียน ภาคปลาย</h4>
-                    <p>ประกาศกำหนดการลงทะเบียนเรียนและชำระค่าธรรมเนียมการศึกษา ภาคปลาย ปีการศึกษา 2567...</p>
-                    <a href="#">อ่านต่อ</a>
-                </article>
-                <a href="#" class="all-news-link" style="display: block; margin-top: 15px; color: var(--ku-green); font-weight: 600;">👉 ดูข่าวทั้งหมด</a>
-            </section>
-
-            <aside class="sidebar">
-                <h3>📌 ลิงก์ด่วน</h3>
-                <ul>
-                    <li><a href="#">ระบบบริการการศึกษา KU-KPS</a></li>
-                    <li><a href="#">ปฏิทินวิชาการ</a></li>
-                    <li><a href="#">Download แบบฟอร์ม</a></li>
-                    <li><a href="#">วารสารวิชาการภาควิชา</a></li>
-                </ul>
-                <div class="social-media" style="margin-top: 20px;">
-                    <h3>สื่อสังคมออนไลน์</h3>
-                    <p>🔗 Facebook, YouTube, Line Official</p>
-                </div>
-            </aside>
+    <section class="hero">
+      <div class="hero-card">
+        <h1>ยินดีต้อนรับสู่ภาควิชาเคมี</h1>
+        <p>เว็บไซต์ตัวอย่างแบบเรียบง่ายแต่ทันสมัย เหมาะสำหรับแสดงข่าว บทความ ตารางเวร และข้อมูลติดต่อของภาควิชา</p>
+        <div class="cta">
+          <button class="btn btn-primary" onclick="alert('ไปยังหน้าลงทะเบียน (ตัวอย่าง)')">ลงทะเบียนนักศึกษา</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('news').scrollIntoView({behavior:'smooth'})">ดูข่าวล่าสุด</button>
         </div>
-    </main>
 
-    <footer class="main-footer">
-        <div class="footer-info">
-            <p>ภาควิชาเคมี คณะศิลปศาสตร์และวิทยาศาสตร์</p>
-            <p>ที่อยู่: 195 ม.1 ต.กำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140</p>
-            <p>โทร: 0-3435-1896 | อีเมล: chem.flas@ku.ac.th</p>
+        <div style="margin-top:18px;display:flex;gap:12px">
+          <div style="flex:1;background:#f1f7ff;padding:12px;border-radius:10px">
+            <div style="font-size:12px;color:var(--muted)">สำนักงาน</div>
+            <div style="font-weight:700">ติดต่อ: งานบริหารภาควิชา</div>
+          </div>
+          <div style="width:130px;background:#fff;border-radius:10px;padding:12px;text-align:center;color:var(--accent)">
+            <div style="font-size:12px">เปิดทำการ</div>
+            <div style="font-weight:800">จันทร์–ศุกร์<br>08:30–16:30</div>
+          </div>
         </div>
-        <p class="copyright">© 2024. Department of Chemistry, FLAS, Kasetsart University. All Rights Reserved.</p>
+      </div>
+
+      <aside class="side-card">
+        <div class="announce">ประกาศด่วน</div>
+        <p style="margin:10px 0;color:var(--muted);font-size:14px">ระบบสารสนเทศปิดปรับปรุง วันที่ 22 พ.ย. 2568 เวลา 10:00 - 12:00</p>
+        <div style="font-size:12px;color:var(--muted)">ติดต่อ: admin@chem.example</div>
+      </aside>
+    </section>
+
+    <section id="news" class="grid">
+      <article class="news">
+        <h3>การประชุมวิชาการภาควิชา</h3>
+        <div class="meta">20 พ.ย. 2568 — ประกาศ</div>
+        <p style="color:var(--muted);margin-top:8px">สรุปการประชุมและแนวทางการวิจัยร่วมสำหรับปีหน้า อ่านเพิ่มเติม...</p>
+      </article>
+
+      <article class="news">
+        <h3>รับสมัครนิสิตปริญญาโท</h3>
+        <div class="meta">15 พ.ย. 2568 — ประกาศรับสมัคร</div>
+        <p style="color:var(--muted);margin-top:8px">เปิดรับสมัครนักศึกษาระดับปริญญาโท ภาคเรียนที่ 1/2569 ดูเงื่อนไขการสมัครที่เอกสารแนบ</p>
+      </article>
+
+      <article class="news">
+        <h3>ห้องปฏิบัติการใหม่</h3>
+        <div class="meta">10 พ.ย. 2568 — ข่าวภาควิชา</div>
+        <p style="color:var(--muted);margin-top:8px">ห้องปฏิบัติการวัสดุศาสตร์ได้รับการปรับปรุง พร้อมใช้งานสำหรับโครงการวิจัย</p>
+      </article>
+    </section>
+
+    <section class="events">
+      <div class="event">
+        <strong>ปฏิทินกิจกรรม</strong>
+        <div style="margin-top:8px;color:var(--muted)">ไม่มีเหตุการณ์พิเศษในสัปดาห์นี้</div>
+      </div>
+      <div class="event">
+        <strong>ดาวน์โหลดเอกสาร</strong>
+        <div style="margin-top:8px;color:var(--muted)">คู่มือการสมัคร, แบบฟอร์มคำร้อง</div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      ภาควิชาเคมี — คณะวิทยาศาสตร์ ม.เกษตรศาสตร์ • โทร. 0-2942-xxxx • อีเมล: chem@ku.ac.th
     </footer>
+  </div>
 
+  <script>
+    // ตัวอย่าง: ดึงข่าวจาก JSON (สำหรับนำไปต่อยอด)
+    const sampleNews = [
+      {title:'ประชุมบอร์ดภาควิชา',date:'2025-11-20'},
+      {title:'ทุนวิจัยใหม่',date:'2025-11-15'}
+    ];
+    // ฟังก์ชันเพิ่มเติม เช่น โหลดข่าว, นับถอยหลัง, หรือเชื่อม API สามารถต่อยอดได้
+  </script>
 </body>
 </html>
