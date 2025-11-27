@@ -3,148 +3,428 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Neutrality - เว็บไซต์อย่างยั่งยืน</title>
+    <title>BioScience KPS - เว็บไซต์อย่างยั่งยืน</title>
     
-    <meta name="description" content="เรามุ่งมั่นสู่ความเป็นกลางทางคาร์บอนในการดำเนินงานดิจิทัล โดยเน้นประสิทธิภาพการใช้พลังงานสูงสุด">
+    <meta name="description" content="เรามุ่งมั่นนำเสนอข้อมูลชีววิทยาอย่างยั่งยืน และลดผลกระทบต่อสิ่งแวดล้อม">
 
     <style>
         /* -------------------------------------- */
-        /* 🎨 CSS พื้นฐาน: ความเรียบง่ายคือประสิทธิภาพ */
+        /* 🎨 Basic Setup & Utility Classes */
         /* -------------------------------------- */
+        :root {
+            --primary-color: #00796b; /* สีเขียว */
+            --secondary-color: #388e3c; /* สีเขียวเข้ม */
+            --text-color: #333333;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --header-background: #ffffff;
+            --footer-background: #333333;
+            --footer-text: #e0e0e0;
+        }
+
+        /* Dark Mode Variables */
+        .dark-mode-manual,
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #4db6ac; 
+                --secondary-color: #66bb6a;
+                --text-color: #e0e0e0;
+                --background-color: #121212;
+                --card-background: #1e1e1e;
+                --header-background: #1f1f1f;
+                --footer-background: #0d0d0d;
+                --footer-text: #bbbbbb;
+            }
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Prompt', sans-serif; 
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s; 
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* โหมดสว่าง (ค่าเริ่มต้น) */
-        body {
-            background-color: #f0f4f7; 
-            color: #212121;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        nav a {
-            color: #00796b; 
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        main {
-            max-width: 960px;
-            margin: 30px auto;
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
             padding: 0 20px;
         }
 
-        section {
-            margin-bottom: 40px;
-            padding: 25px;
-            border-radius: 12px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        /* -------------------------------------- */
+        /* 🌐 Header & Navigation */
+        /* -------------------------------------- */
+        .main-header {
+            background-color: var(--header-background);
+            color: var(--text-color);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        img {
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode-button {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-left: 20px;
+        }
+
+        /* -------------------------------------- */
+        /* 🌟 Hero Section */
+        /* -------------------------------------- */
+        .hero-section {
+            background: url('hero-bg.webp') no-repeat center center/cover; 
+            color: #ffffff;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .hero-section::before { 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+
+        .hero-content {
+            position: relative; 
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* -------------------------------------- */
+        /* 📝 Content Sections */
+        /* -------------------------------------- */
+        .content-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .content-section h2::after { 
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* About Section Specifics */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            text-align: left;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .about-image img {
             max-width: 100%;
             height: auto;
-            display: block;
             border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Section Specifics */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-item {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-item h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .service-item img {
+            width: 80px; 
+            height: 80px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Carbon Footprint Info */
+        .carbon-stats-detail {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .carbon-stats-detail p {
+            margin-bottom: 10px;
+        }
+
+
+        /* -------------------------------------- */
+        /* 🦶 Footer */
+        /* -------------------------------------- */
+        .main-footer {
+            background-color: var(--footer-background);
+            color: var(--footer-text);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .main-footer .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .main-footer .footer-links a:hover {
+            color: var(--primary-color);
         }
 
         /* -------------------------------------- */
-        /* 🌙 Dark Mode: ประหยัดพลังงานในจอ OLED/AMOLED */
+        /* 📱 Responsive Design (สำหรับมือถือ) */
         /* -------------------------------------- */
-
-        /* Dark Mode อัตโนมัติ: ตอบสนองต่อการตั้งค่าระบบของผู้ใช้ */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #121212; 
-                color: #e0e0e0;
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
             }
 
-            header {
-                background-color: #1f1f1f;
-                border-bottom-color: #333333;
+            .main-nav ul {
+                flex-direction: column;
+                margin-top: 15px;
             }
 
-            nav a {
-                color: #4db6ac;
+            .main-nav li {
+                margin: 10px 0;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr; 
+                text-align: center;
             }
             
-            section {
-                background-color: #1e1e1e; 
-                box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05); 
+            .about-text, .about-image {
+                grid-column: 1 / -1; 
             }
-        }
 
-        /* Dark Mode แบบสลับเอง: หากผู้ใช้กดปุ่ม */
-        .dark-mode-manual {
-            background-color: #121212 !important; 
-            color: #e0e0e0 !important;
-        }
-        .dark-mode-manual header {
-            background-color: #1f1f1f !important;
-            border-bottom-color: #333333 !important;
-        }
-        .dark-mode-manual section {
-            background-color: #1e1e1e !important; 
+            .about-image {
+                order: -1; 
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>โครงการเว็บที่ใส่ใจสิ่งแวดล้อม</h1>
-        <nav>
-            <a href="#about">เกี่ยวกับเรา</a>
-            <a href="#efficiency">ประสิทธิภาพ</a>
-            <button id="dark-mode-toggle">สลับโหมด 💡</button> 
-        </nav>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="#">BioScience KPS</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">หน้าแรก</a></li>
+                    <li><a href="#about">เกี่ยวกับ</a></li>
+                    <li><a href="#services">บริการ</a></li>
+                    <li><a href="#contact">ติดต่อ</a></li>
+                    <li><button id="dark-mode-toggle" class="dark-mode-button">💡</button></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        
-        <section id="carbon-stats">
-            <h2>🌍 ผลกระทบด้านคาร์บอนของเรา</h2>
-            <p>ขนาดหน้าเว็บโดยประมาณ: <span id="page-size">กำลังคำนวณ...</span></p>
-            <p>คะแนนความยั่งยืน: <strong>85/100</strong> (มุ่งเน้นความเร็วและประสิทธิภาพ)</p>
-            <p class="commitment">เราใช้ **Green Hosting** ที่ขับเคลื่อนด้วยพลังงานสะอาด 100%</p>
-        </section>
+    <section id="home" class="hero-section">
+        <div class="hero-content container">
+            <h1>BioScience KPS: ก้าวสู่ยุคชีววิทยาที่ยั่งยืน</h1>
+            <p>ศึกษา ค้นคว้า และแบ่งปันความรู้ด้านชีววิทยา เพื่ออนาคตที่เป็นกลางทางคาร์บอน</p>
+            <a href="#about" class="button">เรียนรู้เพิ่มเติม</a>
+        </div>
+    </section>
 
-        <section id="efficiency">
-            <h2>⚡️ การออกแบบที่ประหยัดพลังงาน</h2>
-            <p>เว็บไซต์นี้ลดการใช้พลังงานด้วยการ:</p>
-            <ul>
-                <li>ใช้รูปภาพ **WebP/AVIF** (ระบุใน `data-src`)</li>
-                <li>ใช้เทคนิค **Lazy Loading** เพื่อไม่โหลดรูปภาพที่ไม่จำเป็น</li>
-                <li>ใช้โค้ด **CSS** ที่ง่ายและมีประสิทธิภาพ</li>
-            </ul>
-        </section>
+    <section id="about" class="content-section container">
+        <h2>เกี่ยวกับเรา</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>BioScience KPS มุ่งมั่นที่จะเป็นผู้นำด้านการวิจัยและเผยแพร่ความรู้ทางชีววิทยาที่เป็นมิตรต่อสิ่งแวดล้อม เราเชื่อว่าการใช้เทคโนโลยีดิจิทัลอย่างมีความรับผิดชอบ สามารถลดการใช้พลังงานและผลกระทบต่อโลกได้</p>
+                <p>เราเน้นการออกแบบเว็บไซต์ที่เบา ประหยัดพลังงาน และสามารถเข้าถึงได้ เพื่อให้ทุกคนเข้าถึงข้อมูลได้อย่างมีประสิทธิภาพโดยไม่สร้างภาระด้านสิ่งแวดล้อม</p>
+            </div>
+            <div class="about-image">
+                <img 
+                    src="placeholder.jpg" 
+                    data-src="lab-scientist.webp" 
+                    alt="นักวิทยาศาสตร์ในห้องแล็บ" 
+                    loading="lazy"
+                    width="600"
+                    height="400">
+            </div>
+        </div>
+    </section>
 
-        <section class="image-section">
-            <h3>รูปภาพที่ชาญฉลาด (Lazy Loading)</h3>
-            <img 
-                src="placeholder.jpg" 
-                data-src="sustainable-city.webp" 
-                alt="ภาพเมืองยั่งยืน" 
-                loading="lazy" 
-                width="800" 
-                height="450">
-            <p class="caption">ภาพนี้จะถูกโหลดก็ต่อเมื่อผู้ใช้เลื่อนหน้าจอมาใกล้เท่านั้น</p>
-        </section>
+    <section id="services" class="content-section container">
+        <h2>บริการของเรา</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <h3>การวิจัยและพัฒนา</h3>
+                <p>เราทำการวิจัยในหลากหลายสาขาชีววิทยา โดยเน้นเทคโนโลยีชีวภาพสีเขียว</p>
+                <img 
+                    src="placeholder.jpg" 
+                    data-src="research-icon.webp" 
+                    alt="ไอคอนการวิจัย" 
+                    loading="lazy"
+                    width="150"
+                    height="150">
+            </div>
+            <div class="service-item">
+                <h3>การให้คำปรึกษา</h3>
+                <p>บริการให้คำปรึกษาด้านชีววิทยาและแนวทางปฏิบัติที่ยั่งยืน</p>
+                <img 
+                    src="placeholder.jpg" 
+                    data-src="consulting-icon.webp" 
+                    alt="ไอคอนการให้คำปรึกษา" 
+                    loading="lazy"
+                    width="150"
+                    height="150">
+            </div>
+            <div class="service-item">
+                <h3>สื่อการเรียนรู้</h3>
+                <p>แหล่งข้อมูลและสื่อการเรียนรู้ด้านชีววิทยาที่เข้าถึงง่ายและประหยัดพลังงาน</p>
+                <img 
+                    src="placeholder.jpg" 
+                    data-src="education-icon.webp" 
+                    alt="ไอคอนการศึกษา" 
+                    loading="lazy"
+                    width="150"
+                    height="150">
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <section id="carbon-footprint-info" class="content-section container">
+        <h2>รอยเท้าคาร์บอนดิจิทัลของเรา</h2>
+        <p>เรามุ่งมั่นที่จะลดผลกระทบต่อสิ่งแวดล้อมจากการดำเนินงานดิจิทัล</p>
+        <div class="carbon-stats-detail">
+            <p><strong>โฮสติง:</strong> ใช้ Green Hosting ที่ขับเคลื่อนด้วยพลังงานหมุนเวียน 100%</p>
+            <p><strong>ขนาดหน้าเว็บ:</strong> <span id="page-size">กำลังคำนวณ...</span></p>
+            <p><strong>ประสิทธิภาพ:</strong> ได้รับการจัดอันดับสูงในการทดสอบประสิทธิภาพ (LightHouse)</p>
+        </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 เว็บไซต์ที่เป็นกลางทางคาร์บอน | นโยบายความเป็นส่วนตัว</p>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 BioScience KPS. สงวนลิขสิทธิ์.</p>
+            <div class="footer-links">
+                <a href="#">นโยบายความเป็นส่วนตัว</a> | <a href="#">ข้อกำหนดการใช้งาน</a>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -198,6 +478,16 @@
                     document.body.classList.toggle('dark-mode-manual');
                 });
             }
+
+            // 4. (Optional) Smooth Scrolling สำหรับ Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
         });
     </script>
 </body>
