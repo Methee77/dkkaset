@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบงาน | ฟอนต์ Itim ทุกตัวอักษร</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ตัวแปรสี */
+        :root {
+            --dark-bg: #1e1e1e;
+            --card-bg: #2d2d2d;
+            --text-color: #f0f0f0;
+            --primary-color: #bb86fc; /* ม่วงอ่อน */
+            --accept-color: #4CAF50;
+            --reject-color: #CF6679;
+            --delegate-color: #FFC107;
+            --border-color: #444;
+            --price-color: #00BFFF; /* <<<< สีน้ำเงินสำหรับราคา */
+        }
+
+        body {
+            font-family: 'Itim', cursive;
+            background-color: var(--dark-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        h1, h3 {
+            font-weight: normal;
+        }
+        
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-info span {
+            font-weight: normal;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: #444;
+            border-color: var(--primary-color);
+        }
+
+        #task-list {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .task-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
+        }
+
+        .task-details h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .task-details p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        /* ************** การปรับปรุงสำหรับส่วน Action และ Price ************** */
+        .task-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .task-price {
+            font-size: 1.2em;
+            font-weight: normal;
+            color: var(--price-color); /* สีน้ำเงิน */
+            padding: 5px 10px;
+            border: 1px solid var(--price-color); /* กรอบสีน้ำเงิน */
+            border-radius: 4px;
+            background-color: rgba(0, 191, 255, 0.1); /* พื้นหลังสีน้ำเงินอ่อน */
+            margin-top: 5px;
+        }
+        /* ******************************************************************** */
+
+        .btn {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: normal;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .accept { background-color: var(--accept-color); color: var(--dark-bg); }
+        .reject { background-color: var(--reject-color); color: var(--dark-bg); }
+        .delegate { background-color: var(--delegate-color); color: var(--dark-bg); }
+
+        .accept:hover, .reject:hover, .delegate:hover { opacity: 0.9; }
+        
+        /* สไตล์สำหรับสถานะหลังจากดำเนินการ */
+        .task-status p {
+            font-weight: normal;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
+        .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
+        .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Coverteam System</h1>
+        <div class="user-info">
+            <span>Coverusername : sutee08NYtm^_^</span>
+            <button class="logout-btn" onclick="logout()">logout</button>
+        </div>
+    </header>
+    <main id="task-list">
+        <div class="task-item" data-task-id="1">
+            <div class="task-details">
+                <h3>Cover07Y81: ระบบรองรับฐานข้อมูลการจัดเก็บขนาดใหญ่</h3>
+                <p><strong>Assignor:</strong> head</p>
+                <p><strong>date:</strong> 2026 Jun</p>
+            </div>
+            <div class="task-actions">
+                <div class="action-buttons">
+                    <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
+                    <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
+                    <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
+                </div>
+                <div class="task-price">
+                    ราคาจ่าย: 40,000
+                </div>
+            </div>
+        </div>
+
+        <div class="task-item" data-task-id="2">
+            <div class="task-details">
+                <h3>Cover0188P: ระบบรับสมัครวิ่งเต็มระบบ</h3>
+                <p><strong>Assignor:</strong> head</p>
+                <p><strong>กำหนดส่ง:</strong> 2026 Jun</p>
+            </div>
+            <div class="task-actions">
+                <div class="action-buttons">
+                    <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
+                    <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
+                    <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
+                </div>
+                <div class="task-price">
+                    ราคาจ่าย: 8,000
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <script>
+        function handleTaskAction(taskId, action) {
+            const taskElement = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
+            const taskActionsElement = taskElement.querySelector('.task-actions');
+            let message = '';
+            let statusText = '';
+            let statusClass = '';
+
+            // ตรวจสอบการดำเนินการ
+            switch (action) {
+                case 'accept':
+                    message = `✅ ตอบรับงานที่ ${taskId} เรียบร้อยแล้ว!`;
+                    statusText = 'ตอบรับแล้ว';
+                    statusClass = 'status-accepted';
+                    break;
+                case 'reject':
+                    const reason = prompt(`❌ โปรดระบุเหตุผลในการปฏิเสธงานที่ ${taskId}:`);
+                    if (reason) {
+                        message = `คุณได้ ปฏิเสธ งานที่ ${taskId} ด้วยเหตุผล: ${reason}`;
+                        statusText = `ปฏิเสธแล้ว (เหตุผล: ${reason})`;
+                        statusClass = 'status-rejected';
+                    } else {
+                        alert('ยกเลิกการปฏิเสธงาน');
+                        return;
+                    }
+                    break;
+                case 'delegate':
+                    const delegateTo = prompt(`➡️ คุณต้องการ โยนงานที่ ${taskId} ให้ใคร?:`);
+                    if (delegateTo) {
+                        message = `คุณได้ โยนงานที่ ${taskId} ให้กับ: ${delegateTo}`;
+                        statusText = `โยนงานแล้ว (ถึง: ${delegateTo})`;
+                        statusClass = 'status-delegated';
+                    } else {
+                        alert('ยกเลิกการโยนงาน');
+                        return;
+                    }
+                    break;
+                default:
+                    message = 'การดำเนินการไม่ถูกต้อง';
+                    return;
+            }
+
+            // แสดงข้อความแจ้งเตือน
+            console.log(message);
+            alert(message);
+            
+            // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
+            taskActionsElement.innerHTML = `
+                <div class="task-status">
+                    <p class="${statusClass}">${statusText}</p>
+                </div>
+            `;
+            
+            // เปลี่ยนสีพื้นหลังของ task-item เป็นสีสถานะ
+            taskElement.style.backgroundColor = getComputedStyle(document.querySelector(`.${statusClass}`)).backgroundColor;
+        }
+
+        function logout() {
+            // ฟังก์ชันนี้จำลองการออกจากระบบ
+            alert('คุณออกจากระบบเรียบร้อยแล้ว');
+            // ในระบบจริง จะมีการ redirect ไปที่หน้า Login
+            // window.location.href = '/login'; 
+        }
+    </script>
+</body>
+</html>
