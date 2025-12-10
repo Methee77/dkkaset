@@ -3,48 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หัวใจเต้น (Animated Heart)</title>
+    <title>หัวใจเต้นพร้อมข้อความ</title>
     <style>
         /* สไตล์สำหรับส่วนหลักของหน้า */
         body {
             display: flex; /* จัดให้อยู่ตรงกลางหน้า */
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* ความสูงเต็มหน้าจอ */
+            min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; /* สีพื้นหลังอ่อนๆ */
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
 
-        /* ภาชนะสำหรับรูปร่างหัวใจ */
+        /* ภาชนะสำหรับรูปร่างหัวใจและข้อความ */
         .heart-container {
             width: 150px;
             height: 150px;
-            /* เรียกใช้แอนิเมชัน 'beat' */
-            animation: beat 1.2s infinite; /* 1.2 วินาที, วนไปเรื่อยๆ */
             position: relative;
+            /* เรียกใช้แอนิเมชัน 'beat' */
+            animation: beat 1.2s infinite; 
+            /* ทำให้การแปลง (transform) มีผลกับทั้ง container และเนื้อหาภายใน */
+            display: flex; 
+            justify-content: center;
+            align-items: center;
         }
 
-        /* รูปร่างหัวใจจริงๆ */
+        /* รูปร่างหัวใจจริงๆ (ซ่อนการแปลงหมุนไว้ใน .heart เพื่อให้ข้อความไม่หมุนตาม) */
         .heart {
             width: 100%;
             height: 100%;
-            background-color: #ff0000; /* สีแดงของหัวใจ */
+            background-color: #ff0000; 
             position: absolute;
-            /* หมุนเพื่อทำมุม 45 องศา */
+            /* การหมุน 45 องศาเพื่อสร้างรูปร่างหัวใจ */
             transform: rotate(-45deg);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* เพิ่มเงาให้ดูมีมิติ */
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); 
         }
 
         /* ส่วนโค้งด้านบนซ้ายของหัวใจ */
         .heart::before {
             content: "";
             position: absolute;
-            top: -50%; /* เลื่อนขึ้นไปครึ่งหนึ่งของขนาด */
+            top: -50%; 
             left: 0;
             width: 100%;
             height: 100%;
             background-color: #ff0000;
-            /* ทำให้เป็นวงกลม */
             border-radius: 50%;
         }
 
@@ -53,30 +57,43 @@
             content: "";
             position: absolute;
             top: 0;
-            right: -50%; /* เลื่อนไปทางขวาครึ่งหนึ่งของขนาด */
+            right: -50%; 
             width: 100%;
             height: 100%;
             background-color: #ff0000;
-            /* ทำให้เป็นวงกลม */
             border-radius: 50%;
         }
 
+        /* สไตล์สำหรับข้อความที่อยู่ตรงกลาง */
+        .heart-text {
+            z-index: 10; /* ให้ข้อความอยู่เหนือหัวใจ */
+            color: white; /* สีข้อความ */
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            /* การทำให้ข้อความไม่หมุนตามการปรับรูปร่างหัวใจในองค์ประกอบ .heart */
+            /* เนื่องจากการหมุน -45deg ทำให้หัวใจเป็นรูปร่าง แต่ข้อความควรอยู่ตรง */
+            transform: rotate(45deg); 
+            /* ปรับขนาดตัวอักษรให้เล็กลงเมื่อหัวใจหดตัว เพื่อให้ดูเป็นส่วนหนึ่งของการเต้น */
+            transition: font-size 0.1s ease;
+        }
+        
         /* คีย์เฟรมของแอนิเมชัน 'beat' */
         @keyframes beat {
             0% {
-                transform: scale(1); /* ขนาดปกติ */
+                transform: scale(1);
             }
             25% {
                 transform: scale(1.15); /* ขยายใหญ่ขึ้น (เต้น) */
             }
             50% {
-                transform: scale(1); /* กลับมาขนาดปกติ */
+                transform: scale(1);
             }
             75% {
-                transform: scale(1.05); /* ขยายเล็กน้อย */
+                transform: scale(1.05);
             }
             100% {
-                transform: scale(1); /* กลับมาขนาดปกติ */
+                transform: scale(1);
             }
         }
     </style>
@@ -85,6 +102,7 @@
 
     <div class="heart-container">
         <div class="heart"></div>
+        <span class="heart-text">pipoom <33333</span>
     </div>
 
 </body>
