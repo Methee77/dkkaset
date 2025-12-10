@@ -21,19 +21,17 @@
         }
 
         body {
-            /* กำหนดให้ฟอนต์ Itim เป็นฟอนต์หลักสำหรับทั้งหน้า */
             font-family: 'Itim', cursive;
             background-color: var(--dark-bg);
             margin: 0;
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            font-size: 16px; /* กำหนดขนาดฟอนต์เริ่มต้น */
+            font-size: 16px;
         }
         
-        /* การปรับแต่งส่วนต่างๆ ให้เข้ากับฟอนต์ Itim */
         h1, h3 {
-            font-weight: normal; /* ลดน้ำหนักฟอนต์เนื่องจาก Itim เน้นความน่ารัก */
+            font-weight: normal;
         }
         
         header {
@@ -104,10 +102,30 @@
             font-size: 0.95em;
         }
 
+        /* ************** การปรับปรุงสำหรับส่วน Action และ Price ************** */
         .task-actions {
             display: flex;
-            gap: 15px;
+            flex-direction: column; /* จัดปุ่มและราคาให้อยู่ในแนวตั้ง */
+            align-items: flex-end; /* จัดให้อยู่ชิดขวา */
+            gap: 10px;
         }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px; /* จัดปุ่ม 3 ปุ่มให้อยู่ในแนวนอน */
+        }
+        
+        .task-price {
+            font-size: 1.2em;
+            font-weight: normal;
+            color: var(--delegate-color); /* ใช้สีเหลืองเพื่อเน้นราคา */
+            padding: 5px 10px;
+            border: 1px solid var(--delegate-color);
+            border-radius: 4px;
+            background-color: rgba(255, 193, 7, 0.1);
+            margin-top: 5px; /* ลดระยะห่างด้านบนเล็กน้อย */
+        }
+        /* ******************************************************************** */
 
         .btn {
             padding: 12px 18px;
@@ -158,9 +176,14 @@
                 <p><strong>กำหนดส่ง:</strong> 20 ธันวาคม 2568</p>
             </div>
             <div class="task-actions">
-                <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
-                <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
-                <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
+                <div class="action-buttons">
+                    <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
+                    <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
+                    <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
+                </div>
+                <div class="task-price">
+                    **ราคาจ่าย: 40,000 ฿**
+                </div>
             </div>
         </div>
 
@@ -171,9 +194,14 @@
                 <p><strong>กำหนดส่ง:</strong> ทันที</p>
             </div>
             <div class="task-actions">
-                <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
-                <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
-                <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
+                <div class="action-buttons">
+                    <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
+                    <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
+                    <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
+                </div>
+                <div class="task-price">
+                    **ราคาจ่าย: 40,000 ฿**
+                </div>
             </div>
         </div>
 
