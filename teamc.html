@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบงาน | ฟอนต์ Itim</title>
+    <title>ระบบตรวจสอบงาน | ฟอนต์ Itim ทุกตัวอักษร</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     
     <style>
+        /* ตัวแปรสี */
         :root {
             --dark-bg: #1e1e1e;
             --card-bg: #2d2d2d;
             --text-color: #f0f0f0;
-            --primary-color: #bb86fc; /* ม่วงอ่อน (สำหรับ Dark Mode) */
+            --primary-color: #bb86fc; /* ม่วงอ่อน */
             --accept-color: #4CAF50;
             --reject-color: #CF6679;
             --delegate-color: #FFC107;
@@ -20,15 +21,21 @@
         }
 
         body {
-            /* เปลี่ยนไปใช้ฟอนต์ Itim */
+            /* กำหนดให้ฟอนต์ Itim เป็นฟอนต์หลักสำหรับทั้งหน้า */
             font-family: 'Itim', cursive;
             background-color: var(--dark-bg);
             margin: 0;
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
+            font-size: 16px; /* กำหนดขนาดฟอนต์เริ่มต้น */
         }
-
+        
+        /* การปรับแต่งส่วนต่างๆ ให้เข้ากับฟอนต์ Itim */
+        h1, h3 {
+            font-weight: normal; /* ลดน้ำหนักฟอนต์เนื่องจาก Itim เน้นความน่ารัก */
+        }
+        
         header {
             background-color: var(--card-bg);
             padding: 20px 30px;
@@ -39,7 +46,6 @@
         }
 
         header h1 {
-            font-weight: normal; /* ฟอนต์ Itim ไม่เน้น Bold มาก */
             margin: 0;
             color: var(--primary-color);
         }
@@ -91,7 +97,6 @@
         .task-details h3 {
             margin-top: 0;
             color: var(--primary-color);
-            font-weight: normal;
         }
 
         .task-details p {
@@ -111,39 +116,17 @@
             cursor: pointer;
             font-weight: normal;
             transition: opacity 0.2s, transform 0.1s;
-            text-transform: uppercase;
         }
         
         .btn:active {
             transform: scale(0.98);
         }
 
-        .accept {
-            background-color: var(--accept-color); 
-            color: var(--dark-bg);
-        }
+        .accept { background-color: var(--accept-color); color: var(--dark-bg); }
+        .reject { background-color: var(--reject-color); color: var(--dark-bg); }
+        .delegate { background-color: var(--delegate-color); color: var(--dark-bg); }
 
-        .accept:hover {
-            opacity: 0.9;
-        }
-
-        .reject {
-            background-color: var(--reject-color); 
-            color: var(--dark-bg);
-        }
-
-        .reject:hover {
-            opacity: 0.9;
-        }
-
-        .delegate {
-            background-color: var(--delegate-color);
-            color: var(--dark-bg);
-        }
-
-        .delegate:hover {
-            opacity: 0.9;
-        }
+        .accept:hover, .reject:hover, .delegate:hover { opacity: 0.9; }
         
         /* สไตล์สำหรับสถานะหลังจากดำเนินการ */
         .task-status p {
@@ -153,7 +136,6 @@
             font-size: 0.9em;
         }
         
-        /* เน้นสีสถานะบนพื้นหลังดำ */
         .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
         .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
         .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
@@ -162,10 +144,10 @@
 </head>
 <body>
     <header>
-        <h1>ตรวจสอบงาน</h1>
+        <h1>Coverteam System</h1>
         <div class="user-info">
-            <span>👤 ผู้ใช้งาน: **บัญชีแอดมิน**</span>
-            <button class="logout-btn" onclick="logout()">🚪 ออกจากระบบ</button>
+            <span>Coverusername:sutee08NYtm^_^</span>
+            <button class="logout-btn" onclick="logout()">logout</button>
         </div>
     </header>
     <main id="task-list">
