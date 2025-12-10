@@ -18,6 +18,7 @@
             --reject-color: #CF6679;
             --delegate-color: #FFC107;
             --border-color: #444;
+            --price-color: #00BFFF; /* <<<< สีน้ำเงินสำหรับราคา */
         }
 
         body {
@@ -105,25 +106,25 @@
         /* ************** การปรับปรุงสำหรับส่วน Action และ Price ************** */
         .task-actions {
             display: flex;
-            flex-direction: column; /* จัดปุ่มและราคาให้อยู่ในแนวตั้ง */
-            align-items: flex-end; /* จัดให้อยู่ชิดขวา */
+            flex-direction: column;
+            align-items: flex-end;
             gap: 10px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 15px; /* จัดปุ่ม 3 ปุ่มให้อยู่ในแนวนอน */
+            gap: 15px;
         }
         
         .task-price {
             font-size: 1.2em;
             font-weight: normal;
-            color: var(--delegate-color); /* ใช้สีเหลืองเพื่อเน้นราคา */
+            color: var(--price-color); /* สีน้ำเงิน */
             padding: 5px 10px;
-            border: 1px solid var(--delegate-color);
+            border: 1px solid var(--price-color); /* กรอบสีน้ำเงิน */
             border-radius: 4px;
-            background-color: rgba(255, 193, 7, 0.1);
-            margin-top: 5px; /* ลดระยะห่างด้านบนเล็กน้อย */
+            background-color: rgba(0, 191, 255, 0.1); /* พื้นหลังสีน้ำเงินอ่อน */
+            margin-top: 5px;
         }
         /* ******************************************************************** */
 
