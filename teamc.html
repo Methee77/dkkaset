@@ -3,47 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบงานที่ต้องทำ</title>
+    <title>ระบบตรวจสอบงาน | Modern Dark Theme</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --dark-bg: #1e1e1e;
+            --card-bg: #2d2d2d;
+            --text-color: #f0f0f0;
+            --primary-color: #bb86fc; /* ม่วงอ่อน (สำหรับ Dark Mode) */
+            --accept-color: #4CAF50;
+            --reject-color: #CF6679;
+            --delegate-color: #FFC107;
+            --border-color: #444;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
             margin: 0;
             padding: 0;
-            color: #333;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        #task-list {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 15px;
-        }
-
-        .task-item {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: background-color 0.3s ease; /* เพิ่ม transition เพื่อความสวยงาม */
+        }
+
+        header h1 {
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-info span {
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: #444;
+            border-color: var(--primary-color);
+        }
+
+        #task-list {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .task-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
         }
 
         .task-details h3 {
             margin-top: 0;
-            color: #007bff;
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
         .task-details p {
@@ -53,85 +100,97 @@
 
         .task-actions {
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .btn {
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
+            font-weight: 600;
+            transition: opacity 0.2s, transform 0.1s;
+            text-transform: uppercase;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .accept {
-            background-color: #28a745; /* สีเขียว */
-            color: white;
+            background-color: var(--accept-color); 
+            color: var(--dark-bg);
         }
 
         .accept:hover {
-            background-color: #218838;
+            opacity: 0.9;
         }
 
         .reject {
-            background-color: #dc3545; /* สีแดง */
-            color: white;
+            background-color: var(--reject-color); 
+            color: var(--dark-bg);
         }
 
         .reject:hover {
-            background-color: #c82333;
+            opacity: 0.9;
         }
 
         .delegate {
-            background-color: #ffc107; /* สีเหลือง */
-            color: #333;
+            background-color: var(--delegate-color);
+            color: var(--dark-bg);
         }
 
         .delegate:hover {
-            background-color: #e0a800;
+            opacity: 0.9;
         }
         
         /* สไตล์สำหรับสถานะหลังจากดำเนินการ */
         .task-status p {
-            font-weight: bold;
-            padding: 8px;
+            font-weight: 600;
+            padding: 10px 15px;
             border-radius: 4px;
+            font-size: 0.9em;
         }
-        .status-accepted { background-color: #d4edda; color: #155724; }
-        .status-rejected { background-color: #f8d7da; color: #721c24; }
-        .status-delegated { background-color: #ffeeba; color: #856404; }
+        
+        /* เน้นสีสถานะบนพื้นหลังดำ */
+        .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
+        .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
+        .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
 
     </style>
 </head>
 <body>
     <header>
-        <h1>รายการงานที่ต้องตรวจสอบ</h1>
+        <h1>ตรวจสอบงาน</h1>
+        <div class="user-info">
+            <span>👤 ผู้ใช้งาน: **บัญชีแอดมิน**</span>
+            <button class="logout-btn" onclick="logout()">🚪 ออกจากระบบ</button>
+        </div>
     </header>
     <main id="task-list">
         <div class="task-item" data-task-id="1">
             <div class="task-details">
-                <h3>งานที่ 001: ตรวจสอบรายงานประจำเดือน</h3>
-                <p><strong>ผู้มอบหมาย:</strong> คุณสมชาย</p>
+                <h3>งานที่ 001: ตรวจสอบรายงานประจำเดือน (KPI)</h3>
+                <p><strong>ผู้มอบหมาย:</strong> คุณสมชาย แผนกบุคคล</p>
                 <p><strong>กำหนดส่ง:</strong> 20 ธันวาคม 2568</p>
             </div>
             <div class="task-actions">
-                <button class="btn accept" onclick="handleTaskAction(1, 'accept')">✅ ตอบรับงาน</button>
-                <button class="btn reject" onclick="handleTaskAction(1, 'reject')">❌ ปฏิเสธงาน</button>
-                <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">➡️ โยนงาน</button>
+                <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
+                <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
+                <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
             </div>
         </div>
 
         <div class="task-item" data-task-id="2">
             <div class="task-details">
-                <h3>งานที่ 002: อนุมัติการลาพักร้อนของพนักงาน</h3>
-                <p><strong>ผู้มอบหมาย:</strong> คุณสมหญิง</p>
+                <h3>งานที่ 002: อนุมัติการลาพักร้อนของพนักงาน A</h3>
+                <p><strong>ผู้มอบหมาย:</strong> ระบบ HR อัตโนมัติ</p>
                 <p><strong>กำหนดส่ง:</strong> ทันที</p>
             </div>
             <div class="task-actions">
-                <button class="btn accept" onclick="handleTaskAction(2, 'accept')">✅ ตอบรับงาน</button>
-                <button class="btn reject" onclick="handleTaskAction(2, 'reject')">❌ ปฏิเสธงาน</button>
-                <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">➡️ โยนงาน</button>
+                <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
+                <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
+                <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
             </div>
         </div>
 
@@ -148,15 +207,15 @@
             // ตรวจสอบการดำเนินการ
             switch (action) {
                 case 'accept':
-                    message = `คุณได้ ตอบรับ งานที่ ${taskId} เรียบร้อยแล้ว!`;
-                    statusText = 'ตอบรับแล้ว (Accepted)';
+                    message = `✅ ตอบรับงานที่ ${taskId} เรียบร้อยแล้ว!`;
+                    statusText = 'ตอบรับแล้ว';
                     statusClass = 'status-accepted';
                     break;
                 case 'reject':
-                    const reason = prompt(`โปรดระบุเหตุผลในการปฏิเสธงานที่ ${taskId}:`);
+                    const reason = prompt(`❌ โปรดระบุเหตุผลในการปฏิเสธงานที่ ${taskId}:`);
                     if (reason) {
                         message = `คุณได้ ปฏิเสธ งานที่ ${taskId} ด้วยเหตุผล: ${reason}`;
-                        statusText = `ปฏิเสธแล้ว (Rejected) เหตุผล: ${reason}`;
+                        statusText = `ปฏิเสธแล้ว (เหตุผล: ${reason})`;
                         statusClass = 'status-rejected';
                     } else {
                         alert('ยกเลิกการปฏิเสธงาน');
@@ -164,10 +223,10 @@
                     }
                     break;
                 case 'delegate':
-                    const delegateTo = prompt(`คุณต้องการ โยนงานที่ ${taskId} ให้ใคร?:`);
+                    const delegateTo = prompt(`➡️ คุณต้องการ โยนงานที่ ${taskId} ให้ใคร?:`);
                     if (delegateTo) {
                         message = `คุณได้ โยนงานที่ ${taskId} ให้กับ: ${delegateTo}`;
-                        statusText = `โยนงานแล้ว (Delegated) ถึง: ${delegateTo}`;
+                        statusText = `โยนงานแล้ว (ถึง: ${delegateTo})`;
                         statusClass = 'status-delegated';
                     } else {
                         alert('ยกเลิกการโยนงาน');
@@ -183,6 +242,9 @@
             console.log(message);
             alert(message);
             
+            // ดึงค่าสีพื้นหลังจาก CSS เพื่อนำไปใส่ใน task-item
+            const computedStyle = getComputedStyle(document.body).getPropertyValue('--card-bg');
+            
             // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
             taskActionsElement.innerHTML = `
                 <div class="task-status">
@@ -190,9 +252,16 @@
                 </div>
             `;
             
-            // เปลี่ยนสีพื้นหลังของ Task Item (ถ้าต้องการเน้นให้ชัดขึ้น)
-            taskElement.style.backgroundColor = getComputedStyle(document.querySelector(`.${statusClass}`)).backgroundColor;
+            // ทำให้สีพื้นหลังของ task-item กลับเป็นสีเดิมหลังทำรายการ
+            // (หรือจะให้สีค้างก็ได้แล้วแต่ชอบ)
+            // taskElement.style.backgroundColor = computedStyle; 
+        }
 
+        function logout() {
+            // ฟังก์ชันนี้จำลองการออกจากระบบ
+            alert('คุณออกจากระบบเรียบร้อยแล้ว');
+            // ในระบบจริง จะมีการ redirect ไปที่หน้า Login
+            // window.location.href = '/login'; 
         }
     </script>
 </body>
