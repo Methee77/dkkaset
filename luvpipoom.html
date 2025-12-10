@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หัวใจเต้นพร้อมข้อความ</title>
+    <title>หัวใจเต้น SVG พร้อมข้อความตรง</title>
     <style>
-        /* สไตล์สำหรับส่วนหลักของหน้า */
         body {
-            display: flex; /* จัดให้อยู่ตรงกลางหน้า */
+            display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -16,68 +15,40 @@
             font-family: Arial, sans-serif;
         }
 
-        /* ภาชนะสำหรับรูปร่างหัวใจและข้อความ */
-        .heart-container {
-            width: 150px;
-            height: 150px;
+        .heart-wrapper {
             position: relative;
-            /* เรียกใช้แอนิเมชัน 'beat' */
-            animation: beat 1.2s infinite; 
-            /* ทำให้การแปลง (transform) มีผลกับทั้ง container และเนื้อหาภายใน */
-            display: flex; 
+            width: 200px; /* กำหนดขนาดของพื้นที่แสดงผล */
+            height: 200px;
+            display: flex;
             justify-content: center;
             align-items: center;
+            /* เรียกใช้แอนิเมชัน 'beat' */
+            animation: beat 1.2s infinite;
         }
 
-        /* รูปร่างหัวใจจริงๆ (ซ่อนการแปลงหมุนไว้ใน .heart เพื่อให้ข้อความไม่หมุนตาม) */
-        .heart {
+        /* สไตล์สำหรับรูปร่างหัวใจ SVG */
+        .svg-heart {
+            fill: #ff0000; /* สีแดงของหัวใจ */
             width: 100%;
             height: 100%;
-            background-color: #ff0000; 
-            position: absolute;
-            /* การหมุน 45 องศาเพื่อสร้างรูปร่างหัวใจ */
-            transform: rotate(-45deg);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); 
-        }
-
-        /* ส่วนโค้งด้านบนซ้ายของหัวใจ */
-        .heart::before {
-            content: "";
-            position: absolute;
-            top: -50%; 
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ff0000;
-            border-radius: 50%;
-        }
-
-        /* ส่วนโค้งด้านบนขวาของหัวใจ */
-        .heart::after {
-            content: "";
             position: absolute;
             top: 0;
-            right: -50%; 
-            width: 100%;
-            height: 100%;
-            background-color: #ff0000;
-            border-radius: 50%;
+            left: 0;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5)); /* เพิ่มเงา */
         }
 
         /* สไตล์สำหรับข้อความที่อยู่ตรงกลาง */
         .heart-text {
-            z-index: 10; /* ให้ข้อความอยู่เหนือหัวใจ */
-            color: white; /* สีข้อความ */
-            font-size: 1.2em;
+            position: absolute;
+            z-index: 10;
+            color: white;
+            font-size: 1.4em;
             font-weight: bold;
             text-align: center;
-            /* การทำให้ข้อความไม่หมุนตามการปรับรูปร่างหัวใจในองค์ประกอบ .heart */
-            /* เนื่องจากการหมุน -45deg ทำให้หัวใจเป็นรูปร่าง แต่ข้อความควรอยู่ตรง */
-            transform: rotate(45deg); 
-            /* ปรับขนาดตัวอักษรให้เล็กลงเมื่อหัวใจหดตัว เพื่อให้ดูเป็นส่วนหนึ่งของการเต้น */
-            transition: font-size 0.1s ease;
+            /* ข้อความจะตั้งตรง ไม่มีการหมุน */
+            margin-top: 15px; /* ปรับตำแหน่งข้อความลงมาเล็กน้อยให้อยู่กึ่งกลางตามรูปทรงหัวใจ */
         }
-        
+
         /* คีย์เฟรมของแอนิเมชัน 'beat' */
         @keyframes beat {
             0% {
@@ -100,9 +71,12 @@
 </head>
 <body>
 
-    <div class="heart-container">
-        <div class="heart"></div>
-        <span class="heart-text">pipoom <33333</span>
+    <div class="heart-wrapper">
+        <svg class="svg-heart" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+
+        <div class="heart-text">pipoom <33333</div>
     </div>
 
 </body>
