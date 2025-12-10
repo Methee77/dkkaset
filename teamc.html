@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบงานที่ต้องทำ</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #task-list {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .task-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease; /* เพิ่ม transition เพื่อความสวยงาม */
+        }
+
+        .task-details h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .task-details p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .accept {
+            background-color: #28a745; /* สีเขียว */
+            color: white;
+        }
+
+        .accept:hover {
+            background-color: #218838;
+        }
+
+        .reject {
+            background-color: #dc3545; /* สีแดง */
+            color: white;
+        }
+
+        .reject:hover {
+            background-color: #c82333;
+        }
+
+        .delegate {
+            background-color: #ffc107; /* สีเหลือง */
+            color: #333;
+        }
+
+        .delegate:hover {
+            background-color: #e0a800;
+        }
+        
+        /* สไตล์สำหรับสถานะหลังจากดำเนินการ */
+        .task-status p {
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .status-accepted { background-color: #d4edda; color: #155724; }
+        .status-rejected { background-color: #f8d7da; color: #721c24; }
+        .status-delegated { background-color: #ffeeba; color: #856404; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>รายการงานที่ต้องตรวจสอบ</h1>
+    </header>
+    <main id="task-list">
+        <div class="task-item" data-task-id="1">
+            <div class="task-details">
+                <h3>งานที่ 001: ตรวจสอบรายงานประจำเดือน</h3>
+                <p><strong>ผู้มอบหมาย:</strong> คุณสมชาย</p>
+                <p><strong>กำหนดส่ง:</strong> 20 ธันวาคม 2568</p>
+            </div>
+            <div class="task-actions">
+                <button class="btn accept" onclick="handleTaskAction(1, 'accept')">✅ ตอบรับงาน</button>
+                <button class="btn reject" onclick="handleTaskAction(1, 'reject')">❌ ปฏิเสธงาน</button>
+                <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">➡️ โยนงาน</button>
+            </div>
+        </div>
+
+        <div class="task-item" data-task-id="2">
+            <div class="task-details">
+                <h3>งานที่ 002: อนุมัติการลาพักร้อนของพนักงาน</h3>
+                <p><strong>ผู้มอบหมาย:</strong> คุณสมหญิง</p>
+                <p><strong>กำหนดส่ง:</strong> ทันที</p>
+            </div>
+            <div class="task-actions">
+                <button class="btn accept" onclick="handleTaskAction(2, 'accept')">✅ ตอบรับงาน</button>
+                <button class="btn reject" onclick="handleTaskAction(2, 'reject')">❌ ปฏิเสธงาน</button>
+                <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">➡️ โยนงาน</button>
+            </div>
+        </div>
+
+    </main>
+    
+    <script>
+        function handleTaskAction(taskId, action) {
+            const taskElement = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
+            const taskActionsElement = taskElement.querySelector('.task-actions');
+            let message = '';
+            let statusText = '';
+            let statusClass = '';
+
+            // ตรวจสอบการดำเนินการ
+            switch (action) {
+                case 'accept':
+                    message = `คุณได้ ตอบรับ งานที่ ${taskId} เรียบร้อยแล้ว!`;
+                    statusText = 'ตอบรับแล้ว (Accepted)';
+                    statusClass = 'status-accepted';
+                    break;
+                case 'reject':
+                    const reason = prompt(`โปรดระบุเหตุผลในการปฏิเสธงานที่ ${taskId}:`);
+                    if (reason) {
+                        message = `คุณได้ ปฏิเสธ งานที่ ${taskId} ด้วยเหตุผล: ${reason}`;
+                        statusText = `ปฏิเสธแล้ว (Rejected) เหตุผล: ${reason}`;
+                        statusClass = 'status-rejected';
+                    } else {
+                        alert('ยกเลิกการปฏิเสธงาน');
+                        return;
+                    }
+                    break;
+                case 'delegate':
+                    const delegateTo = prompt(`คุณต้องการ โยนงานที่ ${taskId} ให้ใคร?:`);
+                    if (delegateTo) {
+                        message = `คุณได้ โยนงานที่ ${taskId} ให้กับ: ${delegateTo}`;
+                        statusText = `โยนงานแล้ว (Delegated) ถึง: ${delegateTo}`;
+                        statusClass = 'status-delegated';
+                    } else {
+                        alert('ยกเลิกการโยนงาน');
+                        return;
+                    }
+                    break;
+                default:
+                    message = 'การดำเนินการไม่ถูกต้อง';
+                    return;
+            }
+
+            // แสดงข้อความแจ้งเตือน
+            console.log(message);
+            alert(message);
+            
+            // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
+            taskActionsElement.innerHTML = `
+                <div class="task-status">
+                    <p class="${statusClass}">${statusText}</p>
+                </div>
+            `;
+            
+            // เปลี่ยนสีพื้นหลังของ Task Item (ถ้าต้องการเน้นให้ชัดขึ้น)
+            taskElement.style.backgroundColor = getComputedStyle(document.querySelector(`.${statusClass}`)).backgroundColor;
+
+        }
+    </script>
+</body>
+</html>
