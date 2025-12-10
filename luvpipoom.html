@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หัวใจเต้นขนาดใหญ่พิเศษพร้อมข้อความพอดี</title>
+    <title>หัวใจขนาดใหญ่พิเศษ (800px) ข้อความคงที่</title>
     <style>
         body {
             display: flex;
@@ -15,11 +15,11 @@
             font-family: Arial, sans-serif;
         }
 
-        /* **ขนาดหัวใจใหญ่ขึ้นเป็น 600px** */
+        /* **ขนาดหัวใจใหญ่ขึ้นเป็น 800px** */
         .heart-wrapper {
             position: relative;
-            width: 600px; 
-            height: 600px; 
+            width: 800px; /* **ขนาดใหญ่มาก** */
+            height: 800px; /* **ขนาดใหญ่มาก** */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,20 +35,21 @@
             position: absolute;
             top: 0;
             left: 0;
-            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)); /* เพิ่มเงาให้เข้มขึ้น */
+            filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.8)); /* เพิ่มเงาให้เข้มและใหญ่ขึ้น */
         }
 
-        /* สไตล์สำหรับข้อความที่อยู่ตรงกลาง (ปรับขนาดตามหัวใจ 600px) */
+        /* สไตล์สำหรับข้อความที่อยู่ตรงกลาง */
         .heart-text {
             position: absolute;
             z-index: 10;
             color: white;
-            font-size: 4.5em; /* **ปรับขนาดฟอนต์ให้ใหญ่ขึ้น (4.5em)** */
+            /* **คงขนาดฟอนต์เดิม (4.5em) เพื่อให้ข้อความดูเล็กลงเมื่อเทียบกับหัวใจ** */
+            font-size: 4.5em; 
             font-weight: bold;
             text-align: center;
-            /* ปรับตำแหน่งข้อความลงมาเล็กน้อยให้ดูอยู่กึ่งกลางตามรูปทรงหัวใจ */
-            margin-top: 50px; /* **ปรับระยะห่างด้านบนให้เข้ากับขนาดใหม่** */
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); /* เพิ่มเงาให้ข้อความเด่นชัด */
+            /* ปรับตำแหน่งข้อความลงมาให้เข้ากับขนาดหัวใจ 800px */
+            margin-top: 60px; /* **ปรับระยะห่างด้านบนให้เข้ากับขนาดใหม่** */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); 
         }
 
         /* คีย์เฟรมของแอนิเมชัน 'beat' */
@@ -57,7 +58,7 @@
                 transform: scale(1);
             }
             25% {
-                transform: scale(1.08); /* ปรับการเต้นให้ลดลงเล็กน้อยเมื่อหัวใจมีขนาดใหญ่มาก */
+                transform: scale(1.08); 
             }
             50% {
                 transform: scale(1);
