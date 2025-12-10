@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หัวใจเต้น SVG พร้อมข้อความตรง</title>
+    <title>หัวใจเต้นขนาดใหญ่พร้อมข้อความตรง</title>
     <style>
         body {
             display: flex;
@@ -15,10 +15,11 @@
             font-family: Arial, sans-serif;
         }
 
+        /* ปรับขนาดหัวใจให้ใหญ่ขึ้น */
         .heart-wrapper {
             position: relative;
-            width: 200px; /* กำหนดขนาดของพื้นที่แสดงผล */
-            height: 200px;
+            width: 400px; /* **ขนาดใหญ่ขึ้น** */
+            height: 400px; /* **ขนาดใหญ่ขึ้น** */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,13 +29,13 @@
 
         /* สไตล์สำหรับรูปร่างหัวใจ SVG */
         .svg-heart {
-            fill: #ff0000; /* สีแดงของหัวใจ */
+            fill: #ff0000;
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5)); /* เพิ่มเงา */
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.7)); /* เพิ่มเงาให้ดูมีมิติมากขึ้น */
         }
 
         /* สไตล์สำหรับข้อความที่อยู่ตรงกลาง */
@@ -42,11 +43,11 @@
             position: absolute;
             z-index: 10;
             color: white;
-            font-size: 1.4em;
+            font-size: 2.5em; /* **ปรับขนาดตัวอักษรให้ใหญ่ขึ้น** */
             font-weight: bold;
             text-align: center;
-            /* ข้อความจะตั้งตรง ไม่มีการหมุน */
-            margin-top: 15px; /* ปรับตำแหน่งข้อความลงมาเล็กน้อยให้อยู่กึ่งกลางตามรูปทรงหัวใจ */
+            margin-top: 30px; /* ปรับตำแหน่งข้อความลงมาเล็กน้อย */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาให้ข้อความอ่านง่ายขึ้น */
         }
 
         /* คีย์เฟรมของแอนิเมชัน 'beat' */
@@ -55,7 +56,7 @@
                 transform: scale(1);
             }
             25% {
-                transform: scale(1.15); /* ขยายใหญ่ขึ้น (เต้น) */
+                transform: scale(1.1); /* ปรับการเต้นให้ไม่ใหญ่จนเกินไปเมื่อหัวใจใหญ่ */
             }
             50% {
                 transform: scale(1);
