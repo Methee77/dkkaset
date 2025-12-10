@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบงาน | Modern Dark Theme</title>
+    <title>ระบบตรวจสอบงาน | ฟอนต์ Itim</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -20,7 +20,8 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            /* เปลี่ยนไปใช้ฟอนต์ Itim */
+            font-family: 'Itim', cursive;
             background-color: var(--dark-bg);
             margin: 0;
             padding: 0;
@@ -38,7 +39,7 @@
         }
 
         header h1 {
-            font-weight: 700;
+            font-weight: normal; /* ฟอนต์ Itim ไม่เน้น Bold มาก */
             margin: 0;
             color: var(--primary-color);
         }
@@ -50,7 +51,7 @@
         }
         
         .user-info span {
-            font-weight: 600;
+            font-weight: normal;
         }
 
         .logout-btn {
@@ -90,7 +91,7 @@
         .task-details h3 {
             margin-top: 0;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: normal;
         }
 
         .task-details p {
@@ -108,7 +109,7 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: normal;
             transition: opacity 0.2s, transform 0.1s;
             text-transform: uppercase;
         }
@@ -146,7 +147,7 @@
         
         /* สไตล์สำหรับสถานะหลังจากดำเนินการ */
         .task-status p {
-            font-weight: 600;
+            font-weight: normal;
             padding: 10px 15px;
             border-radius: 4px;
             font-size: 0.9em;
@@ -242,9 +243,6 @@
             console.log(message);
             alert(message);
             
-            // ดึงค่าสีพื้นหลังจาก CSS เพื่อนำไปใส่ใน task-item
-            const computedStyle = getComputedStyle(document.body).getPropertyValue('--card-bg');
-            
             // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
             taskActionsElement.innerHTML = `
                 <div class="task-status">
@@ -252,9 +250,8 @@
                 </div>
             `;
             
-            // ทำให้สีพื้นหลังของ task-item กลับเป็นสีเดิมหลังทำรายการ
-            // (หรือจะให้สีค้างก็ได้แล้วแต่ชอบ)
-            // taskElement.style.backgroundColor = computedStyle; 
+            // เปลี่ยนสีพื้นหลังของ task-item เป็นสีสถานะ
+            taskElement.style.backgroundColor = getComputedStyle(document.querySelector(`.${statusClass}`)).backgroundColor;
         }
 
         function logout() {
