@@ -13,14 +13,14 @@
             --dark-bg: #1e1e1e;
             --card-bg: #2d2d2d;
             --text-color: #f0f0f0;
-            --primary-color: #bb86fc; /* ม่วงอ่อน (สำหรับกราฟ) */
+            --primary-color: #bb86fc; 
             --accept-color: #4CAF50;
-            --reject-color: #CF6679;
+            --reject-color: #CF6679; /* สีแดงสำหรับปฏิเสธและขอบ Black Room */
             --delegate-color: #FFC107;
             --border-color: #444;
-            --price-color: #00BFFF; /* สีน้ำเงินสำหรับราคา */
+            --price-color: #00BFFF; 
             --black-room-color: #000000; /* สีพื้นหลังดำ */
-            --badge-color: #FF4136; /* สีแดงสำหรับแจ้งเตือน */
+            --badge-color: #FF4136; /* สีแดงสดสำหรับแจ้งเตือน */
         }
 
         body {
@@ -46,36 +46,6 @@
             align-items: center;
         }
 
-        header h1 {
-            margin: 0;
-            color: var(--primary-color);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .user-info span {
-            font-weight: normal;
-        }
-
-        .logout-btn {
-            padding: 8px 15px;
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-
-        .logout-btn:hover {
-            background-color: #444;
-            border-color: var(--primary-color);
-        }
-
         /* -------------------------------------- */
         /* โครงสร้างหลักสำหรับการจัดวางซ้าย-ขวา */
         /* -------------------------------------- */
@@ -96,167 +66,70 @@
             flex: 1.5; 
         }
 
-
         /* -------------------------------------- */
-        /* สไตล์สำหรับส่วนโปรไฟล์ */
+        /* สไตล์สำหรับ Task List Header (ปุ่มซ่อน/แสดง) */
         /* -------------------------------------- */
-        #profile-section {
-            max-width: 450px; 
-            margin: 0 0 30px 0; 
-            padding: 30px;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            border: 1px solid var(--primary-color);
-        }
-
-        .profile-img-container {
-            margin-bottom: 20px;
-        }
-        
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            box-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
-        }
-
-        .profile-info h2 {
-            margin: 0 0 10px 0;
-            color: var(--text-color);
-            font-size: 1.6em;
-        }
-
-        .profile-info p {
-            margin: 5px 0;
-            color: #ccc;
-            text-align: left; 
-            padding-left: 20px;
-        }
-
-        .profile-role {
-            font-weight: normal;
-            color: var(--price-color);
-            padding: 5px 10px;
-            border: 1px solid var(--price-color);
-            border-radius: 5px;
-            display: inline-block;
+        .task-list-header {
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 10px 0;
             margin-top: 15px;
-            text-align: center;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background-color: var(--border-color);
-            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
         }
         
-        /* -------------------------------------- */
-        /* สไตล์สำหรับ Task List */
-        /* -------------------------------------- */
+        .task-list-header:hover {
+            color: var(--delegate-color);
+        }
+
+        /* สำหรับไอคอนลูกศร */
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* สถานะเมื่อ Task List เปิดอยู่ (ดีฟอลต์ซ่อนอยู่) */
+        .task-list-header[aria-expanded="true"] .toggle-icon {
+            transform: rotate(90deg);
+        }
+        
+        /* สไตล์หลักของ Task List (ซ่อนโดยดีฟอลต์) */
         #task-list {
             max-width: 100%;
             margin: 0; 
             padding: 0;
-        }
-
-        .task-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px 20px; 
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            transition: background-color 0.3s ease;
-        }
-
-        .task-details h3 {
-            font-size: 1.1em;
-        }
-
-        .task-price {
-            font-size: 1.1em;
-        }
-
-        /* -------------------------------------- */
-        /* สไตล์สำหรับกราฟรายได้ (คอลัมน์ขวา) */
-        /* -------------------------------------- */
-        #revenue-dashboard {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            height: fit-content;
-            border: 1px solid var(--delegate-color);
-            margin-bottom: 30px; /* เพิ่มระยะห่างด้านล่างสำหรับปุ่ม */
-        }
-
-        #revenue-dashboard h2 {
-            color: var(--delegate-color); 
-            margin-top: 0;
-            font-size: 1.8em;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        /* สไตล์สำหรับกล่องกราฟ SVG */
-        .chart-container {
-            width: 100%;
-            padding: 20px 0;
-            background-color: var(--dark-bg); 
-            border-radius: 8px;
-            overflow: visible; 
-            margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างกราฟ */
-        }
-        
-        /* สไตล์สำหรับองค์ประกอบ SVG (คงเดิม) */
-        .svg-line { fill: none; stroke: var(--primary-color); stroke-width: 3; transition: stroke-dasharray 2s ease-in-out; }
-        .svg-dot { fill: var(--primary-color); }
-        .svg-text { fill: var(--text-color); font-size: 12px; font-family: 'Itim', cursive; }
-        .svg-axis-line { stroke: var(--border-color); stroke-width: 1; }
-        .svg-grid-line { stroke: var(--border-color); stroke-width: 0.5; stroke-dasharray: 4; }
-
-        .chart-legend {
-            font-size: 0.9em;
-            color: #aaa;
-            margin-top: 15px;
-            text-align: left;
-            padding-left: 10px;
+            /* ** CSS ที่ช่วยให้เกิดการสไลด์ ** */
+            overflow: hidden;
+            max-height: 0; /* ซ่อนเริ่มต้น */
+            transition: max-height 0.3s ease-in-out;
         }
 
         /* -------------------------------------- */
         /* สไตล์สำหรับ Black Room Button */
         /* -------------------------------------- */
         .black-room-btn-container {
-            text-align: right; /* จัดปุ่มไปทางขวา */
+            text-align: right; 
             padding-top: 15px;
             border-top: 1px solid var(--border-color);
         }
 
         .black-room-btn {
-            position: relative; /* สำคัญสำหรับการวาง badge */
+            position: relative; 
             padding: 12px 25px;
-            background-color: var(--black-room-color);
-            color: var(--reject-color); /* ใช้สีแดงเพื่อเน้นความสำคัญ */
-            border: 2px solid var(--reject-color); 
+            background-color: var(--black-room-color); /* พื้นหลังดำ */
+            color: var(--reject-color); /* ตัวอักษรสีแดง */
+            border: 2px solid var(--reject-color); /* ขอบสีแดง */
             border-radius: 6px;
             cursor: pointer;
             font-weight: normal;
             font-size: 1.1em;
-            transition: background-color 0.2s, border-color 0.2s;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .black-room-btn:hover {
-            background-color: #0d0d0d;
+            background-color: #1a1a1a;
             border-color: var(--delegate-color);
             color: var(--delegate-color);
         }
@@ -265,7 +138,7 @@
             position: absolute;
             top: -10px;
             right: -10px;
-            background-color: var(--badge-color); /* สีแดง */
+            background-color: var(--badge-color); /* สีแดงสด */
             color: var(--text-color);
             border-radius: 50%;
             padding: 5px 8px;
@@ -277,15 +150,32 @@
             box-shadow: 0 0 5px var(--badge-color);
         }
 
-        /* Task Action Styles (คงเดิม) */
+        /* สไตล์ที่เหลือ (คงเดิม) */
+        #profile-section { max-width: 450px; margin: 0 0 30px 0; padding: 30px; background-color: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-align: center; border: 1px solid var(--primary-color); }
+        .profile-img-container { margin-bottom: 20px; }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); box-shadow: 0 0 10px rgba(187, 134, 252, 0.5); }
+        .profile-info h2 { margin: 0 0 10px 0; color: var(--text-color); font-size: 1.6em; }
+        .profile-info p { margin: 5px 0; color: #ccc; text-align: left; padding-left: 20px; }
+        .profile-role { font-weight: normal; color: var(--price-color); padding: 5px 10px; border: 1px solid var(--price-color); border-radius: 5px; display: inline-block; margin-top: 15px; text-align: center; }
+        hr { border: 0; height: 1px; background-color: var(--border-color); margin: 15px 0; }
+        .task-item { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); transition: background-color 0.3s ease; }
+        .task-details h3 { font-size: 1.1em; }
+        .task-price { font-size: 1.1em; }
+        #revenue-dashboard { background-color: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); height: fit-content; border: 1px solid var(--delegate-color); margin-bottom: 30px; }
+        #revenue-dashboard h2 { color: var(--delegate-color); margin-top: 0; font-size: 1.8em; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
+        .chart-container { width: 100%; padding: 20px 0; background-color: var(--dark-bg); border-radius: 8px; overflow: visible; margin-bottom: 15px; }
+        .svg-line { fill: none; stroke: var(--primary-color); stroke-width: 3; transition: stroke-dasharray 2s ease-in-out; }
+        .svg-dot { fill: var(--primary-color); }
+        .svg-text { fill: var(--text-color); font-size: 12px; font-family: 'Itim', cursive; }
+        .svg-axis-line { stroke: var(--border-color); stroke-width: 1; }
+        .svg-grid-line { stroke: var(--border-color); stroke-width: 0.5; stroke-dasharray: 4; }
+        .chart-legend { font-size: 0.9em; color: #aaa; margin-top: 15px; text-align: left; padding-left: 10px; }
         .task-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
         .action-buttons { display: flex; gap: 10px; }
         .btn { padding: 8px 14px; }
-
         .accept { background-color: var(--accept-color); color: var(--dark-bg); }
         .reject { background-color: var(--reject-color); color: var(--dark-bg); }
         .delegate { background-color: var(--delegate-color); color: var(--dark-bg); }
-
         .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
         .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
         .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
@@ -316,7 +206,16 @@
                 </div>
             </div>
             
-            <h2>งานที่รอการตรวจสอบ</h2>
+            <div class="task-list-header" 
+                 onclick="toggleTaskList()" 
+                 aria-controls="task-list" 
+                 aria-expanded="false" 
+                 role="button"
+                 tabindex="0">
+                <h2>งานที่รอการตรวจสอบ</h2>
+                <span class="toggle-icon">▶</span>
+            </div>
+            
             <div id="task-list">
                 <div class="task-item" data-task-id="1">
                     <div class="task-details">
@@ -444,6 +343,23 @@
         </main>
     
     <script>
+        function toggleTaskList() {
+            const list = document.getElementById('task-list');
+            const header = document.querySelector('.task-list-header');
+            const isExpanded = header.getAttribute('aria-expanded') === 'true' || false;
+
+            if (!isExpanded) {
+                // เปิด
+                list.style.maxHeight = list.scrollHeight + "px"; // ตั้งค่าความสูงให้เท่ากับเนื้อหาจริง
+                header.setAttribute('aria-expanded', 'true');
+            } else {
+                // ปิด
+                list.style.maxHeight = "0";
+                header.setAttribute('aria-expanded', 'false');
+            }
+        }
+        
+        // ฟังก์ชันเดิม
         function handleTaskAction(taskId, action) {
             const taskElement = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
             const taskActionsElement = taskElement.querySelector('.task-actions');
@@ -451,7 +367,6 @@
             let statusText = '';
             let statusClass = '';
 
-            // ตรวจสอบการดำเนินการ
             switch (action) {
                 case 'accept':
                     message = `✅ ตอบรับงานที่ ${taskId} เรียบร้อยแล้ว!`;
@@ -485,11 +400,9 @@
                     return;
             }
 
-            // แสดงข้อความแจ้งเตือน
             console.log(message);
             alert(message);
             
-            // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
             const currentPriceHTML = taskElement.querySelector('.task-price').outerHTML; 
             taskActionsElement.innerHTML = `
                 <div class="task-status">
@@ -497,13 +410,19 @@
                 </div>
                 ${currentPriceHTML} 
             `;
+            
+            // ต้องปรับความสูงของ max-height ใหม่หลังมีการเปลี่ยนแปลงเนื้อหาภายใน
+            const header = document.querySelector('.task-list-header');
+            if (header.getAttribute('aria-expanded') === 'true') {
+                 // ต้องใช้ setTimeout เพื่อให้ DOM คำนวณความสูงใหม่
+                setTimeout(() => {
+                    list.style.maxHeight = list.scrollHeight + "px";
+                }, 50);
+            }
         }
 
         function logout() {
-            // ฟังก์ชันนี้จำลองการออกจากระบบ
             alert('คุณออกจากระบบเรียบร้อยแล้ว');
-            // ในระบบจริง จะมีการ redirect ไปที่หน้า Login
-            // window.location.href = '/login'; 
         }
     </script>
 </body>
