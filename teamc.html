@@ -19,6 +19,8 @@
             --delegate-color: #FFC107;
             --border-color: #444;
             --price-color: #00BFFF; /* สีน้ำเงินสำหรับราคา */
+            --black-room-color: #000000; /* สีพื้นหลังดำ */
+            --badge-color: #FF4136; /* สีแดงสำหรับแจ้งเตือน */
         }
 
         body {
@@ -96,7 +98,7 @@
 
 
         /* -------------------------------------- */
-        /* สไตล์สำหรับส่วนโปรไฟล์ (จัดชิดซ้าย) */
+        /* สไตล์สำหรับส่วนโปรไฟล์ */
         /* -------------------------------------- */
         #profile-section {
             max-width: 450px; 
@@ -193,6 +195,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             height: fit-content;
             border: 1px solid var(--delegate-color);
+            margin-bottom: 30px; /* เพิ่มระยะห่างด้านล่างสำหรับปุ่ม */
         }
 
         #revenue-dashboard h2 {
@@ -208,39 +211,18 @@
         .chart-container {
             width: 100%;
             padding: 20px 0;
-            background-color: var(--dark-bg); /* ให้พื้นหลังกราฟดูมืดกว่า Card เล็กน้อย */
+            background-color: var(--dark-bg); 
             border-radius: 8px;
-            overflow: visible; /* ให้ข้อความที่ล้นออกไปได้ */
+            overflow: visible; 
+            margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างกราฟ */
         }
         
-        /* สไตล์สำหรับองค์ประกอบ SVG */
-        .svg-line {
-            fill: none;
-            stroke: var(--primary-color);
-            stroke-width: 3;
-            transition: stroke-dasharray 2s ease-in-out;
-        }
-        
-        .svg-dot {
-            fill: var(--primary-color);
-        }
-
-        .svg-text {
-            fill: var(--text-color);
-            font-size: 12px;
-            font-family: 'Itim', cursive;
-        }
-        
-        .svg-axis-line {
-            stroke: var(--border-color);
-            stroke-width: 1;
-        }
-        
-        .svg-grid-line {
-            stroke: var(--border-color);
-            stroke-width: 0.5;
-            stroke-dasharray: 4;
-        }
+        /* สไตล์สำหรับองค์ประกอบ SVG (คงเดิม) */
+        .svg-line { fill: none; stroke: var(--primary-color); stroke-width: 3; transition: stroke-dasharray 2s ease-in-out; }
+        .svg-dot { fill: var(--primary-color); }
+        .svg-text { fill: var(--text-color); font-size: 12px; font-family: 'Itim', cursive; }
+        .svg-axis-line { stroke: var(--border-color); stroke-width: 1; }
+        .svg-grid-line { stroke: var(--border-color); stroke-width: 0.5; stroke-dasharray: 4; }
 
         .chart-legend {
             font-size: 0.9em;
@@ -250,6 +232,50 @@
             padding-left: 10px;
         }
 
+        /* -------------------------------------- */
+        /* สไตล์สำหรับ Black Room Button */
+        /* -------------------------------------- */
+        .black-room-btn-container {
+            text-align: right; /* จัดปุ่มไปทางขวา */
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .black-room-btn {
+            position: relative; /* สำคัญสำหรับการวาง badge */
+            padding: 12px 25px;
+            background-color: var(--black-room-color);
+            color: var(--reject-color); /* ใช้สีแดงเพื่อเน้นความสำคัญ */
+            border: 2px solid var(--reject-color); 
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 1.1em;
+            transition: background-color 0.2s, border-color 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .black-room-btn:hover {
+            background-color: #0d0d0d;
+            border-color: var(--delegate-color);
+            color: var(--delegate-color);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--badge-color); /* สีแดง */
+            color: var(--text-color);
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 0.8em;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 18px;
+            text-align: center;
+            box-shadow: 0 0 5px var(--badge-color);
+        }
 
         /* Task Action Styles (คงเดิม) */
         .task-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
@@ -278,7 +304,7 @@
         <div class="left-column">
             <div id="profile-section">
                 <div class="profile-img-container">
-                    <img src="IMG_2248.JPG" alt="รูปโปรไฟล์" class="profile-img">
+                    <img src="https://via.placeholder.com/100/BB86FC/2D2D2D?text=Profile" alt="รูปโปรไฟล์" class="profile-img">
                 </div>
                 <div class="profile-info">
                     <h2>sutee08NYtm^_^</h2>
@@ -340,6 +366,9 @@
                             <line class="svg-axis-line" x1="50" y1="320" x2="600" y2="320"/>
                             <text class="svg-text" x="40" y="325" text-anchor="end">0k</text>
 
+                            <line class="svg-grid-line" x1="50" y1="307.5" x2="600" y2="307.5"/>
+                            <text class="svg-text" x="40" y="312" text-anchor="end">5k</text>
+                            
                             <line class="svg-grid-line" x1="50" y1="295" x2="600" y2="295"/>
                             <text class="svg-text" x="40" y="300" text-anchor="end">10k</text>
                             
@@ -400,10 +429,18 @@
                     </svg>
 
                     <div class="chart-legend">
+                        <strong>ข้อมูล:</strong> Jul (15,000 ฿), Aug (35,000 ฿), Sep (110,000 ฿), Oct (0 ฿), Nov (0 ฿), Dec (0 ฿)
                     </div>
                 </div>
             </div>
-        </div>
+            
+            <div class="black-room-btn-container">
+                <button class="black-room-btn" onclick="alert('ไปยัง Black Room เพื่อดู 14 รายการแจ้งเตือน!')">
+                    Black Room
+                    <span class="notification-badge">14</span>
+                </button>
+            </div>
+            </div>
         </main>
     
     <script>
