@@ -79,19 +79,19 @@
         /* -------------------------------------- */
         main {
             display: flex;
-            max-width: 1400px; /* เพิ่มความกว้างสูงสุดเพื่อให้มีพื้นที่สำหรับกราฟ */
+            max-width: 1400px;
             margin: 40px auto;
             padding: 0 20px;
-            gap: 30px; /* ระยะห่างระหว่างคอลัมน์ซ้ายและขวา */
+            gap: 30px; 
         }
         
         .left-column {
-            flex: 1; /* ส่วนซ้ายใช้พื้นที่ส่วนใหญ่ (แต่จำกัดความกว้างในส่วน Profile) */
+            flex: 1; 
             min-width: 400px;
         }
 
         .right-column {
-            flex: 1.5; /* ส่วนขวา (กราฟ) ใช้พื้นที่มากกว่า */
+            flex: 1.5; 
         }
 
 
@@ -99,8 +99,8 @@
         /* สไตล์สำหรับส่วนโปรไฟล์ (จัดชิดซ้าย) */
         /* -------------------------------------- */
         #profile-section {
-            max-width: 450px; /* จำกัดความกว้างเพื่อให้ดูเป็นส่วนสรุป */
-            margin: 0 0 30px 0; /* จัดชิดซ้ายและมี margin ด้านล่าง */
+            max-width: 450px; 
+            margin: 0 0 30px 0; 
             padding: 30px;
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -131,7 +131,7 @@
         .profile-info p {
             margin: 5px 0;
             color: #ccc;
-            text-align: left; /* จัดข้อความภายในให้ชิดซ้าย */
+            text-align: left; 
             padding-left: 20px;
         }
 
@@ -144,7 +144,6 @@
             display: inline-block;
             margin-top: 15px;
             text-align: center;
-            padding-left: 10px; /* ลบ padding-left ออกเนื่องจากไม่จำเป็น */
         }
 
         hr {
@@ -159,16 +158,15 @@
         /* -------------------------------------- */
         #task-list {
             max-width: 100%;
-            margin: 0; /* ลบ margin auto ออก */
+            margin: 0; 
             padding: 0;
         }
 
         .task-item {
-            /* สไตล์เดิม */
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 15px 20px; /* ลด padding ลงเล็กน้อย */
+            padding: 15px 20px; 
             margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
@@ -198,7 +196,7 @@
         }
 
         #revenue-dashboard h2 {
-            color: var(--delegate-color); /* ใช้สีเหลืองเพื่อเน้น Dashboard */
+            color: var(--delegate-color); 
             margin-top: 0;
             font-size: 1.8em;
             border-bottom: 2px solid var(--border-color);
@@ -206,25 +204,24 @@
             margin-bottom: 20px;
         }
         
-        /* สไตล์จำลองกราฟ (ใช้สำหรับแสดงผลเบื้องต้น) */
+        /* สไตล์สำหรับกล่องกราฟจริง */
         .chart-container {
             width: 100%;
-            height: 400px;
-            background-color: var(--dark-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            color: var(--primary-color);
-            flex-direction: column;
-            gap: 10px;
+            text-align: center;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
         }
         
         .chart-legend {
             font-size: 0.9em;
             color: #aaa;
+            margin-top: 15px;
+            text-align: left;
         }
 
         /* Task Action Styles (คงเดิม) */
@@ -254,7 +251,7 @@
         <div class="left-column">
             <div id="profile-section">
                 <div class="profile-img-container">
-                    <img src="https://via.placeholder.com/100/BB86FC/2D2D2D?text=Profile" alt="รูปโปรไฟล์" class="profile-img"> 
+                    <img src="https://via.placeholder.com/100/BB86FC/2D2D2D?text=Profile" alt="รูปโปรไฟล์" class="profile-img">
                 </div>
                 <div class="profile-info">
                     <h2>sutee08NYtm^_^</h2>
@@ -309,14 +306,10 @@
             <div id="revenue-dashboard">
                 <h2>📊 รายได้ที่ทำได้ (Monthly Revenue)</h2>
                 <div class="chart-container">
-                    <p>พื้นที่สำหรับแสดงผลกราฟ</p>
-                    <p>(Bar Chart/Line Chart)</p>
+                    <img src="revenue_graph.png" alt="กราฟเส้นแสดงรายได้ต่อเดือน" style="max-width: 100%; height: auto;">
                     <div class="chart-legend">
-                        ตัวอย่างรายได้ 3 เดือนล่าสุด: 
-                        <br>
-                        ม.ค. 30,000 ฿ | ก.พ. 45,000 ฿ | มี.ค. 52,000 ฿
+                        <strong>ข้อมูล:</strong> Jul (15k), Aug (35k), Sep (110k), Oct (0k), Nov (0k), Dec (0k)
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -369,7 +362,7 @@
             alert(message);
             
             // เปลี่ยนส่วนปุ่มให้แสดงสถานะแทน
-            const currentPriceHTML = taskElement.querySelector('.task-price').outerHTML; // เก็บ HTML ราคาเดิม
+            const currentPriceHTML = taskElement.querySelector('.task-price').outerHTML; 
             taskActionsElement.innerHTML = `
                 <div class="task-status">
                     <p class="${statusClass}">${statusText}</p>
