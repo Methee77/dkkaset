@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบงาน | ฟอนต์ Itim ทุกตัวอักษร</title>
+    <title>ระบบตรวจสอบงาน | โปรไฟล์</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     
@@ -18,7 +18,7 @@
             --reject-color: #CF6679;
             --delegate-color: #FFC107;
             --border-color: #444;
-            --price-color: #00BFFF; /* <<<< สีน้ำเงินสำหรับราคา */
+            --price-color: #00BFFF; /* สีน้ำเงินสำหรับราคา */
         }
 
         body {
@@ -74,12 +74,70 @@
             border-color: var(--primary-color);
         }
 
+        /* -------------------------------------- */
+        /* สไตล์สำหรับส่วนโปรไฟล์ */
+        /* -------------------------------------- */
+        #profile-section {
+            max-width: 500px;
+            margin: 40px auto 60px auto; /* เพิ่มระยะห่างด้านล่างก่อน Task List */
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid var(--primary-color); /* เน้นขอบด้วยสีม่วง */
+        }
+
+        .profile-img-container {
+            margin-bottom: 20px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* ทำให้เป็นวงกลม */
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+        }
+
+        .profile-info h2 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+            font-size: 1.8em;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            color: #ccc;
+        }
+
+        .profile-role {
+            font-weight: bold;
+            color: var(--price-color); /* ใช้สีน้ำเงินเพื่อเน้นบทบาท */
+            padding: 5px 10px;
+            border: 1px solid var(--price-color);
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 20px 0;
+        }
+        /* -------------------------------------- */
+        /* สไตล์สำหรับ Task List ที่ปรับปรุง */
+        /* -------------------------------------- */
         #task-list {
             max-width: 1000px;
-            margin: 40px auto;
+            margin: 0 auto 40px auto; /* ปรับ margin ด้านบน */
             padding: 0 20px;
         }
 
+        /* Task List เดิม */
         .task-item {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -158,54 +216,69 @@
         .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
         .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
         .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
-
+        
     </style>
 </head>
 <body>
     <header>
         <h1>Coverteam System</h1>
         <div class="user-info">
-            <span>Coverusername : sutee08NYtm^_^</span>
+            <span>Coverusername : sutee08NYtm^_^</span> 
             <button class="logout-btn" onclick="logout()">logout</button>
         </div>
     </header>
-    <main id="task-list">
-        <div class="task-item" data-task-id="1">
-            <div class="task-details">
-                <h3>Cover07Y81: ระบบรองรับฐานข้อมูลการจัดเก็บขนาดใหญ่</h3>
-                <p><strong>Assignor:</strong> head</p>
-                <p><strong>date:</strong> 2026 Jun</p>
+    <main>
+        <div id="profile-section">
+            <div class="profile-img-container">
+                <img src="https://via.placeholder.com/120/BB86FC/2D2D2D?text=Profile" alt="รูปโปรไฟล์" class="profile-img"> 
             </div>
-            <div class="task-actions">
-                <div class="action-buttons">
-                    <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
-                    <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
-                    <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
-                </div>
-                <div class="task-price">
-                    ราคาจ่าย: 40,000/3
-                </div>
+            <div class="profile-info">
+                <h2>sutee08NYtm^_^</h2>
+                <p class="profile-role">Software Developer (Reviewer)</p>
+                <hr>
+                <p><strong>Email:</strong> sutee.dev@coverteam.com</p>
+                <p><strong>Team:</strong> NYTM Squad</p>
+                <p><strong>Tasks Awaiting Review:</strong> 2</p>
             </div>
         </div>
+        <div id="task-list">
+            <div class="task-item" data-task-id="1">
+                <div class="task-details">
+                    <h3>Cover07Y81: ระบบรองรับฐานข้อมูลการจัดเก็บขนาดใหญ่</h3>
+                    <p><strong>Assignor:</strong> head</p>
+                    <p><strong>date:</strong> 2026 Jun</p>
+                </div>
+                <div class="task-actions">
+                    <div class="action-buttons">
+                        <button class="btn accept" onclick="handleTaskAction(1, 'accept')">ตอบรับ</button>
+                        <button class="btn reject" onclick="handleTaskAction(1, 'reject')">ปฏิเสธ</button>
+                        <button class="btn delegate" onclick="handleTaskAction(1, 'delegate')">โยนงาน</button>
+                    </div>
+                    <div class="task-price">
+                        ราคาจ่าย: 40,000/3
+                    </div>
+                </div>
+            </div>
 
-        <div class="task-item" data-task-id="2">
-            <div class="task-details">
-                <h3>Cover0188P: ระบบรับสมัครวิ่งเต็มระบบ</h3>
-                <p><strong>Assignor:</strong> head</p>
-                <p><strong>date:</strong> 2026 Jun</p>
-            </div>
-            <div class="task-actions">
-                <div class="action-buttons">
-                    <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
-                    <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
-                    <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
+            <div class="task-item" data-task-id="2">
+                <div class="task-details">
+                    <h3>Cover0188P: ระบบรับสมัครวิ่งเต็มระบบ</h3>
+                    <p><strong>Assignor:</strong> head</p>
+                    <p><strong>date:</strong> 2026 Jun</p>
                 </div>
-                <div class="task-price">
-                    ราคาจ่าย: 8,000
+                <div class="task-actions">
+                    <div class="action-buttons">
+                        <button class="btn accept" onclick="handleTaskAction(2, 'accept')">ตอบรับ</button>
+                        <button class="btn reject" onclick="handleTaskAction(2, 'reject')">ปฏิเสธ</button>
+                        <button class="btn delegate" onclick="handleTaskAction(2, 'delegate')">โยนงาน</button>
+                    </div>
+                    <div class="task-price">
+                        ราคาจ่าย: 8,000
+                    </div>
                 </div>
             </div>
+
         </div>
-
     </main>
     
     <script>
@@ -259,10 +332,17 @@
                 <div class="task-status">
                     <p class="${statusClass}">${statusText}</p>
                 </div>
+                <div class="task-price">
+                    ${taskElement.querySelector('.task-price').innerHTML}
+                </div>
             `;
             
-            // เปลี่ยนสีพื้นหลังของ task-item เป็นสีสถานะ
+            // เปลี่ยนสีพื้นหลังของ task-item เป็นสีสถานะ (เลิกทำเพราะอาจทำให้ดูมืดเกินไปสำหรับธีม Dark Mode, แต่ถ้าต้องการใช้ก็เปิดโค้ดนี้)
+            /*
             taskElement.style.backgroundColor = getComputedStyle(document.querySelector(`.${statusClass}`)).backgroundColor;
+            taskElement.style.color = 'var(--dark-bg)';
+            taskElement.querySelectorAll('h3, p, strong').forEach(el => el.style.color = 'var(--dark-bg)');
+            */
         }
 
         function logout() {
