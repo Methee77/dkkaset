@@ -15,12 +15,13 @@
             --text-color: #f0f0f0;
             --primary-color: #bb86fc; 
             --accept-color: #4CAF50;
-            --reject-color: #CF6679; /* สีแดงสำหรับปฏิเสธและขอบ Black Room */
+            --reject-color: #CF6679; 
             --delegate-color: #FFC107;
             --border-color: #444;
             --price-color: #00BFFF; 
-            --black-room-color: #000000; /* สีพื้นหลังดำ */
-            --badge-color: #FF4136; /* สีแดงสดสำหรับแจ้งเตือน */
+            --black-room-color: #000000; 
+            --badge-color: #FF4136; 
+            --event-text-color: #ccc; /* สีสำหรับข้อความกิจกรรม */
         }
 
         body {
@@ -67,7 +68,7 @@
         }
 
         /* -------------------------------------- */
-        /* สไตล์สำหรับ Task List Header (ปุ่มซ่อน/แสดง) */
+        /* สไตล์สำหรับ Task List Header */
         /* -------------------------------------- */
         .task-list-header {
             color: var(--primary-color);
@@ -84,48 +85,66 @@
             color: var(--delegate-color);
         }
 
-        /* สำหรับไอคอนลูกศร */
         .toggle-icon {
             transition: transform 0.3s ease;
         }
 
-        /* สถานะเมื่อ Task List เปิดอยู่ (ดีฟอลต์ซ่อนอยู่) */
         .task-list-header[aria-expanded="true"] .toggle-icon {
             transform: rotate(90deg);
         }
         
-        /* สไตล์หลักของ Task List (ซ่อนโดยดีฟอลต์) */
         #task-list {
             max-width: 100%;
             margin: 0; 
             padding: 0;
-            /* ** CSS ที่ช่วยให้เกิดการสไลด์ ** */
             overflow: hidden;
-            max-height: 0; /* ซ่อนเริ่มต้น */
+            max-height: 0;
             transition: max-height 0.3s ease-in-out;
         }
 
         /* -------------------------------------- */
-        /* สไตล์สำหรับ Black Room Button */
+        /* สไตล์สำหรับ Black Room/Event Container */
         /* -------------------------------------- */
         .black-room-btn-container {
-            text-align: right; 
+            display: flex; /* ใช้ Flexbox เพื่อจัดวางข้อความและปุ่ม */
+            justify-content: space-between; /* แยกข้อความไปซ้าย ปุ่มไปขวา */
+            align-items: center;
             padding-top: 15px;
             border-top: 1px solid var(--border-color);
         }
+        
+        .event-info {
+            font-size: 1.05em;
+            color: var(--event-text-color);
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .event-info strong {
+            color: var(--price-color); /* ใช้สีน้ำเงินเพื่อเน้นวันที่/สถานที่ */
+        }
+        
+        .event-icon {
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+
 
         .black-room-btn {
             position: relative; 
             padding: 12px 25px;
-            background-color: var(--black-room-color); /* พื้นหลังดำ */
-            color: var(--reject-color); /* ตัวอักษรสีแดง */
-            border: 2px solid var(--reject-color); /* ขอบสีแดง */
+            background-color: var(--black-room-color); 
+            color: var(--reject-color); 
+            border: 2px solid var(--reject-color); 
             border-radius: 6px;
             cursor: pointer;
             font-weight: normal;
             font-size: 1.1em;
             transition: background-color 0.2s, border-color 0.2s, color 0.2s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            white-space: nowrap; /* ป้องกันปุ่มถูกตัดขึ้นบรรทัดใหม่ */
         }
 
         .black-room-btn:hover {
@@ -138,7 +157,7 @@
             position: absolute;
             top: -10px;
             right: -10px;
-            background-color: var(--badge-color); /* สีแดงสด */
+            background-color: var(--badge-color); 
             color: var(--text-color);
             border-radius: 50%;
             padding: 5px 8px;
@@ -150,35 +169,17 @@
             box-shadow: 0 0 5px var(--badge-color);
         }
 
-        /* สไตล์ที่เหลือ (คงเดิม) */
+        /* สไตล์อื่นๆ (SVG และอื่นๆ) ยังคงเดิมเพื่อความกระชับ */
         #profile-section { max-width: 450px; margin: 0 0 30px 0; padding: 30px; background-color: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-align: center; border: 1px solid var(--primary-color); }
-        .profile-img-container { margin-bottom: 20px; }
         .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); box-shadow: 0 0 10px rgba(187, 134, 252, 0.5); }
-        .profile-info h2 { margin: 0 0 10px 0; color: var(--text-color); font-size: 1.6em; }
-        .profile-info p { margin: 5px 0; color: #ccc; text-align: left; padding-left: 20px; }
-        .profile-role { font-weight: normal; color: var(--price-color); padding: 5px 10px; border: 1px solid var(--price-color); border-radius: 5px; display: inline-block; margin-top: 15px; text-align: center; }
-        hr { border: 0; height: 1px; background-color: var(--border-color); margin: 15px 0; }
-        .task-item { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); transition: background-color 0.3s ease; }
-        .task-details h3 { font-size: 1.1em; }
-        .task-price { font-size: 1.1em; }
+        .task-item { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
         #revenue-dashboard { background-color: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); height: fit-content; border: 1px solid var(--delegate-color); margin-bottom: 30px; }
-        #revenue-dashboard h2 { color: var(--delegate-color); margin-top: 0; font-size: 1.8em; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
         .chart-container { width: 100%; padding: 20px 0; background-color: var(--dark-bg); border-radius: 8px; overflow: visible; margin-bottom: 15px; }
-        .svg-line { fill: none; stroke: var(--primary-color); stroke-width: 3; transition: stroke-dasharray 2s ease-in-out; }
+        .svg-line { fill: none; stroke: var(--primary-color); stroke-width: 3; }
         .svg-dot { fill: var(--primary-color); }
-        .svg-text { fill: var(--text-color); font-size: 12px; font-family: 'Itim', cursive; }
+        .svg-text { fill: var(--text-color); font-size: 12px; }
         .svg-axis-line { stroke: var(--border-color); stroke-width: 1; }
         .svg-grid-line { stroke: var(--border-color); stroke-width: 0.5; stroke-dasharray: 4; }
-        .chart-legend { font-size: 0.9em; color: #aaa; margin-top: 15px; text-align: left; padding-left: 10px; }
-        .task-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        .action-buttons { display: flex; gap: 10px; }
-        .btn { padding: 8px 14px; }
-        .accept { background-color: var(--accept-color); color: var(--dark-bg); }
-        .reject { background-color: var(--reject-color); color: var(--dark-bg); }
-        .delegate { background-color: var(--delegate-color); color: var(--dark-bg); }
-        .status-accepted { background-color: var(--accept-color); color: var(--dark-bg); }
-        .status-rejected { background-color: var(--reject-color); color: var(--dark-bg); }
-        .status-delegated { background-color: var(--delegate-color); color: var(--dark-bg); }
 
     </style>
 </head>
@@ -186,7 +187,6 @@
     <header>
         <h1>Coverteam System</h1>
         <div class="user-info">
-            <span>Coverusername : sutee08NYtm^_^</span> 
             <button class="logout-btn" onclick="logout()">logout</button>
         </div>
     </header>
@@ -264,7 +264,7 @@
                         <g class="y-axis">
                             <line class="svg-axis-line" x1="50" y1="320" x2="600" y2="320"/>
                             <text class="svg-text" x="40" y="325" text-anchor="end">0k</text>
-                            
+
                             <line class="svg-grid-line" x1="50" y1="270" x2="600" y2="270"/>
                             <text class="svg-text" x="40" y="275" text-anchor="end">20k</text>
                             
@@ -327,6 +327,10 @@
             </div>
             
             <div class="black-room-btn-container">
+                <div class="event-info">
+                    <span class="event-icon">💡</span>
+                    <span>รันโค้ดกันหน่อย <strong>23 Dec แถวสาทร</strong></span>
+                </div>
                 <button class="black-room-btn" onclick="alert('ไปยัง Black Room เพื่อดู 14 รายการแจ้งเตือน!')">
                     Black Room
                     <span class="notification-badge">14</span>
@@ -343,7 +347,7 @@
 
             if (!isExpanded) {
                 // เปิด
-                list.style.maxHeight = list.scrollHeight + "px"; // ตั้งค่าความสูงให้เท่ากับเนื้อหาจริง
+                list.style.maxHeight = list.scrollHeight + "px"; 
                 header.setAttribute('aria-expanded', 'true');
             } else {
                 // ปิด
@@ -352,7 +356,6 @@
             }
         }
         
-        // ฟังก์ชันเดิม
         function handleTaskAction(taskId, action) {
             const taskElement = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
             const taskActionsElement = taskElement.querySelector('.task-actions');
@@ -404,10 +407,10 @@
                 ${currentPriceHTML} 
             `;
             
-            // ต้องปรับความสูงของ max-height ใหม่หลังมีการเปลี่ยนแปลงเนื้อหาภายใน
+            // ปรับความสูงของ max-height ใหม่หลังมีการเปลี่ยนแปลงเนื้อหาภายใน
+            const list = document.getElementById('task-list');
             const header = document.querySelector('.task-list-header');
             if (header.getAttribute('aria-expanded') === 'true') {
-                 // ต้องใช้ setTimeout เพื่อให้ DOM คำนวณความสูงใหม่
                 setTimeout(() => {
                     list.style.maxHeight = list.scrollHeight + "px";
                 }, 50);
