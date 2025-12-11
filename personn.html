@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลบุคลากรและเจ้าหน้าที่ | [ชื่อหน่วยงาน]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* -------------------------- CSS STYLES FOR STAFF DIRECTORY -------------------------- */
+        
+        /* Font และสีพื้นฐาน */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #007bff; /* สีฟ้าหลัก */
+            --header-bg: #004d99; /* น้ำเงินเข้ม */
+            --text-dark: #343a40;
+            --background-light: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* ส่วนหัวของหน้า */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--header-bg);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        /* ส่วนค้นหาและกรอง (ถ้ามี) */
+        .search-bar {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .search-bar input[type="text"] {
+            padding: 12px;
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-bar input[type="text"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+        }
+        
+        /* -------------------------- Personnel Cards (Grid Layout) -------------------------- */
+        
+        .personnel-grid {
+            display: grid;
+            /* สร้าง Grid ที่ปรับตามขนาดหน้าจอ */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .personnel-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .personnel-card:hover {
+            transform: translateY(-5px); /* ยกขึ้นเมื่อชี้เมาส์ */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-img-container {
+            margin-bottom: 15px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            background-color: #f1f1f1; /* สีสำรองถ้าไม่มีรูป */
+        }
+
+        .person-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .person-position {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .contact-info li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            width: 25px;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .personnel-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>ข้อมูลบุคลากรและเจ้าหน้าที่</h1>
+            <p>งานทะเบียนวัดผล โรงเรียน [ชื่อโรงเรียนของคุณ]</p>
+        </header>
+
+        <section class="search-bar">
+            <input type="text" id="personnel-search" placeholder="ค้นหาชื่อ, ตำแหน่ง, หรือกลุ่มสาระการเรียนรู้...">
+        </section>
+
+        <section class="personnel-grid">
+
+            <article class="personnel-card" data-name="ณัฏฐกิตติ์ โพธิ์พุ่ม" data-position="หัวหน้างานทะเบียน">
+                <div class="profile-img-container">
+                    <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=NP" alt="รูปโปรไฟล์ ณัฏฐกิตติ์" class="profile-img"> 
+                </div>
+                <h2 class="person-name">นายณัฏฐกิตติ์ โพธิ์พุ่ม</h2>
+                <p class="person-position">หัวหน้างานทะเบียนและวัดผล</p>
+                <ul class="contact-info">
+                    <li><i class="fas fa-briefcase"></i> งานทะเบียนวัดผล</li>
+                    <li><i class="fas fa-phone"></i> 02-123-4567 ต่อ 830</li>
+                    <li><i class="fas fa-envelope"></i> natthakit@school.ac.th</li>
+                </ul>
+            </article>
+            
+            <article class="personnel-card" data-name="สมหญิง ใจดี" data-position="เจ้าหน้าที่ธุรการ">
+                <div class="profile-img-container">
+                    <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=SY" alt="รูปโปรไฟล์ สมหญิง" class="profile-img">
+                </div>
+                <h2 class="person-name">นางสาวสมหญิง ใจดี</h2>
+                <p class="person-position">เจ้าหน้าที่ธุรการงานทะเบียน</p>
+                <ul class="contact-info">
+                    <li><i class="fas fa-briefcase"></i> แผนกธุรการ</li>
+                    <li><i class="fas fa-phone"></i> 02-123-4567 ต่อ 831</li>
+                    <li><i class="fas fa-envelope"></i> somying@school.ac.th</li>
+                </ul>
+            </article>
+
+            <article class="personnel-card" data-name="วิภาดา เก่งคอม" data-position="ครูผู้ดูแลระบบ">
+                <div class="profile-img-container">
+                    <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=WK" alt="รูปโปรไฟล์ วิภาดา" class="profile-img">
+                </div>
+                <h2 class="person-name">ครูวิภาดา เก่งคอม</h2>
+                <p class="person-position">ครูผู้ดูแลระบบ SGS / IT Support</p>
+                <ul class="contact-info">
+                    <li><i class="fas fa-briefcase"></i> กลุ่มสาระฯ คอมพิวเตอร์</li>
+                    <li><i class="fas fa-phone"></i> 02-123-4567 ต่อ 501</li>
+                    <li><i class="fas fa-envelope"></i> wipada@school.ac.th</li>
+                </ul>
+            </article>
+            
+             <article class="personnel-card" data-name="สมชาย มั่นคง" data-position="รองผู้อำนวยการ">
+                <div class="profile-img-container">
+                    <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=SM" alt="รูปโปรไฟล์ สมชาย" class="profile-img">
+                </div>
+                <h2 class="person-name">รองฯ สมชาย มั่นคง</h2>
+                <p class="person-position">รองผู้อำนวยการฝ่ายวิชาการ</p>
+                <ul class="contact-info">
+                    <li><i class="fas fa-briefcase"></i> ฝ่ายบริหารวิชาการ</li>
+                    <li><i class="fas fa-phone"></i> 02-123-4567 ต่อ 101</li>
+                    <li><i class="fas fa-envelope"></i> somchai@school.ac.th</li>
+                </ul>
+            </article>
+
+        </section>
+    </div>
+    
+    <script>
+        // -------------------------- JAVASCRIPT FOR SEARCH FUNCTIONALITY --------------------------
+        document.getElementById('personnel-search').addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.personnel-card');
+
+            cards.forEach(card => {
+                // ดึงข้อมูลชื่อและตำแหน่งจาก data attribute หรือเนื้อหา
+                const name = card.getAttribute('data-name').toLowerCase();
+                const position = card.getAttribute('data-position').toLowerCase();
+                const content = card.textContent.toLowerCase();
+
+                // ตรวจสอบว่าคำค้นหาตรงกับชื่อ ตำแหน่ง หรือเนื้อหาในการ์ดหรือไม่
+                if (name.includes(searchTerm) || position.includes(searchTerm) || content.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
