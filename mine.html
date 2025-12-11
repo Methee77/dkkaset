@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>งานทะเบียนวัดผล [ชื่อหน่วยงาน] (รูปแบบไว้อาลัย)</title>
+    <title>งานทะเบียนวัดผล [ชื่อหน่วยงาน] (รูปแบบสว่าง)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* -------------------------- CSS STYLES (MOURNING - LIGHT GREY SCALE) -------------------------- */
+        /* -------------------------- CSS STYLES (LIGHT AND CLEAN THEME) -------------------------- */
         
         /* 1. นำเข้าฟอนต์ IBM Plex Sans Thai */
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&display=swap');
         
+        /* ตัวแปรสีหลัก */
+        :root {
+            --primary-color: #007bff; /* สีเน้นหลัก: สีฟ้า */
+            --secondary-color: #f5f5f5; /* สีพื้นหลังรอง: เทาอ่อนมาก */
+            --header-bg: #004d99; /* สี Header: น้ำเงินเข้ม */
+            --text-dark: #333; /* สีข้อความเข้ม */
+            --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.08);
+            --border-light: #ddd;
+        }
+
         /* การตั้งค่าพื้นฐาน */
         body {
-            /* 2. ใช้ฟอนต์ IBM Plex Sans Thai เป็นหลัก */
             font-family: 'IBM Plex Sans Thai', sans-serif;
             margin: 0;
             padding: 0;
             /* เปลี่ยนพื้นหลังหลักเป็นสีเทาอ่อนมาก */
-            background-color: #e9e9e9; 
+            background-color: var(--secondary-color); 
             /* เปลี่ยนสีตัวอักษรหลักเป็นสีเทาเข้ม */
-            color: #333; 
+            color: var(--text-dark); 
             line-height: 1.6;
         }
 
@@ -29,15 +38,17 @@
             width: 95%;
             max-width: 1200px;
             margin: 0 auto;
-            /* เปลี่ยนพื้นหลัง Wrapper เป็นสีขาวสะอาด */
+            /* พื้นหลัง Wrapper เป็นสีขาวสะอาด */
             background-color: white; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
+            border-radius: 8px; /* เพิ่มขอบโค้งมน */
+            overflow: hidden;
         }
 
         /* ส่วนหัว (Header) */
         .header {
-            /* เปลี่ยนสีเป็นสีเทาเข้มเกือบดำ */
-            background-color: #333; 
+            /* เปลี่ยนสีเป็นสีน้ำเงินเข้ม */
+            background-color: var(--header-bg); 
             color: white;
             padding: 20px 20px;
             text-align: center;
@@ -46,10 +57,10 @@
         .header h1 {
             margin: 0;
             font-size: 1.8em;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
         }
 
-        /* โครงสร้างหลัก 2 คอลัมน์ (Sidebar ซ้าย + Content ขวา) */
+        /* โครงสร้างหลัก 2 คอลัมน์ */
         .main-container {
             display: flex;
             min-height: 600px;
@@ -59,15 +70,15 @@
         .sidebar {
             width: 250px;
             flex-shrink: 0;
-            /* เปลี่ยนพื้นหลัง Sidebar เป็นสีเทาอ่อน */
-            background-color: #f5f5f5; 
-            border-right: 1px solid #ddd;
+            /* เปลี่ยนพื้นหลัง Sidebar เป็นสีขาวหรือเทาอ่อนมาก */
+            background-color: #fff; 
+            border-right: 1px solid var(--border-light);
             padding: 15px 0;
         }
 
         .sidebar h3 {
-            /* เปลี่ยนสีพื้นหลังเป็นสีเทาเข้ม */
-            background-color: #555; 
+            /* เปลี่ยนสีพื้นหลังเป็นสีฟ้าอ่อน */
+            background-color: var(--primary-color); 
             /* เปลี่ยนสีเน้นเป็นสีขาว */
             color: #fff; 
             padding: 10px 15px;
@@ -86,31 +97,34 @@
 
         .sidebar ul li a {
             display: block;
-            padding: 8px 10px;
+            padding: 10px 10px;
             margin-bottom: 5px;
             text-decoration: none;
             /* เปลี่ยนสีลิงก์เป็นสีเทาเข้ม */
-            color: #333; 
+            color: var(--text-dark); 
             border-left: 5px solid transparent;
-            font-weight: bold;
+            font-weight: 400;
             transition: background-color 0.2s, border-left 0.2s;
+            border-radius: 4px;
         }
 
         .sidebar ul li a:hover {
-            /* เปลี่ยนสี Hover เป็นสีเทาอ่อนลง */
-            background-color: #e0e0e0; 
-            /* เปลี่ยนสีเน้น Border เป็นสีเทาปานกลาง */
-            border-left: 5px solid #888; 
+            /* เปลี่ยนสี Hover เป็นสีฟ้าอ่อนมาก */
+            background-color: #e6f2ff; 
+            /* เปลี่ยนสีเน้น Border เป็นสีฟ้าหลัก */
+            border-left: 5px solid var(--primary-color); 
         }
         
-        /* สไตล์พิเศษสำหรับลิงก์เข้าสู่ระบบ (ปรับสีให้เข้ากับโทนเทา) */
-        .sidebar ul li a[style*="background-color: #004d99"] {
-            background-color: #555 !important; /* เทาเข้ม */
+        /* สไตล์พิเศษสำหรับลิงก์เข้าสู่ระบบ (ปรับสีให้เข้ากับโทนสว่าง) */
+        .sidebar ul li a[style*="background-color: #555"] {
+            background-color: var(--primary-color) !important; /* ฟ้าหลัก */
             color: white !important;
+            font-weight: 600 !important;
         }
-        .sidebar ul li a[style*="background-color: #ffcc00"] {
-            background-color: #ccc !important; /* เทาอ่อน */
-            color: #333 !important;
+        .sidebar ul li a[style*="background-color: #ccc"] {
+            background-color: #6c757d !important; /* เทาปานกลาง */
+            color: white !important;
+            font-weight: 600 !important;
         }
 
 
@@ -121,26 +135,26 @@
         }
         
         .content h2 {
-            /* เปลี่ยนสีหัวข้อเป็นสีเทาเข้ม */
-            color: #333; 
+            /* เปลี่ยนสีหัวข้อเป็นสีน้ำเงินเข้ม */
+            color: var(--header-bg); 
             font-size: 1.5em;
-            /* เปลี่ยนเส้นขอบเป็นสีเทาปานกลาง */
-            border-bottom: 2px dotted #888; 
+            /* เปลี่ยนเส้นขอบเป็นสีเทาอ่อน */
+            border-bottom: 2px solid #eee; 
             padding-bottom: 5px;
             margin-bottom: 20px;
         }
         
         /* ส่วนนับถอยหลัง (Countdown Section) */
         .countdown-section {
-            /* เปลี่ยนสีพื้นหลังเน้นเป็นสีเทาอ่อน */
-            background-color: #ccc; 
+            /* เปลี่ยนสีพื้นหลังเน้นเป็นสีฟ้าอ่อนมาก */
+            background-color: #e6f2ff; 
             /* เปลี่ยนสีตัวอักษรเป็นสีดำ */
-            color: #333; 
-            padding: 15px;
+            color: var(--text-dark); 
+            padding: 20px;
             margin-bottom: 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             text-align: center;
-            border: 1px solid #999;
+            border: 2px solid var(--primary-color);
         }
 
         .countdown-section h3 {
@@ -151,93 +165,101 @@
         .timer-display {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .time-unit {
-            /* เปลี่ยนสีพื้นหลังเป็นสีเทาเข้ม */
-            background-color: #555; 
+            /* เปลี่ยนสีพื้นหลังเป็นสีฟ้าหลัก */
+            background-color: var(--primary-color); 
             color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            min-width: 60px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            min-width: 70px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .time-unit .number {
             display: block;
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: 700;
         }
 
         .time-unit .label {
             display: block;
-            font-size: 0.75em;
+            font-size: 0.8em;
         }
 
         #countdown-message {
-            font-size: 1.2em;
-            font-weight: bold;
-            /* คงสีแดงไว้เพื่อการแจ้งเตือน */
+            font-size: 1.4em;
+            font-weight: 700;
+            /* คงสีแดงไว้เพื่อการแจ้งเตือนสำคัญ */
             color: #cc0000; 
             padding: 10px;
-            display: none;
         }
 
         /* กล่องข่าวสาร/ลิงก์ด่วน */
         .news-box, .service-box {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             padding: 15px;
             margin-bottom: 20px;
-            border-radius: 4px;
+            border-radius: 8px;
             /* พื้นหลังเป็นสีขาว/เทาอ่อนตาม Wrapper */
             background-color: #fff; 
         }
 
         .news-list a {
             display: block;
-            color: #333;
-            padding: 5px 0;
+            color: var(--text-dark);
+            padding: 8px 0;
             border-bottom: 1px dotted #ccc;
             text-decoration: none;
+            transition: color 0.2s;
         }
         .news-list a:hover {
-            /* สี hover เป็นสีเทาเข้ม */
-            color: #555; 
+            /* สี hover เป็นสีฟ้าหลัก */
+            color: var(--primary-color); 
             text-decoration: underline;
         }
         
         /* --- CSS สำหรับส่วนแสดงสถานะงานทะเบียนใน Content --- */
         
         .status-admin-box {
-            border: 1px solid #ddd;
-            padding: 15px;
+            border: 1px solid var(--border-light);
+            padding: 20px;
             margin-top: 20px;
-            border-radius: 4px;
+            border-radius: 8px;
             /* พื้นหลังสีอ่อน */
-            background-color: #f5f5f5; 
+            background-color: var(--secondary-color); 
         }
 
         .status-header {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 600;
-            /* เปลี่ยนสีเป็นสีเทาเข้ม */
-            color: #555; 
-            border-bottom: 1px solid #ccc;
+            /* เปลี่ยนสีเป็นสีน้ำเงินเข้ม */
+            color: var(--header-bg); 
+            border-bottom: 2px solid #ccc;
             padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .status-item-line {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 10px;
+            font-weight: 400;
         }
 
         .status-options-group label {
             margin-left: 15px;
             font-weight: normal;
-            color: #333;
+            color: var(--text-dark);
             cursor: default;
         }
 
         .status-options-group input[type="radio"] {
-            /* เปลี่ยนสี accent color ให้เป็นเทาเข้ม */
-            accent-color: #555; 
+            /* เปลี่ยนสี accent color ให้เป็นฟ้าหลัก */
+            accent-color: var(--primary-color); 
         }
         
         .metadata {
@@ -245,23 +267,23 @@
             font-size: 0.85em;
             text-align: right;
             color: #666;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #ddd;
             padding-top: 10px;
         }
         /* ----------------------------------------------------------------- */
         
         /* ส่วนท้าย (Footer) */
         .footer {
-            /* เปลี่ยนสีเป็นสีเทาเข้ม */
-            background-color: #333; 
+            /* เปลี่ยนสีเป็นสีน้ำเงินเข้ม */
+            background-color: var(--header-bg); 
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             text-align: center;
-            font-size: 0.8em;
+            font-size: 0.9em;
             clear: both;
         }
 
-        /* Media Queries - ปรับสีตามรูปแบบใหม่ */
+        /* Media Queries */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -269,7 +291,10 @@
             .sidebar {
                 width: 100%;
                 border-right: none;
-                border-bottom: 1px solid #ddd;
+                border-bottom: 1px solid var(--border-light);
+            }
+            .sidebar h3 {
+                border-bottom: none;
             }
             .sidebar ul {
                 display: flex;
@@ -283,8 +308,8 @@
             }
             .sidebar ul li a:hover {
                 border-left: none;
-                /* เปลี่ยนสีเน้นเป็นสีเทาปานกลาง */
-                border-bottom: 3px solid #888; 
+                /* เปลี่ยนสีเน้นเป็นสีฟ้าหลัก */
+                border-bottom: 3px solid var(--primary-color); 
                 background-color: transparent;
             }
         }
@@ -361,7 +386,7 @@
                 <h2>บริการและเอกสารคำร้องออนไลน์</h2>
                 <div class="service-box">
                     <p>สามารถดาวน์โหลดแบบฟอร์มคำร้องต่างๆ ได้ที่นี่</p>
-                    <a href="#" style="background-color: #555; color: white; padding: 8px 15px; display: inline-block; text-decoration: none; border-radius: 4px;"><i class="fas fa-file-pdf"></i> ดาวน์โหลดแบบฟอร์ม ปพ.1/คำร้อง</a>
+                    <a href="#" style="background-color: var(--header-bg); color: white; padding: 8px 15px; display: inline-block; text-decoration: none; border-radius: 4px;"><i class="fas fa-file-pdf"></i> ดาวน์โหลดแบบฟอร์ม ปพ.1/คำร้อง</a>
                 </div>
 
                 <div class="status-admin-box">
