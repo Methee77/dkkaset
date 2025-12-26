@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหาตารางสอบ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ค้นหาตารางสอบ</h1>
+
+    <!-- ช่องค้นหา -->
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="พิมพ์เพื่อค้นหา...">
+
+    <!-- ตารางสอบ -->
+    <table id="examTable">
+        <thead>
+            <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อวิชา</th>
+                <th>วันที่สอบ</th>
+                <th>เวลา</th>
+                <th>ห้อง</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>ENG101</td><td>ภาษาอังกฤษพื้นฐาน</td><td>10/01/2569</td><td>09:00 - 12:00</td><td>101</td></tr>
+            <tr><td>MTH202</td><td>คณิตศาสตร์</td><td>12/01/2569</td><td>13:00 - 15:00</td><td>203</td></tr>
+            <tr><td>SCI303</td><td>วิทยาศาสตร์</td><td>15/01/2569</td><td>10:00 - 12:00</td><td>102</td></tr>
+            <tr><td>HIS204</td><td>ประวัติศาสตร์</td><td>17/01/2569</td><td>09:00 - 11:00</td><td>105</td></tr>
+            <tr><td>IT305</td><td>เทคโนโลยีสารสนเทศ</td><td>19/01/2569</td><td>11:00 - 13:00</td><td>301</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        function searchTable() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById("examTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let txtValue = tr[i].textContent || tr[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
