@@ -2,21 +2,21 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Student Request Tracking</title>
+<title>Request Tracking</title>
 
 <style>
 :root{
-    --primary:#2563eb;
-    --bg:#f4f6f8;
+    --bg:#f9fafb;
     --card:#ffffff;
-    --text:#1f2937;
-    --muted:#9ca3af;
-    --line:#e5e7eb;
+    --text:#111827;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --primary:#2563eb;
 }
 
 *{
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body{
@@ -28,41 +28,54 @@ body{
     align-items:center;
 }
 
-.container{
-    width:520px;
-    background:var(--card);
-    border-radius:16px;
-    padding:32px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+.wrapper{
+    width:560px;
 }
 
-h1{
-    margin:0 0 24px;
-    font-size:22px;
-    text-align:center;
+.header{
+    margin-bottom:24px;
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+    font-weight:600;
     color:var(--text);
+}
+
+.header p{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.version{
+    display:block;
+    margin-top:6px;
+    font-size:12px;
+    color:#9ca3af;
 }
 
 .search{
     display:flex;
-    gap:10px;
+    gap:12px;
 }
 
 input{
     flex:1;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid var(--line);
+    padding:14px 16px;
+    border-radius:10px;
+    border:1px solid var(--border);
     font-size:15px;
 }
 
 button{
-    padding:14px 22px;
-    border:none;
-    border-radius:12px;
-    background:var(--primary);
+    padding:14px 20px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--text);
     color:white;
-    font-size:15px;
+    font-size:14px;
     cursor:pointer;
 }
 
@@ -71,11 +84,11 @@ button:hover{
 }
 
 .card{
-    background:#fafafa;
-    border-radius:14px;
-    padding:18px;
-    margin-top:24px;
-    border:1px solid var(--line);
+    margin-top:28px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:24px;
 }
 
 .name{
@@ -85,71 +98,77 @@ button:hover{
 }
 
 .request{
-    margin-top:6px;
+    margin-top:4px;
+    font-size:14px;
     color:var(--muted);
 }
 
-.status{
-    margin-top:24px;
+.steps{
+    display:flex;
+    justify-content:space-between;
+    margin-top:32px;
 }
 
 .step{
-    display:flex;
-    align-items:center;
+    flex:1;
+    text-align:center;
     position:relative;
+    color:var(--muted);
+    font-size:13px;
 }
 
 .step:not(:last-child)::after{
     content:"";
     position:absolute;
-    left:10px;
-    top:22px;
-    width:2px;
-    height:26px;
-    background:var(--line);
+    top:10px;
+    right:-50%;
+    width:100%;
+    height:1px;
+    background:var(--border);
 }
 
-.circle{
-    width:22px;
-    height:22px;
+.dot{
+    width:10px;
+    height:10px;
     border-radius:50%;
-    background:var(--line);
-    margin-right:12px;
+    background:var(--border);
+    margin:0 auto 10px;
 }
 
-.step.active .circle{
-    background:var(--primary);
-}
-
-.step span{
-    font-size:15px;
-    color:var(--muted);
-}
-
-.step.active span{
+.step.active{
     color:var(--text);
     font-weight:500;
 }
 
+.step.active .dot{
+    background:var(--primary);
+}
+
 .error{
     margin-top:20px;
-    text-align:center;
     color:#dc2626;
+    font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>ติดตามสถานะคำร้องนักเรียน</h1>
+<div class="wrapper">
+
+    <div class="header">
+        <h1>ติดตามคำร้อง</h1>
+        <p>กรอกรหัสเพื่อตรวจสอบสถานะการดำเนินการ</p>
+        <span class="version">version 1.0</span>
+    </div>
 
     <div class="search">
-        <input id="code" placeholder="รหัสติดตาม เช่น STD001">
-        <button onclick="check()">ค้นหา</button>
+        <input id="code" placeholder="Tracking ID เช่น STD001">
+        <button onclick="check()">Search</button>
     </div>
 
     <div id="output"></div>
+
 </div>
 
 <script>
@@ -177,10 +196,10 @@ const data={
 };
 
 const steps=[
-    "รับคำร้อง",
-    "ตรวจสอบเอกสาร",
-    "อยู่ระหว่างดำเนินการ",
-    "ดำเนินการเสร็จสิ้น"
+    "Received",
+    "Review",
+    "Processing",
+    "Completed"
 ];
 
 function check(){
@@ -189,7 +208,7 @@ function check(){
     out.innerHTML="";
 
     if(!data[code]){
-        out.innerHTML=`<div class="error">ไม่พบข้อมูลรหัสติดตาม</div>`;
+        out.innerHTML=`<div class="error">ไม่พบข้อมูล</div>`;
         return;
     }
 
@@ -200,14 +219,14 @@ function check(){
             <div class="name">${d.name}</div>
             <div class="request">${d.request}</div>
 
-            <div class="status">
+            <div class="steps">
     `;
 
     steps.forEach((s,i)=>{
         html+=`
             <div class="step ${i<d.status?'active':''}">
-                <div class="circle"></div>
-                <span>${s}</span>
+                <div class="dot"></div>
+                ${s}
             </div>
         `;
     });
