@@ -2,26 +2,28 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Smart Tracking System</title>
+<title>ระบบติดตามสถานะคำร้อง</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blue:#2563eb;
-  --green:#22c55e;
-  --gray:#64748b;
-  --bg:linear-gradient(135deg,#0f172a,#020617);
+  --primary:#1e3a8a;
+  --accent:#2563eb;
+  --success:#16a34a;
+  --bg:#f1f5f9;
+  --text:#0f172a;
+  --muted:#64748b;
 }
 
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:'Inter',sans-serif;
+  font-family:'Kanit',sans-serif;
   background:var(--bg);
-  color:#e5e7eb;
+  color:var(--text);
 }
 
 .container{
@@ -29,62 +31,62 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:40px;
+  padding:32px;
 }
 
 .card{
   width:100%;
   max-width:900px;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(20px);
-  border-radius:20px;
-  padding:48px;
-  box-shadow:0 30px 60px rgba(0,0,0,.4);
+  background:#ffffff;
+  border-radius:18px;
+  padding:44px 48px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
 }
 
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  border-bottom:1px solid #e5e7eb;
+  padding-bottom:20px;
 }
 
-.title{
+.header h1{
+  margin:0;
   font-size:22px;
-  font-weight:600;
+  font-weight:500;
 }
 
-.live{
-  font-size:13px;
-  color:var(--green);
+.header p{
+  margin-top:6px;
+  font-size:14px;
+  color:var(--muted);
 }
 
 .search{
-  margin-top:36px;
+  margin-top:30px;
   display:flex;
-  gap:14px;
+  gap:12px;
 }
 
 .search input{
   flex:1;
-  padding:14px 18px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.15);
+  padding:14px 16px;
+  font-size:15px;
+  border:1px solid #e2e8f0;
   border-radius:10px;
-  color:#fff;
 }
 
 .search button{
   padding:14px 30px;
-  background:var(--blue);
+  background:var(--primary);
   border:none;
   border-radius:10px;
   color:#fff;
+  font-size:15px;
   cursor:pointer;
 }
 
-.result{
+.section{
   display:none;
-  margin-top:48px;
+  margin-top:36px;
 }
 
 .info{
@@ -94,27 +96,28 @@ body{
 }
 
 .box{
-  background:rgba(255,255,255,.06);
+  background:#f8fafc;
   padding:18px;
   border-radius:14px;
 }
 
 .box span{
-  font-size:12px;
-  color:var(--gray);
+  font-size:13px;
+  color:var(--muted);
 }
 
 .box strong{
   display:block;
   margin-top:6px;
   font-size:15px;
+  font-weight:500;
 }
 
-.timeline{
-  margin-top:42px;
+.progress{
+  margin-top:40px;
 }
 
-.line{
+.steps{
   display:flex;
   align-items:center;
 }
@@ -129,17 +132,12 @@ body{
   width:14px;
   height:14px;
   border-radius:50%;
-  background:#334155;
+  background:#cbd5f5;
   margin:0 auto;
 }
 
-.active{
-  background:var(--blue);
-}
-
-.done{
-  background:var(--green);
-}
+.done{background:var(--success)}
+.active{background:var(--accent)}
 
 .step::after{
   content:'';
@@ -148,7 +146,7 @@ body{
   left:50%;
   width:100%;
   height:2px;
-  background:#334155;
+  background:#cbd5f5;
   z-index:-1;
 }
 
@@ -156,22 +154,23 @@ body{
 
 .label{
   margin-top:10px;
-  font-size:12px;
-  color:#cbd5f5;
+  font-size:13px;
+  color:#475569;
 }
 
 .status{
-  margin-top:20px;
+  margin-top:18px;
   font-size:15px;
   font-weight:500;
-  color:var(--blue);
+  color:var(--accent);
 }
 
 .notfound{
   display:none;
-  margin-top:36px;
-  color:#f87171;
+  margin-top:32px;
   text-align:center;
+  color:#b91c1c;
+  font-weight:500;
 }
 </style>
 </head>
@@ -182,71 +181,77 @@ body{
   <div class="card">
 
     <div class="header">
-      <div class="title">Smart Educational Tracking</div>
-      <div class="live">● LIVE SYSTEM</div>
+      <h1>ระบบติดตามสถานะคำร้องเอกสารทางการศึกษา</h1>
+      <p>สำหรับตรวจสอบความคืบหน้าการดำเนินการ</p>
     </div>
 
     <div class="search">
-      <input id="track" placeholder="Tracking ID">
-      <button onclick="find()">Search</button>
+      <input id="track" placeholder="กรอกรหัสคำร้อง">
+      <button onclick="ค้นหา()">ค้นหา</button>
     </div>
 
-    <div class="result" id="result">
+    <div class="section" id="section">
       <div class="info">
-        <div class="box"><span>Tracking ID</span><strong id="rid"></strong></div>
-        <div class="box"><span>Applicant</span><strong id="name"></strong></div>
-        <div class="box"><span>Document</span><strong id="doc"></strong></div>
-        <div class="box"><span>Submitted</span><strong id="date"></strong></div>
+        <div class="box"><span>รหัสคำร้อง</span><strong id="rid"></strong></div>
+        <div class="box"><span>ชื่อผู้ยื่นคำร้อง</span><strong id="name"></strong></div>
+        <div class="box"><span>ประเภทเอกสาร</span><strong id="doc"></strong></div>
+        <div class="box"><span>วันที่ยื่นคำร้อง</span><strong id="date"></strong></div>
       </div>
 
-      <div class="timeline">
-        <div class="line" id="line"></div>
+      <div class="progress">
+        <div class="steps" id="steps"></div>
         <div class="status" id="status"></div>
       </div>
     </div>
 
     <div class="notfound" id="notfound">
-      No data found in the system
+      ไม่พบข้อมูลคำร้องในระบบ
     </div>
 
   </div>
 </div>
 
 <script>
-const db=[
- {id:"EDU001",name:"สมชาย ใจดี",doc:"Transcript",date:"01/01/2568",step:3},
- {id:"EDU002",name:"สุดา แสงทอง",doc:"Certificate",date:"02/01/2568",step:1}
+const ข้อมูล=[
+ {id:"TH001",name:"นายสมชาย ใจดี",doc:"ใบรับรองผลการเรียน",date:"1 มกราคม 2568",step:2},
+ {id:"TH002",name:"นางสาวสุดา แสงทอง",doc:"ใบรับรองจบการศึกษา",date:"28 ธันวาคม 2567",step:4}
 ];
 
-const steps=["Request Received","Verification","Processing","Completed"];
+const ขั้นตอน=[
+ "รับคำร้อง",
+ "ตรวจสอบเอกสาร",
+ "ดำเนินการจัดทำ",
+ "ดำเนินการเรียบร้อย"
+];
 
-function find(){
- const v=track.value.trim().toUpperCase();
- const f=db.find(d=>d.id===v);
+function ค้นหา(){
+ const ค่า=track.value.trim().toUpperCase();
+ const รายการ=ข้อมูล.find(d=>d.id===ค่า);
 
- if(!f){
-  result.style.display="none";
+ if(!รายการ){
+  section.style.display="none";
   notfound.style.display="block";
   return;
  }
 
- rid.innerText=f.id;
- name.innerText=f.name;
- doc.innerText=f.doc;
- date.innerText=f.date;
+ rid.innerText=รายการ.id;
+ name.innerText=รายการ.name;
+ doc.innerText=รายการ.doc;
+ date.innerText=รายการ.date;
 
- line.innerHTML="";
- steps.forEach((s,i)=>{
-  const st=document.createElement("div");
-  st.className="step";
-  st.innerHTML=`<div class="circle ${
-    i+1<f.step?"done":i+1===f.step?"active":""
-  }"></div><div class="label">${s}</div>`;
-  line.appendChild(st);
+ steps.innerHTML="";
+ ขั้นตอน.forEach((t,i)=>{
+  const s=document.createElement("div");
+  s.className="step";
+  s.innerHTML=`<div class="circle ${
+    i+1<รายการ.step?"done":i+1===รายการ.step?"active":""
+  }"></div><div class="label">${t}</div>`;
+  steps.appendChild(s);
  });
 
- status.innerText="Current Status: "+steps[f.step-1];
- result.style.display="block";
+ status.innerText="สถานะปัจจุบัน : "+ขั้นตอน[รายการ.step-1];
+
+ section.style.display="block";
  notfound.style.display="none";
 }
 </script>
