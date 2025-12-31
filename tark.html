@@ -2,246 +2,167 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Request Tracking</title>
+<title>Tracking System – version 1.0</title>
 
 <style>
-:root{
-  --bg:#0b0d10;
-  --line:#1f2937;
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --primary:#3b82f6;
-}
-
-*{
-  box-sizing:border-box;
-  font-family: Inter, system-ui, sans-serif;
-}
-
 body{
   margin:0;
-  min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
+  height:100vh;
   display:flex;
   justify-content:center;
+  align-items:center;
+  background:#0b0e14;
+  font-family:Inter,system-ui,sans-serif;
+  color:#e5e7eb;
 }
 
-.app{
-  width:760px;
-  padding:48px 0;
+/* container */
+.tracking-box{
+  width:90%;
+  max-width:900px;
+  background:#111827;
+  padding:40px;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
 }
 
-/* ===== HEADER ===== */
+/* header */
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
+  text-align:center;
+  margin-bottom:40px;
 }
 
 .header h1{
-  margin:0;
-  font-size:28px;
-  font-weight:500;
+  font-size:26px;
+  font-weight:600;
 }
 
 .header span{
-  font-size:12px;
-  color:var(--muted);
+  font-size:13px;
+  color:#9ca3af;
 }
 
-/* ===== SEARCH ===== */
-.search{
+/* line status */
+.status-line{
   display:flex;
-  gap:16px;
-  margin:36px 0;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:35px;
 }
 
-input{
+.segment{
   flex:1;
-  padding:14px 4px;
-  background:none;
-  border:none;
-  border-bottom:1px solid var(--line);
-  color:var(--text);
-  outline:none;
-  font-size:15px;
-}
-
-button{
-  padding:12px 22px;
-  background:none;
-  border:1px solid var(--line);
-  color:var(--text);
-  cursor:pointer;
-}
-
-/* ===== PANEL ===== */
-.panel{
-  border-top:1px solid var(--line);
-  padding-top:32px;
-}
-
-.name{
-  font-size:22px;
-  font-weight:500;
-}
-
-.request{
-  color:var(--muted);
-  margin-top:6px;
-}
-
-/* ===== META ===== */
-.meta{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:32px;
-  margin:32px 0;
-  font-size:14px;
-}
-
-.meta span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:4px;
-}
-
-/* ===== STATUS ===== */
-.status{
-  margin-top:36px;
-}
-
-.status-title{
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:18px;
-}
-
-.track{
+  height:6px;
+  border-radius:6px;
+  background:#1f2937;
   position:relative;
-  height:2px;
-  background:var(--line);
+  overflow:hidden;
 }
 
-.track-progress{
-  position:absolute;
-  top:0;
-  left:0;
-  height:2px;
-  background:var(--primary);
+.segment.done{
+  background:#3b82f6;
 }
 
-.nodes{
-  display:flex;
-  justify-content:space-between;
-  margin-top:-7px;
+.segment.active{
+  background:linear-gradient(
+    90deg,
+    #2563eb,
+    #60a5fa,
+    #2563eb
+  );
+  box-shadow:0 0 18px rgba(59,130,246,.8);
+  animation:flow 2.5s linear infinite;
 }
 
-.node{
-  width:14px;
-  height:14px;
-  border:1px solid var(--line);
-  background:var(--bg);
+@keyframes flow{
+  0%{background-position:0%}
+  100%{background-position:200%}
 }
 
-.node.active{
-  background:var(--primary);
-  border-color:var(--primary);
-}
-
+/* labels */
 .labels{
   display:flex;
   justify-content:space-between;
-  margin-top:12px;
   font-size:13px;
-  color:var(--muted);
+  color:#9ca3af;
+  margin-bottom:30px;
 }
 
 .labels .active{
-  color:var(--text);
+  color:#bfdbfe;
+  font-weight:500;
 }
 
-.error{
-  color:#f87171;
-  margin-top:20px;
+/* detail */
+.detail{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  font-size:14px;
+}
+
+.card{
+  background:#0b1220;
+  padding:18px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+}
+
+.card b{
+  display:block;
+  margin-bottom:6px;
+  color:#93c5fd;
 }
 </style>
 </head>
 
 <body>
-<div class="app">
+
+<div class="tracking-box">
 
   <div class="header">
-    <h1>Request Tracking</h1>
+    <h1>ระบบติดตามคำร้อง</h1>
     <span>version 1.0</span>
   </div>
 
-  <div class="search">
-    <input id="code" placeholder="Tracking ID">
-    <button onclick="check()">Search</button>
+  <!-- status line -->
+  <div class="status-line">
+    <div class="segment done"></div>
+    <div class="segment done"></div>
+    <div class="segment active"></div>
+    <div class="segment"></div>
   </div>
 
-  <div id="out"></div>
+  <!-- labels -->
+  <div class="labels">
+    <div>ยื่นคำร้อง</div>
+    <div>ตรวจสอบ</div>
+    <div class="active">กำลังดำเนินการ</div>
+    <div>เสร็จสิ้น</div>
+  </div>
+
+  <!-- detail -->
+  <div class="detail">
+    <div class="card">
+      <b>ชื่อผู้ยื่นคำร้อง</b>
+      นายธนภัทร กลิ่นศรีทอง
+    </div>
+    <div class="card">
+      <b>ประเภทคำร้อง</b>
+      ขอแก้ไขข้อมูลทะเบียน
+    </div>
+    <div class="card">
+      <b>วันที่ยื่นคำร้อง</b>
+      12 ธันวาคม 2568
+    </div>
+    <div class="card">
+      <b>เจ้าหน้าที่ผู้ดำเนินการ</b>
+      น.ส.กมลชนก ศรีสุข
+    </div>
+  </div>
+
 </div>
-
-<script>
-const steps=["รับคำร้อง","ตรวจสอบ","ดำเนินการ","เสร็จสิ้น"];
-
-const db={
-  STD001:{
-    name:"ธนภัทร กลิ่นศรีทอง",
-    request:"ขอใบรับรองผลการเรียน",
-    status:3,
-    submitted:"12/06/2025",
-    received:null,
-    officer:"นางสาวสุภาวดี ศรีสุข"
-  }
-};
-
-function check(){
-  const d=db[code.value.trim()];
-  if(!d){
-    out.innerHTML='<div class="error">ไม่พบ Tracking ID</div>';
-    return;
-  }
-
-  const percent=(d.status-1)/(steps.length-1)*100;
-
-  out.innerHTML=`
-  <div class="panel">
-    <div class="name">${d.name}</div>
-    <div class="request">${d.request}</div>
-
-    <div class="meta">
-      <div><span>วันที่ยื่นคำร้อง</span>${d.submitted}</div>
-      <div><span>วันรับเอกสาร</span>${d.received ?? "–"}</div>
-      <div><span>เจ้าหน้าที่ผู้ดำเนินการ</span>${d.officer}</div>
-    </div>
-
-    <div class="status">
-      <div class="status-title">สถานะการดำเนินการ</div>
-
-      <div class="track">
-        <div class="track-progress" style="width:${percent}%"></div>
-      </div>
-
-      <div class="nodes">
-        ${steps.map((_,i)=>`
-          <div class="node ${i<d.status?'active':''}"></div>
-        `).join("")}
-      </div>
-
-      <div class="labels">
-        ${steps.map((s,i)=>`
-          <div class="${i===d.status-1?'active':''}">${s}</div>
-        `).join("")}
-      </div>
-    </div>
-  </div>`;
-}
-</script>
 
 </body>
 </html>
