@@ -91,9 +91,28 @@ button{
   color:var(--muted);
 }
 
+/* ===== META INFO ===== */
+.meta{
+  display:flex;
+  gap:24px;
+  margin-top:16px;
+  font-size:13px;
+  flex-wrap:wrap;
+}
+
+.meta div span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.meta div strong{
+  font-weight:500;
+}
+
 /* ===== STATUS FOCUS ===== */
 .current-status{
-  margin-top:22px;
+  margin-top:24px;
   padding:18px;
   border-radius:14px;
   background:#0f1217;
@@ -123,7 +142,6 @@ button{
 .progress-bar{
   height:100%;
   background:var(--success);
-  width:0%;
 }
 
 /* ===== DETAIL STATUS ===== */
@@ -176,10 +194,38 @@ button{
 
 <script>
 const db={
-  STD001:{name:"ธนภัทร กลิ่นศรีทอง",request:"ขอใบรับรองผลการเรียน",status:1},
-  STD002:{name:"ณัฐวุฒิ แก้วมณี",request:"ขอย้ายสถานศึกษา",status:2},
-  STD003:{name:"ศิริพร สุขใจ",request:"ขอเอกสารจบการศึกษา",status:3},
-  STD004:{name:"กิตติพงษ์ แสงทอง",request:"ขอแก้ไขข้อมูลส่วนตัว",status:4}
+  STD001:{
+    name:"ธนภัทร กลิ่นศรีทอง",
+    request:"ขอใบรับรองผลการเรียน",
+    status:1,
+    submitted:"12/06/2025",
+    received:null,
+    officer:null
+  },
+  STD002:{
+    name:"ณัฐวุฒิ แก้วมณี",
+    request:"ขอย้ายสถานศึกษา",
+    status:2,
+    submitted:"10/06/2025",
+    received:null,
+    officer:"นางสาวสุภาวดี ศรีสุข"
+  },
+  STD003:{
+    name:"ศิริพร สุขใจ",
+    request:"ขอเอกสารจบการศึกษา",
+    status:3,
+    submitted:"05/06/2025",
+    received:"18/06/2025",
+    officer:"นายปิยะพงษ์ วัฒนชัย"
+  },
+  STD004:{
+    name:"กิตติพงษ์ แสงทอง",
+    request:"ขอแก้ไขข้อมูลส่วนตัว",
+    status:4,
+    submitted:"01/06/2025",
+    received:"15/06/2025",
+    officer:"นางสาวอรทัย มณีวงศ์"
+  }
 };
 
 const steps=["Received","Review","Processing","Completed"];
@@ -200,6 +246,21 @@ function check(){
     <div class="card">
       <div class="name">${d.name}</div>
       <div class="request">${d.request}</div>
+
+      <div class="meta">
+        <div>
+          <span>วันที่ยื่นคำร้อง</span>
+          <strong>${d.submitted}</strong>
+        </div>
+        <div>
+          <span>วันรับเอกสาร</span>
+          <strong>${d.received ?? "– ยังไม่ถึงขั้นตอนนี้"}</strong>
+        </div>
+        <div>
+          <span>เจ้าหน้าที่ผู้ดำเนินการ</span>
+          <strong>${d.officer ?? "– รอการมอบหมาย"}</strong>
+        </div>
+      </div>
 
       <div class="current-status">
         <div class="label">สถานะปัจจุบัน</div>
