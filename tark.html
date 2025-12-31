@@ -29,64 +29,19 @@ body{
 
 .app{
   width:760px;
-  padding:32px 0;
+  padding:48px 0;
 }
 
-/* ===== BIG LOGO HEADER ===== */
-.brand{
-  border-bottom:1px solid var(--line);
-  padding-bottom:20px;
-  margin-bottom:28px;
-}
-
-.brand-top{
-  display:flex;
-  align-items:center;
-  gap:24px;
-}
-
-.logo-box{
-  width:180px;
-  height:80px;
-  border:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.logo-box img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-
-.school-info{
-  line-height:1.4;
-}
-
-.school-info strong{
-  font-size:18px;
-  font-weight:500;
-}
-
-.school-info span{
-  display:block;
-  font-size:13px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-/* ===== TITLE ===== */
+/* ===== HEADER ===== */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
-  margin-top:16px;
 }
 
 .header h1{
   margin:0;
-  font-size:26px;
+  font-size:28px;
   font-weight:500;
 }
 
@@ -99,17 +54,18 @@ body{
 .search{
   display:flex;
   gap:16px;
-  margin:32px 0;
+  margin:36px 0;
 }
 
 input{
   flex:1;
-  padding:14px 16px;
+  padding:14px 4px;
   background:none;
   border:none;
   border-bottom:1px solid var(--line);
   color:var(--text);
   outline:none;
+  font-size:15px;
 }
 
 button{
@@ -120,14 +76,14 @@ button{
   cursor:pointer;
 }
 
-/* ===== CONTENT ===== */
+/* ===== PANEL ===== */
 .panel{
   border-top:1px solid var(--line);
-  padding-top:28px;
+  padding-top:32px;
 }
 
 .name{
-  font-size:20px;
+  font-size:22px;
   font-weight:500;
 }
 
@@ -140,35 +96,36 @@ button{
 .meta{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  margin:28px 0;
-  font-size:13px;
+  gap:32px;
+  margin:32px 0;
+  font-size:14px;
 }
 
 .meta span{
   display:block;
   font-size:12px;
   color:var(--muted);
+  margin-bottom:4px;
 }
 
-/* ===== STATUS LINE ===== */
+/* ===== STATUS ===== */
 .status{
-  margin-top:30px;
+  margin-top:36px;
 }
 
 .status-title{
   font-size:12px;
   color:var(--muted);
-  margin-bottom:14px;
+  margin-bottom:18px;
 }
 
-.line{
+.track{
   position:relative;
   height:2px;
   background:var(--line);
 }
 
-.progress{
+.track-progress{
   position:absolute;
   top:0;
   left:0;
@@ -176,20 +133,20 @@ button{
   background:var(--primary);
 }
 
-.points{
+.nodes{
   display:flex;
   justify-content:space-between;
   margin-top:-7px;
 }
 
-.point{
+.node{
   width:14px;
   height:14px;
-  background:var(--bg);
   border:1px solid var(--line);
+  background:var(--bg);
 }
 
-.point.active{
+.node.active{
   background:var(--primary);
   border-color:var(--primary);
 }
@@ -197,7 +154,7 @@ button{
 .labels{
   display:flex;
   justify-content:space-between;
-  margin-top:10px;
+  margin-top:12px;
   font-size:13px;
   color:var(--muted);
 }
@@ -208,7 +165,7 @@ button{
 
 .error{
   color:#f87171;
-  margin-top:16px;
+  margin-top:20px;
 }
 </style>
 </head>
@@ -216,30 +173,13 @@ button{
 <body>
 <div class="app">
 
-  <!-- BRAND / SCHOOL -->
-  <div class="brand">
-    <div class="brand-top">
-      <div class="logo-box">
-        <!-- ใส่โลโก้โรงเรียน -->
-        <img src="school-logo.png" alt="School Logo"
-             onerror="this.parentElement.innerHTML='SCHOOL LOGO';">
-      </div>
-
-      <div class="school-info">
-        <strong>โรงเรียนตัวอย่างวิทยา</strong>
-        <span>Student Request Tracking System</span>
-      </div>
-    </div>
-
-    <div class="header">
-      <h1>Request Tracking</h1>
-      <span>version 1.0</span>
-    </div>
+  <div class="header">
+    <h1>Request Tracking</h1>
+    <span>version 1.0</span>
   </div>
 
-  <!-- SEARCH -->
   <div class="search">
-    <input id="code" placeholder="Tracking ID เช่น STD001">
+    <input id="code" placeholder="Tracking ID">
     <button onclick="check()">Search</button>
   </div>
 
@@ -283,13 +223,13 @@ function check(){
     <div class="status">
       <div class="status-title">สถานะการดำเนินการ</div>
 
-      <div class="line">
-        <div class="progress" style="width:${percent}%"></div>
+      <div class="track">
+        <div class="track-progress" style="width:${percent}%"></div>
       </div>
 
-      <div class="points">
+      <div class="nodes">
         ${steps.map((_,i)=>`
-          <div class="point ${i<d.status?'active':''}"></div>
+          <div class="node ${i<d.status?'active':''}"></div>
         `).join("")}
       </div>
 
