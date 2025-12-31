@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ระบบแทร็กกิ้งนักเรียน</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .card {
+        width: 450px;
+        background: rgba(0,0,0,.65);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0,0,0,.5);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: #00c6ff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #00aee6;
+    }
+
+    .result {
+        margin-top: 20px;
+    }
+
+    .step {
+        background: #333;
+        padding: 10px;
+        margin-top: 8px;
+        border-left: 6px solid #555;
+        border-radius: 6px;
+    }
+
+    .active {
+        background: #0f3;
+        color: #000;
+        border-color: #0f3;
+        font-weight: bold;
+    }
+
+    .error {
+        text-align: center;
+        color: #ff5c5c;
+        margin-top: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>🔍 ตรวจสอบสถานะคำร้อง</h2>
+
+    <input type="text" id="code" placeholder="กรอกรหัสติดตาม เช่น STD001">
+    <button onclick="checkStatus()">ตรวจสอบ</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    // ====== ข้อมูลตัวอย่าง (แทนฐานข้อมูล) ======
+    const trackingData = {
+        "STD001": { name: "ธนภัทร", status: 1 },
+        "STD002": { name: "ณัฐวุฒิ", status: 2 },
+        "STD003": { name: "ศิริพร", status: 3 },
+        "STD004": { name: "กิตติ", status: 4 }
+    };
+
+    const steps = [
+        "รับคำร้องแล้ว",
+        "กำลังตรวจสอบเอกสาร",
+        "อยู่ระหว่างดำเนินการ",
+        "ดำเนินการเสร็จสิ้น"
+    ];
+
+    function checkStatus() {
+        const code = document.getElementById("code").value.trim();
+        const result = document.getElementById("result");
+        result.innerHTML = "";
+
+        if (!trackingData[code]) {
+            result.innerHTML = `<div class="error">❌ ไม่พบรหัสติดตามนี้</div>`;
+            return;
+        }
+
+        const data = trackingData[code];
+        let html = `<h3>👤 ${data.name}</h3>`;
+
+        steps.forEach((step, index) => {
+            html += `
+                <div class="step ${index < data.status ? "active" : ""}">
+                    ${step}
+                </div>
+            `;
+        });
+
+        result.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
