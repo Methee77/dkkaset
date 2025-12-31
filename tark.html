@@ -2,374 +2,321 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>ระบบติดตามสถานะคำร้องอิเล็กทรอนิกส์</title>
+    <title>Smart Tracking Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e293b;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --success: #10b981;
-            --bg: #f1f5f9;
-            --card: #ffffff;
-            --muted: #94a3b8;
-            --border: #e2e8f0;
+            --bg-color: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(37, 99, 235, 0.5);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --success-color: #2dd4bf;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
+        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
         body {
             margin: 0;
             font-family: 'Prompt', sans-serif;
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at top right, #e2e8f0, transparent);
-            color: var(--primary);
-            line-height: 1.6;
-        }
-
-        .wrapper {
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .panel {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+        /* ตกแต่งพื้นหลังด้วยวงกลมเรืองแสง */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px; height: 300px;
+            background: var(--accent-glow);
+            filter: blur(120px);
+            top: 10%; left: 10%;
+            z-index: -1;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 24px;
-            margin-bottom: 32px;
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 50px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .header h1 {
-            font-size: 22px;
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            font-size: 28px;
             font-weight: 600;
+            letter-spacing: -0.5px;
             margin: 0;
-            background: linear-gradient(to right, #1e293b, #3b82f6);
+            background: linear-gradient(to bottom, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            margin-right: 6px;
-            box-shadow: 0 0 10px var(--success);
-        }
-
-        .system-status {
-            font-size: 13px;
-            color: var(--success);
-            background: #ecfdf5;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        /* Search Section */
-        .search-box {
+        /* Search Bar ใหม่: ดูคล้าย Spotlight Search */
+        .search-container {
             position: relative;
-            display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
+            max-width: 600px;
+            margin: 0 auto 50px;
         }
 
-        .search-box input {
-            flex: 1;
-            padding: 16px 24px;
-            font-size: 16px;
-            border-radius: 16px;
-            border: 2px solid var(--border);
+        .search-container input {
+            width: 100%;
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 18px;
             outline: none;
-            background: #f8fafc;
+            text-align: center;
         }
 
-        .search-box input:focus {
-            border-color: var(--accent);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        .search-container input:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
 
-        .search-box button {
-            padding: 0 32px;
-            background: var(--accent);
+        .btn-search {
+            margin-top: 15px;
+            width: 100%;
+            padding: 15px;
+            background: #3b82f6;
             color: white;
             border: none;
-            border-radius: 16px;
-            font-weight: 500;
+            border-radius: 15px;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
         }
 
-        .search-box button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
+        .btn-search:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5);
         }
 
-        /* Info Grid */
-        .content-area {
+        /* Result Layout */
+        .data-display {
             display: none;
-            animation: fadeIn 0.5s ease forwards;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            animation: slideUp 0.6s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .info-grid {
+        .info-panel {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        .info-card {
-            background: #f8fafc;
+        .data-card {
+            background: rgba(255,255,255,0.03);
             padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .info-card span {
-            display: block;
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-card strong {
-            font-size: 15px;
-            color: var(--primary);
-        }
-
-        /* Tracking Flow */
-        .tracking-wrapper {
-            margin-top: 40px;
-            padding: 30px;
-            background: #f1f5f9;
             border-radius: 20px;
+            border: 1px solid var(--glass-border);
         }
 
-        .flow-container {
+        .data-card label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .data-card div {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        /* Stepper แบบใหม่ (Vertical บนมือถือ / Horizontal บนคอม) */
+        .stepper {
             display: flex;
             justify-content: space-between;
-            position: relative;
-            margin-bottom: 30px;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 24px;
         }
 
-        .step-node {
+        .step {
             flex: 1;
             text-align: center;
-            z-index: 1;
+            position: relative;
         }
 
-        .step-dot {
-            width: 32px;
-            height: 32px;
-            background: #fff;
-            border: 3px solid var(--border);
-            border-radius: 50%;
-            margin: 0 auto 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--muted);
-        }
-
-        .step-node.completed .step-dot {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-
-        .step-node.active .step-dot {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.2);
-        }
-
-        .step-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--muted);
-        }
-
-        .active .step-label { color: var(--accent); }
-
-        .progress-line {
-            position: absolute;
-            top: 16px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: var(--border);
-            z-index: 0;
-        }
-
-        .current-status-banner {
-            text-align: center;
-            padding: 12px;
-            background: white;
+        .step-icon {
+            width: 40px; height: 40px;
+            background: #1e293b;
+            border: 2px solid var(--glass-border);
             border-radius: 12px;
+            margin: 0 auto 10px;
+            line-height: 38px;
             font-weight: 600;
-            color: var(--accent);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            color: var(--text-dim);
+            z-index: 2;
+            position: relative;
         }
 
-        .notfound {
+        .step.active .step-icon {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .step.done .step-icon {
+            background: var(--success-color);
+            border-color: var(--success-color);
+            color: #0f172a;
+        }
+
+        .step-text { font-size: 12px; color: var(--text-dim); }
+        .step.active .step-text { color: #fff; font-weight: 600; }
+
+        .notfound-msg {
             display: none;
+            color: #f87171;
             text-align: center;
-            padding: 40px;
-            color: #ef4444;
-            background: #fef2f2;
-            border-radius: 16px;
-            margin-top: 20px;
+            padding: 20px;
+            background: rgba(248, 113, 113, 0.1);
+            border-radius: 15px;
         }
 
-        @media (max-width: 600px) {
-            .info-grid { grid-template-columns: 1fr; }
-            .header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .flow-container { flex-direction: column; gap: 20px; align-items: flex-start; }
-            .progress-line { display: none; }
-            .step-node { display: flex; align-items: center; gap: 15px; }
-            .step-dot { margin: 0; }
+        @media (max-width: 768px) {
+            .data-display { grid-template-columns: 1fr; }
+            .container { padding: 30px 20px; }
+            .stepper { flex-direction: column; gap: 30px; align-items: flex-start; }
+            .step { display: flex; align-items: center; gap: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="panel">
-        <div class="header">
-            <div>
-                <h1>ระบบติดตามสถานะคำร้อง</h1>
-                <div style="font-size: 14px; color: var(--muted); margin-top: 4px;">Smart Tracking System v2.0</div>
-            </div>
-            <div class="system-status">
-                <span class="status-dot"></span> ระบบเชื่อมต่อปกติ
-            </div>
-        </div>
+<div class="container">
+    <div class="header-section">
+        <h1>Tracking Dashboard</h1>
+        <p style="color: var(--text-dim); font-size: 14px;">ระบบตรวจสอบสถานะคำร้องอัตโนมัติ</p>
+    </div>
 
-        <div class="search-box">
-            <input type="text" id="trackInput" placeholder="กรอกรหัสคำร้องของคุณ (เช่น GOV001)" autocomplete="off">
-            <button onclick="handleSearch()">ตรวจสอบ</button>
-        </div>
+    <div class="search-container">
+        <input type="text" id="reqInput" placeholder="กรอกรหัสคำร้องของคุณ..." autocomplete="off">
+        <button class="btn-search" onclick="doSearch()">ค้นหาข้อมูล</button>
+    </div>
 
-        <div class="content-area" id="resultArea">
-            <div class="info-grid">
-                <div class="info-card"><span>รหัสคำร้อง</span><strong id="res-id"></strong></div>
-                <div class="info-card"><span>ผู้ยื่นคำร้อง</span><strong id="res-name"></strong></div>
-                <div class="info-card"><span>ประเภทเอกสาร</span><strong id="res-doc"></strong></div>
-                <div class="info-card"><span>วันที่ยื่น</span><strong id="res-date"></strong></div>
+    <div id="notFound" class="notfound-msg">ไม่พบรหัสคำร้องที่คุณต้องการตรวจสอบ</div>
+
+    <div class="data-display" id="dataDisplay">
+        <div class="info-panel">
+            <div class="data-card" style="grid-column: span 2;">
+                <label>ผู้ยื่นคำร้อง</label>
+                <div id="o-name">-</div>
             </div>
-
-            <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                <div class="info-card" style="border-left: 4px solid var(--accent);">
-                    <span>หน่วยงานที่รับผิดชอบ</span>
-                    <strong id="res-dept"></strong>
-                </div>
-                <div class="info-card" style="border-left: 4px solid var(--accent);">
-                    <span>เจ้าหน้าที่ดูแล</span>
-                    <strong id="res-officer"></strong>
-                </div>
+            <div class="data-card">
+                <label>รหัสอ้างอิง</label>
+                <div id="o-id">-</div>
             </div>
-
-            <div class="tracking-wrapper">
-                <div class="flow-container" id="flowSteps">
-                    <div class="progress-line"></div>
-                    </div>
-                <div class="current-status-banner" id="currentStatusText"></div>
+            <div class="data-card">
+                <label>วันที่ยื่น</label>
+                <div id="o-date">-</div>
+            </div>
+            <div class="data-card" style="grid-column: span 2;">
+                <label>ประเภทเอกสาร</label>
+                <div id="o-doc">-</div>
             </div>
         </div>
 
-        <div class="notfound" id="errorArea">
-            ❌ ไม่พบข้อมูลคำร้องที่คุณระบุ กรุณาตรวจสอบรหัสอีกครั้ง
+        <div class="info-panel" style="grid-template-columns: 1fr;">
+            <div class="data-card" style="border-left: 4px solid #3b82f6;">
+                <label>เจ้าหน้าที่รับผิดชอบ</label>
+                <div id="o-officer">-</div>
+            </div>
+            <div class="data-card" style="border-left: 4px solid #3b82f6;">
+                <label>หน่วยงาน</label>
+                <div id="o-dept">-</div>
+            </div>
         </div>
+
+        <div class="stepper" id="stepperComp" style="grid-column: span 2;">
+            </div>
     </div>
 </div>
 
 <script>
-const mockData = [
+const db = [
     {
         id: "GOV001",
-        name: "นายสมชาย ใจดี",
-        doc: "ใบรับรองผลการศึกษา (Transcript)",
-        date: "1 มกราคม 2568",
-        receive: "2 มกราคม 2568",
-        officer: "นางสาวศิริพร แสงทอง",
-        dept: "กองบริการการศึกษา",
-        step: 3
+        name: "คุณสมชาย ใจดี",
+        doc: "Official Academic Transcript",
+        date: "01/01/2025",
+        officer: "น.ส. ศิริพร แสงทอง",
+        dept: "Education Service Division",
+        currentStep: 3
     }
 ];
 
-const stepsConfig = ["รับคำร้อง", "ตรวจสอบเอกสาร", "กำลังดำเนินการ", "เสร็จสิ้น"];
+const labels = ["ยืนยันคำร้อง", "ตรวจรับเอกสาร", "กำลังวิเคราะห์", "ออกเอกสารเรียบร้อย"];
 
-function handleSearch() {
-    const input = document.getElementById('trackInput').value.trim().toUpperCase();
-    const result = mockData.find(item => item.id === input);
-    const resultArea = document.getElementById('resultArea');
-    const errorArea = document.getElementById('errorArea');
+function doSearch() {
+    const val = document.getElementById('reqInput').value.trim().toUpperCase();
+    const data = db.find(x => x.id === val);
+    const display = document.getElementById('dataDisplay');
+    const err = document.getElementById('notFound');
 
-    if (!result) {
-        resultArea.style.display = "none";
-        errorArea.style.display = "block";
+    if(!data) {
+        display.style.display = 'none';
+        err.style.display = 'block';
         return;
     }
 
-    // Mapping Data
-    document.getElementById('res-id').innerText = result.id;
-    document.getElementById('res-name').innerText = result.name;
-    document.getElementById('res-doc').innerText = result.doc;
-    document.getElementById('res-date').innerText = result.date;
-    document.getElementById('res-dept').innerText = result.dept;
-    document.getElementById('res-officer').innerText = result.officer;
+    err.style.display = 'none';
+    display.style.display = 'grid';
 
-    // Build Stepper
-    const flowContainer = document.getElementById('flowSteps');
-    // Keep progress line
-    flowContainer.innerHTML = '<div class="progress-line"></div>'; 
+    // Set Values
+    document.getElementById('o-name').innerText = data.name;
+    document.getElementById('o-id').innerText = data.id;
+    document.getElementById('o-date').innerText = data.date;
+    document.getElementById('o-doc').innerText = data.doc;
+    document.getElementById('o-officer').innerText = data.officer;
+    document.getElementById('o-dept').innerText = data.dept;
+
+    // Generate Steps
+    const stepper = document.getElementById('stepperComp');
+    stepper.innerHTML = '';
     
-    stepsConfig.forEach((stepName, index) => {
-        const stepIdx = index + 1;
-        const node = document.createElement('div');
-        node.className = `step-node ${stepIdx < result.step ? 'completed' : (stepIdx === result.step ? 'active' : '')}`;
-        
-        node.innerHTML = `
-            <div class="step-dot">${stepIdx < result.step ? '✓' : stepIdx}</div>
-            <div class="step-label">${stepName}</div>
+    labels.forEach((text, i) => {
+        const stepNum = i + 1;
+        const statusClass = stepNum < data.currentStep ? 'done' : (stepNum === data.currentStep ? 'active' : '');
+        const stepHtml = `
+            <div class="step ${statusClass}">
+                <div class="step-icon">${stepNum < data.currentStep ? '✓' : '0'+stepNum}</div>
+                <div class="step-text">${text}</div>
+            </div>
         `;
-        flowContainer.appendChild(node);
+        stepper.innerHTML += stepHtml;
     });
-
-    document.getElementById('currentStatusText').innerText = "สถานะปัจจุบัน: " + stepsConfig[result.step - 1];
-
-    errorArea.style.display = "none";
-    resultArea.style.display = "block";
 }
 </script>
-
 </body>
 </html>
