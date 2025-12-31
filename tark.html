@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ระบบจัดการสี (Theming) */
         :root {
             --gov-navy: #1a237e;
             --gov-blue: #0d47a1;
@@ -17,13 +18,29 @@
             --text-muted: #7f8c8d;
             --success: #16a34a;
             --update-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --input-bg: #fafafa;
+        }
+
+        /* สีสำหรับ Dark Mode */
+        [data-theme="dark"] {
+            --bg-light: #0f172a;
+            --white: #1e293b;
+            --border: #334155;
+            --text-dark: #f1f5f9;
+            --text-muted: #94a3b8;
+            --update-bg: #0f172a;
+            --card-bg: #1e293b;
+            --input-bg: #334155;
+            --gov-navy: #38bdf8; /* ปรับสี Navy ให้สว่างขึ้นในโหมดมืดเพื่อให้เห็นชัด */
+            --gov-blue: #7dd3fc;
         }
 
         /* บังคับไม่มีขอบมน */
         * { 
             box-sizing: border-box; 
             border-radius: 0 !important;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -40,17 +57,38 @@
         .container {
             width: 100%;
             max-width: 1100px;
-            background: var(--white);
+            background: var(--card-bg);
             border-top: 6px solid var(--gov-navy);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             padding: 0;
             position: relative;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--gov-navy);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gov-accent);
         }
 
         /* ส่วนหัว */
         .header-bar {
             padding: 40px 50px;
-            background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
+            background: var(--card-bg);
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -74,12 +112,12 @@
         /* ส่วนค้นหา */
         .search-section {
             padding: 40px 50px;
-            background: #ffffff;
+            background: var(--card-bg);
         }
 
         .search-group {
             display: flex;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .search-group input {
@@ -88,7 +126,8 @@
             font-size: 16px;
             border: 1px solid var(--border);
             outline: none;
-            background: #fafafa;
+            background: var(--input-bg);
+            color: var(--text-dark);
         }
 
         .search-group button {
@@ -122,7 +161,7 @@
         }
 
         .update-tag strong {
-            background: var(--white);
+            background: var(--card-bg);
             padding: 4px 12px;
             border: 1px solid var(--border);
             color: var(--success);
@@ -181,15 +220,15 @@
             flex: 1;
             padding: 20px;
             border-top: 4px solid var(--border);
-            background: #fcfcfc;
+            background: var(--input-bg);
             position: relative;
         }
 
-        .step.completed { border-top-color: var(--success); background: #f1f8f1; }
-        .step.active { border-top-color: var(--gov-accent); background: #eef2ff; }
+        .step.completed { border-top-color: var(--success); background: rgba(22, 163, 74, 0.1); }
+        .step.active { border-top-color: var(--gov-accent); background: rgba(41, 121, 255, 0.1); }
 
         .step-info { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
-        .step-name { font-size: 14px; font-weight: 600; }
+        .step-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
 
         .error-banner {
             display: none;
@@ -205,25 +244,30 @@
             .info-grid { grid-template-columns: 1fr 1fr; }
             .status-stepper { flex-direction: column; }
             .update-tag { justify-content: flex-start; }
+            .theme-toggle { top: 10px; right: 10px; z-index: 10; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+        <span id="themeIcon">🌙</span> <span id="themeText">โหมดกลางคืน</span>
+    </button>
+
     <div class="header-bar">
         <div class="header-title">
             <h1>Student Request Tracking</h1>
-            <p>Version 1.0</p>
+            <p>Version 1.0 | Digital Government Portal</p>
         </div>
-        <div style="font-size: 12px; font-weight: 600; color: var(--gov-navy); border-left: 1px solid var(--border); padding-left: 20px;">
-            ระบบเชื่อมต่อกับฐานข้อมูลใช้งานได้ตามปกติ
+        <div style="font-size: 12px; font-weight: 600; color: var(--gov-navy); border-left: 1px solid var(--border); padding-left: 20px;" class="d-none-mobile">
+            ระบบฐานข้อมูลออนไลน์พร้อมใช้งาน
         </div>
     </div>
 
     <div class="search-section">
         <div class="search-group">
-            <input type="text" id="reqID" placeholder="กรอกรหัสคำร้องเพื่อเริ่มต้นการค้นหา..." autocomplete="off">
+            <input type="text" id="reqID" placeholder="กรอกรหัสคำร้อง (ตัวอย่าง: GOV001)..." autocomplete="off">
             <button onclick="handleSearch()">ตรวจสอบข้อมูล</button>
         </div>
     </div>
@@ -252,7 +296,36 @@
 </div>
 
 <script>
-// ข้อมูลจำลอง (เพิ่มฟิลด์ update)
+// ระบบสลับโหมด Dark/Light
+function toggleTheme() {
+    const body = document.documentElement;
+    const currentTheme = body.getAttribute('data-theme');
+    const btnText = document.getElementById('themeText');
+    const btnIcon = document.getElementById('themeIcon');
+
+    if (currentTheme === 'dark') {
+        body.removeAttribute('data-theme');
+        btnText.innerText = "โหมดกลางคืน";
+        btnIcon.innerText = "🌙";
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        btnText.innerText = "โหมดกลางวัน";
+        btnIcon.innerText = "☀️";
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// ตรวจสอบ Theme เดิมจาก LocalStorage
+window.onload = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('themeText').innerText = "โหมดกลางวัน";
+        document.getElementById('themeIcon').innerText = "☀️";
+    }
+};
+
 const mockDB = [
     {
         id: "GOV001",
@@ -283,7 +356,6 @@ function handleSearch() {
     err.style.display = 'none';
     area.style.display = 'block';
 
-    // ใส่ข้อมูล
     document.getElementById('d-id').innerText = data.id;
     document.getElementById('d-name').innerText = data.name;
     document.getElementById('d-date').innerText = data.date;
@@ -292,7 +364,6 @@ function handleSearch() {
     document.getElementById('d-off').innerText = data.officer;
     document.getElementById('d-update').innerText = data.update;
 
-    // สร้าง Stepper
     const stepper = document.getElementById('stepper');
     stepper.innerHTML = '';
     
