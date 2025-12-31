@@ -36,8 +36,8 @@ body{
 
 .card{
   width:100%;
-  max-width:900px;
-  background:#ffffff;
+  max-width:920px;
+  background:#fff;
   border-radius:18px;
   padding:44px 48px;
   box-shadow:0 20px 40px rgba(0,0,0,.08);
@@ -113,6 +113,19 @@ body{
   font-weight:500;
 }
 
+/* ====== PROCESS INFO ====== */
+.process{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.process .box{
+  background:#eef2ff;
+}
+
+/* ====== PROGRESS ====== */
 .progress{
   margin-top:40px;
 }
@@ -182,7 +195,7 @@ body{
 
     <div class="header">
       <h1>ระบบติดตามสถานะคำร้องเอกสารทางการศึกษา</h1>
-      <p>สำหรับตรวจสอบความคืบหน้าการดำเนินการ</p>
+      <p>แสดงข้อมูลคำร้องและกระบวนการดำเนินงาน</p>
     </div>
 
     <div class="search">
@@ -191,6 +204,8 @@ body{
     </div>
 
     <div class="section" id="section">
+
+      <!-- ข้อมูลคำร้อง -->
       <div class="info">
         <div class="box"><span>รหัสคำร้อง</span><strong id="rid"></strong></div>
         <div class="box"><span>ชื่อผู้ยื่นคำร้อง</span><strong id="name"></strong></div>
@@ -198,10 +213,19 @@ body{
         <div class="box"><span>วันที่ยื่นคำร้อง</span><strong id="date"></strong></div>
       </div>
 
+      <!-- ข้อมูลกระบวนการ -->
+      <div class="process">
+        <div class="box"><span>วันที่รับเอกสาร</span><strong id="receiveDate"></strong></div>
+        <div class="box"><span>เจ้าหน้าที่ผู้ดำเนินการ</span><strong id="officer"></strong></div>
+        <div class="box"><span>หน่วยงานที่รับผิดชอบ</span><strong id="department"></strong></div>
+      </div>
+
+      <!-- สถานะ -->
       <div class="progress">
         <div class="steps" id="steps"></div>
         <div class="status" id="status"></div>
       </div>
+
     </div>
 
     <div class="notfound" id="notfound">
@@ -213,8 +237,26 @@ body{
 
 <script>
 const ข้อมูล=[
- {id:"TH001",name:"นายสมชาย ใจดี",doc:"ใบรับรองผลการเรียน",date:"1 มกราคม 2568",step:2},
- {id:"TH002",name:"นางสาวสุดา แสงทอง",doc:"ใบรับรองจบการศึกษา",date:"28 ธันวาคม 2567",step:4}
+ {
+  id:"TH001",
+  name:"นายสมชาย ใจดี",
+  doc:"ใบรับรองผลการเรียน",
+  date:"1 มกราคม 2568",
+  receive:"2 มกราคม 2568",
+  officer:"นางสาวศิริพร แสงทอง",
+  dept:"งานทะเบียนและวัดผล",
+  step:2
+ },
+ {
+  id:"TH002",
+  name:"นางสาวสุดา แสงทอง",
+  doc:"ใบรับรองจบการศึกษา",
+  date:"28 ธันวาคม 2567",
+  receive:"29 ธันวาคม 2567",
+  officer:"นายกิตติพงศ์ พรหมมา",
+  dept:"งานทะเบียนและวัดผล",
+  step:4
+ }
 ];
 
 const ขั้นตอน=[
@@ -238,6 +280,9 @@ function ค้นหา(){
  name.innerText=รายการ.name;
  doc.innerText=รายการ.doc;
  date.innerText=รายการ.date;
+ receiveDate.innerText=รายการ.receive;
+ officer.innerText=รายการ.officer;
+ department.innerText=รายการ.dept;
 
  steps.innerHTML="";
  ขั้นตอน.forEach((t,i)=>{
