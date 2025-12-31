@@ -2,18 +2,19 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>ระบบติดตามสถานะคำร้อง</title>
+<title>ระบบติดตามสถานะคำร้องอิเล็กทรอนิกส์</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --primary:#1e3a8a;
+  --primary:#0f172a;
   --accent:#2563eb;
   --success:#16a34a;
-  --bg:#f1f5f9;
-  --text:#0f172a;
+  --warning:#f59e0b;
+  --bg:#f8fafc;
+  --card:#ffffff;
   --muted:#64748b;
 }
 
@@ -21,37 +22,38 @@
 
 body{
   margin:0;
-  font-family:'Kanit',sans-serif;
+  font-family:'Prompt',sans-serif;
   background:var(--bg);
-  color:var(--text);
+  color:var(--primary);
 }
 
-.container{
+.wrapper{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:32px;
+  padding:40px;
 }
 
-.card{
+.panel{
   width:100%;
-  max-width:920px;
-  background:#fff;
-  border-radius:18px;
-  padding:44px 48px;
-  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  max-width:1080px;
+  background:var(--card);
+  border-radius:22px;
+  padding:52px 56px;
+  box-shadow:0 30px 70px rgba(15,23,42,.12);
 }
 
 .header{
-  border-bottom:1px solid #e5e7eb;
-  padding-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
 }
 
 .header h1{
-  margin:0;
-  font-size:22px;
+  font-size:24px;
   font-weight:500;
+  margin:0;
 }
 
 .header p{
@@ -60,206 +62,204 @@ body{
   color:var(--muted);
 }
 
+.system{
+  font-size:12px;
+  color:var(--success);
+  font-weight:500;
+}
+
 .search{
-  margin-top:30px;
+  margin-top:36px;
   display:flex;
-  gap:12px;
+  gap:14px;
 }
 
 .search input{
   flex:1;
-  padding:14px 16px;
+  padding:16px 18px;
   font-size:15px;
+  border-radius:12px;
   border:1px solid #e2e8f0;
-  border-radius:10px;
 }
 
 .search button{
-  padding:14px 30px;
-  background:var(--primary);
+  padding:16px 36px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
+  background:var(--accent);
   color:#fff;
   font-size:15px;
   cursor:pointer;
 }
 
-.section{
+.content{
   display:none;
-  margin-top:36px;
+  margin-top:48px;
 }
 
-.info{
+/* ===== DATA CARDS ===== */
+.cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:24px;
+  gap:26px;
 }
 
-.box{
-  background:#f8fafc;
-  padding:18px;
-  border-radius:14px;
+.card{
+  background:#f9fafb;
+  padding:22px;
+  border-radius:18px;
 }
 
-.box span{
+.card span{
   font-size:13px;
   color:var(--muted);
 }
 
-.box strong{
+.card strong{
   display:block;
-  margin-top:6px;
-  font-size:15px;
+  margin-top:8px;
+  font-size:16px;
   font-weight:500;
 }
 
-/* ====== PROCESS INFO ====== */
+/* ===== PROCESS ===== */
 .process{
-  margin-top:30px;
+  margin-top:36px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  gap:26px;
 }
 
-.process .box{
+.process .card{
   background:#eef2ff;
 }
 
-/* ====== PROGRESS ====== */
-.progress{
-  margin-top:40px;
+/* ===== FLOW ===== */
+.flow{
+  margin-top:46px;
 }
 
-.steps{
+.track{
   display:flex;
   align-items:center;
 }
 
-.step{
+.node{
   flex:1;
   text-align:center;
   position:relative;
 }
 
-.circle{
-  width:14px;
-  height:14px;
+.dot{
+  width:16px;
+  height:16px;
   border-radius:50%;
-  background:#cbd5f5;
+  background:#c7d2fe;
   margin:0 auto;
 }
 
 .done{background:var(--success)}
 .active{background:var(--accent)}
 
-.step::after{
+.node::after{
   content:'';
   position:absolute;
-  top:7px;
+  top:8px;
   left:50%;
   width:100%;
   height:2px;
-  background:#cbd5f5;
+  background:#c7d2fe;
   z-index:-1;
 }
 
-.step:last-child::after{display:none}
+.node:last-child::after{display:none}
 
 .label{
-  margin-top:10px;
+  margin-top:12px;
   font-size:13px;
-  color:#475569;
+  color:#334155;
 }
 
-.status{
-  margin-top:18px;
-  font-size:15px;
+.current{
+  margin-top:22px;
+  font-size:16px;
   font-weight:500;
   color:var(--accent);
 }
 
+/* ===== ERROR ===== */
 .notfound{
   display:none;
-  margin-top:32px;
+  margin-top:40px;
   text-align:center;
-  color:#b91c1c;
   font-weight:500;
+  color:#dc2626;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="card">
+<div class="wrapper">
+  <div class="panel">
 
     <div class="header">
-      <h1>ระบบติดตามสถานะคำร้องเอกสารทางการศึกษา</h1>
-      <p>แสดงข้อมูลคำร้องและกระบวนการดำเนินงาน</p>
+      <div>
+        <h1>ระบบติดตามสถานะคำร้องอิเล็กทรอนิกส์</h1>
+        <p>ศูนย์บริการข้อมูลทางการศึกษา</p>
+      </div>
+      <div class="system">● ระบบกลางพร้อมใช้งาน</div>
     </div>
 
     <div class="search">
       <input id="track" placeholder="กรอกรหัสคำร้อง">
-      <button onclick="ค้นหา()">ค้นหา</button>
+      <button onclick="ค้นหา()">ตรวจสอบสถานะ</button>
     </div>
 
-    <div class="section" id="section">
+    <div class="content" id="content">
 
-      <!-- ข้อมูลคำร้อง -->
-      <div class="info">
-        <div class="box"><span>รหัสคำร้อง</span><strong id="rid"></strong></div>
-        <div class="box"><span>ชื่อผู้ยื่นคำร้อง</span><strong id="name"></strong></div>
-        <div class="box"><span>ประเภทเอกสาร</span><strong id="doc"></strong></div>
-        <div class="box"><span>วันที่ยื่นคำร้อง</span><strong id="date"></strong></div>
+      <div class="cards">
+        <div class="card"><span>รหัสคำร้อง</span><strong id="rid"></strong></div>
+        <div class="card"><span>ผู้ยื่นคำร้อง</span><strong id="name"></strong></div>
+        <div class="card"><span>ประเภทเอกสาร</span><strong id="doc"></strong></div>
+        <div class="card"><span>วันที่ยื่นคำร้อง</span><strong id="date"></strong></div>
       </div>
 
-      <!-- ข้อมูลกระบวนการ -->
       <div class="process">
-        <div class="box"><span>วันที่รับเอกสาร</span><strong id="receiveDate"></strong></div>
-        <div class="box"><span>เจ้าหน้าที่ผู้ดำเนินการ</span><strong id="officer"></strong></div>
-        <div class="box"><span>หน่วยงานที่รับผิดชอบ</span><strong id="department"></strong></div>
+        <div class="card"><span>วันที่รับเอกสาร</span><strong id="receive"></strong></div>
+        <div class="card"><span>เจ้าหน้าที่ผู้ดำเนินการ</span><strong id="officer"></strong></div>
+        <div class="card"><span>หน่วยงานรับผิดชอบ</span><strong id="dept"></strong></div>
       </div>
 
-      <!-- สถานะ -->
-      <div class="progress">
-        <div class="steps" id="steps"></div>
-        <div class="status" id="status"></div>
+      <div class="flow">
+        <div class="track" id="flow"></div>
+        <div class="current" id="status"></div>
       </div>
 
     </div>
 
     <div class="notfound" id="notfound">
-      ไม่พบข้อมูลคำร้องในระบบ
+      ไม่พบข้อมูลคำร้องในระบบกลาง
     </div>
 
   </div>
 </div>
 
 <script>
-const ข้อมูล=[
+const data=[
  {
-  id:"TH001",
+  id:"GOV001",
   name:"นายสมชาย ใจดี",
-  doc:"ใบรับรองผลการเรียน",
+  doc:"ใบรับรองผลการศึกษา",
   date:"1 มกราคม 2568",
   receive:"2 มกราคม 2568",
   officer:"นางสาวศิริพร แสงทอง",
   dept:"งานทะเบียนและวัดผล",
-  step:2
- },
- {
-  id:"TH002",
-  name:"นางสาวสุดา แสงทอง",
-  doc:"ใบรับรองจบการศึกษา",
-  date:"28 ธันวาคม 2567",
-  receive:"29 ธันวาคม 2567",
-  officer:"นายกิตติพงศ์ พรหมมา",
-  dept:"งานทะเบียนและวัดผล",
-  step:4
+  step:3
  }
 ];
 
-const ขั้นตอน=[
+const steps=[
  "รับคำร้อง",
  "ตรวจสอบเอกสาร",
  "ดำเนินการจัดทำ",
@@ -267,36 +267,36 @@ const ขั้นตอน=[
 ];
 
 function ค้นหา(){
- const ค่า=track.value.trim().toUpperCase();
- const รายการ=ข้อมูล.find(d=>d.id===ค่า);
+ const v=track.value.trim().toUpperCase();
+ const f=data.find(d=>d.id===v);
 
- if(!รายการ){
-  section.style.display="none";
+ if(!f){
+  content.style.display="none";
   notfound.style.display="block";
   return;
  }
 
- rid.innerText=รายการ.id;
- name.innerText=รายการ.name;
- doc.innerText=รายการ.doc;
- date.innerText=รายการ.date;
- receiveDate.innerText=รายการ.receive;
- officer.innerText=รายการ.officer;
- department.innerText=รายการ.dept;
+ rid.innerText=f.id;
+ name.innerText=f.name;
+ doc.innerText=f.doc;
+ date.innerText=f.date;
+ receive.innerText=f.receive;
+ officer.innerText=f.officer;
+ dept.innerText=f.dept;
 
- steps.innerHTML="";
- ขั้นตอน.forEach((t,i)=>{
-  const s=document.createElement("div");
-  s.className="step";
-  s.innerHTML=`<div class="circle ${
-    i+1<รายการ.step?"done":i+1===รายการ.step?"active":""
-  }"></div><div class="label">${t}</div>`;
-  steps.appendChild(s);
+ flow.innerHTML="";
+ steps.forEach((s,i)=>{
+  const n=document.createElement("div");
+  n.className="node";
+  n.innerHTML=`<div class="dot ${
+    i+1<f.step?"done":i+1===f.step?"active":""
+  }"></div><div class="label">${s}</div>`;
+  flow.appendChild(n);
  });
 
- status.innerText="สถานะปัจจุบัน : "+ขั้นตอน[รายการ.step-1];
+ status.innerText="สถานะปัจจุบัน : "+steps[f.step-1];
 
- section.style.display="block";
+ content.style.display="block";
  notfound.style.display="none";
 }
 </script>
