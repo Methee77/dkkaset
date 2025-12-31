@@ -2,29 +2,29 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Student Request Tracking</title>
+<title>Request Tracking</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --bg:#0b0f1a;
-    --card:#12182b;
-    --accent:#4fd1ff;
-    --accent2:#7cffc4;
-    --text:#e6e9f0;
-    --muted:#9aa4bf;
+    --bg:#050816;
+    --glass:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.12);
+    --neon1:#5efcff;
+    --neon2:#8b5cf6;
+    --text:#eef1ff;
+    --muted:#a1a8c6;
 }
 
-*{
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
+*{box-sizing:border-box;font-family:'Inter',sans-serif;}
 
 body{
     margin:0;
     min-height:100vh;
-    background:radial-gradient(circle at top,#16213e,#050816);
+    background:
+        radial-gradient(circle at top,#11162a,#050816),
+        linear-gradient(120deg,#0b0f2a,#050816);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -32,106 +32,154 @@ body{
 }
 
 .app{
-    width:520px;
-    background:var(--card);
-    border-radius:20px;
-    padding:32px;
-    box-shadow:0 40px 80px rgba(0,0,0,.6);
-    animation:fadeUp .8s ease;
+    width:560px;
+    padding:34px;
+    border-radius:26px;
+    background:linear-gradient(180deg,var(--glass),rgba(255,255,255,.03));
+    backdrop-filter:blur(22px);
+    border:1px solid var(--border);
+    box-shadow:0 40px 90px rgba(0,0,0,.7);
+    animation:appIn .9s ease;
 }
 
+/* ---------- Header ---------- */
 .header{
-    text-align:center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:28px;
 }
 
-.header h1{
+.title{
+    display:flex;
+    flex-direction:column;
+}
+
+.title h1{
     font-size:22px;
     margin:0;
-    font-weight:600;
+    font-weight:700;
+    letter-spacing:.3px;
 }
 
-.header p{
+.title span{
+    font-size:13px;
     color:var(--muted);
-    font-size:14px;
-    margin-top:6px;
 }
 
+.badge{
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    background:linear-gradient(135deg,var(--neon1),var(--neon2));
+    color:#000;
+}
+
+/* ---------- Search ---------- */
 .search{
     display:flex;
-    gap:10px;
+    gap:12px;
 }
 
 .search input{
     flex:1;
-    padding:14px 16px;
-    border-radius:14px;
-    border:none;
-    outline:none;
-    background:#0e1430;
+    padding:15px 18px;
+    border-radius:16px;
+    background:#070c20;
+    border:1px solid var(--border);
     color:var(--text);
     font-size:15px;
+    outline:none;
 }
 
 .search button{
-    padding:14px 20px;
+    padding:15px 24px;
+    border-radius:16px;
     border:none;
-    border-radius:14px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    background:linear-gradient(135deg,var(--neon1),var(--neon2));
     color:#000;
-    font-weight:600;
+    font-weight:700;
     cursor:pointer;
     transition:.3s;
 }
 
 .search button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(79,209,255,.4);
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 15px 35px rgba(139,92,246,.45);
 }
 
+/* ---------- Result Card ---------- */
 .card{
-    margin-top:26px;
-    padding:20px;
-    border-radius:18px;
-    background:#0e1430;
+    margin-top:30px;
+    padding:26px;
+    border-radius:22px;
+    background:#070c20;
+    border:1px solid var(--border);
     animation:fade .6s ease;
 }
 
 .info{
     display:grid;
-    gap:6px;
-    margin-bottom:20px;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:26px;
 }
 
-.label{
-    font-size:13px;
+.block{
+    background:rgba(255,255,255,.04);
+    padding:14px 16px;
+    border-radius:14px;
+}
+
+.block small{
+    display:block;
+    font-size:12px;
     color:var(--muted);
 }
 
-.value{
+.block strong{
     font-size:15px;
-    font-weight:500;
+    font-weight:600;
 }
 
+/* ---------- Timeline ---------- */
 .timeline{
-    display:grid;
-    gap:14px;
+    display:flex;
+    justify-content:space-between;
+    position:relative;
+    margin-top:10px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    top:18px;
+    left:0;
+    right:0;
+    height:3px;
+    background:rgba(255,255,255,.12);
 }
 
 .step{
-    display:flex;
-    align-items:center;
-    gap:14px;
+    position:relative;
+    text-align:center;
+    width:100%;
+    z-index:2;
     opacity:.35;
     transition:.4s;
 }
 
-.dot{
-    width:14px;
-    height:14px;
+.step .dot{
+    width:18px;
+    height:18px;
+    margin:0 auto 8px;
     border-radius:50%;
-    background:#555;
-    box-shadow:0 0 0 6px rgba(255,255,255,.05);
+    background:#444;
+}
+
+.step span{
+    font-size:12px;
 }
 
 .step.active{
@@ -139,28 +187,25 @@ body{
 }
 
 .step.active .dot{
-    background:var(--accent);
-    box-shadow:0 0 0 6px rgba(79,209,255,.25);
+    background:linear-gradient(135deg,var(--neon1),var(--neon2));
+    box-shadow:0 0 0 6px rgba(139,92,246,.25);
 }
 
-.step span{
-    font-size:14px;
-}
-
+/* ---------- Error ---------- */
 .error{
-    margin-top:20px;
+    margin-top:22px;
     text-align:center;
-    color:#ff9a9a;
+    color:#ff9aa2;
 }
 
+/* ---------- Animations ---------- */
 @keyframes fade{
     from{opacity:0}
     to{opacity:1}
 }
-
-@keyframes fadeUp{
-    from{opacity:0;transform:translateY(25px)}
-    to{opacity:1;transform:translateY(0)}
+@keyframes appIn{
+    from{opacity:0;transform:translateY(30px) scale(.95)}
+    to{opacity:1;transform:translateY(0) scale(1)}
 }
 </style>
 </head>
@@ -169,12 +214,15 @@ body{
 
 <div class="app">
     <div class="header">
-        <h1>Student Request Tracking</h1>
-        <p>ระบบติดตามสถานะคำร้องนักเรียน</p>
+        <div class="title">
+            <h1>Request Tracking</h1>
+            <span>ระบบติดตามคำร้องนักเรียน</span>
+        </div>
+        <div class="badge">LIVE STATUS</div>
     </div>
 
     <div class="search">
-        <input id="code" placeholder="กรอกรหัสติดตาม เช่น STD001">
+        <input id="code" placeholder="Tracking ID เช่น STD001">
         <button onclick="check()">ค้นหา</button>
     </div>
 
@@ -182,7 +230,7 @@ body{
 </div>
 
 <script>
-const data = {
+const data={
     "STD001":{
         name:"ธนภัทร กลิ่นศรีทอง",
         request:"ขอใบรับรองการเป็นนักเรียน",
@@ -206,10 +254,10 @@ const data = {
 };
 
 const steps=[
-    "รับคำร้องแล้ว",
-    "ตรวจสอบเอกสาร",
-    "อยู่ระหว่างดำเนินการ",
-    "ดำเนินการเสร็จสิ้น"
+    "รับคำร้อง",
+    "ตรวจสอบ",
+    "ดำเนินการ",
+    "เสร็จสิ้น"
 ];
 
 function check(){
@@ -223,14 +271,17 @@ function check(){
     }
 
     const d=data[code];
-
     let html=`
     <div class="card">
         <div class="info">
-            <div class="label">ชื่อผู้ยื่นคำร้อง</div>
-            <div class="value">${d.name}</div>
-            <div class="label">ประเภทคำร้อง</div>
-            <div class="value">${d.request}</div>
+            <div class="block">
+                <small>ชื่อผู้ยื่นคำร้อง</small>
+                <strong>${d.name}</strong>
+            </div>
+            <div class="block">
+                <small>ประเภทคำร้อง</small>
+                <strong>${d.request}</strong>
+            </div>
         </div>
         <div class="timeline">
     `;
@@ -240,8 +291,7 @@ function check(){
         <div class="step ${i<d.status?"active":""}">
             <div class="dot"></div>
             <span>${s}</span>
-        </div>
-        `;
+        </div>`;
     });
 
     html+=`</div></div>`;
