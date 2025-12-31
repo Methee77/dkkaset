@@ -12,6 +12,7 @@
   --muted:#9ca3af;
   --border:#1f2937;
   --accent:#3b82f6;
+  --success:#22c55e;
 }
 
 *{
@@ -41,7 +42,6 @@ body{
   margin:0;
   font-size:26px;
   font-weight:600;
-  letter-spacing:-.3px;
 }
 
 .header span{
@@ -62,7 +62,6 @@ input{
   border:1px solid var(--border);
   background:#0f1217;
   color:var(--text);
-  font-size:15px;
 }
 
 button{
@@ -71,7 +70,6 @@ button{
   border:none;
   background:var(--accent);
   color:white;
-  font-size:14px;
   cursor:pointer;
 }
 
@@ -79,7 +77,7 @@ button{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:18px;
-  padding:24px;
+  padding:26px;
 }
 
 .name{
@@ -93,6 +91,42 @@ button{
   color:var(--muted);
 }
 
+/* ===== STATUS FOCUS ===== */
+.current-status{
+  margin-top:22px;
+  padding:18px;
+  border-radius:14px;
+  background:#0f1217;
+  border:1px solid var(--border);
+}
+
+.current-status .label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.current-status .value{
+  margin-top:6px;
+  font-size:20px;
+  font-weight:600;
+  color:var(--success);
+}
+
+.progress{
+  margin-top:14px;
+  height:6px;
+  background:#1f2937;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  background:var(--success);
+  width:0%;
+}
+
+/* ===== DETAIL STATUS ===== */
 .status{
   display:flex;
   gap:8px;
@@ -132,7 +166,7 @@ button{
   </div>
 
   <div class="search">
-    <input id="code" placeholder="Tracking ID (เช่น STD001)">
+    <input id="code" placeholder="Tracking ID เช่น STD001">
     <button onclick="check()">Search</button>
   </div>
 
@@ -160,11 +194,22 @@ function check(){
   }
 
   const d=db[c];
+  const percent=Math.round((d.status/steps.length)*100);
 
   let html=`
     <div class="card">
       <div class="name">${d.name}</div>
       <div class="request">${d.request}</div>
+
+      <div class="current-status">
+        <div class="label">สถานะปัจจุบัน</div>
+        <div class="value">${steps[d.status-1]}</div>
+
+        <div class="progress">
+          <div class="progress-bar" style="width:${percent}%"></div>
+        </div>
+      </div>
+
       <div class="status">
   `;
 
