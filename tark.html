@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <title>ระบบติดตามสถานะคำร้อง - Digital Government</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gov-navy: #1a237e;
             --gov-blue: #0d47a1;
             --gov-accent: #2979ff;
-            --bg-light: #f4f7f9;
+            --bg-light: #f1f5f9;
             --white: #ffffff;
-            --border: #d1d9e6;
-            --text-dark: #2c3e50;
-            --text-muted: #7f8c8d;
-            --success: #16a34a;
-            --update-bg: #f8fafc;
+            --border: #cbd5e1;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --success: #15803d;
+            --highlight: #fff7ed;
+            --highlight-border: #fed7aa;
         }
 
         /* บังคับไม่มีขอบมน */
         * { 
             box-sizing: border-box; 
             border-radius: 0 !important;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         body {
@@ -35,6 +36,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
@@ -42,15 +44,14 @@
             max-width: 1100px;
             background: var(--white);
             border-top: 6px solid var(--gov-navy);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            padding: 0;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             position: relative;
         }
 
-        /* ส่วนหัว */
+        /* ส่วนหัวปรับปรุงใหม่ */
         .header-bar {
-            padding: 40px 50px;
-            background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 25px 50px;
+            background: #fff;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -58,82 +59,89 @@
         }
 
         .header-title h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             color: var(--gov-navy);
             margin: 0;
-            letter-spacing: 0.5px;
         }
 
         .header-title p {
-            margin: 5px 0 0;
-            font-size: 14px;
+            margin: 3px 0 0;
+            font-size: 12px;
             color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* ปุ่มเจ้าหน้าที่ */
+        .staff-login-btn {
+            background: transparent;
+            border: 1px solid var(--gov-navy);
+            color: var(--gov-navy);
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .staff-login-btn:hover {
+            background: var(--gov-navy);
+            color: white;
         }
 
         /* ส่วนค้นหา */
         .search-section {
             padding: 40px 50px;
-            background: #ffffff;
+            background: #fafafa;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gov-navy);
         }
 
         .search-group {
             display: flex;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .search-group input {
             flex: 1;
-            padding: 18px 25px;
+            padding: 16px 20px;
             font-size: 16px;
             border: 1px solid var(--border);
+            border-right: none;
             outline: none;
-            background: #fafafa;
+        }
+
+        .search-group input:focus {
+            border-color: var(--gov-accent);
+            background: #fff;
         }
 
         .search-group button {
             padding: 0 40px;
             background: var(--gov-navy);
             color: #fff;
-            border: none;
-            font-weight: 500;
+            border: 1px solid var(--gov-navy);
+            font-weight: 600;
             cursor: pointer;
         }
 
-        .search-group button:hover { background: var(--gov-blue); }
-
-        /* แถบแจ้งวันที่อัปเดต */
-        .update-tag {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .update-tag span {
-            background: var(--update-bg);
-            padding: 4px 12px;
-            border: 1px solid var(--border);
-            border-right: none;
-            color: var(--gov-navy);
-            font-weight: 500;
-        }
-
-        .update-tag strong {
-            background: var(--white);
-            padding: 4px 12px;
-            border: 1px solid var(--border);
-            color: var(--success);
-            font-weight: 600;
+        .search-group button:hover {
+            background: var(--gov-blue);
         }
 
         /* พื้นที่แสดงผล */
         .result-area {
             display: none;
-            padding: 0 50px 50px;
-            animation: fadeIn 0.4s ease-in;
+            padding: 40px 50px;
+            animation: fadeIn 0.3s ease-out;
         }
 
         @keyframes fadeIn {
@@ -141,6 +149,43 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .status-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .update-info {
+            font-size: 12px;
+            color: var(--text-muted);
+            border-left: 3px solid var(--border);
+            padding-left: 10px;
+        }
+
+        .pickup-box {
+            background: var(--highlight);
+            border: 1px solid var(--highlight-border);
+            padding: 12px 25px;
+            text-align: right;
+        }
+
+        .pickup-box label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            color: #9a3412;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .pickup-box span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ea580c;
+        }
+
+        /* ตารางข้อมูล */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -161,50 +206,62 @@
             font-size: 11px;
             font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
         .data-cell span {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
         }
 
         /* Stepper */
-        .status-stepper {
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: var(--gov-navy);
+        }
+
+        .stepper {
             display: flex;
-            margin-top: 20px;
+            border: 1px solid var(--border);
         }
 
         .step {
             flex: 1;
             padding: 20px;
-            border-top: 4px solid var(--border);
-            background: #fcfcfc;
-            position: relative;
+            background: #fff;
+            border-right: 1px solid var(--border);
+            text-align: center;
         }
 
-        .step.completed { border-top-color: var(--success); background: #f1f8f1; }
-        .step.active { border-top-color: var(--gov-accent); background: #eef2ff; }
+        .step:last-child { border-right: none; }
 
-        .step-info { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
-        .step-name { font-size: 14px; font-weight: 600; }
+        .step.done { background: #f8fafc; color: var(--text-muted); }
+        .step.active { background: var(--gov-navy); color: white; }
 
-        .error-banner {
+        .step-no { font-size: 10px; font-weight: 700; display: block; margin-bottom: 5px; opacity: 0.8; }
+        .step-text { font-size: 14px; font-weight: 600; }
+
+        .error-msg {
             display: none;
-            margin: 0 50px 40px;
-            padding: 15px;
-            background: #fff5f5;
-            border: 1px solid #feb2b2;
-            color: #c53030;
+            padding: 20px;
+            margin: 20px 50px;
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: #b91c1c;
             text-align: center;
+            font-weight: 600;
         }
 
         @media (max-width: 900px) {
             .info-grid { grid-template-columns: 1fr 1fr; }
-            .status-stepper { flex-direction: column; }
-            .update-tag { justify-content: flex-start; }
+            .stepper { flex-direction: column; }
+            .header-bar { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .staff-login-btn { width: 100%; justify-content: center; }
+            .status-meta { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .pickup-box { width: 100%; text-align: left; }
         }
     </style>
 </head>
@@ -213,66 +270,73 @@
 <div class="container">
     <div class="header-bar">
         <div class="header-title">
-            <h1>Student Request Tracking</h1>
-            <p>Version 1.0</p>
+            <h1>ระบบติดตามสถานะคำร้องอิเล็กทรอนิกส์</h1>
+            <p>E-GOVERNMENT SMART TRACKING SYSTEM</p>
         </div>
-        <div style="font-size: 12px; font-weight: 600; color: var(--gov-navy); border-left: 1px solid var(--border); padding-left: 20px;">
-            ระบบเชื่อมต่อกับฐานข้อมูลใช้งานได้ตามปกติ
-        </div>
+        <button class="staff-login-btn" onclick="alert('ไปที่หน้าเข้าสู่ระบบเจ้าหน้าที่')">
+            <span>🔐</span> สำหรับเจ้าหน้าที่
+        </button>
     </div>
 
     <div class="search-section">
+        <label class="search-label">ตรวจสอบสถานะการดำเนินงาน</label>
         <div class="search-group">
-            <input type="text" id="reqID" placeholder="กรอกรหัสคำร้องเพื่อเริ่มต้นการค้นหา..." autocomplete="off">
-            <button onclick="handleSearch()">ตรวจสอบข้อมูล</button>
+            <input type="text" id="inputID" placeholder="ระบุรหัสคำร้องเพื่อเริ่มต้นการค้นหา..." autocomplete="off">
+            <button onclick="searchData()">ค้นหาข้อมูล</button>
         </div>
     </div>
 
-    <div id="errorBox" class="error-banner">ไม่พบข้อมูลตามรหัสที่ระบุ กรุณาตรวจสอบรหัสคำร้องอีกครั้ง</div>
+    <div id="error" class="error-msg">ขออภัย ไม่พบข้อมูลตามรหัสที่ระบุ</div>
 
-    <div class="result-area" id="displayArea">
+    <div class="result-area" id="resultArea">
         
-        <div class="update-tag">
-            <span>ข้อมูล ณ วันที่</span>
-            <strong id="d-update"></strong>
+        <div class="status-meta">
+            <div class="update-info">
+                อัปเดตข้อมูลล่าสุดเมื่อ: <br>
+                <span id="u-time" style="font-weight: 700; color: var(--text-dark);"></span>
+            </div>
+            <div class="pickup-box">
+                <label>วันที่คาดว่าจะได้รับเอกสาร</label>
+                <span id="u-pickup"></span>
+            </div>
         </div>
 
         <div class="info-grid">
-            <div class="data-cell"><label>เลขที่คำร้อง</label><span id="d-id"></span></div>
-            <div class="data-cell" style="grid-column: span 2;"><label>ชื่อผู้ยื่นคำร้อง</label><span id="d-name"></span></div>
-            <div class="data-cell"><label>วันที่ยื่นคำร้อง</label><span id="d-date"></span></div>
-            <div class="data-cell" style="grid-column: span 2;"><label>รายการบริการ</label><span id="d-doc"></span></div>
-            <div class="data-cell"><label>หน่วยงานรับผิดชอบ</label><span id="d-dept"></span></div>
-            <div class="data-cell"><label>เจ้าหน้าที่ผู้ดูแล</label><span id="d-off"></span></div>
+            <div class="data-cell"><label>รหัสอ้างอิง</label><span id="r-id"></span></div>
+            <div class="data-cell" style="grid-column: span 2;"><label>ชื่อ-นามสกุล ผู้ขอรับบริการ</label><span id="r-name"></span></div>
+            <div class="data-cell"><label>วันที่ส่งคำร้อง</label><span id="r-date"></span></div>
+            <div class="data-cell" style="grid-column: span 2;"><label>รายการบริการ</label><span id="r-doc"></span></div>
+            <div class="data-cell"><label>หน่วยงาน</label><span id="r-dept"></span></div>
+            <div class="data-cell"><label>เจ้าหน้าที่ผู้รับผิดชอบ</label><span id="r-off"></span></div>
         </div>
 
-        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; border-left: 4px solid var(--gov-navy); padding-left: 12px;">สถานะการดำเนินงานปัจจุบัน</h3>
-        <div class="status-stepper" id="stepper"></div>
+        <div class="section-title">สถานะความคืบหน้าปัจจุบัน</div>
+        <div class="stepper" id="stepper"></div>
     </div>
 </div>
 
 <script>
-// ข้อมูลจำลอง (เพิ่มฟิลด์ update)
-const mockDB = [
+const db = [
     {
         id: "GOV001",
-        name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์",
+        name: "นายสมชาย ใจดี",
         doc: "ขอหนังสือรับรองความประพฤติ",
-        date: "23 ธันวาคม 2568",
-        update: "29 ธันวาคม 2568 เวลา 14:06 น.",
-        officer: "นางลำดวน ชิดปราง",
-        dept: "ฝ่ายทะเบียนวัดผล",
+        date: "01/01/2568",
+        updateTime: "31 ธันวาคม 2568 | 14:13 น.",
+        pickupDate: "05 มกราคม 2569",
+        officer: "น.ส. ศิริพร แสงทอง",
+        dept: "กองบริการประชาชน",
         currentStep: 3
     }
 ];
 
-const stepsList = ["รับคำร้อง", "ตรวจสอบเอกสาร", "อยู่ระหว่างดำเนินการ", "เสร็จสิ้น/พร้อมรับ"];
+const stepsLabels = ["รับคำร้อง", "ตรวจสอบ", "ดำเนินการ", "เสร็จสมบูรณ์"];
 
-function handleSearch() {
-    const input = document.getElementById('reqID').value.trim().toUpperCase();
-    const data = mockDB.find(x => x.id === input);
-    const area = document.getElementById('displayArea');
-    const err = document.getElementById('errorBox');
+function searchData() {
+    const query = document.getElementById('inputID').value.trim().toUpperCase();
+    const data = db.find(x => x.id === query);
+    const area = document.getElementById('resultArea');
+    const err = document.getElementById('error');
 
     if(!data) {
         area.style.display = 'none';
@@ -283,29 +347,28 @@ function handleSearch() {
     err.style.display = 'none';
     area.style.display = 'block';
 
-    // ใส่ข้อมูล
-    document.getElementById('d-id').innerText = data.id;
-    document.getElementById('d-name').innerText = data.name;
-    document.getElementById('d-date').innerText = data.date;
-    document.getElementById('d-doc').innerText = data.doc;
-    document.getElementById('d-dept').innerText = data.dept;
-    document.getElementById('d-off').innerText = data.officer;
-    document.getElementById('d-update').innerText = data.update;
+    document.getElementById('r-id').innerText = data.id;
+    document.getElementById('r-name').innerText = data.name;
+    document.getElementById('r-date').innerText = data.date;
+    document.getElementById('r-doc').innerText = data.doc;
+    document.getElementById('r-dept').innerText = data.dept;
+    document.getElementById('r-off').innerText = data.officer;
+    document.getElementById('u-time').innerText = data.updateTime;
+    document.getElementById('u-pickup').innerText = data.pickupDate;
 
-    // สร้าง Stepper
     const stepper = document.getElementById('stepper');
     stepper.innerHTML = '';
     
-    stepsList.forEach((name, i) => {
-        const num = i + 1;
+    stepsLabels.forEach((label, i) => {
+        const stepNum = i + 1;
         let statusClass = '';
-        if (num < data.currentStep) statusClass = 'completed';
-        else if (num === data.currentStep) statusClass = 'active';
+        if (stepNum < data.currentStep) statusClass = 'done';
+        else if (stepNum === data.currentStep) statusClass = 'active';
 
         stepper.innerHTML += `
             <div class="step ${statusClass}">
-                <div class="step-info">ขั้นตอนที่ ${num}</div>
-                <div class="step-name">${name}</div>
+                <span class="step-no">STEP 0${stepNum}</span>
+                <span class="step-text">${label}</span>
             </div>
         `;
     });
