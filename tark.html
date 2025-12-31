@@ -255,7 +255,7 @@
 // ข้อมูลจำลอง (เพิ่มฟิลด์ update)
 const mockDB = [
     {
-        id: "EDU987",
+        id: "GOV001",
         name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์",
         doc: "ขอหนังสือรับรองความประพฤติ",
         date: "23 ธันวาคม 2568",
@@ -266,7 +266,7 @@ const mockDB = [
     }
 ];
 
-const stepsList = ["รับคำร้อง", "ตรวจสอบเอกสาร", "อยู่ระหว่างดำเนินการ", "ดำเนินการเสร็จสิ้น"];
+const stepsList = ["รับคำร้อง", "ตรวจสอบเอกสาร", "อยู่ระหว่างดำเนินการ", "เสร็จสิ้น/พร้อมรับ"];
 
 function handleSearch() {
     const input = document.getElementById('reqID').value.trim().toUpperCase();
@@ -283,33 +283,6 @@ function handleSearch() {
     err.style.display = 'none';
     area.style.display = 'block';
 
-    id: "EDU458",
-        name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์",
-        doc: "ขอหนังสือรับรองความประพฤติ",
-        date: "23 ธันวาคม 2568",
-        update: "29 ธันวาคม 2568 เวลา 14:06 น.",
-        officer: "นางลำดวน ชิดปราง",
-        dept: "ฝ่ายทะเบียนวัดผล",
-        currentStep: 3
-    }
-];
-
-const stepsList = ["รับคำร้อง", "ตรวจสอบเอกสาร", "อยู่ระหว่างดำเนินการ", "ดำเนินการเสร็จสิ้น"];
-
-function handleSearch() {
-    const input = document.getElementById('reqID').value.trim().toUpperCase();
-    const data = mockDB.find(x => x.id === input);
-    const area = document.getElementById('displayArea');
-    const err = document.getElementById('errorBox');
-
-    if(!data) {
-        area.style.display = 'none';
-        err.style.display = 'block';
-        return;
-    }
-
-    err.style.display = 'none';
-    area.style.display = 'block';
     // ใส่ข้อมูล
     document.getElementById('d-id').innerText = data.id;
     document.getElementById('d-name').innerText = data.name;
@@ -340,4 +313,4 @@ function handleSearch() {
 </script>
 
 </body>
-</html> 
+</html>
