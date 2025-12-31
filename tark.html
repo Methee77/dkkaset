@@ -2,14 +2,16 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Student Tracking System</title>
+<title>Student Request Tracking</title>
 
 <style>
 :root{
-    --bg1:#667eea;
-    --bg2:#764ba2;
+    --primary:#2563eb;
+    --bg:#f4f6f8;
     --card:#ffffff;
-    --text:#333;
+    --text:#1f2937;
+    --muted:#9ca3af;
+    --line:#e5e7eb;
 }
 
 *{
@@ -19,123 +21,120 @@
 
 body{
     margin:0;
+    background:var(--bg);
     min-height:100vh;
-    background:linear-gradient(135deg,var(--bg1),var(--bg2));
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
 .container{
-    width:480px;
+    width:520px;
     background:var(--card);
-    border-radius:24px;
-    padding:30px;
-    box-shadow:0 30px 60px rgba(0,0,0,.3);
-    animation:fadeIn .8s ease;
-}
-
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;transform:none;}
+    border-radius:16px;
+    padding:32px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 h1{
+    margin:0 0 24px;
+    font-size:22px;
     text-align:center;
-    margin-bottom:20px;
-    background:linear-gradient(90deg,#667eea,#764ba2);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:var(--text);
+}
+
+.search{
+    display:flex;
+    gap:10px;
 }
 
 input{
-    width:100%;
+    flex:1;
     padding:14px;
-    border-radius:14px;
-    border:1px solid #ddd;
-    font-size:16px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    font-size:15px;
 }
 
 button{
-    margin-top:12px;
-    width:100%;
-    padding:14px;
+    padding:14px 22px;
     border:none;
-    border-radius:14px;
-    font-size:16px;
-    background:linear-gradient(90deg,#667eea,#764ba2);
-    color:#fff;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-size:15px;
     cursor:pointer;
-    transition:.3s;
 }
 
 button:hover{
-    transform:scale(1.03);
-}
-
-.profile{
-    margin-top:25px;
+    opacity:.9;
 }
 
 .card{
-    background:#f7f8ff;
-    padding:16px;
-    border-radius:16px;
-    margin-bottom:16px;
+    background:#fafafa;
+    border-radius:14px;
+    padding:18px;
+    margin-top:24px;
+    border:1px solid var(--line);
 }
 
-.badge{
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:12px;
-    font-size:14px;
-    background:#667eea;
-    color:white;
-    margin-top:8px;
+.name{
+    font-size:18px;
+    font-weight:600;
+    color:var(--text);
 }
 
-.progress{
-    height:10px;
-    background:#ddd;
-    border-radius:20px;
-    overflow:hidden;
-    margin:16px 0;
+.request{
+    margin-top:6px;
+    color:var(--muted);
 }
 
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#43e97b,#38f9d7);
-    transition:width .6s ease;
+.status{
+    margin-top:24px;
 }
 
 .step{
     display:flex;
     align-items:center;
-    margin-top:10px;
-    opacity:.4;
+    position:relative;
 }
 
-.step.active{
-    opacity:1;
+.step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    left:10px;
+    top:22px;
+    width:2px;
+    height:26px;
+    background:var(--line);
 }
 
-.dot{
-    width:16px;
-    height:16px;
+.circle{
+    width:22px;
+    height:22px;
     border-radius:50%;
-    margin-right:10px;
-    background:#ccc;
+    background:var(--line);
+    margin-right:12px;
 }
 
-.step.active .dot{
-    background:linear-gradient(135deg,#667eea,#764ba2);
+.step.active .circle{
+    background:var(--primary);
+}
+
+.step span{
+    font-size:15px;
+    color:var(--muted);
+}
+
+.step.active span{
+    color:var(--text);
+    font-weight:500;
 }
 
 .error{
+    margin-top:20px;
     text-align:center;
-    color:#e63946;
-    margin-top:15px;
+    color:#dc2626;
 }
 </style>
 </head>
@@ -143,16 +142,18 @@ button:hover{
 <body>
 
 <div class="container">
-    <h1>📌 ติดตามคำร้องนักเรียน</h1>
+    <h1>ติดตามสถานะคำร้องนักเรียน</h1>
 
-    <input id="code" placeholder="กรอกรหัสติดตาม เช่น STD001">
-    <button onclick="check()">ตรวจสอบสถานะ</button>
+    <div class="search">
+        <input id="code" placeholder="รหัสติดตาม เช่น STD001">
+        <button onclick="check()">ค้นหา</button>
+    </div>
 
     <div id="output"></div>
 </div>
 
 <script>
-const data = {
+const data={
     "STD001":{
         name:"ธนภัทร กลิ่นศรีทอง",
         request:"ขอใบรับรองผลการเรียน",
@@ -170,7 +171,7 @@ const data = {
     },
     "STD004":{
         name:"กิตติพงษ์ แสงทอง",
-        request:"ขอเปลี่ยนแปลงข้อมูลส่วนตัว",
+        request:"ขอแก้ไขข้อมูลส่วนตัว",
         status:4
     }
 };
@@ -178,8 +179,8 @@ const data = {
 const steps=[
     "รับคำร้อง",
     "ตรวจสอบเอกสาร",
-    "กำลังดำเนินการ",
-    "เสร็จสิ้น"
+    "อยู่ระหว่างดำเนินการ",
+    "ดำเนินการเสร็จสิ้น"
 ];
 
 function check(){
@@ -188,33 +189,34 @@ function check(){
     out.innerHTML="";
 
     if(!data[code]){
-        out.innerHTML=`<div class="error">❌ ไม่พบรหัสติดตาม</div>`;
+        out.innerHTML=`<div class="error">ไม่พบข้อมูลรหัสติดตาม</div>`;
         return;
     }
 
     const d=data[code];
-    let html=`
-        <div class="profile">
-            <div class="card">
-                <h3>👤 ${d.name}</h3>
-                <div class="badge">📄 ${d.request}</div>
-            </div>
 
-            <div class="progress">
-                <div class="progress-bar" style="width:${(d.status/4)*100}%"></div>
-            </div>
+    let html=`
+        <div class="card">
+            <div class="name">${d.name}</div>
+            <div class="request">${d.request}</div>
+
+            <div class="status">
     `;
 
     steps.forEach((s,i)=>{
         html+=`
             <div class="step ${i<d.status?'active':''}">
-                <div class="dot"></div>
-                ${s}
+                <div class="circle"></div>
+                <span>${s}</span>
             </div>
         `;
     });
 
-    html+="</div>";
+    html+=`
+            </div>
+        </div>
+    `;
+
     out.innerHTML=html;
 }
 </script>
