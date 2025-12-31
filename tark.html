@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<title>Tracking</title>
+<meta charset="UTF-8">
+<title>Request Tracking</title>
 
 <style>
 :root{
   --bg:#0b0d10;
   --card:#12151a;
+  --border:#1f2937;
   --text:#e5e7eb;
   --muted:#9ca3af;
-  --border:#1f2937;
-  --accent:#3b82f6;
+  --primary:#3b82f6;
   --success:#22c55e;
 }
 
@@ -30,18 +30,11 @@ body{
   color:var(--text);
 }
 
-.app{
-  width:560px;
-}
-
-.header{
-  margin-bottom:28px;
-}
+.app{ width:580px; }
 
 .header h1{
   margin:0;
   font-size:26px;
-  font-weight:600;
 }
 
 .header span{
@@ -52,7 +45,7 @@ body{
 .search{
   display:flex;
   gap:12px;
-  margin-bottom:28px;
+  margin:24px 0;
 }
 
 input{
@@ -65,10 +58,10 @@ input{
 }
 
 button{
-  padding:14px 22px;
+  padding:14px 24px;
   border-radius:12px;
   border:none;
-  background:var(--accent);
+  background:var(--primary);
   color:white;
   cursor:pointer;
 }
@@ -76,106 +69,105 @@ button{
 .card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:18px;
-  padding:26px;
+  border-radius:20px;
+  padding:28px;
 }
 
-.name{
-  font-size:18px;
-  font-weight:600;
-}
+.name{ font-size:18px; font-weight:600; }
+.request{ color:var(--muted); margin-top:4px; }
 
-.request{
-  margin-top:4px;
-  font-size:14px;
-  color:var(--muted);
-}
-
-/* ===== META INFO ===== */
 .meta{
   display:flex;
   gap:24px;
-  margin-top:16px;
+  margin-top:18px;
   font-size:13px;
   flex-wrap:wrap;
 }
 
-.meta div span{
+.meta span{
   display:block;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.meta div strong{
-  font-weight:500;
-}
-
-/* ===== STATUS FOCUS ===== */
-.current-status{
-  margin-top:24px;
-  padding:18px;
-  border-radius:14px;
-  background:#0f1217;
-  border:1px solid var(--border);
-}
-
-.current-status .label{
   font-size:12px;
   color:var(--muted);
 }
 
-.current-status .value{
-  margin-top:6px;
-  font-size:20px;
+/* ===== STATUS TIMELINE ===== */
+.current{
+  margin-top:28px;
+}
+
+.current .title{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.current .value{
+  font-size:22px;
   font-weight:600;
   color:var(--success);
+  margin-top:4px;
 }
 
-.progress{
-  margin-top:14px;
-  height:6px;
-  background:#1f2937;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  height:100%;
-  background:var(--success);
-}
-
-/* ===== DETAIL STATUS ===== */
-.status{
+.timeline{
   display:flex;
-  gap:8px;
-  margin-top:20px;
-  flex-wrap:wrap;
+  align-items:center;
+  margin-top:22px;
 }
 
-.pill{
-  padding:6px 14px;
-  border-radius:999px;
-  font-size:13px;
+.step{
+  flex:1;
+  position:relative;
+  text-align:center;
+}
+
+.step::after{
+  content:"";
+  position:absolute;
+  top:14px;
+  right:-50%;
+  width:100%;
+  height:2px;
+  background:#1f2937;
+}
+
+.step:last-child::after{ display:none; }
+
+.circle{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  margin:auto;
   background:#0f1217;
+  border:2px solid #1f2937;
+  position:relative;
+  z-index:1;
+}
+
+.step.done .circle{
+  background:var(--primary);
+  border-color:var(--primary);
+}
+
+.step.active .circle{
+  border-color:var(--primary);
+  box-shadow:0 0 0 8px rgba(59,130,246,.18);
+}
+
+.label{
+  margin-top:10px;
+  font-size:13px;
   color:var(--muted);
-  border:1px solid var(--border);
 }
 
-.pill.active{
-  background:rgba(59,130,246,.15);
-  color:#bfdbfe;
-  border-color:rgba(59,130,246,.4);
+.step.done .label,
+.step.active .label{
+  color:var(--text);
 }
 
-.error{
-  color:#f87171;
-  font-size:14px;
-}
+.error{ color:#f87171; }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
   <div class="header">
@@ -189,97 +181,62 @@ button{
   </div>
 
   <div id="out"></div>
-
 </div>
 
 <script>
+const steps=["รับคำร้อง","ตรวจสอบ","ดำเนินการ","เสร็จสิ้น"];
+
 const db={
   STD001:{
     name:"ธนภัทร กลิ่นศรีทอง",
     request:"ขอใบรับรองผลการเรียน",
-    status:1,
-    submitted:"12/06/2025",
-    received:null,
-    officer:null
-  },
-  STD002:{
-    name:"ณัฐวุฒิ แก้วมณี",
-    request:"ขอย้ายสถานศึกษา",
     status:2,
-    submitted:"10/06/2025",
+    submitted:"12/06/2025",
     received:null,
     officer:"นางสาวสุภาวดี ศรีสุข"
   },
-  STD003:{
+  STD002:{
     name:"ศิริพร สุขใจ",
     request:"ขอเอกสารจบการศึกษา",
-    status:3,
+    status:4,
     submitted:"05/06/2025",
     received:"18/06/2025",
     officer:"นายปิยะพงษ์ วัฒนชัย"
-  },
-  STD004:{
-    name:"กิตติพงษ์ แสงทอง",
-    request:"ขอแก้ไขข้อมูลส่วนตัว",
-    status:4,
-    submitted:"01/06/2025",
-    received:"15/06/2025",
-    officer:"นางสาวอรทัย มณีวงศ์"
   }
 };
 
-const steps=["Received","Review","Processing","Completed"];
-
 function check(){
-  const c=code.value.trim();
-  out.innerHTML="";
-
-  if(!db[c]){
-    out.innerHTML=`<div class="error">Tracking ID ไม่ถูกต้อง</div>`;
+  const d=db[code.value.trim()];
+  if(!d){
+    out.innerHTML='<div class="error">ไม่พบ Tracking ID</div>';
     return;
   }
 
-  const d=db[c];
-  const percent=Math.round((d.status/steps.length)*100);
+  out.innerHTML=`
+  <div class="card">
+    <div class="name">${d.name}</div>
+    <div class="request">${d.request}</div>
 
-  let html=`
-    <div class="card">
-      <div class="name">${d.name}</div>
-      <div class="request">${d.request}</div>
+    <div class="meta">
+      <div><span>วันที่ยื่นคำร้อง</span>${d.submitted}</div>
+      <div><span>วันรับเอกสาร</span>${d.received ?? "–"}</div>
+      <div><span>เจ้าหน้าที่ผู้ดำเนินการ</span>${d.officer}</div>
+    </div>
 
-      <div class="meta">
-        <div>
-          <span>วันที่ยื่นคำร้อง</span>
-          <strong>${d.submitted}</strong>
+    <div class="current">
+      <div class="title">สถานะปัจจุบัน</div>
+      <div class="value">${steps[d.status-1]}</div>
+    </div>
+
+    <div class="timeline">
+      ${steps.map((s,i)=>`
+        <div class="step ${i < d.status-1 ? 'done' : i===d.status-1 ? 'active' : ''}">
+          <div class="circle"></div>
+          <div class="label">${s}</div>
         </div>
-        <div>
-          <span>วันรับเอกสาร</span>
-          <strong>${d.received ?? "– ยังไม่ถึงขั้นตอนนี้"}</strong>
-        </div>
-        <div>
-          <span>เจ้าหน้าที่ผู้ดำเนินการ</span>
-          <strong>${d.officer ?? "– รอการมอบหมาย"}</strong>
-        </div>
-      </div>
-
-      <div class="current-status">
-        <div class="label">สถานะปัจจุบัน</div>
-        <div class="value">${steps[d.status-1]}</div>
-
-        <div class="progress">
-          <div class="progress-bar" style="width:${percent}%"></div>
-        </div>
-      </div>
-
-      <div class="status">
-  `;
-
-  steps.forEach((s,i)=>{
-    html+=`<div class="pill ${i<d.status?'active':''}">${s}</div>`;
-  });
-
-  html+=`</div></div>`;
-  out.innerHTML=html;
+      `).join("")}
+    </div>
+  </div>`;
 }
 </script>
 
