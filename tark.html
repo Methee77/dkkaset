@@ -2,321 +2,276 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Smart Tracking Dashboard</title>
+    <title>Status Monitoring System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-glow: rgba(37, 99, 235, 0.5);
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --success-color: #2dd4bf;
+            --bg: #05070a;
+            --surface: #0f1218;
+            --accent: #00f2ff; /* Neon Cyan */
+            --accent-dim: rgba(0, 242, 255, 0.1);
+            --border-color: #1e293b;
+            --text: #e2e8f0;
+            --muted: #64748b;
         }
 
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { 
+            box-sizing: border-box; 
+            border-radius: 0 !important; /* บังคับไม่มีขอบมนทุกกรณี */
+            transition: all 0.2s ease;
+        }
 
         body {
             margin: 0;
             font-family: 'Prompt', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
-            color: var(--text-main);
-            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* ตกแต่งพื้นหลังด้วยวงกลมเรืองแสง */
-        body::before {
-            content: "";
+        .main-panel {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            position: relative;
+            padding: 60px;
+            box-shadow: 20px 20px 0px rgba(0, 242, 255, 0.03);
+        }
+
+        /* ตกแต่งมุมแบบกลไก */
+        .main-panel::before {
+            content: "SYSTEM_ACTIVE_V.4.0";
             position: absolute;
-            width: 300px; height: 300px;
-            background: var(--accent-glow);
-            filter: blur(120px);
-            top: 10%; left: 10%;
-            z-index: -1;
+            top: 10px; left: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--accent);
         }
 
-        .container {
-            width: 95%;
-            max-width: 1000px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 50px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        .header {
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin-bottom: 50px;
         }
 
-        .header-section {
-            text-align: center;
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Search Section */
+        .search-row {
+            display: flex;
+            margin-bottom: 60px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-row input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 20px 25px;
+            color: var(--accent);
+            font-size: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            outline: none;
+        }
+
+        .search-row button {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .search-row button:hover {
+            background: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* Grid Layout */
+        .content-grid {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+
+        .data-table {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
             margin-bottom: 40px;
         }
 
-        .header-section h1 {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin: 0;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Search Bar ใหม่: ดูคล้าย Spotlight Search */
-        .search-container {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto 50px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 20px 30px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            color: #fff;
-            font-size: 18px;
-            outline: none;
-            text-align: center;
-        }
-
-        .search-container input:focus {
-            background: rgba(255,255,255,0.08);
-            border-color: #3b82f6;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-        }
-
-        .btn-search {
-            margin-top: 15px;
-            width: 100%;
-            padding: 15px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-search:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5);
-        }
-
-        /* Result Layout */
-        .data-display {
-            display: none;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 30px;
-            animation: slideUp 0.6s ease-out forwards;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .info-panel {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .data-card {
-            background: rgba(255,255,255,0.03);
+        .cell {
             padding: 20px;
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .data-card label {
+        .cell label {
             display: block;
             font-size: 11px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
+            color: var(--muted);
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .data-card div {
-            font-size: 16px;
-            font-weight: 400;
+        .cell span {
+            font-size: 15px;
+            font-weight: 500;
         }
 
-        /* Stepper แบบใหม่ (Vertical บนมือถือ / Horizontal บนคอม) */
-        .stepper {
+        /* Stepper - Sharp Line Design */
+        .status-track {
+            margin-top: 50px;
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 24px;
         }
 
-        .step {
+        .step-item {
             flex: 1;
-            text-align: center;
+            border-top: 2px solid var(--border-color);
+            padding-top: 15px;
             position: relative;
         }
 
-        .step-icon {
-            width: 40px; height: 40px;
-            background: #1e293b;
-            border: 2px solid var(--glass-border);
-            border-radius: 12px;
-            margin: 0 auto 10px;
-            line-height: 38px;
-            font-weight: 600;
-            color: var(--text-dim);
-            z-index: 2;
-            position: relative;
+        .step-item.active {
+            border-top-color: var(--accent);
         }
 
-        .step.active .step-icon {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        .step-item.done {
+            border-top-color: #fff;
         }
 
-        .step.done .step-icon {
-            background: var(--success-color);
-            border-color: var(--success-color);
-            color: #0f172a;
+        .step-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: var(--muted);
         }
 
-        .step-text { font-size: 12px; color: var(--text-dim); }
-        .step.active .step-text { color: #fff; font-weight: 600; }
+        .active .step-code { color: var(--accent); }
 
-        .notfound-msg {
+        .step-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .error-box {
             display: none;
-            color: #f87171;
-            text-align: center;
+            border: 1px solid #ff4a4a;
             padding: 20px;
-            background: rgba(248, 113, 113, 0.1);
-            border-radius: 15px;
+            color: #ff4a4a;
+            text-align: center;
+            font-weight: 700;
         }
 
         @media (max-width: 768px) {
-            .data-display { grid-template-columns: 1fr; }
-            .container { padding: 30px 20px; }
-            .stepper { flex-direction: column; gap: 30px; align-items: flex-start; }
-            .step { display: flex; align-items: center; gap: 20px; }
+            .data-table { grid-template-columns: 1fr 1fr; }
+            .status-track { flex-direction: column; gap: 20px; }
+            .main-panel { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-section">
-        <h1>Tracking Dashboard</h1>
-        <p style="color: var(--text-dim); font-size: 14px;">ระบบตรวจสอบสถานะคำร้องอัตโนมัติ</p>
+<div class="main-panel">
+    <div class="header">
+        <h1>Tracking Terminal</h1>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 5px;">ESTABLISHED CONNECTION... PORT: 443</div>
     </div>
 
-    <div class="search-container">
-        <input type="text" id="reqInput" placeholder="กรอกรหัสคำร้องของคุณ..." autocomplete="off">
-        <button class="btn-search" onclick="doSearch()">ค้นหาข้อมูล</button>
+    <div class="search-row">
+        <input type="text" id="reqInput" placeholder="ENTER REQUEST ID..." autocomplete="off">
+        <button onclick="runSearch()">Execute</button>
     </div>
 
-    <div id="notFound" class="notfound-msg">ไม่พบรหัสคำร้องที่คุณต้องการตรวจสอบ</div>
+    <div id="errorBox" class="error-box">ERROR: REQUEST_ID_NOT_FOUND</div>
 
-    <div class="data-display" id="dataDisplay">
-        <div class="info-panel">
-            <div class="data-card" style="grid-column: span 2;">
-                <label>ผู้ยื่นคำร้อง</label>
-                <div id="o-name">-</div>
-            </div>
-            <div class="data-card">
-                <label>รหัสอ้างอิง</label>
-                <div id="o-id">-</div>
-            </div>
-            <div class="data-card">
-                <label>วันที่ยื่น</label>
-                <div id="o-date">-</div>
-            </div>
-            <div class="data-card" style="grid-column: span 2;">
-                <label>ประเภทเอกสาร</label>
-                <div id="o-doc">-</div>
-            </div>
+    <div class="content-grid" id="contentGrid">
+        <div class="data-table">
+            <div class="cell"><label>Ref. ID</label><span id="v-id"></span></div>
+            <div class="cell" style="grid-column: span 2;"><label>Requester Name</label><span id="v-name"></span></div>
+            <div class="cell"><label>Submission Date</label><span id="v-date"></span></div>
+            <div class="cell" style="grid-column: span 2;"><label>Document Type</label><span id="v-doc"></span></div>
+            <div class="cell"><label>Authorized Dept.</label><span id="v-dept"></span></div>
+            <div class="cell"><label>Officer</label><span id="v-off"></span></div>
         </div>
 
-        <div class="info-panel" style="grid-template-columns: 1fr;">
-            <div class="data-card" style="border-left: 4px solid #3b82f6;">
-                <label>เจ้าหน้าที่รับผิดชอบ</label>
-                <div id="o-officer">-</div>
-            </div>
-            <div class="data-card" style="border-left: 4px solid #3b82f6;">
-                <label>หน่วยงาน</label>
-                <div id="o-dept">-</div>
-            </div>
-        </div>
-
-        <div class="stepper" id="stepperComp" style="grid-column: span 2;">
+        <div class="status-track" id="statusTrack">
             </div>
     </div>
 </div>
 
 <script>
-const db = [
+const dataSet = [
     {
         id: "GOV001",
-        name: "คุณสมชาย ใจดี",
-        doc: "Official Academic Transcript",
-        date: "01/01/2025",
-        officer: "น.ส. ศิริพร แสงทอง",
-        dept: "Education Service Division",
-        currentStep: 3
+        name: "MR. SOMCHAI JAIDEE",
+        doc: "ACADEMIC TRANSCRIPT (OFFICIAL)",
+        date: "2025-01-01",
+        officer: "S. SAENGTHONG",
+        dept: "REGISTRY OFFICE",
+        step: 3
     }
 ];
 
-const labels = ["ยืนยันคำร้อง", "ตรวจรับเอกสาร", "กำลังวิเคราะห์", "ออกเอกสารเรียบร้อย"];
+const steps = ["Registered", "Verified", "Processing", "Completed"];
 
-function doSearch() {
-    const val = document.getElementById('reqInput').value.trim().toUpperCase();
-    const data = db.find(x => x.id === val);
-    const display = document.getElementById('dataDisplay');
-    const err = document.getElementById('notFound');
+function runSearch() {
+    const query = document.getElementById('reqInput').value.trim().toUpperCase();
+    const result = dataSet.find(x => x.id === query);
+    const grid = document.getElementById('contentGrid');
+    const err = document.getElementById('errorBox');
 
-    if(!data) {
-        display.style.display = 'none';
+    if(!result) {
+        grid.style.display = 'none';
         err.style.display = 'block';
         return;
     }
 
     err.style.display = 'none';
-    display.style.display = 'grid';
+    grid.style.display = 'block';
 
-    // Set Values
-    document.getElementById('o-name').innerText = data.name;
-    document.getElementById('o-id').innerText = data.id;
-    document.getElementById('o-date').innerText = data.date;
-    document.getElementById('o-doc').innerText = data.doc;
-    document.getElementById('o-officer').innerText = data.officer;
-    document.getElementById('o-dept').innerText = data.dept;
+    document.getElementById('v-id').innerText = result.id;
+    document.getElementById('v-name').innerText = result.name;
+    document.getElementById('v-date').innerText = result.date;
+    document.getElementById('v-doc').innerText = result.doc;
+    document.getElementById('v-dept').innerText = result.dept;
+    document.getElementById('v-off').innerText = result.officer;
 
-    // Generate Steps
-    const stepper = document.getElementById('stepperComp');
-    stepper.innerHTML = '';
+    const track = document.getElementById('statusTrack');
+    track.innerHTML = '';
     
-    labels.forEach((text, i) => {
-        const stepNum = i + 1;
-        const statusClass = stepNum < data.currentStep ? 'done' : (stepNum === data.currentStep ? 'active' : '');
-        const stepHtml = `
-            <div class="step ${statusClass}">
-                <div class="step-icon">${stepNum < data.currentStep ? '✓' : '0'+stepNum}</div>
-                <div class="step-text">${text}</div>
+    steps.forEach((label, i) => {
+        const sIdx = i + 1;
+        const state = sIdx < result.step ? 'done' : (sIdx === result.step ? 'active' : '');
+        track.innerHTML += `
+            <div class="step-item ${state}">
+                <div class="step-code">0${sIdx} //</div>
+                <div class="step-label">${label}</div>
             </div>
         `;
-        stepper.innerHTML += stepHtml;
     });
 }
 </script>
+
 </body>
 </html>
