@@ -2,19 +2,17 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>ติดตามคำร้องเอกสาร</title>
+<title>Smart Tracking System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --primary:#0f2a44;
-  --accent:#2563eb;
-  --success:#16a34a;
-  --bg:#f6f7f9;
-  --text:#0f172a;
-  --muted:#6b7280;
+  --blue:#2563eb;
+  --green:#22c55e;
+  --gray:#64748b;
+  --bg:linear-gradient(135deg,#0f172a,#020617);
 }
 
 *{box-sizing:border-box}
@@ -23,203 +21,233 @@ body{
   margin:0;
   font-family:'Inter',sans-serif;
   background:var(--bg);
-  color:var(--text);
+  color:#e5e7eb;
 }
 
-.page{
+.container{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:32px;
+  padding:40px;
 }
 
-.panel{
-  background:#fff;
+.card{
   width:100%;
-  max-width:880px;
-  padding:48px 56px;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  max-width:900px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  border-radius:20px;
+  padding:48px;
+  box-shadow:0 30px 60px rgba(0,0,0,.4);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .title{
-  font-size:20px;
+  font-size:22px;
   font-weight:600;
 }
 
-.subtitle{
-  font-size:14px;
-  color:var(--muted);
-  margin-top:6px;
+.live{
+  font-size:13px;
+  color:var(--green);
 }
 
 .search{
-  margin-top:32px;
+  margin-top:36px;
   display:flex;
-  gap:12px;
+  gap:14px;
 }
 
 .search input{
   flex:1;
-  padding:14px 16px;
-  font-size:15px;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  color:#fff;
 }
 
 .search button{
-  padding:14px 26px;
+  padding:14px 30px;
+  background:var(--blue);
   border:none;
-  background:var(--primary);
+  border-radius:10px;
   color:#fff;
-  font-size:15px;
-  border-radius:8px;
   cursor:pointer;
 }
 
-.section{
-  margin-top:40px;
+.result{
   display:none;
+  margin-top:48px;
 }
 
-.grid{
+.info{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px 40px;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
 }
 
-.item span{
-  font-size:13px;
-  color:var(--muted);
+.box{
+  background:rgba(255,255,255,.06);
+  padding:18px;
+  border-radius:14px;
 }
 
-.item strong{
+.box span{
+  font-size:12px;
+  color:var(--gray);
+}
+
+.box strong{
   display:block;
   margin-top:6px;
   font-size:15px;
-  font-weight:500;
 }
 
-/* ===== PROGRESS BAR ===== */
-.progress{
-  margin-top:40px;
+.timeline{
+  margin-top:42px;
 }
 
-.progress-label{
+.line{
   display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  margin-bottom:10px;
+  align-items:center;
 }
 
-.bar{
-  height:6px;
-  background:#e5e7eb;
-  border-radius:999px;
-  overflow:hidden;
+.step{
+  flex:1;
+  text-align:center;
+  position:relative;
 }
 
-.bar span{
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--accent),var(--success));
-  transition:width .6s ease;
+.circle{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#334155;
+  margin:0 auto;
 }
 
-.status-text{
-  margin-top:14px;
-  font-size:14px;
+.active{
+  background:var(--blue);
+}
+
+.done{
+  background:var(--green);
+}
+
+.step::after{
+  content:'';
+  position:absolute;
+  top:7px;
+  left:50%;
+  width:100%;
+  height:2px;
+  background:#334155;
+  z-index:-1;
+}
+
+.step:last-child::after{display:none}
+
+.label{
+  margin-top:10px;
+  font-size:12px;
+  color:#cbd5f5;
+}
+
+.status{
+  margin-top:20px;
+  font-size:15px;
   font-weight:500;
-  color:var(--accent);
+  color:var(--blue);
 }
 
 .notfound{
   display:none;
-  margin-top:32px;
+  margin-top:36px;
+  color:#f87171;
   text-align:center;
-  color:#b91c1c;
-  font-weight:500;
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
-  <div class="panel">
+<div class="container">
+  <div class="card">
 
-    <div class="title">ติดตามสถานะคำร้องเอกสาร</div>
-    <div class="subtitle">ระบบรายงานความคืบหน้าสำหรับผู้บริหาร</div>
-
-    <div class="search">
-      <input id="track" placeholder="กรอกรหัสแทรกกิ้ง">
-      <button onclick="search()">ค้นหา</button>
+    <div class="header">
+      <div class="title">Smart Educational Tracking</div>
+      <div class="live">● LIVE SYSTEM</div>
     </div>
 
-    <div class="section" id="content">
+    <div class="search">
+      <input id="track" placeholder="Tracking ID">
+      <button onclick="find()">Search</button>
+    </div>
 
-      <div class="grid">
-        <div class="item"><span>เลขคำร้อง</span><strong id="rid"></strong></div>
-        <div class="item"><span>ชื่อผู้ขอ</span><strong id="name"></strong></div>
-        <div class="item"><span>ประเภทเอกสาร</span><strong id="doc"></strong></div>
-        <div class="item"><span>วันที่ยื่นคำร้อง</span><strong id="date"></strong></div>
+    <div class="result" id="result">
+      <div class="info">
+        <div class="box"><span>Tracking ID</span><strong id="rid"></strong></div>
+        <div class="box"><span>Applicant</span><strong id="name"></strong></div>
+        <div class="box"><span>Document</span><strong id="doc"></strong></div>
+        <div class="box"><span>Submitted</span><strong id="date"></strong></div>
       </div>
 
-      <div class="progress">
-        <div class="progress-label">
-          <span>ความคืบหน้า</span>
-          <span id="percent">0%</span>
-        </div>
-        <div class="bar"><span id="bar"></span></div>
-        <div class="status-text" id="statusText"></div>
+      <div class="timeline">
+        <div class="line" id="line"></div>
+        <div class="status" id="status"></div>
       </div>
-
     </div>
 
     <div class="notfound" id="notfound">
-      ไม่พบข้อมูลจากรหัสที่ระบุ
+      No data found in the system
     </div>
 
   </div>
 </div>
 
 <script>
-const data=[
- {id:"REQ001",name:"สมชาย ใจดี",doc:"ใบรับรองผลการเรียน",date:"01/01/2568",step:1},
- {id:"REQ002",name:"สุดา แสงทอง",doc:"ปพ.1",date:"02/01/2568",step:2},
- {id:"REQ003",name:"กิตติพงศ์ ดีมาก",doc:"ใบรับรองจบการศึกษา",date:"30/12/2567",step:4}
+const db=[
+ {id:"EDU001",name:"สมชาย ใจดี",doc:"Transcript",date:"01/01/2568",step:3},
+ {id:"EDU002",name:"สุดา แสงทอง",doc:"Certificate",date:"02/01/2568",step:1}
 ];
 
-const stepsText=[
- "รับคำร้องแล้ว",
- "อยู่ระหว่างตรวจสอบเอกสาร",
- "กำลังดำเนินการจัดทำ",
- "ดำเนินการเสร็จสิ้น"
-];
+const steps=["Request Received","Verification","Processing","Completed"];
 
-function search(){
- const v=document.getElementById("track").value.trim().toUpperCase();
- const f=data.find(d=>d.id===v);
+function find(){
+ const v=track.value.trim().toUpperCase();
+ const f=db.find(d=>d.id===v);
 
- if(f){
-  document.getElementById("rid").innerText=f.id;
-  document.getElementById("name").innerText=f.name;
-  document.getElementById("doc").innerText=f.doc;
-  document.getElementById("date").innerText=f.date;
-
-  const percent=(f.step-1)/3*100;
-  document.getElementById("bar").style.width=percent+"%";
-  document.getElementById("percent").innerText=Math.round(percent)+"%";
-  document.getElementById("statusText").innerText=stepsText[f.step-1];
-
-  document.getElementById("content").style.display="block";
-  document.getElementById("notfound").style.display="none";
- }else{
-  document.getElementById("content").style.display="none";
-  document.getElementById("notfound").style.display="block";
+ if(!f){
+  result.style.display="none";
+  notfound.style.display="block";
+  return;
  }
+
+ rid.innerText=f.id;
+ name.innerText=f.name;
+ doc.innerText=f.doc;
+ date.innerText=f.date;
+
+ line.innerHTML="";
+ steps.forEach((s,i)=>{
+  const st=document.createElement("div");
+  st.className="step";
+  st.innerHTML=`<div class="circle ${
+    i+1<f.step?"done":i+1===f.step?"active":""
+  }"></div><div class="label">${s}</div>`;
+  line.appendChild(st);
+ });
+
+ status.innerText="Current Status: "+steps[f.step-1];
+ result.style.display="block";
+ notfound.style.display="none";
 }
 </script>
 
