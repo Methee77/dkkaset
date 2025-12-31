@@ -1,242 +1,179 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>Request Tracking</title>
+<meta charset="UTF-8" />
+<title>Tracking</title>
 
 <style>
 :root{
-    --bg:#f9fafb;
-    --card:#ffffff;
-    --text:#111827;
-    --muted:#6b7280;
-    --border:#e5e7eb;
-    --primary:#2563eb;
+  --bg:#0b0d10;
+  --card:#12151a;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#1f2937;
+  --accent:#3b82f6;
 }
 
 *{
-    box-sizing:border-box;
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-sizing:border-box;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 body{
-    margin:0;
-    background:var(--bg);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--text);
 }
 
-.wrapper{
-    width:560px;
+.app{
+  width:560px;
 }
 
 .header{
-    margin-bottom:24px;
+  margin-bottom:28px;
 }
 
 .header h1{
-    margin:0;
-    font-size:24px;
-    font-weight:600;
-    color:var(--text);
+  margin:0;
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:-.3px;
 }
 
-.header p{
-    margin-top:6px;
-    color:var(--muted);
-    font-size:14px;
-}
-
-.version{
-    display:block;
-    margin-top:6px;
-    font-size:12px;
-    color:#9ca3af;
+.header span{
+  font-size:12px;
+  color:var(--muted);
 }
 
 .search{
-    display:flex;
-    gap:12px;
+  display:flex;
+  gap:12px;
+  margin-bottom:28px;
 }
 
 input{
-    flex:1;
-    padding:14px 16px;
-    border-radius:10px;
-    border:1px solid var(--border);
-    font-size:15px;
+  flex:1;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#0f1217;
+  color:var(--text);
+  font-size:15px;
 }
 
 button{
-    padding:14px 20px;
-    border-radius:10px;
-    border:1px solid var(--border);
-    background:var(--text);
-    color:white;
-    font-size:14px;
-    cursor:pointer;
-}
-
-button:hover{
-    opacity:.9;
+  padding:14px 22px;
+  border-radius:12px;
+  border:none;
+  background:var(--accent);
+  color:white;
+  font-size:14px;
+  cursor:pointer;
 }
 
 .card{
-    margin-top:28px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:24px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
 }
 
 .name{
-    font-size:18px;
-    font-weight:600;
-    color:var(--text);
+  font-size:18px;
+  font-weight:600;
 }
 
 .request{
-    margin-top:4px;
-    font-size:14px;
-    color:var(--muted);
+  margin-top:4px;
+  font-size:14px;
+  color:var(--muted);
 }
 
-.steps{
-    display:flex;
-    justify-content:space-between;
-    margin-top:32px;
+.status{
+  display:flex;
+  gap:8px;
+  margin-top:20px;
+  flex-wrap:wrap;
 }
 
-.step{
-    flex:1;
-    text-align:center;
-    position:relative;
-    color:var(--muted);
-    font-size:13px;
+.pill{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  background:#0f1217;
+  color:var(--muted);
+  border:1px solid var(--border);
 }
 
-.step:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    top:10px;
-    right:-50%;
-    width:100%;
-    height:1px;
-    background:var(--border);
-}
-
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:var(--border);
-    margin:0 auto 10px;
-}
-
-.step.active{
-    color:var(--text);
-    font-weight:500;
-}
-
-.step.active .dot{
-    background:var(--primary);
+.pill.active{
+  background:rgba(59,130,246,.15);
+  color:#bfdbfe;
+  border-color:rgba(59,130,246,.4);
 }
 
 .error{
-    margin-top:20px;
-    color:#dc2626;
-    font-size:14px;
+  color:#f87171;
+  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="app">
 
-    <div class="header">
-        <h1>ติดตามคำร้อง</h1>
-        <p>กรอกรหัสเพื่อตรวจสอบสถานะการดำเนินการ</p>
-        <span class="version">version 1.0</span>
-    </div>
+  <div class="header">
+    <h1>Request Tracking</h1>
+    <span>version 1.0</span>
+  </div>
 
-    <div class="search">
-        <input id="code" placeholder="Tracking ID เช่น STD001">
-        <button onclick="check()">Search</button>
-    </div>
+  <div class="search">
+    <input id="code" placeholder="Tracking ID (เช่น STD001)">
+    <button onclick="check()">Search</button>
+  </div>
 
-    <div id="output"></div>
+  <div id="out"></div>
 
 </div>
 
 <script>
-const data={
-    "STD001":{
-        name:"ธนภัทร กลิ่นศรีทอง",
-        request:"ขอใบรับรองผลการเรียน",
-        status:1
-    },
-    "STD002":{
-        name:"ณัฐวุฒิ แก้วมณี",
-        request:"ขอย้ายสถานศึกษา",
-        status:2
-    },
-    "STD003":{
-        name:"ศิริพร สุขใจ",
-        request:"ขอเอกสารจบการศึกษา",
-        status:3
-    },
-    "STD004":{
-        name:"กิตติพงษ์ แสงทอง",
-        request:"ขอแก้ไขข้อมูลส่วนตัว",
-        status:4
-    }
+const db={
+  STD001:{name:"ธนภัทร กลิ่นศรีทอง",request:"ขอใบรับรองผลการเรียน",status:1},
+  STD002:{name:"ณัฐวุฒิ แก้วมณี",request:"ขอย้ายสถานศึกษา",status:2},
+  STD003:{name:"ศิริพร สุขใจ",request:"ขอเอกสารจบการศึกษา",status:3},
+  STD004:{name:"กิตติพงษ์ แสงทอง",request:"ขอแก้ไขข้อมูลส่วนตัว",status:4}
 };
 
-const steps=[
-    "Received",
-    "Review",
-    "Processing",
-    "Completed"
-];
+const steps=["Received","Review","Processing","Completed"];
 
 function check(){
-    const code=document.getElementById("code").value.trim();
-    const out=document.getElementById("output");
-    out.innerHTML="";
+  const c=code.value.trim();
+  out.innerHTML="";
 
-    if(!data[code]){
-        out.innerHTML=`<div class="error">ไม่พบข้อมูล</div>`;
-        return;
-    }
+  if(!db[c]){
+    out.innerHTML=`<div class="error">Tracking ID ไม่ถูกต้อง</div>`;
+    return;
+  }
 
-    const d=data[code];
+  const d=db[c];
 
-    let html=`
-        <div class="card">
-            <div class="name">${d.name}</div>
-            <div class="request">${d.request}</div>
+  let html=`
+    <div class="card">
+      <div class="name">${d.name}</div>
+      <div class="request">${d.request}</div>
+      <div class="status">
+  `;
 
-            <div class="steps">
-    `;
+  steps.forEach((s,i)=>{
+    html+=`<div class="pill ${i<d.status?'active':''}">${s}</div>`;
+  });
 
-    steps.forEach((s,i)=>{
-        html+=`
-            <div class="step ${i<d.status?'active':''}">
-                <div class="dot"></div>
-                ${s}
-            </div>
-        `;
-    });
-
-    html+=`
-            </div>
-        </div>
-    `;
-
-    out.innerHTML=html;
+  html+=`</div></div>`;
+  out.innerHTML=html;
 }
 </script>
 
