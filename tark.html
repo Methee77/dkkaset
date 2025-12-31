@@ -5,164 +5,238 @@
 <title>Tracking System – version 1.0</title>
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0b0e14;
+  background:#0a0a0a;
   font-family:Inter,system-ui,sans-serif;
   color:#e5e7eb;
 }
 
-/* container */
-.tracking-box{
-  width:90%;
-  max-width:900px;
-  background:#111827;
-  padding:40px;
-  border-radius:16px;
-  box-shadow:0 20px 50px rgba(0,0,0,.6);
+.app{
+  width:95%;
+  max-width:1100px;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:28px;
 }
 
-/* header */
-.header{
-  text-align:center;
-  margin-bottom:40px;
+/* sidebar */
+.sidebar{
+  background:#0f0f0f;
+  border:1px solid #1f1f1f;
+  border-radius:18px;
+  padding:20px;
 }
 
-.header h1{
-  font-size:26px;
-  font-weight:600;
-}
-
-.header span{
-  font-size:13px;
+.sidebar h2{
+  font-size:14px;
+  font-weight:500;
   color:#9ca3af;
+  margin-bottom:16px;
 }
 
-/* line status */
-.status-line{
+.person{
+  padding:14px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  color:#9ca3af;
+  transition:.2s;
+}
+
+.person:hover{
+  background:#111827;
+}
+
+.person.active{
+  background:#111827;
+  color:#e5e7eb;
+}
+
+/* main */
+.main{
+  background:#0f0f0f;
+  border:1px solid #1f1f1f;
+  border-radius:18px;
+  padding:36px 44px;
+}
+
+h1{
+  margin:0;
+  font-size:22px;
+  font-weight:500;
+  text-align:center;
+}
+
+.version{
+  text-align:center;
+  font-size:12px;
+  color:#6b7280;
+  margin:6px 0 40px;
+}
+
+/* status line */
+.status{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  margin-bottom:35px;
+  gap:16px;
+  margin-bottom:14px;
 }
 
-.segment{
+.bar{
   flex:1;
-  height:6px;
-  border-radius:6px;
+  height:4px;
   background:#1f2937;
-  position:relative;
-  overflow:hidden;
+  border-radius:4px;
 }
 
-.segment.done{
-  background:#3b82f6;
-}
+.bar.done{ background:#e5e7eb; }
 
-.segment.active{
-  background:linear-gradient(
-    90deg,
-    #2563eb,
-    #60a5fa,
-    #2563eb
-  );
-  box-shadow:0 0 18px rgba(59,130,246,.8);
-  animation:flow 2.5s linear infinite;
+.bar.active{
+  background:linear-gradient(90deg,#9ca3af,#ffffff,#9ca3af);
+  box-shadow:0 0 10px rgba(255,255,255,.35);
+  animation:flow 3s linear infinite;
 }
 
 @keyframes flow{
-  0%{background-position:0%}
-  100%{background-position:200%}
+  from{background-position:0%}
+  to{background-position:200%}
 }
 
-/* labels */
 .labels{
   display:flex;
   justify-content:space-between;
-  font-size:13px;
-  color:#9ca3af;
-  margin-bottom:30px;
+  font-size:12px;
+  color:#6b7280;
+  margin-bottom:36px;
 }
 
-.labels .active{
-  color:#bfdbfe;
-  font-weight:500;
-}
+.labels .active{ color:#e5e7eb; }
 
-/* detail */
-.detail{
+/* info */
+.info{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
-  font-size:14px;
+  gap:22px;
 }
 
-.card{
-  background:#0b1220;
-  padding:18px;
-  border-radius:12px;
-  border:1px solid #1f2937;
+.item{
+  padding:18px 20px;
+  border-radius:14px;
+  background:#0b0b0b;
+  border:1px solid #1f1f1f;
 }
 
-.card b{
+.item span{
+  font-size:12px;
+  color:#6b7280;
+}
+
+.item b{
   display:block;
-  margin-bottom:6px;
-  color:#93c5fd;
+  margin-top:6px;
+  font-weight:500;
 }
 </style>
 </head>
 
 <body>
 
-<div class="tracking-box">
+<div class="app">
 
-  <div class="header">
+  <!-- sidebar -->
+  <div class="sidebar">
+    <h2>รายการผู้ยื่นคำร้อง</h2>
+    <div id="list"></div>
+  </div>
+
+  <!-- main -->
+  <div class="main">
     <h1>ระบบติดตามคำร้อง</h1>
-    <span>version 1.0</span>
-  </div>
+    <div class="version">version 1.0</div>
 
-  <!-- status line -->
-  <div class="status-line">
-    <div class="segment done"></div>
-    <div class="segment done"></div>
-    <div class="segment active"></div>
-    <div class="segment"></div>
-  </div>
+    <div class="status" id="statusLine"></div>
+    <div class="labels" id="labels"></div>
 
-  <!-- labels -->
-  <div class="labels">
-    <div>ยื่นคำร้อง</div>
-    <div>ตรวจสอบ</div>
-    <div class="active">กำลังดำเนินการ</div>
-    <div>เสร็จสิ้น</div>
-  </div>
-
-  <!-- detail -->
-  <div class="detail">
-    <div class="card">
-      <b>ชื่อผู้ยื่นคำร้อง</b>
-      นายธนภัทร กลิ่นศรีทอง
-    </div>
-    <div class="card">
-      <b>ประเภทคำร้อง</b>
-      ขอแก้ไขข้อมูลทะเบียน
-    </div>
-    <div class="card">
-      <b>วันที่ยื่นคำร้อง</b>
-      12 ธันวาคม 2568
-    </div>
-    <div class="card">
-      <b>เจ้าหน้าที่ผู้ดำเนินการ</b>
-      น.ส.กมลชนก ศรีสุข
+    <div class="info">
+      <div class="item"><span>ชื่อผู้ยื่นคำร้อง</span><b id="name"></b></div>
+      <div class="item"><span>ประเภทคำร้อง</span><b id="type"></b></div>
+      <div class="item"><span>วันที่ยื่นคำร้อง</span><b id="submit"></b></div>
+      <div class="item"><span>เจ้าหน้าที่ผู้ดำเนินการ</span><b id="officer"></b></div>
     </div>
   </div>
 
 </div>
+
+<script>
+const steps = ["ยื่นคำร้อง","ตรวจสอบ","ดำเนินการ","เสร็จสิ้น"];
+
+const data = [
+  {
+    name:"ธนภัทร กลิ่นศรีทอง",
+    type:"แก้ไขข้อมูลทะเบียน",
+    submit:"12 ธันวาคม 2568",
+    officer:"กมลชนก ศรีสุข",
+    status:3
+  },
+  {
+    name:"ปริญญา แสงทอง",
+    type:"ขอเอกสารรับรอง",
+    submit:"10 ธันวาคม 2568",
+    officer:"ศุภชัย วัฒนา",
+    status:4
+  },
+  {
+    name:"ณัฐพล ใจดี",
+    type:"ขอลาเรียน",
+    submit:"9 ธันวาคม 2568",
+    officer:"พิมพ์ชนก บุญมา",
+    status:2
+  }
+];
+
+const list = document.getElementById("list");
+
+data.forEach((p,i)=>{
+  const div = document.createElement("div");
+  div.className = "person" + (i===0?" active":"");
+  div.textContent = p.name;
+  div.onclick = ()=>selectPerson(i);
+  list.appendChild(div);
+});
+
+function selectPerson(i){
+  document.querySelectorAll(".person").forEach((e,idx)=>{
+    e.classList.toggle("active",idx===i);
+  });
+
+  const d = data[i];
+  name.textContent = d.name;
+  type.textContent = d.type;
+  submit.textContent = d.submit;
+  officer.textContent = d.officer;
+
+  statusLine.innerHTML="";
+  labels.innerHTML="";
+
+  steps.forEach((s,idx)=>{
+    const bar=document.createElement("div");
+    bar.className="bar" +
+      (idx+1<d.status?" done": idx+1===d.status?" active":"");
+    statusLine.appendChild(bar);
+
+    const lb=document.createElement("div");
+    lb.textContent=s;
+    if(idx+1===d.status) lb.classList.add("active");
+    labels.appendChild(lb);
+  });
+}
+
+selectPerson(0);
+</script>
 
 </body>
 </html>
