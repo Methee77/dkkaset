@@ -2,139 +2,123 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Student Tracking System</title>
+<title>ระบบแทร็กกิ้งคำร้องนักเรียน</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: 'Kanit', sans-serif;
+*{
+    box-sizing:border-box;
+    font-family:'Kanit',sans-serif;
 }
-
-body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #1cb5e0, #000046);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+body{
+    margin:0;
+    height:100vh;
+    background: radial-gradient(circle at top, #141e30, #243b55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
 }
-
-.container {
-    width: 480px;
-    padding: 35px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 30px 60px rgba(0,0,0,.45);
-    animation: fadeIn 1s ease;
+.container{
+    width:500px;
+    padding:35px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    box-shadow:0 30px 60px rgba(0,0,0,.45);
+    animation:fade .8s ease;
 }
-
-h1 {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 25px;
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-weight:600;
 }
-
-.search-box {
-    display: flex;
-    gap: 10px;
+.search{
+    display:flex;
+    gap:10px;
 }
-
-input {
-    flex: 1;
-    padding: 14px;
-    border-radius: 12px;
-    border: none;
-    font-size: 16px;
-    outline: none;
+input{
+    flex:1;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-size:16px;
+    outline:none;
 }
-
-button {
-    padding: 14px 22px;
-    border-radius: 12px;
-    border: none;
-    background: linear-gradient(135deg,#00f260,#0575e6);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .3s;
+button{
+    padding:14px 22px;
+    border-radius:12px;
+    border:none;
+    background:linear-gradient(135deg,#00f260,#0575e6);
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
 }
-
-button:hover {
-    transform: scale(1.05);
+button:hover{
+    transform:scale(1.05);
 }
-
-.result {
-    margin-top: 30px;
+.info{
+    margin-top:25px;
+    background:rgba(0,0,0,.35);
+    padding:18px;
+    border-radius:16px;
 }
-
-.student {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 20px;
+.info div{
+    margin-bottom:6px;
 }
-
-.timeline {
-    position: relative;
-    padding-left: 25px;
+.timeline{
+    position:relative;
+    margin-top:20px;
+    padding-left:25px;
 }
-
-.timeline::before {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: rgba(255,255,255,.3);
-    border-radius: 10px;
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;
+    top:0;
+    width:4px;
+    height:100%;
+    background:rgba(255,255,255,.3);
+    border-radius:10px;
 }
-
-.step {
-    position: relative;
-    margin-bottom: 18px;
-    padding: 12px 18px;
-    background: rgba(0,0,0,.35);
-    border-radius: 12px;
-    opacity: .4;
-    transform: translateX(-10px);
-    transition: .4s;
+.step{
+    position:relative;
+    margin-bottom:18px;
+    padding:12px 18px;
+    background:rgba(0,0,0,.35);
+    border-radius:12px;
+    opacity:.4;
+    transform:translateX(-10px);
+    transition:.4s;
 }
-
-.step::before {
-    content: "";
-    position: absolute;
-    left: -25px;
-    top: 16px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #777;
+.step::before{
+    content:"";
+    position:absolute;
+    left:-25px;
+    top:16px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#777;
 }
-
-.step.active {
-    opacity: 1;
-    transform: translateX(0);
-    background: linear-gradient(135deg,#00f260,#0575e6);
+.step.active{
+    opacity:1;
+    transform:translateX(0);
+    background:linear-gradient(135deg,#00f260,#0575e6);
 }
-
-.step.active::before {
-    background: #00ffae;
+.step.active::before{
+    background:#00ffae;
 }
-
-.error {
-    text-align: center;
-    color: #ff9c9c;
-    font-size: 16px;
-    margin-top: 15px;
+.error{
+    text-align:center;
+    color:#ff9c9c;
+    margin-top:15px;
 }
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -142,46 +126,68 @@ button:hover {
 <body>
 
 <div class="container">
-    <h1>🔍 ระบบแทร็กกิ้งนักเรียน</h1>
+    <h1>📌 ติดตามสถานะคำร้อง</h1>
 
-    <div class="search-box">
+    <div class="search">
         <input type="text" id="code" placeholder="กรอกรหัสติดตาม เช่น STD001">
         <button onclick="check()">ค้นหา</button>
     </div>
 
-    <div class="result" id="result"></div>
+    <div id="result"></div>
 </div>
 
 <script>
 const data = {
-    "STD001": { name: "ธนภัทร กลิ่นศรีทอง", status: 1 },
-    "STD002": { name: "ณัฐวุฒิ ใจดี", status: 2 },
-    "STD003": { name: "ศิริพร แสงทอง", status: 3 },
-    "STD004": { name: "กิตติ พงศ์สวัสดิ์", status: 4 }
+    "STD001": {
+        name: "ธนภัทร กลิ่นศรีทอง",
+        request: "ขอใบรับรองการเป็นนักเรียน",
+        status: 1
+    },
+    "STD002": {
+        name: "ณัฐวุฒิ ใจดี",
+        request: "ขอแก้ไขข้อมูลส่วนตัว",
+        status: 2
+    },
+    "STD003": {
+        name: "ศิริพร แสงทอง",
+        request: "ขอพักการเรียนชั่วคราว",
+        status: 3
+    },
+    "STD004": {
+        name: "กิตติ พงศ์สวัสดิ์",
+        request: "ขอเอกสารแสดงผลการเรียน",
+        status: 4
+    }
 };
 
 const steps = [
-    "รับคำร้องเรียบร้อย",
+    "รับคำร้องแล้ว",
     "ตรวจสอบเอกสาร",
     "อยู่ระหว่างดำเนินการ",
     "ดำเนินการเสร็จสิ้น"
 ];
 
-function check() {
+function check(){
     const code = document.getElementById("code").value.trim();
     const result = document.getElementById("result");
     result.innerHTML = "";
 
-    if (!data[code]) {
-        result.innerHTML = `<div class="error">❌ ไม่พบข้อมูลรหัสนี้</div>`;
+    if(!data[code]){
+        result.innerHTML = `<div class="error">❌ ไม่พบข้อมูลคำร้อง</div>`;
         return;
     }
 
     const d = data[code];
-    let html = `<div class="student">👤 ${d.name}</div>`;
-    html += `<div class="timeline">`;
 
-    steps.forEach((s, i) => {
+    let html = `
+        <div class="info">
+            <div><strong>👤 ชื่อ:</strong> ${d.name}</div>
+            <div><strong>📄 คำร้อง:</strong> ${d.request}</div>
+        </div>
+        <div class="timeline">
+    `;
+
+    steps.forEach((s,i)=>{
         html += `
             <div class="step ${i < d.status ? "active" : ""}">
                 ${s}
