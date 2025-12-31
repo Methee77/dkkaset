@@ -114,36 +114,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* แถบหัวข้อมูลสรุป */
-        .summary-header {
+        .summary-info {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            justify-content: flex-end;
             margin-bottom: 20px;
         }
 
-        /* จำลอง QR Code */
-        .qr-placeholder {
-            width: 100px;
-            height: 100px;
+        .update-box {
+            background: var(--update-bg);
             border: 1px solid var(--border);
-            padding: 5px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            text-align: center;
+            padding: 8px 15px;
+            font-size: 13px;
         }
 
-        .qr-placeholder div {
-            width: 70px;
-            height: 70px;
-            background: #333; /* จำลองรูป QR */
-            margin-bottom: 5px;
-            background-image: repeating-conic-gradient(#fff 0% 25%, #000 0% 50%) 50% / 10px 10px;
-        }
+        .update-box span { color: var(--text-muted); }
+        .update-box strong { color: var(--success); margin-left: 5px; }
 
         .info-grid {
             display: grid;
@@ -179,7 +164,6 @@
         .status-stepper {
             display: flex;
             margin-top: 20px;
-            margin-bottom: 40px;
         }
 
         .step {
@@ -195,27 +179,6 @@
         .step-info { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
         .step-name { font-size: 14px; font-weight: 600; }
 
-        /* ปุ่มพิมพ์ */
-        .action-bar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn-print {
-            padding: 12px 30px;
-            background: #334155;
-            color: white;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-print:hover { background: #000; }
-
         .error-banner {
             display: none;
             margin: 0 50px 40px;
@@ -226,19 +189,9 @@
             text-align: center;
         }
 
-        /* ตั้งค่าการพิมพ์ */
-        @media print {
-            body { background: white; padding: 0; }
-            .search-section, .header-bar div:last-child, .btn-print { display: none !important; }
-            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
-            .result-area { display: block !important; padding: 20px; }
-            .header-bar { padding: 20px; }
-        }
-
         @media (max-width: 900px) {
             .info-grid { grid-template-columns: 1fr 1fr; }
             .status-stepper { flex-direction: column; }
-            .summary-header { flex-direction: column; align-items: flex-start; gap: 20px; }
         }
     </style>
 </head>
@@ -257,7 +210,7 @@
 
     <div class="search-section">
         <div class="search-group">
-            <input type="text" id="reqID" placeholder="กรอกรหัสคำร้อง (เช่น GOV001)..." autocomplete="off">
+            <input type="text" id="reqID" placeholder="กรอกรหัสคำร้องเพื่อตรวจสอบสถานะ..." autocomplete="off">
             <button onclick="handleSearch()">ตรวจสอบข้อมูล</button>
         </div>
     </div>
@@ -266,14 +219,10 @@
 
     <div class="result-area" id="displayArea">
         
-        <div class="summary-header">
-            <div>
-                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">ข้อมูลอัปเดต ณ วันที่</div>
-                <strong id="d-update" style="color: var(--success); font-size: 16px;"></strong>
-            </div>
-            <div class="qr-placeholder">
-                <div id="qr-img"></div>
-                <span id="qr-label"></span>
+        <div class="summary-info">
+            <div class="update-box">
+                <span>อัปเดตล่าสุด:</span>
+                <strong id="d-update"></strong>
             </div>
         </div>
 
@@ -282,29 +231,23 @@
             <div class="data-cell" style="grid-column: span 2;"><label>ชื่อผู้ยื่นคำร้อง</label><span id="d-name"></span></div>
             <div class="data-cell"><label>วันที่ยื่นคำร้อง</label><span id="d-date"></span></div>
             <div class="data-cell" style="grid-column: span 2;"><label>รายการบริการ</label><span id="d-doc"></span></div>
-            <div class="data-cell"><label>หน่วยงาน</label><span id="d-dept"></span></div>
-            <div class="data-cell"><label>เจ้าหน้าที่</label><span id="d-off"></span></div>
+            <div class="data-cell"><label>หน่วยงานรับผิดชอบ</label><span id="d-dept"></span></div>
+            <div class="data-cell"><label>เจ้าหน้าที่ผู้ดูแล</label><span id="d-off"></span></div>
         </div>
 
         <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; border-left: 4px solid var(--gov-navy); padding-left: 12px;">สถานะการดำเนินงานปัจจุบัน</h3>
         <div class="status-stepper" id="stepper"></div>
-
-        <div class="action-bar">
-            <button class="btn-print" onclick="window.print()">
-                <span>🖨️</span> พิมพ์ใบแสดงสถานะคำร้อง
-            </button>
-        </div>
     </div>
 </div>
 
 <script>
 const mockDB = [
-    { id: "GOV001", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", doc: "ขอหนังสือรับรองความประพฤติ", date: "23 ธันวาคม 2568", update: "29 ธันวาคม 2568 เวลา 14:06 น.", officer: "นางลำดวน ชิดปราง", dept: "ฝ่ายทะเบียนวัดผล", currentStep: 3 },
-    { id: "GOV002", name: "นางสาววิไลลักษณ์ รักเรียน", doc: "ขอใบระเบียนแสดงผลการเรียน (GPA)", date: "24 ธันวาคม 2568", update: "30 ธันวาคม 2568 เวลา 09:15 น.", officer: "นายสมเกียรติ มั่นคง", dept: "งานทะเบียนนิสิต", currentStep: 4 },
-    { id: "GOV003", name: "นายสมชาย สายเสมอ", doc: "ขอผ่อนผันค่าธรรมเนียมการศึกษา", date: "25 ธันวาคม 2568", update: "28 ธันวาคม 2568 เวลา 11:30 น.", officer: "นางปทุมพร อิ่มเอิบ", dept: "ฝ่ายการเงินและพัสดุ", currentStep: 2 },
-    { id: "GOV004", name: "นางสาวมณีรัตน์ แก้วมณี", doc: "ขอใบแทนปริญญาบัตร", date: "26 ธันวาคม 2568", update: "27 ธันวาคม 2568 เวลา 16:45 น.", officer: "นายวิชัย ใจดี", dept: "กองบริหารการศึกษา", currentStep: 1 },
-    { id: "GOV005", name: "นายธีรภัทร ชนะสงคราม", doc: "ขอเปลี่ยนนามสกุลในฐานข้อมูล", date: "27 ธันวาคม 2568", update: "31 ธันวาคม 2568 เวลา 10:20 น.", officer: "นางสาวสิริมา นามวงศ์", dept: "งานทะเบียนนักศึกษา", currentStep: 3 },
-    { id: "GOV006", name: "นางสาวฟ้าใส ใจสว่าง", doc: "ขอหนังสือรับรองสถานภาพ", date: "28 ธันวาคม 2568", update: "31 ธันวาคม 2568 เวลา 13:50 น.", officer: "นางลำดวน ชิดปราง", dept: "ฝ่ายทะเบียนวัดผล", currentStep: 4 }
+    { id: "GOV001", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", doc: "ขอหนังสือรับรองความประพฤติ", date: "23 ธันวาคม 2568", update: "29 ธันวาคม 2568 | 14:06 น.", officer: "นางลำดวน ชิดปราง", dept: "ฝ่ายทะเบียนวัดผล", currentStep: 3 },
+    { id: "GOV002", name: "นางสาววิไลลักษณ์ รักเรียน", doc: "ขอใบระเบียนแสดงผลการเรียน (GPA)", date: "24 ธันวาคม 2568", update: "30 ธันวาคม 2568 | 09:15 น.", officer: "นายสมเกียรติ มั่นคง", dept: "งานทะเบียนนิสิต", currentStep: 4 },
+    { id: "GOV003", name: "นายสมชาย สายเสมอ", doc: "ขอผ่อนผันค่าธรรมเนียมการศึกษา", date: "25 ธันวาคม 2568", update: "28 ธันวาคม 2568 | 11:30 น.", officer: "นางปทุมพร อิ่มเอิบ", dept: "ฝ่ายการเงินและพัสดุ", currentStep: 2 },
+    { id: "GOV004", name: "นางสาวมณีรัตน์ แก้วมณี", doc: "ขอใบแทนปริญญาบัตร", date: "26 ธันวาคม 2568", update: "27 ธันวาคม 2568 | 16:45 น.", officer: "นายวิชัย ใจดี", dept: "กองบริหารการศึกษา", currentStep: 1 },
+    { id: "GOV005", name: "นายธีรภัทร ชนะสงคราม", doc: "ขอเปลี่ยนนามสกุลในฐานข้อมูล", date: "27 ธันวาคม 2568", update: "31 ธันวาคม 2568 | 10:20 น.", officer: "นางสาวสิริมา นามวงศ์", dept: "งานทะเบียนนักศึกษา", currentStep: 3 },
+    { id: "GOV006", name: "นางสาวฟ้าใส ใจสว่าง", doc: "ขอหนังสือรับรองสถานภาพการเป็นนักศึกษา", date: "28 ธันวาคม 2568", update: "31 ธันวาคม 2568 | 13:50 น.", officer: "นางลำดวน ชิดปราง", dept: "ฝ่ายทะเบียนวัดผล", currentStep: 4 }
 ];
 
 const stepsList = ["รับคำร้อง", "ตรวจสอบเอกสาร", "อยู่ระหว่างดำเนินการ", "เสร็จสิ้น/พร้อมรับ"];
@@ -331,7 +274,6 @@ function handleSearch() {
     document.getElementById('d-dept').innerText = data.dept;
     document.getElementById('d-off').innerText = data.officer;
     document.getElementById('d-update').innerText = data.update;
-    document.getElementById('qr-label').innerText = data.id;
 
     const stepper = document.getElementById('stepper');
     stepper.innerHTML = '';
@@ -339,7 +281,12 @@ function handleSearch() {
     stepsList.forEach((name, i) => {
         const num = i + 1;
         let statusClass = num < data.currentStep ? 'completed' : (num === data.currentStep ? 'active' : '');
-        stepper.innerHTML += `<div class="step ${statusClass}"><div class="step-info">ขั้นตอนที่ ${num}</div><div class="step-name">${name}</div></div>`;
+        stepper.innerHTML += `
+            <div class="step ${statusClass}">
+                <div class="step-info">ขั้นตอนที่ ${num}</div>
+                <div class="step-name">${name}</div>
+            </div>
+        `;
     });
 }
 </script>
