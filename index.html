@@ -53,7 +53,6 @@
             vertical-align: middle;
         }
 
-        /* เอฟเฟกต์กะพริบสำหรับประกาศเตือน */
         .alert-flash {
             border: 4px solid #000;
             animation: border-pulse 2s infinite;
@@ -103,7 +102,6 @@
     </section>
 
     <section id="resultView" class="hidden animate-in fade-in duration-500">
-        
         <div class="alert-flash bg-yellow-300 p-4 mb-6 flex items-center gap-4 shadow-[6px_6px_0px_#000]">
             <div class="bg-black text-yellow-300 p-2 font-black text-2xl">!</div>
             <div class="text-sm md:text-base">
@@ -156,44 +154,116 @@
 </div>
 
 <script>
+    // ฐานข้อมูลนิสิต 11 คน พร้อมตารางสอบคนละ 5 วิชา
     const db = {
         "6720600494": {
-            name: "นายเมธี   ใจสุขดี", 
-            id: "6720600494", 
-            faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", 
-            major: "เกษตรและสิ่งแวดล้อมศึกษา", 
-            dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", 
-            year: "F39-2",
-            advisor: "ผศ.ดร. นามสมมติ ชัดเจน",
+            name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ผศ.ดร. นามสมมติ ชัดเจน",
             exams: [
-                { 
-                    code: "01355102-64", 
-                    titleEn: "English for University", 
-                    titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", 
-                    date: "เสาร์ 10 ม.ค. 69", 
-                    time: "13:00 - 15:30", 
-                    sec: "หมู่เรียน 710", 
-                    room: "LH3-304" 
-                },
-                { 
-                    code: "02036271-66", 
-                    titleEn: "Horticultural Science and Technology", 
-                    titleTh: "วิทยาศาสตร์และเทคโนโลยีด้านพืชสวน", 
-                    date: "จันทร์ 12 ม.ค. 69", 
-                    time: "16:30 - 18:30", 
-                    sec: "หมู่เรียน 700", 
-                    room: "LH4-201" 
-                },
-                { 
-                    code: "02036271-66", 
-                    titleEn: "Horticultural Science and Technology", 
-                    titleTh: "วิทยาศาสตร์และเทคโนโลยีด้านพืชสวน", 
-                    date: "จันทร์ 12 ม.ค. 69", 
-                    time: "16:30 - 18:30", 
-                    sec: "หมู่เรียน 700", 
-                    room: "LH4-201" 
-                }
-                }
+                { code: "01355102-64", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00 - 15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
+                { code: "02036271-66", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30 - 18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
+                { code: "01420111-64", titleEn: "General Physics I", titleTh: "ฟิสิกส์ทั่วไป I", date: "พุธ 14 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 701", room: "SC45-102" },
+                { code: "01175113-64", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "ศุกร์ 16 ม.ค. 69", time: "13:00 - 15:00", sec: "หมู่เรียน 711", room: "POOL-KU" },
+                { code: "01422111-64", titleEn: "Principles of Statistics", titleTh: "หลักสถิติ", date: "จันทร์ 19 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 700", room: "LH1-101" }
+            ]
+        },
+        "6720600001": {
+            name: "นายสมชาย รักดี", id: "6720600001", faculty: "วิศวกรรมศาสตร์", major: "วิศวกรรมคอมพิวเตอร์", dept: "วิศวกรรมคอมพิวเตอร์", year: "E15-1", advisor: "ดร. วิศวะ เก่งกาจ",
+            exams: [
+                { code: "01204111", titleEn: "Computer Programming", titleTh: "การเขียนโปรแกรมคอมพิวเตอร์", date: "อังคาร 13 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 1", room: "ENG-401" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "พฤหัส 15 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 10", room: "LH2-201" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 5", room: "LH3-202" },
+                { code: "01420111", titleEn: "General Physics I", titleTh: "ฟิสิกส์ทั่วไป I", date: "จันทร์ 19 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 2", room: "SC45-105" },
+                { code: "01204112", titleEn: "Digital Systems", titleTh: "ระบบดิจิทัล", date: "พุธ 21 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 1", room: "ENG-502" }
+            ]
+        },
+        "6720600002": {
+            name: "นางสาวสมหญิง มุ่งมั่น", id: "6720600002", faculty: "บริหารธุรกิจ", major: "การตลาด", dept: "การตลาด", year: "B20-1", advisor: "ดร. ตลาด นำพา",
+            exams: [
+                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "พุธ 14 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 800", room: "BUS-101" },
+                { code: "01134111", titleEn: "Principles of Marketing", titleTh: "หลักการตลาด", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 801", room: "BUS-202" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "13:00 - 15:30", sec: "หมู่เรียน 810", room: "LH3-101" },
+                { code: "01133111", titleEn: "Financial Accounting", titleTh: "การบัญชีการเงิน", date: "พุธ 21 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 805", room: "BUS-305" },
+                { code: "01422111", titleEn: "Principles of Statistics", titleTh: "หลักสถิติ", date: "ศุกร์ 23 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 800", room: "LH1-105" }
+            ]
+        },
+        "6720600003": {
+            name: "นายสมศักดิ์ สู้ชีวิต", id: "6720600003", faculty: "เกษตร", major: "พืชสวน", dept: "พืชสวน", year: "A12-1", advisor: "ดร. ต้นไม้ แข็งแรง",
+            exams: [
+                { code: "01003111", titleEn: "Introduction to Agriculture", titleTh: "เกษตรศาสตร์เบื้องต้น", date: "จันทร์ 12 ม.ค. 69", time: "09:00 - 11:00", sec: "หมู่เรียน 1", room: "AG-101" },
+                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "พุธ 14 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 15", room: "SC2-201" },
+                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาเทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 10", room: "SC1-105" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "จันทร์ 19 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 5", room: "LH2-101" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 20", room: "LH3-105" }
+            ]
+        },
+        "6720600004": {
+            name: "นางสาวสมจิตร จิตแจ่มใส", id: "6720600004", faculty: "มนุษยศาสตร์", major: "ภาษาอังกฤษ", dept: "ภาษาตะวันตก", year: "H05-1", advisor: "ดร. ภาษา ดีเยี่ยม",
+            exams: [
+                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "อังคาร 13 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 100", room: "LH3-401" },
+                { code: "01361101", titleEn: "Introduction to Linguistics", titleTh: "ภาษาศาสตร์เบื้องต้น", date: "พฤหัส 15 ม.ค. 69", time: "13:30 - 16:00", sec: "หมู่เรียน 1", room: "HUM-201" },
+                { code: "01371111", titleEn: "Information Literacy", titleTh: "การรู้สารสนเทศ", date: "จันทร์ 19 ม.ค. 69", time: "09:00 - 11:00", sec: "หมู่เรียน 50", room: "LIB-101" },
+                { code: "01999111", titleEn: "Knowledge of the Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "13:30 - 15:30", sec: "หมู่เรียน 10", room: "LH1-201" },
+                { code: "01175113", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "ศุกร์ 23 ม.ค. 69", time: "08:00 - 10:00", sec: "หมู่เรียน 5", room: "POOL-KU" }
+            ]
+        },
+        "6720600005": {
+            name: "นายปกรณ์ บินไป", id: "6720600005", faculty: "วิทยาศาสตร์", major: "ฟิสิกส์", dept: "ฟิสิกส์", year: "S02-1", advisor: "ดร. อะตอม สว่างไสว",
+            exams: [
+                { code: "01420111", titleEn: "General Physics I", titleTh: "ฟิสิกส์ทั่วไป I", date: "จันทร์ 12 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 1", room: "SC45-101" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "พุธ 14 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 1", room: "LH2-101" },
+                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 2", room: "SC2-101" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 3", room: "LH3-105" },
+                { code: "01420119", titleEn: "Physics Laboratory I", titleTh: "ปฏิบัติการฟิสิกส์ I", date: "พุธ 21 ม.ค. 69", time: "13:00 - 16:00", sec: "หมู่เรียน 1", room: "SC45-301" }
+            ]
+        },
+        "6720600006": {
+            name: "นางสาวนลิน ขยันเรียน", id: "6720600006", faculty: "สังคมศาสตร์", major: "รัฐศาสตร์", dept: "รัฐศาสตร์", year: "SO04-1", advisor: "ดร. การเมือง มั่นคง",
+            exams: [
+                { code: "01387101", titleEn: "Intro to Political Science", titleTh: "รัฐศาสตร์เบื้องต้น", date: "อังคาร 13 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 1", room: "SOC-101" },
+                { code: "01388111", titleEn: "Thai Government", titleTh: "การเมืองการปกครองไทย", date: "พฤหัส 15 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 5", room: "SOC-202" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 10", room: "LH3-110" },
+                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "จันทร์ 19 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 10", room: "BUS-105" },
+                { code: "01999111", titleEn: "Knowledge of the Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "09:00 - 11:00", sec: "หมู่เรียน 2", room: "LH1-101" }
+            ]
+        },
+        "6720600007": {
+            name: "นายวิชาญ ใจกล้า", id: "6720600007", faculty: "เศรษฐศาสตร์", major: "เศรษฐศาสตร์", dept: "เศรษฐศาสตร์", year: "EC01-1", advisor: "ดร. เงินตรา ร่ำรวย",
+            exams: [
+                { code: "01119111", titleEn: "Microeconomics I", titleTh: "เศรษฐศาสตร์จุลภาค I", date: "พุธ 14 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 1", room: "ECON-101" },
+                { code: "01119113", titleEn: "Math for Economists", titleTh: "คณิตศาสตร์สำหรับเศรษฐกร", date: "ศุกร์ 16 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 2", room: "ECON-105" },
+                { code: "01422111", titleEn: "Principles of Statistics", titleTh: "หลักสถิติ", date: "จันทร์ 19 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 5", room: "LH1-102" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "13:00 - 15:30", sec: "หมู่เรียน 15", room: "LH3-205" },
+                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "ศุกร์ 23 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 20", room: "BUS-102" }
+            ]
+        },
+        "6720600008": {
+            name: "นางสาวมณฑา ฟ้าใส", id: "6720600008", faculty: "วนศาสตร์", major: "วนศาสตร์", dept: "วนวัฒนวิทยา", year: "F01-1", advisor: "ดร. ป่าไม้ ยั่งยืน",
+            exams: [
+                { code: "01301111", titleEn: "Intro to Forestry", titleTh: "วนศาสตร์เบื้องต้น", date: "จันทร์ 12 ม.ค. 69", time: "09:00 - 11:00", sec: "หมู่เรียน 1", room: "FOR-101" },
+                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "พุธ 14 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 20", room: "SC1-101" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 30", room: "LH2-105" },
+                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "จันทร์ 19 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 10", room: "SC2-205" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 50", room: "LH3-210" }
+            ]
+        },
+        "6720600009": {
+            name: "นายยอดชาย แข็งแรง", id: "6720600009", faculty: "สถาปัตยกรรมศาสตร์", major: "สถาปัตยกรรม", dept: "สถาปัตยกรรม", year: "AR01-1", advisor: "ดร. ออกแบบ สร้างสรรค์",
+            exams: [
+                { code: "01151111", titleEn: "Basic Architectural Design", titleTh: "การออกแบบสถาปัตยกรรมขั้นพื้นฐาน", date: "อังคาร 13 ม.ค. 69", time: "09:00 - 16:00", sec: "หมู่เรียน 1", room: "STUDIO-1" },
+                { code: "01152111", titleEn: "History of Architecture", titleTh: "ประวัติศาสตร์สถาปัตยกรรม", date: "พฤหัส 15 ม.ค. 69", time: "10:00 - 12:00", sec: "หมู่เรียน 1", room: "ARCH-101" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 16 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 40", room: "LH2-301" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 60", room: "LH3-405" },
+                { code: "01999111", titleEn: "Knowledge of the Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "13:30 - 15:30", sec: "หมู่เรียน 5", room: "LH1-301" }
+            ]
+        },
+        "6720600010": {
+            name: "นางสาวศิริพร พรประเสริฐ", id: "6720600010", faculty: "อุตสาหกรรมเกษตร", major: "เทคโนโลยีการอาหาร", dept: "วิทยาศาสตร์และเทคโนโลยีการอาหาร", year: "AI05-1", advisor: "ดร. อาหาร ปลอดภัย",
+            exams: [
+                { code: "01052111", titleEn: "Food Science and Tech", titleTh: "วิทยาศาสตร์และเทคโนโลยีทางอาหาร", date: "พุธ 14 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 1", room: "AI-101" },
+                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "09:00 - 12:00", sec: "หมู่เรียน 25", room: "SC2-105" },
+                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "จันทร์ 19 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 15", room: "SC1-201" },
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00 - 11:30", sec: "หมู่เรียน 70", room: "LH3-501" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 23 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่เรียน 50", room: "LH2-401" }
             ]
         }
     };
@@ -219,15 +289,15 @@
             const tbody = document.getElementById('examTableBody');
             tbody.innerHTML = student.exams.map(ex => `
                 <tr class="hover:bg-gray-50 transition font-medium">
-                    <td class="font-bold text-blue-700 text-sm">${ex.code}</td>
-                    <td class="py-3">
+                    <td class="font-bold text-blue-700 text-sm italic">${ex.code}</td>
+                    <td class="py-3 px-4">
                         <div class="font-bold text-base leading-tight uppercase text-black">${ex.titleEn}</div>
-                        <div class="text-xs text-gray-500 font-bold mt-1">${ex.titleTh}</div>
+                        <div class="text-xs text-gray-500 font-bold mt-1 tracking-wide">${ex.titleTh}</div>
                     </td>
-                    <td class="text-center font-bold text-sm">${ex.date}</td>
-                    <td class="text-center font-bold text-blue-600 text-sm">${ex.time}</td>
-                    <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black text-sm">${ex.sec}</td>
-                    <td class="text-center font-[900] text-lg bg-gray-100">${ex.room}</td>
+                    <td class="text-center font-bold text-sm text-gray-700">${ex.date}</td>
+                    <td class="text-center font-bold text-blue-600 text-sm">${ex.time} น.</td>
+                    <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black text-sm px-2">${ex.sec}</td>
+                    <td class="text-center font-[900] text-lg bg-gray-100 text-black px-2">${ex.room}</td>
                 </tr>
             `).join('');
         } else {
