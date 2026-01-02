@@ -7,17 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* บังคับขอบตัดตรง 100% */
+        /* บังคับขอบตัดตรง 100% ทุกจุด */
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
         body { background-color: #fcfcfc; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
         
+        /* ช่องกรอกและเมนูเลือกสไตล์ Sharp */
         .input-sharp {
             border: 2px solid #000;
-            padding: 1rem;
-            font-size: 1.25rem;
-            font-weight: 700;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             width: 100%;
             transition: all 0.2s ease;
+            background-color: #fff;
         }
         .input-sharp:focus { background-color: #f8fafc; border-color: #2563eb; outline: none; }
 
@@ -26,10 +28,12 @@
             color: #fff;
             padding: 1rem 2rem;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: 0.2s;
+            letter-spacing: 1px;
         }
-        .btn-gov:hover { background-color: #2563eb; }
+        .btn-gov:hover { background-color: #2563eb; transform: translateY(-2px); }
+        .btn-gov:active { transform: translateY(0); }
 
         .exam-table th {
             background-color: #000;
@@ -38,12 +42,10 @@
             text-align: left;
             font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 1px;
         }
         .exam-table td {
             border: 1px solid #000;
             padding: 1rem;
-            line-height: 1.5;
         }
     </style>
 </head>
@@ -54,46 +56,80 @@
         <div>
             <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase">Digital Exam Service</div>
             <h1 class="text-5xl md:text-6xl font-[900] tracking-tighter leading-none uppercase">
-                ตาราง<span class="text-blue-600">สอบ</span>
+                ตรวจสอบ<span class="text-blue-600">ตารางสอบ</span>
             </h1>
         </div>
         <div class="text-left md:text-right border-l-4 md:border-l-0 md:border-r-4 border-black pl-4 md:pr-4">
-            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">ปีการศึกษา 2569</p>
-            <p class="text-sm font-black text-blue-600 uppercase">ระบบตรวจสอบข้อมูลนิสิต</p>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">ระบบสารสนเทศนิสิต</p>
+            <p class="text-sm font-black text-blue-600 uppercase">ปีการศึกษา 2569</p>
         </div>
     </header>
 
-    <section id="searchView" class="max-w-md mx-auto py-16">
-        <label class="block font-bold text-xs uppercase tracking-widest mb-3 text-gray-500 text-center">กรุณากรอกรหัสประจำตัวนิสิต</label>
-        <div class="flex flex-col gap-3 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-            <input type="text" id="studentId" class="input-sharp text-center" placeholder="รหัสนิสิต">
-            <button onclick="handleSearch()" class="btn-gov w-full uppercase">ตรวจสอบข้อมูล</button>
+    <section id="searchView" class="max-w-2xl mx-auto py-10 animate-fade-in">
+        <div class="border-4 border-black p-8 bg-white shadow-[12px_12px_0px_rgba(0,0,0,1)]">
+            <h2 class="text-xl font-black uppercase mb-6 border-b-2 border-black pb-2">เข้าสู่ระบบตรวจสอบข้อมูล</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-500">รหัสประจำตัวนิสิต</label>
+                    <input type="text" id="studentId" class="input-sharp" placeholder="ระบุรหัสประจำตัว">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-500">ภาคการศึกษา</label>
+                    <select id="semester" class="input-sharp">
+                        <option value="1">ภาคเรียนที่ 1</option>
+                        <option value="2">ภาคเรียนที่ 2</option>
+                        <option value="3">ภาคเรียนฤดูร้อน</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-500">ประเภทการสอบ</label>
+                    <select id="examType" class="input-sharp">
+                        <option value="mid">สอบกลางภาค (Mid-term)</option>
+                        <option value="final">สอบปลายภาค (Final)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase">
+                ยืนยันและค้นหาข้อมูล →
+            </button>
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center italic text-sm">! ไม่พบข้อมูลที่ตรงกับเงื่อนไขในระบบ</p>
         </div>
-        <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center italic text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
     </section>
 
     <section id="resultView" class="hidden">
-        <div class="grid grid-cols-1 md:grid-cols-2 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
-            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50">
-                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">โปรไฟล์นิสิตที่เข้าสู่ระบบ</p>
-                <h2 id="resName" class="text-3xl font-black mb-1 leading-none">-</h2>
-                <p id="resId" class="text-lg font-bold text-blue-700 mb-6 tracking-tight">-</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
+            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-2">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-[10px] font-black text-blue-800 uppercase mb-1 tracking-widest">ข้อมูลผู้สอบ</p>
+                        <h2 id="resName" class="text-3xl font-black mb-1 leading-none">-</h2>
+                        <p id="resId" class="text-lg font-bold text-blue-700 tracking-tight">-</p>
+                    </div>
+                    <div class="text-right">
+                        <p id="resExamType" class="bg-black text-white px-3 py-1 text-xs font-bold uppercase">-</p>
+                        <p id="resSemester" class="text-[10px] font-bold mt-1 text-gray-500 uppercase">-</p>
+                    </div>
+                </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 text-sm border-t-2 border-blue-200 pt-4">
-                    <p class="font-bold text-gray-500 text-xs">คณะ: <span id="resFaculty" class="text-black block text-sm">-</span></p>
-                    <p class="font-bold text-gray-500 text-xs">ภาควิชา: <span id="resDept" class="text-black block text-sm">-</span></p>
-                    <p class="font-bold text-gray-500 text-xs">สาขา: <span id="resMajor" class="text-black block text-sm">-</span></p>
-                    <p class="font-bold text-gray-500 text-xs">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4">
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
                 </div>
             </div>
-            <div class="p-6 flex flex-col justify-between items-end bg-white">
-                <div class="text-right">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 text-xs">รหัสอ้างอิงเอกสาร</p>
-                    <p class="text-sm font-black">#ST-2026-IDX</p>
+            <div class="p-6 flex flex-col justify-between items-center bg-white">
+                <div class="text-center">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">รหัสยืนยัน</p>
+                    <p class="text-sm font-black border-2 border-black px-2 py-1">SECURE-ID: 2026</p>
                 </div>
-                <div class="flex gap-4 w-full md:w-auto">
-                    <button onclick="window.print()" class="flex-grow text-xs font-bold border-2 border-black px-4 py-2 hover:bg-black hover:text-white transition uppercase">พิมพ์ตารางสอบ</button>
-                    <button onclick="location.reload()" class="flex-grow text-xs font-bold text-red-600 border-2 border-red-600 px-4 py-2 hover:bg-red-600 hover:text-white transition uppercase">ออกจากระบบ</button>
+                <div class="flex flex-col gap-3 w-full">
+                    <button onclick="window.print()" class="text-xs font-bold border-2 border-black py-2 hover:bg-black hover:text-white transition uppercase">พิมพ์ตาราง</button>
+                    <button onclick="location.reload()" class="text-xs font-bold text-red-600 border-2 border-red-600 py-2 hover:bg-red-600 hover:text-white transition uppercase text-center">ค้นหาใหม่</button>
                 </div>
             </div>
         </div>
@@ -104,19 +140,13 @@
                     <tr>
                         <th class="border-r border-gray-700 uppercase">วัน / เวลาสอบ</th>
                         <th class="border-r border-gray-700 uppercase">รายชื่อวิชา</th>
-                        <th class="border-r border-gray-700 uppercase">ห้องสอบ</th>
+                        <th class="border-r border-gray-700 uppercase text-center">ห้องสอบ</th>
                         <th class="text-right uppercase">ที่นั่งสอบ</th>
                     </tr>
                 </thead>
-                <tbody id="examTableBody">
-                    </tbody>
+                <tbody id="examTableBody"></tbody>
             </table>
         </div>
-
-        <footer class="mt-10 flex justify-between items-end text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">
-            <p>Generated by Gov Exam Portal</p>
-            <p class="text-right">ข้อมูลนี้ใช้สำหรับภายในหน่วยงานเท่านั้น</p>
-        </footer>
     </section>
 </div>
 
@@ -124,45 +154,49 @@
     const db = {
         "6601": {
             name: "นายธนกฤต มั่งคั่ง", id: "6601234567", faculty: "วิศวกรรมศาสตร์", major: "วิศวกรรมคอมพิวเตอร์", dept: "วิศวกรรมคอมพิวเตอร์", advisor: "ผศ.ดร. มานะ วีระกรรม",
-            exams: [
-                { date: "15 มี.ค. 2569", time: "09:00 - 12:00", subject: "CP101 วิทยาการคอมพิวเตอร์พื้นฐาน", room: "ENG-502", seat: "A-12" },
-                { date: "18 มี.ค. 2569", time: "13:30 - 16:30", subject: "MA202 แคลคูลัสสำหรับวิศวกร 2", room: "หอประชุมใหญ่", seat: "S-08" }
-            ]
-        },
-        "6602": {
-            name: "นางสาวกัญญารัตน์ เรียบร้อย", id: "6602987654", faculty: "บริหารธุรกิจ", major: "การจัดการทั่วไป", dept: "การบริหารธุรกิจ", advisor: "ดร. สมหญิง ยอดเยี่ยม",
-            exams: [
-                { date: "16 มี.ค. 2569", time: "09:00 - 12:00", subject: "MK301 หลักการตลาดเบื้องต้น", room: "ACC-101", seat: "L-22" }
-            ]
+            exams: {
+                "1_mid": [
+                    { date: "15 มี.ค. 2569", time: "09:00 - 12:00", subject: "CP101 วิทยาการคอมพิวเตอร์", room: "ENG-502", seat: "A-12" }
+                ],
+                "1_final": [
+                    { date: "20 พ.ค. 2569", time: "09:00 - 12:00", subject: "CP101 วิทยาการคอมพิวเตอร์ (ปลายภาค)", room: "ENG-502", seat: "A-12" }
+                ]
+            }
         }
     };
 
     function handleSearch() {
         const idInput = document.getElementById('studentId').value.trim();
+        const sem = document.getElementById('semester').value;
+        const type = document.getElementById('examType').value;
+        const queryKey = sem + "_" + type;
+        
         const student = db[idInput];
         const error = document.getElementById('errorMsg');
 
-        if (student) {
+        if (student && student.exams[queryKey]) {
             error.classList.add('hidden');
             document.getElementById('searchView').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
             
             document.getElementById('resName').innerText = student.name;
-            document.getElementById('resId').innerText = "รหัสประจำตัว: " + student.id;
+            document.getElementById('resId').innerText = "ID: " + student.id;
             document.getElementById('resFaculty').innerText = student.faculty;
             document.getElementById('resMajor').innerText = student.major;
             document.getElementById('resDept').innerText = student.dept;
             document.getElementById('resAdvisor').innerText = student.advisor;
+            document.getElementById('resSemester').innerText = "ภาคเรียนที่ " + sem;
+            document.getElementById('resExamType').innerText = type === 'mid' ? 'สอบกลางภาค' : 'สอบปลายภาค';
 
             const tbody = document.getElementById('examTableBody');
-            tbody.innerHTML = student.exams.map(ex => `
+            tbody.innerHTML = student.exams[queryKey].map(ex => `
                 <tr class="hover:bg-gray-50 transition">
                     <td class="border-r border-black">
                         <span class="block text-lg font-bold">${ex.date}</span>
                         <span class="text-blue-600 text-sm font-black">${ex.time} น.</span>
                     </td>
-                    <td class="border-r border-black font-bold text-xl leading-tight">${ex.subject}</td>
-                    <td class="border-r border-black font-bold text-gray-600 uppercase text-center">${ex.room}</td>
+                    <td class="border-r border-black font-bold text-xl leading-tight uppercase">${ex.subject}</td>
+                    <td class="border-r border-black font-bold text-gray-600 text-center uppercase">${ex.room}</td>
                     <td class="text-right font-[900] text-4xl tracking-tighter text-black">${ex.seat}</td>
                 </tr>
             `).join('');
