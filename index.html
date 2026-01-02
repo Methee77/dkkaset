@@ -37,19 +37,19 @@
         }
         .btn-gov:hover { background-color: #2563eb; }
 
-        /* ปรับสไตล์ตารางให้รองรับข้อมูลที่มากขึ้น */
         .exam-table th {
             background-color: #000;
             color: #fff;
-            padding: 0.75rem;
+            padding: 0.85rem;
             text-align: left;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             border: 1px solid #333;
+            text-transform: uppercase;
         }
         .exam-table td {
             border: 1px solid #000;
-            padding: 0.75rem;
+            padding: 1rem;
             vertical-align: middle;
         }
     </style>
@@ -86,33 +86,28 @@
                     <input type="text" class="input-sharp input-locked" value="กลางภาค" readonly>
                 </div>
             </div>
-            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest">ค้นหาตารางสอบ →</button>
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้</p>
+            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest text-center">ค้นหาตารางสอบของคุณ →</button>
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
         </div>
     </section>
 
     <section id="resultView" class="hidden animate-in fade-in duration-500">
-        <div class="grid grid-cols-1 md:grid-cols-3 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
-            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-2">
-                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลนิสิต</p>
-                <h2 id="resName" class="text-3xl font-black mb-1 leading-none">-</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
+            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-3">
+                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลผู้เข้าสอบ</p>
+                <h2 id="resName" class="text-3xl font-black mb-1 leading-none uppercase">-</h2>
                 <p id="resId" class="text-xl font-bold text-blue-700 tracking-tighter">-</p>
+                
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4">
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm font-semibold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm font-semibold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm font-semibold">-</span></p>
                     <p class="font-bold text-gray-400 text-[10px] uppercase">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
                 </div>
             </div>
-            <div class="p-6 flex flex-col justify-between items-center bg-white text-center">
-                <div class="w-full">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-2">สถานะการเข้าสอบ</p>
-                    <p class="text-lg font-black bg-green-100 text-green-800 border-2 border-green-800 py-1 uppercase">ยืนยันสิทธิ์</p>
-                </div>
-                <div class="flex flex-col gap-2 w-full mt-6">
-                    <button onclick="window.print()" class="text-xs font-bold border-2 border-black py-2 hover:bg-black hover:text-white transition">พิมพ์ตารางสอบ</button>
-                    <button onclick="location.reload()" class="text-xs font-bold text-red-600 border-2 border-red-600 py-2 hover:bg-red-600 hover:text-white transition">ค้นหาใหม่</button>
-                </div>
+            <div class="p-6 flex flex-col justify-center gap-3 bg-white">
+                <button onclick="window.print()" class="w-full text-sm font-bold border-2 border-black py-3 hover:bg-black hover:text-white transition uppercase">พิมพ์ตารางสอบ</button>
+                <button onclick="location.reload()" class="w-full text-sm font-bold text-red-600 border-2 border-red-600 py-3 hover:bg-red-600 hover:text-white transition uppercase">ค้นหาใหม่</button>
             </div>
         </div>
 
@@ -120,28 +115,33 @@
             <table class="w-full exam-table border-collapse">
                 <thead>
                     <tr>
-                        <th class="w-24">รหัสวิชา</th>
+                        <th class="w-28">รหัสวิชา</th>
                         <th>ชื่อวิชา</th>
-                        <th class="w-32 text-center">วันสอบ</th>
-                        <th class="w-32 text-center">เวลาสอบ</th>
-                        <th class="w-20 text-center">หมู่เรียน</th>
-                        <th class="w-28 text-center">ห้องสอบ</th>
+                        <th class="w-36 text-center">วันสอบ</th>
+                        <th class="w-36 text-center">เวลาสอบ</th>
+                        <th class="w-32 text-center">หมู่เรียน</th> <th class="w-32 text-center">ห้องสอบ</th>
                     </tr>
                 </thead>
                 <tbody id="examTableBody"></tbody>
             </table>
         </div>
-        <p class="mt-4 text-[10px] font-bold text-gray-400 uppercase">* กรุณาตรวจสอบรหัสวิชาและห้องสอบอีกครั้งก่อนวันสอบจริง</p>
+        <footer class="mt-6 border-l-4 border-blue-600 pl-4 py-2">
+            <p class="text-[11px] font-bold text-gray-500 uppercase leading-relaxed">
+                * หมายเหตุ: ผู้เข้าสอบควรตรวจสอบห้องสอบและที่นั่งสอบก่อนเริ่มเวลาสอบอย่างน้อย 15 นาที<br>
+                และกรุณาแสดงบัตรประจำตัวนิสิตหรือบัตรที่ทางราชการออกให้ต่อเจ้าหน้าที่คุมสอบ
+            </p>
+        </footer>
     </section>
 </div>
 
 <script>
+    // ข้อมูลตัวอย่างสำหรับทดสอบ
     const db = {
         "6601": {
             name: "นายธนกฤต มั่งคั่ง", id: "6601234567", faculty: "วิศวกรรมศาสตร์", major: "วิศวกรรมคอมพิวเตอร์", dept: "วิศวกรรมคอมพิวเตอร์", advisor: "ผศ.ดร. มานะ วีระกรรม",
             exams: [
-                { code: "01204111", title: "คอมพิวเตอร์และโปรแกรมมิ่ง", date: "15 ม.ค. 69", time: "09:00-12:00", sec: "1", room: "LH3-301" },
-                { code: "01420111", title: "ฟิสิกส์ทั่วไป I", date: "18 ม.ค. 69", time: "13:30-16:30", sec: "200", room: "SC45-102" }
+                { code: "01204111", title: "คอมพิวเตอร์และโปรแกรมมิ่ง", date: "15 มี.ค. 69", time: "09:00 - 12:00", sec: "หมู่ 1 (ENG)", room: "ENG-301" },
+                { code: "01420111", title: "ฟิสิกส์ทั่วไป I", date: "18 มี.ค. 69", time: "13:30 - 16:30", sec: "หมู่ 200 (SC)", room: "SC45-102" }
             ]
         }
     };
@@ -170,8 +170,8 @@
                     <td class="font-bold text-base leading-tight uppercase">${ex.title}</td>
                     <td class="text-center font-bold">${ex.date}</td>
                     <td class="text-center font-bold text-blue-600">${ex.time}</td>
-                    <td class="text-center font-bold">${ex.sec}</td>
-                    <td class="text-center font-black text-lg bg-gray-50">${ex.room}</td>
+                    <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black">${ex.sec}</td>
+                    <td class="text-center font-[900] text-lg bg-gray-100">${ex.room}</td>
                 </tr>
             `).join('');
         } else {
