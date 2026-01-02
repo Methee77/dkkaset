@@ -3,155 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบค้นหาตารางสอบออนไลน์ - หน่วยงานราชการ</title>
+    <title>ระบบตรวจสอบตารางสอบรายบุคคล</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Kanit:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         :root {
-            --gov-blue: #003366;
-            --gov-gold: #ffd700;
+            --primary-color: #1a237e; /* สีน้ำเงินเข้มราชการ */
+            --accent-color: #ffd600;
+            --bg-light: #f8f9fa;
         }
+
         body { 
             font-family: 'Sarabun', sans-serif; 
-            background-color: #f0f2f5; 
-            color: #333;
+            background-color: var(--bg-light);
+            min-height: 100vh;
         }
-        .hero-section { 
-            background: linear-gradient(135deg, var(--gov-blue) 0%, #004a94 100%); 
-            color: white; 
-            padding: 60px 0; 
-            border-bottom: 6px solid var(--gov-gold);
-            margin-bottom: 40px;
+
+        .login-container {
+            max-width: 450px;
+            margin: 100px auto;
         }
-        .search-card { 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+
+        .card-modern {
             border: none;
-            margin-top: -50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-        .table-exam { 
-            background: white; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+        .card-header-custom {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border: none;
         }
-        .badge-subject { background-color: var(--gov-blue); color: white; padding: 8px 12px; }
-        .text-gov { color: var(--gov-blue); }
-        .footer { margin-top: 50px; padding: 20px; color: #666; font-size: 0.9rem; }
-        @media (max-width: 768px) {
-            .hero-section h1 { font-size: 1.5rem; }
-            .table-responsive { font-size: 0.85rem; }
+
+        .btn-check-id {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-check-id:hover {
+            background: #0d144d;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .student-info {
+            background: white;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #examResultSection { display: none; }
+
+        /* ตกแต่งตารางให้ดูทันสมัย */
+        .table-custom {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .table-custom thead {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .badge-room {
+            background-color: #e8eaf6;
+            color: var(--primary-color);
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<header class="hero-section text-center">
-    <div class="container">
-        <h1 class="fw-bold mb-2">🏛️ ระบบตรวจสอบตารางสอบและที่นั่งสอบ</h1>
-        <p class="lead mb-0">ศูนย์อำนวยการทดสอบส่วนกลาง (ระบบออนไลน์)</p>
-    </div>
-</header>
-
 <div class="container">
-    <div class="card search-card p-4 mb-4">
-        <div class="row align-items-center">
-            <div class="col-md-8 mb-3 mb-md-0">
-                <label class="form-label fw-bold text-gov">ระบุข้อมูลที่ต้องการค้นหา</label>
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text bg-white border-end-0 text-muted">🔍</span>
-                    <input type="text" id="searchInput" class="form-control border-start-0" 
-                           placeholder="พิมพ์รหัสวิชา, ชื่อวิชา หรือ ห้องสอบ...">
-                </div>
+    <div id="searchSection" class="login-container animate__animated animate__fadeIn">
+        <div class="card card-modern">
+            <div class="card-header-custom">
+                <h3 class="fw-bold mb-0">🏛️ ตรวจสอบตารางสอบ</h3>
+                <p class="small opacity-75 mt-2">กรุณาระบุรหัสประจำตัวนิสิต/นักศึกษา</p>
             </div>
-            <div class="col-md-4 text-md-end">
-                <button onclick="window.print()" class="btn btn-outline-dark btn-lg mt-md-4">
-                    🖨️ พิมพ์ตารางสอบ
-                </button>
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <input type="text" id="studentIdInput" class="form-control form-control-lg text-center" 
+                           placeholder="เช่น 66012345" autocomplete="off">
+                </div>
+                <button onclick="checkStudentId()" class="btn btn-check-id w-100 fw-bold">ตรวจสอบข้อมูล</button>
+                <div id="errorMsg" class="text-danger text-center mt-3 d-none small">ไม่พบข้อมูลรหัสประจำตัวนี้ในระบบ</div>
             </div>
         </div>
     </div>
 
-    <div class="table-responsive table-exam">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="table-dark">
-                <tr>
-                    <th class="py-3 ps-4">วันที่สอบ</th>
-                    <th class="py-3">เวลา</th>
-                    <th class="py-3">รหัสวิชา</th>
-                    <th class="py-3">ชื่อวิชา</th>
-                    <th class="py-3">สถานที่/ห้องสอบ</th>
-                    <th class="py-3 pe-4 text-center">เลขที่นั่ง</th>
-                </tr>
-            </thead>
-            <tbody id="examDataBody">
-                </tbody>
-        </table>
-    </div>
+    <div id="examResultSection" class="mt-5 animate__animated animate__fadeIn">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h2 class="fw-bold text-gov">ผลการจัดที่นั่งสอบ</h2>
+                        <div id="studentDetail" class="student-info shadow-sm">
+                            </div>
+                    </div>
+                    <button onclick="logout()" class="btn btn-outline-secondary mb-3">ค้นหาใหม่</button>
+                </div>
 
-    <div id="noDataMessage" class="text-center py-5 d-none">
-        <h4 class="text-muted">❌ ไม่พบข้อมูลที่ท่านค้นหา</h4>
-        <p>โปรดตรวจสอบตัวสะกดหรือรหัสวิชาอีกครั้ง</p>
+                <div class="table-responsive">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th class="p-3">รหัสวิชา</th>
+                                <th>ชื่อวิชา</th>
+                                <th>วัน/เวลาสอบ</th>
+                                <th>สถานที่/ห้องสอบ</th>
+                                <th class="text-center">แถว/ที่นั่ง</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examTableBody">
+                            </tbody>
+                    </table>
+                </div>
+                
+                <p class="text-muted small mt-3">* หากข้อมูลไม่ถูกต้อง กรุณาติดต่อฝ่ายทะเบียนภายใน 24 ชม.</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<footer class="text-center footer">
-    <hr>
-    <p>© 2026 หน่วยงานบริหารราชการส่วนกลาง - ระบบบริการข้อมูลดิจิทัล</p>
-</footer>
-
 <script>
-    /** * ส่วนจัดการข้อมูล (DATA) 
-     * คุณสามารถเพิ่ม/ลด ข้อมูลในส่วนนี้ได้เลยครับ 
-     **/
-    const examData = [
-        { code: "ENG101", name: "ภาษาอังกฤษระดับต้น", date: "15/03/2026", time: "09:00 - 12:00", room: "อาคาร 10 ห้อง 1001", seat: "001-050" },
-        { code: "LAW102", name: "กฎหมายเบื้องต้นสำหรับประชาชน", date: "15/03/2026", time: "13:30 - 16:30", room: "ห้องประชุมสุพรรณิการ์", seat: "101-250" },
-        { code: "MATH201", name: "คณิตศาสตร์ประยุกต์", date: "16/03/2026", time: "09:00 - 12:00", room: "อาคารวิทยบริการ ชั้น 3", seat: "A1-A40" },
-        { code: "THAI101", name: "การใช้ภาษาไทยเพื่อการสื่อสาร", date: "17/03/2026", time: "09:00 - 12:00", room: "อาคาร 2 ห้อง 202", seat: "B01-B60" },
-        { code: "POL303", name: "นโยบายสาธารณะและการวางแผน", date: "18/03/2026", time: "13:30 - 16:30", room: "หอประชุมใหญ่", seat: "501-800" }
-    ];
-
-    const tableBody = document.getElementById('examDataBody');
-    const searchInput = document.getElementById('searchInput');
-    const noDataMessage = document.getElementById('noDataMessage');
-
-    // ฟังก์ชันแสดงข้อมูลลงในตาราง
-    function renderTable(data) {
-        if (data.length === 0) {
-            tableBody.innerHTML = '';
-            noDataMessage.classList.remove('d-none');
-            return;
+    /** * DATA: ข้อมูลจำลอง (ในใช้งานจริงสามารถนำข้อมูลจาก Excel มาแปลงเป็น JSON ตรงนี้ได้)
+     */
+    const students = {
+        "6601001": {
+            name: "นายสมชาย ใจดี",
+            major: "วิศวกรรมคอมพิวเตอร์",
+            exams: [
+                { code: "CPE101", name: "Computer Programming", date: "15 มี.ค. 2569", time: "09:00 - 12:00", room: "ห้อง Lab 501", seat: "A-12" },
+                { code: "GEN202", name: "Ethics and Society", date: "18 มี.ค. 2569", time: "13:30 - 16:30", room: "หอประชุมใหญ่", seat: "G-405" }
+            ]
+        },
+        "6601002": {
+            name: "นางสาวสมหญิง รักเรียน",
+            major: "บริหารธุรกิจ",
+            exams: [
+                { code: "BUS105", name: "Principles of Marketing", date: "16 มี.ค. 2569", time: "09:00 - 12:00", room: "อาคาร 2 ห้อง 202", seat: "B-05" }
+            ]
         }
+    };
 
-        noDataMessage.classList.add('d-none');
-        tableBody.innerHTML = data.map(item => `
-            <tr>
-                <td class="ps-4 fw-bold text-gov">${item.date}</td>
-                <td>${item.time} น.</td>
-                <td><span class="badge badge-subject rounded-pill">${item.code}</span></td>
-                <td class="fw-bold">${item.name}</td>
-                <td>${item.room}</td>
-                <td class="pe-4 text-center fw-bold text-danger">${item.seat}</td>
+    function checkStudentId() {
+        const idInput = document.getElementById('studentIdInput').value.trim();
+        const student = students[idInput];
+        const errorMsg = document.getElementById('errorMsg');
+
+        if (student) {
+            errorMsg.classList.add('d-none');
+            showResult(idInput, student);
+        } else {
+            errorMsg.classList.remove('d-none');
+        }
+    }
+
+    function showResult(id, data) {
+        document.getElementById('searchSection').style.display = 'none';
+        document.getElementById('examResultSection').style.display = 'block';
+
+        // แสดงข้อมูลส่วนตัว
+        document.getElementById('studentDetail').innerHTML = `
+            <h5 class="mb-1 fw-bold">${data.name}</h5>
+            <p class="mb-0 text-muted">รหัสนิสิต: ${id} | สาขาวิชา: ${data.major}</p>
+        `;
+
+        // แสดงตารางสอบ
+        const tableBody = document.getElementById('examTableBody');
+        tableBody.innerHTML = data.exams.map(ex => `
+            <tr class="animate__animated animate__fadeInUp">
+                <td class="p-3"><span class="badge bg-primary">${ex.code}</span></td>
+                <td class="fw-bold">${ex.name}</td>
+                <td><small class="d-block text-primary fw-bold">${ex.date}</small> ${ex.time}</td>
+                <td><span class="badge badge-room">${ex.room}</span></td>
+                <td class="text-center fw-bold text-danger fs-5">${ex.seat}</td>
             </tr>
         `).join('');
     }
 
-    // ฟังก์ชันค้นหาข้อมูล
-    searchInput.addEventListener('input', (e) => {
-        const text = e.target.value.toLowerCase();
-        const filteredData = examData.filter(item => 
-            item.code.toLowerCase().includes(text) || 
-            item.name.toLowerCase().includes(text) ||
-            item.room.toLowerCase().includes(text)
-        );
-        renderTable(filteredData);
-    });
+    function logout() {
+        document.getElementById('studentIdInput').value = '';
+        document.getElementById('searchSection').style.display = 'block';
+        document.getElementById('examResultSection').style.display = 'none';
+    }
 
-    // เรียกใช้งานครั้งแรก
-    renderTable(examData);
+    // กด Enter ในช่อง Input ได้
+    document.getElementById('studentIdInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkStudentId();
+    });
 </script>
 
 </body>
