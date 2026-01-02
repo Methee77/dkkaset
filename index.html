@@ -3,102 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบค้นหาตารางสอบ</title>
+    <title>ระบบเช็คตารางสอบ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ลบความโค้งมนออกทั้งหมด */
-        * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
-        .sharp-border { border: 2px solid #000; }
-        .btn-black { background: #000; color: #fff; transition: 0.2s; }
-        .btn-black:hover { background: #2563eb; }
+        body { font-family: 'Kanit', sans-serif; background: #f9fafb; }
+        .modern-card { transition: all 0.3s ease; }
+        .modern-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body class="bg-gray-50 text-black">
+<body class="flex items-center justify-center min-h-screen p-4">
 
-<div class="max-w-4xl mx-auto px-4 py-12">
-    <header class="border-b-4 border-black pb-4 mb-12">
-        <h1 class="text-4xl font-bold tracking-tighter uppercase">Exam Finder <span class="text-blue-600">4.0</span></h1>
-        <p class="text-sm text-gray-500 font-bold uppercase tracking-widest">ระบบตรวจสอบตารางสอบออนไลน์</p>
-    </header>
-
-    <div id="searchView" class="animate-pulse">
-        <div class="sharp-border p-8 bg-white">
-            <h2 class="text-xl font-bold mb-4">เข้าสู่ระบบข้อมูล</h2>
-            <div class="flex flex-col md:flex-row gap-4">
-                <input type="text" id="studentId" 
-                       class="flex-grow sharp-border p-4 text-xl focus:outline-none focus:border-blue-600" 
-                       placeholder="กรอกรหัสนิสิต / นักศึกษา">
-                <button onclick="searchData()" class="btn-black px-8 py-4 font-bold uppercase">ค้นหา</button>
-            </div>
-            <p id="error" class="text-red-600 mt-4 hidden font-bold">! ไม่พบข้อมูลในระบบ</p>
+<div class="w-full max-w-2xl">
+    <div id="searchBox" class="bg-white p-8 rounded-3xl shadow-xl modern-card animate-fade-in">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">ตารางสอบออนไลน์</h1>
+            <p class="text-gray-500">กรุณากรอกรหัสนิสิตเพื่อดูข้อมูล</p>
         </div>
+        
+        <div class="space-y-4">
+            <input type="text" id="idInput" 
+                   class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 text-xl text-center outline-none transition-all"
+                   placeholder="รหัสนิสิต (เช่น 6601)">
+            <button onclick="search()" 
+                    class="w-full py-4 bg-blue-600 text-white rounded-2xl font-semibold text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                เข้าสู่ระบบ
+            </button>
+        </div>
+        <p id="error" class="text-red-500 text-center mt-4 hidden">ไม่พบรหัสนิสิตนี้ในระบบ</p>
     </div>
 
-    <div id="resultView" class="hidden space-y-6">
-        <div class="sharp-border p-6 bg-white flex justify-between items-center">
+    <div id="resultBox" class="hidden space-y-4 animate-fade-in">
+        <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100 flex justify-between items-center">
             <div>
-                <p class="text-xs text-gray-400 font-bold uppercase">ผู้ใช้งาน</p>
-                <h3 id="resName" class="text-2xl font-bold">-</h3>
+                <p class="text-sm text-gray-400">นิสิต:</p>
+                <h2 id="stdName" class="text-xl font-bold text-gray-800">-</h2>
             </div>
-            <button onclick="location.reload()" class="text-xs font-bold border-b-2 border-black hover:text-blue-600">ค้นหาใหม่</button>
+            <button onclick="location.reload()" class="text-blue-600 font-medium hover:underline">เปลี่ยนรหัส</button>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left sharp-border bg-white">
-                <thead>
-                    <tr class="bg-black text-white">
-                        <th class="p-4 border-r border-gray-700">วัน/เวลาสอบ</th>
-                        <th class="p-4 border-r border-gray-700">วิชา</th>
-                        <th class="p-4 border-r border-gray-700">ห้องสอบ</th>
-                        <th class="p-4 text-center">ที่นั่ง</th>
-                    </tr>
-                </thead>
-                <tbody id="tableContent">
-                    </tbody>
-            </table>
-        </div>
+        <div id="examCards" class="grid gap-4">
+            </div>
     </div>
 </div>
 
 <script>
-    // ฐานข้อมูลแบบรหัส (แก้ไขเพิ่มข้อมูลที่นี่)
     const db = {
         "6601": {
-            name: "นายสมชาย ใจดี",
+            name: "สมชาย ใจดี",
             exams: [
-                { date: "15 ม.ค. 69", time: "09:00", subject: "TH101 ภาษาไทย", room: "502", seat: "A15" },
-                { date: "17 ม.ค. 69", time: "13:30", subject: "MA202 แคลคูลัส", room: "Hall 1", seat: "G02" }
+                { subject: "TH101 ภาษาไทย", date: "15 มี.ค. 69", time: "09:00 - 12:00", room: "A402", seat: "15" },
+                { subject: "EN102 ภาษาอังกฤษ", date: "17 มี.ค. 69", time: "13:30 - 16:30", room: "Hall 1", seat: "42" }
             ]
         },
         "6602": {
-            name: "นางสาวสมหญิง รักเรียน",
+            name: "สมหญิง มุ่งมั่น",
             exams: [
-                { date: "16 ม.ค. 69", time: "09:00", subject: "EN102 ภาษาอังกฤษ", room: "202", seat: "B05" }
+                { subject: "MA105 แคลคูลัส", date: "16 มี.ค. 69", time: "09:00 - 12:00", room: "B101", seat: "05" }
             ]
         }
     };
 
-    function searchData() {
-        const id = document.getElementById('studentId').value;
+    function search() {
+        const id = document.getElementById('idInput').value;
         const data = db[id];
         const error = document.getElementById('error');
 
         if (data) {
             error.classList.add('hidden');
-            document.getElementById('searchView').classList.add('hidden');
-            document.getElementById('resultView').classList.remove('hidden');
-            
-            document.getElementById('resName').innerText = data.name;
+            document.getElementById('searchBox').classList.add('hidden');
+            document.getElementById('resultBox').classList.remove('hidden');
+            document.getElementById('stdName').innerText = data.name;
 
-            const tbody = document.getElementById('tableContent');
-            tbody.innerHTML = data.exams.map(ex => `
-                <tr class="border-b border-black hover:bg-gray-50">
-                    <td class="p-4 border-r border-black font-bold">${ex.date}<br><span class="text-blue-600 text-xs">${ex.time} น.</span></td>
-                    <td class="p-4 border-r border-black">${ex.subject}</td>
-                    <td class="p-4 border-r border-black font-bold text-center">${ex.room}</td>
-                    <td class="p-4 text-center text-2xl font-bold">${ex.seat}</td>
-                </tr>
+            const container = document.getElementById('examCards');
+            container.innerHTML = data.exams.map(ex => `
+                <div class="bg-white p-6 rounded-3xl shadow-md border-l-8 border-blue-500 flex justify-between items-center">
+                    <div class="space-y-1">
+                        <p class="font-bold text-lg text-gray-800">${ex.subject}</p>
+                        <p class="text-sm text-gray-500">${ex.date} | ${ex.time}</p>
+                        <p class="text-sm text-gray-500 font-medium">ห้องสอบ: <span class="text-blue-600">${ex.room}</span></p>
+                    </div>
+                    <div class="text-center bg-gray-50 p-3 rounded-2xl min-w-[70px]">
+                        <p class="text-xs text-gray-400 uppercase">ที่นั่ง</p>
+                        <p class="text-2xl font-bold text-gray-800">${ex.seat}</p>
+                    </div>
+                </div>
             `).join('');
         } else {
             error.classList.remove('hidden');
