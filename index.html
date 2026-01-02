@@ -3,143 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOV EXAM PORTAL 4.0</title>
+    <title>ระบบตรวจสอบตารางสอบออนไลน์ | หน่วยงานราชการ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* บังคับให้ขอบตัดตรงทั้งหมดตามสไตล์ 4.0 */
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
-        body { background-color: #fcfcfc; color: #1a1a1a; }
-        .gov-shadow { box-shadow: 10px 10px 0px #1a1a1a; }
-        .input-sharp:focus { outline: none; border-color: #2563eb; background-color: #f8fafc; }
-        .row-hover:hover { background-color: #1a1a1a !important; color: #ffffff !important; transition: 0.2s; }
-        .status-pill { border: 1px solid currentColor; padding: 2px 8px; font-size: 0.75rem; font-weight: 700; }
+        body { background-color: #ffffff; color: #111111; }
+        
+        /* สไตล์กรอบและเส้นแบบหนา (Bold Border) */
+        .sharp-card { border: 4px solid #111111; box-shadow: 12px 12px 0px #111111; }
+        .input-sharp:focus { outline: none; border-color: #2563eb; background-color: #f1f5f9; }
+        
+        /* สไตล์ตารางแบบราชการสมัยใหม่ */
+        .gov-table th { background-color: #111111; color: #ffffff; padding: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .gov-table td { border-bottom: 2px solid #111111; padding: 1rem; }
+        .row-hover:hover { background-color: #f8fafc; }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-6 md:p-12">
 
-<div class="max-w-7xl mx-auto">
-    <header class="border-b-8 border-black pb-6 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div class="max-w-6xl mx-auto">
+    <header class="border-b-8 border-black pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
         <div>
-            <div class="bg-black text-white px-3 py-1 inline-block text-xs font-bold tracking-[0.3em] mb-4">THAI GOV 4.0 - DIGITAL SERVICE</div>
-            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">Exam<br><span class="text-blue-600">Verification</span></h1>
+            <div class="bg-blue-600 text-white px-4 py-1 inline-block text-sm font-bold tracking-widest mb-4">บริการดิจิทัลภาครัฐ (GOV DIGITAL)</div>
+            <h1 class="text-5xl md:text-7xl font-black leading-none uppercase tracking-tighter">ตรวจสอบ<br><span class="text-blue-600">ตารางสอบ</span></h1>
         </div>
-        <div class="text-left md:text-right border-l-4 md:border-l-0 md:border-r-4 border-black pl-4 md:pr-4">
-            <p class="text-xs font-bold uppercase tracking-widest text-gray-400">System Ref.</p>
-            <p class="text-sm font-black">ST-2026-X89</p>
-            <p class="text-xs text-blue-600 font-bold mt-1">● SERVER STATUS: SECURED</p>
+        <div class="mt-6 md:mt-0 text-left md:text-right border-l-4 border-black pl-4">
+            <p class="text-xs font-bold text-gray-400">อ้างอิงระบบ</p>
+            <p class="text-lg font-black">EXAM-SERVE-2026</p>
+            <p class="text-sm font-bold text-green-600">● ระบบพร้อมใช้งาน</p>
         </div>
     </header>
 
-    <div id="searchSection" class="max-w-2xl mx-auto py-20 animate__animated animate__fadeIn">
-        <div class="border-4 border-black p-8 bg-white gov-shadow">
-            <h2 class="text-2xl font-black uppercase mb-6 border-b-2 border-black pb-2">Identification Required</h2>
+    <div id="searchView" class="max-w-2xl mx-auto py-12 animate-fade-in">
+        <div class="sharp-card p-8 bg-white">
+            <h2 class="text-2xl font-black mb-6 border-b-4 border-black pb-2 inline-block">ยืนยันตัวตน</h2>
+            <p class="text-gray-500 mb-6 text-sm">กรุณากรอกรหัสประจำตัวนิสิต/นักศึกษา เพื่อเข้าถึงข้อมูลตารางสอบรายบุคคล</p>
+            
             <div class="space-y-6">
                 <div>
-                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Student / Personnel ID</label>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2">รหัสประจำตัว</label>
                     <input type="text" id="studentId" 
                            class="w-full border-4 border-black p-4 text-3xl font-bold input-sharp"
-                           placeholder="000-000-000">
+                           placeholder="เช่น 66012345">
                 </div>
-                <button onclick="processVerify()" 
-                        class="w-full bg-black text-white p-6 font-black text-xl hover:bg-blue-600 transition-colors uppercase tracking-widest">
-                    Verify Access
+                <button onclick="handleSearch()" 
+                        class="w-full bg-black text-white p-5 font-black text-xl hover:bg-blue-600 transition-colors tracking-widest uppercase">
+                    เข้าสู่ระบบข้อมูล
                 </button>
             </div>
-            <p id="errorMsg" class="text-red-600 mt-6 font-bold hidden text-center">ACCESS DENIED: DATA NOT FOUND</p>
+            <p id="errorTxt" class="text-red-600 mt-6 font-bold hidden text-center">! ไม่พบข้อมูลรหัสที่ระบุในฐานข้อมูล</p>
         </div>
     </div>
 
-    <div id="resultSection" class="hidden animate__animated animate__fadeIn">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-0 border-4 border-black mb-12 bg-white">
-            <div class="p-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-blue-50">
-                <p class="text-xs font-black text-blue-800 uppercase mb-1">Authenticated User</p>
-                <h3 id="resName" class="text-2xl font-black uppercase">-</h3>
+    <div id="resultView" class="hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-4 border-black mb-8 bg-white shadow-[8px_8px_0px_#111111]">
+            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">
+                <p class="text-xs font-black text-gray-400 uppercase">ชื่อ-นามสกุล</p>
+                <h3 id="resName" class="text-2xl font-black">-</h3>
             </div>
-            <div class="p-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black">
-                <p class="text-xs font-black text-gray-400 uppercase mb-1">Status</p>
-                <span class="status-pill border-green-600 text-green-600 uppercase">Authorized</span>
+            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">
+                <p class="text-xs font-black text-gray-400 uppercase">รหัสประจำตัว</p>
+                <h3 id="resId" class="text-2xl font-black">-</h3>
             </div>
-            <div class="p-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black">
-                <p class="text-xs font-black text-gray-400 uppercase mb-1">Department</p>
-                <p id="resDept" class="font-bold">-</p>
-            </div>
-            <div class="p-8 flex items-center justify-center">
-                <button onclick="location.reload()" class="font-black text-xs uppercase hover:underline">Terminate Session</button>
+            <div class="p-6 flex items-center justify-between md:justify-center">
+                <button onclick="window.print()" class="bg-gray-200 px-4 py-2 text-xs font-bold hover:bg-black hover:text-white transition">พิมพ์ตารางสอบ</button>
+                <button onclick="location.reload()" class="text-xs font-bold text-red-600 hover:underline md:ml-4">ออกจากระบบ</button>
             </div>
         </div>
 
-        <div class="border-4 border-black bg-white overflow-hidden">
-            <table class="w-full text-left">
+        <div class="border-4 border-black overflow-hidden bg-white">
+            <table class="w-full text-left gov-table">
                 <thead>
-                    <tr class="bg-black text-white">
-                        <th class="p-6 text-xs font-bold uppercase tracking-widest">Schedule</th>
-                        <th class="p-6 text-xs font-bold uppercase tracking-widest">Subject Information</th>
-                        <th class="p-6 text-xs font-bold uppercase tracking-widest">Examination Venue</th>
-                        <th class="p-6 text-xs font-bold uppercase tracking-widest text-right">Seat ID</th>
+                    <tr>
+                        <th class="border-r-2 border-white">วัน/เวลาสอบ</th>
+                        <th class="border-r-2 border-white">รายละเอียดวิชา</th>
+                        <th class="border-r-2 border-white">สถานที่/ห้องสอบ</th>
+                        <th class="text-right">เลขที่นั่ง</th>
                     </tr>
                 </thead>
-                <tbody id="examTable" class="divide-y-2 divide-black">
+                <tbody id="examData">
                     </tbody>
             </table>
         </div>
         
-        <div class="mt-8 flex justify-between items-center text-xs font-bold uppercase">
-            <p>Generated by GOV.OS 4.0</p>
-            <p class="text-gray-400 italic">Digital document - No signature required</p>
+        <div class="mt-8 text-xs font-bold text-gray-400 uppercase tracking-widest">
+            เอกสารนี้เป็นข้อมูลทางอิเล็กทรอนิกส์ จัดทำโดยระบบส่วนกลาง 4.0
         </div>
     </div>
 </div>
 
 <script>
-    // ฐานข้อมูลแบบโครงสร้าง Object (Key = รหัสผ่าน/รหัสนิสิต)
-    const secureDB = {
+    /** * ฐานข้อมูลจำลอง (คุณสามารถแก้ไขข้อมูลตรงนี้ได้เลย)
+     */
+    const db = {
         "6601": {
-            name: "ธนกฤต มุ่งมั่น",
-            dept: "วิศวกรรมข้อมูล (Data Engineering)",
+            name: "นายสมชาย เรียนดี",
             exams: [
-                { date: "15 JAN 2026", time: "09:00 - 12:00", code: "DE401", title: "Cyber Policy", room: "B-BLOCK HALL 1", seat: "A24" },
-                { date: "17 JAN 2026", time: "13:30 - 16:30", code: "AI202", title: "Gov-Logic Systems", room: "CENTRAL LAB 02", seat: "X09" }
+                { date: "15 ม.ค. 2569", time: "09:00 - 12:00", code: "TH101", title: "ภาษาไทยเพื่อการสื่อสาร", room: "อาคาร 5 ห้อง 502", seat: "A-15" },
+                { date: "17 ม.ค. 2569", time: "13:30 - 16:30", code: "MA202", title: "คณิตศาสตร์วิศวกรรม", room: "หอประชุมใหญ่", seat: "G-402" }
             ]
         },
         "6602": {
-            name: "กัญญารัตน์ เรียนดี",
-            dept: "นิติศาสตร์ (Legal Studies)",
+            name: "นางสาวสมหญิง มุ่งมั่น",
             exams: [
-                { date: "16 JAN 2026", time: "09:00 - 12:00", code: "LAW303", title: "Digital Act 4.0", room: "อาคารรัฐประศาสนศาสตร์", seat: "L102" }
+                { date: "16 ม.ค. 2569", time: "09:00 - 12:00", code: "EN102", title: "ภาษาอังกฤษพื้นฐาน", room: "อาคารวิทยบริการ", seat: "B-05" }
             ]
         }
     };
 
-    function processVerify() {
+    function handleSearch() {
         const id = document.getElementById('studentId').value;
-        const data = secureDB[id];
-        const error = document.getElementById('errorMsg');
+        const student = db[id];
+        const error = document.getElementById('errorTxt');
 
-        if (data) {
+        if (student) {
             error.classList.add('hidden');
-            document.getElementById('searchSection').style.display = 'none';
-            document.getElementById('resultSection').classList.remove('hidden');
+            document.getElementById('searchView').style.display = 'none';
+            document.getElementById('resultView').classList.remove('hidden');
             
-            document.getElementById('resName').innerText = data.name;
-            document.getElementById('resDept').innerText = data.dept;
+            document.getElementById('resName').innerText = student.name;
+            document.getElementById('resId').innerText = id;
 
-            const tbody = document.getElementById('examTable');
-            tbody.innerHTML = data.exams.map(ex => `
-                <tr class="row-hover transition-colors">
-                    <td class="p-6 border-r-2 border-black">
-                        <span class="block font-black text-xl">${ex.date}</span>
-                        <span class="text-xs font-bold opacity-60 uppercase">${ex.time} น.</span>
+            const tbody = document.getElementById('examData');
+            tbody.innerHTML = student.exams.map(ex => `
+                <tr class="row-hover">
+                    <td class="font-bold border-r-2 border-black">
+                        <span class="block text-lg">${ex.date}</span>
+                        <span class="text-xs text-blue-600 font-black">${ex.time} น.</span>
                     </td>
-                    <td class="p-6">
-                        <span class="block text-xs font-black text-blue-600 mb-1">${ex.code}</span>
-                        <span class="font-bold text-lg uppercase">${ex.title}</span>
+                    <td class="border-r-2 border-black">
+                        <span class="block text-xs font-black text-gray-400">${ex.code}</span>
+                        <span class="font-bold uppercase">${ex.title}</span>
                     </td>
-                    <td class="p-6">
-                        <span class="font-bold">${ex.room}</span>
-                    </td>
-                    <td class="p-6 text-right">
-                        <span class="text-4xl font-black tracking-tighter">${ex.seat}</span>
-                    </td>
+                    <td class="border-r-2 border-black font-bold">${ex.room}</td>
+                    <td class="text-right font-black text-3xl text-blue-600">${ex.seat}</td>
                 </tr>
             `).join('');
         } else {
