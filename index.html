@@ -3,210 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบตารางสอบรายบุคคล</title>
-    
+    <title>ระบบตรวจสอบตารางสอบ | Exam Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Kanit:wght@300;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1a237e; /* สีน้ำเงินเข้มราชการ */
-            --accent-color: #ffd600;
-            --bg-light: #f8f9fa;
+            --primary: #2563eb;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
-        body { 
-            font-family: 'Sarabun', sans-serif; 
-            background-color: var(--bg-light);
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #1f2937;
         }
 
-        .login-container {
-            max-width: 450px;
-            margin: 100px auto;
+        /* Glassmorphism Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .card-modern {
+        .search-container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .result-container {
+            max-width: 900px;
+            margin: auto;
+            display: none;
+        }
+
+        /* Input Styling */
+        .form-control-modern {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 14px 20px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control-modern:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        .btn-modern {
+            background: var(--primary);
+            color: white;
             border: none;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            overflow: hidden;
+            border-radius: 16px;
+            padding: 14px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .card-header-custom {
-            background: var(--primary-color);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border: none;
-        }
-
-        .btn-check-id {
-            background: var(--primary-color);
-            color: white;
-            border-radius: 10px;
-            padding: 12px;
-            transition: 0.3s;
-        }
-
-        .btn-check-id:hover {
-            background: #0d144d;
-            color: white;
+        .btn-modern:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
         }
 
-        .student-info {
+        /* Table Design */
+        .table-modern {
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .table-modern tr {
             background: white;
-            border-left: 5px solid var(--accent-color);
-            padding: 15px;
+            border-radius: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .table-modern tr:hover {
+            transform: scale(1.01);
+        }
+
+        .table-modern td, .table-modern th {
+            padding: 20px;
+            border: none;
+        }
+
+        .table-modern td:first-child { border-radius: 16px 0 0 16px; }
+        .table-modern td:last-child { border-radius: 0 16px 16px 0; }
+
+        .status-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 12px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        #examResultSection { display: none; }
-
-        /* ตกแต่งตารางให้ดูทันสมัย */
-        .table-custom {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .table-custom thead {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .badge-room {
-            background-color: #e8eaf6;
-            color: var(--primary-color);
-            font-weight: bold;
+        .id-label {
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary);
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="searchSection" class="login-container animate__animated animate__fadeIn">
-        <div class="card card-modern">
-            <div class="card-header-custom">
-                <h3 class="fw-bold mb-0">🏛️ ตรวจสอบตารางสอบ</h3>
-                <p class="small opacity-75 mt-2">กรุณาระบุรหัสประจำตัวนิสิต/นักศึกษา</p>
+<div class="container py-5">
+    
+    <div id="search-box" class="search-container glass-card text-center animate__animated animate__fadeIn">
+        <h2 class="fw-bold mb-1">ตารางสอบรายบุคคล</h2>
+        <p class="text-muted mb-4">เข้าสู่ระบบด้วยรหัสนิสิตเพื่อดูข้อมูล</p>
+        
+        <div class="mb-4">
+            <input type="text" id="studentId" class="form-control-modern w-100 text-center" placeholder="รหัสนิสิต (เช่น 66001)">
+        </div>
+        
+        <button onclick="handleSearch()" class="btn-modern w-100">ค้นหาตารางสอบ</button>
+        <p id="error-txt" class="text-danger mt-3 d-none">! ไม่พบข้อมูลในระบบ</p>
+    </div>
+
+    <div id="result-box" class="result-container animate__animated animate__fadeIn">
+        <div class="glass-card mb-4 d-flex justify-content-between align-items-center py-3">
+            <div>
+                <span class="text-muted small">ชื่อ-นามสกุล</span>
+                <h4 id="display-name" class="fw-bold mb-0">-</h4>
             </div>
-            <div class="card-body p-4">
-                <div class="mb-3">
-                    <input type="text" id="studentIdInput" class="form-control form-control-lg text-center" 
-                           placeholder="เช่น 66012345" autocomplete="off">
-                </div>
-                <button onclick="checkStudentId()" class="btn btn-check-id w-100 fw-bold">ตรวจสอบข้อมูล</button>
-                <div id="errorMsg" class="text-danger text-center mt-3 d-none small">ไม่พบข้อมูลรหัสประจำตัวนี้ในระบบ</div>
+            <div class="text-end">
+                <span class="text-muted small">รหัสนิสิต</span>
+                <div id="display-id" class="id-label fs-5">-</div>
             </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-modern">
+                <thead>
+                    <tr class="bg-transparent">
+                        <th class="text-muted">วิชา</th>
+                        <th class="text-muted">วัน-เวลา</th>
+                        <th class="text-muted">ห้องสอบ</th>
+                        <th class="text-muted text-center">สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody id="exam-list">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <button onclick="location.reload()" class="btn btn-link text-muted text-decoration-none">← ค้นหารหัสอื่น</button>
         </div>
     </div>
 
-    <div id="examResultSection" class="mt-5 animate__animated animate__fadeIn">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <div class="d-flex justify-content-between align-items-end mb-4">
-                    <div>
-                        <h2 class="fw-bold text-gov">ผลการจัดที่นั่งสอบ</h2>
-                        <div id="studentDetail" class="student-info shadow-sm">
-                            </div>
-                    </div>
-                    <button onclick="logout()" class="btn btn-outline-secondary mb-3">ค้นหาใหม่</button>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-custom align-middle">
-                        <thead>
-                            <tr>
-                                <th class="p-3">รหัสวิชา</th>
-                                <th>ชื่อวิชา</th>
-                                <th>วัน/เวลาสอบ</th>
-                                <th>สถานที่/ห้องสอบ</th>
-                                <th class="text-center">แถว/ที่นั่ง</th>
-                            </tr>
-                        </thead>
-                        <tbody id="examTableBody">
-                            </tbody>
-                    </table>
-                </div>
-                
-                <p class="text-muted small mt-3">* หากข้อมูลไม่ถูกต้อง กรุณาติดต่อฝ่ายทะเบียนภายใน 24 ชม.</p>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
-    /** * DATA: ข้อมูลจำลอง (ในใช้งานจริงสามารถนำข้อมูลจาก Excel มาแปลงเป็น JSON ตรงนี้ได้)
-     */
-    const students = {
-        "6601001": {
-            name: "นายสมชาย ใจดี",
-            major: "วิศวกรรมคอมพิวเตอร์",
+    // ฐานข้อมูลจำลอง (คุณสามารถเพิ่มข้อมูลตรงนี้ได้เลย)
+    const db = {
+        "66001": {
+            name: "ธนกฤต มุ่งมั่น",
             exams: [
-                { code: "CPE101", name: "Computer Programming", date: "15 มี.ค. 2569", time: "09:00 - 12:00", room: "ห้อง Lab 501", seat: "A-12" },
-                { code: "GEN202", name: "Ethics and Society", date: "18 มี.ค. 2569", time: "13:30 - 16:30", room: "หอประชุมใหญ่", seat: "G-405" }
+                { subject: "TH101 ภาษาไทย", time: "12 ม.ค. 69 | 09:00", room: "A402", status: "ปกติ" },
+                { subject: "EN202 English II", time: "14 ม.ค. 69 | 13:00", room: "Hall 1", status: "ปกติ" }
             ]
         },
-        "6601002": {
-            name: "นางสาวสมหญิง รักเรียน",
-            major: "บริหารธุรกิจ",
+        "66002": {
+            name: "กัญญารัตน์ เรียนดี",
             exams: [
-                { code: "BUS105", name: "Principles of Marketing", date: "16 มี.ค. 2569", time: "09:00 - 12:00", room: "อาคาร 2 ห้อง 202", seat: "B-05" }
+                { subject: "MA105 Calculus I", time: "13 ม.ค. 69 | 09:00", room: "B101", status: "ปกติ" }
             ]
         }
     };
 
-    function checkStudentId() {
-        const idInput = document.getElementById('studentIdInput').value.trim();
-        const student = students[idInput];
-        const errorMsg = document.getElementById('errorMsg');
+    function handleSearch() {
+        const id = document.getElementById('studentId').value;
+        const data = db[id];
+        const errorTxt = document.getElementById('error-txt');
 
-        if (student) {
-            errorMsg.classList.add('d-none');
-            showResult(idInput, student);
+        if (data) {
+            errorTxt.classList.add('d-none');
+            showResult(id, data);
         } else {
-            errorMsg.classList.remove('d-none');
+            errorTxt.classList.remove('d-none');
         }
     }
 
     function showResult(id, data) {
-        document.getElementById('searchSection').style.display = 'none';
-        document.getElementById('examResultSection').style.display = 'block';
+        document.getElementById('search-box').style.display = 'none';
+        document.getElementById('result-box').style.display = 'block';
+        
+        document.getElementById('display-name').innerText = data.name;
+        document.getElementById('display-id').innerText = id;
 
-        // แสดงข้อมูลส่วนตัว
-        document.getElementById('studentDetail').innerHTML = `
-            <h5 class="mb-1 fw-bold">${data.name}</h5>
-            <p class="mb-0 text-muted">รหัสนิสิต: ${id} | สาขาวิชา: ${data.major}</p>
-        `;
-
-        // แสดงตารางสอบ
-        const tableBody = document.getElementById('examTableBody');
-        tableBody.innerHTML = data.exams.map(ex => `
-            <tr class="animate__animated animate__fadeInUp">
-                <td class="p-3"><span class="badge bg-primary">${ex.code}</span></td>
-                <td class="fw-bold">${ex.name}</td>
-                <td><small class="d-block text-primary fw-bold">${ex.date}</small> ${ex.time}</td>
-                <td><span class="badge badge-room">${ex.room}</span></td>
-                <td class="text-center fw-bold text-danger fs-5">${ex.seat}</td>
+        const list = document.getElementById('exam-list');
+        list.innerHTML = data.exams.map(ex => `
+            <tr>
+                <td class="fw-bold">${ex.subject}</td>
+                <td>${ex.time} น.</td>
+                <td><span class="text-primary fw-bold">${ex.room}</span></td>
+                <td class="text-center"><span class="status-badge">${ex.status}</span></td>
             </tr>
         `).join('');
     }
-
-    function logout() {
-        document.getElementById('studentIdInput').value = '';
-        document.getElementById('searchSection').style.display = 'block';
-        document.getElementById('examResultSection').style.display = 'none';
-    }
-
-    // กด Enter ในช่อง Input ได้
-    document.getElementById('studentIdInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') checkStudentId();
-    });
 </script>
 
 </body>
