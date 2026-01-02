@@ -3,218 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบตารางสอบ | Exam Portal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>EXAM SYSTEM 4.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2563eb;
-            --glass-bg: rgba(255, 255, 255, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
-
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            color: #1f2937;
-        }
-
-        /* Glassmorphism Card */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-            padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .search-container {
-            max-width: 500px;
-            margin: auto;
-        }
-
-        .result-container {
-            max-width: 900px;
-            margin: auto;
-            display: none;
-        }
-
-        /* Input Styling */
-        .form-control-modern {
-            background: rgba(255, 255, 255, 0.5);
-            border: 2px solid transparent;
-            border-radius: 16px;
-            padding: 14px 20px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control-modern:focus {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-            outline: none;
-        }
-
-        .btn-modern {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            padding: 14px 28px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-        }
-
-        /* Table Design */
-        .table-modern {
-            border-collapse: separate;
-            border-spacing: 0 12px;
-        }
-
-        .table-modern tr {
-            background: white;
-            border-radius: 16px;
-            transition: transform 0.2s ease;
-        }
-
-        .table-modern tr:hover {
-            transform: scale(1.01);
-        }
-
-        .table-modern td, .table-modern th {
-            padding: 20px;
-            border: none;
-        }
-
-        .table-modern td:first-child { border-radius: 16px 0 0 16px; }
-        .table-modern td:last-child { border-radius: 0 16px 16px 0; }
-
-        .status-badge {
-            background: #dcfce7;
-            color: #166534;
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .id-label {
-            letter-spacing: 2px;
-            font-family: 'Inter', sans-serif;
-            color: var(--primary);
-            font-weight: 700;
-        }
+        body { font-family: 'Kanit', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        .sharp-border { border: 1px solid #333; }
+        .focus-neon:focus { outline: none; border-color: #00f2ff; box-shadow: 0 0 10px #00f2ff; }
+        .btn-neon { background: white; color: black; transition: 0.3s; }
+        .btn-neon:hover { background: #00f2ff; color: black; box-shadow: 0 0 20px #00f2ff; }
+        /* ลบขอบมนออกทั้งหมด */
+        * { border-radius: 0 !important; }
     </style>
 </head>
-<body>
+<body class="p-6">
 
-<div class="container py-5">
-    
-    <div id="search-box" class="search-container glass-card text-center animate__animated animate__fadeIn">
-        <h2 class="fw-bold mb-1">ตารางสอบรายบุคคล</h2>
-        <p class="text-muted mb-4">เข้าสู่ระบบด้วยรหัสนิสิตเพื่อดูข้อมูล</p>
-        
-        <div class="mb-4">
-            <input type="text" id="studentId" class="form-control-modern w-100 text-center" placeholder="รหัสนิสิต (เช่น 66001)">
+<div class="max-w-6xl mx-auto">
+    <header class="border-b-4 border-white pb-4 mb-12 flex justify-between items-end">
+        <div>
+            <h1 class="text-6xl font-black tracking-tighter">EXAM.FINDER <span class="text-cyan-400">4.0</span></h1>
+            <p class="text-gray-400 uppercase tracking-widest mt-2">Personal Schedule Verification System</p>
         </div>
-        
-        <button onclick="handleSearch()" class="btn-modern w-100">ค้นหาตารางสอบ</button>
-        <p id="error-txt" class="text-danger mt-3 d-none">! ไม่พบข้อมูลในระบบ</p>
+        <div class="text-right hidden md:block">
+            <p class="text-xs text-gray-500">SYSTEM STATUS: ONLINE</p>
+            <p class="text-xs text-gray-500">DATE: 02/01/2026</p>
+        </div>
+    </header>
+
+    <div id="searchBox" class="max-w-md mx-auto py-20 animate-pulse">
+        <label class="block text-sm uppercase tracking-widest mb-4">Input Student Identification</label>
+        <input type="text" id="idInput" 
+               class="w-full bg-transparent border-2 border-gray-700 p-4 text-2xl font-light focus-neon transition-all"
+               placeholder="ENTER ID NUMBER">
+        <button onclick="search()" class="w-full mt-6 p-4 btn-neon font-bold uppercase tracking-widest">
+            AUTHENTICATE & SEARCH
+        </button>
+        <p id="error" class="text-red-500 mt-4 hidden text-center text-sm">NOT FOUND: INVALID IDENTIFICATION</p>
     </div>
 
-    <div id="result-box" class="result-container animate__animated animate__fadeIn">
-        <div class="glass-card mb-4 d-flex justify-content-between align-items-center py-3">
-            <div>
-                <span class="text-muted small">ชื่อ-นามสกุล</span>
-                <h4 id="display-name" class="fw-bold mb-0">-</h4>
+    <div id="resultBox" class="hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="border-l-4 border-cyan-400 pl-4">
+                <p class="text-xs text-gray-500 uppercase">Student Name</p>
+                <h2 id="stdName" class="text-2xl font-bold">-</h2>
             </div>
-            <div class="text-end">
-                <span class="text-muted small">รหัสนิสิต</span>
-                <div id="display-id" class="id-label fs-5">-</div>
+            <div class="border-l-4 border-cyan-400 pl-4">
+                <p class="text-xs text-gray-500 uppercase">Student ID</p>
+                <h2 id="stdId" class="text-2xl font-bold">-</h2>
+            </div>
+            <div class="text-right">
+                <button onclick="location.reload()" class="text-xs border border-gray-600 px-4 py-2 hover:bg-white hover:text-black transition">EXIT SYSTEM</button>
             </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-modern">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-transparent">
-                        <th class="text-muted">วิชา</th>
-                        <th class="text-muted">วัน-เวลา</th>
-                        <th class="text-muted">ห้องสอบ</th>
-                        <th class="text-muted text-center">สถานะ</th>
+                    <tr class="border-b-2 border-white text-gray-400 text-xs uppercase tracking-widest">
+                        <th class="p-4">Subject Code</th>
+                        <th class="p-4">Description</th>
+                        <th class="p-4">Date & Time</th>
+                        <th class="p-4">Location</th>
+                        <th class="p-4 text-right">Seat</th>
                     </tr>
                 </thead>
-                <tbody id="exam-list">
+                <tbody id="tableContent">
                     </tbody>
             </table>
         </div>
-
-        <div class="text-center mt-4">
-            <button onclick="location.reload()" class="btn btn-link text-muted text-decoration-none">← ค้นหารหัสอื่น</button>
-        </div>
     </div>
-
 </div>
 
 <script>
-    // ฐานข้อมูลจำลอง (คุณสามารถเพิ่มข้อมูลตรงนี้ได้เลย)
+    // ฐานข้อมูลแบบรหัสเฉพาะตัว (Database)
     const db = {
         "66001": {
-            name: "ธนกฤต มุ่งมั่น",
+            name: "THANAKRIT MUNGMAN",
             exams: [
-                { subject: "TH101 ภาษาไทย", time: "12 ม.ค. 69 | 09:00", room: "A402", status: "ปกติ" },
-                { subject: "EN202 English II", time: "14 ม.ค. 69 | 13:00", room: "Hall 1", status: "ปกติ" }
+                { code: "CT401", title: "CYBER SECURITY", date: "JAN 15, 2026", time: "09:00", room: "LAB-X1", seat: "S-10" },
+                { code: "AI202", title: "NEURAL NETWORKS", date: "JAN 17, 2026", time: "13:00", room: "HALL-4", seat: "R-05" }
             ]
         },
         "66002": {
-            name: "กัญญารัตน์ เรียนดี",
+            name: "KANYARAT REANDEE",
             exams: [
-                { subject: "MA105 Calculus I", time: "13 ม.ค. 69 | 09:00", room: "B101", status: "ปกติ" }
+                { code: "UX101", title: "INTERFACE DESIGN", date: "JAN 16, 2026", time: "09:00", room: "ROOM-202", seat: "B-22" }
             ]
         }
     };
 
-    function handleSearch() {
-        const id = document.getElementById('studentId').value;
+    function search() {
+        const id = document.getElementById('idInput').value;
         const data = db[id];
-        const errorTxt = document.getElementById('error-txt');
+        const error = document.getElementById('error');
 
         if (data) {
-            errorTxt.classList.add('d-none');
-            showResult(id, data);
+            error.classList.add('hidden');
+            document.getElementById('searchBox').classList.add('hidden');
+            document.getElementById('resultBox').classList.remove('hidden');
+            
+            document.getElementById('stdName').innerText = data.name;
+            document.getElementById('stdId').innerText = id;
+
+            const tbody = document.getElementById('tableContent');
+            tbody.innerHTML = data.exams.map(ex => `
+                <tr class="border-b border-gray-800 hover:bg-gray-900 transition">
+                    <td class="p-4 font-bold text-cyan-400">${ex.code}</td>
+                    <td class="p-4 text-sm">${ex.title}</td>
+                    <td class="p-4 text-sm">${ex.date} | ${ex.time}</td>
+                    <td class="p-4 text-sm">${ex.room}</td>
+                    <td class="p-4 text-right font-black text-xl">${ex.seat}</td>
+                </tr>
+            `).join('');
         } else {
-            errorTxt.classList.remove('d-none');
+            error.classList.remove('hidden');
         }
-    }
-
-    function showResult(id, data) {
-        document.getElementById('search-box').style.display = 'none';
-        document.getElementById('result-box').style.display = 'block';
-        
-        document.getElementById('display-name').innerText = data.name;
-        document.getElementById('display-id').innerText = id;
-
-        const list = document.getElementById('exam-list');
-        list.innerHTML = data.exams.map(ex => `
-            <tr>
-                <td class="fw-bold">${ex.subject}</td>
-                <td>${ex.time} น.</td>
-                <td><span class="text-primary fw-bold">${ex.room}</span></td>
-                <td class="text-center"><span class="status-badge">${ex.status}</span></td>
-            </tr>
-        `).join('');
     }
 </script>
 
