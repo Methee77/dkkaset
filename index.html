@@ -80,7 +80,7 @@
 <div class="max-w-6xl mx-auto">
     <header class="border-b-8 border-black pb-6 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase text-center">Digital Exam Service</div>
+            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase text-center">ชมรมผู้สูงอายุ TikTokKPS</div>
             <h1 class="text-4xl md:text-6xl font-[900] tracking-tighter leading-none uppercase">
                 ค้นหา<span class="text-blue-600">ตารางสอบ</span>
             </h1>
@@ -126,12 +126,12 @@
                     <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm font-bold">-</span></p>
                     <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm font-bold">-</span></p>
                     <p class="font-bold text-gray-400 text-[10px] uppercase">รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black block text-sm font-bold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase md:col-span-2">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm font-bold italic">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase md:col-span-2">ประเภทการสอบ: <span id="resAdvisor" class="text-black block text-sm font-bold">-</span></p>
                 </div>
             </div>
             <div class="p-6 flex flex-col justify-center gap-3 bg-white text-center">
                 <button onclick="window.print()" class="w-full text-sm font-bold border-2 border-black py-3 hover:bg-black hover:text-white transition uppercase font-bold">พิมพ์ตารางสอบ</button>
-                <button onclick="toggleOffCampus()" id="btnOffCampus" class="btn-off-campus w-full text-sm py-4 uppercase italic">แสดงวิชานอกตาราง</button>
+                <button onclick="toggleOffCampus()" id="btnOffCampus" class="btn-off-campus w-full text-sm py-4 uppercase italic">วิชานอกตารางวิทยาเขต</button>
                 <button onclick="location.reload()" class="w-full text-sm font-bold text-gray-500 hover:underline transition uppercase font-bold">ค้นหาใหม่</button>
             </div>
         </div>
@@ -158,7 +158,7 @@
                     <thead>
                         <tr class="bg-red-600">
                             <th class="w-28 bg-red-600 border-red-700 text-center font-bold">รหัสวิชา</th>
-                            <th class="bg-red-600 border-red-700 font-bold italic">วิชานอกตาราง / ต่างวิทยาเขต</th>
+                            <th class="bg-red-600 border-red-700 font-bold italic">ชื่อวิชา</th>
                             <th class="w-36 bg-red-600 border-red-700 text-center font-bold">วันสอบ</th>
                             <th class="w-36 bg-red-600 border-red-700 text-center font-bold">เวลาสอบ</th>
                             <th class="w-40 bg-red-600 border-red-700 text-center font-bold">หมู่เรียน</th>
@@ -182,12 +182,14 @@
     const db = {
         "6720600494": { name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ผศ.ดร. มานะ วีระกรรม",
             exams: [
-                { code: "01355102-64", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
-                { code: "02036271-66", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30-18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
-                { code: "02036261-66", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "พุธ 14 ม.ค. 69", time: "13:00-15:00", sec: "หมู่เรียน 700", room: "KH80-208" }
+                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษในมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00 - 15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
+                { code: "02036271", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์และเทคโนโลยีด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30 - 18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
+                { code: "02036261", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "พุธ 14 ม.ค. 69", time: "13:00 - 15:00", sec: "หมู่เรียน 700", room: "KH80-208" }
             ],
             offCampus: [
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "KU-APP" }
+                { code: "02181331", titleEn: "Communication in Agricultural and Environmental Education", titleTh: "การสื่อสารทางเกษตรและสิ่งแวดล้อมศึกษา", date: "ศุกร์ 9 ม.ค. 69", time: "10.00 - 12.00", sec: "หมู่ 700/711", room: "EDS3-301" },
+                { code: "02033302", titleEn: "Livestock and Thai Way of Life", titleTh: "ปศุสัตว์กับวิถีชีวิตไทย", date: "จันทร์ 19 ม.ค. 69", time: "16.00 - 17.30", sec: "หมู่ 700", room: "LH4-102" },
+                { code: "02181351", titleEn: "Evaluation of Educational Provision in Agriculture and Environment", titleTh: "การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อม", date: "พฤหัสบดี 22 ม.ค. 69", time: "10.30 - 12.30", sec: "หมู่ 700/711", room: "EDS3-307" }
             ]
         },
         "6720600028": { name: "นางสาวกมลลักษณ์ ชาวบางงาม", id: "6720600028", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ดร. ใจดี มาเสมอ",
