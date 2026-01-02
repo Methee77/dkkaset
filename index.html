@@ -3,142 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบตารางสอบออนไลน์ | หน่วยงานราชการ</title>
+    <title>ระบบค้นหาตารางสอบ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* บังคับให้ขอบตัดตรงทั้งหมดตามสไตล์ 4.0 */
+        /* ลบความโค้งมนออกทั้งหมด */
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
-        body { background-color: #ffffff; color: #111111; }
-        
-        /* สไตล์กรอบและเส้นแบบหนา (Bold Border) */
-        .sharp-card { border: 4px solid #111111; box-shadow: 12px 12px 0px #111111; }
-        .input-sharp:focus { outline: none; border-color: #2563eb; background-color: #f1f5f9; }
-        
-        /* สไตล์ตารางแบบราชการสมัยใหม่ */
-        .gov-table th { background-color: #111111; color: #ffffff; padding: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .gov-table td { border-bottom: 2px solid #111111; padding: 1rem; }
-        .row-hover:hover { background-color: #f8fafc; }
+        .sharp-border { border: 2px solid #000; }
+        .btn-black { background: #000; color: #fff; transition: 0.2s; }
+        .btn-black:hover { background: #2563eb; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="bg-gray-50 text-black">
 
-<div class="max-w-6xl mx-auto">
-    <header class="border-b-8 border-black pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
-        <div>
-            <div class="bg-blue-600 text-white px-4 py-1 inline-block text-sm font-bold tracking-widest mb-4">บริการดิจิทัลภาครัฐ (GOV DIGITAL)</div>
-            <h1 class="text-5xl md:text-7xl font-black leading-none uppercase tracking-tighter">ตรวจสอบ<br><span class="text-blue-600">ตารางสอบ</span></h1>
-        </div>
-        <div class="mt-6 md:mt-0 text-left md:text-right border-l-4 border-black pl-4">
-            <p class="text-xs font-bold text-gray-400">อ้างอิงระบบ</p>
-            <p class="text-lg font-black">EXAM-SERVE-2026</p>
-            <p class="text-sm font-bold text-green-600">● ระบบพร้อมใช้งาน</p>
-        </div>
+<div class="max-w-4xl mx-auto px-4 py-12">
+    <header class="border-b-4 border-black pb-4 mb-12">
+        <h1 class="text-4xl font-bold tracking-tighter uppercase">Exam Finder <span class="text-blue-600">4.0</span></h1>
+        <p class="text-sm text-gray-500 font-bold uppercase tracking-widest">ระบบตรวจสอบตารางสอบออนไลน์</p>
     </header>
 
-    <div id="searchView" class="max-w-2xl mx-auto py-12 animate-fade-in">
-        <div class="sharp-card p-8 bg-white">
-            <h2 class="text-2xl font-black mb-6 border-b-4 border-black pb-2 inline-block">ยืนยันตัวตน</h2>
-            <p class="text-gray-500 mb-6 text-sm">กรุณากรอกรหัสประจำตัวนิสิต/นักศึกษา เพื่อเข้าถึงข้อมูลตารางสอบรายบุคคล</p>
-            
-            <div class="space-y-6">
-                <div>
-                    <label class="block text-xs font-black uppercase tracking-widest mb-2">รหัสประจำตัว</label>
-                    <input type="text" id="studentId" 
-                           class="w-full border-4 border-black p-4 text-3xl font-bold input-sharp"
-                           placeholder="เช่น 66012345">
-                </div>
-                <button onclick="handleSearch()" 
-                        class="w-full bg-black text-white p-5 font-black text-xl hover:bg-blue-600 transition-colors tracking-widest uppercase">
-                    เข้าสู่ระบบข้อมูล
-                </button>
+    <div id="searchView" class="animate-pulse">
+        <div class="sharp-border p-8 bg-white">
+            <h2 class="text-xl font-bold mb-4">เข้าสู่ระบบข้อมูล</h2>
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" id="studentId" 
+                       class="flex-grow sharp-border p-4 text-xl focus:outline-none focus:border-blue-600" 
+                       placeholder="กรอกรหัสนิสิต / นักศึกษา">
+                <button onclick="searchData()" class="btn-black px-8 py-4 font-bold uppercase">ค้นหา</button>
             </div>
-            <p id="errorTxt" class="text-red-600 mt-6 font-bold hidden text-center">! ไม่พบข้อมูลรหัสที่ระบุในฐานข้อมูล</p>
+            <p id="error" class="text-red-600 mt-4 hidden font-bold">! ไม่พบข้อมูลในระบบ</p>
         </div>
     </div>
 
-    <div id="resultView" class="hidden">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-4 border-black mb-8 bg-white shadow-[8px_8px_0px_#111111]">
-            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">
-                <p class="text-xs font-black text-gray-400 uppercase">ชื่อ-นามสกุล</p>
-                <h3 id="resName" class="text-2xl font-black">-</h3>
+    <div id="resultView" class="hidden space-y-6">
+        <div class="sharp-border p-6 bg-white flex justify-between items-center">
+            <div>
+                <p class="text-xs text-gray-400 font-bold uppercase">ผู้ใช้งาน</p>
+                <h3 id="resName" class="text-2xl font-bold">-</h3>
             </div>
-            <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">
-                <p class="text-xs font-black text-gray-400 uppercase">รหัสประจำตัว</p>
-                <h3 id="resId" class="text-2xl font-black">-</h3>
-            </div>
-            <div class="p-6 flex items-center justify-between md:justify-center">
-                <button onclick="window.print()" class="bg-gray-200 px-4 py-2 text-xs font-bold hover:bg-black hover:text-white transition">พิมพ์ตารางสอบ</button>
-                <button onclick="location.reload()" class="text-xs font-bold text-red-600 hover:underline md:ml-4">ออกจากระบบ</button>
-            </div>
+            <button onclick="location.reload()" class="text-xs font-bold border-b-2 border-black hover:text-blue-600">ค้นหาใหม่</button>
         </div>
 
-        <div class="border-4 border-black overflow-hidden bg-white">
-            <table class="w-full text-left gov-table">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left sharp-border bg-white">
                 <thead>
-                    <tr>
-                        <th class="border-r-2 border-white">วัน/เวลาสอบ</th>
-                        <th class="border-r-2 border-white">รายละเอียดวิชา</th>
-                        <th class="border-r-2 border-white">สถานที่/ห้องสอบ</th>
-                        <th class="text-right">เลขที่นั่ง</th>
+                    <tr class="bg-black text-white">
+                        <th class="p-4 border-r border-gray-700">วัน/เวลาสอบ</th>
+                        <th class="p-4 border-r border-gray-700">วิชา</th>
+                        <th class="p-4 border-r border-gray-700">ห้องสอบ</th>
+                        <th class="p-4 text-center">ที่นั่ง</th>
                     </tr>
                 </thead>
-                <tbody id="examData">
+                <tbody id="tableContent">
                     </tbody>
             </table>
-        </div>
-        
-        <div class="mt-8 text-xs font-bold text-gray-400 uppercase tracking-widest">
-            เอกสารนี้เป็นข้อมูลทางอิเล็กทรอนิกส์ จัดทำโดยระบบส่วนกลาง 4.0
         </div>
     </div>
 </div>
 
 <script>
-    /** * ฐานข้อมูลจำลอง (คุณสามารถแก้ไขข้อมูลตรงนี้ได้เลย)
-     */
+    // ฐานข้อมูลแบบรหัส (แก้ไขเพิ่มข้อมูลที่นี่)
     const db = {
         "6601": {
-            name: "นายสมชาย เรียนดี",
+            name: "นายสมชาย ใจดี",
             exams: [
-                { date: "15 ม.ค. 2569", time: "09:00 - 12:00", code: "TH101", title: "ภาษาไทยเพื่อการสื่อสาร", room: "อาคาร 5 ห้อง 502", seat: "A-15" },
-                { date: "17 ม.ค. 2569", time: "13:30 - 16:30", code: "MA202", title: "คณิตศาสตร์วิศวกรรม", room: "หอประชุมใหญ่", seat: "G-402" }
+                { date: "15 ม.ค. 69", time: "09:00", subject: "TH101 ภาษาไทย", room: "502", seat: "A15" },
+                { date: "17 ม.ค. 69", time: "13:30", subject: "MA202 แคลคูลัส", room: "Hall 1", seat: "G02" }
             ]
         },
         "6602": {
-            name: "นางสาวสมหญิง มุ่งมั่น",
+            name: "นางสาวสมหญิง รักเรียน",
             exams: [
-                { date: "16 ม.ค. 2569", time: "09:00 - 12:00", code: "EN102", title: "ภาษาอังกฤษพื้นฐาน", room: "อาคารวิทยบริการ", seat: "B-05" }
+                { date: "16 ม.ค. 69", time: "09:00", subject: "EN102 ภาษาอังกฤษ", room: "202", seat: "B05" }
             ]
         }
     };
 
-    function handleSearch() {
+    function searchData() {
         const id = document.getElementById('studentId').value;
-        const student = db[id];
-        const error = document.getElementById('errorTxt');
+        const data = db[id];
+        const error = document.getElementById('error');
 
-        if (student) {
+        if (data) {
             error.classList.add('hidden');
-            document.getElementById('searchView').style.display = 'none';
+            document.getElementById('searchView').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
             
-            document.getElementById('resName').innerText = student.name;
-            document.getElementById('resId').innerText = id;
+            document.getElementById('resName').innerText = data.name;
 
-            const tbody = document.getElementById('examData');
-            tbody.innerHTML = student.exams.map(ex => `
-                <tr class="row-hover">
-                    <td class="font-bold border-r-2 border-black">
-                        <span class="block text-lg">${ex.date}</span>
-                        <span class="text-xs text-blue-600 font-black">${ex.time} น.</span>
-                    </td>
-                    <td class="border-r-2 border-black">
-                        <span class="block text-xs font-black text-gray-400">${ex.code}</span>
-                        <span class="font-bold uppercase">${ex.title}</span>
-                    </td>
-                    <td class="border-r-2 border-black font-bold">${ex.room}</td>
-                    <td class="text-right font-black text-3xl text-blue-600">${ex.seat}</td>
+            const tbody = document.getElementById('tableContent');
+            tbody.innerHTML = data.exams.map(ex => `
+                <tr class="border-b border-black hover:bg-gray-50">
+                    <td class="p-4 border-r border-black font-bold">${ex.date}<br><span class="text-blue-600 text-xs">${ex.time} น.</span></td>
+                    <td class="p-4 border-r border-black">${ex.subject}</td>
+                    <td class="p-4 border-r border-black font-bold text-center">${ex.room}</td>
+                    <td class="p-4 text-center text-2xl font-bold">${ex.seat}</td>
                 </tr>
             `).join('');
         } else {
