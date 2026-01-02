@@ -3,117 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบเช็คตารางสอบ | SHARP DESIGN</title>
+    <title>ระบบตรวจสอบตารางสอบรายบุคคล</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* บังคับขอบตัดตรง 100% */
+        /* บังคับขอบตัดตรงทุกจุด */
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
         
-        /* สไตล์ Neo-Brutalism: เงาต้องคมและหนา */
-        .neo-shadow { box-shadow: 8px 8px 0px #000000; }
-        .neo-shadow-sm { box-shadow: 4px 4px 0px #000000; }
+        body { background-color: #ffffff; color: #000000; }
         
-        .neo-input:focus { outline: none; background: #fff1f2; border-color: #2563eb; }
-        
-        @keyframes slideIn {
-            from { transform: translate(-10px, -10px); opacity: 0; }
-            to { transform: translate(0, 0); opacity: 1; }
+        /* สไตล์ช่องกรอกข้อมูลแบบ Modern Industrial */
+        .input-box {
+            border: 2px solid #000;
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            width: 100%;
+            transition: all 0.2s ease;
         }
-        .animate-sharp { animation: slideIn 0.3s font-weight; }
+        .input-box:focus {
+            background-color: #f0f4ff;
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        /* ปุ่มแบบคมชัด */
+        .btn-action {
+            background-color: #000;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #2563eb;
+        }
+
+        /* ตารางข้อมูลแบบไม่มีขอบมน */
+        .data-table th {
+            background-color: #f3f4f6;
+            border: 1px solid #000;
+            padding: 1rem;
+            font-weight: 700;
+            text-align: left;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .data-table td {
+            border: 1px solid #e5e7eb;
+            padding: 1.25rem 1rem;
+        }
     </style>
 </head>
-<body class="bg-[#f0f0f0] p-4 md:p-10">
+<body class="p-6 md:p-16">
 
-<div class="max-w-5xl mx-auto">
-    <header class="border-[6px] border-black p-8 bg-[#ffff00] neo-shadow mb-12">
-        <h1 class="text-5xl md:text-7xl font-[900] uppercase tracking-tighter italic">
-            EXAM<br>CHECKER
-        </h1>
-        <div class="mt-4 flex justify-between items-end">
-            <p class="font-bold border-l-4 border-black pl-3 uppercase tracking-widest text-sm">
-                Digital Information Service v.2.0
-            </p>
-            <p class="font-black text-2xl">2026</p>
+<div class="max-w-6xl mx-auto">
+    <header class="border-b-[12px] border-black pb-8 mb-16">
+        <div class="flex justify-between items-end">
+            <div>
+                <h1 class="text-6xl md:text-8xl font-[900] tracking-tighter leading-none uppercase">
+                    Exam<br><span class="text-blue-600">Portal</span>
+                </h1>
+                <p class="mt-4 font-bold text-gray-400 uppercase tracking-[0.3em] text-sm">
+                    ระบบสืบค้นข้อมูลตารางสอบรายบุคคล
+                </p>
+            </div>
+            <div class="hidden md:block text-right">
+                <p class="text-xs font-bold uppercase">ปีการศึกษา 2569</p>
+                <p class="text-xs font-bold text-blue-600">ระบบเข้าถึงข้อมูลส่วนกลาง</p>
+            </div>
         </div>
     </header>
 
-    <div id="searchView" class="max-w-xl mx-auto animate-sharp">
-        <div class="border-[6px] border-black p-8 bg-white neo-shadow">
-            <label class="block font-black uppercase mb-4 text-xl">ใส่รหัสประจำตัวของคุณ</label>
-            <input type="text" id="studentId" 
-                   class="w-full border-[6px] border-black p-5 text-4xl font-black neo-input transition-all mb-6"
-                   placeholder="ID NUMBER">
-            <button onclick="handleSearch()" 
-                    class="w-full bg-black text-white p-6 font-black text-2xl hover:bg-[#2563eb] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all neo-shadow uppercase">
-                ตกลง / ค้นหา
+    <section id="searchSection" class="max-w-xl animate-fade-in">
+        <div class="mb-8">
+            <label class="block font-bold text-xs uppercase tracking-widest mb-3 text-gray-500">
+                กรุณาระบุรหัสประจำตัวเพื่อยืนยันสิทธิ์
+            </label>
+            <input type="text" id="studentId" class="input-box font-bold" placeholder="ระบุรหัสนิสิตของคุณ">
+        </div>
+        <button onclick="handleSearch()" class="btn-action w-full md:w-auto">
+            ตรวจสอบตารางสอบของคุณ →
+        </button>
+        <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden border-l-4 border-red-600 pl-3">
+            ไม่พบรหัสในระบบฐานข้อมูล
+        </p>
+    </section>
+
+    <section id="resultSection" class="hidden">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div class="border-l-8 border-black pl-6">
+                <p class="text-xs font-bold text-gray-400 uppercase">Authenticated User</p>
+                <h2 id="displayName" class="text-4xl font-black uppercase text-black">-</h2>
+            </div>
+            <button onclick="location.reload()" class="text-xs font-bold hover:text-blue-600 border-b-2 border-black pb-1">
+                เปลี่ยนรหัสค้นหา
             </button>
-            <p id="errorTxt" class="text-red-600 mt-6 font-black hidden border-2 border-red-600 p-2 text-center">! ไม่พบข้อมูลรหัสนี้</p>
-        </div>
-    </div>
-
-    <div id="resultView" class="hidden space-y-8 animate-sharp">
-        <div class="border-[6px] border-black bg-[#00ff99] p-6 neo-shadow flex justify-between items-center">
-            <div>
-                <span class="font-bold uppercase text-xs">Authenticated User:</span>
-                <h2 id="nameDisplay" class="text-3xl font-black uppercase">-</h2>
-            </div>
-            <button onclick="location.reload()" class="border-4 border-black bg-white px-4 py-2 font-black hover:bg-black hover:text-white transition">X ปิด</button>
         </div>
 
-        <div id="examContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            </div>
-    </div>
+        <div class="overflow-x-auto border-t-4 border-black">
+            <table class="w-full data-table">
+                <thead>
+                    <tr>
+                        <th class="uppercase">รหัสวิชา</th>
+                        <th class="uppercase">รายชื่อวิชา</th>
+                        <th class="uppercase">วัน / เวลาสอบ</th>
+                        <th class="uppercase">ห้องสอบ</th>
+                        <th class="uppercase text-right">ที่นั่ง</th>
+                    </tr>
+                </thead>
+                <tbody id="examTableBody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="mt-12 flex justify-between items-start text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <p>Digital Document Ref: #ST-2026-001</p>
+            <p class="text-right">หมายเหตุ: ข้อมูลนี้เป็นความลับเฉพาะบุคคล<br>ห้ามเผยแพร่ตารางสอบของผู้อื่น</p>
+        </div>
+    </section>
 </div>
 
 <script>
+    // ฐานข้อมูลแบบจำลอง
     const db = {
         "6601": {
-            name: "SOMCHAI J.",
+            name: "สมชาย รักการเรียน",
             exams: [
-                { subject: "TH101 ภาษาไทย", date: "15/03/69", time: "09:00", room: "B402", seat: "A15" },
-                { subject: "EN202 ENGLISH II", date: "18/03/69", time: "13:30", room: "HALL 1", seat: "C08" }
+                { id: "DE101", title: "พื้นฐานวิศวกรรมข้อมูล", schedule: "15 มี.ค. 69 | 09:00", room: "ห้องประชุม 1", seat: "A-12" },
+                { id: "EN202", title: "ภาษาอังกฤษธุรกิจ", schedule: "18 มี.ค. 69 | 13:30", room: "Hall B", seat: "S-08" }
             ]
         },
         "6602": {
-            name: "KANYARAT M.",
+            name: "วิภาดา มุ่งมั่นศึกษา",
             exams: [
-                { subject: "MA105 CALCULUS", date: "16/03/69", time: "09:00", room: "B101", seat: "B22" }
+                { id: "LAW301", title: "กฎหมายเบื้องต้น", schedule: "16 มี.ค. 69 | 09:00", room: "อาคาร 2", seat: "L-22" }
             ]
         }
     };
 
     function handleSearch() {
-        const id = document.getElementById('studentId').value;
+        const id = document.getElementById('studentId').value.trim();
         const student = db[id];
-        const error = document.getElementById('errorTxt');
+        const error = document.getElementById('errorMsg');
 
         if (student) {
             error.classList.add('hidden');
-            document.getElementById('searchView').classList.add('hidden');
-            document.getElementById('resultView').classList.remove('hidden');
+            document.getElementById('searchSection').style.display = 'none';
+            document.getElementById('resultSection').classList.remove('hidden');
             
-            document.getElementById('nameDisplay').innerText = student.name;
+            document.getElementById('displayName').innerText = student.name;
 
-            const container = document.getElementById('examContainer');
-            container.innerHTML = student.exams.map(ex => `
-                <div class="border-[6px] border-black bg-white p-6 neo-shadow hover:-translate-x-1 hover:-translate-y-1 transition-all">
-                    <div class="flex justify-between items-start mb-4 border-b-4 border-black pb-2">
-                        <h4 class="font-black text-2xl uppercase italic">${ex.subject}</h4>
-                        <span class="bg-black text-white px-2 py-1 font-bold text-sm">${ex.room}</span>
-                    </div>
-                    <div class="flex justify-between items-end">
-                        <div class="space-y-1">
-                            <p class="font-bold text-sm text-gray-500 uppercase">Schedule:</p>
-                            <p class="font-black text-lg">${ex.date}</p>
-                            <p class="font-black text-lg text-blue-600">${ex.time} น.</p>
-                        </div>
-                        <div class="text-right border-l-4 border-black pl-4">
-                            <p class="font-bold text-xs uppercase">Seat:</p>
-                            <p class="text-5xl font-[900] tracking-tighter">${ex.seat}</p>
-                        </div>
-                    </div>
-                </div>
+            const tbody = document.getElementById('examTableBody');
+            tbody.innerHTML = student.exams.map(ex => `
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="font-bold text-blue-600">${ex.id}</td>
+                    <td class="font-bold text-lg">${ex.title}</td>
+                    <td class="text-sm font-bold">${ex.schedule} น.</td>
+                    <td class="font-bold">${ex.room}</td>
+                    <td class="text-right font-black text-2xl">${ex.seat}</td>
+                </tr>
             `).join('');
         } else {
             error.classList.remove('hidden');
