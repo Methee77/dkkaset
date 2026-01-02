@@ -49,11 +49,11 @@
         }
         .exam-table td {
             border: 1px solid #000;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             vertical-align: middle;
         }
 
-        /* เอฟเฟกต์กะพริบเบาๆ สำหรับประกาศเตือน */
+        /* เอฟเฟกต์กะพริบสำหรับประกาศเตือน */
         .alert-flash {
             border: 4px solid #000;
             animation: border-pulse 2s infinite;
@@ -70,23 +70,23 @@
 <div class="max-w-6xl mx-auto">
     <header class="border-b-8 border-black pb-6 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase">Digital Exam Service</div>
+            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase text-center">Digital Exam Service</div>
             <h1 class="text-4xl md:text-6xl font-[900] tracking-tighter leading-none uppercase">
                 ค้นหา<span class="text-blue-600">ตารางสอบ</span>
             </h1>
         </div>
         <div class="text-left md:text-right border-l-4 md:border-l-0 md:border-r-4 border-black pl-4 md:pr-4">
             <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-xs">ปีการศึกษา 2568</p>
-            <p class="text-sm font-black text-blue-600 uppercase">Updated 2 มกราคม 2569</p>
+            <p class="text-sm font-black text-blue-600 uppercase">อัปเดต 2 มกราคม 2569</p>
         </div>
     </header>
 
     <section id="searchView" class="max-w-2xl mx-auto py-10">
         <div class="border-4 border-black p-8 bg-white shadow-[12px_12px_0px_rgba(0,0,0,1)]">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="md:col-span-2">
+                <div class="md:col-span-2 text-center">
                     <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-blue-600">กรอกรหัสประจำตัวนิสิต *</label>
-                    <input type="text" id="studentId" class="input-sharp border-blue-600" placeholder="ระบุรหัสนิสิต">
+                    <input type="text" id="studentId" class="input-sharp border-blue-600 text-center" placeholder="ระบุรหัสนิสิต">
                 </div>
                 <div>
                     <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ภาคการศึกษา</label>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest text-center">ค้นหาตารางสอบของคุณ →</button>
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm italic">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
         </div>
     </section>
 
@@ -108,24 +108,22 @@
             <div class="bg-black text-yellow-300 p-2 font-black text-2xl">!</div>
             <div class="text-sm md:text-base">
                 <p class="font-black text-black uppercase tracking-tight">ประกาศเตือน: นิสิตประเมินการสอน ครั้งที่ 1</p>
-                <p class="font-bold text-black">วันที่ 5 - 9 มกราคม 2569 ผ่านระบบ <span class="underline decoration-2">MYKU</span> ก่อนเข้าสอบกลางภาค</p>
+                <p class="font-bold text-black">วันที่ 5 - 9 มกราคม 2569 ผ่านระบบ <span class="underline decoration-2 font-black">MYKU</span> ก่อนเข้าสอบกลางภาค</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
             <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-3">
                 <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลผู้เข้าสอบ</p>
-                <h2 id="resName" class="text-3xl font-black mb-1 leading-none uppercase">-</h2>
+                <h2 id="resName" class="text-3xl font-black mb-1 leading-none uppercase text-black font-bold">-</h2>
                 <p id="resId" class="text-xl font-bold text-blue-700 tracking-tighter">-</p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4">
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm font-semibold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm font-semibold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm font-semibold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">รหัสสาขา-ชั้นปี: <span id="resAdvisor" class="text-black block text-sm font-semibold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm italic">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase md:col-span-2">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm font-bold italic">-</span></p>
                 </div>
             </div>
             <div class="p-6 flex flex-col justify-center gap-3 bg-white">
@@ -142,7 +140,7 @@
                         <th>ชื่อวิชา</th>
                         <th class="w-36 text-center">วันสอบ</th>
                         <th class="w-36 text-center">เวลาสอบ</th>
-                        <th class="w-32 text-center">หมู่เรียน</th>
+                        <th class="w-40 text-center">หมู่เรียน</th>
                         <th class="w-32 text-center">ห้องสอบ</th>
                     </tr>
                 </thead>
@@ -160,10 +158,32 @@
 <script>
     const db = {
         "6720600494": {
-            name: "นายเมธี   ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", advisor: "F39-2",
+            name: "นายเมธี   ใจสุขดี", 
+            id: "6720600494", 
+            faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", 
+            major: "เกษตรและสิ่งแวดล้อมศึกษา", 
+            dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", 
+            year: "F39-2",
+            advisor: "ผศ.ดร. นามสมมติ ชัดเจน",
             exams: [
-                { code: "01355102", title: "English for University", date: "เสาร์ 10 ม.ค. 69", time: "13:00 - 15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
-                { code: "01420111", title: "ฟิสิกส์ทั่วไป I", date: "18 ม.ค. 69", time: "13:30 - 16:30", sec: "หมู่ 200 (SC)", room: "SC45-102" }
+                { 
+                    code: "01355102", 
+                    titleEn: "English for University", 
+                    titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", 
+                    date: "เสาร์ 10 ม.ค. 69", 
+                    time: "13:00 - 15:30", 
+                    sec: "หมู่เรียน 710", 
+                    room: "LH3-304" 
+                },
+                { 
+                    code: "01420111", 
+                    titleEn: "General Physics I", 
+                    titleTh: "ฟิสิกส์ทั่วไป I", 
+                    date: "18 ม.ค. 69", 
+                    time: "13:30 - 16:30", 
+                    sec: "หมู่ 200 (SC)", 
+                    room: "SC45-102" 
+                }
             ]
         }
     };
@@ -179,20 +199,24 @@
             document.getElementById('resultView').classList.remove('hidden');
             
             document.getElementById('resName').innerText = student.name;
-            document.getElementById('resId').innerText = "ID: " + student.id;
+            document.getElementById('resId').innerText = "รหัสนิสิต: " + student.id;
             document.getElementById('resFaculty').innerText = student.faculty;
             document.getElementById('resMajor').innerText = student.major;
             document.getElementById('resDept').innerText = student.dept;
+            document.getElementById('resYear').innerText = student.year;
             document.getElementById('resAdvisor').innerText = student.advisor;
 
             const tbody = document.getElementById('examTableBody');
             tbody.innerHTML = student.exams.map(ex => `
                 <tr class="hover:bg-gray-50 transition font-medium">
-                    <td class="font-bold text-blue-700">${ex.code}</td>
-                    <td class="font-bold text-base leading-tight uppercase">${ex.title}</td>
-                    <td class="text-center font-bold">${ex.date}</td>
-                    <td class="text-center font-bold text-blue-600">${ex.time}</td>
-                    <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black">${ex.sec}</td>
+                    <td class="font-bold text-blue-700 text-sm">${ex.code}</td>
+                    <td class="py-3">
+                        <div class="font-bold text-base leading-tight uppercase text-black">${ex.titleEn}</div>
+                        <div class="text-xs text-gray-500 font-bold mt-1">${ex.titleTh}</div>
+                    </td>
+                    <td class="text-center font-bold text-sm">${ex.date}</td>
+                    <td class="text-center font-bold text-blue-600 text-sm">${ex.time}</td>
+                    <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black text-sm">${ex.sec}</td>
                     <td class="text-center font-[900] text-lg bg-gray-100">${ex.room}</td>
                 </tr>
             `).join('');
