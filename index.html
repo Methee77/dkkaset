@@ -11,74 +11,28 @@
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
         body { background-color: #fcfcfc; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
         
-        .input-sharp {
-            border: 2px solid #000;
-            padding: 0.75rem 1rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            background-color: #fff;
-        }
-        .input-locked {
-            background-color: #f3f4f6;
-            color: #6b7280;
-            border: 2px solid #000;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
+        .input-sharp { border: 2px solid #000; padding: 0.75rem 1rem; font-size: 1.1rem; font-weight: 600; width: 100%; background-color: #fff; }
+        .input-locked { background-color: #f3f4f6; color: #6b7280; border: 2px solid #000; cursor: not-allowed; pointer-events: none; }
 
-        .btn-gov {
-            background-color: #000;
-            color: #fff;
-            padding: 1rem 2rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: 0.2s;
-        }
+        .btn-gov { background-color: #000; color: #fff; padding: 1rem 2rem; font-weight: 700; font-size: 1.1rem; transition: 0.2s; }
         .btn-gov:hover { background-color: #2563eb; }
 
-        /* ปุ่มแสดงวิชานอกตารางแบบเด่นสะดุดตา */
-        .btn-off-campus {
-            background-color: #ff6b00; /* สีส้มสด */
-            color: #000;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            font-weight: 800;
-            transition: 0.1s;
-        }
-        .btn-off-campus:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #000;
-        }
-        .btn-off-campus:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px #000;
-        }
+        .btn-off-campus { background-color: #ff6b00; color: #000; border: 3px solid #000; box-shadow: 4px 4px 0px #000; font-weight: 800; transition: 0.1s; }
+        .btn-off-campus:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
 
-        .exam-table th {
-            background-color: #000;
-            color: #fff;
-            padding: 0.85rem;
-            text-align: left;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border: 1px solid #333;
-            text-transform: uppercase;
-        }
-        .exam-table td {
-            border: 1px solid #000;
-            padding: 1rem;
-            vertical-align: middle;
-        }
+        .exam-table th { background-color: #000; color: #fff; padding: 0.85rem; text-align: left; font-size: 0.85rem; font-weight: 700; border: 1px solid #333; text-transform: uppercase; }
+        .exam-table td { border: 1px solid #000; padding: 1rem; vertical-align: middle; }
 
-        .alert-flash {
-            border: 4px solid #000;
-            animation: border-pulse 2s infinite;
+        /* ประกาศเตือนแบบเด่นพิเศษ */
+        .alert-urgent {
+            border: 6px dashed #000;
+            background-color: #fbbf24; /* เหลืองเข้ม */
+            animation: alert-blink 1.5s infinite;
         }
-        @keyframes border-pulse {
-            0% { border-color: #000; }
-            50% { border-color: #2563eb; }
-            100% { border-color: #000; }
+        @keyframes alert-blink {
+            0% { background-color: #fbbf24; }
+            50% { background-color: #f59e0b; } /* ส้มเหลือง */
+            100% { background-color: #fbbf24; }
         }
     </style>
 </head>
@@ -87,10 +41,8 @@
 <div class="max-w-6xl mx-auto">
     <header class="border-b-8 border-black pb-6 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase text-center">Digital Exam Service</div>
-            <h1 class="text-4xl md:text-6xl font-[900] tracking-tighter leading-none uppercase">
-                ค้นหา<span class="text-blue-600">ตารางสอบ</span>
-            </h1>
+            <div class="bg-black text-white px-3 py-0.5 text-[10px] font-bold tracking-[0.2em] inline-block mb-3 uppercase text-center font-bold">Digital Exam Service</div>
+            <h1 class="text-4xl md:text-6xl font-[900] tracking-tighter leading-none uppercase">ค้นหา<span class="text-blue-600 font-bold">ตารางสอบ</span></h1>
         </div>
         <div class="text-left md:text-right border-l-4 md:border-l-0 md:border-r-4 border-black pl-4 md:pr-4">
             <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-xs">ปีการศึกษา 2568</p>
@@ -109,75 +61,68 @@
                 <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400 font-bold">ประเภทการสอบ</label><input type="text" class="input-sharp input-locked font-bold text-center" value="กลางภาค" readonly></div>
             </div>
             <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest text-center font-bold">ค้นหาตารางสอบของคุณ →</button>
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm italic">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm italic">! ไม่พบข้อมูลในระบบ</p>
         </div>
     </section>
 
     <section id="resultView" class="hidden animate-in fade-in duration-500">
-        <div class="alert-flash bg-yellow-300 p-4 mb-6 flex items-center gap-4 shadow-[6px_6px_0px_#000]">
-            <div class="bg-black text-yellow-300 p-2 font-black text-2xl">!</div>
-            <div class="text-sm md:text-base font-semibold">
-                <p class="font-black text-black uppercase tracking-tight">ประกาศเตือน: นิสิตประเมินการสอน ครั้งที่ 1</p>
-                <p class="text-black text-sm uppercase leading-relaxed font-bold">วันที่ 5 - 9 มกราคม 2569 ผ่านระบบ MYKU ก่อนเข้าสอบกลางภาค</p>
+        <div class="alert-urgent p-5 mb-8 flex items-center gap-6 shadow-[10px_10px_0px_#000]">
+            <div class="bg-black text-white w-16 h-16 flex items-center justify-center font-black text-4xl shrink-0">!</div>
+            <div class="text-black">
+                <p class="font-[900] text-xl uppercase tracking-tighter leading-none mb-1">ต้องประเมินการสอนก่อนเข้าสอบ</p>
+                <p class="font-bold text-lg leading-tight italic border-b-4 border-black inline-block">5 - 9 มกราคม 2569 ผ่านระบบ MYKU</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
             <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-3">
-                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลผู้เข้าสอบ</p>
+                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest font-bold">ข้อมูลผู้เข้าสอบ</p>
                 <h2 id="resName" class="text-3xl font-black mb-1 leading-none uppercase text-black font-bold">-</h2>
                 <p id="resId" class="text-xl font-bold text-blue-700 tracking-tighter">-</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4">
-                    <p class="font-bold text-gray-400 text-[10px] uppercase font-bold">คณะ: <span id="resFaculty" class="text-black block text-sm font-bold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase font-bold">ภาควิชา: <span id="resDept" class="text-black block text-sm font-bold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase font-bold">สาขา: <span id="resMajor" class="text-black block text-sm font-bold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase font-bold">รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black block text-sm font-bold">-</span></p>
-                    <p class="font-bold text-gray-400 text-[10px] uppercase font-bold md:col-span-2">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm font-bold italic">-</span></p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4 font-bold uppercase">
+                    <p>คณะ: <span id="resFaculty" class="text-black block text-sm font-bold"></span></p>
+                    <p>ภาควิชา: <span id="resDept" class="text-black block text-sm font-bold"></span></p>
+                    <p>สาขา: <span id="resMajor" class="text-black block text-sm font-bold"></span></p>
+                    <p>รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black block text-sm font-bold"></span></p>
+                    <p class="md:col-span-2 italic">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm font-bold"></span></p>
                 </div>
             </div>
             <div class="p-6 flex flex-col justify-center gap-4 bg-white text-center">
                 <button onclick="window.print()" class="w-full text-sm font-bold border-2 border-black py-3 hover:bg-black hover:text-white transition uppercase font-bold">พิมพ์ตารางสอบ</button>
                 <button onclick="toggleOffCampus()" id="btnOffCampus" class="btn-off-campus w-full text-sm py-4 uppercase italic">แสดงวิชานอกตาราง</button>
-                <button onclick="location.reload()" class="w-full text-sm font-bold text-gray-400 hover:text-black transition uppercase font-bold">ค้นหาใหม่</button>
+                <button onclick="location.reload()" class="w-full text-sm font-bold text-gray-400 hover:text-black transition uppercase font-bold tracking-widest">ค้นหาใหม่</button>
             </div>
         </div>
 
-        <div class="overflow-x-auto border-4 border-black mb-10 shadow-[8px_8px_0px_#000]">
+        <div class="overflow-x-auto border-4 border-black mb-12 shadow-[8px_8px_0px_#000]">
             <table class="w-full exam-table border-collapse">
                 <thead>
-                    <tr>
-                        <th class="w-28 text-center">รหัสวิชา</th>
-                        <th>ชื่อวิชา</th>
-                        <th class="w-36 text-center">วันสอบ</th>
-                        <th class="w-36 text-center">เวลาสอบ</th>
-                        <th class="w-40 text-center">หมู่เรียน</th>
-                        <th class="w-32 text-center">ห้องสอบ</th>
-                    </tr>
+                    <tr><th class="w-28 text-center">รหัสวิชา</th><th>ชื่อวิชา</th><th class="w-36 text-center font-bold">วันสอบ</th><th class="w-36 text-center font-bold">เวลาสอบ</th><th class="w-40 text-center font-bold">หมู่เรียน</th><th class="w-32 text-center font-bold">ห้องสอบ</th></tr>
                 </thead>
                 <tbody id="examTableBody"></tbody>
             </table>
         </div>
 
         <div id="offCampusContainer" class="hidden">
-            <div class="overflow-x-auto border-4 border-orange-600 shadow-[8px_8px_0px_#ff6b00] mb-10">
-                <table class="w-full exam-table border-collapse">
-                    <thead class="bg-orange-600">
-                        <tr class="bg-orange-600">
-                            <th class="w-28 bg-orange-600 text-center font-bold">รหัสวิชา</th>
-                            <th class="bg-orange-600 font-bold italic">ชื่อวิชานอกตาราง</th>
-                            <th class="w-36 text-center bg-orange-600 font-bold">วันสอบ</th>
-                            <th class="w-36 text-center bg-orange-600 font-bold">เวลาสอบ</th>
-                            <th class="w-40 text-center bg-orange-600 font-bold">หมู่เรียน</th>
-                            <th class="w-32 text-center bg-orange-600 font-bold">ห้องสอบ</th>
+            <div class="overflow-x-auto border-4 border-red-600 shadow-[10px_10px_0px_#dc2626] mb-10">
+                <table class="w-full exam-table border-collapse border-red-600">
+                    <thead class="bg-red-600">
+                        <tr class="bg-red-600 text-white font-bold uppercase tracking-widest">
+                            <th class="w-28 bg-red-600 border-red-700 text-center">รหัสวิชา</th>
+                            <th class="bg-red-600 border-red-700 italic">วิชานอกตาราง / ต่างวิทยาเขต</th>
+                            <th class="w-36 bg-red-600 border-red-700 text-center">วันสอบ</th>
+                            <th class="w-36 bg-red-600 border-red-700 text-center">เวลาสอบ</th>
+                            <th class="w-40 bg-red-600 border-red-700 text-center">หมู่เรียน</th>
+                            <th class="w-32 bg-red-600 border-red-700 text-center">ห้องสอบ</th>
                         </tr>
                     </thead>
-                    <tbody id="offCampusTableBody"></tbody>
+                    <tbody id="offCampusTableBody" class="border-red-600"></tbody>
                 </table>
             </div>
         </div>
 
-        <footer class="mt-8 border-l-4 border-blue-600 pl-4 py-2">
-            <p class="text-[11px] font-bold text-gray-500 uppercase leading-relaxed font-bold">
+        <footer class="mt-8 border-l-4 border-blue-600 pl-4 py-2 font-bold">
+            <p class="text-[11px] font-bold text-gray-500 uppercase leading-relaxed">
                 * หมายเหตุ: กรุณาตรวจสอบรหัสวิชาและห้องสอบอีกครั้ง และแสดงบัตรประจำตัวนิสิตต่อเจ้าหน้าที่คุมสอบ
             </p>
         </footer>
@@ -207,7 +152,6 @@
                 { code: "01422111", titleEn: "Statistics", titleTh: "สถิติพื้นฐาน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "E-EXAM" }
             ]
         }
-        // ข้อมูลคนอื่นเพิ่มในรูปแบบเดียวกัน
     };
 
     function handleSearch() {
@@ -223,9 +167,8 @@
             document.getElementById('resDept').innerText = student.dept;
             document.getElementById('resYear').innerText = student.year;
             document.getElementById('resAdvisor').innerText = student.advisor;
-
-            renderTable('examTableBody', student.exams);
-            renderTable('offCampusTableBody', student.offCampus);
+            renderTable('examTableBody', student.exams, 'black');
+            renderTable('offCampusTableBody', student.offCampus, 'red-600');
             document.getElementById('offCampusContainer').classList.add('hidden');
             document.getElementById('btnOffCampus').innerText = "แสดงวิชานอกตาราง";
         } else {
@@ -233,23 +176,23 @@
         }
     }
 
-    function renderTable(targetId, data) {
+    function renderTable(targetId, data, color) {
         const tbody = document.getElementById(targetId);
         if(!data || data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-10 text-gray-400 font-bold uppercase tracking-widest">--- ไม่พบข้อมูลการสอบ ---</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-10 text-gray-400 font-bold uppercase">--- ไม่พบข้อมูล ---</td></tr>';
             return;
         }
         tbody.innerHTML = data.map(ex => `
-            <tr class="hover:bg-gray-50 transition">
-                <td class="font-bold text-blue-700 text-sm text-center">${ex.code}</td>
-                <td class="py-3 px-4">
+            <tr class="hover:bg-gray-50 transition border-${color}">
+                <td class="font-bold text-blue-700 text-sm text-center border-${color}">${ex.code}</td>
+                <td class="py-3 px-4 border-${color}">
                     <div class="font-bold text-base leading-tight uppercase text-black tracking-tighter">${ex.titleEn}</div>
                     <div class="text-[11px] text-gray-500 font-bold mt-1">${ex.titleTh}</div>
                 </td>
-                <td class="text-center text-[15px] text-gray-800 font-semibold">${ex.date}</td>
-                <td class="text-center text-[15px] font-semibold text-blue-700 tracking-tighter">${ex.time}</td>
-                <td class="text-center text-[15px] font-semibold bg-blue-50 text-blue-900 border-x-2 border-black px-2">${ex.sec}</td>
-                <td class="text-center font-[900] text-lg bg-gray-100 text-black px-2 uppercase">${ex.room}</td>
+                <td class="text-center text-[15px] text-gray-800 font-semibold border-${color}">${ex.date}</td>
+                <td class="text-center text-[15px] font-semibold text-blue-700 tracking-tighter border-${color}">${ex.time} น.</td>
+                <td class="text-center text-[15px] font-semibold bg-blue-50 text-blue-900 px-2 border-x-2 border-${color}">${ex.sec}</td>
+                <td class="text-center font-[900] text-lg bg-gray-100 text-black px-2 uppercase border-${color}">${ex.room}</td>
             </tr>
         `).join('');
     }
