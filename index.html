@@ -7,17 +7,62 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* บังคับขอบตัดตรง 100% */
         * { border-radius: 0 !important; font-family: 'Kanit', sans-serif; }
         body { background-color: #fcfcfc; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
-        .input-sharp { border: 2px solid #000; padding: 0.75rem 1rem; font-size: 1.1rem; font-weight: 600; width: 100%; background-color: #fff; }
-        .input-locked { background-color: #f3f4f6; color: #6b7280; border: 2px solid #000; cursor: not-allowed; pointer-events: none; }
-        .btn-gov { background-color: #000; color: #fff; padding: 1rem 2rem; font-weight: 700; font-size: 1.1rem; transition: 0.2s; }
+        
+        .input-sharp {
+            border: 2px solid #000;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            background-color: #fff;
+        }
+        .input-locked {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border: 2px solid #000;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-gov {
+            background-color: #000;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
         .btn-gov:hover { background-color: #2563eb; }
-        .exam-table th { background-color: #000; color: #fff; padding: 0.85rem; text-align: left; font-size: 0.85rem; font-weight: 700; border: 1px solid #333; text-transform: uppercase; }
-        .exam-table td { border: 1px solid #000; padding: 0.75rem 1rem; vertical-align: middle; }
-        .alert-flash { border: 4px solid #000; animation: border-pulse 2s infinite; }
-        @keyframes border-pulse { 0% { border-color: #000; } 50% { border-color: #2563eb; } 100% { border-color: #000; } }
-        .off-campus-header { background-color: #dc2626; color: white; padding: 0.5rem; font-weight: 900; }
+
+        .exam-table th {
+            background-color: #000;
+            color: #fff;
+            padding: 0.85rem;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #333;
+            text-transform: uppercase;
+        }
+        .exam-table td {
+            border: 1px solid #000;
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        /* เอฟเฟกต์ประกาศเตือน */
+        .alert-flash {
+            border: 4px solid #000;
+            animation: border-pulse 2s infinite;
+        }
+        @keyframes border-pulse {
+            0% { border-color: #000; }
+            50% { border-color: #2563eb; }
+            100% { border-color: #000; }
+        }
     </style>
 </head>
 <body class="p-4 md:p-12">
@@ -39,15 +84,15 @@
     <section id="searchView" class="max-w-2xl mx-auto py-10">
         <div class="border-4 border-black p-8 bg-white shadow-[12px_12px_0px_rgba(0,0,0,1)] text-center">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="md:col-span-2">
-                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-blue-600 font-black italic">กรอกรหัสประจำตัวนิสิตเพื่อตรวจสอบตารางสอบรายบุคคล *</label>
+                <div class="md:col-span-2 text-center">
+                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-blue-600">กรอกรหัสประจำตัวนิสิต *</label>
                     <input type="text" id="studentId" class="input-sharp border-blue-600 text-center" placeholder="ระบุรหัสนิสิต">
                 </div>
                 <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ภาคการศึกษา</label><input type="text" class="input-sharp input-locked" value="ภาคปลาย 2568" readonly></div>
                 <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ประเภทการสอบ</label><input type="text" class="input-sharp input-locked" value="กลางภาค" readonly></div>
             </div>
-            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest text-center">ค้นหาตารางสอบของคุณ →</button>
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-sm italic uppercase tracking-tighter">! ไม่พบข้อมูลรหัสประจำตัวนี้ในระบบ</p>
+            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest text-center font-bold">ค้นหาตารางสอบของคุณ →</button>
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm italic">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
         </div>
     </section>
 
@@ -55,54 +100,52 @@
         <div class="alert-flash bg-yellow-300 p-4 mb-6 flex items-center gap-4 shadow-[6px_6px_0px_#000]">
             <div class="bg-black text-yellow-300 p-2 font-black text-2xl">!</div>
             <div class="text-sm md:text-base">
-                <p class="font-black text-black uppercase tracking-tight">ประกาศเตือน: นิสิตประเมินการสอน ครั้งที่ 1</p>
+                <p class="font-black text-black uppercase tracking-tight font-bold">ประกาศเตือน: นิสิตประเมินการสอน ครั้งที่ 1</p>
                 <p class="font-bold text-black text-sm uppercase leading-relaxed">วันที่ 5 - 9 มกราคม 2569 ผ่านระบบ MYKU ก่อนเข้าสอบกลางภาค</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 border-4 border-black mb-8 bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)]">
             <div class="p-6 border-b-4 md:border-b-0 md:border-r-4 border-black bg-blue-50 col-span-3">
-                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลนิสิตที่เข้าสู่ระบบ</p>
+                <p class="text-[10px] font-black text-blue-800 uppercase mb-2 tracking-widest">ข้อมูลผู้เข้าสอบ</p>
                 <h2 id="resName" class="text-3xl font-black mb-1 leading-none uppercase text-black font-bold">-</h2>
                 <p id="resId" class="text-xl font-bold text-blue-700 tracking-tighter">-</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4 text-xs font-bold uppercase">
-                    <p>คณะ: <span id="resFaculty" class="text-black font-bold"></span></p>
-                    <p>ภาควิชา: <span id="resDept" class="text-black font-bold"></span></p>
-                    <p>สาขา: <span id="resMajor" class="text-black font-bold"></span></p>
-                    <p>รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black font-bold"></span></p>
-                    <p class="md:col-span-2 italic">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black font-bold"></span></p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm border-t-2 border-blue-200 pt-4 mt-4">
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">คณะ: <span id="resFaculty" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">ภาควิชา: <span id="resDept" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">สาขา: <span id="resMajor" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase">รหัสสาขา-ชั้นปี: <span id="resYear" class="text-black block text-sm font-bold">-</span></p>
+                    <p class="font-bold text-gray-400 text-[10px] uppercase md:col-span-2">อาจารย์ที่ปรึกษา: <span id="resAdvisor" class="text-black block text-sm font-bold italic">-</span></p>
                 </div>
             </div>
-            <div class="p-6 flex flex-col justify-center gap-3 bg-white border-black">
-                <button onclick="window.print()" class="w-full text-xs font-bold border-2 border-black py-2 hover:bg-black hover:text-white transition uppercase">พิมพ์ตารางสอบ</button>
-                <button onclick="toggleOffCampus()" id="btnOffCampus" class="w-full text-xs font-bold border-2 border-red-600 text-red-600 py-2 hover:bg-red-600 hover:text-white transition uppercase">วิชานอกตาราง</button>
-                <button onclick="location.reload()" class="w-full text-xs font-bold text-gray-500 hover:underline transition uppercase">ค้นหาใหม่</button>
+            <div class="p-6 flex flex-col justify-center gap-3 bg-white text-center">
+                <button onclick="window.print()" class="w-full text-sm font-bold border-2 border-black py-3 hover:bg-black hover:text-white transition uppercase font-bold">พิมพ์ตารางสอบ</button>
+                <button onclick="toggleOffCampus()" id="btnOffCampus" class="w-full text-sm font-bold border-2 border-red-600 text-red-600 py-3 hover:bg-red-600 hover:text-white transition uppercase font-bold italic">แสดงวิชานอกตาราง</button>
+                <button onclick="location.reload()" class="w-full text-sm font-bold text-gray-500 hover:underline transition uppercase font-bold">ค้นหาใหม่</button>
             </div>
         </div>
 
-        <div id="mainTableSection">
-            <div class="bg-black text-white px-4 py-2 font-black text-sm uppercase tracking-widest">ตารางสอบในวิทยาเขต</div>
-            <div class="overflow-x-auto border-x-4 border-b-4 border-black">
-                <table class="w-full exam-table border-collapse">
-                    <thead>
-                        <tr><th class="w-28">รหัสวิชา</th><th>ชื่อวิชา</th><th class="w-36 text-center">วันสอบ</th><th class="w-36 text-center">เวลาสอบ</th><th class="w-40 text-center">หมู่เรียน</th><th class="w-32 text-center">ห้องสอบ</th></tr>
-                    </thead>
-                    <tbody id="examTableBody"></tbody>
-                </table>
-            </div>
+        <div class="overflow-x-auto border-t-4 border-black border-x-4 border-b-4">
+            <table class="w-full exam-table border-collapse">
+                <thead>
+                    <tr>
+                        <th class="w-28">รหัสวิชา</th>
+                        <th>ชื่อวิชา</th>
+                        <th class="w-36 text-center">วันสอบ</th>
+                        <th class="w-36 text-center">เวลาสอบ</th>
+                        <th class="w-40 text-center">หมู่เรียน</th>
+                        <th class="w-32 text-center">ห้องสอบ</th>
+                    </tr>
+                </thead>
+                <tbody id="examTableBody"></tbody>
+            </table>
         </div>
-
-        <div id="offCampusSection" class="hidden mt-10">
-            <div class="off-campus-header text-sm uppercase tracking-widest px-4 border-x-4 border-t-4 border-red-600">วิชาสอบนอกตาราง / ต่างวิทยาเขต</div>
-            <div class="overflow-x-auto border-x-4 border-b-4 border-red-600">
-                <table class="w-full exam-table border-collapse border-red-600">
-                    <thead class="bg-red-600">
-                        <tr><th class="w-28 bg-red-600">รหัสวิชา</th><th class="bg-red-600">ชื่อวิชา</th><th class="w-36 text-center bg-red-600">วันสอบ</th><th class="w-36 text-center bg-red-600">เวลาสอบ</th><th class="w-40 text-center bg-red-600 text-xs">หมู่เรียน</th><th class="w-32 text-center bg-red-600 text-xs">หมายเหตุ</th></tr>
-                    </thead>
-                    <tbody id="offCampusTableBody"></tbody>
-                </table>
-            </div>
-        </div>
+        <footer class="mt-6 border-l-4 border-blue-600 pl-4 py-2">
+            <p class="text-[11px] font-bold text-gray-500 uppercase leading-relaxed">
+                * หมายเหตุ: กรุณาตรวจสอบรหัสวิชาและห้องสอบอีกครั้ง และแสดงบัตรประจำตัวนิสิตต่อเจ้าหน้าที่คุมสอบ
+            </p>
+        </footer>
     </section>
 </div>
 
@@ -110,41 +153,21 @@
     const db = {
         "6720600494": { name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ผศ.ดร. มานะ วีระกรรม",
             exams: [
-                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
-                { code: "02036271", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30-18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
-                { code: "02036261", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "พุธ 14 ม.ค. 69", time: "13:00-15:00", sec: "หมู่เรียน 700", room: "KH80-208" },
-                { code: "01175110", titleEn: "Table Tennis", titleTh: "เทเบิลเทนนิส", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-11:00", sec: "หมู่เรียน 705", room: "GYM-2" },
-                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "จันทร์ 19 ม.ค. 69", time: "13:30-16:30", sec: "หมู่เรียน 701", room: "SC2-101" }
+                { code: "01355102-64", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
+                { code: "02036271-66", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30-18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
+                { code: "02036261-66", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "พุธ 14 ม.ค. 69", time: "13:00-15:00", sec: "หมู่เรียน 700", room: "KH80-208" }
             ],
             offCampus: [
                 { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "KU-APP" },
-                { code: "01999011", titleEn: "Food for Mankind", titleTh: "อาหารเพื่อมนุษยชาติ", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "E-LEARN" },
+                { code: "01999011", titleEn: "Food for Mankind", titleTh: "อาหารเพื่อมนุษยชาติ", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "E-EXAM" },
                 { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 700", room: "MYKU" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 710", room: "SELF-ACCESS" }
+                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 710", room: "LAB-301" }
             ]
         },
-        "6720600001": { name: "นายสมชาย รักดี", id: "6720600001", faculty: "วิศวกรรมศาสตร์", major: "วิศวกรรมคอมพิวเตอร์", dept: "วิศวกรรมคอมพิวเตอร์", year: "E15-1", advisor: "ดร. วิศวะ เก่งกาจ",
+        "6720600028": { name: "นางสาวกมลักษณ์ ชาวบางงาม", id: "6720600028", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ดร. ใจดี มาเสมอ",
             exams: [
-                { code: "01204111", titleEn: "Computer Programming", titleTh: "การเขียนโปรแกรมคอมพิวเตอร์", date: "จันทร์ 12 ม.ค. 69", time: "09:00-12:00", sec: "หมู่เรียน 1", room: "ENG-401" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "พุธ 14 ม.ค. 69", time: "13:30-16:30", sec: "หมู่เรียน 10", room: "LH2-201" },
-                { code: "01420111", titleEn: "General Physics I", titleTh: "ฟิสิกส์ทั่วไป I", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-12:00", sec: "หมู่เรียน 2", room: "SC45-102" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 5", room: "LH3-201" },
-                { code: "01204112", titleEn: "Digital Systems", titleTh: "ระบบดิจิทัล", date: "พุธ 21 ม.ค. 69", time: "09:00-12:00", sec: "หมู่เรียน 1", room: "ENG-502" }
-            ],
-            offCampus: [
-                { code: "01999021", titleEn: "Thai Society and Culture", titleTh: "สังคมและวัฒนธรรมไทย", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "WEB" },
-                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "KU-X" },
-                { code: "01175113", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "POOL-KU" },
-                { code: "01204199", titleEn: "Ethics for Engineers", titleTh: "จริยธรรมวิศวกร", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "ENG-OFF" }
-            ]
-        },
-        "6720600028": { name: "นางสาวกมลลักษณ์ ชาวบางงาม", id: "6720600028", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "ดร. ใจดี มาเสมอ",
-            exams: [
-                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
-                { code: "02036271", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30-18:30", sec: "หมู่เรียน 700", room: "LH4-201" },
-                { code: "02036261", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "พุธ 14 ม.ค. 69", time: "13:00-15:00", sec: "หมู่เรียน 700", room: "KH80-208" },
-                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-12:00", sec: "หมู่เรียน 100", room: "SC1-101" },
-                { code: "01175113", titleEn: "Swimming", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "อังคาร 20 ม.ค. 69", time: "08:00-10:00", sec: "หมู่ 700", room: "POOL-KU" }
+                { code: "01355102-64", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "เสาร์ 10 ม.ค. 69", time: "13:00-15:30", sec: "หมู่เรียน 710", room: "LH3-304" },
+                { code: "02036271-66", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "จันทร์ 12 ม.ค. 69", time: "16:30-18:30", sec: "หมู่เรียน 700", room: "LH4-201" }
             ],
             offCampus: [
                 { code: "01175110", titleEn: "Table Tennis", titleTh: "เทเบิลเทนนิส", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "GYM-2" },
@@ -153,13 +176,21 @@
                 { code: "01420119", titleEn: "Physics Lab", titleTh: "ปฏิบัติการฟิสิกส์", date: "นอกตาราง", time: "ส่งงาน", sec: "หมู่ 1", room: "SC45-301" }
             ]
         },
-        "6720600002": { name: "นางสาวสมหญิง มุ่งมั่น", id: "6720600002", faculty: "บริหารธุรกิจ", major: "การตลาด", dept: "การตลาด", year: "B20-1", advisor: "ดร. การตลาด ร่ำรวย",
+        "6720600001": { name: "นายสมชาย รักดี", id: "6720600001", faculty: "วิศวกรรมศาสตร์", major: "วิศวกรรมคอมพิวเตอร์", dept: "วิศวกรรมคอมพิวเตอร์", year: "E15-1", advisor: "ดร. วิศวะ เก่งกาจ",
             exams: [
-                { code: "01134111", titleEn: "Principles of Marketing", titleTh: "หลักการตลาด", date: "จันทร์ 12 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 800", room: "BUS-101" },
-                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "พุธ 14 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 800", room: "BUS-202" },
-                { code: "01133111", titleEn: "Financial Accounting", titleTh: "การบัญชีการเงิน", date: "ศุกร์ 16 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 805", room: "BUS-305" },
-                { code: "01422111", titleEn: "Principles of Statistics", titleTh: "หลักสถิติ", date: "จันทร์ 19 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 800", room: "LH1-101" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "13:00-15:30", sec: "หมู่ 810", room: "LH3-101" }
+                { code: "01204111", titleEn: "Computer Programming", titleTh: "การเขียนโปรแกรมคอมพิวเตอร์", date: "จันทร์ 12 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 1", room: "ENG-401" },
+                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "พุธ 14 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 10", room: "LH2-201" }
+            ],
+            offCampus: [
+                { code: "01999021", titleEn: "Thai Society", titleTh: "สังคมและวัฒนธรรมไทย", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "WEB" },
+                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "KU-X" },
+                { code: "01175113", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "POOL-KU" },
+                { code: "01204199", titleEn: "Ethics for Engineers", titleTh: "จริยธรรมวิศวกร", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "ENG-OFF" }
+            ]
+        },
+        "6720600002": { name: "นางสาวสมหญิง มุ่งมั่น", id: "6720600002", faculty: "บริหารธุรกิจ", major: "การตลาด", dept: "การตลาด", year: "B20-1", advisor: "ดร. ตลาด นำพา",
+            exams: [
+                { code: "01134111", titleEn: "Principles of Marketing", titleTh: "หลักการตลาด", date: "จันทร์ 12 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 800", room: "BUS-101" }
             ],
             offCampus: [
                 { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 800", room: "KU-WEB" },
@@ -168,186 +199,75 @@
                 { code: "01175111", titleEn: "Badminton", titleTh: "แบดมินตัน", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 5", room: "GYM-1" }
             ]
         },
-        "6720600003": { name: "นายสมศักดิ์ สู้ชีวิต", id: "6720600003", faculty: "เกษตร", major: "พืชไร่", dept: "พืชไร่นา", year: "A12-1", advisor: "ดร. ดินดี พันธุ์พืช",
-            exams: [
-                { code: "01003111", titleEn: "Intro to Agriculture", titleTh: "เกษตรศาสตร์เบื้องต้น", date: "อังคาร 13 ม.ค. 69", time: "09:00-11:00", sec: "หมู่ 1", room: "AG-101" },
-                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "พฤหัส 15 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 15", room: "SC2-201" },
-                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 10", room: "SC1-105" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "จันทร์ 19 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 5", room: "LH2-101" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 20", room: "LH3-105" }
-            ],
-            offCampus: [
-                { code: "01999011", titleEn: "Food for Mankind", titleTh: "อาหารเพื่อมนุษยชาติ", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "E-EXAM" },
-                { code: "01175161", titleEn: "Football", titleTh: "ฟุตบอล", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 2", room: "FIELD-1" },
-                { code: "01403119", titleEn: "Chemistry Lab", titleTh: "ปฏิบัติการเคมี", date: "นอกตาราง", time: "ส่งเล่ม", sec: "หมู่ 15", room: "SC2-501" },
-                { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600004": { name: "นางสาวสมจิตร จิตแจ่มใส", id: "6720600004", faculty: "มนุษยศาสตร์", major: "ภาษาอังกฤษ", dept: "ภาษาตะวันตก", year: "H05-1", advisor: "ดร. ภาษา พารู้",
-            exams: [
-                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษเพื่อมหาวิทยาลัย", date: "อังคาร 13 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 100", room: "LH3-401" },
-                { code: "01361101", titleEn: "Intro to Linguistics", titleTh: "ภาษาศาสตร์เบื้องต้น", date: "พฤหัส 15 ม.ค. 69", time: "13:30-16:00", sec: "หมู่ 1", room: "HUM-201" },
-                { code: "01371111", titleEn: "Information Literacy", titleTh: "การรู้สารสนเทศ", date: "จันทร์ 19 ม.ค. 69", time: "09:00-11:00", sec: "หมู่ 50", room: "LIB-101" },
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "13:30-15:30", sec: "หมู่ 10", room: "LH1-201" },
-                { code: "01175113", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "ศุกร์ 23 ม.ค. 69", time: "08:00-10:00", sec: "หมู่ 5", room: "POOL-KU" }
-            ],
-            offCampus: [
-                { code: "01355103", titleEn: "English Listening", titleTh: "การฟังภาษาอังกฤษ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 100", room: "LAB-HUM" },
-                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 5", room: "KU-WEB" },
-                { code: "01361211", titleEn: "Phonetics", titleTh: "สัทศาสตร์", date: "นอกตาราง", time: "สอบปากเปล่า", sec: "หมู่ 1", room: "HUM-OFF" },
-                { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 5", room: "MYKU" }
-            ]
-        },
-        "6720600005": { name: "นายปกรณ์ บินไป", id: "6720600005", faculty: "วิทยาศาสตร์", major: "ฟิสิกส์", dept: "ฟิสิกส์", year: "S02-1", advisor: "ดร. อะตอม สว่างไสว",
-            exams: [
-                { code: "01420111", titleEn: "General Physics I", titleTh: "ฟิสิกส์ทั่วไป I", date: "จันทร์ 12 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 1", room: "SC45-101" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "พุธ 14 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 1", room: "LH2-101" },
-                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 2", room: "SC2-101" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 3", room: "LH3-105" },
-                { code: "01420119", titleEn: "Physics Lab I", titleTh: "ปฏิบัติการฟิสิกส์ I", date: "พุธ 21 ม.ค. 69", time: "13:00-16:00", sec: "หมู่ 1", room: "SC45-301" }
-            ],
-            offCampus: [
-                { code: "01999011", titleEn: "Food for Mankind", titleTh: "อาหารเพื่อมนุษยชาติ", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "E-LEARN" },
-                { code: "01422111", titleEn: "Statistics", titleTh: "สถิติพื้นฐาน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "KU-APP" },
-                { code: "01175110", titleEn: "Table Tennis", titleTh: "เทเบิลเทนนิส", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "GYM-2" },
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600006": { name: "นางสาวนลิน ขยันเรียน", id: "6720600006", faculty: "สังคมศาสตร์", major: "รัฐศาสตร์", dept: "รัฐศาสตร์", year: "SO04-1", advisor: "ดร. การเมือง มั่นคง",
-            exams: [
-                { code: "01387101", titleEn: "Intro to Political Science", titleTh: "รัฐศาสตร์เบื้องต้น", date: "อังคาร 13 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 1", room: "SOC-101" },
-                { code: "01388111", titleEn: "Thai Government", titleTh: "การเมืองไทย", date: "พฤหัส 15 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 5", room: "SOC-202" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 10", room: "LH3-110" },
-                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "จันทร์ 19 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 10", room: "BUS-105" },
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "09:00-11:00", sec: "หมู่ 2", room: "LH1-101" }
-            ],
-            offCampus: [
-                { code: "01387211", titleEn: "Public Policy", titleTh: "นโยบายสาธารณะ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "SOC-OFF" },
-                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "WEB" },
-                { code: "01175111", titleEn: "Badminton", titleTh: "แบดมินตัน", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 5", room: "GYM-1" },
-                { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600007": { name: "นายวิชาญ ใจกล้า", id: "6720600007", faculty: "เศรษฐศาสตร์", major: "เศรษฐศาสตร์", dept: "เศรษฐศาสตร์", year: "EC01-1", advisor: "ดร. เงินตรา ร่ำรวย",
-            exams: [
-                { code: "01119111", titleEn: "Microeconomics I", titleTh: "เศรษฐศาสตร์จุลภาค I", date: "พุธ 14 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 1", room: "ECON-101" },
-                { code: "01119113", titleEn: "Math for Economists", titleTh: "คณิตศาสตร์สำหรับเศรษฐกร", date: "ศุกร์ 16 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 2", room: "ECON-105" },
-                { code: "01422111", titleEn: "Principles of Statistics", titleTh: "หลักสถิติ", date: "จันทร์ 19 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 5", room: "LH1-102" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "13:00-15:30", sec: "หมู่ 15", room: "LH3-205" },
-                { code: "01132111", titleEn: "Principles of Management", titleTh: "หลักการจัดการ", date: "ศุกร์ 23 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 20", room: "BUS-102" }
-            ],
-            offCampus: [
-                { code: "01119211", titleEn: "Macroeconomics I", titleTh: "เศรษฐศาสตร์มหภาค I", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "ECON-OFF" },
-                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "KU-APP" },
-                { code: "01175110", titleEn: "Table Tennis", titleTh: "เทเบิลเทนนิส", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "GYM-2" },
-                { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600008": { name: "นางสาวมณฑา ฟ้าใส", id: "6720600008", faculty: "วนศาสตร์", major: "วนศาสตร์", dept: "วนวัฒนวิทยา", year: "F01-1", advisor: "ดร. ป่าไม้ ยั่งยืน",
-            exams: [
-                { code: "01301111", titleEn: "Intro to Forestry", titleTh: "วนศาสตร์เบื้องต้น", date: "จันทร์ 12 ม.ค. 69", time: "09:00-11:00", sec: "หมู่ 1", room: "FOR-101" },
-                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "พุธ 14 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 20", room: "SC1-101" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 30", room: "LH2-105" },
-                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "จันทร์ 19 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 10", room: "SC2-205" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 50", room: "LH3-210" }
-            ],
-            offCampus: [
-                { code: "01301211", titleEn: "Forest Botany", titleTh: "พฤกษศาสตร์ป่าไม้", date: "นอกตาราง", time: "เดินป่าประเมิน", sec: "หมู่ 1", room: "KHAO-YAI" },
-                { code: "01424119", titleEn: "Biology Lab", titleTh: "ปฏิบัติการชีววิทยา", date: "นอกตาราง", time: "ส่งงาน", sec: "หมู่ 20", room: "SC1-501" },
-                { code: "01175161", titleEn: "Football", titleTh: "ฟุตบอล", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 1", room: "FIELD-1" },
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600009": { name: "นายยอดชาย แข็งแรง", id: "6720600009", faculty: "สถาปัตยกรรมศาสตร์", major: "สถาปัตยกรรม", dept: "สถาปัตยกรรม", year: "AR01-1", advisor: "ดร. ออกแบบ สร้างสรรค์",
-            exams: [
-                { code: "01151111", titleEn: "Basic Arch Design", titleTh: "การออกแบบพื้นฐาน", date: "อังคาร 13 ม.ค. 69", time: "09:00-16:00", sec: "หมู่ 1", room: "STUDIO-1" },
-                { code: "01152111", titleEn: "History of Arch", titleTh: "ประวัติศาสตร์สถาปัตยกรรม", date: "พฤหัส 15 ม.ค. 69", time: "10:00-12:00", sec: "หมู่ 1", room: "ARCH-101" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 16 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 40", room: "LH2-301" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "จันทร์ 19 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 60", room: "LH3-405" },
-                { code: "01999111", titleEn: "Knowledge of Land", titleTh: "ศาสตร์แห่งแผ่นดิน", date: "พุธ 21 ม.ค. 69", time: "13:30-15:30", sec: "หมู่ 5", room: "LH1-301" }
-            ],
-            offCampus: [
-                { code: "01151211", titleEn: "Freehand Drawing", titleTh: "วาดเขียน", date: "นอกตาราง", time: "ส่งพอร์ต", sec: "หมู่ 1", room: "ARCH-STUDIO" },
-                { code: "01999033", titleEn: "Arts of Living", titleTh: "ศิลปะการดำเนินชีวิต", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 5", room: "KU-X" },
-                { code: "01175113", titleEn: "Swimming for Health", titleTh: "ว่ายน้ำเพื่อสุขภาพ", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 10", room: "POOL-KU" },
-                { code: "01999141", titleEn: "Man and Society", titleTh: "มนุษย์กับสังคม", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "MYKU" }
-            ]
-        },
-        "6720600010": { name: "นางสาวศิริพร พรประเสริฐ", id: "6720600010", faculty: "อุตสาหกรรมเกษตร", major: "เทคโนโลยีการอาหาร", dept: "วิทยาศาสตร์และเทคโนโลยีการอาหาร", year: "AI05-1", advisor: "ดร. อาหาร ปลอดภัย",
-            exams: [
-                { code: "01052111", titleEn: "Food Science and Tech", titleTh: "วิทยาศาสตร์ทางอาหาร", date: "พุธ 14 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 1", room: "AI-101" },
-                { code: "01403111", titleEn: "General Chemistry", titleTh: "เคมีทั่วไป", date: "ศุกร์ 16 ม.ค. 69", time: "09:00-12:00", sec: "หมู่ 25", room: "SC2-105" },
-                { code: "01424111", titleEn: "General Biology", titleTh: "ชีววิทยาทั่วไป", date: "จันทร์ 19 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 15", room: "SC1-201" },
-                { code: "01355101", titleEn: "English Foundation", titleTh: "พื้นฐานภาษาอังกฤษ", date: "พุธ 21 ม.ค. 69", time: "09:00-11:30", sec: "หมู่ 70", room: "LH3-501" },
-                { code: "01417111", titleEn: "Calculus I", titleTh: "แคลคูลัส I", date: "ศุกร์ 23 ม.ค. 69", time: "13:30-16:30", sec: "หมู่ 50", room: "LH2-401" }
-            ],
-            offCampus: [
-                { code: "01052119", titleEn: "Food Tech Lab", titleTh: "ปฏิบัติการเทคโนโลยีอาหาร", date: "นอกตาราง", time: "ส่งเล่ม", sec: "หมู่ 1", room: "AI-501" },
-                { code: "01403119", titleEn: "Chemistry Lab", titleTh: "ปฏิบัติการเคมี", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 25", room: "SC2-501" },
-                { code: "01999011", titleEn: "Food for Mankind", titleTh: "อาหารเพื่อมนุษยชาติ", date: "นอกตาราง", time: "ออนไลน์", sec: "หมู่ 1", room: "KU-APP" },
-                { code: "01175111", titleEn: "Badminton", titleTh: "แบดมินตัน", date: "นอกตาราง", time: "นัดหมาย", sec: "หมู่ 10", room: "GYM-1" }
-            ]
-        }
+        "6720600003": { name: "นายสมศักดิ์ สู้ชีวิต", id: "6720600003", faculty: "เกษตร", major: "พืชไร่", dept: "พืชไร่นา", year: "A12-1", advisor: "ดร. ดินดี พันธุ์พืช", exams: [], offCampus: [] },
+        "6720600004": { name: "นางสาวสมจิตร จิตแจ่มใส", id: "6720600004", faculty: "มนุษยศาสตร์", major: "ภาษาอังกฤษ", dept: "ภาษาตะวันตก", year: "H05-1", advisor: "ดร. ภาษา พารู้", exams: [], offCampus: [] },
+        "6720600005": { name: "นายปกรณ์ บินไป", id: "6720600005", faculty: "วิทยาศาสตร์", major: "ฟิสิกส์", dept: "ฟิสิกส์", year: "S02-1", advisor: "ดร. อะตอม สว่างไสว", exams: [], offCampus: [] },
+        "6720600006": { name: "นางสาวนลิน ขยันเรียน", id: "6720600006", faculty: "สังคมศาสตร์", major: "รัฐศาสตร์", dept: "รัฐศาสตร์", year: "SO04-1", advisor: "ดร. การเมือง มั่นคง", exams: [], offCampus: [] },
+        "6720600007": { name: "นายวิชาญ ใจกล้า", id: "6720600007", faculty: "เศรษฐศาสตร์", major: "เศรษฐศาสตร์", dept: "เศรษฐศาสตร์", year: "EC01-1", advisor: "ดร. เงินตรา ร่ำรวย", exams: [], offCampus: [] },
+        "6720600008": { name: "นางสาวมณฑา ฟ้าใส", id: "6720600008", faculty: "วนศาสตร์", major: "วนศาสตร์", dept: "วนวัฒนวิทยา", year: "F01-1", advisor: "ดร. ป่าไม้ ยั่งยืน", exams: [], offCampus: [] },
+        "6720600009": { name: "นายยอดชาย แข็งแรง", id: "6720600009", faculty: "สถาปัตยกรรมศาสตร์", major: "สถาปัตยกรรม", dept: "สถาปัตยกรรม", year: "AR01-1", advisor: "ดร. ออกแบบ สร้างสรรค์", exams: [], offCampus: [] },
+        "6720600010": { name: "นางสาวศิริพร พรประเสริฐ", id: "6720600010", faculty: "อุตสาหกรรมเกษตร", major: "เทคโนโลยีการอาหาร", dept: "วิทยาศาสตร์และเทคโนโลยีการอาหาร", year: "AI05-1", advisor: "ดร. อาหาร ปลอดภัย", exams: [], offCampus: [] }
     };
+
+    let currentStudent = null;
+    let showingOffCampus = false;
 
     function handleSearch() {
         const idInput = document.getElementById('studentId').value.trim();
-        const student = db[idInput];
-        const error = document.getElementById('errorMsg');
-
-        if (student) {
-            error.classList.add('hidden');
+        currentStudent = db[idInput];
+        if (currentStudent) {
             document.getElementById('searchView').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
             
-            document.getElementById('resName').innerText = student.name;
-            document.getElementById('resId').innerText = "รหัสนิสิต: " + student.id;
-            document.getElementById('resFaculty').innerText = student.faculty;
-            document.getElementById('resMajor').innerText = student.major;
-            document.getElementById('resDept').innerText = student.dept;
-            document.getElementById('resYear').innerText = student.year;
-            document.getElementById('resAdvisor').innerText = student.advisor;
+            document.getElementById('resName').innerText = currentStudent.name;
+            document.getElementById('resId').innerText = "รหัสนิสิต: " + currentStudent.id;
+            document.getElementById('resFaculty').innerText = currentStudent.faculty;
+            document.getElementById('resMajor').innerText = currentStudent.major;
+            document.getElementById('resDept').innerText = currentStudent.dept;
+            document.getElementById('resYear').innerText = currentStudent.year;
+            document.getElementById('resAdvisor').innerText = currentStudent.advisor;
 
-            renderTable('examTableBody', student.exams);
-            renderTable('offCampusTableBody', student.offCampus);
+            showingOffCampus = false;
+            document.getElementById('btnOffCampus').innerText = "แสดงวิชานอกตาราง";
+            renderTable(currentStudent.exams);
         } else {
-            error.classList.remove('hidden');
+            document.getElementById('errorMsg').classList.remove('hidden');
         }
     }
 
-    function renderTable(targetId, data) {
-        const tbody = document.getElementById(targetId);
+    function renderTable(data) {
+        const tbody = document.getElementById('examTableBody');
         if(!data || data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-400 font-bold">ไม่พบข้อมูล</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-10 text-gray-400 font-bold uppercase">--- ไม่พบข้อมูลการสอบ ---</td></tr>';
             return;
         }
         tbody.innerHTML = data.map(ex => `
             <tr class="hover:bg-gray-50 transition font-medium">
                 <td class="font-bold text-blue-700 text-sm italic">${ex.code}</td>
-                <td class="py-3 px-4">
+                <td class="py-3 px-4 border-l">
                     <div class="font-bold text-base leading-tight uppercase text-black tracking-tighter">${ex.titleEn}</div>
-                    <div class="text-[11px] text-gray-500 font-bold mt-1 tracking-wide">${ex.titleTh}</div>
+                    <div class="text-[11px] text-gray-500 font-bold mt-1 tracking-wide font-bold">${ex.titleTh}</div>
                 </td>
-                <td class="text-center font-bold text-sm text-gray-700">${ex.date}</td>
-                <td class="text-center font-bold text-blue-600 text-sm tracking-tighter">${ex.time}</td>
+                <td class="text-center font-bold text-sm text-gray-700 border-l">${ex.date}</td>
+                <td class="text-center font-bold text-blue-600 text-sm tracking-tighter border-l">${ex.time} น.</td>
                 <td class="text-center font-black bg-blue-50 text-blue-900 border-x-2 border-black text-xs px-2">${ex.sec}</td>
-                <td class="text-center font-[900] text-lg bg-gray-100 text-black px-2 uppercase">${ex.room}</td>
+                <td class="text-center font-[900] text-lg bg-gray-100 text-black px-2 uppercase border-l">${ex.room}</td>
             </tr>
         `).join('');
     }
 
     function toggleOffCampus() {
-        const section = document.getElementById('offCampusSection');
+        if (!currentStudent) return;
         const btn = document.getElementById('btnOffCampus');
-        if (section.classList.contains('hidden')) {
-            section.classList.remove('hidden');
-            btn.innerText = "ซ่อนวิชานอกตาราง";
-            btn.classList.add('bg-red-600', 'text-white');
-            section.scrollIntoView({ behavior: 'smooth' });
+        
+        if (!showingOffCampus) {
+            renderTable(currentStudent.exams.concat(currentStudent.offCampus));
+            btn.innerText = "แสดงตารางปกติ";
+            showingOffCampus = true;
         } else {
-            section.classList.add('hidden');
-            btn.innerText = "วิชานอกตาราง";
-            btn.classList.remove('bg-red-600', 'text-white');
+            renderTable(currentStudent.exams);
+            btn.innerText = "แสดงวิชานอกตาราง";
+            showingOffCampus = false;
         }
     }
 </script>
