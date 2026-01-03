@@ -3,125 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Battle Pass 2568</title>
+    <title>KU KPS - ACADEMIC OS 4.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Anuphan:wght@300;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Anuphan:wght@300;500;700&display=swap');
         
         body { 
             font-family: 'Anuphan', sans-serif; 
-            background: #050505; 
-            color: #ffffff;
+            background: #0a0a0c; 
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
         }
 
-        .cyber-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
+        .tech-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* การ์ดแบบโปร่งใสระดับ High-End */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cyber-card:hover {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: #10b981; /* สีเขียวเกษตรแบบ Modern */
+            opacity: 0; transition: opacity 0.3s;
         }
 
-        .active-tab {
-            background: #10b981;
-            color: #000;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        .glass-panel:hover::before { opacity: 1; }
+
+        /* ปุ่มเลือกแบบ Segmented Control */
+        .segmented-btn {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .season-title { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .active-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981 !important;
+            color: #10b981;
+        }
+
+        /* แอนิเมชันข้อมูล */
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(16, 185, 129, 0.1);
+            position: absolute;
+            animation: scan 4s linear infinite;
+            z-index: 10;
+        }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
     </style>
 </head>
-<body x-data="{ season: '2568', term: '1' }" class="p-4 md:p-10">
+<body x-data="{ sector: '2568', phase: '1' }" class="p-4 md:p-8 min-h-screen">
 
-    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
-        <div class="flex items-center gap-6">
-            <div class="w-16 h-16 bg-gradient-to-tr from-emerald-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.3)]">
-                <i class="fas fa-shield-halved text-3xl text-black"></i>
-            </div>
+    <div class="fixed top-4 left-4 tech-font text-[10px] text-emerald-500/50 hidden lg:block uppercase tracking-widest">
+        Deployment Status: Active <br> Encryption: RSA-4096
+    </div>
+
+    <div class="max-w-6xl mx-auto glass-panel rounded-[2rem] p-6 md:p-10 border-white/10 shadow-2xl relative">
+        <div class="scanline"></div>
+
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-12 border-b border-white/5 pb-8">
             <div>
-                <h1 class="season-title text-3xl font-extrabold tracking-tighter uppercase italic">Academic <span class="text-emerald-500">Battle Pass</span></h1>
-                <p class="text-xs text-slate-500 font-bold tracking-[0.3em] uppercase">KU Kamphaeng Saen • Intelligence System</p>
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="tech-font text-emerald-500 text-xs font-bold tracking-[0.4em] uppercase">Academic System 4.0</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black tracking-tighter italic">KU KPS <span class="text-emerald-500">SECTOR_OS</span></h1>
             </div>
-        </div>
 
-        <div class="flex bg-white/5 p-1 rounded-2xl border border-white/10">
-            <button @click="season = '2568'" :class="season === '2568' ? 'active-tab' : 'text-slate-400'" class="px-8 py-3 rounded-xl text-xs font-black transition-all">SEASON 2568</button>
-            <button @click="season = '2569'" :class="season === '2569' ? 'active-tab' : 'text-slate-400'" class="px-8 py-3 rounded-xl text-xs font-black transition-all">SEASON 2569</button>
-        </div>
-    </header>
+            <div class="flex gap-2 p-1.5 bg-black/40 rounded-2xl border border-white/5 w-full lg:w-auto">
+                <button @click="sector = '2568'" :class="sector === '2568' ? 'active-glow border-emerald-500/50' : 'border-transparent text-slate-500'" 
+                        class="segmented-btn flex-1 lg:flex-none px-10 py-3 rounded-xl border font-bold text-sm tracking-widest uppercase">Sector 2568</button>
+                <button @click="sector = '2569'" :class="sector === '2569' ? 'active-glow border-emerald-500/50' : 'border-transparent text-slate-500'" 
+                        class="segmented-btn flex-1 lg:flex-none px-10 py-3 rounded-xl border font-bold text-sm tracking-widest uppercase">Sector 2569</button>
+            </div>
+        </header>
 
-    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <aside class="lg:col-span-3 space-y-4">
-            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-2">เลือกเลเวลการผจญภัย</p>
-            <button @click="term = '1'" :class="term === '1' ? 'border-emerald-500 bg-emerald-500/10 text-emerald-400' : 'border-white/10 text-slate-500'" class="w-full p-5 rounded-2xl border-2 text-left transition-all group">
-                <span class="block text-[10px] font-black uppercase">Level 01</span>
-                <span class="text-lg font-bold">ภาคต้น</span>
-            </button>
-            <button @click="term = '2'" :class="term === '2' ? 'border-emerald-500 bg-emerald-500/10 text-emerald-400' : 'border-white/10 text-slate-500'" class="w-full p-5 rounded-2xl border-2 text-left transition-all">
-                <span class="block text-[10px] font-black uppercase">Level 02</span>
-                <span class="text-lg font-bold">ภาคปลาย</span>
-            </button>
-            <button @click="term = '3'" :class="term === '3' ? 'border-amber-500 bg-amber-500/10 text-amber-400' : 'border-white/10 text-slate-500'" class="w-full p-5 rounded-2xl border-2 text-left transition-all">
-                <span class="block text-[10px] font-black uppercase">Event</span>
-                <span class="text-lg font-bold">ภาคฤดูร้อน</span>
-            </button>
-        </aside>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <nav class="lg:col-span-3 space-y-3">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Phase Selection</p>
+                <button @click="phase = '1'" :class="phase === '1' ? 'active-glow' : 'border-white/5'" class="w-full p-4 rounded-xl border text-left transition-all">
+                    <span class="block tech-font text-[9px] opacity-50 font-bold uppercase">Phase 01</span>
+                    <span class="font-bold text-lg">ภาคต้น (Semester 1)</span>
+                </button>
+                <button @click="phase = '2'" :class="phase === '2' ? 'active-glow' : 'border-white/5'" class="w-full p-4 rounded-xl border text-left transition-all">
+                    <span class="block tech-font text-[9px] opacity-50 font-bold uppercase">Phase 02</span>
+                    <span class="font-bold text-lg">ภาคปลาย (Semester 2)</span>
+                </button>
+                <button @click="phase = '3'" :class="phase === '3' ? 'active-glow' : 'border-white/5'" class="w-full p-4 rounded-xl border text-left transition-all">
+                    <span class="block tech-font text-[9px] opacity-50 font-bold uppercase">Event Phase</span>
+                    <span class="font-bold text-lg">ภาคฤดูร้อน (Summer)</span>
+                </button>
+            </nav>
 
-        <section class="lg:col-span-9">
-            <div x-show="season === '2568'" x-transition:enter="transition duration-500 ease-out">
-                <div x-show="term === '1'" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="lg:col-span-9">
+                <div x-show="sector === '2568'" x-transition:enter="transition ease-out duration-300 transform opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                     
-                    <div class="cyber-card p-6 rounded-3xl relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 p-3 bg-emerald-500 text-black text-[10px] font-black uppercase">ภารกิจหลัก</div>
-                        <p class="text-emerald-500 text-xs font-bold mb-2">12 - 23 พฤษภาคม 2568</p>
-                        <h3 class="text-xl font-bold mb-3">ลงทะเบียนเรียน & ชำระเงิน</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed">นิสิตทุกชั้นปีบันทึกรายวิชาผ่านระบบนิสิตออนไลน์ (หากล่าช้าปรับวันละ 100 บาท)</p>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="glass-panel p-6 rounded-2xl group cursor-default">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-emerald-500/10 text-emerald-500 text-[10px] font-bold px-2 py-1 rounded border border-emerald-500/20 uppercase">Initial Mission</span>
+                                <i class="fas fa-microchip text-slate-700"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-1">ลงทะเบียนเรียน & ชำระเงิน</h3>
+                            <p class="text-emerald-500 tech-font text-xs font-bold mb-4">12 - 23 MAY 2025</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">เข้าถึงระบบสารสนเทศนิสิตเพื่อยืนยันรายวิชา (เกินกำหนดมีโทษปรับ Penalty วันละ 100 บาท)</p>
+                        </div>
 
-                    <div class="cyber-card p-6 rounded-3xl border-l-4 border-l-emerald-500 bg-emerald-500/5">
-                        <p class="text-emerald-500 text-xs font-bold mb-2 uppercase">Unlock World</p>
-                        <h3 class="text-2xl font-black mb-3">23 มิถุนายน 2568</h3>
-                        <p class="text-white text-sm font-bold">วันเปิดภาคเรียน ภาคต้น</p>
-                        <p class="text-slate-400 text-xs mt-2 italic">"เริ่มนับสัปดาห์ที่ 1 แห่งการบรรยาย"</p>
-                    </div>
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-blue-500/50 bg-blue-500/5">
+                            <span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded border border-blue-500/20 uppercase mb-4 inline-block">System Launch</span>
+                            <h3 class="text-3xl font-black mb-1">23 JUN 2025</h3>
+                            <p class="text-blue-300 text-sm font-bold uppercase italic tracking-tighter">วันแรกของการบรรยาย (ภาคต้น)</p>
+                        </div>
 
-                    <div class="cyber-card p-6 rounded-3xl">
-                        <p class="text-amber-500 text-xs font-bold mb-2">16 - 24 สิงหาคม 2568</p>
-                        <h3 class="text-xl font-bold mb-3">Challenge: สอบกลางภาค</h3>
-                        <p class="text-slate-400 text-xs">งดการเรียนการสอน (ยกเว้นวิชาที่จัดสอบนอกตาราง)</p>
-                    </div>
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-amber-500/50">
+                            <p class="text-amber-500 tech-font text-[10px] font-bold mb-2 tracking-[0.2em] uppercase">Security Checkpoint</p>
+                            <h3 class="text-xl font-bold mb-1">วัดผลการเรียนกลางภาค</h3>
+                            <p class="text-slate-400 text-xs mt-3">16 - 24 AUG 2025 (งดเรียนเพื่อทดสอบความสามารถ)</p>
+                        </div>
 
-                    <div class="cyber-card p-6 rounded-3xl border-rose-500/50 bg-rose-500/5">
-                        <p class="text-rose-500 text-xs font-bold mb-2">13 - 26 ตุลาคม 2568</p>
-                        <h3 class="text-xl font-bold mb-3 text-rose-500">FINAL BOSS: สอบปลายภาค</h3>
-                        <p class="text-slate-400 text-xs">วันสุดท้ายของการสอบและวันสิ้นสุดภาคเรียน</p>
+                        <div class="glass-panel p-6 rounded-2xl bg-red-500/5 border-l-4 border-l-red-500/50">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>
+                                <span class="text-red-500 text-[10px] font-black uppercase">Final Conflict</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-1 text-red-100 uppercase italic">สอบปลายภาค & ปิดเทอม</h3>
+                            <p class="text-red-400 tech-font text-sm font-bold mb-2">13 - 26 OCT 2025</p>
+                            <p class="text-slate-500 text-[10px]">สิ้นสุดภารกิจประจำ Sector 2568 ภาคต้น</p>
+                        </div>
                     </div>
 
                 </div>
-            </div>
 
-            <div x-show="season === '2569'" x-cloak class="flex items-center justify-center h-64 bg-white/5 rounded-[3rem] border-2 border-dashed border-white/10">
-                <div class="text-center">
-                    <i class="fas fa-lock text-4xl text-slate-700 mb-4"></i>
-                    <p class="season-title text-xl font-bold opacity-50 italic">COMING SOON : NEXT SEASON</p>
-                    <p class="text-xs text-slate-600 mt-2 uppercase tracking-widest underline italic">Waiting for KU Official Update</p>
+                <div x-show="sector === '2569'" x-transition x-cloak class="flex flex-col items-center justify-center py-24 glass-panel rounded-[3rem] border-dashed">
+                    <div class="relative mb-6">
+                        <i class="fas fa-radar text-6xl text-emerald-500/20 animate-spin-slow"></i>
+                        <i class="fas fa-lock absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-emerald-500"></i>
+                    </div>
+                    <h3 class="tech-font text-xl font-bold tracking-[0.5em] text-emerald-500 uppercase italic">Syncing Sector 2569</h3>
+                    <p class="text-slate-500 text-xs mt-4 uppercase font-bold tracking-widest">Awaiting Official Data Feed from KU KPS</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-    </main>
-
-    <footer class="max-w-6xl mx-auto mt-20 p-8 border-t border-white/10 flex justify-between items-center text-[10px] font-bold text-slate-600 tracking-widest uppercase italic">
-        <p>Source: KU KPS Academic Calendar 18 Aug 25</p>
-        <p class="text-emerald-500">Academic OS v4.0.5</p>
-    </footer>
+        <footer class="mt-12 flex flex-col md:flex-row justify-between items-end gap-4 border-t border-white/5 pt-6 opacity-40">
+            <div class="tech-font text-[8px] uppercase tracking-[0.3em]">
+                System Log: v4.1.0-GEN // Source: REG-KPS // Build: 2025.08.18
+            </div>
+            <div class="flex gap-6 text-[10px] font-black uppercase italic">
+                <span class="text-emerald-500">Secure Access</span>
+                <span class="text-slate-500">KU KPS Intelligence</span>
+            </div>
+        </footer>
+    </div>
 
 </body>
 </html>
