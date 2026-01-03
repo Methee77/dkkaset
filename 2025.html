@@ -3,210 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Calendar 2568 - Minecraft Edition</title>
+    <title>KU MINECRAFT CALENDAR 2568</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* นำฟอนต์ที่คล้าย Minecraft มาใช้ */
+        /* Minecraft Font Style */
         @font-face {
             font-family: 'Minecraft';
             src: url('https://db.onlinewebfonts.com/t/c1328456254784a0c86815efc1c3f19e.woff2') format('woff2');
         }
 
         :root {
-            --mc-gui: #c6c6c6;
-            --mc-border-light: #ffffff;
-            --mc-border-dark: #555555;
-            --mc-shadow: #373737;
+            --mc-dirt: #866043;
+            --mc-grass: #5da037;
+            --mc-stone: #7a7a7a;
+            --mc-gui-bg: #c6c6c6;
         }
 
         body {
-            background: #5c94fc; /* สีท้องฟ้า Minecraft */
+            background-image: url('https://www.transparenttextures.com/patterns/pixel-weave.png'), linear-gradient(to bottom, #5c94fc 0%, #a2c1f9 100%);
             font-family: 'Kanit', sans-serif;
             image-rendering: pixelated;
-            overflow-x: hidden;
             margin: 0;
+            min-height: 100vh;
         }
 
-        /* --- Minecraft Background Scene --- */
-        .sun {
-            position: fixed;
-            top: 50px; right: 50px;
-            width: 60px; height: 60px;
-            background: #ffff55;
-            border: 4px solid #000;
-            z-index: -1;
+        /* --- Minecraft Block Elements --- */
+        .block-grass {
+            background: #55ff55;
+            border-top: 8px solid #74bf2e;
+            border-bottom: 8px solid #8b4513;
         }
 
-        .cloud-mc {
-            position: absolute;
-            background: white;
-            border: 4px solid #000;
-            animation: moveCloud linear infinite;
-            z-index: -1;
+        .mc-window {
+            background: var(--mc-gui-bg);
+            border: 6px solid #1e1e1e;
+            box-shadow: inset 6px 6px 0px #ffffff, inset -6px -6px 0px #555555;
+            padding: 24px;
         }
 
-        @keyframes moveCloud {
-            from { left: -200px; }
-            to { left: 100vw; }
+        .mc-slot {
+            background: #8b8b8b;
+            border: 4px solid #373737;
+            box-shadow: inset 4px 4px 0px #000000;
+            padding: 12px;
+            transition: 0.1s;
         }
 
-        /* --- Minecraft GUI Style --- */
-        .mc-container {
-            background-color: var(--mc-gui);
-            border: 4px solid #000;
-            box-shadow: inset 4px 4px 0px var(--mc-border-light), 
-                        inset -4px -4px 0px var(--mc-border-dark);
-            padding: 20px;
-            position: relative;
+        .mc-slot:hover {
+            background: #9d9d9d;
+            border-color: #ffffff;
         }
 
-        .mc-header {
+        .mc-text-shadow {
             font-family: 'Minecraft', sans-serif;
             color: #ffffff;
-            text-shadow: 3px 3px 0px #373737;
-            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #3f3f3f;
         }
 
-        .mc-card {
-            background: #212121; /* สีพื้นหลังช่อง Inventory */
-            border: 4px solid #000;
-            box-shadow: inset 4px 4px 0px #000;
-            color: #ffffff;
-            padding: 15px;
-            transition: transform 0.1s;
-        }
-
-        .mc-card:hover {
-            outline: 4px solid #ffffff;
-            transform: scale(1.02);
-        }
-
-        .item-icon {
-            width: 32px; height: 32px;
-            image-rendering: pixelated;
-        }
-
-        .grade-box {
-            background: #3f3f3f;
-            border: 2px solid #55ff55;
+        .grade-tag {
+            background: #000000aa;
+            border-left: 4px solid #55ff55;
+            padding: 4px 8px;
+            font-size: 0.75rem;
             color: #55ff55;
-            padding: 5px;
-            text-align: center;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
-        .mc-button {
-            background: #aaaaaa;
-            border: 3px solid #000;
-            box-shadow: inset 3px 3px 0px #dbdbdb, inset -3px -3px 0px #555555;
-            color: #ffffff;
-            text-shadow: 2px 2px 0px #373737;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
+        /* --- Animations --- */
+        .float-item {
+            animation: floating 3s ease-in-out infinite;
         }
 
-        .mc-button:hover {
-            background: #c6c6c6;
-            outline: 2px solid #ffffff;
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* --- Ground & Grass --- */
-        .ground {
-            position: fixed;
-            bottom: 0; width: 100%; height: 60px;
-            background: #8b4513; /* Dirt */
-            border-top: 8px solid #55ff55; /* Grass */
+        .sun-square {
+            width: 80px; height: 80px;
+            background: #ffff55;
+            border: 6px solid #000;
+            position: fixed; top: 40px; right: 40px;
             z-index: -1;
         }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-10 flex flex-col items-center">
 
-    <div class="sun"></div>
-    <div class="cloud-mc w-32 h-12" style="top: 15%; animation-duration: 40s;"></div>
-    <div class="cloud-mc w-48 h-16" style="top: 5%; animation-duration: 60s; animation-delay: -20s;"></div>
+    <div class="sun-square"></div>
 
-    <div class="max-w-6xl mx-auto">
-        <header class="text-center mb-12">
-            <h1 class="mc-header text-3xl md:text-5xl mb-4">KU CALENDAR: 2025-2026</h1>
-            <div class="inline-block bg-[#000000aa] p-2 px-6">
-                <p class="text-green-400 font-mono text-xs md:text-sm">>> WORLD: ACADEMIC_YEAR_2568</p>
-            </div>
-        </header>
+    <header class="text-center mb-12">
+        <h1 class="mc-text-shadow text-4xl md:text-6xl mb-2">MINECRAFT CALENDAR</h1>
+        <div class="bg-black text-green-500 font-mono text-sm px-4 py-1 inline-block border-2 border-green-500">
+            LOADED: KU_ACADEMIC_2568
+        </div>
+    </header>
 
-        <div class="mc-container">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <div class="mc-card">
-                    <div class="flex items-center gap-2 mb-4">
-                        <img src="https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png" class="item-icon" alt="icon">
-                        <h2 class="mc-header text-sm">SEMESTER 1</h2>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p class="text-gray-400">STATUS: <span class="text-white">COMPLETED</span></p>
-                        <div class="flex justify-between"><span>START:</span><span>23 มิ.ย. 68</span></div>
-                        <div class="flex justify-between text-yellow-400"><span>MIDTERM:</span><span>9-17 ส.ค. 68</span></div>
-                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>20-31 ต.ค. 68</span></div>
-                        <div class="grade-box">
-                            🏆 เกรดออก: 10 พ.ย. 68
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mc-card" style="border-color: #ffff55;">
-                    <div class="flex items-center gap-2 mb-4">
-                        <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" class="item-icon animate-bounce" alt="icon">
-                        <h2 class="mc-header text-sm text-yellow-400">SEMESTER 2</h2>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p class="text-gray-400">STATUS: <span class="text-green-400">IN PROGRESS</span></p>
-                        <div class="flex justify-between"><span>START:</span><span>24 พ.ย. 68</span></div>
-                        <div class="flex justify-between bg-white text-black px-1 font-bold"><span>MIDTERM:</span><span>10-18 ม.ค. 69</span></div>
-                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>16-27 มี.ค. 69</span></div>
-                        <div class="grade-box" style="border-color: #ffff55; color: #ffff55;">
-                            🏆 เกรดออก: 7 เม.ย. 69
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mc-card opacity-80">
-                    <div class="flex items-center gap-2 mb-4">
-                        <img src="https://minecraft.wiki/images/Lava_Bucket_JE2_BE2.png" class="item-icon" alt="icon">
-                        <h2 class="mc-header text-sm">SUMMER</h2>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p class="text-gray-400">STATUS: <span class="text-red-400">LOCKED</span></p>
-                        <div class="flex justify-between"><span>START:</span><span>20 เม.ย. 69</span></div>
-                        <div class="flex justify-between"><span>LAST DAY:</span><span>29 พ.ค. 69</span></div>
-                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
-                        <div class="grade-box">
-                            🏆 เกรดออก: 11 มิ.ย. 69
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="mc-button">MENU</div>
-                <div class="mc-button">SKINS</div>
-                <div class="mc-button" onclick="window.print()">PRINT</div>
-                <div class="mc-button bg-red-800">QUIT</div>
+    <main class="mc-window max-w-5xl w-full">
+        <div class="mb-6 flex items-center justify-between">
+            <span class="mc-text-shadow text-black" style="text-shadow: none;">Inventory: Schedule</span>
+            <div class="flex gap-1">
+                <div class="w-6 h-6 bg-red-500 border-2 border-black"></div>
+                <div class="w-6 h-6 bg-gray-400 border-2 border-black"></div>
             </div>
         </div>
-    </div>
 
-    <div class="mt-20 flex justify-center gap-10 opacity-80">
-        <div class="w-16 h-32 bg-green-700 border-4 border-black relative">
-            <div class="absolute top-4 left-4 w-4 h-4 bg-red-500"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="mc-slot flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://minecraft.wiki/images/Oak_Log_JE4_BE3.png" class="w-10 h-10 float-item" alt="icon">
+                    <h2 class="mc-text-shadow text-xs">STAGE: ภาคต้น</h2>
+                </div>
+                <div class="text-[13px] text-white space-y-2 flex-grow">
+                    <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span class="text-green-400">23 มิ.ย. 68</span></div>
+                    <div class="flex justify-between"><span>สอบกลางภาค:</span><span>9-17 ส.ค. 68</span></div>
+                    <div class="flex justify-between"><span>สอบปลายภาค:</span><span>20-31 ต.ค. 68</span></div>
+                    <div class="flex justify-between text-gray-400"><span>ปิดภาคเรียน:</span><span>3 พ.ย. 68</span></div>
+                    <div class="grade-tag">วันเกรดออก: 10 พ.ย. 68</div>
+                </div>
+            </div>
+
+            <div class="mc-slot flex flex-col h-full border-white" style="background: #4a4a4a;">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword_JE3_BE3.png" class="w-10 h-10 float-item" style="animation-delay: 0.5s;" alt="icon">
+                    <h2 class="mc-text-shadow text-xs text-yellow-400">STAGE: ภาคปลาย</h2>
+                </div>
+                <div class="text-[13px] text-white space-y-2 flex-grow">
+                    <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span class="text-green-400">24 พ.ย. 68</span></div>
+                    <div class="flex justify-between bg-yellow-400 text-black px-1 font-bold"><span>สอบกลางภาค:</span><span>10-18 ม.ค. 69</span></div>
+                    <div class="flex justify-between"><span>สอบปลายภาค:</span><span>16-27 มี.ค. 69</span></div>
+                    <div class="flex justify-between text-gray-400"><span>ปิดภาคเรียน:</span><span>30 มี.ค. 69</span></div>
+                    <div class="grade-tag" style="border-color: #ffff55; color: #ffff55;">วันเกรดออก: 7 เม.ย. 69</div>
+                </div>
+            </div>
+
+            <div class="mc-slot flex flex-col h-full opacity-70">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://minecraft.wiki/images/Blaze_Powder_JE2_BE2.png" class="w-10 h-10 float-item" style="animation-delay: 1s;" alt="icon">
+                    <h2 class="mc-text-shadow text-xs">STAGE: ฤดูร้อน</h2>
+                </div>
+                <div class="text-[13px] text-white space-y-2 flex-grow">
+                    <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span class="text-green-400">20 เม.ย. 69</span></div>
+                    <div class="flex justify-between"><span>เรียนวันสุดท้าย:</span><span>29 พ.ค. 69</span></div>
+                    <div class="flex justify-between"><span>สอบปลายภาค:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
+                    <div class="flex justify-between text-gray-400"><span>ปิดภาคเรียน:</span><span>2 มิ.ย. 69</span></div>
+                    <div class="grade-tag">วันเกรดออก: 11 มิ.ย. 69</div>
+                </div>
+            </div>
+
         </div>
-        <div class="w-12 h-20 bg-gray-500 border-4 border-black"></div>
-    </div>
 
-    <div class="ground"></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">OPTIONS</button>
+            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">SERVER INFO</button>
+            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white" onclick="window.print()">SAVE & PRINT</button>
+            <button class="bg-red-800 border-4 border-black shadow-[inset_4px_4px_0px_#b91c1c,inset_-4px_-4px_0px_#450a0a] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">DISCONNECT</button>
+        </div>
+    </main>
+
+    <div class="w-full fixed bottom-0 left-0">
+        <div class="h-10 w-full bg-[#5da037] border-t-8 border-[#74bf2e]"></div>
+        <div class="h-20 w-full bg-[#866043] flex items-center justify-center">
+            <p class="mc-text-shadow text-[10px] opacity-50 italic">KU Calendar v25.68 - Minecraft Edition</p>
+        </div>
+    </div>
 
 </body>
 </html>
