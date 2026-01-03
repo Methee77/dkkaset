@@ -3,126 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Roadmap 2568</title>
+    <title>Academic System 2568</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600;700&display=swap');
-        body { font-family: 'Anuphan', sans-serif; background: #0f172a; color: #f8fafc; }
-        .glass-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .semester-tab:hover { background: rgba(99, 102, 241, 0.1); border-color: #6366f1; }
-        .active-dot { box-shadow: 0 0 10px #6366f1; }
-    </style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
+        body { font-family: 'Sarabun', sans-serif; background-color: #f1f5f9; }
+        .semester-card { transition: all 0.3s ease; }
+        .semester-card:hover { border-color: #6366f1; }
+    </table>
 </head>
-<body class="p-6 md:p-12">
+<body class="text-slate-800">
 
-    <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-8">
+    <div class="max-w-[1400px] mx-auto p-4 md:p-8">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-2 uppercase">Academic <span class="text-indigo-400">2568</span></h1>
-                <p class="text-slate-400 font-light">ปฏิทินกิจกรรมการเรียนรู้อัจฉริยะ ภาคปกติ (NPRU Modern Style)</p>
+                <h1 class="text-2xl font-bold flex items-center gap-2">
+                    <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
+                    ปฏิทินกิจกรรมการศึกษา ปีการศึกษา 2568
+                </h1>
+                <p class="text-slate-500 text-sm ml-4">สำนักส่งเสริมวิชาการและงานทะเบียน (Smart Registrar)</p>
             </div>
-            <div class="mt-6 md:mt-0 flex gap-4">
-                <button class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-xl font-bold transition shadow-lg shadow-indigo-500/20">
-                    <i class="fas fa-file-pdf mr-2"></i> โหลดแผนการเรียน
-                </button>
+            <div class="flex gap-2">
+                <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">ภาคปกติ</button>
+                <button class="bg-slate-100 text-slate-600 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 transition">ภาคพิเศษ</button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <div class="semester-section">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center active-dot">
-                        <i class="fas fa-sun text-white"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold">ภาคต้น</h2>
+            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                <div class="bg-indigo-600 p-4 text-white flex justify-between items-center">
+                    <h2 class="font-bold tracking-wide">ภาคต้น (1/2568)</h2>
+                    <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded uppercase">Active</span>
                 </div>
-                
-                <div class="space-y-4">
-                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-indigo-500">
-                        <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">1 - 15 พฤษภาคม</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight">ลงทะเบียนเรียนออนไลน์</h4>
-                        <p class="text-slate-400 text-xs mt-2">ผ่านระบบ Smart Registrar</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] bg-indigo-500/10 border-indigo-500/50">
-                        <span class="text-[10px] font-bold text-white uppercase tracking-widest">1 มิถุนายน</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white uppercase tracking-wide">วันเปิดภาคเรียน</h4>
-                        <p class="text-indigo-200 text-xs mt-2">Kick-off ภาคเรียนที่ 1/2568</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem]">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">28 ก.ค. - 3 ส.ค.</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight">ประเมินสมรรถนะกลางภาค</h4>
-                        <p class="text-slate-400 text-xs mt-2">Mid-term Evaluation</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] border-b-4 border-indigo-500/30">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ตุลาคม</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight">สอบปลายภาค & ปิดภาคเรียน</h4>
-                    </div>
+                <div class="p-4 flex-1">
+                    <table class="w-full text-xs">
+                        <thead class="text-slate-400 border-b border-slate-100">
+                            <tr>
+                                <th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th>
+                                <th class="pb-2 text-left font-semibold">รายการกิจกรรม</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            <tr><td class="py-3 font-bold w-28">1-15 พ.ค. 68</td><td class="py-3">ลงทะเบียนเรียนและชำระเงิน</td></tr>
+                            <tr class="bg-indigo-50/50"><td class="py-3 font-bold text-indigo-700">1 มิ.ย. 68</td><td class="py-3 font-bold text-indigo-700">วันเปิดภาคเรียน</td></tr>
+                            <tr><td class="py-3 font-bold">1-14 มิ.ย. 68</td><td class="py-3">ขอเพิ่ม-ถอน รายวิชา (Add/Drop)</td></tr>
+                            <tr><td class="py-3 font-bold">28 ก.ค.-3 ส.ค. 68</td><td class="py-3 text-amber-600 font-semibold">ประเมินสมรรถนะกลางภาค</td></tr>
+                            <tr><td class="py-3 font-bold">29 ก.ย.-12 ต.ค. 68</td><td class="py-3 text-rose-600 font-semibold">ประเมินสมรรถนะปลายภาค</td></tr>
+                            <tr><td class="py-3 font-bold">13 ต.ค. 68</td><td class="py-3 text-slate-400 italic font-medium">วันปิดภาคเรียน</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <div class="semester-section">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-moon text-white"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold">ภาคปลาย</h2>
+            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                <div class="bg-slate-800 p-4 text-white flex justify-between items-center">
+                    <h2 class="font-bold tracking-wide">ภาคปลาย (2/2568)</h2>
+                    <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded uppercase">Pending</span>
                 </div>
-                
-                <div class="space-y-4">
-                    <div class="glass-card p-6 rounded-[2rem]">
-                        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest">พฤศจิกายน</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white">เปิดภาคเรียนที่ 2/2568</h4>
-                        <p class="text-slate-400 text-xs mt-2">เริ่มกิจกรรมการเรียนรู้แบบ Hybrid</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem]">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">มกราคม 2569</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white uppercase">Hackathon Week</h4>
-                        <p class="text-slate-400 text-xs mt-2">สัปดาห์สร้างสรรค์นวัตกรรมร่วมกับบริษัท</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem]">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">มีนาคม 2569</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white">ปิดภาคเรียนที่ 2</h4>
-                        <p class="text-slate-400 text-xs mt-2">Final Pitching Day</p>
-                    </div>
+                <div class="p-4 flex-1">
+                    <table class="w-full text-xs">
+                        <thead class="text-slate-400 border-b border-slate-100">
+                            <tr><th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th><th class="pb-2 text-left font-semibold">รายการกิจกรรม</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            <tr><td class="py-3 font-bold w-28">1-15 พ.ย. 68</td><td class="py-3">ลงทะเบียนเรียนและชำระเงิน</td></tr>
+                            <tr class="bg-slate-50"><td class="py-3 font-bold">1 ธ.ค. 68</td><td class="py-3 font-bold">วันเปิดภาคเรียน</td></tr>
+                            <tr><td class="py-3 font-bold">25-31 ม.ค. 69</td><td class="py-3 text-amber-600 font-semibold">ประเมินสมรรถนะกลางภาค</td></tr>
+                            <tr><td class="py-3 font-bold">22 มี.ค.-5 เม.ย. 69</td><td class="py-3 text-rose-600 font-semibold">ประเมินสมรรถนะปลายภาค</td></tr>
+                            <tr><td class="py-3 font-bold">6 เม.ย. 69</td><td class="py-3 text-slate-400 italic font-medium">วันปิดภาคเรียน</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <div class="semester-section">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-fire text-white"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold">ภาคฤดูร้อน</h2>
+            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col border-dashed">
+                <div class="bg-amber-500 p-4 text-white flex justify-between items-center">
+                    <h2 class="font-bold tracking-wide">ภาคฤดูร้อน (3/2568)</h2>
+                    <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded uppercase">Optional</span>
                 </div>
-                
-                <div class="space-y-4">
-                    <div class="glass-card p-6 rounded-[2rem] border-dashed border-amber-500/50">
-                        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">เมษายน 2569</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white">Summer Bootcamp</h4>
-                        <p class="text-slate-400 text-xs mt-2">วิชาเลือกและคอร์สระยะสั้น (Micro-learning)</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem]">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">พฤษภาคม 2569</span>
-                        <h4 class="font-bold mt-1 text-lg leading-tight text-white">ประเมินผลภาคฤดูร้อน</h4>
-                        <p class="text-slate-400 text-xs mt-2">สรุปคะแนนและสะสม Badge</p>
-                    </div>
+                <div class="p-4 flex-1">
+                    <table class="w-full text-xs">
+                        <thead class="text-slate-400 border-b border-slate-100">
+                            <tr><th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th><th class="pb-2 text-left font-semibold">รายการกิจกรรม</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            <tr><td class="py-3 font-bold w-28">1-10 เม.ย. 69</td><td class="py-3">ลงทะเบียนเรียนภาคฤดูร้อน</td></tr>
+                            <tr class="bg-amber-50/50"><td class="py-3 font-bold text-amber-700">20 เม.ย. 69</td><td class="py-3 font-bold text-amber-700">วันเปิดภาคฤดูร้อน</td></tr>
+                            <tr><td class="py-3 font-bold">15-20 พ.ค. 69</td><td class="py-3 text-rose-600 font-semibold">วันประเมินผลภาคฤดูร้อน</td></tr>
+                            <tr><td class="py-3 font-bold">25 พ.ค. 69</td><td class="py-3 text-slate-400 italic font-medium">วันสิ้นสุดภาคเรียน</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
         </div>
 
-        <div class="mt-12 p-8 glass-card rounded-[3rem] bg-gradient-to-r from-indigo-900/40 to-transparent flex flex-col md:flex-row items-center justify-between gap-6 border-white/10">
-            <div class="flex items-center gap-4">
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
-                    <i class="fas fa-info-circle text-indigo-400"></i>
-                </div>
-                <p class="text-slate-400 text-sm">หมายเหตุ: กำหนดการอาจมีการเปลี่ยนแปลงตามประกาศของมหาวิทยาลัย โปรดตรวจสอบผ่านแอปฯ EduSmart เป็นระยะ</p>
+        <div class="mt-8 p-6 bg-white border border-slate-200 rounded-2xl">
+            <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest"><i class="fas fa-bullhorn mr-2 text-indigo-500"></i> หมายเหตุสำคัญ</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-500">
+                <p>1. นักศึกษาต้องชำระค่าธรรมเนียมการศึกษาภายในระยะเวลาที่กำหนด มิฉะนั้นระบบจะถือว่าสละสิทธิ์การลงทะเบียน</p>
+                <p>2. การวัดผลเน้นการประเมินสมรรถนะ (Competency-Based) ตามนโยบายมหาวิทยาลัย 4.0</p>
             </div>
-            <button class="text-indigo-400 font-bold hover:text-white transition uppercase tracking-[0.2em] text-xs underline">
-                ดูระเบียบการทั้งหมด
-            </button>
         </div>
     </div>
 
