@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปผลการขอเปิดรายวิชา 2/2568</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --success-bg: #d1fae5;
+            --success-text: #065f46;
+            --pending-bg: #fee2e2;
+            --pending-text: #991b1b;
+            --border-color: #e2e8f0;
+            --admin-section-bg: #eff6ff;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 { color: var(--primary); margin: 0; }
+        p.subtitle { color: #64748b; margin-top: 5px; }
+
+        /* ส่วนหัวกลุ่มสาระ */
+        .dept-group-header {
+            background: #f8fafc;
+            padding: 10px 15px;
+            margin-top: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dept-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* ตาราง */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th {
+            background-color: #ffffff;
+            color: #64748b;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .done { background: var(--success-bg); color: var(--success-text); }
+        .waiting { background: var(--pending-bg); color: var(--pending-text); }
+
+        .course-name { font-weight: 600; color: #1e3a8a; }
+        .teacher-name { color: #64748b; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            td, th { padding: 10px 5px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2><i class="fas fa-file-signature"></i> สรุปผลการขอเปิดรายวิชา</h2>
+        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 | แยกตามกลุ่มสาระการเรียนรู้</p>
+    </div>
+
+    <div id="contentArea"></div>
+</div>
+
+<script>
+    const departments = {
+        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
+        "4": "สังคมศึกษา", "5": "สุขศึกษาและพลศึกษา", "6": "ศิลปะ",
+        "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
+    };
+
+    // เพิ่มฟิลด์ course เข้าไปในข้อมูล
+    const teacherData = [
+        { id: "111", name: "นางสาววาสนา ด่วนดี", course: "ภาษาไทยพื้นฐาน 4", status: 1 },
+        { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", course: "การอ่านร้อยแก้ว", status: 1 },
+        { id: "216", name: "นางสาวภัสรา เพ็งใย", course: "คณิตศาสตร์เพิ่มเติม 2", status: 1 },
+        { id: "217", name: "นางสาวรจนา ดาวเรือง", course: "แคลคูลัสเบื้องต้น", status: 1 },
+        { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", course: "ฟิสิกส์ 3", status: 1 },
+        { id: "314", name: "นางศิริพร เถาว์โท", course: "เคมี 2", status: 1 },
+        { id: "407", name: "นายไชยพร แย้มมี", course: "ประวัติศาสตร์ไทย", status: 1 },
+        { id: "509", name: "นายประพนธ์ ชิดปราง", course: "สุขศึกษา 4", status: 1 },
+        { id: "601", name: "นายณัฐวุฒิ สุดโต", course: "ทัศนศิลป์พื้นฐาน", status: 1 },
+        { id: "808", name: "นางสาวกัญญาพัชร เกตุแก้ว", course: "ภาษาอังกฤษฟัง-พูด", status: 1 },
+        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", course: "ภาษาอังกฤษรอบรู้", status: 1 }
+        // ... (ข้อมูลอื่นๆ สามารถเพิ่ม course เข้าไปในรูปแบบนี้)
+    ];
+
+    const contentArea = document.getElementById('contentArea');
+
+    // จัดกลุ่มข้อมูลตามกลุ่มสาระ (เลขตัวแรกของ ID)
+    const groupedData = {};
+    teacherData.forEach(item => {
+        const deptId = item.id.charAt(0);
+        if (!groupedData[deptId]) groupedData[deptId] = [];
+        groupedData[deptId].push(item);
+    });
+
+    // วนลูปสร้างตารางตามกลุ่มสาระ
+    Object.keys(groupedData).sort().forEach(deptId => {
+        const deptName = departments[deptId] || "อื่นๆ";
+        const items = groupedData[deptId];
+
+        const section = document.createElement('div');
+        section.innerHTML = `
+            <div class="dept-group-header">
+                <span class="dept-title"><i class="fas fa-layer-group"></i> กลุ่มสาระฯ ${deptName}</span>
+                <small>${items.length} รายวิชา</small>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">รหัส</th>
+                            <th style="width: 40%">ชื่อรายวิชา</th>
+                            <th style="width: 30%">ผู้สอน</th>
+                            <th style="width: 20%">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${items.map(item => `
+                            <tr>
+                                <td><strong>${item.id}</strong></td>
+                                <td class="course-name">${item.course || 'ยังไม่ได้ระบุชื่อวิชา'}</td>
+                                <td class="teacher-name">${item.name}</td>
+                                <td>
+                                    <span class="status-badge ${item.status === 1 ? 'done' : 'waiting'}">
+                                        ${item.status === 1 ? 'ยืนยันแล้ว [7/7]' : 'รอดำเนินการ'}
+                                    </span>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+        contentArea.appendChild(section);
+    });
+</script>
+
+</body>
+</html>
