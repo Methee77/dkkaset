@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>ตรวจสอบผลการขอเปิดรายวิชา 2/2568</title>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 ตรวจสอบผลการขอเปิดรายวิชา</h2>
+        <p>ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
+        
+        <div class="search-box">
+            <input type="text" id="courseCode" placeholder="กรอกรหัสวิชา (เช่น 001234)...">
+            <button onclick="searchCourse()">ค้นหาข้อมูล</button>
+        </div>
+
+        <div id="loader" class="loader" style="display:none;">กำลังค้นหา...</div>
+        <div id="result" class="result-card" style="display:none;"></div>
+    </div>
+</body>
+</html>
