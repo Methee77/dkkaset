@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super KU 2568 - Pro Mario Calendar</title>
+    <title>Super KU 2568 - Mario Calendar Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
             --mario-sky: #5c94fc;
-            --mario-ground: #74bf2e;
+            --mario-grass: #74bf2e;
             --mario-dirt: #8b4513;
             --mario-pipe: #43b047;
         }
@@ -22,7 +22,7 @@
             min-height: 100vh;
         }
 
-        /* --- Smooth Parallax Clouds --- */
+        /* --- Smooth Parallax Clouds (Infinite Loop) --- */
         .cloud-layer {
             position: fixed;
             top: 0;
@@ -37,11 +37,9 @@
             position: absolute;
             background: white;
             border: 4px solid #000;
-            border-radius: 0 !important; /* รักษาความเหลี่ยม */
             animation: slideCloud linear infinite;
         }
 
-        /* สร้างรูปทรงเมฆด้วย Box Shadow แทน SVG เพื่อความสมูทของพิกเซล */
         .pixel-cloud::after {
             content: '';
             position: absolute;
@@ -50,21 +48,18 @@
             box-shadow: 20px -8px 0 0 white, 20px -8px 0 4px #000, 0 -4px 0 4px #000;
         }
         
-        /* ชั้นเมฆที่ 1: เลื่อนช้า (อยู่ไกล) */
-        .cloud-slow { opacity: 0.5; transform: scale(0.7); animation-duration: 60s; }
-        /* ชั้นเมฆที่ 2: เลื่อนเร็ว (อยู่ใกล้) */
-        .cloud-fast { opacity: 0.9; transform: scale(1); animation-duration: 35s; }
+        .cloud-slow { opacity: 0.6; transform: scale(0.8); animation-duration: 80s; }
+        .cloud-fast { opacity: 1; transform: scale(1.1); animation-duration: 45s; }
 
         @keyframes slideCloud {
-            from { left: -200px; }
+            from { left: -300px; }
             to { left: 100vw; }
         }
 
-        /* --- UI Polish --- */
+        /* --- UI Elements & Animation --- */
         .mario-header {
             font-family: 'Press Start 2P', cursive;
             text-shadow: 6px 6px 0px #000;
-            letter-spacing: -2px;
         }
 
         .mario-card {
@@ -77,16 +72,15 @@
         }
 
         .mario-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 16px 16px 0px rgba(0,0,0,1);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 18px 18px 0px rgba(0,0,0,1);
         }
 
-        .current-term {
-            border-color: #ef4444;
-            box-shadow: 10px 10px 0px #ef4444;
-        }
-        .current-term:hover {
-            box-shadow: 16px 16px 0px #ef4444;
+        .grade-highlight {
+            background: #fef08a; /* สีเหลืองสว่างสำหรับเกรด */
+            border: 2px dashed #000;
+            padding: 4px 8px;
+            margin-top: 8px;
         }
 
         .btn-mario {
@@ -106,118 +100,88 @@
             position: fixed;
             bottom: 0; width: 100%; height: 50px;
             background: var(--mario-dirt);
-            border-top: 10px solid var(--mario-ground);
+            border-top: 10px solid var(--mario-grass);
             z-index: 20;
-        }
-
-        .pipe-system {
-            position: fixed;
-            bottom: 50px; left: 10%;
-            width: 80px; height: 100px;
-            background: var(--mario-pipe);
-            border: 4px solid #000;
-            z-index: 15;
-        }
-        .pipe-top {
-            position: absolute;
-            top: 0; left: -8px; width: 96px; height: 24px;
-            background: var(--mario-pipe);
-            border: 4px solid #000;
         }
     </style>
 </head>
 <body class="p-6 md:p-16">
 
     <div class="cloud-layer">
-        <div class="pixel-cloud cloud-slow w-32 h-12" style="top: 15%; animation-delay: -10s;"></div>
-        <div class="pixel-cloud cloud-slow w-40 h-16" style="top: 35%; animation-delay: -40s;"></div>
-        <div class="pixel-cloud cloud-fast w-48 h-20" style="top: 10%; animation-delay: -5s;"></div>
-        <div class="pixel-cloud cloud-fast w-36 h-14" style="top: 25%; animation-delay: -25s;"></div>
+        <div class="pixel-cloud cloud-slow w-40 h-16" style="top: 10%; animation-delay: -15s;"></div>
+        <div class="pixel-cloud cloud-fast w-48 h-20" style="top: 25%; animation-delay: -5s;"></div>
+        <div class="pixel-cloud cloud-slow w-32 h-12" style="top: 45%; animation-delay: -40s;"></div>
+        <div class="pixel-cloud cloud-fast w-56 h-24" style="top: 15%; animation-delay: -25s;"></div>
     </div>
 
-    <header class="text-center mb-20 relative z-20">
-        <h1 class="mario-header text-5xl md:text-7xl text-white mb-4">SUPER KU</h1>
-        <div class="inline-block bg-black text-yellow-400 px-6 py-2 border-4 border-white">
-            <span class="mario-header text-2xl">2568 CALENDAR</span>
+    <header class="text-center mb-24 relative z-20">
+        <h1 class="mario-header text-4xl md:text-6xl text-white mb-6">SUPER KU 2568</h1>
+        <div class="inline-block bg-black text-white px-6 py-2 border-4 border-white">
+            <span class="mario-header text-xl text-yellow-400">CALENDAR SYSTEM</span>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 relative z-20">
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 relative z-20">
         
-        <div class="mario-card p-6 flex flex-col">
-            <div class="bg-blue-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-1: ภาคต้น</div>
-            <div class="space-y-4 flex-grow">
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
-                    <span class="font-bold">เปิดเรียน:</span>
-                    <span class="font-black">23 มิ.ย. 68</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
-                    <span class="font-bold">สอบกลางภาค:</span>
-                    <span class="font-black">9-17 ส.ค. 68</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
-                    <span class="font-bold">สอบปลายภาค:</span>
-                    <span class="font-black">20-31 ต.ค. 68</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold text-gray-400">ปิดภาคเรียน:</span>
-                    <span class="font-black text-gray-400">3 พ.ย. 68</span>
+        <div class="mario-card p-6 flex flex-col border-blue-600">
+            <div class="bg-blue-600 text-white p-2 text-center mb-4 border-2 border-black font-black uppercase">STAGE 1: ภาคต้น</div>
+            <div class="space-y-3 flex-grow text-sm">
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>เปิดเรียน:</span><span class="font-bold text-lg">23 มิ.ย. 68</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1 text-red-600 font-bold"><span>สอบกลางภาค:</span><span>9-17 ส.ค. 68</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1 text-red-600 font-bold"><span>สอบปลายภาค:</span><span>20-31 ต.ค. 68</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>ปิดภาคเรียน:</span><span class="font-bold text-gray-500">3 พ.ย. 68</span></div>
+                <div class="grade-highlight flex justify-between items-center">
+                    <span class="font-black text-xs">ประกาศผลเกรด:</span>
+                    <span class="font-black text-blue-700">10 พ.ย. 68</span>
                 </div>
             </div>
-            <button class="btn-mario w-full mt-6 py-3 text-white">START</button>
+            <button class="btn-mario w-full mt-6 py-3 text-white text-xs">CLEARED</button>
         </div>
 
-        <div class="mario-card p-6 flex flex-col current-term scale-105">
-            <div class="bg-red-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-2: ภาคปลาย</div>
-            <div class="space-y-4 flex-grow">
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
-                    <span class="font-bold">เปิดเรียน:</span>
-                    <span class="font-black">24 พ.ย. 68</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2 bg-yellow-100 px-1 font-black">
-                    <span>สอบกลางภาค:</span>
-                    <span>10-18 ม.ค. 69</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
-                    <span class="font-bold">สอบปลายภาค:</span>
-                    <span class="font-black">16-27 มี.ค. 69</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">ปิดภาคเรียน:</span>
-                    <span class="font-black">30 มี.ค. 69</span>
+        <div class="mario-card p-6 flex flex-col border-red-600 scale-105 ring-8 ring-yellow-400/20">
+            <div class="bg-red-600 text-white p-2 text-center mb-4 border-2 border-black font-black uppercase italic">STAGE 2: ภาคปลาย</div>
+            <div class="space-y-3 flex-grow text-sm">
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>เปิดเรียน:</span><span class="font-bold text-lg">24 พ.ย. 68</span></div>
+                <div class="flex justify-between border-b border-black pb-1 bg-yellow-100 font-black px-1"><span>สอบกลางภาค:</span><span>10-18 ม.ค. 69</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1 text-red-600 font-bold"><span>สอบปลายภาค:</span><span>16-27 มี.ค. 69</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>ปิดภาคเรียน:</span><span class="font-bold text-gray-500">30 มี.ค. 69</span></div>
+                <div class="grade-highlight flex justify-between items-center bg-red-50">
+                    <span class="font-black text-xs">ประกาศผลเกรด:</span>
+                    <span class="font-black text-red-600">7 เม.ย. 69</span>
                 </div>
             </div>
-            <div class="absolute -top-5 -right-5 text-4xl animate-bounce">⭐</div>
-            <button class="btn-mario w-full mt-6 py-3 text-white bg-red-600">PLAYING</button>
+            <div class="absolute -top-6 -right-6 text-5xl animate-bounce">⭐</div>
+            <button class="btn-mario w-full mt-6 py-3 text-white text-xs bg-red-600">PLAYING</button>
         </div>
 
-        <div class="mario-card p-6 flex flex-col">
-            <div class="bg-orange-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-3: ฤดูร้อน</div>
-            <div class="space-y-4 flex-grow">
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
-                    <span class="font-bold">เปิดเรียน:</span>
-                    <span class="font-black">20 เม.ย. 69</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
-                    <span class="font-bold text-xs">เรียนวันสุดท้าย:</span>
-                    <span class="font-black">29 พ.ค. 69</span>
-                </div>
-                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
-                    <span class="font-bold">สอบปลายภาค:</span>
-                    <span class="font-black">30 พ.ค.-1 มิ.ย. 69</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold text-gray-400">ปิดภาคเรียน:</span>
-                    <span class="font-black text-gray-400">2 มิ.ย. 69</span>
+        <div class="mario-card p-6 flex flex-col border-orange-500">
+            <div class="bg-orange-500 text-white p-2 text-center mb-4 border-2 border-black font-black uppercase">STAGE 3: SUMMER</div>
+            <div class="space-y-3 flex-grow text-sm">
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>เปิดเรียน:</span><span class="font-bold text-lg">20 เม.ย. 69</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>เรียนวันสุดท้าย:</span><span class="font-bold">29 พ.ค. 69</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1 text-red-600 font-bold"><span>สอบปลายภาค:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
+                <div class="flex justify-between border-b border-gray-100 pb-1"><span>ปิดภาคเรียน:</span><span class="font-bold text-gray-500">2 มิ.ย. 69</span></div>
+                <div class="grade-highlight flex justify-between items-center">
+                    <span class="font-black text-xs">ประกาศผลเกรด:</span>
+                    <span class="font-black text-orange-700">11 มิ.ย. 69</span>
                 </div>
             </div>
-            <button class="btn-mario w-full mt-6 py-3 text-white bg-gray-400 cursor-not-allowed">LOCKED</button>
+            <button class="btn-mario w-full mt-6 py-3 text-white text-xs bg-gray-400 cursor-not-allowed">LOCKED</button>
         </div>
 
     </main>
 
-    <div class="pipe-system">
-        <div class="pipe-top"></div>
+    <div class="mt-24 flex justify-around items-end opacity-90 relative z-10">
+        <div class="w-20 h-24 bg-green-600 border-4 border-black relative">
+            <div class="absolute -top-4 -left-2 w-24 h-6 bg-green-600 border-4 border-black"></div>
+        </div>
+        <div class="text-center">
+            <p class="mario-font text-[10px] text-white bg-black/60 p-2 mb-2 border border-white">GRADE RELEASED SOON</p>
+            <div class="text-6xl">🏰</div>
+        </div>
+        <div class="w-16 h-12 bg-green-600 border-4 border-black relative">
+            <div class="absolute -top-4 -left-2 w-20 h-6 bg-green-600 border-4 border-black"></div>
+        </div>
     </div>
 
     <div class="ground"></div>
