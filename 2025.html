@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super KU 2568 - Mario Calendar</title>
+    <title>Super KU 2568 - Pro Mario Calendar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -12,8 +12,6 @@
             --mario-ground: #74bf2e;
             --mario-dirt: #8b4513;
             --mario-pipe: #43b047;
-            --mario-cloud: #ffffff;
-            --mario-text-black: #000000;
         }
 
         body {
@@ -21,197 +19,205 @@
             font-family: 'Kanit', sans-serif;
             overflow-x: hidden;
             margin: 0;
-            image-rendering: pixelated; /* เพื่อให้ Pixel Art คมชัด */
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Custom Pixel Cloud SVG for better rendering */
-        .pixel-cloud-svg {
+        /* --- Smooth Parallax Clouds --- */
+        .cloud-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .pixel-cloud {
             position: absolute;
-            z-index: -1;
-            animation: floatCloud linear infinite;
+            background: white;
+            border: 4px solid #000;
+            border-radius: 0 !important; /* รักษาความเหลี่ยม */
+            animation: slideCloud linear infinite;
         }
 
-        .pixel-cloud-svg.cloud-1 { top: 10%; left: 5%; width: 150px; height: 70px; animation-duration: 40s; animation-delay: 0s; }
-        .pixel-cloud-svg.cloud-2 { top: 25%; left: 30%; width: 180px; height: 80px; animation-duration: 45s; animation-delay: 10s; }
-        .pixel-cloud-svg.cloud-3 { top: 18%; left: 60%; width: 160px; height: 75px; animation-duration: 38s; animation-delay: 20s; }
-        .pixel-cloud-svg.cloud-4 { top: 5%; left: 85%; width: 140px; height: 65px; animation-duration: 42s; animation-delay: 30s; }
-        .pixel-cloud-svg.cloud-5 { top: 30%; left: -10%; width: 170px; height: 78px; animation-duration: 50s; animation-delay: 25s; } /* For looping */
+        /* สร้างรูปทรงเมฆด้วย Box Shadow แทน SVG เพื่อความสมูทของพิกเซล */
+        .pixel-cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            top: -16px; left: 20%; width: 40%; height: 16px;
+            box-shadow: 20px -8px 0 0 white, 20px -8px 0 4px #000, 0 -4px 0 4px #000;
+        }
+        
+        /* ชั้นเมฆที่ 1: เลื่อนช้า (อยู่ไกล) */
+        .cloud-slow { opacity: 0.5; transform: scale(0.7); animation-duration: 60s; }
+        /* ชั้นเมฆที่ 2: เลื่อนเร็ว (อยู่ใกล้) */
+        .cloud-fast { opacity: 0.9; transform: scale(1); animation-duration: 35s; }
 
-
-        @keyframes floatCloud {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(100vw + 200px)); /* เลื่อนข้ามจอ */ }
+        @keyframes slideCloud {
+            from { left: -200px; }
+            to { left: 100vw; }
         }
 
-        /* --- UI Elements --- */
-        .mario-header-font {
+        /* --- UI Polish --- */
+        .mario-header {
             font-family: 'Press Start 2P', cursive;
-            color: var(--mario-text-black);
-            text-shadow: 4px 4px 0px #000;
-            line-height: 1;
+            text-shadow: 6px 6px 0px #000;
+            letter-spacing: -2px;
         }
 
         .mario-card {
-            background: var(--mario-cloud);
-            border: 4px solid var(--mario-text-black);
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mario-card-header {
-            background: var(--mario-sky);
-            border: 2px solid var(--mario-text-black);
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.75rem;
-            color: var(--mario-text-black);
-        }
-
-        .mario-data-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.3rem 0;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border-bottom: 1px dashed #ccc;
-        }
-        .mario-data-row:last-of-type { border-bottom: none; }
-
-        .btn-start-game {
-            background: var(--mario-pipe);
-            border: 3px solid var(--mario-text-black);
-            color: white;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.75rem;
-            padding: 0.75rem;
-            margin-top: 1rem;
-            box-shadow: 3px 3px 0px var(--mario-text-black);
-            transition: all 0.1s ease;
-        }
-        .btn-start-game:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px var(--mario-text-black);
-        }
-
-        .mario-pipe {
-            background: var(--mario-pipe);
-            border: 4px solid var(--mario-text-black);
+            background: #fff;
+            border: 4px solid #000;
+            box-shadow: 10px 10px 0px rgba(0,0,0,1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            margin: 0 auto;
+            z-index: 10;
         }
-        .mario-pipe::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -4px; right: -4px; height: 12px;
-            background: var(--mario-pipe); border: 4px solid var(--mario-text-black);
+
+        .mario-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 16px 16px 0px rgba(0,0,0,1);
+        }
+
+        .current-term {
+            border-color: #ef4444;
+            box-shadow: 10px 10px 0px #ef4444;
+        }
+        .current-term:hover {
+            box-shadow: 16px 16px 0px #ef4444;
+        }
+
+        .btn-mario {
+            font-family: 'Press Start 2P', cursive;
+            background: var(--mario-pipe);
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            transition: 0.1s;
+        }
+
+        .btn-mario:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
         }
 
         .ground {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
+            bottom: 0; width: 100%; height: 50px;
             background: var(--mario-dirt);
-            border-top: 8px solid var(--mario-ground);
-            z-index: 10;
+            border-top: 10px solid var(--mario-ground);
+            z-index: 20;
+        }
+
+        .pipe-system {
+            position: fixed;
+            bottom: 50px; left: 10%;
+            width: 80px; height: 100px;
+            background: var(--mario-pipe);
+            border: 4px solid #000;
+            z-index: 15;
+        }
+        .pipe-top {
+            position: absolute;
+            top: 0; left: -8px; width: 96px; height: 24px;
+            background: var(--mario-pipe);
+            border: 4px solid #000;
         }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-6 md:p-16">
 
-    <svg class="pixel-cloud-svg cloud-1" viewBox="0 0 100 50">
-        <path d="M10,25 Q15,10 30,15 T50,10 Q60,5 70,15 T90,20 V30 H10 Z" fill="white" stroke="black" stroke-width="2"/>
-    </svg>
-    <svg class="pixel-cloud-svg cloud-2" viewBox="0 0 100 50">
-        <path d="M5,20 Q10,5 25,10 T45,5 Q55,0 65,10 T85,15 V25 H5 Z" fill="white" stroke="black" stroke-width="2"/>
-    </svg>
-    <svg class="pixel-cloud-svg cloud-3" viewBox="0 0 100 50">
-        <path d="M15,22 Q20,7 35,12 T55,7 Q65,2 75,12 T95,17 V27 H15 Z" fill="white" stroke="black" stroke-width="2"/>
-    </svg>
-    <svg class="pixel-cloud-svg cloud-4" viewBox="0 0 100 50">
-        <path d="M10,25 Q15,10 30,15 T50,10 Q60,5 70,15 T90,20 V30 H10 Z" fill="white" stroke="black" stroke-width="2"/>
-    </svg>
-    <svg class="pixel-cloud-svg cloud-5" viewBox="0 0 100 50">
-        <path d="M5,20 Q10,5 25,10 T45,5 Q55,0 65,10 T85,15 V25 H5 Z" fill="white" stroke="black" stroke-width="2"/>
-    </svg>
+    <div class="cloud-layer">
+        <div class="pixel-cloud cloud-slow w-32 h-12" style="top: 15%; animation-delay: -10s;"></div>
+        <div class="pixel-cloud cloud-slow w-40 h-16" style="top: 35%; animation-delay: -40s;"></div>
+        <div class="pixel-cloud cloud-fast w-48 h-20" style="top: 10%; animation-delay: -5s;"></div>
+        <div class="pixel-cloud cloud-fast w-36 h-14" style="top: 25%; animation-delay: -25s;"></div>
+    </div>
 
-
-    <header class="text-center mb-16 relative z-10">
-        <h1 class="mario-header-font text-5xl md:text-7xl">SUPER KU 2568</h1>
-        <h2 class="mario-header-font text-3xl md:text-5xl text-yellow-400 drop-shadow-[4px_4px_0px_#ab3916]">MARIO 2568</h2>
-        <p class="font-bold text-lg text-white mt-4 tracking-wider">Academic Calendar</p>
+    <header class="text-center mb-20 relative z-20">
+        <h1 class="mario-header text-5xl md:text-7xl text-white mb-4">SUPER KU</h1>
+        <div class="inline-block bg-black text-yellow-400 px-6 py-2 border-4 border-white">
+            <span class="mario-header text-2xl">2568 CALENDAR</span>
+        </div>
     </header>
 
-    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 relative z-20">
         
-        <div class="mario-card">
-            <div class="mario-card-header">WORLD 1-1 (ภาคการศึกษาต้น)</div>
-            <div class="flex-grow">
-                <div class="mario-data-row"><span>วันเปิดเรียน:</span><span>23 มิ.ย. 2568</span></div>
-                <div class="mario-data-row"><span>วันสอบกลางภาค:</span><span>9 - 17 ส.ค. 2568</span></div>
-                <div class="mario-data-row"><span>วันสอบปลายภาค:</span><span>20 - 31 ต.ค. 2568</span></div>
-                <div class="mario-data-row"><span>วันปิดภาคเรียน:</span><span>3 พ.ย. 2568</span></div>
+        <div class="mario-card p-6 flex flex-col">
+            <div class="bg-blue-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-1: ภาคต้น</div>
+            <div class="space-y-4 flex-grow">
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
+                    <span class="font-bold">เปิดเรียน:</span>
+                    <span class="font-black">23 มิ.ย. 68</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
+                    <span class="font-bold">สอบกลางภาค:</span>
+                    <span class="font-black">9-17 ส.ค. 68</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
+                    <span class="font-bold">สอบปลายภาค:</span>
+                    <span class="font-black">20-31 ต.ค. 68</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-bold text-gray-400">ปิดภาคเรียน:</span>
+                    <span class="font-black text-gray-400">3 พ.ย. 68</span>
+                </div>
             </div>
-            <button class="btn-start-game bg-blue-500">BN START</button>
+            <button class="btn-mario w-full mt-6 py-3 text-white">START</button>
         </div>
 
-        <div class="mario-card border-4 border-red-500 shadow-[8px_8px_0px_rgba(255,0,0,0.5)]">
-            <div class="mario-card-header bg-yellow-300">WORLD 1-2 (ภาคการศึกษาปลาย)</div>
-            <div class="flex-grow">
-                <div class="mario-data-row"><span>วันเปิดเรียน:</span><span>24 พ.ย. 2568</span></div>
-                <div class="mario-data-row bg-yellow-200 px-2"><span>วันสอบกลางภาค:</span><span>10 - 18 ม.ค. 2569</span></div>
-                <div class="mario-data-row"><span>วันสอบปลายภาค:</span><span>16 - 27 มี.ค. 2569</span></div>
-                <div class="mario-data-row"><span>วันปิดภาคเรียน:</span><span>30 มี.ค. 2569</span></div>
+        <div class="mario-card p-6 flex flex-col current-term scale-105">
+            <div class="bg-red-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-2: ภาคปลาย</div>
+            <div class="space-y-4 flex-grow">
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
+                    <span class="font-bold">เปิดเรียน:</span>
+                    <span class="font-black">24 พ.ย. 68</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2 bg-yellow-100 px-1 font-black">
+                    <span>สอบกลางภาค:</span>
+                    <span>10-18 ม.ค. 69</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
+                    <span class="font-bold">สอบปลายภาค:</span>
+                    <span class="font-black">16-27 มี.ค. 69</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-bold">ปิดภาคเรียน:</span>
+                    <span class="font-black">30 มี.ค. 69</span>
+                </div>
             </div>
-            <button class="btn-start-game bg-red-500">BN START</button>
+            <div class="absolute -top-5 -right-5 text-4xl animate-bounce">⭐</div>
+            <button class="btn-mario w-full mt-6 py-3 text-white bg-red-600">PLAYING</button>
         </div>
 
-        <div class="mario-card">
-            <div class="mario-card-header">WORLD 1-3 (ภาคฤดูร้อน)</div>
-            <div class="flex-grow">
-                <div class="mario-data-row"><span>วันเปิดเรียน:</span><span>20 เม.ย. 2569</span></div>
-                <div class="mario-data-row"><span>วันสุดท้ายการเรียน:</span><span>29 พ.ค. 2569</span></div>
-                <div class="mario-data-row"><span>วันสอบปลายภาค:</span><span>30 พ.ค. - 1 มิ.ย. 2569</span></div>
-                <div class="mario-data-row"><span>วันปิดภาคเรียน:</span><span>2 มิ.ย. 2569</span></div>
+        <div class="mario-card p-6 flex flex-col">
+            <div class="bg-orange-500 text-white p-2 text-center mb-4 border-2 border-black font-bold">WORLD 1-3: ฤดูร้อน</div>
+            <div class="space-y-4 flex-grow">
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
+                    <span class="font-bold">เปิดเรียน:</span>
+                    <span class="font-black">20 เม.ย. 69</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2">
+                    <span class="font-bold text-xs">เรียนวันสุดท้าย:</span>
+                    <span class="font-black">29 พ.ค. 69</span>
+                </div>
+                <div class="flex justify-between border-b-2 border-gray-100 pb-2 text-red-500">
+                    <span class="font-bold">สอบปลายภาค:</span>
+                    <span class="font-black">30 พ.ค.-1 มิ.ย. 69</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-bold text-gray-400">ปิดภาคเรียน:</span>
+                    <span class="font-black text-gray-400">2 มิ.ย. 69</span>
+                </div>
             </div>
-            <button class="btn-start-game bg-orange-500">BN START</button>
-        </div>
-
-        <div class="mario-card">
-            <div class="mario-card-header">WORLD 5-2 (ตัวอย่าง)</div>
-            <div class="flex-grow">
-                <div class="mario-data-row"><span>ข้อมูล 1:</span><span>2 P.M. - 11.22</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 2:</span><span>1.000</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 3:</span><span>1282.53/0.12</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 4:</span><span>1150</span></div>
-            </div>
-            <button class="btn-start-game bg-gray-500">BN START</button>
-        </div>
-
-        <div class="mario-card">
-            <div class="mario-card-header">WORLD 4-2 (ตัวอย่าง)</div>
-            <div class="flex-grow">
-                <div class="mario-data-row"><span>ข้อมูล 1:</span><span>2 P.M. - 11.28</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 2:</span><span>1.000</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 3:</span><span>1282.53/0.12</span></div>
-                <div class="mario-data-row"><span>ข้อมูล 4:</span><span>1150</span></div>
-            </div>
-            <button class="btn-start-game bg-gray-500">BN START</button>
+            <button class="btn-mario w-full mt-6 py-3 text-white bg-gray-400 cursor-not-allowed">LOCKED</button>
         </div>
 
     </main>
 
-    <div class="mt-auto pt-20"> <div class="flex justify-start pl-20 relative z-10">
-            <div class="mario-pipe w-16 h-20"></div>
-        </div>
+    <div class="pipe-system">
+        <div class="pipe-top"></div>
     </div>
 
     <div class="ground"></div>
