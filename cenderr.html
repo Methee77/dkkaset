@@ -2,77 +2,126 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; }
+        .roadmap-card:hover { border-color: #6366f1; box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+    </style>
 </head>
-<body class="bg-gray-50 p-6 md:p-12">
+<body class="p-4 md:p-12">
 
-    <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
-        <div class="bg-indigo-900 p-8 text-white">
-            <h2 class="text-2xl font-bold mb-2">ตารางกำหนดการเรียนรู้ยุค 4.0</h2>
-            <p class="text-indigo-200">ปีการศึกษา 2569 | เน้นการเรียนรู้ฐานสมรรถนะ (Competency-Based)</p>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm">Next-Gen Education</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold mt-2">Academic Roadmap <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">4.0</span></h1>
+            </div>
+            <div class="flex gap-4">
+                <div class="text-right">
+                    <p class="text-slate-400 text-sm">Current Progress</p>
+                    <div class="w-48 h-2 bg-slate-800 rounded-full mt-2 overflow-hidden border border-slate-700">
+                        <div class="bg-indigo-500 h-full w-[35%] shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-indigo-50 text-indigo-900 uppercase text-sm leading-normal">
-                        <th class="py-4 px-6 font-bold">ช่วงเวลา / ไตรมาส</th>
-                        <th class="py-4 px-6 font-bold">กิจกรรมสำคัญ</th>
-                        <th class="py-4 px-6 font-bold text-center">รูปแบบ</th>
-                        <th class="py-4 px-6 font-bold">ผลลัพธ์ (Badge/Credit)</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-700 text-sm font-light">
-                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                        <td class="py-4 px-6 font-semibold">Q1: Foundation (มิ.ย. - ก.ค.)</td>
-                        <td class="py-4 px-6">
-                            <span class="block font-bold text-indigo-600">Digital Citizenship</span>
-                            อบรมความปลอดภัยไซเบอร์และการใช้เครื่องมือ AI
-                        </td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="bg-blue-100 text-blue-600 py-1 px-3 rounded-full text-xs font-bold">Online</span>
-                        </td>
-                        <td class="py-4 px-6 font-medium text-emerald-600">Digital Literacy Badge</td>
-                    </tr>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                        <td class="py-4 px-6 font-semibold">Q2: Specialized (ส.ค. - ก.ย.)</td>
-                        <td class="py-4 px-6">
-                            <span class="block font-bold text-indigo-600">Micro-Credential Modules</span>
-                            เลือกเรียนวิชาเจาะลึกตามความสนใจรายบุคคล
-                        </td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="bg-purple-100 text-purple-600 py-1 px-3 rounded-full text-xs font-bold">Hybrid</span>
-                        </td>
-                        <td class="py-4 px-6 font-medium text-emerald-600">12 Micro-Credits</td>
-                    </tr>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                        <td class="py-4 px-6 font-semibold">Q3: Practical (พ.ย. - ธ.ค.)</td>
-                        <td class="py-4 px-6">
-                            <span class="block font-bold text-indigo-600">Industry Challenge</span>
-                            เข้าฝึกงานหรือทำโครงงานกับบริษัทพาร์ทเนอร์
-                        </td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="bg-emerald-100 text-emerald-600 py-1 px-3 rounded-full text-xs font-bold">On-site</span>
-                        </td>
-                        <td class="py-4 px-6 font-medium text-emerald-600">Real-World Project Cert.</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="py-4 px-6 font-semibold">Q4: Graduation (ม.ค. - ก.พ.)</td>
-                        <td class="py-4 px-6">
-                            <span class="block font-bold text-indigo-600">Portfolio & Pitching</span>
-                            ประเมินผลการเรียนรู้ผ่านการนำเสนอผลงาน
-                        </td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="bg-amber-100 text-amber-600 py-1 px-3 rounded-full text-xs font-bold">Showcase</span>
-                        </td>
-                        <td class="py-4 px-6 font-medium text-emerald-600">Competency Portfolio</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="roadmap-card bg-slate-900/50 border border-slate-800 p-6 rounded-3xl transition-all duration-300">
+                <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 border border-indigo-500/20">
+                    <i class="fas fa-rocket text-indigo-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-indigo-100">Phase 1: Foundation</h3>
+                <p class="text-slate-400 text-sm mb-6">มิถุนายน - กรกฎาคม</p>
+                
+                <ul class="space-y-4">
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">Skill Set</span>
+                        <p class="text-sm font-semibold">AI Literacy & Prompts</p>
+                    </li>
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Activity</span>
+                        <p class="text-sm font-semibold">Hybrid Orientation</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="roadmap-card bg-slate-900/50 border border-slate-800 p-6 rounded-3xl transition-all duration-300">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <i class="fas fa-microchip text-emerald-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-emerald-100">Phase 2: Deep Dive</h3>
+                <p class="text-slate-400 text-sm mb-6">สิงหาคม - ตุลาคม</p>
+                
+                <ul class="space-y-4">
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Badge</span>
+                        <p class="text-sm font-semibold">Micro-Credentials</p>
+                    </li>
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Activity</span>
+                        <p class="text-sm font-semibold">Self-Paced Modules</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="roadmap-card bg-slate-900/50 border border-slate-800 p-6 rounded-3xl transition-all duration-300 border-dashed border-indigo-500/50">
+                <div class="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 border border-amber-500/20">
+                    <i class="fas fa-briefcase text-amber-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-amber-100">Phase 3: Sandbox</h3>
+                <p class="text-slate-400 text-sm mb-6">พฤศจิกายน - มกราคม</p>
+                
+                <ul class="space-y-4">
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Experience</span>
+                        <p class="text-sm font-semibold">Industry Hackathon</p>
+                    </li>
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Activity</span>
+                        <p class="text-sm font-semibold">Real-world Problem</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="roadmap-card bg-slate-900/50 border border-slate-800 p-6 rounded-3xl transition-all duration-300">
+                <div class="w-12 h-12 bg-rose-500/10 rounded-2xl flex items-center justify-center mb-6 border border-rose-500/20">
+                    <i class="fas fa-trophy text-rose-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-rose-100">Phase 4: Launch</h3>
+                <p class="text-slate-400 text-sm mb-6">กุมภาพันธ์ - มีนาคม</p>
+                
+                <ul class="space-y-4">
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-rose-400 font-bold uppercase tracking-wider">Outcome</span>
+                        <p class="text-sm font-semibold">Digital Portfolio</p>
+                    </li>
+                    <li class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Activity</span>
+                        <p class="text-sm font-semibold">Final Pitching Day</p>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-        
-        <div class="bg-gray-50 p-4 border-t border-gray-100 text-center text-gray-500 text-xs">
-            * กำหนดการอาจมีการเปลี่ยนแปลงตามความก้าวหน้าของผู้เรียนแต่ละบุคคล
+
+        <div class="mt-12 p-8 bg-gradient-to-r from-indigo-900/40 to-cyan-900/40 rounded-3xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <div class="p-4 bg-white/5 rounded-2xl">
+                    <i class="fas fa-robot text-indigo-400 text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold">AI Counselor Integration</h4>
+                    <p class="text-slate-400 text-sm">ระบบปรับแต่งตารางเรียนอัตโนมัติรายบุคคล</p>
+                </div>
+            </div>
+            <button class="bg-white text-slate-950 px-8 py-3 rounded-2xl font-bold hover:bg-indigo-400 hover:text-white transition-all">
+                Connect Wallet / Student ID
+            </button>
         </div>
     </div>
 
