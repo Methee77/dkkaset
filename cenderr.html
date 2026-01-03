@@ -3,196 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU KPS OMNI-LINK PROTOCOL 4.0</title>
+    <title>KU KPS Academic Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;600;800&family=Anuphan:wght@200;400;700&display=swap');
-        
-        body { 
-            font-family: 'Anuphan', sans-serif; 
-            background: #000; 
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .omni-font { font-family: 'Oxanium', sans-serif; }
-
-        /* กราฟิกพื้นหลังคล้ายวงจร */
-        .circuit-bg {
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 25% 75%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 75% 25%, rgba(59, 130, 246, 0.03) 0%, transparent 40%),
-                linear-gradient(rgba(16, 185, 129, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16, 185, 129, 0.01) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: backgroundPulse 20s ease-in-out infinite alternate;
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        @keyframes backgroundPulse {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
-        /* เอฟเฟกต์ Holographic Panel */
-        .holographic-panel {
-            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(35px) saturate(200%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            box-shadow: 0 0 80px rgba(16, 185, 129, 0.2); /* Holographic Glow */
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* เตรียมสำหรับ 3D */
-            transition: all 0.5s ease;
-        }
-
-        .holographic-panel:hover {
-            border-color: #10b981;
-            box-shadow: 0 0 100px rgba(16, 185, 129, 0.4);
-        }
-
-        /* เลเยอร์เส้นกราฟิกด้านหน้า */
-        .grid-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background: 
-                linear-gradient(transparent 98%, rgba(16, 185, 129, 0.1) 100%),
-                linear-gradient(90deg, transparent 98%, rgba(16, 185, 129, 0.1) 100%);
-            background-size: 20px 20px;
-            animation: gridScan 15s linear infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes gridScan {
-            0% { background-position: 0 0; }
-            100% { background-position: -200px -200px; }
-        }
-
-        .active-button {
-            background: #10b981;
-            color: #000;
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
-        }
-
-        .pulse-text { animation: textPulse 2s infinite alternate; }
-        @keyframes textPulse {
-            from { text-shadow: 0 0 5px rgba(255,255,255,0.8); }
-            to { text-shadow: 0 0 15px rgba(255,255,255,1); }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600;700&display=swap');
+        body { font-family: 'Anuphan', sans-serif; background: #fdfdfd; color: #1a1a1a; }
+        [x-cloak] { display: none !important; }
+        .tab-active { color: #006b3d; border-bottom: 3px solid #006b3d; }
     </style>
 </head>
 <body x-data="{ year: '2568', term: '1' }">
 
-    <div class="circuit-bg"></div>
-    <div class="grid-overlay"></div>
-
-    <div class="relative w-[90vw] h-[90vh] max-w-7xl max-h-[800px] holographic-panel p-8 md:p-12 flex flex-col">
+    <div class="max-w-4xl mx-auto px-6 py-16">
         
-        <header class="flex justify-between items-center mb-10 pb-6 border-b border-white/10 relative z-20">
-            <div class="flex items-center gap-6">
-                <div class="w-14 h-14 bg-emerald-700/50 rounded-full flex items-center justify-center border border-emerald-500/50 animate-pulse">
-                    <i class="fas fa-satellite text-2xl text-emerald-300"></i>
-                </div>
-                <div>
-                    <h1 class="omni-font text-4xl font-extrabold tracking-tighter italic">KU KPS <span class="text-emerald-400">OMNI-LINK</span></h1>
-                    <p class="text-[10px] uppercase tracking-[0.5em] text-white/40">Academic Data Protocol v4.0.0.9</p>
-                </div>
+        <header class="mb-16">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-700">Official Schedule</span>
             </div>
-
-            <div class="flex bg-black/40 p-1 rounded-2xl border border-white/10">
-                <button @click="year = '2568'" :class="year === '2568' ? 'active-button' : 'text-white/50'" class="px-8 py-3 rounded-xl text-xs font-bold transition-all uppercase tracking-widest">Year 2568</button>
-                <button @click="year = '2569'" :class="year === '2569' ? 'active-button' : 'text-white/50'" class="px-8 py-3 rounded-xl text-xs font-bold transition-all uppercase tracking-widest ml-1">Year 2569</button>
+            <h1 class="text-4xl font-bold tracking-tight text-slate-900">ปฏิทินการศึกษา <span class="text-emerald-700" x-text="year"></span></h1>
+            <div class="flex gap-6 mt-8 border-b border-slate-100">
+                <button @click="year = '2568'" :class="year === '2568' ? 'tab-active' : 'text-slate-400'" class="pb-4 text-sm font-bold transition-all">ปีการศึกษา 2568</button>
+                <button @click="year = '2569'" :class="year === '2569' ? 'tab-active' : 'text-slate-400'" class="pb-4 text-sm font-bold transition-all">ปีการศึกษา 2569</button>
             </div>
         </header>
 
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6 overflow-hidden">
-            
-            <aside class="lg:col-span-1 space-y-4 relative z-10">
-                <p class="text-[9px] font-bold text-white/30 uppercase tracking-widest ml-2 mb-4">Select Data Stream</p>
-                <button @click="term = '1'" :class="term === '1' ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-white/10'" class="w-full holographic-panel p-6 rounded-2xl text-left transition-all">
-                    <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest mb-1 block">Semester 1</span>
-                    <h3 class="text-xl font-bold pulse-text">ภาคต้น</h3>
-                </button>
-                <button @click="term = '2'" :class="term === '2' ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-white/10'" class="w-full holographic-panel p-6 rounded-2xl text-left transition-all">
-                    <span class="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 block">Semester 2</span>
-                    <h3 class="text-xl font-bold">ภาคปลาย</h3>
-                </button>
-                <button @click="term = '3'" :class="term === '3' ? 'border-amber-500/50 bg-amber-500/10' : 'border-white/10'" class="w-full holographic-panel p-6 rounded-2xl text-left transition-all">
-                    <span class="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 block">Event Cycle</span>
-                    <h3 class="text-xl font-bold">ฤดูร้อน</h3>
-                </button>
-            </aside>
-
-            <section class="lg:col-span-3 overflow-y-auto pr-4 space-y-4">
-                
-                <template x-if="year === '2568' && term === '1'">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="holographic-panel p-8 rounded-3xl relative overflow-hidden">
-                            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Data Stream Active</span>
-                            <h4 class="text-2xl font-bold mt-4">ลงทะเบียนเรียน & ชำระเงิน</h4>
-                            <p class="text-xs text-white/60 mt-2">12 - 23 พฤษภาคม 2568</p>
-                            <p class="text-[9px] text-rose-400 font-bold mt-4">ระบบตรวจจับ Penalty: ปรับวันละ 100 บาท</p>
-                        </div>
-
-                        <div class="holographic-panel p-8 rounded-3xl border-emerald-500 bg-emerald-500/10">
-                            <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-[0.4em]">Protocol Start</span>
-                            <h4 class="omni-font text-4xl font-extrabold mt-4 italic uppercase">23 มิ.ย. 68</h4>
-                            <p class="text-lg text-emerald-200 mt-2">วันเปิดภาคเรียน (Semester 1 Activation)</p>
-                        </div>
-
-                        <div class="holographic-panel p-8 rounded-3xl">
-                            <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">System Check</span>
-                            <h4 class="text-xl font-bold mt-4">การวัดผลกลางภาค</h4>
-                            <p class="text-xs text-white/60 mt-2">16 - 24 สิงหาคม 2568</p>
-                        </div>
-
-                        <div class="holographic-panel p-8 rounded-3xl bg-rose-950/20 border-rose-600">
-                            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Final Decryption</span>
-                            <h4 class="text-3xl font-black mt-4 text-white uppercase">สอบปลายภาค</h4>
-                            <p class="text-xl font-bold text-rose-300 mt-2">13 - 26 ตุลาคม 2568</p>
-                            <p class="text-[9px] text-white/40 mt-4 uppercase tracking-[0.3em] italic">End of Current Cycle</p>
-                        </div>
-                    </div>
-                </template>
-
-                <template x-if="year === '2569'">
-                    <div class="h-full holographic-panel rounded-[3rem] flex flex-col items-center justify-center text-center border-dashed border-white/20">
-                        <div class="relative w-28 h-28 mb-10">
-                            <div class="absolute inset-0 border-4 border-emerald-500/30 border-t-emerald-500 animate-spin" style="border-radius: 50%;"></div>
-                            <div class="absolute inset-4 border-4 border-emerald-500/10 border-b-emerald-500 animate-spin-slow" style="border-radius: 50%;"></div>
-                            <i class="fas fa-satellite-dish absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl text-emerald-500"></i>
-                        </div>
-                        <h3 class="omni-font text-2xl font-bold uppercase tracking-[0.4em] mb-4">Establishing Link to 2569 Data</h3>
-                        <p class="text-white/40 text-xs font-bold uppercase tracking-widest underline italic">Waiting for KU.KPS Official Protocol Initialization</p>
-                    </div>
-                </template>
-
-            </section>
-
-        </main>
-
-        <footer class="mt-8 pt-6 border-t border-white/10 flex justify-between items-end relative z-20">
-            <div class="text-[8px] font-bold text-white/20 uppercase tracking-[0.4em] space-y-1">
-                <p>Telemetry: Stable // Data Integrity: 99.8%</p>
-                <p>Interface Protocol: OMNI-LINK v4.0.0.9 // Build: 2025.08.18</p>
+        <main>
+            <div class="flex gap-2 mb-10">
+                <button @click="term = '1'" :class="term === '1' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 rounded-full text-xs font-bold transition-all">ภาคต้น</button>
+                <button @click="term = '2'" :class="term === '2' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 rounded-full text-xs font-bold transition-all">ภาคปลาย</button>
+                <button @click="term = '3'" :class="term === '3' ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 rounded-full text-xs font-bold transition-all">ฤดูร้อน</button>
             </div>
-            <div class="flex gap-4">
-                <div class="w-px h-8 bg-emerald-500/20"></div>
-                <div class="text-right">
-                    <p class="text-[8px] font-bold text-emerald-500 uppercase tracking-widest">SYSTEM STATUS</p>
-                    <p class="text-[10px] font-bold italic pulse-text">OPERATIONAL</p>
+
+            <div x-show="year === '2568'" x-transition:enter="transition duration-300 opacity-0" x-transition:enter-end="opacity-100">
+                
+                <div x-show="term === '1'" class="space-y-4">
+                    <div class="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white border border-slate-100 rounded-[2rem] hover:shadow-xl hover:shadow-emerald-900/5 transition-all">
+                        <div class="mb-4 md:mb-0">
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">12 - 23 พ.ค. 2568</p>
+                            <h3 class="text-xl font-bold text-slate-800 italic">ลงทะเบียนเรียน & ชำระเงิน</h3>
+                        </div>
+                        <span class="text-[10px] px-3 py-1 bg-slate-50 rounded-full font-bold text-slate-400">REGISTRATION</span>
+                    </div>
+
+                    <div class="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-emerald-700 rounded-[2rem] shadow-xl shadow-emerald-700/20 text-white transition-all">
+                        <div>
+                            <p class="text-[10px] font-bold text-emerald-200 uppercase tracking-widest mb-1">23 มิถุนายน 2568</p>
+                            <h3 class="text-2xl font-bold uppercase italic">วันเปิดภาคเรียนประจำภาคต้น</h3>
+                        </div>
+                        <i class="fas fa-arrow-right-long text-xl opacity-50"></i>
+                    </div>
+
+                    <div class="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white border border-slate-100 rounded-[2rem] hover:shadow-xl transition-all">
+                        <div>
+                            <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-1">16 - 24 ส.ค. 2568</p>
+                            <h3 class="text-xl font-bold text-slate-800">การวัดผลกลางภาค (Mid-term)</h3>
+                        </div>
+                        <span class="text-[10px] px-3 py-1 bg-amber-50 rounded-full font-bold text-amber-600">EVALUATION</span>
+                    </div>
+
+                    <div class="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white border border-rose-100 rounded-[2rem] hover:shadow-xl transition-all border-l-8 border-l-rose-500">
+                        <div>
+                            <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest mb-1">13 - 26 ต.ค. 2568</p>
+                            <h3 class="text-xl font-bold text-rose-600">สอบปลายภาค & ปิดภาคเรียน</h3>
+                        </div>
+                        <i class="fas fa-flag-checkered text-rose-200 text-2xl"></i>
+                    </div>
+                </div>
+
+                <div x-show="term !== '1'" class="py-20 text-center text-slate-300 italic font-medium">
+                    กำลังแสดงผลข้อมูลจำลองของเทอม <span x-text="term"></span>...
                 </div>
             </div>
+
+            <div x-show="year === '2569'" x-cloak class="py-32 text-center border-2 border-dashed border-slate-100 rounded-[3rem]">
+                <div class="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-hourglass-half text-slate-300"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-400 uppercase italic">Waiting for KU Official Data</h3>
+                <p class="text-slate-300 text-xs mt-2 uppercase tracking-widest">ข้อมูลปี 2569 จะอัปเดตทันทีที่ประกาศออก</p>
+            </div>
+        </main>
+
+        <footer class="mt-24 pt-10 border-t border-slate-50 flex justify-between items-center text-[10px] font-bold text-slate-300 uppercase tracking-[0.4em]">
+            <p>KU KPS // ACADEMIC 4.0</p>
+            <p>VERSION : CLEAN_MINIMAL_V1</p>
         </footer>
     </div>
 
