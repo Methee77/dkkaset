@@ -3,245 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Academic Calendar 2568 - Minecraft Characters!</title>
+    <title>KU Academic Farm 2568 - Hay Day Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Cherry+Bomb+One&display=swap" rel="stylesheet">
     <style>
-        /* Minecraft Font Style */
-        @font-face {
-            font-family: 'Minecraft';
-            src: url('https://db.onlinewebfonts.com/t/c1328456254784a0c86815efc1c3f19e.woff2') format('woff2');
-        }
-
         :root {
-            --mc-sky: #5c94fc;
-            --mc-dirt: #866043;
-            --mc-grass-top: #5da037;
-            --mc-grass-side: #74bf2e;
-            --mc-wood: #70422d;
-            --mc-gui-bg: #c6c6c6;
-            --mc-border-dark: #373737;
-            --mc-text-green: #55ff55;
-            --mc-text-white: #ffffff;
-            --mc-text-yellow: #ffff55;
+            --farm-sky: #87ceeb;
+            --farm-grass: #7cfc00;
+            --farm-wood: #8b4513;
+            --farm-board: #f4a460;
+            --farm-paper: #fff8dc;
         }
 
         body {
-            background-color: var(--mc-sky);
+            background-color: var(--farm-sky);
             font-family: 'Kanit', sans-serif;
-            image-rendering: pixelated; /* เพื่อให้ภาพพิกเซลคมชัด */
-            overflow-x: hidden;
             margin: 0;
-            min-height: 100vh;
-            position: relative;
+            overflow-x: hidden;
+            background-image: radial-gradient(#ffffff 2px, transparent 2px);
+            background-size: 40px 40px;
         }
 
-        /* --- Minecraft World Elements --- */
-        .sun-mc {
-            width: 80px; height: 80px;
-            background: #ffff55;
-            border: 6px solid #000;
-            position: fixed; top: 40px; right: 40px;
+        /* --- Hay Day Scenery --- */
+        .sun-hd {
+            position: fixed;
+            top: 30px; left: 40px;
+            width: 100px; height: 100px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ffa500;
             z-index: -1;
         }
 
-        .cloud-mc {
+        .cloud-hd {
             position: absolute;
             background: white;
-            border: 4px solid #000;
-            animation: moveCloud linear infinite;
+            border-radius: 50px;
+            filter: blur(2px);
+            animation: drift linear infinite;
             z-index: -1;
         }
-        @keyframes moveCloud {
+
+        @keyframes drift {
             from { left: -200px; }
             to { left: 100vw; }
         }
 
-        .ground-mc {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 100px;
-            background-color: var(--mc-dirt);
-            border-top: 8px solid var(--mc-grass-top);
-            z-index: 1;
+        /* --- Farm UI Elements --- */
+        .wood-frame {
+            background-color: var(--farm-wood);
+            border: 8px solid #5d2e06;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 0px #3d1f04;
         }
 
-        .tree-mc {
-            position: absolute;
-            bottom: 90px; left: 15%;
-            width: 40px; height: 80px;
-            background: var(--mc-wood);
-            border: 4px solid #000;
-            z-index: 2;
-        }
-        .leaves-mc {
-            position: absolute;
-            top: -50px; left: -30px;
-            width: 100px; height: 60px;
-            background: #4a8024;
-            border: 4px solid #000;
-        }
-
-        /* --- Minecraft Characters (with animation) --- */
-        .mc-character {
-            position: absolute;
-            bottom: 100px; /* เหนือพื้นดิน */
-            z-index: 3;
-            animation: walkCharacter 8s linear infinite;
-        }
-
-        .mc-character.steve { left: 5%; animation-delay: 0s; }
-        .mc-character.alex { left: 25%; animation-delay: -3s; }
-        .mc-character.creeper { left: 45%; animation-delay: -6s; }
-
-        @keyframes walkCharacter {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(100vw + 200px)); } /* เดินข้ามจอ */
-        }
-
-        .mc-character.creeper {
-            animation: walkCreeper 12s linear infinite;
-        }
-        @keyframes walkCreeper {
-            0% { transform: translateX(0); opacity: 1; }
-            40% { opacity: 1; }
-            50% { opacity: 0; } /* หายตัวไปชั่วคราว */
-            60% { transform: translateX(calc(100vw + 200px)); opacity: 0; }
-            100% { transform: translateX(calc(100vw + 200px)); opacity: 1; }
-        }
-
-
-        /* --- Minecraft GUI Style --- */
-        .mc-window {
-            background: var(--mc-gui-bg);
-            border: 6px solid var(--mc-border-dark);
-            box-shadow: inset 6px 6px 0px var(--mc-text-white), 
-                        inset -6px -6px 0px #555555;
-            padding: 24px;
+        .order-paper {
+            background-color: var(--farm-paper);
+            border: 2px solid #d2b48c;
+            border-radius: 5px;
+            padding: 15px;
             position: relative;
-            z-index: 10;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
-        .mc-text-shadow {
-            font-family: 'Minecraft', sans-serif;
-            color: var(--mc-text-white);
-            text-shadow: 3px 3px 0px var(--mc-border-dark);
+        .order-paper::before {
+            content: "📌";
+            position: absolute;
+            top: -15px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
         }
 
-        .mc-slot {
-            background: #8b8b8b; /* สีช่อง Inventory */
-            border: 4px solid var(--mc-border-dark);
-            box-shadow: inset 4px 4px 0px #000000;
-            padding: 12px;
-            transition: 0.1s;
-        }
-        .mc-slot:hover {
-            background: #9d9d9d;
-            border-color: var(--mc-text-white);
+        .farm-title {
+            font-family: 'Cherry Bomb One', cursive;
+            color: #fff;
+            text-shadow: 4px 4px 0px #8b4513;
+            letter-spacing: 2px;
         }
 
-        .item-icon {
-            width: 40px; height: 40px;
-            image-rendering: pixelated;
+        .grade-ribbon {
+            background: #ff4500;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            display: inline-block;
+            box-shadow: 0 4px 0px #8b0000;
         }
 
-        .grade-tag {
-            background: #000000aa;
-            border-left: 4px solid var(--mc-text-green);
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            color: var(--mc-text-green);
-            font-weight: bold;
-            margin-top: 8px;
+        .animal-float {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .ground-farm {
+            position: fixed;
+            bottom: 0; width: 100%; height: 120px;
+            background: #228b22;
+            border-top: 15px solid #32cd32;
+            z-index: -1;
         }
     </style>
 </head>
-<body class="p-4 md:p-10 flex flex-col items-center">
+<body class="p-4 md:p-10">
 
-    <div class="sun-mc"></div>
-    <div class="cloud-mc w-32 h-12" style="top: 15%; left: 10%; animation-duration: 40s;"></div>
-    <div class="cloud-mc w-48 h-16" style="top: 5%; left: 60%; animation-duration: 60s; animation-delay: -20s;"></div>
+    <div class="sun-hd"></div>
+    <div class="cloud-hd w-40 h-12" style="top: 10%; animation-duration: 45s;"></div>
+    <div class="cloud-hd w-32 h-10" style="top: 25%; animation-duration: 60s; animation-delay: -20s;"></div>
 
-    <div class="tree-mc"><div class="leaves-mc"></div></div>
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="farm-title text-5xl md:text-7xl mb-2">HAY KU FARM</h1>
+            <p class="bg-[#8b4513] text-white inline-block px-6 py-1 rounded-full font-bold text-sm">
+                🚜 ปฏิทินการผลิตปีการศึกษา 2568
+            </p>
+        </header>
 
-    <img src="https://minecraft.wiki/images/Steve_skin.png" class="mc-character steve w-16 h-32" alt="Steve">
-    <img src="https://minecraft.wiki/images/Alex_skin.png" class="mc-character alex w-16 h-32" alt="Alex">
-    <img src="https://minecraft.wiki/images/Creeper.png" class="mc-character creeper w-16 h-32" alt="Creeper">
-    
-    <div class="ground-mc"></div>
-
-    <header class="text-center mb-12 relative z-10">
-        <h1 class="mc-text-shadow text-4xl md:text-6xl mb-2">KU MINECRAFT CALENDAR</h1>
-        <div class="bg-black text-green-500 font-mono text-sm px-4 py-1 inline-block border-2 border-green-500">
-            WORLD: ACADEMIC_YEAR_2568 // VERSION: 1.2.0
-        </div>
-    </header>
-
-    <main class="mc-window max-w-5xl w-full">
-        <div class="mb-6 flex items-center justify-between">
-            <span class="mc-text-shadow text-black" style="text-shadow: none;">Inventory: Academic Schedule</span>
-            <div class="flex gap-1">
-                <div class="w-6 h-6 bg-red-500 border-2 border-black"></div>
-                <div class="w-6 h-6 bg-gray-400 border-2 border-black"></div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="mc-slot flex flex-col h-full">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://minecraft.wiki/images/Oak_Log_JE4_BE3.png" class="item-icon float-item" alt="Oak Log">
-                    <h2 class="mc-text-shadow text-base">QUEST: ภาคต้น</h2>
-                </div>
-                <div class="text-[13px] text-white space-y-2 flex-grow">
-                    <div class="flex justify-between"><span><span class="text-green-400">[NEW]</span> เปิดภาคเรียน:</span><span class="text-green-400">23 มิ.ย. 68</span></div>
-                    <div class="flex justify-between"><span><span class="text-yellow-400">[EXAM]</span> สอบกลางภาค:</span><span>9-17 ส.ค. 68</span></div>
-                    <div class="flex justify-between"><span><span class="text-yellow-400">[EXAM]</span> สอบปลายภาค:</span><span>20-31 ต.ค. 68</span></div>
-                    <div class="flex justify-between text-gray-400"><span>[END] ปิดภาคเรียน:</span><span>3 พ.ย. 68</span></div>
-                    <div class="grade-tag">⭐ เกรดออก: 10 พ.ย. 68</div>
-                </div>
+        <div class="wood-frame max-w-5xl mx-auto">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-4xl animal-float">🐔</span>
+                <h2 class="text-white text-2xl font-black italic">Farm Orders: Academic Calendar</h2>
             </div>
 
-            <div class="mc-slot flex flex-col h-full border-white" style="background: #4a4a4a;">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://minecraft.wiki/images/Diamond_Sword_JE3_BE3.png" class="item-icon float-item" style="animation-delay: 0.5s;" alt="Diamond Sword">
-                    <h2 class="mc-text-shadow text-base text-yellow-400">QUEST: ภาคปลาย</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="order-paper flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-black text-brown-800">ฤดูเก็บเกี่ยว: ภาคต้น</h3>
+                        <span class="text-2xl">🌽</span>
+                    </div>
+                    <div class="space-y-3 text-sm flex-grow">
+                        <div class="flex justify-between"><span>หว่านเมล็ด (เปิดเรียน):</span><span class="font-bold text-green-700">23 มิ.ย. 68</span></div>
+                        <div class="flex justify-between"><span>ดูแลพืชผล (สอบกลาง):</span><span class="font-bold text-orange-600">9-17 ส.ค. 68</span></div>
+                        <div class="flex justify-between"><span>เก็บเกี่ยว (สอบปลาย):</span><span class="font-bold text-orange-600">20-31 ต.ค. 68</span></div>
+                        <div class="flex justify-between text-gray-400"><span>พักแปลง (ปิดภาค):</span><span>3 พ.ย. 68</span></div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="grade-ribbon">🏆 ผลผลิต (เกรด) ออก: 10 พ.ย. 68</div>
+                    </div>
                 </div>
-                <div class="text-[13px] text-white space-y-2 flex-grow">
-                    <div class="flex justify-between"><span><span class="text-green-400">[NEW]</span> เปิดภาคเรียน:</span><span class="text-green-400">24 พ.ย. 68</span></div>
-                    <div class="flex justify-between bg-yellow-400 text-black px-1 font-bold"><span><span class="text-red-600">[ACTIVE]</span> สอบกลางภาค:</span><span>10-18 ม.ค. 69</span></div>
-                    <div class="flex justify-between"><span><span class="text-yellow-400">[EXAM]</span> สอบปลายภาค:</span><span>16-27 มี.ค. 69</span></div>
-                    <div class="flex justify-between text-gray-400"><span>[END] ปิดภาคเรียน:</span><span>30 มี.ค. 69</span></div>
-                    <div class="grade-tag" style="border-color: #ffff55; color: #ffff55;">⭐ เกรดออก: 7 เม.ย. 69</div>
+
+                <div class="order-paper flex flex-col h-full ring-4 ring-yellow-400">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-black text-brown-800">ฤดูเก็บเกี่ยว: ภาคปลาย</h3>
+                        <span class="text-2xl animal-float">🐮</span>
+                    </div>
+                    <div class="space-y-3 text-sm flex-grow">
+                        <div class="flex justify-between"><span>หว่านเมล็ด (เปิดเรียน):</span><span class="font-bold text-green-700">24 พ.ย. 68</span></div>
+                        <div class="flex justify-between bg-yellow-100 p-1 font-bold"><span>ดูแลพืชผล (สอบกลาง):</span><span class="text-red-600">10-18 ม.ค. 69</span></div>
+                        <div class="flex justify-between"><span>เก็บเกี่ยว (สอบปลาย):</span><span class="font-bold text-orange-600">16-27 มี.ค. 69</span></div>
+                        <div class="flex justify-between text-gray-400"><span>พักแปลง (ปิดภาค):</span><span>30 มี.ค. 69</span></div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="grade-ribbon bg-yellow-500">🏆 ผลผลิต (เกรด) ออก: 7 เม.ย. 69</div>
+                    </div>
                 </div>
+
+                <div class="order-paper flex flex-col h-full opacity-80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-black text-brown-800">ฤดูเก็บเกี่ยว: ฤดูร้อน</h3>
+                        <span class="text-2xl">🐷</span>
+                    </div>
+                    <div class="space-y-3 text-sm flex-grow">
+                        <div class="flex justify-between"><span>หว่านเมล็ด (เปิดเรียน):</span><span class="font-bold text-green-700">20 เม.ย. 69</span></div>
+                        <div class="flex justify-between"><span>ดูแลพืชผล (เรียนวันสุดท้าย):</span><span>29 พ.ค. 69</span></div>
+                        <div class="flex justify-between"><span>เก็บเกี่ยว (สอบปลาย):</span><span class="font-bold text-orange-600">30 พ.ค.-1 มิ.ย. 69</span></div>
+                        <div class="flex justify-between text-gray-400"><span>พักแปลง (ปิดภาค):</span><span>2 มิ.ย. 69</span></div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="grade-ribbon bg-blue-500">🏆 ผลผลิต (เกรด) ออก: 11 มิ.ย. 69</div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="mc-slot flex flex-col h-full opacity-70">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://minecraft.wiki/images/Blaze_Powder_JE2_BE2.png" class="item-icon float-item" style="animation-delay: 1s;" alt="Blaze Powder">
-                    <h2 class="mc-text-shadow text-base">QUEST: ฤดูร้อน</h2>
-                </div>
-                <div class="text-[13px] text-white space-y-2 flex-grow">
-                    <div class="flex justify-between"><span><span class="text-green-400">[NEW]</span> เปิดภาคเรียน:</span><span class="text-green-400">20 เม.ย. 69</span></div>
-                    <div class="flex justify-between"><span>[LAST] เรียนวันสุดท้าย:</span><span>29 พ.ค. 69</span></div>
-                    <div class="flex justify-between"><span><span class="text-yellow-400">[EXAM]</span> สอบปลายภาค:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
-                    <div class="flex justify-between text-gray-400"><span>[END] ปิดภาคเรียน:</span><span>2 มิ.ย. 69</span></div>
-                    <div class="grade-tag">⭐ เกรดออก: 11 มิ.ย. 69</div>
-                </div>
+            <div class="mt-8 flex justify-center">
+                <button class="bg-[#ffff00] border-4 border-[#8b4513] px-12 py-3 rounded-xl font-black text-[#8b4513] hover:scale-105 transition shadow-lg uppercase">
+                    🚚 ส่งออกข้อมูล (Print)
+                </button>
             </div>
-
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
-            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">OPTIONS</button>
-            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">SERVER INFO</button>
-            <button class="bg-[#aaaaaa] border-4 border-black shadow-[inset_4px_4px_0px_#dbdbdb,inset_-4px_-4px_0px_#555555] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white" onclick="window.print()">SAVE & PRINT</button>
-            <button class="bg-red-800 border-4 border-black shadow-[inset_4px_4px_0px_#b91c1c,inset_-4px_-4px_0px_#450a0a] py-2 mc-text-shadow text-[10px] text-center hover:outline hover:outline-2 hover:outline-white">DISCONNECT</button>
-        </div>
-    </main>
-
-    <div class="w-full fixed bottom-0 left-0 h-24 bg-[var(--mc-dirt)] z-0">
-        <div class="h-16 w-full bg-[var(--mc-grass-top)] border-t-8 border-[var(--mc-grass-side)]"></div>
     </div>
+
+    <div class="mt-20 flex justify-around items-end opacity-90 relative">
+        <div class="text-6xl animal-float">🌳</div>
+        <div class="text-7xl">🚜</div>
+        <div class="text-6xl">🏡</div>
+        <div class="text-5xl animal-float">🐑</div>
+    </div>
+
+    <div class="ground-farm"></div>
 
 </body>
 </html>
