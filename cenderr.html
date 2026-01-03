@@ -3,362 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปฏิทินวิชาการ (Modern) - มหาวิทยาลัยตัวอย่าง</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Edu-Calendar 4.0 Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- โค้ด CSS สำหรับจัดรูปแบบ --- */
-        body {
-            font-family: 'Kanit', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f9; /* พื้นหลังสว่างกว่าเดิม */
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding-top: 20px;
-        }
-
-        /* Header / Title Section */
-        .title-section {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 2px solid #0056b3;
-            margin-bottom: 30px;
-        }
-        .title-section h1 {
-            font-size: 2.5em;
-            color: #0056b3;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-        .title-section p {
-            font-size: 1.1em;
-            color: #666;
-            margin-top: 0;
-        }
-
-        /* Tabs (ตัวเลือกปีการศึกษา) */
-        .year-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .year-tabs .tab-button {
-            flex-grow: 1;
-            padding: 15px 10px;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #333;
-            transition: all 0.3s;
-        }
-
-        .year-tabs .tab-button:hover {
-            background-color: #dee2e6;
-        }
-
-        .year-tabs .tab-button.active {
-            background-color: #0056b3;
-            color: white;
-        }
-
-        /* Accordion (ตัวเลือกหลักสูตร/ภาคเรียน) */
-        .accordion {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            background-color: #0056b3;
-            color: white;
-            padding: 15px 20px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-header .icon {
-            font-size: 1.5em;
-            line-height: 1;
-            transition: transform 0.3s;
-        }
-
-        .accordion-header.active .icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out, padding 0.4s;
-            background-color: white;
-        }
-
-        .accordion-content.open {
-            max-height: 2000px; /* ค่าเผื่อสำหรับการขยาย */
-            padding: 20px;
-        }
-
-        /* ตารางรายการกิจกรรม */
-        .calendar-list table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        .calendar-list th, .calendar-list td {
-            padding: 12px 15px;
-            text-align: left;
-            border: 1px solid #eee;
-        }
-
-        .calendar-list th {
-            background-color: #f1f1f1;
-            color: #333;
-            font-weight: 600;
-        }
-
-        /* รหัสสีสำหรับแถว (Minimalist style) */
-        .event-holiday { background-color: #fff0f0; border-left: 5px solid #d9534f; } 
-        .event-start-end { background-color: #f0f8ff; border-left: 5px solid #5bc0de; } 
-        .event-action { background-color: #f9fff0; border-left: 5px solid #5cb85c; } 
-        .event-exam { background-color: #fffbe6; border-left: 5px solid #f0ad4e; } 
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            border-top: 1px solid #ddd;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        /* --- Responsive Design (Mobile - จัดการตาราง) --- */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-            }
-            .title-section h1 {
-                font-size: 2em;
-            }
-            
-            .year-tabs {
-                flex-direction: column;
-                border-radius: 0;
-            }
-            .year-tabs .tab-button {
-                border-bottom: 1px solid #ddd;
-            }
-
-            /* Table stack on mobile */
-            .calendar-list table, .calendar-list thead, .calendar-list tbody, 
-            .calendar-list th, .calendar-list td, .calendar-list tr { display: block; }
-            .calendar-list thead { display: none; }
-            
-            .calendar-list tr {
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            .calendar-list td {
-                border: none;
-                position: relative;
-                padding-left: 50%; 
-                text-align: right;
-            }
-            .calendar-list td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: 45%;
-                white-space: nowrap;
-                font-weight: 600;
-                text-align: left;
-                color: #0056b3;
-            }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap');
+        body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; }
+        .calendar-card:hover { transform: translateY(-5px); transition: 0.3s; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <header class="title-section">
-            <h1>ปฏิทินวิชาการ</h1>
-            <p>มหาวิทยาลัยตัวอย่าง | ข้อมูลปีการศึกษา 2568</p>
-        </header>
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <nav class="w-full md:w-64 bg-indigo-900 text-white p-6">
+            <h1 class="text-2xl font-bold mb-8"><i class="fas fa-graduation-cap mr-2"></i>EDU 4.0</h1>
+            <ul class="space-y-4">
+                <li class="hover:text-indigo-300 cursor-pointer"><i class="fas fa-calendar-alt mr-2"></i> ปฏิทินรวม</li>
+                <li class="hover:text-indigo-300 cursor-pointer"><i class="fas fa-rocket mr-2"></i> Project-Based</li>
+                <li class="hover:text-indigo-300 cursor-pointer"><i class="fas fa-microchip mr-2"></i> Skill Badges</li>
+            </ul>
+        </nav>
 
-        <div class="year-tabs">
-            <button class="tab-button active" data-tab="2568">ปีการศึกษา 2568</button>
-            <button class="tab-button" data-tab="2569">ปีการศึกษา 2569</button>
-            <button class="tab-button" data-tab="2567">ปีก่อนหน้า 2567</button>
-        </div>
-
-        <div class="tab-content" id="tab-2568">
-            
-            <div class="accordion">
-                <div class="accordion-header active" data-target="content-normal-1">
-                    ภาคปกติ: ภาคเรียนที่ 1 / 2568 <span class="icon">▼</span>
+        <main class="flex-1 p-4 md:p-10">
+            <header class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-semibold text-gray-800">มกราคม 2026</h2>
+                <div class="space-x-2">
+                    <button class="bg-white border p-2 rounded shadow-sm hover:bg-gray-50">วันนี้</button>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded shadow-md hover:bg-indigo-700">+ เพิ่มกิจกรรม</button>
                 </div>
-                <div class="accordion-content open" id="content-normal-1">
-                    <div class="calendar-list">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>วันที่</th>
-                                    <th>กิจกรรม</th>
-                                    <th>หมายเหตุ / กลุ่มเป้าหมาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="event-start-end">
-                                    <td data-label="วันที่">15 ส.ค.</td>
-                                    <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 1</td>
-                                    <td data-label="หมายเหตุ">วันแรกของการเรียนการสอน</td>
-                                </tr>
-                                <tr class="event-action">
-                                    <td data-label="วันที่">16-30 ส.ค.</td>
-                                    <td data-label="กิจกรรม">เพิ่ม/ถอนรายวิชา (Add/Drop)</td>
-                                    <td data-label="หมายเหตุ">ดำเนินการผ่านระบบออนไลน์</td>
-                                </tr>
-                                <tr class="event-holiday">
-                                    <td data-label="วันที่">23 ต.ค.</td>
-                                    <td data-label="กิจกรรม">วันหยุด: วันปิยมหาราช</td>
-                                    <td data-label="หมายเหตุ">ไม่มีการเรียนการสอน</td>
-                                </tr>
-                                <tr class="event-exam">
-                                    <td data-label="วันที่">9-16 ธ.ค.</td>
-                                    <td data-label="กิจกรรม">สัปดาห์สอบปลายภาค</td>
-                                    <td data-label="หมายเหตุ">สำหรับทุกระดับชั้น</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-blue-500 text-white p-4 rounded-xl shadow-lg">
+                    <p class="text-sm opacity-80">วิชาที่กำลังเรียน</p>
+                    <p class="text-2xl font-bold">AI for Design</p>
+                </div>
+                <div class="bg-emerald-500 text-white p-4 rounded-xl shadow-lg">
+                    <p class="text-sm opacity-80">Project Deadline</p>
+                    <p class="text-2xl font-bold">ในอีก 3 วัน</p>
+                </div>
+                <div class="bg-amber-500 text-white p-4 rounded-xl shadow-lg">
+                    <p class="text-sm opacity-80">ชั่วโมงสะสม (Micro-credit)</p>
+                    <p class="text-2xl font-bold">45 / 100 hrs</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="grid grid-cols-7 bg-gray-100 text-center py-4 font-bold border-b">
+                    <div>อา.</div><div>จ.</div><div>อ.</div><div>พ.</div><div>พฤ.</div><div>ศ.</div><div>ส.</div>
+                </div>
+                <div id="calendar-days" class="grid grid-cols-7 gap-px bg-gray-200">
                     </div>
-                </div>
             </div>
-
-            <div class="accordion">
-                <div class="accordion-header" data-target="content-normal-2">
-                    ภาคปกติ: ภาคเรียนที่ 2 / 2568 <span class="icon">▶</span>
-                </div>
-                <div class="accordion-content" id="content-normal-2">
-                    <div class="calendar-list">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>วันที่</th>
-                                    <th>กิจกรรม</th>
-                                    <th>หมายเหตุ / กลุ่มเป้าหมาย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="event-start-end">
-                                    <td data-label="วันที่">13 ม.ค.</td>
-                                    <td data-label="กิจกรรม">วันเปิดภาคเรียนที่ 2</td>
-                                    <td data-label="หมายเหตุ">วันแรกของการเรียนการสอน</td>
-                                </tr>
-                                <tr class="event-action">
-                                    <td data-label="วันที่">28 ก.พ.</td>
-                                    <td data-label="กิจกรรม">วันสุดท้ายของการถอนรายวิชา (W)</td>
-                                    <td data-label="หมายเหตุ">ถอนหลังจากนี้ถือว่าได้เกรด F</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion">
-                <div class="accordion-header" data-target="content-special">
-                    หลักสูตรพิเศษ (กศ.พป.): ภาคเรียนที่ 1 / 2568 <span class="icon">▶</span>
-                </div>
-                <div class="accordion-content" id="content-special">
-                    <p>ข้อมูลปฏิทินสำหรับหลักสูตรพิเศษจะแตกต่างกันเล็กน้อย โปรดตรวจสอบรายละเอียด</p>
-                </div>
-            </div>
-
-        </div> <div class="tab-content" id="tab-2569" style="display: none;">
-            <p style="text-align: center;">ปฏิทินปีการศึกษา 2569 จะประกาศให้ทราบในภายหลัง</p>
-        </div>
-        <div class="tab-content" id="tab-2567" style="display: none;">
-            <p style="text-align: center;">นี่คือปฏิทินสำหรับปีการศึกษา 2567 (ปีก่อนหน้า)</p>
-        </div>
-
-        <a href="calendar.pdf" style="display: block; text-align: center; margin-top: 30px; font-weight: 600; color: #0056b3;">
-            [Icon] ดาวน์โหลดปฏิทินฉบับเต็ม (PDF)
-        </a>
-
-        <footer class="footer">
-            © 2568 มหาวิทยาลัยตัวอย่าง | Academic Affairs
-        </footer>
+        </main>
     </div>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- 1. Tab Functionality (สำหรับสลับปีการศึกษา) ---
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
+        // Simple Script to generate calendar days
+        const daysContainer = document.getElementById('calendar-days');
+        const totalDays = 31;
+        const events = {
+            5: { title: "Workshop: Coding", color: "bg-blue-100 text-blue-700" },
+            12: { title: "Pitching Day", color: "bg-red-100 text-red-700" },
+            20: { title: "Hybrid Class", color: "bg-purple-100 text-purple-700" }
+        };
 
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetTab = button.getAttribute('data-tab');
-
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    tabContents.forEach(content => {
-                        content.style.display = content.id === `tab-${targetTab}` ? 'block' : 'none';
-                    });
-                });
-            });
-
-            // --- 2. Accordion Functionality (สำหรับสลับภาคเรียน) ---
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const targetId = header.getAttribute('data-target');
-                    const targetContent = document.getElementById(targetId);
-
-                    // ปิด Accordion อื่นๆ ทั้งหมด
-                    document.querySelectorAll('.accordion-header').forEach(h => {
-                        if (h !== header) {
-                            h.classList.remove('active');
-                            document.getElementById(h.getAttribute('data-target')).classList.remove('open');
-                            document.getElementById(h.getAttribute('data-target')).previousElementSibling.querySelector('.icon').textContent = '▶';
-                        }
-                    });
-
-                    // เปิด/ปิด Accordion ปัจจุบัน
-                    header.classList.toggle('active');
-                    targetContent.classList.toggle('open');
-                    header.querySelector('.icon').textContent = header.classList.contains('active') ? '▼' : '▶';
-                });
-            });
-        });
-    </script> 
+        for (let i = 1; i <= totalDays; i++) {
+            let eventHtml = '';
+            if (events[i]) {
+                eventHtml = `<div class="mt-2 text-[10px] p-1 rounded ${events[i].color} font-semibold">${events[i].title}</div>`;
+            }
+            
+            daysContainer.innerHTML += `
+                <div class="bg-white min-h-[120px] p-2 hover:bg-indigo-50 transition-colors cursor-pointer border-r border-b">
+                    <span class="text-gray-400 font-medium">${i}</span>
+                    ${eventHtml}
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>
