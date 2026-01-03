@@ -3,233 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Academic Calendar 4.0 - Cyber Mario</title>
+    <title>KU Calendar 2568 - Minecraft Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* นำฟอนต์ที่คล้าย Minecraft มาใช้ */
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://db.onlinewebfonts.com/t/c1328456254784a0c86815efc1c3f19e.woff2') format('woff2');
+        }
+
         :root {
-            --cyber-blue: #00f2ff;
-            --cyber-pink: #ff00ff;
-            --mario-red: #ff3131;
-            --glass: rgba(255, 255, 255, 0.1);
+            --mc-gui: #c6c6c6;
+            --mc-border-light: #ffffff;
+            --mc-border-dark: #555555;
+            --mc-shadow: #373737;
         }
 
         body {
-            background: #050505;
-            color: #fff;
+            background: #5c94fc; /* สีท้องฟ้า Minecraft */
             font-family: 'Kanit', sans-serif;
+            image-rendering: pixelated;
             overflow-x: hidden;
-            min-height: 100vh;
+            margin: 0;
         }
 
-        /* --- Animated Cyber Background --- */
-        .cyber-bg {
+        /* --- Minecraft Background Scene --- */
+        .sun {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
-            z-index: -2;
-        }
-
-        .grid-floor {
-            position: fixed;
-            bottom: 0; width: 200%; height: 50vh;
-            background-image: 
-                linear-gradient(var(--cyber-blue) 1px, transparent 1px),
-                linear-gradient(90deg, var(--cyber-blue) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center bottom;
-            opacity: 0.15;
-            animation: moveGrid 5s linear infinite;
+            top: 50px; right: 50px;
+            width: 60px; height: 60px;
+            background: #ffff55;
+            border: 4px solid #000;
             z-index: -1;
         }
 
-        @keyframes moveGrid {
-            from { background-position: 0 0; }
-            to { background-position: 0 50px; }
-        }
-
-        /* --- Floating Cyber Clouds --- */
-        .cyber-cloud {
+        .cloud-mc {
             position: absolute;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            border-radius: 50px;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
-            animation: float 20s linear infinite;
+            background: white;
+            border: 4px solid #000;
+            animation: moveCloud linear infinite;
+            z-index: -1;
         }
 
-        @keyframes float {
+        @keyframes moveCloud {
             from { left: -200px; }
             to { left: 100vw; }
         }
 
-        /* --- Mission Cards (Academic Calendar) --- */
-        .mission-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border-left: 4px solid var(--cyber-blue);
-            padding: 1.5rem;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* --- Minecraft GUI Style --- */
+        .mc-container {
+            background-color: var(--mc-gui);
+            border: 4px solid #000;
+            box-shadow: inset 4px 4px 0px var(--mc-border-light), 
+                        inset -4px -4px 0px var(--mc-border-dark);
+            padding: 20px;
             position: relative;
-            overflow: hidden;
         }
 
-        .mission-card::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 50px; height: 50px;
-            background: linear-gradient(225deg, var(--cyber-blue) 50%, transparent 50%);
-            opacity: 0.2;
+        .mc-header {
+            font-family: 'Minecraft', sans-serif;
+            color: #ffffff;
+            text-shadow: 3px 3px 0px #373737;
+            letter-spacing: 2px;
         }
 
-        .mission-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-left: 4px solid var(--cyber-pink);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        .mc-card {
+            background: #212121; /* สีพื้นหลังช่อง Inventory */
+            border: 4px solid #000;
+            box-shadow: inset 4px 4px 0px #000;
+            color: #ffffff;
+            padding: 15px;
+            transition: transform 0.1s;
         }
 
-        .cyber-header {
-            font-family: 'Syncopate', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+        .mc-card:hover {
+            outline: 4px solid #ffffff;
+            transform: scale(1.02);
         }
 
-        .grade-status {
-            background: rgba(0, 242, 255, 0.1);
-            border: 1px solid var(--cyber-blue);
-            color: var(--cyber-blue);
-            font-weight: 900;
-            padding: 0.5rem;
+        .item-icon {
+            width: 32px; height: 32px;
+            image-rendering: pixelated;
+        }
+
+        .grade-box {
+            background: #3f3f3f;
+            border: 2px solid #55ff55;
+            color: #55ff55;
+            padding: 5px;
             text-align: center;
-            margin-top: 1rem;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+            font-weight: bold;
+            margin-top: 10px;
         }
 
-        .scanline {
-            width: 100%; height: 2px;
-            background: var(--cyber-blue);
-            opacity: 0.3;
-            position: absolute;
-            animation: scan 4s linear infinite;
+        .mc-button {
+            background: #aaaaaa;
+            border: 3px solid #000;
+            box-shadow: inset 3px 3px 0px #dbdbdb, inset -3px -3px 0px #555555;
+            color: #ffffff;
+            text-shadow: 2px 2px 0px #373737;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
         }
 
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100%; }
+        .mc-button:hover {
+            background: #c6c6c6;
+            outline: 2px solid #ffffff;
+        }
+
+        /* --- Ground & Grass --- */
+        .ground {
+            position: fixed;
+            bottom: 0; width: 100%; height: 60px;
+            background: #8b4513; /* Dirt */
+            border-top: 8px solid #55ff55; /* Grass */
+            z-index: -1;
         }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-4 md:p-10">
 
-<div class="cyber-bg"></div>
-<div class="grid-floor"></div>
+    <div class="sun"></div>
+    <div class="cloud-mc w-32 h-12" style="top: 15%; animation-duration: 40s;"></div>
+    <div class="cloud-mc w-48 h-16" style="top: 5%; animation-duration: 60s; animation-delay: -20s;"></div>
 
-<div class="cyber-cloud w-32 h-8" style="top: 10%; animation-duration: 25s; opacity: 0.4;"></div>
-<div class="cyber-cloud w-48 h-12" style="top: 20%; animation-duration: 40s; animation-delay: -10s; opacity: 0.6;"></div>
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="mc-header text-3xl md:text-5xl mb-4">KU CALENDAR: 2025-2026</h1>
+            <div class="inline-block bg-[#000000aa] p-2 px-6">
+                <p class="text-green-400 font-mono text-xs md:text-sm">>> WORLD: ACADEMIC_YEAR_2568</p>
+            </div>
+        </header>
 
-<div class="max-w-6xl mx-auto">
-    <header class="text-center mb-16">
-        <h1 class="cyber-header text-3xl md:text-5xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">
-            SYSTEM 2568: CALENDAR
-        </h1>
-        <div class="flex justify-center items-center gap-4">
-            <span class="h-px w-12 bg-cyan-500"></span>
-            <p class="text-[10px] tracking-[0.5em] font-bold text-cyan-500">VERSION 4.0 // ACADEMIC OBJECTIVES</p>
-            <span class="h-px w-12 bg-cyan-500"></span>
-        </div>
-    </header>
+        <div class="mc-container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="mc-card">
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png" class="item-icon" alt="icon">
+                        <h2 class="mc-header text-sm">SEMESTER 1</h2>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400">STATUS: <span class="text-white">COMPLETED</span></p>
+                        <div class="flex justify-between"><span>START:</span><span>23 มิ.ย. 68</span></div>
+                        <div class="flex justify-between text-yellow-400"><span>MIDTERM:</span><span>9-17 ส.ค. 68</span></div>
+                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>20-31 ต.ค. 68</span></div>
+                        <div class="grade-box">
+                            🏆 เกรดออก: 10 พ.ย. 68
+                        </div>
+                    </div>
+                </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <div class="mission-card group">
-            <div class="scanline"></div>
-            <p class="text-[10px] font-bold text-cyan-400 mb-2">OBJECTIVE 01 // 1ST SEMESTER</p>
-            <h2 class="text-2xl font-black mb-6 flex items-center gap-2">
-                <span class="w-2 h-6 bg-cyan-500"></span> ภาคการศึกษาต้น
-            </h2>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between items-center opacity-70">
-                    <span>เปิดเรียน</span> <span class="font-bold text-white">23 มิ.ย. 68</span>
+                <div class="mc-card" style="border-color: #ffff55;">
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" class="item-icon animate-bounce" alt="icon">
+                        <h2 class="mc-header text-sm text-yellow-400">SEMESTER 2</h2>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400">STATUS: <span class="text-green-400">IN PROGRESS</span></p>
+                        <div class="flex justify-between"><span>START:</span><span>24 พ.ย. 68</span></div>
+                        <div class="flex justify-between bg-white text-black px-1 font-bold"><span>MIDTERM:</span><span>10-18 ม.ค. 69</span></div>
+                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>16-27 มี.ค. 69</span></div>
+                        <div class="grade-box" style="border-color: #ffff55; color: #ffff55;">
+                            🏆 เกรดออก: 7 เม.ย. 69
+                        </div>
+                    </div>
                 </div>
-                <div class="flex justify-between items-center text-rose-400 font-bold">
-                    <span>สอบกลางภาค</span> <span>9 - 17 ส.ค. 68</span>
+
+                <div class="mc-card opacity-80">
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="https://minecraft.wiki/images/Lava_Bucket_JE2_BE2.png" class="item-icon" alt="icon">
+                        <h2 class="mc-header text-sm">SUMMER</h2>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400">STATUS: <span class="text-red-400">LOCKED</span></p>
+                        <div class="flex justify-between"><span>START:</span><span>20 เม.ย. 69</span></div>
+                        <div class="flex justify-between"><span>LAST DAY:</span><span>29 พ.ค. 69</span></div>
+                        <div class="flex justify-between text-yellow-400"><span>FINAL:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
+                        <div class="grade-box">
+                            🏆 เกรดออก: 11 มิ.ย. 69
+                        </div>
+                    </div>
                 </div>
-                <div class="flex justify-between items-center text-rose-400 font-bold">
-                    <span>สอบปลายภาค</span> <span>20 - 31 ต.ค. 68</span>
-                </div>
-                <div class="flex justify-between items-center opacity-40">
-                    <span>ปิดภาคเรียน</span> <span>3 พ.ย. 68</span>
-                </div>
-                <div class="grade-status group-hover:bg-cyan-500 group-hover:text-black transition-colors">
-                    GRADE RELEASE: 10 พ.ย. 68
-                </div>
+
+            </div>
+
+            <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="mc-button">MENU</div>
+                <div class="mc-button">SKINS</div>
+                <div class="mc-button" onclick="window.print()">PRINT</div>
+                <div class="mc-button bg-red-800">QUIT</div>
             </div>
         </div>
-
-        <div class="mission-card border-l-rose-500 scale-105 shadow-[0_0_40px_rgba(244,63,94,0.1)]">
-            <div class="scanline" style="background: #f43f5e;"></div>
-            <div class="absolute -top-2 right-4 bg-rose-500 text-black text-[8px] font-black px-2 py-0.5">ACTIVE MISSION</div>
-            <p class="text-[10px] font-bold text-rose-500 mb-2">OBJECTIVE 02 // 2ND SEMESTER</p>
-            <h2 class="text-2xl font-black mb-6 flex items-center gap-2">
-                <span class="w-2 h-6 bg-rose-500 animate-pulse"></span> ภาคการศึกษาปลาย
-            </h2>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between items-center">
-                    <span>เปิดเรียน</span> <span class="font-bold">24 พ.ย. 68</span>
-                </div>
-                <div class="flex justify-between items-center bg-rose-500/20 p-2 border border-rose-500/50">
-                    <span class="font-black">สอบกลางภาค</span> <span class="font-black text-rose-500">10 - 18 ม.ค. 69</span>
-                </div>
-                <div class="flex justify-between items-center text-rose-400 font-bold">
-                    <span>สอบปลายภาค</span> <span>16 - 27 มี.ค. 69</span>
-                </div>
-                <div class="flex justify-between items-center opacity-70">
-                    <span>ปิดภาคเรียน</span> <span>30 มี.ค. 69</span>
-                </div>
-                <div class="grade-status border-rose-500 text-rose-500 bg-rose-500/10">
-                    GRADE RELEASE: 7 เม.ย. 69
-                </div>
-            </div>
-        </div>
-
-        <div class="mission-card group">
-            <div class="scanline"></div>
-            <p class="text-[10px] font-bold text-cyan-400 mb-2">OBJECTIVE 03 // SUMMER</p>
-            <h2 class="text-2xl font-black mb-6 flex items-center gap-2">
-                <span class="w-2 h-6 bg-cyan-500"></span> ภาคฤดูร้อน
-            </h2>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between items-center">
-                    <span>เปิดเรียน</span> <span class="font-bold">20 เม.ย. 69</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span>เรียนวันสุดท้าย</span> <span>29 พ.ค. 69</span>
-                </div>
-                <div class="flex justify-between items-center text-rose-400 font-bold">
-                    <span>สอบปลายภาค</span> <span>30 พ.ค. - 1 มิ.ย. 69</span>
-                </div>
-                <div class="flex justify-between items-center opacity-40">
-                    <span>ปิดภาคเรียน</span> <span>2 มิ.ย. 69</span>
-                </div>
-                <div class="grade-status group-hover:bg-cyan-500 group-hover:text-black transition-colors">
-                    GRADE RELEASE: 11 มิ.ย. 69
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <div class="mt-20 flex justify-between items-center opacity-30">
-        <div class="text-xs font-mono tracking-widest">>> LOADING STATUS: ALL SYSTEMS NOMINAL</div>
-        <div class="flex gap-1">
-            <div class="w-12 h-1 bg-cyan-500 animate-pulse"></div>
-            <div class="w-4 h-1 bg-fuchsia-500"></div>
+    <div class="mt-20 flex justify-center gap-10 opacity-80">
+        <div class="w-16 h-32 bg-green-700 border-4 border-black relative">
+            <div class="absolute top-4 left-4 w-4 h-4 bg-red-500"></div>
         </div>
+        <div class="w-12 h-20 bg-gray-500 border-4 border-black"></div>
     </div>
-</div>
+
+    <div class="ground"></div>
 
 </body>
 </html>
