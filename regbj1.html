@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบรายชื่อผู้ขอเปิดรายวิชา 2/2568</title>
+    <title>ตรวจสอบรายชื่อผู้ขอเปิดรายวิชา 2/2568</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #3498db;
-            --bg: #f4f7f9;
+            --primary: #1e3a8a;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --bg: #f8fafc;
         }
 
         body {
@@ -20,98 +21,124 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
+            padding-top: 50px;
         }
 
         .container {
             background: white;
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             text-align: center;
         }
 
-        .logo { font-size: 3rem; color: var(--accent); margin-bottom: 15px; }
-        h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
-        p.desc { color: #888; margin-bottom: 25px; font-size: 0.9rem; }
-
-        .search-box {
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: #eff6ff;
+            color: var(--accent);
+            border-radius: 50%;
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        h2 { margin: 0; color: var(--primary); font-size: 1.6rem; }
+        p.desc { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+
+        .search-area {
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 15px;
+            display: flex;
+            margin-bottom: 25px;
         }
 
         input {
             flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #eee;
-            border-radius: 10px;
+            padding: 15px;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
             outline: none;
-            transition: 0.3s;
+            font-family: 'Sarabun', sans-serif;
         }
-
-        input:focus { border-color: var(--accent); }
 
         button {
-            padding: 12px 20px;
-            background: var(--accent);
+            padding: 0 25px;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
-        button:hover { background: #2980b9; }
+        button:hover { background: var(--accent); }
 
         #result {
             display: none;
             margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
+            padding: 25px;
+            background: #ffffff;
             border-radius: 15px;
-            border: 1px solid #eee;
-            animation: fadeIn 0.4s ease;
+            border: 2px solid #f1f5f9;
+            animation: slideUp 0.3s ease;
+            text-align: left;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .info-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 1rem; }
-        .label { color: #666; }
-        .value { color: var(--primary); font-weight: 600; }
-        .status { color: #27ae60; font-weight: bold; margin-top: 10px; display: block; }
+        .res-item { display: flex; flex-direction: column; margin-bottom: 15px; }
+        .res-label { font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
+        .res-value { font-size: 1.2rem; color: var(--primary); font-weight: 600; }
+
+        .badge {
+            display: inline-block;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="logo"><i class="fas fa-file-signature"></i></div>
-    <h2>ตรวจสอบการขอเปิดวิชา</h2>
+    <div class="icon-box"><i class="fas fa-user-check"></i></div>
+    <h2>ระบบตรวจสอบรายชื่อ</h2>
     <p class="desc">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
 
-    <div class="search-box">
-        <input type="text" id="teacherId" placeholder="กรอกรหัสครู (เช่น 111, 231)">
+    <div class="search-area">
+        <input type="text" id="teacherId" placeholder="กรอกรหัสครู (เช่น 111, 231)" onkeyup="if(event.keyCode===13) search()">
         <button onclick="search()"><i class="fas fa-search"></i></button>
     </div>
 
     <div id="result">
-        <div class="info-row">
-            <span class="label">รหัสครู:</span>
-            <span class="value" id="dispId"></span>
+        <div class="res-item">
+            <span class="res-label">รหัสครู</span>
+            <span class="res-value" id="dispId"></span>
         </div>
-        <div class="info-row">
-            <span class="label">ชื่อ-นามสกุล:</span>
-            <span class="value" id="dispName"></span>
+        <div class="res-item">
+            <span class="res-label">ชื่อ-นามสกุล</span>
+            <span class="res-value" id="dispName"></span>
         </div>
-        <span class="status"><i class="fas fa-check-circle"></i> บันทึกข้อมูลเรียบร้อย</span>
+        <div style="text-align: center; margin-top: 10px;">
+            <span class="badge"><i class="fas fa-check"></i> ยืนยันข้อมูลในระบบแล้ว</span>
+        </div>
     </div>
 </div>
 
 <script>
-    // ฐานข้อมูลจากที่คุณให้มา (ตัวอย่างบางส่วน)
+    // ฐานข้อมูลรายชื่อทั้งหมดที่ให้มา
     const teachers = {
         "111": "นางสาววาสนา ด่วนดี",
         "113": "นางสาวจินตนา บำรุงเพ็ชร",
@@ -123,14 +150,107 @@
         "121": "นายจิรวัฒน์ โสภาพันธุ์",
         "123": "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์",
         "124": "นางสาวอุษา สายทอง",
+        "125": "นายธีรภัทร แก้วสมนึก",
         "213": "นายจุมพล อยู่คง",
+        "216": "นางสาวภัสรา เพ็งใย",
+        "217": "นางสาวรจนา ดาวเรือง",
+        "218": "นางสาวปัญญาวดี ประดับสุข",
+        "221": "นางปราณี อินทรักษา",
+        "222": "นางสาวเสาวลักษณ์ ชินวงษ์",
+        "224": "นางสาวปัทมปาณี ทับทิมศรี",
+        "225": "นางสาวศิราพรรณ ชูประสิทธิ์",
+        "226": "นางอนุสรา โพธิ์หอม",
+        "227": "นางสาววรรษา กาญจนลักษณ์",
+        "228": "นางสาวภัคจิรา จงสุกใส",
+        "229": "นางสาวสายรุ้ง ดอกลำภู",
+        "230": "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ",
         "231": "นายนัฎฐกิตติ์ เพชรี",
+        "255": "นางสาวพชรกมล รุ่งวารินทร์",
         "310": "นางสาวจุฑามาศ เอี่ยมเกตุ",
+        "311": "นางสาวเนตรราตรี ท้าวโสม",
+        "314": "นางศิริพร เถาว์โท",
+        "315": "นางนัญธมณีกร ระรอกแก้ว",
+        "316": "นางสาวพิมพ์ณภัส อินทร์สกุล",
+        "319": "นางสาววิชุดา งามอักษร",
+        "320": "นางสาวลินดา จุฬาวรรณ",
+        "321": "นางสาวจิราพร ลิ้มประเสริฐ",
+        "324": "นางกรริสา จันทร์สุวรรณ",
+        "325": "นายเอกชัย ลวดคำ",
+        "326": "นายเสกสรร คำนนท์",
+        "328": "นางสาวชลิตา คงศิริ",
         "329": "นางลำดวน ชิดปราง",
+        "330": "นายสุรศักดิ์ สีน้ำเงิน",
+        "331": "นางวรางคณา พรหมชนะ",
+        "332": "นางศริยา วงษ์จันทร์",
         "333": "นายภูวนัย อ่อนสอาด",
+        "334": "นางสาวปวีณา วงษ์จินดา",
+        "335": "นายสราวุธ แช่มช้อย",
+        "336": "นายธีรภัทร สุดโต",
+        "337": "นางสาวธิดาพร สังข์ทอง",
+        "338": "นางสาวศิรินทิพย์ ลาภสอาดพร",
+        "339": "นางสาวทิพามล ศรีวิเชียร",
+        "340": "นายวินิจ ภูพวก",
+        "341": "นางสาวมัชฌิมา สุขะพิบูลย์",
+        "351": "นายบรรเจิด พุ่มพันธ์สน",
+        "353": "นายวรัตน์ภูมิ บุญตันทา",
         "407": "นายไชยพร แย้มมี",
+        "409": "นางจุฑามาศ เห็นประเสริฐ",
+        "411": "นางสาวอุสา ทองปรีชา",
+        "412": "นายนิคม วงษ์สุวรรณ",
+        "413": "นางปพัชญา จันทรโชติ",
+        "414": "นางสาววราภรณ์ มาลัย",
+        "417": "นายณัฐพัชร์ ทองรอด",
+        "418": "นางสาวเกษจมาภรณ์ น้ำสุทอง",
+        "419": "นายธีรวิช แก้วเกตุ",
+        "420": "นายจิรายุส บูชา",
+        "421": "นางสาวนิติภรณ์ อ่อนละมุล",
+        "422": "นางสาวมลิสา สุขวงษ์จันทร์",
+        "454": "นางชัญญา โพธิ์พันธุ์",
+        "506": "นายโกศล จันทรโชติ",
+        "509": "นายประพนธ์ ชิดปราง",
+        "511": "นางสาวจิตรลัดดา กุศลเสถียร",
+        "512": "นายศุภชัย เนตรนิล",
+        "513": "นายวีระวัฒน์ ชาววังฆ้อง",
+        "552": "นายสิทธิชัย แพน้อย",
+        "554": "นางสาวปาริชาติ เพ็ชรวาว",
+        "555": "นายพรชัย แก้วเรือง",
+        "601": "นายณัฐวุฒิ สุดโต",
+        "606": "นายภูรีวิทย์ เพ็งสุวรรณ",
+        "613": "นางสาววราภรณ์ แก้วกระจ่าง",
+        "614": "นางสาวมัณฑรี เกตุแก้ว",
+        "616": "นางสาวปิยธิดา สร้อยระย้า",
+        "617": "นางสาวอังคณา ดวงเกตุ",
+        "618": "นางสาวกาญจนา คำเทศ",
+        "654": "นางสาวยุพาภรณ์ จงรอบคอบ",
+        "727": "นางพรทิพย์ วันดี",
+        "728": "นางสาวจิรารัตน์ เอี่ยมเขียว",
+        "729": "นางสาวสุนิษา สุวรรณเนตร์",
         "730": "นายนครินทร์ กล้าหาญ",
-        "830": "นายณัฏฐกิตติ์ โพธิ์พุ่ม"
+        "731": "นางสาวเกษราภรณ์ จูงวงค์สุข",
+        "751": "นางสาวเนตรชนก ศรีชมภู",
+        "753": "นายโยธิน เวชวิฐาน",
+        "754": "นางสาวช่อลดา ประไพ",
+        "755": "นายณัฐพร หิรัญอ่อน",
+        "808": "นางสาวกัญญาพัชร เกตุแก้ว",
+        "810": "นางสาวนันทิยา ปัญญาธิกวัฒน์",
+        "812": "นางสาวพิชารมย์ สุขกลม",
+        "815": "นางสาวกาญจนาพร เชิดชูสุวรรณ",
+        "816": "นางสาวพัชรินทร์ ศรีทาคง",
+        "818": "นางสาวมณีวรรณ พลายมี",
+        "819": "นางสาวปริดา แก้วประหลาด",
+        "820": "นางสาวภัคภร เอกอมรธนากิจ",
+        "821": "นางสาวชาริตา พลายระหาร",
+        "822": "นางสาวจุฑาวดี นามเมืองจันทร์",
+        "824": "นางสาวพชรมนต์ คงเกื้อ",
+        "826": "นางสาวปัทมาพร เต่าให้",
+        "827": "นางสาวเบญจวรรณ วุฒิ",
+        "828": "นายนคร คำพล",
+        "829": "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์",
+        "830": "นายณัฏฐกิตติ์ โพธิ์พุ่ม",
+        "831": "นางสาวอุษามณี กล้าหาญ",
+        "832": "นางสาวบุญรักษา ปะลาวัน",
+        "901": "นางสาวอำพิกา บารมี",
+        "903": "นางสาวยุพิน มะลิถอด"
     };
 
     function search() {
@@ -142,7 +262,7 @@
             document.getElementById('dispName').innerText = teachers[id];
             resDiv.style.display = 'block';
         } else {
-            alert("ไม่พบรหัสครูนี้ในระบบการขอเปิดรายวิชา");
+            alert("ไม่พบข้อมูลรหัส " + id + " ในระบบ");
             resDiv.style.display = 'none';
         }
     }
