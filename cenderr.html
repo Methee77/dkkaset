@@ -3,111 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic System 2568</title>
+    <title>Academic Calendar 2025 | University 4.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
-        body { font-family: 'Sarabun', sans-serif; background-color: #f1f5f9; }
-        .semester-card { transition: all 0.3s ease; }
-        .semester-card:hover { border-color: #6366f1; }
-    </table>
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600;700&display=swap');
+        body { font-family: 'Anuphan', sans-serif; background-color: #f8fafc; }
+        .semester-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .semester-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    </style>
 </head>
-<body class="text-slate-800">
+<body class="text-slate-800 antialiased">
 
-    <div class="max-w-[1400px] mx-auto p-4 md:p-8">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-2xl font-bold flex items-center gap-2">
-                    <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
-                    ปฏิทินกิจกรรมการศึกษา ปีการศึกษา 2568
-                </h1>
-                <p class="text-slate-500 text-sm ml-4">สำนักส่งเสริมวิชาการและงานทะเบียน (Smart Registrar)</p>
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold leading-none text-slate-900">Academic Registrar</h1>
+                    <p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-semibold">NPRU Modern System</p>
+                </div>
             </div>
-            <div class="flex gap-2">
-                <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">ภาคปกติ</button>
-                <button class="bg-slate-100 text-slate-600 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 transition">ภาคพิเศษ</button>
+            <div class="flex items-center gap-3">
+                <button class="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition">คู่มือนักศึกษา</button>
+                <button class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition shadow-md">
+                    <i class="fas fa-download mr-2"></i>ดาวน์โหลดปฏิทิน
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">ปฏิทินการศึกษาประจำปี 2568</h2>
+            <div class="flex items-center gap-2 text-slate-500 font-medium">
+                <span>ภาคเรียนปกติ</span>
+                <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
+                <span class="text-indigo-600">Active Academic Year</span>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                <div class="bg-indigo-600 p-4 text-white flex justify-between items-center">
-                    <h2 class="font-bold tracking-wide">ภาคต้น (1/2568)</h2>
-                    <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded uppercase">Active</span>
+            <section class="semester-card bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden flex flex-col">
+                <div class="bg-gradient-to-br from-indigo-600 to-blue-700 p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Phase 01</span>
+                        <h3 class="text-3xl font-bold mt-1">ภาคต้น</h3>
+                        <p class="text-indigo-100 text-sm mt-1 font-medium italic">มิถุนายน - ตุลาคม 2568</p>
+                    </div>
+                    <i class="fas fa-sun absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
                 </div>
-                <div class="p-4 flex-1">
-                    <table class="w-full text-xs">
-                        <thead class="text-slate-400 border-b border-slate-100">
-                            <tr>
-                                <th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th>
-                                <th class="pb-2 text-left font-semibold">รายการกิจกรรม</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50">
-                            <tr><td class="py-3 font-bold w-28">1-15 พ.ค. 68</td><td class="py-3">ลงทะเบียนเรียนและชำระเงิน</td></tr>
-                            <tr class="bg-indigo-50/50"><td class="py-3 font-bold text-indigo-700">1 มิ.ย. 68</td><td class="py-3 font-bold text-indigo-700">วันเปิดภาคเรียน</td></tr>
-                            <tr><td class="py-3 font-bold">1-14 มิ.ย. 68</td><td class="py-3">ขอเพิ่ม-ถอน รายวิชา (Add/Drop)</td></tr>
-                            <tr><td class="py-3 font-bold">28 ก.ค.-3 ส.ค. 68</td><td class="py-3 text-amber-600 font-semibold">ประเมินสมรรถนะกลางภาค</td></tr>
-                            <tr><td class="py-3 font-bold">29 ก.ย.-12 ต.ค. 68</td><td class="py-3 text-rose-600 font-semibold">ประเมินสมรรถนะปลายภาค</td></tr>
-                            <tr><td class="py-3 font-bold">13 ต.ค. 68</td><td class="py-3 text-slate-400 italic font-medium">วันปิดภาคเรียน</td></tr>
-                        </tbody>
-                    </table>
+                <div class="p-8 space-y-6 flex-1">
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                            <span class="w-px h-full bg-slate-100 my-1"></span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-indigo-500 uppercase">1 - 15 พ.ค. 68</p>
+                            <h4 class="text-sm font-bold text-slate-900">ลงทะเบียนเรียนและชำระเงิน</h4>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                            <span class="w-px h-full bg-slate-100 my-1"></span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-emerald-500 uppercase">1 มิถุนายน 68</p>
+                            <h4 class="text-sm font-bold text-slate-900 uppercase">วันเปิดภาคเรียน</h4>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span class="w-px h-full bg-slate-100 my-1"></span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-amber-500 uppercase">28 ก.ค. - 3 ส.ค. 68</p>
+                            <h4 class="text-sm font-bold text-slate-900">การวัดผลกลางภาค</h4>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-rose-500 uppercase">29 ก.ย. - 12 ต.ค. 68</p>
+                            <h4 class="text-sm font-bold text-slate-900">การวัดผลปลายภาค</h4>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                <div class="bg-slate-800 p-4 text-white flex justify-between items-center">
-                    <h2 class="font-bold tracking-wide">ภาคปลาย (2/2568)</h2>
-                    <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded uppercase">Pending</span>
+            <section class="semester-card bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden flex flex-col">
+                <div class="bg-gradient-to-br from-slate-800 to-slate-950 p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Phase 02</span>
+                        <h3 class="text-3xl font-bold mt-1">ภาคปลาย</h3>
+                        <p class="text-slate-400 text-sm mt-1 font-medium italic">พฤศจิกายน - มีนาคม 2569</p>
+                    </div>
+                    <i class="fas fa-moon absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
                 </div>
-                <div class="p-4 flex-1">
-                    <table class="w-full text-xs">
-                        <thead class="text-slate-400 border-b border-slate-100">
-                            <tr><th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th><th class="pb-2 text-left font-semibold">รายการกิจกรรม</th></tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50">
-                            <tr><td class="py-3 font-bold w-28">1-15 พ.ย. 68</td><td class="py-3">ลงทะเบียนเรียนและชำระเงิน</td></tr>
-                            <tr class="bg-slate-50"><td class="py-3 font-bold">1 ธ.ค. 68</td><td class="py-3 font-bold">วันเปิดภาคเรียน</td></tr>
-                            <tr><td class="py-3 font-bold">25-31 ม.ค. 69</td><td class="py-3 text-amber-600 font-semibold">ประเมินสมรรถนะกลางภาค</td></tr>
-                            <tr><td class="py-3 font-bold">22 มี.ค.-5 เม.ย. 69</td><td class="py-3 text-rose-600 font-semibold">ประเมินสมรรถนะปลายภาค</td></tr>
-                            <tr><td class="py-3 font-bold">6 เม.ย. 69</td><td class="py-3 text-slate-400 italic font-medium">วันปิดภาคเรียน</td></tr>
-                        </tbody>
-                    </table>
+                <div class="p-8 space-y-6 flex-1">
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center"><span class="w-2 h-2 rounded-full bg-slate-400"></span><span class="w-px h-full bg-slate-100 my-1"></span></div>
+                        <div><p class="text-[10px] font-bold text-slate-400 uppercase">พฤศจิกายน 68</p><h4 class="text-sm font-bold text-slate-900">เปิดภาคเรียนที่ 2/2568</h4></div>
+                    </div>
+                    <div class="flex gap-4 text-indigo-600">
+                        <div class="flex flex-col items-center"><span class="w-2 h-2 rounded-full bg-indigo-500"></span><span class="w-px h-full bg-slate-100 my-1"></span></div>
+                        <div><p class="text-[10px] font-bold uppercase">มกราคม 2569</p><h4 class="text-sm font-bold">สัปดาห์กิจกรรมวิชาการ 4.0</h4></div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center"><span class="w-2 h-2 rounded-full bg-rose-500"></span></div>
+                        <div><p class="text-[10px] font-bold text-rose-500 uppercase">มีนาคม 2569</p><h4 class="text-sm font-bold text-slate-900">สอบปลายภาค & ปิดภาคเรียน</h4></div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="semester-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col border-dashed">
-                <div class="bg-amber-500 p-4 text-white flex justify-between items-center">
-                    <h2 class="font-bold tracking-wide">ภาคฤดูร้อน (3/2568)</h2>
-                    <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded uppercase">Optional</span>
+            <section class="semester-card bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden flex flex-col">
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Phase 03</span>
+                        <h3 class="text-3xl font-bold mt-1">ภาคฤดูร้อน</h3>
+                        <p class="text-orange-100 text-sm mt-1 font-medium italic">เมษายน - พฤษภาคม 2569</p>
+                    </div>
+                    <i class="fas fa-fire-alt absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
                 </div>
-                <div class="p-4 flex-1">
-                    <table class="w-full text-xs">
-                        <thead class="text-slate-400 border-b border-slate-100">
-                            <tr><th class="pb-2 text-left font-semibold">วัน/เดือน/ปี</th><th class="pb-2 text-left font-semibold">รายการกิจกรรม</th></tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50">
-                            <tr><td class="py-3 font-bold w-28">1-10 เม.ย. 69</td><td class="py-3">ลงทะเบียนเรียนภาคฤดูร้อน</td></tr>
-                            <tr class="bg-amber-50/50"><td class="py-3 font-bold text-amber-700">20 เม.ย. 69</td><td class="py-3 font-bold text-amber-700">วันเปิดภาคฤดูร้อน</td></tr>
-                            <tr><td class="py-3 font-bold">15-20 พ.ค. 69</td><td class="py-3 text-rose-600 font-semibold">วันประเมินผลภาคฤดูร้อน</td></tr>
-                            <tr><td class="py-3 font-bold">25 พ.ค. 69</td><td class="py-3 text-slate-400 italic font-medium">วันสิ้นสุดภาคเรียน</td></tr>
-                        </tbody>
-                    </table>
+                <div class="p-8 space-y-6 flex-1">
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center"><span class="w-2 h-2 rounded-full bg-orange-400"></span><span class="w-px h-full bg-slate-100 my-1"></span></div>
+                        <div><p class="text-[10px] font-bold text-orange-400 uppercase">เมษายน 69</p><h4 class="text-sm font-bold text-slate-900 font-semibold">วันเปิดภาคฤดูร้อน</h4></div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center"><span class="w-2 h-2 rounded-full bg-rose-500"></span></div>
+                        <div><p class="text-[10px] font-bold text-rose-500 uppercase">พฤษภาคม 69</p><h4 class="text-sm font-bold text-slate-900">สอบปลายภาค & ปิดภาคเรียน</h4></div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
         </div>
 
-        <div class="mt-8 p-6 bg-white border border-slate-200 rounded-2xl">
-            <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest"><i class="fas fa-bullhorn mr-2 text-indigo-500"></i> หมายเหตุสำคัญ</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-500">
-                <p>1. นักศึกษาต้องชำระค่าธรรมเนียมการศึกษาภายในระยะเวลาที่กำหนด มิฉะนั้นระบบจะถือว่าสละสิทธิ์การลงทะเบียน</p>
-                <p>2. การวัดผลเน้นการประเมินสมรรถนะ (Competency-Based) ตามนโยบายมหาวิทยาลัย 4.0</p>
+        <div class="mt-12 bg-indigo-50 rounded-3xl p-6 border border-indigo-100 flex gap-4 items-start">
+            <i class="fas fa-info-circle text-indigo-600 mt-1"></i>
+            <div>
+                <h4 class="text-sm font-bold text-indigo-900">ประกาศสำคัญ</h4>
+                <p class="text-xs text-indigo-700 mt-1 leading-relaxed">นักศึกษาควรตรวจสอบกำหนดการลงทะเบียนอย่างละเอียดผ่านระบบ Smart Registrar การประเมินผลจะใช้เกณฑ์สมรรถนะ (Competency-based) ตามนโยบายมหาวิทยาลัยดิจิทัล 4.0</p>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 Office of Academic Affairs and Registration. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
