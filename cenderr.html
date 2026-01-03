@@ -3,182 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU KPS World 2568</title>
+    <title>KU KPS World Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Anuphan:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Anuphan:wght@400;700;800&display=swap');
         
         body { 
             font-family: 'Anuphan', sans-serif; 
-            background-color: #5C94FC; /* สีท้องฟ้ามาริโอ้ */
+            background-color: #5C94FC; 
             background-image: url('https://www.transparenttextures.com/patterns/pixel-weave.png');
             color: #ffffff;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .pixel-font { font-family: 'Press Start 2P', cursive; }
 
-        /* ตกแต่งพื้นหญ้าและบล็อก */
-        .ground {
-            background: #E76928;
-            border-top: 8px solid #000;
-            position: relative;
-        }
-
-        .mario-card {
+        /* การ์ดสไตล์บล็อกคำถาม */
+        .mario-block {
             background: #ffffff;
             border: 4px solid #000;
             box-shadow: 8px 8px 0px #000;
             color: #333;
-            image-rendering: pixelated;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
-        .mario-tab {
-            border: 4px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            transition: all 0.1s;
+        .mario-block:hover {
+            transform: translateY(-10px);
+            box-shadow: 12px 12px 0px #000;
+            background: #FFD700;
         }
 
-        .mario-tab:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px #000;
+        .mario-block.active {
+            background: #FFD700;
+            border-color: #000;
+            transform: scale(1.05);
         }
 
-        /* เมฆประดับ */
-        .cloud {
+        .ground-line {
+            background: #E76928;
+            border-top: 6px solid #000;
+        }
+
+        .status-badge {
+            border: 2px solid #000;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* เมฆเคลื่อนที่ */
+        .cloud-bg {
             position: absolute;
-            background: white;
-            width: 100px;
-            height: 40px;
-            border-radius: 20px;
-            opacity: 0.8;
-            z-index: -1;
-            animation: moveClouds 30s linear infinite;
+            opacity: 0.6;
+            animation: moveClouds 40s linear infinite;
         }
-
         @keyframes moveClouds {
             from { transform: translateX(-200px); }
-            to { transform: translateX(1200px); }
-        }
-
-        .pipe {
-            width: 60px;
-            height: 80px;
-            background: #73C105;
-            border: 4px solid #000;
-            position: relative;
-        }
-        .pipe::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -5px;
-            width: 70px;
-            height: 20px;
-            background: #73C105;
-            border: 4px solid #000;
+            to { transform: translateX(100vw); }
         }
     </style>
 </head>
-<body x-data="{ world: '1' }" class="min-h-screen">
+<body x-data="{ year: '2568', term: '1' }" class="pb-20">
 
-    <div class="cloud top-20 left-10"></div>
-    <div class="cloud top-40 right-20" style="animation-delay: -15s;"></div>
+    <div class="cloud-bg top-20 left-10 w-24 h-10 bg-white rounded-full"></div>
+    <div class="cloud-bg top-60 right-20 w-32 h-12 bg-white rounded-full" style="animation-delay: -20s;"></div>
 
-    <header class="max-w-5xl mx-auto p-6 flex justify-between items-start pixel-font text-[10px] md:text-sm">
-        <div>
-            <p class="mb-2">PLAYER: NISIT_KU</p>
-            <p>SCORE: 002568</p>
+    <header class="max-w-5xl mx-auto p-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+        <div class="text-center md:text-left">
+            <p class="pixel-font text-[10px] mb-2 tracking-tighter">SELECT WORLD YEAR</p>
+            <div class="flex gap-4">
+                <button @click="year = '2568'" :class="year === '2568' ? 'active' : ''" class="mario-block px-6 py-3 font-black text-xl">2568</button>
+                <button @click="year = '2569'" :class="year === '2569' ? 'active' : ''" class="mario-block px-6 py-3 font-black text-xl">2569</button>
+            </div>
         </div>
-        <div class="text-center">
-            <p class="mb-2">WORLD</p>
-            <p x-text="'1 - ' + world"></p>
-        </div>
-        <div>
-            <p class="mb-2">TIME</p>
-            <p>25:68</p>
+        <div class="text-center bg-black/20 p-4 rounded-xl backdrop-blur-sm">
+            <p class="pixel-font text-xs uppercase mb-1">Current World</p>
+            <p class="font-bold text-2xl uppercase" x-text="'ปีการศึกษา ' + year"></p>
         </div>
     </header>
 
-    <div class="flex justify-center gap-8 mb-12">
-        <button @click="world = '1'" class="mario-tab px-4 py-2 bg-red-500 font-bold" :class="world === '1' ? 'scale-110 ring-4 ring-white' : 'opacity-70'">ภาคต้น</button>
-        <button @click="world = '2'" class="mario-tab px-4 py-2 bg-green-500 font-bold" :class="world === '2' ? 'scale-110 ring-4 ring-white' : 'opacity-70'">ภาคปลาย</button>
-        <button @click="world = '3'" class="mario-tab px-4 py-2 bg-yellow-500 font-bold text-black" :class="world === '3' ? 'scale-110 ring-4 ring-white' : 'opacity-70'">ฤดูร้อน</button>
-    </div>
+    <nav class="max-w-4xl mx-auto flex justify-center gap-4 mb-12 px-4">
+        <button @click="term = '1'" :class="term === '1' ? 'bg-red-500 text-white scale-110' : 'bg-white text-black opacity-70'" 
+                class="mario-tab flex-1 py-3 font-black border-4 border-black shadow-[4px_4px_0px_#000] text-sm">ภาคต้น</button>
+        <button @click="term = '2'" :class="term === '2' ? 'bg-green-500 text-white scale-110' : 'bg-white text-black opacity-70'" 
+                class="mario-tab flex-1 py-3 font-black border-4 border-black shadow-[4px_4px_0px_#000] text-sm">ภาคปลาย</button>
+        <button @click="term = '3'" :class="term === '3' ? 'bg-amber-400 text-black scale-110' : 'bg-white text-black opacity-70'" 
+                class="mario-tab flex-1 py-3 font-black border-4 border-black shadow-[4px_4px_0px_#000] text-sm">ฤดูร้อน</button>
+    </nav>
 
-    <main class="max-w-4xl mx-auto px-4 pb-32">
+    <main class="max-w-3xl mx-auto px-6">
         
-        <div x-show="world === '1'" x-transition class="space-y-12">
-            
-            <div class="flex items-end gap-4 mb-8">
-                <div class="w-1 bg-white h-24 relative">
-                    <div class="absolute top-2 -left-1 w-8 h-6 bg-red-600 border-2 border-black"></div>
+        <template x-if="year === '2568'">
+            <div class="space-y-8" x-show="term === '1'" x-transition>
+                <div class="mario-block p-6 flex items-center gap-6">
+                    <div class="w-12 h-12 bg-blue-500 border-4 border-black flex items-center justify-center text-white font-bold">1</div>
+                    <div>
+                        <h3 class="font-black text-lg">ลงทะเบียนเรียน & ชำระเงิน</h3>
+                        <p class="text-sm font-bold text-blue-600">12 - 23 พ.ค. 2568</p>
+                    </div>
                 </div>
-                <p class="pixel-font text-xs">START STAGE 1</p>
-            </div>
-
-            <div class="mario-card p-6 flex flex-col md:flex-row gap-6 items-center">
-                <img src="https://api.iconify.design/pixelarticons:contact-plus.svg?color=%23333" class="w-12 h-12" alt="icon">
-                <div class="text-center md:text-left">
-                    <h3 class="font-bold text-xl uppercase">ด่านที่ 1: ลงทะเบียนเรียน</h3>
-                    <p class="text-blue-600 font-bold">12 - 23 พฤษภาคม 2568</p>
-                    <p class="text-sm mt-2 text-gray-600">กดบันทึกรายวิชา & ชำระเงิน (ระวังโดนปรับวันละ 100 บาท!)</p>
+                <div class="mario-block p-8 border-green-600 bg-green-50 flex items-center gap-6 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-6xl opacity-10 text-green-900"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="w-16 h-16 bg-red-500 border-4 border-black text-white flex items-center justify-center text-3xl font-black">?</div>
+                    <div>
+                        <h3 class="font-black text-2xl text-green-700">วันเปิดภาคเรียน 1/2568</h3>
+                        <p class="font-bold text-black uppercase">23 มิถุนายน 2568</p>
+                    </div>
                 </div>
-                <div class="ml-auto flex gap-1">
-                    <div class="w-4 h-4 bg-yellow-400 border-2 border-black"></div>
-                    <div class="w-4 h-4 bg-yellow-400 border-2 border-black"></div>
-                </div>
-            </div>
-
-            <div class="mario-card p-6 border-green-500 bg-green-50 flex flex-col md:flex-row gap-6 items-center">
-                <div class="w-16 h-16 bg-red-500 border-4 border-black flex items-center justify-center text-white text-3xl font-bold">?</div>
-                <div>
-                    <h3 class="font-bold text-2xl uppercase text-green-700 underline">วันเปิดภาคเรียน 1/2568</h3>
-                    <p class="text-black font-bold text-lg">23 มิถุนายน 2568</p>
-                    <p class="text-sm mt-1 text-gray-700 italic">"วันแรกของการเข้าห้องเรียน ยืดพลังเต็มที่!"</p>
+                <div class="mario-block p-6 flex items-center gap-6">
+                    <div class="w-12 h-12 bg-amber-400 border-4 border-black flex items-center justify-center text-black font-bold">!</div>
+                    <div>
+                        <h3 class="font-black text-lg">การวัดผลปลายภาคเรียน</h3>
+                        <p class="text-sm font-bold text-red-600 font-black">13 - 26 ตุลาคม 2568</p>
+                    </div>
                 </div>
             </div>
+        </template>
 
-            <div class="mario-card p-6 flex flex-col md:flex-row gap-6 items-center border-orange-500">
-                <img src="https://api.iconify.design/pixelarticons:briefcase.svg" class="w-12 h-12" alt="icon">
-                <div>
-                    <h3 class="font-bold text-xl uppercase">ด่านทดสอบกลางภาค</h3>
-                    <p class="text-orange-600 font-bold">16 - 24 สิงหาคม 2568</p>
-                    <p class="text-sm mt-2">งดเรียน เพื่อเข้าโหมดการสอบ (หลบไฟให้พ้น!)</p>
+        <template x-if="year === '2569'">
+            <div class="space-y-8" x-transition>
+                <div class="mario-block p-10 bg-gray-100 text-center border-dashed">
+                    <i class="fas fa-lock text-4xl mb-4 text-gray-400"></i>
+                    <h3 class="font-black text-xl uppercase italic">World 2569: ภาคต่อการผจญภัย</h3>
+                    <p class="text-sm text-gray-500 mt-2 italic">"กำลังรอประกาศกำหนดการอย่างเป็นทางการจาก มก. กพส."</p>
+                    <div class="mt-6 flex justify-center gap-2">
+                        <div class="w-4 h-4 bg-gray-300 border-2 border-black"></div>
+                        <div class="w-4 h-4 bg-gray-300 border-2 border-black"></div>
+                        <div class="w-4 h-4 bg-gray-300 border-2 border-black"></div>
+                    </div>
                 </div>
             </div>
-
-            <div class="mario-card p-8 bg-gray-900 text-white border-white flex flex-col md:flex-row gap-6 items-center relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-2 bg-red-600 pixel-font text-[8px]">BOSS</div>
-                <div class="w-20 h-20 bg-gray-800 border-4 border-white flex items-center justify-center">
-                    <i class="fas fa-dragon text-4xl text-red-500 animate-bounce"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-3xl uppercase tracking-tighter text-yellow-400">ศึกสอบปลายภาค</h3>
-                    <p class="text-red-400 font-bold text-xl mt-1">13 - 26 ตุลาคม 2568</p>
-                    <p class="text-sm mt-2 text-gray-300 italic">"เอาชนะด่านนี้เพื่อปิดเทอม (จบด่านภาคต้น)"</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div x-show="world !== '1'" x-cloak class="py-20 flex flex-col items-center">
-            <div class="pipe mb-4"></div>
-            <p class="pixel-font text-xs">COMING SOON...</p>
-        </div>
+        </template>
 
     </main>
 
-    <div class="fixed bottom-0 left-0 w-full h-12 ground flex justify-around items-end">
-        <div class="w-8 h-10 bg-green-500 border-4 border-black rounded-t-lg -mb-2"></div>
-        <div class="w-10 h-10 mario-card bg-yellow-400 text-black flex items-center justify-center font-bold mb-2">?</div>
-        <div class="w-8 h-12 bg-green-500 border-4 border-black rounded-t-lg -mb-2"></div>
+    <div class="fixed bottom-0 left-0 w-full h-16 ground-line flex justify-around items-start">
+        <div class="hidden md:block w-12 h-12 bg-green-500 border-4 border-black rounded-t-xl -mt-4 shadow-xl"></div>
+        <div class="p-2 bg-black/40 text-[8px] pixel-font text-white self-center">KU-KPS OFFICIAL DATA : 2026.OS</div>
+        <div class="w-12 h-12 bg-green-500 border-4 border-black rounded-t-xl -mt-4 shadow-xl"></div>
     </div>
-
-    <footer class="max-w-4xl mx-auto mt-4 px-6 text-[10px] text-slate-100 italic opacity-80">
-        * อ้างอิงประกาศ มก. กพส. ปี 2568 (ฉบับ 18 ส.ค. 25)
-    </footer>
 
 </body>
 </html>
