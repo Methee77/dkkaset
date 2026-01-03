@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f1f5f9;
             margin: 0;
             padding: 20px;
         }
@@ -29,106 +29,75 @@
             max-width: 1100px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 3px double #eee;
-            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        h2 { color: var(--primary); margin: 0; font-size: 1.8rem; }
-        p.subtitle { color: #64748b; margin-top: 8px; font-size: 1.1rem; }
+        h2 { color: var(--primary); margin: 0; font-size: 1.6rem; }
+        p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* Dashboard สรุปยอด */
-        .summary-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            color: white;
-        }
-        .card.total { background: var(--primary); }
-        .card.done { background: #10b981; }
-        .card.wait { background: #f59e0b; }
-        .card-num { font-size: 1.5rem; font-weight: 600; display: block; }
-
-        /* ส่วนหัวกลุ่มสาระ */
         .dept-group-header {
-            background: #eff6ff;
-            padding: 12px 20px;
-            margin-top: 30px;
-            border-radius: 10px 10px 0 0;
-            border-bottom: 2px solid var(--secondary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #f8fafc;
+            padding: 12px 18px;
+            margin-top: 25px;
+            border-radius: 8px 8px 0 0;
+            border-left: 6px solid var(--primary);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .dept-title {
             font-weight: 600;
             color: var(--primary);
-            font-size: 1.15rem;
+            font-size: 1.1rem;
         }
 
-        /* ตาราง */
         .table-wrapper {
             overflow-x: auto;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
         }
 
         th {
-            background-color: #f1f5f9;
-            color: #475569;
+            background-color: #ffffff;
+            color: #64748b;
             font-weight: 600;
             text-align: left;
-            padding: 15px;
+            padding: 12px 15px;
             font-size: 0.9rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         td {
-            padding: 15px;
+            padding: 12px 15px;
             border-bottom: 1px solid #f1f5f9;
-            color: #334155;
+            color: #1e293b;
             font-size: 0.95rem;
         }
 
-        tr:hover { background-color: #fafafa; }
+        .course-code { font-family: monospace; color: #64748b; font-weight: bold; }
+        .course-name { color: #1e3a8a; font-weight: 600; }
 
-        /* สถานะ */
         .status-pill {
-            padding: 5px 12px;
-            border-radius: 6px;
+            padding: 4px 10px;
+            border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            display: inline-block;
         }
-        .status-pill.complete { background: var(--success-bg); color: var(--success-text); }
-        .status-pill.pending { background: var(--pending-bg); color: var(--pending-text); }
-
-        .course-code { color: #64748b; font-size: 0.85rem; font-weight: normal; }
+        .complete { background: var(--success-bg); color: var(--success-text); }
+        .pending { background: var(--pending-bg); color: var(--pending-text); }
 
         @media (max-width: 768px) {
-            .container { padding: 15px; }
             td, th { padding: 10px; font-size: 0.85rem; }
         }
     </style>
@@ -137,23 +106,8 @@
 
 <div class="container">
     <div class="header">
-        <h2><i class="fas fa-check-circle"></i> แบบสรุปยืนยันการส่งผลการเรียนเข้าระบบ</h2>
-        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
-    </div>
-
-    <div class="summary-cards">
-        <div class="card total">
-            <span class="card-num" id="totalCount">0</span>
-            <span>รายวิชาทั้งหมด</span>
-        </div>
-        <div class="card done">
-            <span class="card-num" id="doneCount">0</span>
-            <span>ส่งผลการเรียนแล้ว</span>
-        </div>
-        <div class="card wait">
-            <span class="card-num" id="waitCount">0</span>
-            <span>ยังไม่ส่งผลการเรียน</span>
-        </div>
+        <h2><i class="fas fa-file-check"></i> แบบสรุปยืนยันการส่งผลการเรียนเข้าระบบ</h2>
+        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 (จำแนกตามกลุ่มสาระการเรียนรู้)</p>
     </div>
 
     <div id="contentArea"></div>
@@ -162,33 +116,22 @@
 <script>
     const departments = {
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
-        "4": "สังคมศึกษา ศาสนา และวัฒนธรรม", "5": "สุขศึกษาและพลศึกษา", 
-        "6": "ศิลปะ", "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กิจกรรมพัฒนาผู้เรียน"
+        "4": "สังคมศึกษาฯ", "5": "สุขศึกษาและพลศึกษา", "6": "ศิลปะ",
+        "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กิจกรรมพัฒนาผู้เรียน"
     };
 
-    // ข้อมูลจำลอง: เพิ่มชื่อวิชาและรหัสวิชา
     const academicData = [
         { id: "111", name: "นางสาววาสนา ด่วนดี", code: "ท21102", course: "ภาษาไทย 2", status: 1 },
         { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", code: "ท32205", course: "การอ่านพิจารณาวรรณกรรม", status: 1 },
         { id: "216", name: "นางสาวภัสรา เพ็งใย", code: "ค22102", course: "คณิตศาสตร์ 4", status: 0 },
-        { id: "217", name: "นางสาวรจนา ดาวเรือง", code: "ค33202", course: "คณิตศาสตร์เพิ่มเติม 6", status: 1 },
         { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", code: "ว30202", course: "ฟิสิกส์เพิ่มเติม", status: 1 },
         { id: "314", name: "นางศิริพร เถาว์โท", code: "ว23102", course: "วิทยาศาสตร์ 6", status: 0 },
-        { id: "407", name: "นายไชยพร แย้มมี", code: "ส21104", course: "ประวัติศาสตร์ 2", status: 1 },
-        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", code: "อ31102", course: "ภาษาอังกฤษพื้นฐาน", status: 1 },
-        { id: "830", name: "นายณัฏฐกิตติ์ โพธิ์พุ่ม", code: "อ20202", course: "ภาษาอังกฤษเพื่อการสื่อสาร", status: 0 }
+        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", code: "อ31102", course: "ภาษาอังกฤษพื้นฐาน", status: 1 }
     ];
 
     const contentArea = document.getElementById('contentArea');
-    
-    // คำนวณยอดสรุป
-    const total = academicData.length;
-    const done = academicData.filter(d => d.status === 1).length;
-    document.getElementById('totalCount').innerText = total;
-    document.getElementById('doneCount').innerText = done;
-    document.getElementById('waitCount').innerText = total - done;
 
-    // จัดกลุ่มตามกลุ่มสาระ
+    // จัดกลุ่ม
     const groupedData = {};
     academicData.forEach(item => {
         const deptId = item.id.charAt(0);
@@ -196,38 +139,36 @@
         groupedData[deptId].push(item);
     });
 
-    // สร้างตาราง
+    // วนลูปสร้างตาราง
     Object.keys(groupedData).sort().forEach(deptId => {
-        const deptName = departments[deptId] || "กลุ่มงานอื่นๆ";
+        const deptName = departments[deptId] || "อื่นๆ";
         const items = groupedData[deptId];
 
         const section = document.createElement('div');
         section.innerHTML = `
             <div class="dept-group-header">
-                <span class="dept-title"><i class="fas fa-book"></i> กลุ่มสาระฯ ${deptName}</span>
-                <small>รวม ${items.length} รายวิชา</small>
+                <span class="dept-title">กลุ่มสาระฯ ${deptName}</span>
             </div>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
                             <th style="width: 15%">รหัสวิชา</th>
-                            <th style="width: 35%">ชื่อรายวิชา</th>
+                            <th style="width: 40%">ชื่อรายวิชา</th>
                             <th style="width: 30%">ครูผู้สอน</th>
-                            <th style="width: 20%; text-align: center;">การส่งผลการเรียน</th>
+                            <th style="width: 15%">การส่งผล</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${items.map(item => `
                             <tr>
                                 <td><span class="course-code">${item.code}</span></td>
-                                <td><strong>${item.course}</strong></td>
+                                <td class="course-name">${item.course}</td>
                                 <td>${item.name}</td>
-                                <td style="text-align: center;">
-                                    ${item.status === 1 
-                                        ? `<span class="status-pill complete"><i class="fas fa-check-double"></i> ส่งเรียบร้อย</span>` 
-                                        : `<span class="status-pill pending"><i class="fas fa-clock"></i> ยังไม่ส่ง</span>`
-                                    }
+                                <td>
+                                    <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
+                                        ${item.status === 1 ? 'ส่งแล้ว' : 'ยังไม่ส่ง'}
+                                    </span>
                                 </td>
                             </tr>
                         `).join('')}
