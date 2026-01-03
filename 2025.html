@@ -3,46 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ประกาศกำหนดการศึกษา ปีการศึกษา 2568</title>
+    <title>ประกาศกำหนดการศึกษา ปีการศึกษา 2568 - มหาวิทยาลัยเกษตรศาสตร์</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&family=Kanit:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ku-green: #006600; /* สีเขียวนนทรีประจำมหาวิทยาลัย */
+            --ku-green: #006600;
             --official-gray: #f4f4f4;
             --border-color: #d1d5db;
         }
 
         body {
-            background-color: #e5e7eb;
-            font-family: 'Sarabun', sans-serif; /* ฟอนต์มาตรฐานราชการ */
+            background-color: #f1f5f9;
+            font-family: 'Sarabun', sans-serif;
             color: #1f2937;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
         }
 
-        /* ปรับ Layout ให้เหมือนกระดาษ A4 ทางการ */
-        .official-page {
+        /* โครงสร้างหน้ากระดาษทางการ A4 */
+        .official-document {
             background: white;
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
-            padding: 3rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-top: 10px solid var(--ku-green);
+            padding: 4rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* ตรามหาวิทยาลัย */
+        .ku-logo {
+            width: 100px;
+            height: auto;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        .header-section {
+            border-bottom: 2px solid var(--ku-green);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .header-title {
             font-family: 'Kanit', sans-serif;
             color: var(--ku-green);
+            line-height: 1.2;
         }
 
-        /* การจัดขนาดการ์ดให้เท่ากันทุกลูก */
-        .schedule-grid {
+        /* ระบบ Grid สำหรับการ์ดข้อมูลที่เท่ากันเป๊ะ */
+        .grid-layout {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
-        .term-card {
+        .card-official {
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -50,167 +65,138 @@
             transition: all 0.3s ease;
         }
 
-        .term-card:hover {
+        .card-official:hover {
             border-color: var(--ku-green);
-            background-color: #f0fdf4;
+            box-shadow: 0 10px 20px rgba(0, 102, 0, 0.05);
         }
 
-        .term-header {
+        .card-head {
             background-color: var(--ku-green);
             color: white;
-            padding: 0.75rem;
+            padding: 1rem;
             text-align: center;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            font-family: 'Kanit', sans-serif;
         }
 
-        .data-table {
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .table-data {
             width: 100%;
             font-size: 0.95rem;
         }
 
-        .data-table tr {
-            border-bottom: 1px solid #edf2f7;
+        .table-data tr {
+            border-bottom: 1px solid #f1f5f9;
         }
 
-        .data-table td {
-            padding: 10px 5px;
+        .table-data td {
+            padding: 12px 4px;
         }
 
-        .grade-highlight {
-            background-color: #fff7ed;
-            border: 1px dashed #fb923c;
-            padding: 10px;
-            margin-top: auto; /* ดันลงด้านล่างให้เท่ากัน */
+        .footer-grade {
+            background-color: #fffbeb;
+            border-top: 1px solid #fef3c7;
+            padding: 1.25rem;
             text-align: center;
         }
 
-        @media (max-width: 768px) {
-            .schedule-grid { grid-template-columns: 1fr; }
-            .official-page { padding: 1.5rem; }
+        .grade-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #d97706;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout { grid-template-columns: 1fr; }
+            .official-document { padding: 2rem; }
         }
 
         @media print {
             body { background: white; padding: 0; }
-            .official-page { box-shadow: none; border: none; width: 100%; max-width: none; }
+            .official-document { box-shadow: none; width: 100%; max-width: none; padding: 2rem; }
             .no-print { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="official-page">
-    <header class="text-center mb-12 border-b-2 border-gray-100 pb-8">
-        <h1 class="header-title text-3xl md:text-4xl font-bold mb-2 uppercase">กำหนดวันเปิด-ปิดภาคการศึกษา</h1>
-        <h2 class="text-xl font-semibold text-gray-600 italic">มหาวิทยาลัยเกษตรศาสตร์ ปีการศึกษา 2568</h2>
-        <div class="mt-4 flex justify-center items-center gap-2">
-            <span class="h-1 w-12 bg-green-700"></span>
-            <p class="text-sm font-bold tracking-widest text-green-800">ประกาศระเบียบกำหนดการระดับปริญญาตรี</p>
-            <span class="h-1 w-12 bg-green-700"></span>
-        </div>
+<div class="official-document">
+    <img src="https://upload.wikimedia.org/wikipedia/th/thumb/f/f7/KU_Logo.png/600px-KU_Logo.png" alt="ตรามหาวิทยาลัยเกษตรศาสตร์" class="ku-logo">
+
+    <header class="header-section text-center">
+        <h1 class="header-title text-3xl md:text-5xl font-bold mb-3">ประกาศกำหนดการศึกษา</h1>
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-500 italic">มหาวิทยาลัยเกษตรศาสตร์ ปีการศึกษา 2568</h2>
+        <p class="text-sm font-bold mt-4 tracking-widest text-slate-400 uppercase">OFFICIAL ACADEMIC SCHEDULE 2025-2026</p>
     </header>
 
-    <main class="schedule-grid mb-12">
+    <main class="grid-layout">
         
-        <section class="term-card">
-            <div class="term-header">ภาคการศึกษาต้น</div>
-            <div class="p-5 flex-grow">
-                <table class="data-table">
-                    <tr>
-                        <td class="font-semibold text-gray-500">วันเปิดเรียน</td>
-                        <td class="text-right font-bold">23 มิ.ย. 2568</td>
-                    </tr>
-                    <tr class="text-red-600">
-                        <td class="font-semibold">วันสอบกลางภาค</td>
-                        <td class="text-right font-bold">9-17 ส.ค. 2568</td>
-                    </tr>
-                    <tr class="text-red-600">
-                        <td class="font-semibold">วันสอบปลายภาค</td>
-                        <td class="text-right font-bold">20-31 ต.ค. 2568</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-gray-400">วันปิดภาคเรียน</td>
-                        <td class="text-right font-bold text-gray-400">3 พ.ย. 2568</td>
-                    </tr>
+        <div class="card-official">
+            <div class="card-head">ภาคการศึกษาต้น</div>
+            <div class="card-body">
+                <table class="table-data">
+                    <tr><td class="text-gray-400">วันเปิดเรียน</td><td class="text-right font-bold">23 มิ.ย. 68</td></tr>
+                    <tr class="text-red-600"><td class="font-semibold">วันสอบกลางภาค</td><td class="text-right font-bold">9-17 ส.ค. 68</td></tr>
+                    <tr class="text-red-600"><td class="font-semibold">วันสอบปลายภาค</td><td class="text-right font-bold">20-31 ต.ค. 68</td></tr>
+                    <tr><td class="text-gray-300">วันปิดภาคเรียน</td><td class="text-right font-medium text-gray-300">3 พ.ย. 68</td></tr>
                 </table>
             </div>
-            <div class="p-5 pt-0">
-                <div class="grade-highlight">
-                    <p class="text-xs font-bold text-orange-600 uppercase mb-1">ประกาศผลการศึกษา (เกรด)</p>
-                    <p class="text-lg font-extrabold">10 พฤศจิกายน 2568</p>
-                </div>
+            <div class="footer-grade">
+                <p class="grade-label">ประกาศผลการศึกษา</p>
+                <p class="text-xl font-black text-amber-600">10 พฤศจิกายน 2568</p>
             </div>
-        </section>
+        </div>
 
-        <section class="term-card ring-2 ring-green-600">
-            <div class="term-header">ภาคการศึกษาปลาย</div>
-            <div class="p-5 flex-grow">
-                <table class="data-table">
-                    <tr>
-                        <td class="font-semibold text-gray-500">วันเปิดเรียน</td>
-                        <td class="text-right font-bold text-green-700">24 พ.ย. 2568</td>
-                    </tr>
-                    <tr class="bg-yellow-50">
-                        <td class="font-semibold text-red-600">วันสอบกลางภาค</td>
-                        <td class="text-right font-bold text-red-600">10-18 ม.ค. 2569</td>
-                    </tr>
-                    <tr class="text-red-600">
-                        <td class="font-semibold">วันสอบปลายภาค</td>
-                        <td class="text-right font-bold">16-27 มี.ค. 2569</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-gray-400">วันปิดภาคเรียน</td>
-                        <td class="text-right font-bold text-gray-400">30 มี.ค. 2569</td>
-                    </tr>
+        <div class="card-official border-2 border-green-600 shadow-xl scale-105">
+            <div class="card-head bg-green-700">ภาคการศึกษาปลาย</div>
+            <div class="card-body">
+                <table class="table-data">
+                    <tr><td class="text-gray-400">วันเปิดเรียน</td><td class="text-right font-bold text-green-700 underline">24 พ.ย. 68</td></tr>
+                    <tr class="bg-yellow-50 text-red-600"><td class="font-bold italic">วันสอบกลางภาค</td><td class="text-right font-black">10-18 ม.ค. 69</td></tr>
+                    <tr class="text-red-600"><td class="font-semibold">วันสอบปลายภาค</td><td class="text-right font-bold">16-27 มี.ค. 69</td></tr>
+                    <tr><td class="text-gray-300">วันปิดภาคเรียน</td><td class="text-right font-medium text-gray-300">30 มี.ค. 69</td></tr>
                 </table>
             </div>
-            <div class="p-5 pt-0">
-                <div class="grade-highlight bg-orange-100 border-orange-400">
-                    <p class="text-xs font-bold text-orange-600 uppercase mb-1">ประกาศผลการศึกษา (เกรด)</p>
-                    <p class="text-lg font-extrabold">7 เมษายน 2569</p>
-                </div>
+            <div class="footer-grade bg-orange-50">
+                <p class="grade-label">ประกาศผลการศึกษา</p>
+                <p class="text-xl font-black text-amber-600">7 เมษายน 2569</p>
             </div>
-        </section>
+        </div>
 
-        <section class="term-card">
-            <div class="term-header">ภาคฤดูร้อน</div>
-            <div class="p-5 flex-grow">
-                <table class="data-table">
-                    <tr>
-                        <td class="font-semibold text-gray-500">วันเปิดเรียน</td>
-                        <td class="text-right font-bold">20 เม.ย. 2569</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-gray-500">วันสุดท้ายการเรียน</td>
-                        <td class="text-right font-bold">29 พ.ค. 2569</td>
-                    </tr>
-                    <tr class="text-red-600">
-                        <td class="font-semibold">วันสอบปลายภาค</td>
-                        <td class="text-right font-bold">30 พ.ค.-1 มิ.ย. 69</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-gray-400">วันปิดภาคเรียน</td>
-                        <td class="text-right font-bold text-gray-400">2 มิ.ย. 2569</td>
-                    </tr>
+        <div class="card-official">
+            <div class="card-head">ภาคฤดูร้อน</div>
+            <div class="card-body">
+                <table class="table-data">
+                    <tr><td class="text-gray-400">วันเปิดเรียน</td><td class="text-right font-bold">20 เม.ย. 69</td></tr>
+                    <tr><td class="text-gray-400">วันสุดท้ายการเรียน</td><td class="text-right font-bold">29 พ.ค. 69</td></tr>
+                    <tr class="text-red-600"><td class="font-semibold">วันสอบปลายภาค</td><td class="text-right font-bold">30 พ.ค.-1 มิ.ย. 69</td></tr>
+                    <tr><td class="text-gray-300">วันปิดภาคเรียน</td><td class="text-right font-medium text-gray-300">2 มิ.ย. 69</td></tr>
                 </table>
             </div>
-            <div class="p-5 pt-0">
-                <div class="grade-highlight">
-                    <p class="text-xs font-bold text-orange-600 uppercase mb-1">ประกาศผลการศึกษา (เกรด)</p>
-                    <p class="text-lg font-extrabold">11 มิถุนายน 2569</p>
-                </div>
+            <div class="footer-grade">
+                <p class="grade-label">ประกาศผลการศึกษา</p>
+                <p class="text-xl font-black text-amber-600">11 มิถุนายน 2569</p>
             </div>
-        </section>
+        </div>
 
     </main>
 
-    <footer class="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">
-            อ้างอิง: สำนักบริหารการศึกษา มหาวิทยาลัยเกษตรศาสตร์ [2568]
-        </p>
-        <button onclick="window.print()" class="no-print bg-gray-800 text-white px-8 py-2 font-bold hover:bg-green-700 transition-all shadow-md">
-            พิมพ์เอกสารกำหนดการ
-        </button>
+    <footer class="mt-20 pt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center md:text-left">
+            สำนักบริหารการศึกษา มหาวิทยาลัยเกษตรศาสตร์<br>
+            DOCUMENT ID: KU-REG-CAL2568-OFFICIAL
+        </div>
+        <div class="flex gap-4 mt-6 md:mt-0 no-print">
+            <button onclick="window.print()" class="bg-slate-800 text-white px-8 py-2 font-bold hover:bg-green-700 transition-all">พิมพ์เอกสาร</button>
+        </div>
     </footer>
 </div>
 
