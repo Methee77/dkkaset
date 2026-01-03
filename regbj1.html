@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปผลการขอเปิดรายวิชา 2/2568</title>
+    <title>สรุปผลการขอเปิดรายวิชาแยกตามกลุ่มสาระ 2/2568</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -39,7 +39,7 @@
         }
 
         h2 { color: var(--primary); margin: 0; }
-        p { color: #64748b; }
+        p { color: #64748b; margin-top: 5px; }
 
         .table-wrapper {
             overflow-x: auto;
@@ -69,26 +69,40 @@
 
         tr:hover { background-color: #f8fafc; }
 
+        /* การตกแต่งสถานะ */
         .status-badge {
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
         }
-
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
 
-        .count-tag {
-            color: #64748b;
-            font-size: 0.8rem;
-            margin-right: 5px;
+        /* การตกแต่งกลุ่มสาระ */
+        .dept-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-left: 4px solid #ccc;
         }
+        
+        /* สีประจำกลุ่มสาระ */
+        .dept-1 { border-color: #f43f5e; color: #f43f5e; } /* ภาษาไทย - แดง */
+        .dept-2 { border-color: #fbbf24; color: #b45309; } /* คณิต - เหลือง/ส้ม */
+        .dept-3 { border-color: #fb923c; color: #c2410c; } /* วิทย์ - ส้ม */
+        .dept-4 { border-color: #3b82f6; color: #1d4ed8; } /* สังคม - ฟ้า */
+        .dept-5 { border-color: #10b981; color: #047857; } /* สุขศึกษา - เขียว */
+        .dept-6 { border-color: #a855f7; color: #7e22ce; } /* ศิลปะ - ม่วง */
+        .dept-7 { border-color: #14b8a6; color: #0f766e; } /* การงาน - เขียวเข้ม */
+        .dept-8 { border-color: #ec4899; color: #be185d; } /* ต่างประเทศ - ชมพู */
+        .dept-9 { border-color: #64748b; color: #334155; } /* สนับสนุน - เทา */
 
-        /* สำหรับหน้าจอมือถือ */
-        @media (max-width: 600px) {
-            th, td { padding: 10px 8px; font-size: 0.85rem; }
+        .count-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; }
+
+        @media (max-width: 768px) {
+            td, th { padding: 10px 5px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -96,8 +110,8 @@
 
 <div class="container">
     <div class="header">
-        <h2><i class="fas fa-list-check"></i> รายชื่อผู้ขอเปิดรายวิชา</h2>
-        <p>ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
+        <h2><i class="fas fa-university"></i> สรุปผลการขอเปิดรายวิชา</h2>
+        <p>ภาคเรียนที่ 2 ปีการศึกษา 2568 (แยกตามกลุ่มสาระการเรียนรู้)</p>
     </div>
 
     <div class="table-wrapper">
@@ -107,6 +121,7 @@
                     <th>ลำดับ</th>
                     <th>รหัสครู</th>
                     <th>ชื่อ-นามสกุล</th>
+                    <th>กลุ่มสาระการเรียนรู้</th>
                     <th>สถานะการดำเนินการ</th>
                 </tr>
             </thead>
@@ -117,6 +132,18 @@
 </div>
 
 <script>
+    const departments = {
+        "1": "ภาษาไทย",
+        "2": "คณิตศาสตร์",
+        "3": "วิทยาศาสตร์และเทคโนโลยี",
+        "4": "สังคมศึกษา",
+        "5": "สุขศึกษา",
+        "6": "ศิลปะ",
+        "7": "การงานอาชีพ",
+        "8": "ภาษาต่างประเทศ",
+        "9": "กลุ่มงานสนับสนุน"
+    };
+
     const teacherData = [
         { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
         { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", status: 1 },
@@ -236,7 +263,11 @@
     teacherData.forEach((teacher, index) => {
         const row = document.createElement('tr');
         
-        // กำหนดข้อความสถานะและสไตล์
+        // ดึงเลขหลักแรกเพื่อระบุกลุ่มสาระ
+        const deptId = teacher.id.charAt(0);
+        const deptName = departments[deptId] || "ไม่ระบุ";
+        
+        // กำหนดสถานะ
         const statusText = teacher.status === 1 ? "ยืนยันข้อมูลแล้ว" : "ยังไม่ดำเนินการ";
         const statusClass = teacher.status === 1 ? "done" : "waiting";
         const stepText = teacher.status === 1 ? "[7/7]" : "[1/7]";
@@ -245,6 +276,9 @@
             <td>${index + 1}</td>
             <td><strong>${teacher.id}</strong></td>
             <td>${teacher.name}</td>
+            <td>
+                <div class="dept-tag dept-${deptId}">${deptName}</div>
+            </td>
             <td>
                 <span class="count-tag">${stepText}</span>
                 <span class="status-badge ${statusClass}">${statusText}</span>
