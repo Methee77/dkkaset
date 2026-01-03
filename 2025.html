@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARIO EXAM SERVICE - KU KPS</title>
+    <title>KU Academic Calendar 2568 - Mario Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -12,154 +12,188 @@
             --mario-brick: #ab3916;
             --mario-yellow: #fbd000;
             --mario-green: #43b047;
+            --mario-grass: #74bf2e;
         }
         * { font-family: 'Kanit', sans-serif; }
-        body { background-color: var(--mario-sky); overflow-x: hidden; }
-
-        /* Mario Style Classes */
+        body { 
+            background-color: var(--mario-sky); 
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+        
         .pixel-border {
             border: 4px solid #000;
-            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            background: white;
+            position: relative;
         }
+
+        .mario-title {
+            font-family: 'Press Start 2P', cursive;
+            color: white;
+            text-shadow: 4px 4px 0px #000;
+            line-height: 1.5;
+        }
+
+        /* ปรับสไตล์ Stage (ภาคการศึกษา) */
+        .stage-card {
+            border: 4px solid #000;
+            image-rendering: pixelated;
+            transition: transform 0.2s;
+        }
+        .stage-card:hover {
+            transform: scale(1.02);
+        }
+
         .q-block {
             background: var(--mario-yellow);
             border: 4px solid #000;
             box-shadow: inset -4px -4px 0px #b79500;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Press Start 2P', cursive;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             animation: bounce 0.6s infinite alternate;
         }
-        .brick-btn {
-            background-color: var(--mario-brick);
+
+        .pipe-green {
+            background: #43b047;
             border: 4px solid #000;
-            border-bottom: 8px solid #5d1f0c;
-            color: white; font-weight: 900;
-        }
-        .brick-btn:active {
-            border-bottom: 2px solid #5d1f0c;
-            transform: translateY(6px);
-        }
-        .pipe {
-            background: var(--mario-green);
-            border: 4px solid #000;
+            width: 80px;
+            height: 60px;
             position: relative;
+            margin: 0 auto;
         }
-        .pipe::before {
-            content: ""; position: absolute;
-            top: 0; left: -4px; right: -4px; height: 12px;
-            background: var(--mario-green); border: 4px solid #000;
+        .pipe-green::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -4px; right: -4px; height: 16px;
+            background: #43b047;
+            border: 4px solid #000;
         }
+
         @keyframes bounce {
             from { transform: translateY(0); }
-            to { transform: translateY(-8px); }
+            to { transform: translateY(-10px); }
         }
-        .cloud { position: absolute; color: white; opacity: 0.8; z-index: -1; }
+
+        .ground {
+            background: #8b4513;
+            border-top: 8px solid var(--mario-grass);
+            height: 40px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-10">
 
-<div class="max-w-4xl mx-auto">
-    <div class="cloud top-10 left-10 text-5xl">☁️</div>
-    <div class="cloud top-40 right-10 text-4xl">☁️</div>
-
-    <header class="text-center mb-12">
-        <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[4px_4px_0px_#000] uppercase italic">
-            MARIO <span class="text-yellow-400">EXAM</span>
-        </h1>
-        <p class="inline-block bg-black text-white px-4 py-1 font-bold mt-2 border-2 border-white">WORLD: ปีการศึกษา 2568</p>
+<div class="max-w-6xl mx-auto">
+    <header class="text-center mb-16">
+        <div class="flex justify-center gap-4 mb-4">
+            <div class="q-block text-xl">?</div>
+            <div class="q-block text-xl" style="animation-delay: 0.2s">?</div>
+            <div class="q-block text-xl" style="animation-delay: 0.4s">?</div>
+        </div>
+        <h1 class="mario-title text-2xl md:text-4xl italic">SUPER KU CALENDAR</h1>
+        <p class="bg-black text-white inline-block px-6 py-2 font-bold mt-4 border-4 border-white pixel-border">
+            ปีการศึกษา 2568 (UNDERGRADUATE)
+        </p>
     </header>
 
-    <section id="searchView">
-        <div class="max-w-2xl mx-auto pixel-border p-8 bg-white mb-16 relative">
-            <div class="flex justify-center -mt-16 mb-4">
-                <div class="q-block w-16 h-16 text-2xl">?</div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+        
+        <div class="stage-card bg-blue-100 p-6 pixel-border border-blue-500">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">🍄</span>
+                <h2 class="text-2xl font-black text-blue-700">ภาคการศึกษาต้น</h2>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                <div class="md:col-span-2">
-                    <label class="block font-black text-blue-600 uppercase text-sm mb-1">INSERT STUDENT ID *</label>
-                    <input type="text" id="studentId" class="w-full border-4 border-black p-3 text-2xl font-black text-center" placeholder="รหัสนิสิต">
+            <div class="space-y-4 font-bold text-gray-800">
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🚩 เปิดเรียน</span>
+                    <span class="text-blue-600">23 มิ.ย. 68</span>
                 </div>
-                <div>
-                    <label class="block font-bold text-gray-400 text-xs uppercase">Semester</label>
-                    <div class="border-4 border-black bg-gray-100 p-2 text-center font-bold">ภาคปลาย 2568</div>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>⚔️ สอบกลางภาค</span>
+                    <span class="text-red-500">9 - 17 ส.ค. 68</span>
                 </div>
-                <div>
-                    <label class="block font-bold text-gray-400 text-xs uppercase">Exam Type</label>
-                    <div class="border-4 border-black bg-gray-100 p-2 text-center font-bold">กลางภาค</div>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🔥 สอบปลายภาค</span>
+                    <span class="text-red-500">20 - 31 ต.ค. 68</span>
                 </div>
-            </div>
-            
-            <button onclick="handleSearch()" class="brick-btn w-full mt-8 py-4 text-2xl tracking-tighter">PRESS START →</button>
-            
-            <div class="mt-8 flex justify-center">
-                <div class="bg-black text-[#00ff00] font-mono px-4 py-1 border-2 border-white text-xs">
-                    COINS (VISITORS): <span id="totalCount">1,248</span>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🏁 ปิดภาคเรียน</span>
+                    <span class="text-black">3 พ.ย. 68</span>
                 </div>
-            </div>
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center italic">! GAME OVER: ไม่พบรหัสนี้</p>
-        </div>
-
-        <div class="pixel-border bg-[#eec39a] p-4 md:p-8 relative">
-            <div class="absolute -top-6 left-10 bg-black text-white px-4 py-1 font-black border-2 border-white uppercase">
-                World Map: Calendar 2568
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="pixel-border bg-blue-50 p-4 border-4">
-                    <h3 class="font-black text-blue-800 border-b-4 border-blue-200 mb-3 pb-1">STAGE 1: ภาคต้น</h3>
-                    <ul class="text-xs space-y-2 font-bold">
-                        <li class="flex justify-between"><span>เปิดเรียน:</span> <span>23 มิ.ย. 68</span></li>
-                        <li class="flex justify-between text-red-600"><span>สอบกลาง:</span> <span>9-17 ส.ค. 68</span></li>
-                        <li class="flex justify-between text-red-600"><span>สอบปลาย:</span> <span>20-31 ต.ค. 68</span></li>
-                        <li class="flex justify-between text-gray-400"><span>ปิดภาค:</span> <span>3 พ.ย. 68</span></li>
-                    </ul>
-                </div>
-
-                <div class="pixel-border bg-yellow-50 p-4 border-4 border-yellow-500 ring-4 ring-black">
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-xl">⭐</span>
-                        <h3 class="font-black text-red-600">STAGE 2: ภาคปลาย</h3>
-                    </div>
-                    <ul class="text-xs space-y-2 font-black">
-                        <li class="flex justify-between"><span>เปิดเรียน:</span> <span>24 พ.ย. 68</span></li>
-                        <li class="flex justify-between bg-yellow-400 px-1"><span>สอบกลาง:</span> <span>10-18 ม.ค. 69</span></li>
-                        <li class="flex justify-between"><span>สอบปลาย:</span> <span>16-27 มี.ค. 69</span></li>
-                        <li class="flex justify-between text-gray-400"><span>ปิดภาค:</span> <span>30 มี.ค. 69</span></li>
-                    </ul>
-                </div>
-
-                <div class="pixel-border bg-orange-50 p-4 border-4">
-                    <h3 class="font-black text-orange-800 border-b-4 border-orange-200 mb-3 pb-1">STAGE 3: ฤดูร้อน</h3>
-                    <ul class="text-xs space-y-2 font-bold">
-                        <li class="flex justify-between"><span>เปิดเรียน:</span> <span>20 เม.ย. 69</span></li>
-                        <li class="flex justify-between"><span>เรียนวันสุดท้าย:</span> <span>29 พ.ค. 69</span></li>
-                        <li class="flex justify-between text-red-600"><span>สอบปลาย:</span> <span>30 พ.ค.-1 มิ.ย. 69</span></li>
-                        <li class="flex justify-between text-gray-400"><span>ปิดภาค:</span> <span>2 มิ.ย. 69</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-end mt-8">
-                <div class="text-4xl">🌵</div>
-                <div class="pipe w-12 h-16"></div>
             </div>
         </div>
-    </section>
+
+        <div class="stage-card bg-yellow-100 p-6 pixel-border border-yellow-500 ring-8 ring-yellow-400/50">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl animate-pulse">⭐</span>
+                <h2 class="text-2xl font-black text-red-600">ภาคการศึกษาปลาย</h2>
+            </div>
+            <div class="space-y-4 font-black text-gray-900">
+                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
+                    <span>🚩 เปิดเรียน</span>
+                    <span class="text-blue-600">24 พ.ย. 68</span>
+                </div>
+                <div class="bg-yellow-400 p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
+                    <span>⚔️ สอบกลางภาค</span>
+                    <span>10 - 18 ม.ค. 69</span>
+                </div>
+                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
+                    <span>🔥 สอบปลายภาค</span>
+                    <span class="text-red-600">16 - 27 มี.ค. 69</span>
+                </div>
+                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
+                    <span>🏁 ปิดภาคเรียน</span>
+                    <span>30 มี.ค. 69</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage-card bg-orange-100 p-6 pixel-border border-orange-500">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">☀️</span>
+                <h2 class="text-2xl font-black text-orange-700">ภาคฤดูร้อน</h2>
+            </div>
+            <div class="space-y-4 font-bold text-gray-800">
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🚩 เปิดเรียน</span>
+                    <span class="text-blue-600">20 เม.ย. 69</span>
+                </div>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>📚 เรียนวันสุดท้าย</span>
+                    <span>29 พ.ค. 69</span>
+                </div>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🔥 สอบปลายภาค</span>
+                    <span class="text-red-500">30 พ.ค. - 1 มิ.ย. 69</span>
+                </div>
+                <div class="bg-white p-3 border-2 border-black flex justify-between">
+                    <span>🏁 ปิดภาคเรียน</span>
+                    <span class="text-black">2 มิ.ย. 69</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-20 flex justify-around items-end">
+        <div class="text-5xl">🌵</div>
+        <div class="pipe-green"></div>
+        <div class="text-6xl pb-2">🏰</div>
+        <div class="pipe-green h-24"></div>
+        <div class="text-5xl">🌵</div>
+    </div>
 </div>
 
-<footer class="mt-20 text-center text-white/60 text-[10px] font-mono mb-10">
-    © 2026 DEVELOPED BY SUTHEE | BASED ON KU ACADEMIC CALENDAR 2568
-</footer>
-
-<script>
-    // ข้อมูลจากรูปภาพปฏิทินที่นำมาใส่ในโค้ด
-    function handleSearch() {
-        const id = document.getElementById('studentId').value;
-        // logic ค้นหาของคุณ
-        alert("กำลังค้นหาข้อมูลรหัส: " + id);
-    }
-</script>
+<div class="ground"></div>
 
 </body>
 </html>
