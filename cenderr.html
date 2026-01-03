@@ -2,107 +2,78 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Edu-Calendar 4.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600&display=swap');
-        body { font-family: 'IBM Plex Sans Thai', sans-serif; background-color: #f1f5f9; }
-        .glass-morphism { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .calendar-day:hover { transform: scale(1.02); transition: all 0.2s ease; }
-    </style>
 </head>
-<body class="text-slate-800">
+<body class="bg-gray-50 p-6 md:p-12">
 
-    <div class="flex flex-col lg:flex-row min-h-screen">
-        <aside class="w-full lg:w-72 bg-indigo-900 text-white p-6 shrink-0">
-            <div class="flex items-center gap-3 mb-10">
-                <div class="bg-indigo-500 p-2 rounded-lg">
-                    <i class="fas fa-layer-group text-xl text-white"></i>
-                </div>
-                <h1 class="text-xl font-bold tracking-tight">EduSmart 4.0</h1>
-            </div>
+    <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
+        <div class="bg-indigo-900 p-8 text-white">
+            <h2 class="text-2xl font-bold mb-2">ตารางกำหนดการเรียนรู้ยุค 4.0</h2>
+            <p class="text-indigo-200">ปีการศึกษา 2569 | เน้นการเรียนรู้ฐานสมรรถนะ (Competency-Based)</p>
+        </div>
 
-            <nav class="space-y-6">
-                <div>
-                    <p class="text-indigo-300 text-xs font-bold uppercase mb-4">เมนูหลัก</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-3 p-3 bg-indigo-800 rounded-xl cursor-pointer"><i class="fas fa-calendar-day"></i> ปฏิทินวิชาการ</li>
-                        <li class="flex items-center gap-3 p-3 hover:bg-indigo-800 rounded-xl cursor-pointer opacity-70 hover:opacity-100"><i class="fas fa-tasks"></i> โปรเจกต์ของฉัน</li>
-                        <li class="flex items-center gap-3 p-3 hover:bg-indigo-800 rounded-xl cursor-pointer opacity-70 hover:opacity-100"><i class="fas fa-medal"></i> สมรรถนะที่ได้รับ</li>
-                    </ul>
-                </div>
-
-                <div class="pt-6 border-t border-indigo-800">
-                    <p class="text-indigo-300 text-xs font-bold uppercase mb-4">ประเภทกิจกรรม</p>
-                    <div class="space-y-3">
-                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="accent-emerald-400"> <span class="text-sm">การเรียน (On-site)</span></label>
-                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="accent-blue-400"> <span class="text-sm">ออนไลน์ (Self-paced)</span></label>
-                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="accent-amber-400"> <span class="text-sm">ส่งงาน/โปรเจกต์</span></label>
-                    </div>
-                </div>
-            </nav>
-        </aside>
-
-        <main class="flex-1 p-6 lg:p-10">
-            <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900">กำหนดการปีการศึกษา 2569</h2>
-                    <p class="text-slate-500">มกราคม (ไตรมาสที่ 1: Foundation & Skills)</p>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button class="p-2 hover:bg-white rounded-lg"><i class="fas fa-chevron-left"></i></button>
-                    <span class="font-bold">มกราคม 2026</span>
-                    <button class="p-2 hover:bg-white rounded-lg"><i class="fas fa-chevron-right"></i></button>
-                    <button class="ml-4 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-medium shadow-lg shadow-indigo-200 hover:bg-indigo-700">Sync กับปฏิทินมือถือ</button>
-                </div>
-            </header>
-
-            <div class="grid grid-cols-7 gap-4">
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">SUN</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">MON</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">TUE</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">WED</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">THU</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">FRI</div>
-                <div class="text-center font-bold text-slate-400 text-sm pb-2">SAT</div>
-
-                <script>
-                    const events = {
-                        1: { type: 'online', title: 'เปิดเทอม: Intro to AI', time: '09:00' },
-                        5: { type: 'onsite', title: 'Workshop: Design Thinking', time: '13:00' },
-                        12: { type: 'project', title: 'ส่งหัวข้อ Project 4.0', time: '23:59' },
-                        20: { type: 'online', title: 'Special Talk: Meta-Trend', time: '19:00' },
-                        28: { type: 'project', title: 'Showcase Round 1', time: '10:00' }
-                    };
-
-                    const typeColors = {
-                        online: 'bg-blue-50 text-blue-600 border-blue-200',
-                        onsite: 'bg-emerald-50 text-emerald-600 border-emerald-200',
-                        project: 'bg-amber-50 text-amber-600 border-amber-200'
-                    };
-
-                    for (let i = 1; i <= 31; i++) {
-                        let content = '';
-                        if (events[i]) {
-                            content = `
-                                <div class="mt-2 p-1.5 border rounded-lg text-[10px] leading-tight font-semibold ${typeColors[events[i].type]}">
-                                    <span class="block opacity-60">${events[i].time}</span>
-                                    ${events[i].title}
-                                </div>
-                            `;
-                        }
-                        document.write(`
-                            <div class="calendar-day glass-morphism min-h-[120px] p-3 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-start">
-                                <span class="text-slate-400 font-bold">${i}</span>
-                                ${content}
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
-        </main>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-indigo-50 text-indigo-900 uppercase text-sm leading-normal">
+                        <th class="py-4 px-6 font-bold">ช่วงเวลา / ไตรมาส</th>
+                        <th class="py-4 px-6 font-bold">กิจกรรมสำคัญ</th>
+                        <th class="py-4 px-6 font-bold text-center">รูปแบบ</th>
+                        <th class="py-4 px-6 font-bold">ผลลัพธ์ (Badge/Credit)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-sm font-light">
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <td class="py-4 px-6 font-semibold">Q1: Foundation (มิ.ย. - ก.ค.)</td>
+                        <td class="py-4 px-6">
+                            <span class="block font-bold text-indigo-600">Digital Citizenship</span>
+                            อบรมความปลอดภัยไซเบอร์และการใช้เครื่องมือ AI
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="bg-blue-100 text-blue-600 py-1 px-3 rounded-full text-xs font-bold">Online</span>
+                        </td>
+                        <td class="py-4 px-6 font-medium text-emerald-600">Digital Literacy Badge</td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <td class="py-4 px-6 font-semibold">Q2: Specialized (ส.ค. - ก.ย.)</td>
+                        <td class="py-4 px-6">
+                            <span class="block font-bold text-indigo-600">Micro-Credential Modules</span>
+                            เลือกเรียนวิชาเจาะลึกตามความสนใจรายบุคคล
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="bg-purple-100 text-purple-600 py-1 px-3 rounded-full text-xs font-bold">Hybrid</span>
+                        </td>
+                        <td class="py-4 px-6 font-medium text-emerald-600">12 Micro-Credits</td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <td class="py-4 px-6 font-semibold">Q3: Practical (พ.ย. - ธ.ค.)</td>
+                        <td class="py-4 px-6">
+                            <span class="block font-bold text-indigo-600">Industry Challenge</span>
+                            เข้าฝึกงานหรือทำโครงงานกับบริษัทพาร์ทเนอร์
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="bg-emerald-100 text-emerald-600 py-1 px-3 rounded-full text-xs font-bold">On-site</span>
+                        </td>
+                        <td class="py-4 px-6 font-medium text-emerald-600">Real-World Project Cert.</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="py-4 px-6 font-semibold">Q4: Graduation (ม.ค. - ก.พ.)</td>
+                        <td class="py-4 px-6">
+                            <span class="block font-bold text-indigo-600">Portfolio & Pitching</span>
+                            ประเมินผลการเรียนรู้ผ่านการนำเสนอผลงาน
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="bg-amber-100 text-amber-600 py-1 px-3 rounded-full text-xs font-bold">Showcase</span>
+                        </td>
+                        <td class="py-4 px-6 font-medium text-emerald-600">Competency Portfolio</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bg-gray-50 p-4 border-t border-gray-100 text-center text-gray-500 text-xs">
+            * กำหนดการอาจมีการเปลี่ยนแปลงตามความก้าวหน้าของผู้เรียนแต่ละบุคคล
+        </div>
     </div>
 
 </body>
