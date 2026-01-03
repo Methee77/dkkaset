@@ -1,73 +1,267 @@
-<section id="searchView" class="max-w-4xl mx-auto py-10">
-        <div class="max-w-2xl mx-auto border-4 border-black p-8 bg-white shadow-[12px_12px_0px_rgba(0,0,0,1)] text-center mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                <div class="md:col-span-2">
-                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-blue-600">กรอกรหัสประจำตัวนิสิต *</label>
-                    <input type="text" id="studentId" class="input-sharp border-blue-600 text-center font-bold" placeholder="ระบุรหัสนิสิต">
-                </div>
-                <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ภาคการศึกษา</label><input type="text" class="input-sharp input-locked font-bold text-center" value="ภาคปลาย 2568" readonly></div>
-                <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ประเภทการสอบ</label><input type="text" class="input-sharp input-locked font-bold text-center" value="กลางภาค" readonly></div>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARIO EXAM - KU KPS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mario-sky: #5c94fc;
+            --mario-brick: #ab3916;
+            --mario-yellow: #fbd000;
+            --mario-green: #43b047;
+            --mario-grass: #74bf2e;
+        }
+        * { font-family: 'Kanit', sans-serif; }
+        body { 
+            background-color: var(--mario-sky); 
+            image-rendering: pixelated;
+        }
+
+        /* Pixel Art Style */
+        .pixel-border {
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            background: white;
+        }
+
+        .mario-card {
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+
+        .q-block {
+            background: var(--mario-yellow);
+            border: 4px solid #000;
+            box-shadow: inset -4px -4px 0px #b79500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .brick-btn {
+            background-color: var(--mario-brick);
+            border: 4px solid #000;
+            border-bottom: 8px solid #5d1f0c;
+            color: white;
+            font-weight: 900;
+            transition: 0.1s;
+        }
+        .brick-btn:active {
+            border-bottom: 2px solid #5d1f0c;
+            transform: translateY(4px);
+        }
+
+        .pipe-green {
+            background: #43b047;
+            border: 4px solid #000;
+            position: relative;
+        }
+        .pipe-green::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -4px; right: -4px; height: 16px;
+            background: #43b047;
+            border: 4px solid #000;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .cloud {
+            position: absolute;
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+<div class="max-w-5xl mx-auto relative">
+    <div class="cloud top-0 left-10">☁️</div>
+    <div class="cloud top-20 right-20">☁️</div>
+
+    <header class="text-center mb-10 relative z-10">
+        <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] uppercase tracking-tighter">
+            MARIO <span class="text-yellow-400">EXAM</span>
+        </h1>
+        <p class="text-white font-bold bg-black inline-block px-4 py-1 mt-2">ปีการศึกษา 2568</p>
+    </header>
+
+    <section id="searchView" class="relative z-10">
+        <div class="max-w-2xl mx-auto pixel-border p-8 mb-12 bg-white relative">
+            <div class="flex justify-center -mt-16 mb-6">
+                <div class="q-block w-16 h-16 text-2xl text-black">?</div>
             </div>
-            
-            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest font-bold">ค้นหาตารางสอบของคุณ →</button>
-            
-            <div class="mt-10 pt-6 border-t-2 border-gray-100 flex justify-center">
-                <div class="border-2 border-black bg-gray-50 py-2 px-6 shadow-[4px_4px_0px_#000] text-center min-w-[200px]">
-                    <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-1">จำนวนผู้เข้าเยี่ยมชมระบบ</p>
-                    <p id="totalCount" class="text-2xl font-black text-black leading-none">--</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block font-black text-blue-600 mb-2 uppercase">ระบุรหัสนิสิตของคุณ</label>
+                    <input type="text" id="studentId" class="w-full border-4 border-black p-4 text-2xl font-black text-center" placeholder="6720xxxxxx">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-500 text-xs">ภาคการศึกษา</label>
+                    <div class="border-4 border-black bg-gray-100 p-3 font-bold text-center">ภาคปลาย 2568</div>
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-500 text-xs">ประเภทการสอบ</label>
+                    <div class="border-4 border-black bg-gray-100 p-3 font-bold text-center">กลางภาค</div>
                 </div>
             </div>
 
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
+            <button onclick="handleSearch()" class="brick-btn w-full mt-8 py-4 text-2xl uppercase">
+                PRESS START →
+            </button>
+
+            <div class="mt-8 flex justify-center">
+                <div class="bg-black text-[#00ff00] font-mono px-4 py-1 border-2 border-white">
+                    COINS(VISITORS): <span id="totalCount">1248</span>
+                </div>
+            </div>
+            <p id="errorMsg" class="mt-4 text-red-600 font-black hidden text-center italic">! รหัสไม่ถูกต้อง กรุณาลองใหม่</p>
         </div>
 
-        <div class="border-4 border-black bg-white p-6 md:p-8 shadow-[8px_8px_0px_#000]">
-            <div class="flex items-center gap-4 mb-8 border-b-4 border-black pb-4">
-                <div class="bg-black text-white p-2 text-2xl">📅</div>
-                <div>
-                    <h3 class="text-2xl font-[900] leading-none uppercase tracking-tighter">กำหนดการศึกษา ปีการศึกษา 2568</h3>
-                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Academic Calendar (Undergraduate)</p>
+        <div class="pixel-border bg-[#eec39a] p-4 md:p-8">
+            <div class="bg-black text-white px-4 py-2 inline-block mb-6 border-2 border-white">
+                <h2 class="text-xl font-black uppercase">📅 WORLD 2568: CALENDAR</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="mario-card bg-sky-100 p-4 border-4 border-black">
+                    <h3 class="font-black text-blue-700 border-b-4 border-blue-200 pb-2 mb-4">ภาคการศึกษาต้น</h3>
+                    <div class="text-sm space-y-3 font-bold">
+                        <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span>23 มิ.ย. 68</span></div>
+                        <div class="flex justify-between text-red-600"><span>สอบกลางภาค:</span><span>9-17 ส.ค. 68</span></div>
+                        <div class="flex justify-between text-red-600"><span>สอบปลายภาค:</span><span>20-31 ต.ค. 68</span></div>
+                        <div class="flex justify-between text-gray-500"><span>ปิดภาคเรียน:</span><span>3 พ.ย. 68</span></div>
+                    </div>
+                </div>
+
+                <div class="mario-card bg-yellow-100 p-4 border-4 border-yellow-500 ring-4 ring-black">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xl">⭐</span>
+                        <h3 class="font-black text-red-600">ภาคการศึกษาปลาย</h3>
+                    </div>
+                    <div class="text-sm space-y-3 font-black">
+                        <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span>24 พ.ย. 68</span></div>
+                        <div class="flex justify-between bg-yellow-400 px-1"><span>สอบกลางภาค:</span><span>10-18 ม.ค. 69</span></div>
+                        <div class="flex justify-between"><span>สอบปลายภาค:</span><span>16-27 มี.ค. 69</span></div>
+                        <div class="flex justify-between text-gray-500"><span>ปิดภาคเรียน:</span><span>30 มี.ค. 69</span></div>
+                    </div>
+                </div>
+
+                <div class="mario-card bg-orange-100 p-4 border-4 border-black">
+                    <h3 class="font-black text-orange-700 border-b-4 border-orange-200 pb-2 mb-4">ภาคฤดูร้อน</h3>
+                    <div class="text-sm space-y-3 font-bold">
+                        <div class="flex justify-between"><span>เปิดภาคเรียน:</span><span>20 เม.ย. 69</span></div>
+                        <div class="flex justify-between"><span>เรียนวันสุดท้าย:</span><span>29 พ.ค. 69</span></div>
+                        <div class="flex justify-between text-red-600"><span>สอบปลายภาค:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
+                        <div class="flex justify-between text-gray-500"><span>ปิดภาคเรียน:</span><span>2 มิ.ย. 69</span></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="border-2 border-black p-5 bg-slate-50 relative">
-                    <div class="bg-sky-500 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0">1st SEMESTER</div>
-                    <h4 class="font-black text-xl mb-4 mt-2 text-black border-b-2 border-sky-200">ภาคการศึกษาต้น</h4>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>23 มิ.ย. 68</span></div>
-                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบกลางภาค:</span><span>9 - 17 ส.ค. 68</span></div>
-                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>20 - 31 ต.ค. 68</span></div>
-                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>3 พ.ย. 68</span></div>
-                    </div>
-                </div>
-
-                <div class="border-4 border-blue-600 p-5 bg-white relative shadow-[4px_4px_0px_#2563eb]">
-                    <div class="bg-blue-600 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0 uppercase">Current Term</div>
-                    <h4 class="font-black text-xl mb-4 mt-2 text-blue-600 border-b-2 border-blue-100">ภาคการศึกษาปลาย</h4>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>24 พ.ย. 68</span></div>
-                        <div class="flex justify-between text-red-600 font-black italic scale-105"><span>สอบกลางภาค:</span><span>10 - 18 ม.ค. 69</span></div>
-                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>16 - 27 มี.ค. 69</span></div>
-                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>30 มี.ค. 69</span></div>
-                    </div>
-                </div>
-
-                <div class="border-2 border-black p-5 bg-orange-50 relative">
-                    <div class="bg-orange-500 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0 uppercase">Summer</div>
-                    <h4 class="font-black text-xl mb-4 mt-2 text-orange-700 border-b-2 border-orange-200">ภาคฤดูร้อน</h4>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>20 เม.ย. 69</span></div>
-                        <div class="flex justify-between font-bold"><span>วันสุดท้ายการเรียน:</span><span>29 พ.ค. 69</span></div>
-                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>30 พ.ค. - 1 มิ.ย. 69</span></div>
-                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>2 มิ.ย. 69</span></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-6 flex items-center gap-2 text-gray-400 italic">
-                <span class="text-xs font-bold uppercase tracking-widest">หมายเหตุ:</span>
-                <span class="text-[10px] font-medium leading-tight">ข้อมูลอ้างอิงจากประกาศกำหนดวันเปิด-ปิดภาคการศึกษา มหาวิทยาลัยเกษตรศาสตร์ ปีการศึกษา 2568</span>
+            <div class="flex justify-between mt-10">
+                <div class="text-4xl">🌵</div>
+                <div class="pipe-green w-16 h-12 self-end"></div>
             </div>
         </div>
     </section>
+
+    <section id="resultView" class="hidden relative z-10">
+        <div class="pixel-border p-6 bg-white mb-6">
+            <h2 id="resName" class="text-3xl font-black text-black">-</h2>
+            <p id="resId" class="text-xl font-bold text-blue-600">-</p>
+            <div class="mt-4 grid grid-cols-2 gap-4 text-sm border-t-2 border-black pt-4">
+                <p><b>คณะ:</b> <span id="resFaculty"></span></p>
+                <p><b>ภาควิชา:</b> <span id="resDept"></span></p>
+            </div>
+            <button onclick="location.reload()" class="mt-6 text-blue-600 font-bold underline">← กลับไปหน้าหลัก</button>
+        </div>
+
+        <div class="pixel-border overflow-hidden bg-white">
+            <table class="w-full text-left">
+                <thead class="bg-black text-white text-xs">
+                    <tr>
+                        <th class="p-3">รหัสวิชา</th>
+                        <th class="p-3">ชื่อวิชา</th>
+                        <th class="p-3 text-center">วัน/เวลาสอบ</th>
+                        <th class="p-3 text-center">ห้อง</th>
+                    </tr>
+                </thead>
+                <tbody id="examTableBody" class="font-bold text-sm"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<footer class="mt-20 bg-black text-white p-6 text-center">
+    <p class="text-[10px] font-mono">© 2026 MARIO EXAM SYSTEM | DEVELOPED BY SUTHEE</p>
+    <div class="flex justify-center gap-4 mt-2">
+        <div class="w-4 h-4 bg-red-500"></div>
+        <div class="w-4 h-4 bg-green-500"></div>
+        <div class="w-4 h-4 bg-blue-500"></div>
+    </div>
+</footer>
+
+<script>
+    const db = {
+        "6720600494": { name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน",
+            exams: [
+                { code: "01355102", titleEn: "English for University", date: "10 ม.ค. 69", time: "13:00-15:30", room: "LH3-304" },
+                { code: "02036271", titleEn: "Horticultural Science", date: "12 ม.ค. 69", time: "16:30-18:30", room: "LH4-201" }
+            ]
+        },
+        "6720600656": { name: "นายสิทธิชาติ ทองนุ่น", id: "6720600656", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน",
+            exams: [
+                { code: "01355102", titleEn: "English for University", date: "10 ม.ค. 69", time: "13:00-15:30", room: "LH3-304" },
+                { code: "01419211", titleEn: "General Microbiology", date: "13 ม.ค. 69", time: "09:00-12:00", room: "LH3-211" }
+            ]
+        }
+        // ... (สามารถเพิ่มข้อมูลนิสิตคนอื่นได้ตามโครงสร้างนี้)
+    };
+
+    function handleSearch() {
+        const id = document.getElementById('studentId').value.trim();
+        const student = db[id];
+        if (student) {
+            document.getElementById('searchView').classList.add('hidden');
+            document.getElementById('resultView').classList.remove('hidden');
+            document.getElementById('resName').innerText = student.name;
+            document.getElementById('resId').innerText = "รหัสนิสิต: " + student.id;
+            document.getElementById('resFaculty').innerText = student.faculty;
+            document.getElementById('resDept').innerText = student.dept;
+
+            const tbody = document.getElementById('examTableBody');
+            tbody.innerHTML = student.exams.map(ex => `
+                <tr class="border-b-2 border-gray-100">
+                    <td class="p-3 text-blue-600">${ex.code}</td>
+                    <td class="p-3">${ex.titleEn}</td>
+                    <td class="p-3 text-center text-xs">${ex.date}<br>${ex.time}</td>
+                    <td class="p-3 text-center text-red-600">${ex.room}</td>
+                </tr>
+            `).join('');
+        } else {
+            document.getElementById('errorMsg').classList.remove('hidden');
+        }
+    }
+
+    // ตัวนับ Coins (Visit Counter)
+    window.onload = () => {
+        let count = localStorage.getItem('marioVisits') || 1248;
+        count = parseInt(count) + 1;
+        localStorage.setItem('marioVisits', count);
+        document.getElementById('totalCount').innerText = count.toString().padStart(4, '0');
+    };
+</script>
+
+</body>
+</html>
