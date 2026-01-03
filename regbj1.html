@@ -15,7 +15,7 @@
             --pending-bg: #fee2e2;
             --pending-text: #991b1b;
             --border-color: #e2e8f0;
-            --admin-bg: #f8fafc;
+            --admin-section-bg: #eff6ff;
         }
 
         body {
@@ -40,17 +40,60 @@
         }
 
         h2 { color: var(--primary); margin: 0; }
-        p { color: #64748b; margin-top: 5px; }
+        p.subtitle { color: #64748b; margin-top: 5px; }
 
+        /* ส่วนเจ้าหน้าที่ระบบ (ย้ายมาด้านบน) */
+        .admin-section {
+            background-color: var(--admin-section-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #dbeafe;
+            margin-bottom: 30px;
+        }
+
+        .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            border: 1px solid #f0f7ff;
+        }
+
+        .admin-icon {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.9rem; }
+        .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
+
+        /* ตาราง */
         .table-wrapper {
             overflow-x: auto;
-            margin-bottom: 40px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
 
         th {
@@ -74,7 +117,7 @@
         .status-badge {
             padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             display: inline-block;
         }
@@ -82,7 +125,7 @@
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
 
         .dept-tag {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             padding: 2px 8px;
             border-left: 4px solid #ccc;
@@ -99,50 +142,11 @@
         .dept-8 { border-color: #ec4899; color: #be185d; }
         .dept-9 { border-color: #64748b; color: #334155; }
 
-        /* ส่วนเจ้าหน้าที่ระบบ */
-        .admin-section {
-            background-color: var(--admin-bg);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .admin-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .admin-icon {
-            background: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .admin-info h4 { margin: 0; color: var(--primary); font-size: 0.95rem; }
-        .admin-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
-        .role-tag { font-size: 0.75rem; background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-weight: 600; margin-top: 4px; display: inline-block; }
-
-        .count-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; }
+        .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
 
         @media (max-width: 768px) {
             td, th { padding: 10px 5px; font-size: 0.8rem; }
+            .admin-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -151,26 +155,11 @@
 <div class="container">
     <div class="header">
         <h2><i class="fas fa-university"></i> สรุปผลการขอเปิดรายวิชา</h2>
-        <p>ภาคเรียนที่ 2 ปีการศึกษา 2568 (แยกตามกลุ่มสาระการเรียนรู้)</p>
-    </div>
-
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>ลำดับ</th>
-                    <th>รหัสครู</th>
-                    <th>ชื่อ-นามสกุล</th>
-                    <th>กลุ่มสาระการเรียนรู้</th>
-                    <th>สถานะการดำเนินการ</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
+        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 (แยกตามกลุ่มสาระการเรียนรู้)</p>
     </div>
 
     <div class="admin-section">
-        <h3 style="margin-top:0; color: var(--primary); font-size: 1.1rem;"><i class="fas fa-user-shield"></i> เจ้าหน้าที่ระบบประจำปีการศึกษา 2568</h3>
+        <h3><i class="fas fa-user-shield"></i> เจ้าหน้าที่ระบบประจำปีการศึกษา 2568</h3>
         <div class="admin-grid">
             <div class="admin-card">
                 <div class="admin-icon"><i class="fas fa-laptop-code"></i></div>
@@ -215,6 +204,21 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>รหัสครู</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    <th>กลุ่มสาระ</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
     </div>
 </div>
 
