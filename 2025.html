@@ -3,204 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Academic Farm 2568 - Smooth Edition</title>
+    <title>KU Academic Farm 2568 - Easy Read Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Cherry+Bomb+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --farm-sky: #87ceeb;
-            --farm-grass-light: #55ff55;
-            --farm-grass-dark: #228b22;
+            --farm-grass: #7cfc00;
             --farm-wood: #8b4513;
+            --farm-paper: #fffcf0;
         }
 
+        /* เน้นฟอนต์ Kanit ให้อ่านง่ายขึ้น */
         body {
             background-color: var(--farm-sky);
             font-family: 'Kanit', sans-serif;
             margin: 0;
-            overflow-x: hidden;
-            min-height: 100vh;
+            color: #333;
         }
 
-        /* --- Smooth Parallax Elements --- */
-        .cloud-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: -1;
+        .main-title {
+            font-family: 'Cherry Bomb One', cursive;
+            color: #fff;
+            text-shadow: 4px 4px 0px var(--farm-wood);
         }
 
+        /* ปรับปรุงกระดานไม้ให้ดูสะอาดตา */
+        .wood-frame {
+            background-color: #a0522d;
+            border: 8px solid #5d2e06;
+            border-radius: 24px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+
+        /* ปรับปรุงกระดาษโน้ตให้อ่านง่าย */
+        .order-paper {
+            background-color: var(--farm-paper);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .order-paper:hover {
+            transform: scale(1.02);
+            background-color: #ffffff;
+        }
+
+        /* เน้นความชัดเจนของหัวข้อ */
+        .section-header {
+            font-weight: 800;
+            color: #5d2e06;
+            border-bottom: 3px solid #f0e4b4;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+        }
+
+        .data-label {
+            font-weight: 400;
+            color: #7d5a44;
+        }
+
+        .data-value {
+            font-weight: 600;
+            color: #2d1a0c;
+        }
+
+        .grade-ribbon {
+            background: #ff4500;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-block;
+            box-shadow: 0 4px 0px #8b0000;
+            font-size: 0.9rem;
+        }
+
+        /* พื้นหลังเคลื่อนไหว */
         .cloud {
             position: absolute;
             background: white;
             border-radius: 50px;
-            filter: blur(1px);
             animation: drift linear infinite;
+            z-index: -1;
+            opacity: 0.8;
         }
 
         @keyframes drift {
-            from { transform: translateX(-200px); }
-            to { transform: translateX(100vw); }
-        }
-
-        /* --- Smooth UI Components --- */
-        .wood-board {
-            background: #a0522d;
-            border: 6px solid #5d2e06;
-            box-shadow: 0 10px 0 #3d1f04, 0 20px 30px rgba(0,0,0,0.2);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .wood-board:hover {
-            transform: translateY(-8px) rotate(1deg);
-        }
-
-        .paper-note {
-            background: #fff8dc;
-            border: 1px solid #d2b48c;
-            box-shadow: 2px 2px 0 #d2b48c, 5px 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .paper-note:hover {
-            background: #ffffff;
-            transform: scale(1.02);
-        }
-
-        .grade-tag {
-            background: #ff4500;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-weight: 900;
-            box-shadow: 0 4px 0 #8b0000;
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .ground-parallax {
-            position: fixed;
-            bottom: 0; width: 100%; height: 100px;
-            background: var(--farm-grass-dark);
-            border-top: 10px solid var(--farm-grass-light);
-            z-index: -1;
-        }
-
-        .animal-parallax {
-            position: absolute;
-            bottom: 95px;
-            font-size: 3rem;
-            animation: bounce 3s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            from { left: -200px; }
+            to { left: 100vw; }
         }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-4 md:p-12 min-h-screen flex flex-col items-center">
 
-    <div class="cloud-container">
-        <div class="cloud w-40 h-12 opacity-80" style="top: 10%; animation-duration: 40s;"></div>
-        <div class="cloud w-32 h-10 opacity-60" style="top: 20%; animation-duration: 65s; animation-delay: -10s;"></div>
-        <div class="cloud w-56 h-16 opacity-70" style="top: 5%; animation-duration: 50s; animation-delay: -25s;"></div>
-    </div>
+    <div class="cloud w-40 h-12" style="top: 10%; animation-duration: 45s;"></div>
+    <div class="cloud w-32 h-10" style="top: 25%; animation-duration: 60s; animation-delay: -20s;"></div>
 
-    <div class="max-w-6xl mx-auto relative z-10">
-        <header class="text-center mb-16">
-            <h1 style="font-family: 'Cherry Bomb One', cursive;" class="text-white text-5xl md:text-7xl drop-shadow-[5px_5px_0px_#8b4513]">HAY KU FARM</h1>
-            <p class="bg-white/20 backdrop-blur-md text-[#5d2e06] px-6 py-1 rounded-full font-black text-sm mt-4 inline-block border-2 border-white/50">
-                🌾 SEASON 2568 : ACADEMIC HARVEST 🌾
-            </p>
-        </header>
+    <header class="text-center mb-12">
+        <h1 class="main-title text-5xl md:text-7xl mb-4">HAY KU FARM</h1>
+        <p class="bg-[#5d2e06] text-white px-8 py-2 rounded-full font-semibold tracking-wide">
+            👨‍🌾 ปฏิทินการศึกษา ปีการศึกษา 2568
+        </p>
+    </header>
 
-        <div class="wood-board rounded-3xl p-6 md:p-10">
-            <div class="flex items-center gap-4 mb-8">
-                <div class="bg-white rounded-full p-2 text-3xl shadow-inner">🚜</div>
-                <h2 class="text-white text-3xl font-[900] italic tracking-tight">Order Board: Harvest Schedule</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="paper-note rounded-lg p-6 relative flex flex-col justify-between">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">📌</div>
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="font-black text-amber-900">SEASON 1: ภาคต้น</span>
-                            <span class="text-2xl">🌽</span>
-                        </div>
-                        <div class="space-y-3 text-sm font-bold text-amber-950/70">
-                            <div class="flex justify-between border-b border-amber-200 pb-1"><span>หว่านเมล็ด:</span><span class="text-green-700">23 มิ.ย. 68</span></div>
-                            <div class="flex justify-between border-b border-amber-200 pb-1 text-red-600"><span>สอบกลางภาค:</span><span>9-17 ส.ค. 68</span></div>
-                            <div class="flex justify-between border-b border-amber-200 pb-1 text-red-600"><span>สอบปลายภาค:</span><span>20-31 ต.ค. 68</span></div>
-                            <div class="flex justify-between"><span>ปิดภาคเรียน:</span><span class="text-gray-400">3 พ.ย. 68</span></div>
-                        </div>
+    <main class="wood-frame max-w-6xl w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="order-paper">
+                <div class="section-header flex justify-between">
+                    <span>ภาคการศึกษาต้น</span>
+                    <span>🌽</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
+                        <span class="data-label">เปิดเรียน:</span>
+                        <span class="data-value">23 มิ.ย. 2568</span>
                     </div>
-                    <div class="mt-6 text-center">
-                        <div class="grade-tag text-[10px] md:text-xs italic">เกรดออก: 10 พ.ย. 68</div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2 text-red-600">
+                        <span class="data-label text-red-400">สอบกลางภาค:</span>
+                        <span class="data-value">9-17 ส.ค. 2568</span>
+                    </div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2 text-red-600">
+                        <span class="data-label text-red-400">สอบปลายภาค:</span>
+                        <span class="data-value">20-31 ต.ค. 2568</span>
+                    </div>
+                    <div class="flex justify-between pb-2">
+                        <span class="data-label">ปิดภาคเรียน:</span>
+                        <span class="data-value text-gray-400">3 พ.ย. 2568</span>
                     </div>
                 </div>
-
-                <div class="paper-note rounded-lg p-6 relative flex flex-col justify-between ring-4 ring-yellow-400">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">📌</div>
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="font-black text-amber-900">SEASON 2: ภาคปลาย</span>
-                            <span class="text-2xl animate-bounce">🐮</span>
-                        </div>
-                        <div class="space-y-3 text-sm font-bold text-amber-950">
-                            <div class="flex justify-between border-b border-amber-300 pb-1"><span>หว่านเมล็ด:</span><span class="text-green-700">24 พ.ย. 68</span></div>
-                            <div class="flex justify-between bg-yellow-200 px-1 border-b border-amber-300 pb-1 text-red-700"><span>สอบกลางภาค:</span><span>10-18 ม.ค. 69</span></div>
-                            <div class="flex justify-between border-b border-amber-300 pb-1"><span>สอบปลายภาค:</span><span class="text-red-600">16-27 มี.ค. 69</span></div>
-                            <div class="flex justify-between"><span>ปิดภาคเรียน:</span><span class="text-gray-400">30 มี.ค. 69</span></div>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <div class="grade-tag bg-yellow-500 text-[10px] md:text-xs italic">เกรดออก: 7 เม.ย. 69</div>
-                    </div>
+                <div class="mt-6 text-center">
+                    <div class="grade-ribbon">🏆 วันเกรดออก: 10 พ.ย. 68</div>
                 </div>
-
-                <div class="paper-note rounded-lg p-6 relative flex flex-col justify-between opacity-80">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">📌</div>
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="font-black text-amber-900">SUMMER: ฤดูร้อน</span>
-                            <span class="text-2xl">🐷</span>
-                        </div>
-                        <div class="space-y-3 text-sm font-bold text-amber-950/70">
-                            <div class="flex justify-between border-b border-amber-200 pb-1"><span>หว่านเมล็ด:</span><span class="text-green-700">20 เม.ย. 69</span></div>
-                            <div class="flex justify-between border-b border-amber-200 pb-1"><span>เรียนวันสุดท้าย:</span><span>29 พ.ค. 69</span></div>
-                            <div class="flex justify-between border-b border-amber-200 pb-1 text-red-600"><span>สอบปลายภาค:</span><span>30 พ.ค.-1 มิ.ย. 69</span></div>
-                            <div class="flex justify-between"><span>ปิดภาคเรียน:</span><span class="text-gray-400">2 มิ.ย. 69</span></div>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <div class="grade-tag bg-blue-500 text-[10px] md:text-xs italic">เกรดออก: 11 มิ.ย. 69</div>
-                    </div>
-                </div>
-
             </div>
 
-            <div class="mt-10 flex justify-center">
-                <button onclick="window.print()" class="bg-[#ffd700] hover:bg-[#ffed4a] text-[#5d2e06] border-4 border-[#5d2e06] px-10 py-3 rounded-2xl font-black shadow-[0_6px_0_#8b4513] active:shadow-none active:translate-y-1 transition-all">
-                    🚚 DELIVER REPORT (PRINT)
-                </button>
+            <div class="order-paper border-4 border-yellow-400">
+                <div class="section-header flex justify-between text-red-700">
+                    <span>ภาคการศึกษาปลาย</span>
+                    <span class="animate-bounce">🐮</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
+                        <span class="data-label">เปิดเรียน:</span>
+                        <span class="data-value text-blue-600 font-bold">24 พ.ย. 2568</span>
+                    </div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2 bg-yellow-50 px-1">
+                        <span class="data-label font-semibold">สอบกลางภาค:</span>
+                        <span class="data-value text-red-600 font-bold">10-18 ม.ค. 2569</span>
+                    </div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
+                        <span class="data-label text-red-400">สอบปลายภาค:</span>
+                        <span class="data-value text-red-600 font-bold">16-27 มี.ค. 2569</span>
+                    </div>
+                    <div class="flex justify-between pb-2">
+                        <span class="data-label">ปิดภาคเรียน:</span>
+                        <span class="data-value text-gray-400">30 มี.ค. 2569</span>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <div class="grade-ribbon bg-yellow-500">🏆 วันเกรดออก: 7 เม.ย. 69</div>
+                </div>
             </div>
+
+            <div class="order-paper opacity-90">
+                <div class="section-header flex justify-between">
+                    <span>ภาคฤดูร้อน</span>
+                    <span>🐷</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
+                        <span class="data-label">เปิดเรียน:</span>
+                        <span class="data-value">20 เม.ย. 2569</span>
+                    </div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
+                        <span class="data-label">เรียนวันสุดท้าย:</span>
+                        <span class="data-value">29 พ.ค. 2569</span>
+                    </div>
+                    <div class="flex justify-between border-b border-dashed border-gray-200 pb-2 text-red-600">
+                        <span class="data-label text-red-400">สอบปลายภาค:</span>
+                        <span class="data-value">30 พ.ค.-1 มิ.ย. 2569</span>
+                    </div>
+                    <div class="flex justify-between pb-2">
+                        <span class="data-label">ปิดภาคเรียน:</span>
+                        <span class="data-value text-gray-400">2 มิ.ย. 2569</span>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <div class="grade-ribbon bg-blue-500">🏆 วันเกรดออก: 11 มิ.ย. 69</div>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <div class="animal-parallax" style="left: 10%;">🌳</div>
-    <div class="animal-parallax" style="left: 25%; animation-delay: -1s;">🏡</div>
-    <div class="animal-parallax" style="right: 20%; animation-delay: -0.5s;">🐑</div>
-    <div class="animal-parallax" style="right: 5%; animation-delay: -2s;">🌳</div>
+        <div class="mt-10 text-center">
+            <button onclick="window.print()" class="bg-[#ffd700] hover:bg-[#ffc107] text-[#5d2e06] font-bold px-10 py-3 rounded-xl border-2 border-[#5d2e06] shadow-lg transition-all active:translate-y-1">
+                🚜 พิมพ์รายงานกำหนดการ
+            </button>
+        </div>
+    </main>
 
-    <div class="ground-parallax"></div>
+    <footer class="mt-12 text-[#5d2e06] font-semibold text-sm bg-white/30 px-6 py-2 rounded-full">
+        อ้างอิง: มหาวิทยาลัยเกษตรศาสตร์ ปีการศึกษา 2568
+    </footer>
 
 </body>
 </html>
