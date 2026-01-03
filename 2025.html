@@ -3,193 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Academic Calendar 2568 - Mario Edition</title>
+    <title>Super KU Calendar 2568</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
             --mario-sky: #5c94fc;
-            --mario-brick: #ab3916;
-            --mario-yellow: #fbd000;
-            --mario-green: #43b047;
             --mario-grass: #74bf2e;
+            --mario-dirt: #8b4513;
+            --mario-brick: #ab3916;
         }
-        * { font-family: 'Kanit', sans-serif; }
-        body { 
-            background-color: var(--mario-sky); 
+
+        body {
+            background-color: var(--mario-sky);
+            font-family: 'Kanit', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 50px;
-        }
-        
-        .pixel-border {
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
-            background: white;
-            position: relative;
-        }
-
-        .mario-title {
-            font-family: 'Press Start 2P', cursive;
-            color: white;
-            text-shadow: 4px 4px 0px #000;
-            line-height: 1.5;
-        }
-
-        /* ปรับสไตล์ Stage (ภาคการศึกษา) */
-        .stage-card {
-            border: 4px solid #000;
+            margin: 0;
             image-rendering: pixelated;
-            transition: transform 0.2s;
-        }
-        .stage-card:hover {
-            transform: scale(1.02);
         }
 
-        .q-block {
-            background: var(--mario-yellow);
-            border: 4px solid #000;
-            box-shadow: inset -4px -4px 0px #b79500;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            animation: bounce 0.6s infinite alternate;
+        /* ฉากหลังภูเขาและเมฆ */
+        .scenery {
+            position: fixed;
+            bottom: 40px;
+            width: 100%;
+            height: 300px;
+            background: 
+                radial-gradient(circle at 20% 10%, #fff 20px, transparent 21px),
+                radial-gradient(circle at 25% 15%, #fff 25px, transparent 26px),
+                radial-gradient(circle at 15% 15%, #fff 25px, transparent 26px),
+                linear-gradient(to top, var(--mario-grass) 0%, transparent 100%);
+            background-repeat: repeat-x;
+            background-size: 400px 300px;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .pipe-green {
-            background: #43b047;
+        .pixel-card {
+            background: white;
             border: 4px solid #000;
-            width: 80px;
-            height: 60px;
+            box-shadow: 
+                -8px 0 0 0 #000,
+                8px 0 0 0 #000,
+                0 -8px 0 0 #000,
+                0 8px 0 0 #000,
+                12px 12px 0px rgba(0,0,0,0.2);
             position: relative;
-            margin: 0 auto;
-        }
-        .pipe-green::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -4px; right: -4px; height: 16px;
-            background: #43b047;
-            border: 4px solid #000;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+        .pixel-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 15px 15px 0px rgba(0,0,0,0.3);
+        }
+
+        .mario-font { font-family: 'Press Start 2P', cursive; }
+
+        /* ตกแต่งส่วนหัวด่าน */
+        .world-tag {
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 10px;
+            border: 2px solid #fff;
+        }
+
+        /* อิฐมาริโอ้ */
+        .brick {
+            background: var(--mario-brick);
+            border: 4px solid #000;
+            box-shadow: inset -4px -4px 0px #5d1f0c, inset 4px 4px 0px #d35a3c;
+            width: 100%; height: 20px;
+        }
+
+        /* ท่อเขียว */
+        .pipe-top {
+            background: #43b047;
+            border: 4px solid #000;
+            width: 100px; height: 30px;
+            margin: 0 auto;
+            box-shadow: inset -10px 0 0 #2d7a31;
         }
 
         .ground {
-            background: #8b4513;
-            border-top: 8px solid var(--mario-grass);
-            height: 40px;
-            width: 100%;
             position: fixed;
-            bottom: 0;
-            left: 0;
+            bottom: 0; width: 100%; height: 40px;
+            background: linear-gradient(45deg, var(--mario-dirt) 25%, #a0522d 25%, #a0522d 50%, var(--mario-dirt) 50%, var(--mario-dirt) 75%, #a0522d 75%, #a0522d 100%);
+            background-size: 20px 20px;
+            border-top: 6px solid var(--mario-grass);
         }
+
+        .event-row {
+            border-bottom: 2px dashed #ccc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-row:last-child { border: none; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-12">
+
+<div class="scenery"></div>
 
 <div class="max-w-6xl mx-auto">
-    <header class="text-center mb-16">
-        <div class="flex justify-center gap-4 mb-4">
-            <div class="q-block text-xl">?</div>
-            <div class="q-block text-xl" style="animation-delay: 0.2s">?</div>
-            <div class="q-block text-xl" style="animation-delay: 0.4s">?</div>
+    <header class="text-center mb-20">
+        <div class="inline-block relative">
+            <h1 class="mario-font text-white text-2xl md:text-4xl drop-shadow-[6px_6px_0px_#ab3916]">
+                SUPER KU CALENDAR
+            </h1>
+            <div class="flex justify-between mt-4">
+                <div class="w-8 h-8 bg-[#fbd000] border-4 border-black animate-bounce flex items-center justify-center font-bold">?</div>
+                <div class="bg-black text-white mario-font text-[10px] px-4 py-2 self-center border-2 border-white">
+                    YEAR: 2568
+                </div>
+                <div class="w-8 h-8 bg-[#fbd000] border-4 border-black animate-bounce flex items-center justify-center font-bold" style="animation-delay: 0.3s">?</div>
+            </div>
         </div>
-        <h1 class="mario-title text-2xl md:text-4xl italic">SUPER KU CALENDAR</h1>
-        <p class="bg-black text-white inline-block px-6 py-2 font-bold mt-4 border-4 border-white pixel-border">
-            ปีการศึกษา 2568 (UNDERGRADUATE)
-        </p>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         
-        <div class="stage-card bg-blue-100 p-6 pixel-border border-blue-500">
+        <div class="pixel-card p-6 pt-10 border-blue-500">
+            <div class="world-tag mario-font">WORLD 1-1</div>
             <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">🍄</span>
-                <h2 class="text-2xl font-black text-blue-700">ภาคการศึกษาต้น</h2>
+                <img src="https://img.icons8.com/color/48/000000/super-mario-mushroom.png" width="30"/>
+                <h2 class="text-2xl font-black text-blue-600">ภาคการศึกษาต้น</h2>
             </div>
-            <div class="space-y-4 font-bold text-gray-800">
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🚩 เปิดเรียน</span>
-                    <span class="text-blue-600">23 มิ.ย. 68</span>
+            <div class="text-sm">
+                <div class="event-row">
+                    <span class="font-bold">🚩 เปิดเรียน</span>
+                    <span class="bg-blue-100 px-2 py-1 border-2 border-blue-400">23 มิ.ย. 2568</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>⚔️ สอบกลางภาค</span>
-                    <span class="text-red-500">9 - 17 ส.ค. 68</span>
+                <div class="event-row text-red-600">
+                    <span class="font-bold">⚔️ สอบกลางภาค</span>
+                    <span>9 - 17 ส.ค. 2568</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🔥 สอบปลายภาค</span>
-                    <span class="text-red-500">20 - 31 ต.ค. 68</span>
+                <div class="event-row text-red-600">
+                    <span class="font-bold">🔥 สอบปลายภาค</span>
+                    <span>20 - 31 ต.ค. 2568</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🏁 ปิดภาคเรียน</span>
-                    <span class="text-black">3 พ.ย. 68</span>
+                <div class="event-row">
+                    <span class="font-bold">🏁 ปิดภาคเรียน</span>
+                    <span class="font-bold italic">3 พ.ย. 2568</span>
                 </div>
             </div>
+            <div class="mt-6 brick"></div>
         </div>
 
-        <div class="stage-card bg-yellow-100 p-6 pixel-border border-yellow-500 ring-8 ring-yellow-400/50">
+        <div class="pixel-card p-6 pt-10 ring-8 ring-yellow-400/30">
+            <div class="world-tag mario-font bg-red-600">WORLD 1-2</div>
             <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl animate-pulse">⭐</span>
+                <img src="https://img.icons8.com/color/48/000000/super-mario-star.png" class="animate-pulse" width="30"/>
                 <h2 class="text-2xl font-black text-red-600">ภาคการศึกษาปลาย</h2>
             </div>
-            <div class="space-y-4 font-black text-gray-900">
-                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
-                    <span>🚩 เปิดเรียน</span>
-                    <span class="text-blue-600">24 พ.ย. 68</span>
+            <div class="text-sm">
+                <div class="event-row">
+                    <span class="font-bold">🚩 เปิดเรียน</span>
+                    <span class="bg-red-50 px-2 py-1 border-2 border-red-400">24 พ.ย. 2568</span>
                 </div>
-                <div class="bg-yellow-400 p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
-                    <span>⚔️ สอบกลางภาค</span>
-                    <span>10 - 18 ม.ค. 69</span>
+                <div class="event-row bg-yellow-100 p-2 rounded border-2 border-black">
+                    <span class="font-black">⚔️ สอบกลางภาค</span>
+                    <span class="font-black">10 - 18 ม.ค. 2569</span>
                 </div>
-                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
-                    <span>🔥 สอบปลายภาค</span>
-                    <span class="text-red-600">16 - 27 มี.ค. 69</span>
+                <div class="event-row text-red-600">
+                    <span class="font-bold">🔥 สอบปลายภาค</span>
+                    <span>16 - 27 มี.ค. 2569</span>
                 </div>
-                <div class="bg-white p-3 border-4 border-black flex justify-between shadow-[4px_4px_0px_#000]">
-                    <span>🏁 ปิดภาคเรียน</span>
-                    <span>30 มี.ค. 69</span>
+                <div class="event-row">
+                    <span class="font-bold">🏁 ปิดภาคเรียน</span>
+                    <span class="font-bold italic">30 มี.ค. 2569</span>
                 </div>
             </div>
+            <div class="mt-6 brick"></div>
         </div>
 
-        <div class="stage-card bg-orange-100 p-6 pixel-border border-orange-500">
+        <div class="pixel-card p-6 pt-10 border-orange-500">
+            <div class="world-tag mario-font bg-orange-500">WORLD 1-3</div>
             <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">☀️</span>
+                <img src="https://img.icons8.com/color/48/000000/fire-flower.png" width="30"/>
                 <h2 class="text-2xl font-black text-orange-700">ภาคฤดูร้อน</h2>
             </div>
-            <div class="space-y-4 font-bold text-gray-800">
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🚩 เปิดเรียน</span>
-                    <span class="text-blue-600">20 เม.ย. 69</span>
+            <div class="text-sm">
+                <div class="event-row">
+                    <span class="font-bold">🚩 เปิดเรียน</span>
+                    <span class="bg-orange-100 px-2 py-1 border-2 border-orange-400">20 เม.ย. 2569</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>📚 เรียนวันสุดท้าย</span>
-                    <span>29 พ.ค. 69</span>
+                <div class="event-row">
+                    <span class="font-bold">📚 เรียนวันสุดท้าย</span>
+                    <span>29 พ.ค. 2569</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🔥 สอบปลายภาค</span>
-                    <span class="text-red-500">30 พ.ค. - 1 มิ.ย. 69</span>
+                <div class="event-row text-red-600">
+                    <span class="font-bold">🔥 สอบปลายภาค</span>
+                    <span>30 พ.ค. - 1 มิ.ย. 69</span>
                 </div>
-                <div class="bg-white p-3 border-2 border-black flex justify-between">
-                    <span>🏁 ปิดภาคเรียน</span>
-                    <span class="text-black">2 มิ.ย. 69</span>
+                <div class="event-row">
+                    <span class="font-bold">🏁 ปิดภาคเรียน</span>
+                    <span class="font-bold italic">2 มิ.ย. 2569</span>
                 </div>
             </div>
+            <div class="mt-6 brick"></div>
         </div>
 
     </div>
 
-    <div class="mt-20 flex justify-around items-end">
-        <div class="text-5xl">🌵</div>
-        <div class="pipe-green"></div>
-        <div class="text-6xl pb-2">🏰</div>
-        <div class="pipe-green h-24"></div>
-        <div class="text-5xl">🌵</div>
+    <div class="mt-24 flex justify-around items-end">
+        <div class="pipe-container">
+            <div class="pipe-top"></div>
+            <div class="bg-[#43b047] border-x-4 border-black w-20 h-20 mx-auto shadow-inner"></div>
+        </div>
+        <div class="text-center">
+            <p class="mario-font text-[10px] text-white bg-black/50 p-2">THANK YOU FOR PLAYING</p>
+            <div class="text-4xl">🏰</div>
+        </div>
+        <div class="pipe-container">
+            <div class="pipe-top w-20"></div>
+            <div class="bg-[#43b047] border-x-4 border-black w-16 h-10 mx-auto"></div>
+        </div>
     </div>
 </div>
 
