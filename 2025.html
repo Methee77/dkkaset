@@ -1,0 +1,73 @@
+<section id="searchView" class="max-w-4xl mx-auto py-10">
+        <div class="max-w-2xl mx-auto border-4 border-black p-8 bg-white shadow-[12px_12px_0px_rgba(0,0,0,1)] text-center mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div class="md:col-span-2">
+                    <label class="block font-bold text-xs uppercase tracking-widest mb-2 text-blue-600">กรอกรหัสประจำตัวนิสิต *</label>
+                    <input type="text" id="studentId" class="input-sharp border-blue-600 text-center font-bold" placeholder="ระบุรหัสนิสิต">
+                </div>
+                <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ภาคการศึกษา</label><input type="text" class="input-sharp input-locked font-bold text-center" value="ภาคปลาย 2568" readonly></div>
+                <div><label class="block font-bold text-xs uppercase tracking-widest mb-2 text-gray-400">ประเภทการสอบ</label><input type="text" class="input-sharp input-locked font-bold text-center" value="กลางภาค" readonly></div>
+            </div>
+            
+            <button onclick="handleSearch()" class="btn-gov w-full mt-8 uppercase tracking-widest font-bold">ค้นหาตารางสอบของคุณ →</button>
+            
+            <div class="mt-10 pt-6 border-t-2 border-gray-100 flex justify-center">
+                <div class="border-2 border-black bg-gray-50 py-2 px-6 shadow-[4px_4px_0px_#000] text-center min-w-[200px]">
+                    <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-1">จำนวนผู้เข้าเยี่ยมชมระบบ</p>
+                    <p id="totalCount" class="text-2xl font-black text-black leading-none">--</p>
+                </div>
+            </div>
+
+            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center text-sm">! ไม่พบข้อมูลรหัสประจำตัวนี้ในฐานข้อมูล</p>
+        </div>
+
+        <div class="border-4 border-black bg-white p-6 md:p-8 shadow-[8px_8px_0px_#000]">
+            <div class="flex items-center gap-4 mb-8 border-b-4 border-black pb-4">
+                <div class="bg-black text-white p-2 text-2xl">📅</div>
+                <div>
+                    <h3 class="text-2xl font-[900] leading-none uppercase tracking-tighter">กำหนดการศึกษา ปีการศึกษา 2568</h3>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Academic Calendar (Undergraduate)</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="border-2 border-black p-5 bg-slate-50 relative">
+                    <div class="bg-sky-500 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0">1st SEMESTER</div>
+                    <h4 class="font-black text-xl mb-4 mt-2 text-black border-b-2 border-sky-200">ภาคการศึกษาต้น</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>23 มิ.ย. 68</span></div>
+                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบกลางภาค:</span><span>9 - 17 ส.ค. 68</span></div>
+                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>20 - 31 ต.ค. 68</span></div>
+                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>3 พ.ย. 68</span></div>
+                    </div>
+                </div>
+
+                <div class="border-4 border-blue-600 p-5 bg-white relative shadow-[4px_4px_0px_#2563eb]">
+                    <div class="bg-blue-600 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0 uppercase">Current Term</div>
+                    <h4 class="font-black text-xl mb-4 mt-2 text-blue-600 border-b-2 border-blue-100">ภาคการศึกษาปลาย</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>24 พ.ย. 68</span></div>
+                        <div class="flex justify-between text-red-600 font-black italic scale-105"><span>สอบกลางภาค:</span><span>10 - 18 ม.ค. 69</span></div>
+                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>16 - 27 มี.ค. 69</span></div>
+                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>30 มี.ค. 69</span></div>
+                    </div>
+                </div>
+
+                <div class="border-2 border-black p-5 bg-orange-50 relative">
+                    <div class="bg-orange-500 text-white text-[10px] font-black px-2 py-0.5 absolute top-0 left-0 uppercase">Summer</div>
+                    <h4 class="font-black text-xl mb-4 mt-2 text-orange-700 border-b-2 border-orange-200">ภาคฤดูร้อน</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between font-bold"><span>วันเปิดภาคเรียน:</span><span>20 เม.ย. 69</span></div>
+                        <div class="flex justify-between font-bold"><span>วันสุดท้ายการเรียน:</span><span>29 พ.ค. 69</span></div>
+                        <div class="flex justify-between text-blue-700 font-bold italic"><span>สอบปลายภาค:</span><span>30 พ.ค. - 1 มิ.ย. 69</span></div>
+                        <div class="flex justify-between font-bold"><span>วันปิดภาคเรียน:</span><span>2 มิ.ย. 69</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex items-center gap-2 text-gray-400 italic">
+                <span class="text-xs font-bold uppercase tracking-widest">หมายเหตุ:</span>
+                <span class="text-[10px] font-medium leading-tight">ข้อมูลอ้างอิงจากประกาศกำหนดวันเปิด-ปิดภาคการศึกษา มหาวิทยาลัยเกษตรศาสตร์ ปีการศึกษา 2568</span>
+            </div>
+        </div>
+    </section>
