@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปผลการขอเปิดรายวิชาแยกตามกลุ่มสาระ 2/2568</title>
+    <title>สรุปผลการขอเปิดรายวิชา 2/2568</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -15,6 +15,7 @@
             --pending-bg: #fee2e2;
             --pending-text: #991b1b;
             --border-color: #e2e8f0;
+            --admin-bg: #f8fafc;
         }
 
         body {
@@ -43,6 +44,7 @@
 
         .table-wrapper {
             overflow-x: auto;
+            margin-bottom: 40px;
         }
 
         table {
@@ -69,7 +71,6 @@
 
         tr:hover { background-color: #f8fafc; }
 
-        /* การตกแต่งสถานะ */
         .status-badge {
             padding: 4px 10px;
             border-radius: 20px;
@@ -80,7 +81,6 @@
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
 
-        /* การตกแต่งกลุ่มสาระ */
         .dept-tag {
             font-size: 0.85rem;
             font-weight: 600;
@@ -88,16 +88,56 @@
             border-left: 4px solid #ccc;
         }
         
-        /* สีประจำกลุ่มสาระ */
-        .dept-1 { border-color: #f43f5e; color: #f43f5e; } /* ภาษาไทย - แดง */
-        .dept-2 { border-color: #fbbf24; color: #b45309; } /* คณิต - เหลือง/ส้ม */
-        .dept-3 { border-color: #fb923c; color: #c2410c; } /* วิทย์ - ส้ม */
-        .dept-4 { border-color: #3b82f6; color: #1d4ed8; } /* สังคม - ฟ้า */
-        .dept-5 { border-color: #10b981; color: #047857; } /* สุขศึกษา - เขียว */
-        .dept-6 { border-color: #a855f7; color: #7e22ce; } /* ศิลปะ - ม่วง */
-        .dept-7 { border-color: #14b8a6; color: #0f766e; } /* การงาน - เขียวเข้ม */
-        .dept-8 { border-color: #ec4899; color: #be185d; } /* ต่างประเทศ - ชมพู */
-        .dept-9 { border-color: #64748b; color: #334155; } /* สนับสนุน - เทา */
+        /* สีกลุ่มสาระ */
+        .dept-1 { border-color: #f43f5e; color: #f43f5e; }
+        .dept-2 { border-color: #fbbf24; color: #b45309; }
+        .dept-3 { border-color: #fb923c; color: #c2410c; }
+        .dept-4 { border-color: #3b82f6; color: #1d4ed8; }
+        .dept-5 { border-color: #10b981; color: #047857; }
+        .dept-6 { border-color: #a855f7; color: #7e22ce; }
+        .dept-7 { border-color: #14b8a6; color: #0f766e; }
+        .dept-8 { border-color: #ec4899; color: #be185d; }
+        .dept-9 { border-color: #64748b; color: #334155; }
+
+        /* ส่วนเจ้าหน้าที่ระบบ */
+        .admin-section {
+            background-color: var(--admin-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .admin-icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-info h4 { margin: 0; color: var(--primary); font-size: 0.95rem; }
+        .admin-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
+        .role-tag { font-size: 0.75rem; background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-weight: 600; margin-top: 4px; display: inline-block; }
 
         .count-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; }
 
@@ -125,23 +165,64 @@
                     <th>สถานะการดำเนินการ</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                </tbody>
+            <tbody id="tableBody"></tbody>
         </table>
+    </div>
+
+    <div class="admin-section">
+        <h3 style="margin-top:0; color: var(--primary); font-size: 1.1rem;"><i class="fas fa-user-shield"></i> เจ้าหน้าที่ระบบประจำปีการศึกษา 2568</h3>
+        <div class="admin-grid">
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="admin-info">
+                    <h4>129 นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ</h4>
+                    <span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-file-invoice"></i></div>
+                <div class="admin-info">
+                    <h4>222 นางสาวเสาวลักษณ์ ชินวงษ์</h4>
+                    <span class="role-tag">งานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-user-clock"></i></div>
+                <div class="admin-info">
+                    <h4>243 นายเมธี ใจสุขดี</h4>
+                    <span class="role-tag">เจ้าหน้าที่งานวัดผลชั่วคราว</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-database"></i></div>
+                <div class="admin-info">
+                    <h4>329 นางลำดวน ชิดปราง</h4>
+                    <span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-user-tie"></i></div>
+                <div class="admin-info">
+                    <h4>816 นางสาวพัชรินทร์ ศรีทาคง</h4>
+                    <span class="role-tag">หัวหน้ากลุ่มงานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-address-book"></i></div>
+                <div class="admin-info">
+                    <h4>830 นายณัฏฐกิตติ์ โพธิ์พุ่ม</h4>
+                    <span class="role-tag">นายทะเบียน</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
     const departments = {
-        "1": "ภาษาไทย",
-        "2": "คณิตศาสตร์",
-        "3": "วิทยาศาสตร์และเทคโนโลยี",
-        "4": "สังคมศึกษา",
-        "5": "สุขศึกษา",
-        "6": "ศิลปะ",
-        "7": "การงานอาชีพ",
-        "8": "ภาษาต่างประเทศ",
-        "9": "กลุ่มงานสนับสนุน"
+        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
+        "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
+        "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
     };
 
     const teacherData = [
@@ -156,6 +237,7 @@
         { id: "123", name: "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์", status: 1 },
         { id: "124", name: "นางสาวอุษา สายทอง", status: 1 },
         { id: "125", name: "นายธีรภัทร แก้วสมนึก", status: 0 },
+        { id: "129", name: "นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ", status: 1 },
         { id: "213", name: "นายจุมพล อยู่คง", status: 0 },
         { id: "216", name: "นางสาวภัสรา เพ็งใย", status: 1 },
         { id: "217", name: "นางสาวรจนา ดาวเรือง", status: 1 },
@@ -169,7 +251,8 @@
         { id: "228", name: "นางสาวภัคจิรา จงสุกใส", status: 0 },
         { id: "229", name: "นางสาวสายรุ้ง ดอกลำภู", status: 0 },
         { id: "230", name: "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ", status: 0 },
-        { id: "231", name: "นายนัฎฐกิตติ์ เพชรี", status:01 },
+        { id: "231", name: "นายนัฎฐกิตติ์ เพชรี", status: 1 },
+        { id: "243", name: "นายเมธี ใจสุขดี", status: 1 },
         { id: "255", name: "นางสาวพชรกมล รุ่งวารินทร์", status: 0 },
         { id: "310", name: "นางสาวจุฑามาศ เอี่ยมเกตุ", status: 0 },
         { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", status: 1 },
@@ -262,12 +345,8 @@
 
     teacherData.forEach((teacher, index) => {
         const row = document.createElement('tr');
-        
-        // ดึงเลขหลักแรกเพื่อระบุกลุ่มสาระ
         const deptId = teacher.id.charAt(0);
         const deptName = departments[deptId] || "ไม่ระบุ";
-        
-        // กำหนดสถานะ
         const statusText = teacher.status === 1 ? "ยืนยันข้อมูลแล้ว" : "ยังไม่ดำเนินการ";
         const statusClass = teacher.status === 1 ? "done" : "waiting";
         const stepText = teacher.status === 1 ? "[7/7]" : "[1/7]";
@@ -276,9 +355,7 @@
             <td>${index + 1}</td>
             <td><strong>${teacher.id}</strong></td>
             <td>${teacher.name}</td>
-            <td>
-                <div class="dept-tag dept-${deptId}">${deptName}</div>
-            </td>
+            <td><div class="dept-tag dept-${deptId}">${deptName}</div></td>
             <td>
                 <span class="count-tag">${stepText}</span>
                 <span class="status-badge ${statusClass}">${statusText}</span>
