@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบผลการขอเปิดรายวิชา 2/2568</title>
+    <title>ระบบตรวจสอบรายชื่อผู้ขอเปิดรายวิชา 2/2568</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-color: #1a237e;
-            --secondary-color: #3949ab;
-            --accent-color: #ffc107;
-            --success-color: #2e7d32;
-            --pending-color: #ef6c00;
-            --bg-color: #f0f2f5;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f4f7f9;
         }
 
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg);
             margin: 0;
             display: flex;
             justify-content: center;
@@ -27,186 +24,126 @@
             min-height: 100vh;
         }
 
-        .card {
+        .container {
             background: white;
-            width: 90%;
-            max-width: 550px;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .header-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
+        .logo { font-size: 3rem; color: var(--accent); margin-bottom: 15px; }
+        h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
+        p.desc { color: #888; margin-bottom: 25px; font-size: 0.9rem; }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
-        h2 { color: var(--primary-color); margin-bottom: 10px; font-weight: 600; }
-        p.subtitle { color: #666; margin-bottom: 30px; font-size: 0.95rem; }
-
-        /* ส่วนของกล่องค้นหา */
-        .search-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
         input {
-            width: 100%;
-            padding: 15px 20px;
-            padding-right: 50px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.3s ease;
-            font-family: 'Sarabun', sans-serif;
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.3s;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
+        input:focus { border-color: var(--accent); }
 
         button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 12px 20px;
+            background: var(--accent);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+            transition: 0.3s;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.4);
-        }
+        button:hover { background: #2980b9; }
 
-        /* ส่วนแสดงผลลัพธ์ */
-        .result-container {
-            margin-top: 30px;
-            text-align: left;
+        #result {
             display: none;
-            animation: slideUp 0.5s ease forwards;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .info-card {
-            background: #f8f9ff;
+            margin-top: 20px;
             padding: 20px;
-            border-radius: 16px;
-            border-left: 6px solid var(--primary-color);
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            animation: fadeIn 0.4s ease;
         }
 
-        .info-item {
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 8px;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .label { color: #777; font-weight: 400; }
-        .value { color: #333; font-weight: 600; }
-
-        .status-pill {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-
-        .status-approved { background: #e8f5e9; color: var(--success-color); }
-        .status-pending { background: #fff3e0; color: var(--pending-color); }
-
-        .footer-text {
-            margin-top: 25px;
-            font-size: 0.8rem;
-            color: #aaa;
-        }
+        .info-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 1rem; }
+        .label { color: #666; }
+        .value { color: var(--primary); font-weight: 600; }
+        .status { color: #27ae60; font-weight: bold; margin-top: 10px; display: block; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="header-icon">
-        <i class="fas fa-university"></i>
-    </div>
-    <h2>ตรวจสอบผลการเปิดรายวิชา</h2>
-    <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
+<div class="container">
+    <div class="logo"><i class="fas fa-file-signature"></i></div>
+    <h2>ตรวจสอบการขอเปิดวิชา</h2>
+    <p class="desc">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
 
-    <div class="search-group">
-        <input type="text" id="courseCode" placeholder="ระบุรหัสรายวิชา 6 หลัก">
+    <div class="search-box">
+        <input type="text" id="teacherId" placeholder="กรอกรหัสครู (เช่น 111, 231)">
+        <button onclick="search()"><i class="fas fa-search"></i></button>
     </div>
-    
-    <button onclick="checkStatus()">
-        <i class="fas fa-search"></i> ตรวจสอบสถานะ
-    </button>
 
-    <div id="resultArea" class="result-container">
-        <div class="info-card">
-            <div class="info-item">
-                <span class="label">รหัสรายวิชา:</span>
-                <span class="value" id="resCode">-</span>
-            </div>
-            <div class="info-item">
-                <span class="label">ชื่อรายวิชา:</span>
-                <span class="value" id="resName">-</span>
-            </div>
-            <div class="info-item">
-                <span class="label">ผู้สอน:</span>
-                <span class="value" id="resTeacher">-</span>
-            </div>
-            <div class="info-item">
-                <span class="label">ผลการอนุมัติ:</span>
-                <span id="resStatus" class="status-pill">-</span>
-            </div>
+    <div id="result">
+        <div class="info-row">
+            <span class="label">รหัสครู:</span>
+            <span class="value" id="dispId"></span>
         </div>
-    </div>
-
-    <div class="footer-text">
-        © 2568 สำนักทะเบียนและประมวลผล
+        <div class="info-row">
+            <span class="label">ชื่อ-นามสกุล:</span>
+            <span class="value" id="dispName"></span>
+        </div>
+        <span class="status"><i class="fas fa-check-circle"></i> บันทึกข้อมูลเรียบร้อย</span>
     </div>
 </div>
 
 <script>
-    // ข้อมูลสมมติ (Mockup Data)
-    const database = {
-        "101101": { name: "General English II", teacher: "Dr. Robert Wilson", status: "approved", statusText: "อนุมัติแล้ว" },
-        "202202": { name: "Data Structures", teacher: "ผศ.ดร. มานะ ใจดี", status: "pending", statusText: "รอพิจารณา" },
-        "303303": { name: "Calculus for Engineers", teacher: "อ.วิภาวรรณ สอนดี", status: "approved", statusText: "อนุมัติแล้ว" }
+    // ฐานข้อมูลจากที่คุณให้มา (ตัวอย่างบางส่วน)
+    const teachers = {
+        "111": "นางสาววาสนา ด่วนดี",
+        "113": "นางสาวจินตนา บำรุงเพ็ชร",
+        "114": "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์",
+        "117": "นายวีระยุทธ โพธิ์สุวรรณ",
+        "118": "นางวิไลพักตร์ กลิ่นกาหลง",
+        "119": "นางนาตยา พิทักษ์วงศ์",
+        "120": "นางสาววชิราภรณ์ ศรป้อม",
+        "121": "นายจิรวัฒน์ โสภาพันธุ์",
+        "123": "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์",
+        "124": "นางสาวอุษา สายทอง",
+        "213": "นายจุมพล อยู่คง",
+        "231": "นายนัฎฐกิตติ์ เพชรี",
+        "310": "นางสาวจุฑามาศ เอี่ยมเกตุ",
+        "329": "นางลำดวน ชิดปราง",
+        "333": "นายภูวนัย อ่อนสอาด",
+        "407": "นายไชยพร แย้มมี",
+        "730": "นายนครินทร์ กล้าหาญ",
+        "830": "นายณัฏฐกิตติ์ โพธิ์พุ่ม"
     };
 
-    function checkStatus() {
-        const id = document.getElementById('courseCode').value.trim();
-        const resultArea = document.getElementById('resultArea');
+    function search() {
+        const id = document.getElementById('teacherId').value.trim();
+        const resDiv = document.getElementById('result');
         
-        if (database[id]) {
-            // ใส่ข้อมูลลงใน UI
-            document.getElementById('resCode').innerText = id;
-            document.getElementById('resName').innerText = database[id].name;
-            document.getElementById('resTeacher').innerText = database[id].teacher;
-            
-            const statusEl = document.getElementById('resStatus');
-            statusEl.innerText = database[id].statusText;
-            statusEl.className = 'status-pill ' + (database[id].status === 'approved' ? 'status-approved' : 'status-pending');
-
-            // แสดงผลลัพธ์พร้อม Animation
-            resultArea.style.display = 'block';
+        if (teachers[id]) {
+            document.getElementById('dispId').innerText = id;
+            document.getElementById('dispName').innerText = teachers[id];
+            resDiv.style.display = 'block';
         } else {
-            alert("ไม่พบข้อมูลรหัสวิชา " + id + " ในระบบปีการศึกษา 2/2568");
-            resultArea.style.display = 'none';
+            alert("ไม่พบรหัสครูนี้ในระบบการขอเปิดรายวิชา");
+            resDiv.style.display = 'none';
         }
     }
 </script>
