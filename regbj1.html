@@ -3,269 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตรวจสอบรายชื่อผู้ขอเปิดรายวิชา 2/2568</title>
+    <title>สรุปผลการขอเปิดรายวิชา 2/2568</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #1e3a8a;
-            --accent: #3b82f6;
-            --success: #10b981;
-            --bg: #f8fafc;
+            --success-bg: #d1fae5;
+            --success-text: #065f46;
+            --pending-bg: #fee2e2;
+            --pending-text: #991b1b;
+            --border-color: #e2e8f0;
         }
 
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: var(--bg);
+            background-color: #f1f5f9;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 50px;
+            padding: 20px;
         }
 
         .container {
+            max-width: 1000px;
+            margin: 0 auto;
             background: white;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 30px;
         }
 
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            background: #eff6ff;
-            color: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 20px;
+        h2 { color: var(--primary); margin: 0; }
+        p { color: #64748b; }
+
+        .table-wrapper {
+            overflow-x: auto;
         }
 
-        h2 { margin: 0; color: var(--primary); font-size: 1.6rem; }
-        p.desc { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
-
-        .search-area {
-            background: #f1f5f9;
-            padding: 5px;
-            border-radius: 15px;
-            display: flex;
-            margin-bottom: 25px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: transparent;
-            font-size: 1.1rem;
-            outline: none;
-            font-family: 'Sarabun', sans-serif;
-        }
-
-        button {
-            padding: 0 25px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        button:hover { background: var(--accent); }
-
-        #result {
-            display: none;
-            margin-top: 20px;
-            padding: 25px;
-            background: #ffffff;
-            border-radius: 15px;
-            border: 2px solid #f1f5f9;
-            animation: slideUp 0.3s ease;
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
             text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid var(--border-color);
         }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
 
-        .res-item { display: flex; flex-direction: column; margin-bottom: 15px; }
-        .res-label { font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
-        .res-value { font-size: 1.2rem; color: var(--primary); font-weight: 600; }
+        tr:hover { background-color: #f8fafc; }
 
-        .badge {
-            display: inline-block;
-            background: #d1fae5;
-            color: #065f46;
+        .status-badge {
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            display: inline-block;
+        }
+
+        .done { background: var(--success-bg); color: var(--success-text); }
+        .waiting { background: var(--pending-bg); color: var(--pending-text); }
+
+        .count-tag {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        /* สำหรับหน้าจอมือถือ */
+        @media (max-width: 600px) {
+            th, td { padding: 10px 8px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="icon-box"><i class="fas fa-user-check"></i></div>
-    <h2>ระบบตรวจสอบรายชื่อ</h2>
-    <p class="desc">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
-
-    <div class="search-area">
-        <input type="text" id="teacherId" placeholder="กรอกรหัสครู (เช่น 111, 231)" onkeyup="if(event.keyCode===13) search()">
-        <button onclick="search()"><i class="fas fa-search"></i></button>
+    <div class="header">
+        <h2><i class="fas fa-list-check"></i> รายชื่อผู้ขอเปิดรายวิชา</h2>
+        <p>ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
     </div>
 
-    <div id="result">
-        <div class="res-item">
-            <span class="res-label">รหัสครู</span>
-            <span class="res-value" id="dispId"></span>
-        </div>
-        <div class="res-item">
-            <span class="res-label">ชื่อ-นามสกุล</span>
-            <span class="res-value" id="dispName"></span>
-        </div>
-        <div style="text-align: center; margin-top: 10px;">
-            <span class="badge"><i class="fas fa-check"></i> ยืนยันข้อมูลในระบบแล้ว</span>
-        </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>รหัสครู</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    <th>สถานะการดำเนินการ</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
     </div>
 </div>
 
 <script>
-    // ฐานข้อมูลรายชื่อทั้งหมดที่ให้มา
-    const teachers = {
-        "111": "นางสาววาสนา ด่วนดี",
-        "113": "นางสาวจินตนา บำรุงเพ็ชร",
-        "114": "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์",
-        "117": "นายวีระยุทธ โพธิ์สุวรรณ",
-        "118": "นางวิไลพักตร์ กลิ่นกาหลง",
-        "119": "นางนาตยา พิทักษ์วงศ์",
-        "120": "นางสาววชิราภรณ์ ศรป้อม",
-        "121": "นายจิรวัฒน์ โสภาพันธุ์",
-        "123": "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์",
-        "124": "นางสาวอุษา สายทอง",
-        "125": "นายธีรภัทร แก้วสมนึก",
-        "213": "นายจุมพล อยู่คง",
-        "216": "นางสาวภัสรา เพ็งใย",
-        "217": "นางสาวรจนา ดาวเรือง",
-        "218": "นางสาวปัญญาวดี ประดับสุข",
-        "221": "นางปราณี อินทรักษา",
-        "222": "นางสาวเสาวลักษณ์ ชินวงษ์",
-        "224": "นางสาวปัทมปาณี ทับทิมศรี",
-        "225": "นางสาวศิราพรรณ ชูประสิทธิ์",
-        "226": "นางอนุสรา โพธิ์หอม",
-        "227": "นางสาววรรษา กาญจนลักษณ์",
-        "228": "นางสาวภัคจิรา จงสุกใส",
-        "229": "นางสาวสายรุ้ง ดอกลำภู",
-        "230": "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ",
-        "231": "นายนัฎฐกิตติ์ เพชรี",
-        "255": "นางสาวพชรกมล รุ่งวารินทร์",
-        "310": "นางสาวจุฑามาศ เอี่ยมเกตุ",
-        "311": "นางสาวเนตรราตรี ท้าวโสม",
-        "314": "นางศิริพร เถาว์โท",
-        "315": "นางนัญธมณีกร ระรอกแก้ว",
-        "316": "นางสาวพิมพ์ณภัส อินทร์สกุล",
-        "319": "นางสาววิชุดา งามอักษร",
-        "320": "นางสาวลินดา จุฬาวรรณ",
-        "321": "นางสาวจิราพร ลิ้มประเสริฐ",
-        "324": "นางกรริสา จันทร์สุวรรณ",
-        "325": "นายเอกชัย ลวดคำ",
-        "326": "นายเสกสรร คำนนท์",
-        "328": "นางสาวชลิตา คงศิริ",
-        "329": "นางลำดวน ชิดปราง",
-        "330": "นายสุรศักดิ์ สีน้ำเงิน",
-        "331": "นางวรางคณา พรหมชนะ",
-        "332": "นางศริยา วงษ์จันทร์",
-        "333": "นายภูวนัย อ่อนสอาด",
-        "334": "นางสาวปวีณา วงษ์จินดา",
-        "335": "นายสราวุธ แช่มช้อย",
-        "336": "นายธีรภัทร สุดโต",
-        "337": "นางสาวธิดาพร สังข์ทอง",
-        "338": "นางสาวศิรินทิพย์ ลาภสอาดพร",
-        "339": "นางสาวทิพามล ศรีวิเชียร",
-        "340": "นายวินิจ ภูพวก",
-        "341": "นางสาวมัชฌิมา สุขะพิบูลย์",
-        "351": "นายบรรเจิด พุ่มพันธ์สน",
-        "353": "นายวรัตน์ภูมิ บุญตันทา",
-        "407": "นายไชยพร แย้มมี",
-        "409": "นางจุฑามาศ เห็นประเสริฐ",
-        "411": "นางสาวอุสา ทองปรีชา",
-        "412": "นายนิคม วงษ์สุวรรณ",
-        "413": "นางปพัชญา จันทรโชติ",
-        "414": "นางสาววราภรณ์ มาลัย",
-        "417": "นายณัฐพัชร์ ทองรอด",
-        "418": "นางสาวเกษจมาภรณ์ น้ำสุทอง",
-        "419": "นายธีรวิช แก้วเกตุ",
-        "420": "นายจิรายุส บูชา",
-        "421": "นางสาวนิติภรณ์ อ่อนละมุล",
-        "422": "นางสาวมลิสา สุขวงษ์จันทร์",
-        "454": "นางชัญญา โพธิ์พันธุ์",
-        "506": "นายโกศล จันทรโชติ",
-        "509": "นายประพนธ์ ชิดปราง",
-        "511": "นางสาวจิตรลัดดา กุศลเสถียร",
-        "512": "นายศุภชัย เนตรนิล",
-        "513": "นายวีระวัฒน์ ชาววังฆ้อง",
-        "552": "นายสิทธิชัย แพน้อย",
-        "554": "นางสาวปาริชาติ เพ็ชรวาว",
-        "555": "นายพรชัย แก้วเรือง",
-        "601": "นายณัฐวุฒิ สุดโต",
-        "606": "นายภูรีวิทย์ เพ็งสุวรรณ",
-        "613": "นางสาววราภรณ์ แก้วกระจ่าง",
-        "614": "นางสาวมัณฑรี เกตุแก้ว",
-        "616": "นางสาวปิยธิดา สร้อยระย้า",
-        "617": "นางสาวอังคณา ดวงเกตุ",
-        "618": "นางสาวกาญจนา คำเทศ",
-        "654": "นางสาวยุพาภรณ์ จงรอบคอบ",
-        "727": "นางพรทิพย์ วันดี",
-        "728": "นางสาวจิรารัตน์ เอี่ยมเขียว",
-        "729": "นางสาวสุนิษา สุวรรณเนตร์",
-        "730": "นายนครินทร์ กล้าหาญ",
-        "731": "นางสาวเกษราภรณ์ จูงวงค์สุข",
-        "751": "นางสาวเนตรชนก ศรีชมภู",
-        "753": "นายโยธิน เวชวิฐาน",
-        "754": "นางสาวช่อลดา ประไพ",
-        "755": "นายณัฐพร หิรัญอ่อน",
-        "808": "นางสาวกัญญาพัชร เกตุแก้ว",
-        "810": "นางสาวนันทิยา ปัญญาธิกวัฒน์",
-        "812": "นางสาวพิชารมย์ สุขกลม",
-        "815": "นางสาวกาญจนาพร เชิดชูสุวรรณ",
-        "816": "นางสาวพัชรินทร์ ศรีทาคง",
-        "818": "นางสาวมณีวรรณ พลายมี",
-        "819": "นางสาวปริดา แก้วประหลาด",
-        "820": "นางสาวภัคภร เอกอมรธนากิจ",
-        "821": "นางสาวชาริตา พลายระหาร",
-        "822": "นางสาวจุฑาวดี นามเมืองจันทร์",
-        "824": "นางสาวพชรมนต์ คงเกื้อ",
-        "826": "นางสาวปัทมาพร เต่าให้",
-        "827": "นางสาวเบญจวรรณ วุฒิ",
-        "828": "นายนคร คำพล",
-        "829": "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์",
-        "830": "นายณัฏฐกิตติ์ โพธิ์พุ่ม",
-        "831": "นางสาวอุษามณี กล้าหาญ",
-        "832": "นางสาวบุญรักษา ปะลาวัน",
-        "901": "นางสาวอำพิกา บารมี",
-        "903": "นางสาวยุพิน มะลิถอด"
-    };
+    const teacherData = [
+        { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
+        { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", status: 1 },
+        { id: "114", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", status: 1 },
+        { id: "117", name: "นายวีระยุทธ โพธิ์สุวรรณ", status: 1 },
+        { id: "118", name: "นางวิไลพักตร์ กลิ่นกาหลง", status: 1 },
+        { id: "119", name: "นางนาตยา พิทักษ์วงศ์", status: 1 },
+        { id: "120", name: "นางสาววชิราภรณ์ ศรป้อม", status: 1 },
+        { id: "121", name: "นายจิรวัฒน์ โสภาพันธุ์", status: 1 },
+        { id: "123", name: "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์", status: 1 },
+        { id: "124", name: "นางสาวอุษา สายทอง", status: 1 },
+        { id: "125", name: "นายธีรภัทร แก้วสมนึก", status: 0 },
+        { id: "213", name: "นายจุมพล อยู่คง", status: 1 },
+        { id: "216", name: "นางสาวภัสรา เพ็งใย", status: 1 },
+        { id: "217", name: "นางสาวรจนา ดาวเรือง", status: 1 },
+        { id: "218", name: "นางสาวปัญญาวดี ประดับสุข", status: 1 },
+        { id: "221", name: "นางปราณี อินทรักษา", status: 1 },
+        { id: "222", name: "นางสาวเสาวลักษณ์ ชินวงษ์", status: 1 },
+        { id: "224", name: "นางสาวปัทมปาณี ทับทิมศรี", status: 1 },
+        { id: "225", name: "นางสาวศิราพรรณ ชูประสิทธิ์", status: 1 },
+        { id: "226", name: "นางอนุสรา โพธิ์หอม", status: 1 },
+        { id: "227", name: "นางสาววรรษา กาญจนลักษณ์", status: 1 },
+        { id: "228", name: "นางสาวภัคจิรา จงสุกใส", status: 1 },
+        { id: "229", name: "นางสาวสายรุ้ง ดอกลำภู", status: 1 },
+        { id: "230", name: "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ", status: 1 },
+        { id: "231", name: "นายนัฎฐกิตติ์ เพชรี", status: 1 },
+        { id: "255", name: "นางสาวพชรกมล รุ่งวารินทร์", status: 1 },
+        { id: "310", name: "นางสาวจุฑามาศ เอี่ยมเกตุ", status: 1 },
+        { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", status: 1 },
+        { id: "314", name: "นางศิริพร เถาว์โท", status: 1 },
+        { id: "315", name: "นางนัญธมณีกร ระรอกแก้ว", status: 1 },
+        { id: "316", name: "นางสาวพิมพ์ณภัส อินทร์สกุล", status: 1 },
+        { id: "319", name: "นางสาววิชุดา งามอักษร", status: 1 },
+        { id: "320", name: "นางสาวลินดา จุฬาวรรณ", status: 1 },
+        { id: "321", name: "นางสาวจิราพร ลิ้มประเสริฐ", status: 1 },
+        { id: "324", name: "นางกรริสา จันทร์สุวรรณ", status: 1 },
+        { id: "325", name: "นายเอกชัย ลวดคำ", status: 1 },
+        { id: "326", name: "นายเสกสรร คำนนท์", status: 1 },
+        { id: "328", name: "นางสาวชลิตา คงศิริ", status: 1 },
+        { id: "329", name: "นางลำดวน ชิดปราง", status: 1 },
+        { id: "330", name: "นายสุรศักดิ์ สีน้ำเงิน", status: 1 },
+        { id: "331", name: "นางวรางคณา พรหมชนะ", status: 1 },
+        { id: "332", name: "นางศริยา วงษ์จันทร์", status: 1 },
+        { id: "333", name: "นายภูวนัย อ่อนสอาด", status: 1 },
+        { id: "334", name: "นางสาวปวีณา วงษ์จินดา", status: 1 },
+        { id: "335", name: "นายสราวุธ แช่มช้อย", status: 1 },
+        { id: "336", name: "นายธีรภัทร สุดโต", status: 1 },
+        { id: "337", name: "นางสาวธิดาพร สังข์ทอง", status: 1 },
+        { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 1 },
+        { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
+        { id: "340", name: "นายวินิจ ภูพวก", status: 1 },
+        { id: "341", name: "นางสาวมัชฌิมา สุขะพิบูลย์", status: 1 },
+        { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
+        { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 0 },
+        { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
+        { id: "409", name: "นางจุฑามาศ เห็นประเสริฐ", status: 1 },
+        { id: "411", name: "นางสาวอุสา ทองปรีชา", status: 1 },
+        { id: "412", name: "นายนิคม วงษ์สุวรรณ", status: 1 },
+        { id: "413", name: "นางปพัชญา จันทรโชติ", status: 1 },
+        { id: "414", name: "นางสาววราภรณ์ มาลัย", status: 1 },
+        { id: "417", name: "นายณัฐพัชร์ ทองรอด", status: 1 },
+        { id: "418", name: "นางสาวเกษจมาภรณ์ น้ำสุทอง", status: 1 },
+        { id: "419", name: "นายธีรวิช แก้วเกตุ", status: 1 },
+        { id: "420", name: "นายจิรายุส บูชา", status: 1 },
+        { id: "421", name: "นางสาวนิติภรณ์ อ่อนละมุล", status: 1 },
+        { id: "422", name: "นางสาวมลิสา สุขวงษ์จันทร์", status: 1 },
+        { id: "454", name: "นางชัญญา โพธิ์พันธุ์", status: 1 },
+        { id: "506", name: "นายโกศล จันทรโชติ", status: 1 },
+        { id: "509", name: "นายประพนธ์ ชิดปราง", status: 1 },
+        { id: "511", name: "นางสาวจิตรลัดดา กุศลเสถียร", status: 1 },
+        { id: "512", name: "นายศุภชัย เนตรนิล", status: 1 },
+        { id: "513", name: "นายวีระวัฒน์ ชาววังฆ้อง", status: 1 },
+        { id: "552", name: "นายสิทธิชัย แพน้อย", status: 1 },
+        { id: "554", name: "นางสาวปาริชาติ เพ็ชรวาว", status: 1 },
+        { id: "555", name: "นายพรชัย แก้วเรือง", status: 1 },
+        { id: "601", name: "นายณัฐวุฒิ สุดโต", status: 1 },
+        { id: "606", name: "นายภูรีวิทย์ เพ็งสุวรรณ", status: 1 },
+        { id: "613", name: "นางสาววราภรณ์ แก้วกระจ่าง", status: 1 },
+        { id: "614", name: "นางสาวมัณฑรี เกตุแก้ว", status: 1 },
+        { id: "616", name: "นางสาวปิยธิดา สร้อยระย้า", status: 1 },
+        { id: "617", name: "นางสาวอังคณา ดวงเกตุ", status: 1 },
+        { id: "618", name: "นางสาวกาญจนา คำเทศ", status: 1 },
+        { id: "654", name: "นางสาวยุพาภรณ์ จงรอบคอบ", status: 1 },
+        { id: "727", name: "นางพรทิพย์ วันดี", status: 1 },
+        { id: "728", name: "นางสาวจิรารัตน์ เอี่ยมเขียว", status: 1 },
+        { id: "729", name: "นางสาวสุนิษา สุวรรณเนตร์", status: 1 },
+        { id: "730", name: "นายนครินทร์ กล้าหาญ", status: 1 },
+        { id: "731", name: "นางสาวเกษราภรณ์ จูงวงค์สุข", status: 1 },
+        { id: "751", name: "นางสาวเนตรชนก ศรีชมภู", status: 1 },
+        { id: "753", name: "นายโยธิน เวชวิฐาน", status: 1 },
+        { id: "754", name: "นางสาวช่อลดา ประไพ", status: 1 },
+        { id: "755", name: "นายณัฐพร หิรัญอ่อน", status: 1 },
+        { id: "808", name: "นางสาวกัญญาพัชร เกตุแก้ว", status: 1 },
+        { id: "810", name: "นางสาวนันทิยา ปัญญาธิกวัฒน์", status: 1 },
+        { id: "812", name: "นางสาวพิชารมย์ สุขกลม", status: 1 },
+        { id: "815", name: "นางสาวกาญจนาพร เชิดชูสุวรรณ", status: 1 },
+        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", status: 1 },
+        { id: "818", name: "นางสาวมณีวรรณ พลายมี", status: 1 },
+        { id: "819", name: "นางสาวปริดา แก้วประหลาด", status: 1 },
+        { id: "820", name: "นางสาวภัคภร เอกอมรธนากิจ", status: 1 },
+        { id: "821", name: "นางสาวชาริตา พลายระหาร", status: 1 },
+        { id: "822", name: "นางสาวจุฑาวดี นามเมืองจันทร์", status: 1 },
+        { id: "824", name: "นางสาวพชรมนต์ คงเกื้อ", status: 1 },
+        { id: "826", name: "นางสาวปัทมาพร เต่าให้", status: 1 },
+        { id: "827", name: "นางสาวเบญจวรรณ วุฒิ", status: 1 },
+        { id: "828", name: "นายนคร คำพล", status: 1 },
+        { id: "829", name: "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์", status: 1 },
+        { id: "830", name: "นายณัฏฐกิตติ์ โพธิ์พุ่ม", status: 1 },
+        { id: "831", name: "นางสาวอุษามณี กล้าหาญ", status: 1 },
+        { id: "832", name: "นางสาวบุญรักษา ปะลาวัน", status: 1 },
+        { id: "901", name: "นางสาวอำพิกา บารมี", status: 1 },
+        { id: "903", name: "นางสาวยุพิน มะลิถอด", status: 1 }
+    ];
 
-    function search() {
-        const id = document.getElementById('teacherId').value.trim();
-        const resDiv = document.getElementById('result');
+    const tableBody = document.getElementById('tableBody');
+
+    teacherData.forEach((teacher, index) => {
+        const row = document.createElement('tr');
         
-        if (teachers[id]) {
-            document.getElementById('dispId').innerText = id;
-            document.getElementById('dispName').innerText = teachers[id];
-            resDiv.style.display = 'block';
-        } else {
-            alert("ไม่พบข้อมูลรหัส " + id + " ในระบบ");
-            resDiv.style.display = 'none';
-        }
-    }
+        // กำหนดข้อความสถานะและสไตล์
+        const statusText = teacher.status === 1 ? "ยืนยันข้อมูลแล้ว" : "ยังไม่ดำเนินการ";
+        const statusClass = teacher.status === 1 ? "done" : "waiting";
+        const stepText = teacher.status === 1 ? "[7/7]" : "[1/7]";
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td><strong>${teacher.id}</strong></td>
+            <td>${teacher.name}</td>
+            <td>
+                <span class="count-tag">${stepText}</span>
+                <span class="status-badge ${statusClass}">${statusText}</span>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
 </script>
 
 </body>
