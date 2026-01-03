@@ -3,66 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Calendar 2025</title>
+    <title>Academic Vision 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Sarabun', sans-serif; background: #fdfdfd; }
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600;700&display=swap');
+        
+        body { 
+            font-family: 'Anuphan', sans-serif; 
+            background: radial-gradient(circle at top right, #1e1b4b, #020617);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .glass:hover {
+            border: 1px solid rgba(99, 102, 241, 0.5);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #6366f1, #a855f7, transparent);
+        }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="p-6">
 
-    <div class="max-w-5xl mx-auto">
-        <div class="border-l-8 border-indigo-600 pl-6 mb-10">
-            <h1 class="text-3xl font-bold text-slate-800">ปฏิทินการศึกษา 2568</h1>
-            <p class="text-slate-500">Academic Calendar Year 2025 - ภาคปกติ</p>
+    <div class="max-w-6xl mx-auto py-12">
+        <header class="text-center mb-16">
+            <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-[0.2em] mb-4 uppercase">
+                Academic Roadmap 4.0
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4">
+                ปฏิทิน <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 neon-text">2568</span>
+            </h1>
+            <p class="text-slate-400 text-lg max-w-xl mx-auto font-light leading-relaxed">
+                ยกระดับการจัดการเวลาสู่ระบบการเรียนรู้ฐานสมรรถนะที่ทันสมัยที่สุด
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="space-y-6">
+                <div class="glass p-8 rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fas fa-bullseye text-indigo-400"></i> สถานะปัจจุบัน
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white/5 p-4 rounded-2xl">
+                            <p class="text-xs text-slate-400 uppercase font-bold">เทอมที่กำลังจะถึง</p>
+                            <p class="text-xl font-bold">ภาคเรียนที่ 1/2568</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl">
+                            <p class="text-xs text-slate-400 uppercase font-bold">โหมดการเรียน</p>
+                            <p class="text-xl font-bold text-emerald-400">Hybrid Learning</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition-all">
+                        Sync to Calendar
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-4">
+                
+                <div class="glass p-6 rounded-[2rem] flex items-center justify-between group cursor-pointer">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex flex-col items-center justify-center border border-indigo-500/30">
+                            <span class="text-[10px] font-bold text-indigo-300 uppercase leading-none">พฤษภาคม</span>
+                            <span class="text-2xl font-bold text-white">01</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold group-hover:text-indigo-400 transition">ลงทะเบียนเรียนออนไลน์</h4>
+                            <p class="text-sm text-slate-400 font-light italic">เปิดระบบรับลงทะเบียนผ่าน AI Smart System</p>
+                        </div>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <span class="bg-indigo-500/10 text-indigo-400 text-[10px] font-bold px-3 py-1 rounded-full border border-indigo-500/20">REGISTRATION</span>
+                    </div>
+                </div>
+
+                <div class="relative p-6 rounded-[2rem] bg-gradient-to-r from-indigo-600 to-purple-600 shadow-xl shadow-indigo-900/20 flex items-center justify-between group cursor-pointer">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex flex-col items-center justify-center border border-white/30 backdrop-blur-md">
+                            <span class="text-[10px] font-bold text-white uppercase leading-none">มิถุนายน</span>
+                            <span class="text-2xl font-bold text-white">01</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-white">วันเปิดภาคเรียนประจำปี 1/2568</h4>
+                            <p class="text-sm text-indigo-100 font-light">เริ่มก้าวแรกสู่อนาคตของคุณวันนี้</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-star text-white/50 group-hover:rotate-45 transition-transform duration-500"></i>
+                </div>
+
+                <div class="glass p-6 rounded-[2rem] flex items-center justify-between group cursor-pointer">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-amber-500/20 rounded-2xl flex flex-col items-center justify-center border border-amber-500/30">
+                            <span class="text-[10px] font-bold text-amber-300 uppercase leading-none">กรกฎาคม</span>
+                            <span class="text-2xl font-bold text-white">28</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold group-hover:text-amber-400 transition">วัดผลกลางภาค (Mid-Term)</h4>
+                            <p class="text-sm text-slate-400 font-light">ประเมินสมรรถนะผ่านสถานการณ์จำลอง (Sandbox)</p>
+                        </div>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <span class="bg-amber-500/10 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/20">EVALUATION</span>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-[2rem] flex items-center justify-between group cursor-pointer border-rose-500/30">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-rose-500/20 rounded-2xl flex flex-col items-center justify-center border border-rose-500/30">
+                            <span class="text-[10px] font-bold text-rose-300 uppercase leading-none">กันยายน</span>
+                            <span class="text-2xl font-bold text-white">29</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold group-hover:text-rose-400 transition">วัดผลปลายภาค (Final-Term)</h4>
+                            <p class="text-sm text-slate-400 font-light italic">Final Showcase & Pitching Day</p>
+                        </div>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <span class="bg-rose-500/10 text-rose-400 text-[10px] font-bold px-3 py-1 rounded-full border border-rose-500/20">MILESTONE</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <table class="w-full border-collapse">
-                <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="py-5 px-6 text-left text-sm font-bold text-slate-600 uppercase">วัน / เดือน / ปี</th>
-                        <th class="py-5 px-6 text-left text-sm font-bold text-slate-600 uppercase">กิจกรรม</th>
-                        <th class="py-5 px-6 text-center text-sm font-bold text-slate-600 uppercase">สถานะ</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100">
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="py-6 px-6 font-semibold text-slate-700">1 - 15 พ.ค. 2568</td>
-                        <td class="py-6 px-6 text-slate-600 text-sm">ลงทะเบียนเรียนออนไลน์และบันทึกรายวิชา</td>
-                        <td class="py-6 px-6 text-center">
-                            <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold border border-blue-100 uppercase tracking-tighter">Enrollment</span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="py-6 px-6 font-semibold text-slate-700">1 มิ.ย. 2568</td>
-                        <td class="py-6 px-6 font-bold text-indigo-600 text-sm">วันเปิดภาคเรียนประจำภาคเรียนที่ 1/2568</td>
-                        <td class="py-6 px-6 text-center">
-                            <span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-xs font-bold border border-emerald-100 uppercase tracking-tighter">Teaching</span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="py-6 px-6 font-semibold text-slate-700">28 ก.ค. - 3 ส.ค. 2568</td>
-                        <td class="py-6 px-6 text-slate-600 text-sm">การประเมินสมรรถนะกลางภาค (Mid-term)</td>
-                        <td class="py-6 px-6 text-center">
-                            <span class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full text-xs font-bold border border-amber-100 uppercase tracking-tighter">Evaluation</span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="py-6 px-6 font-semibold text-slate-700">29 ก.ย. - 12 ต.ค. 2568</td>
-                        <td class="py-6 px-6 text-slate-600 text-sm font-bold text-rose-600">การประเมินสมรรถนะปลายภาค (Final)</td>
-                        <td class="py-6 px-6 text-center">
-                            <span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-bold border border-rose-100 uppercase tracking-tighter">Final Exam</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <p class="mt-6 text-center text-slate-400 text-sm italic">
-            * กำหนดการอาจมีการเปลี่ยนแปลงตามประกาศของมหาวิทยาลัย
-        </p>
+        <footer class="mt-20 border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+            <p>&copy; 2025 Smart Registrar - มหาวิทยาลัยนวัตกรรม</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-indigo-400">ช่วยเหลือ</a>
+                <a href="#" class="hover:text-indigo-400">นโยบายความเป็นส่วนตัว</a>
+            </div>
+        </footer>
     </div>
 
 </body>
