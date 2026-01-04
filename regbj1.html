@@ -16,6 +16,9 @@
             --pending-text: #991b1b;
             --border-color: #e2e8f0;
             --admin-section-bg: #eff6ff;
+            --notice-bg: #fff7ed;
+            --notice-border: #fdba74;
+            --notice-text: #9a3412;
         }
 
         body {
@@ -36,11 +39,38 @@
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         h2 { color: var(--primary); margin: 0; }
         p.subtitle { color: #64748b; margin-top: 5px; }
+
+        /* แถบประกาศกำหนดการส่งเกรด */
+        .notice-banner {
+            background-color: var(--notice-bg);
+            border: 1px solid var(--notice-border);
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .notice-icon {
+            font-size: 1.5rem;
+            color: #f97316;
+        }
+        .notice-content b {
+            color: #c2410c;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .notice-content p {
+            margin: 0;
+            color: var(--notice-text);
+            font-size: 0.95rem;
+        }
 
         .admin-section {
             background-color: var(--admin-section-bg);
@@ -115,7 +145,7 @@
         }
         .open-date-text {
             display: block;
-            color: #e11d48; /* สีแดงเข้ม */
+            color: #475569;
             font-weight: 600;
             font-size: 0.95rem;
         }
@@ -179,6 +209,7 @@
         @media (max-width: 768px) {
             td, th { padding: 10px 5px; font-size: 0.8rem; }
             .admin-grid { grid-template-columns: 1fr; }
+            .notice-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -188,6 +219,14 @@
     <div class="header">
         <h2><i class="fas fa-university"></i> สรุปผลการขอเปิดรายวิชา</h2>
         <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
+    </div>
+
+    <div class="notice-banner">
+        <div class="notice-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="notice-content">
+            <b>กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)</b>
+            <p>ภาคเรียนที่ 2 ปีการศึกษา 2568 <span style="font-weight: 600; text-decoration: underline;">ไม่เกินเที่ยงคืนวันอังคารที่ 13 กุมภาพันธ์ 2569</span></p>
+        </div>
     </div>
 
     <div class="admin-section">
@@ -243,7 +282,7 @@
             <i class="fas fa-check-double"></i> เข้าสู่ระบบยืนยันการส่งเกรด
         </button>
         <span class="open-date-text">
-            <i class="fas fa-calendar-alt"></i> เปิดระบบ 14 กุมภาพันธ์ 2569
+            <i class="fas fa-calendar-check"></i> เปิดระบบยืนยันผล 14 กุมภาพันธ์ 2569
         </span>
     </div>
 
@@ -323,7 +362,7 @@
         { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 0 },
         { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
         { id: "340", name: "นายวินิจ ภูพวก", status: 0 },
-        { id: "341", name: "นางสาวมัชฌิมา สุขะพิบูลย์", status: 1 },
+        { id: "341", name: "นางสาวมัฌิมา สุขะพิบูลย์", status: 1 },
         { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
         { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 0 },
         { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
