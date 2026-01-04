@@ -16,7 +16,6 @@
             --pending-text: #991b1b;
             --border-color: #e2e8f0;
             --admin-section-bg: #eff6ff;
-            /* สีสำหรับประกาศใหม่ */
             --deadline-red: #be123c;
             --warning-gold: #f59e0b;
         }
@@ -26,6 +25,7 @@
             background-color: #f1f5f9;
             margin: 0;
             padding: 20px;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -37,15 +37,11 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
+        .header { text-align: center; margin-bottom: 25px; }
         h2 { color: var(--primary); margin: 0; font-weight: 600; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* การออกแบบประกาศใหม่ให้น่าอ่าน */
+        /* Announcement Card */
         .announcement-card {
             background: linear-gradient(to right, #fff7ed, #ffffff);
             border: 1px solid #fed7aa;
@@ -56,7 +52,6 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
         }
 
         .announcement-icon {
@@ -70,25 +65,6 @@
             justify-content: center;
             font-size: 1.5rem;
             flex-shrink: 0;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .announcement-content { flex-grow: 1; }
-        
-        .announcement-title {
-            color: #92400e;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .deadline-highlight {
@@ -100,10 +76,43 @@
             border: 1px dashed var(--deadline-red);
             display: inline-block;
             margin-top: 5px;
-            font-size: 1.05rem;
         }
 
-        /* ปุ่มและส่วนอื่นๆ */
+        /* เมนูกลุ่มสาระ (Quick Navigation) */
+        .dept-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* ส่วนเจ้าหน้าที่ */
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
@@ -111,117 +120,47 @@
             border: 1px solid #dbeafe;
             margin-bottom: 25px;
         }
+        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .admin-card { background: white; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 12px; border: 1px solid #f0f7ff; }
+        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
 
-        .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-        }
-
-        .admin-card {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-            border: 1px solid #f0f7ff;
-        }
-
-        .admin-icon {
-            background: var(--primary);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.9rem; }
-        .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
-
-        .grade-system-wrapper {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
+        /* ปุ่มระบบยืนยัน */
+        .grade-system-wrapper { text-align: center; margin-bottom: 35px; }
         .btn-grade-system {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             padding: 14px 35px;
             border-radius: 50px;
-            text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 12px;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
             font-family: 'Sarabun', sans-serif;
-            margin-bottom: 12px;
+            text-decoration: none;
         }
 
-        .btn-grade-system:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .open-date-text {
-            display: block;
-            color: #64748b;
-            font-weight: 400;
-            font-size: 0.9rem;
-        }
-
+        /* ตาราง */
         .table-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
-        th {
-            background-color: #f8fafc;
-            color: #475569;
-            font-weight: 600;
-            text-align: left;
-            padding: 15px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); color: #1e293b; font-size: 0.95rem; }
-        tr:hover { background-color: #f8fafc; }
+        th { background-color: #f8fafc; color: #475569; padding: 15px; text-align: left; border-bottom: 2px solid var(--border-color); }
+        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+        
+        /* หัวข้อกลุ่มสาระคั่นในตาราง */
+        .dept-header-row { background-color: #f1f5f9 !important; }
+        .dept-header-row td { font-weight: 600; color: var(--primary); padding: 15px; font-size: 1rem; border-left: 5px solid var(--primary); scroll-margin-top: 150px; }
 
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-block;
-        }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
-
-        .dept-tag { font-size: 0.8rem; font-weight: 600; padding: 2px 8px; border-left: 4px solid #ccc; }
-        .dept-1 { border-color: #f43f5e; color: #f43f5e; }
-        .dept-2 { border-color: #fbbf24; color: #b45309; }
-        .dept-3 { border-color: #fb923c; color: #c2410c; }
-        .dept-4 { border-color: #3b82f6; color: #1d4ed8; }
-        .dept-5 { border-color: #10b981; color: #047857; }
-        .dept-6 { border-color: #a855f7; color: #7e22ce; }
-        .dept-7 { border-color: #14b8a6; color: #0f766e; }
-        .dept-8 { border-color: #ec4899; color: #be185d; }
-        .dept-9 { border-color: #64748b; color: #334155; }
-
         .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
 
         @media (max-width: 768px) {
-            .announcement-card { flex-direction: column; text-align: center; padding: 15px; }
-            .btn-grade-system { width: 100%; justify-content: center; }
+            .dept-nav { position: static; }
         }
     </style>
 </head>
@@ -234,17 +173,11 @@
     </div>
 
     <div class="announcement-card">
-        <div class="announcement-icon">
-            <i class="fas fa-clock"></i>
-        </div>
+        <div class="announcement-icon"><i class="fas fa-clock"></i></div>
         <div class="announcement-content">
-            <div class="announcement-title">
-                <i class="fas fa-exclamation-circle"></i> กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)
-            </div>
-            <p>ประจำภาคเรียนที่ 2 ปีการศึกษา 2568 กรุณาดำเนินการภายในเวลา:</p>
-            <div class="deadline-highlight">
-                <i class="fas fa-calendar-times"></i> ไม่เกินเที่ยงคืน วันอังคารที่ 13 กุมภาพันธ์ 2569
-            </div>
+            <b style="color:#92400e;">กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)</b>
+            <p style="margin:5px 0;">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
+            <div class="deadline-highlight">ไม่เกินเที่ยงคืน วันอังคารที่ 13 กุมภาพันธ์ 2569</div>
         </div>
     </div>
 
@@ -297,23 +230,22 @@
     </div>
 
     <div class="grade-system-wrapper">
-        <button class="btn-grade-system" onclick="alert('ระบบจะเปิดให้บริการในวันที่ 14 กุมภาพันธ์ 2569');">
+        <a href="#" class="btn-grade-system" onclick="alert('ระบบจะเปิด 14 ก.พ. 69'); return false;">
             <i class="fas fa-external-link-alt"></i> เข้าสู่ระบบยืนยันการส่งเกรด
-        </button>
-        <span class="open-date-text">
-            <i class="fas fa-info-circle"></i> ระบบจะเปิดให้ยืนยันผลในวันที่ 14 ก.พ. 2569
-        </span>
+        </a>
+        <p style="color:#64748b; font-size: 0.9rem; margin-top: 10px;">เปิดระบบ 14 กุมภาพันธ์ 2569</p>
     </div>
+
+    <div class="dept-nav" id="deptNav"></div>
 
     <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
-                    <th>ลำดับ</th>
-                    <th>รหัสครู</th>
+                    <th width="80">ลำดับ</th>
+                    <th width="100">รหัสครู</th>
                     <th>ชื่อ-นามสกุล</th>
-                    <th>กลุ่มสาระ</th>
-                    <th>สถานะ</th>
+                    <th width="180">สถานะ</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -322,7 +254,6 @@
 </div>
 
 <script>
-    // ข้อมูลครูและส่วนการทำงานของตารางยังคงเดิมเหมือนต้นฉบับ
     const departments = {
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
         "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
@@ -445,29 +376,58 @@
         { id: "903", name: "นางสาวยุพิน มะลิถอด", status: 0 }
     ];
 
-    const tableBody = document.getElementById('tableBody');
+    function initTable() {
+        const tableBody = document.getElementById('tableBody');
+        const deptNav = document.getElementById('deptNav');
+        
+        // แยกข้อมูลตามกลุ่มสาระ
+        const groups = {};
+        Object.keys(departments).forEach(d => groups[d] = []);
+        teacherData.forEach(t => {
+            const gid = t.id.charAt(0);
+            if(groups[gid]) groups[gid].push(t);
+        });
 
-    teacherData.forEach((teacher, index) => {
-        const row = document.createElement('tr');
-        const deptId = teacher.id.charAt(0);
-        const deptName = departments[deptId] || "ไม่ระบุ";
-        const statusText = teacher.status === 1 ? "ยืนยันข้อมูลแล้ว" : "ยังไม่ดำเนินการ";
-        const statusClass = teacher.status === 1 ? "done" : "waiting";
-        const stepText = teacher.status === 1 ? "[7/7]" : "[1/7]";
+        let masterIndex = 1;
+        Object.keys(groups).forEach(gid => {
+            if(groups[gid].length === 0) return;
 
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td><strong>${teacher.id}</strong></td>
-            <td>${teacher.name}</td>
-            <td><div class="dept-tag dept-${deptId}">${deptName}</div></td>
-            <td>
-                <span class="count-tag">${stepText}</span>
-                <span class="status-badge ${statusClass}">${statusText}</span>
-            </td>
-        `;
-        tableBody.appendChild(row);
-    });
+            // ปุ่มเมนู
+            const btn = document.createElement('a');
+            btn.className = 'nav-btn';
+            btn.href = `#dept-${gid}`;
+            btn.innerHTML = `<i class="fas fa-bookmark"></i> ${departments[gid]}`;
+            deptNav.appendChild(btn);
+
+            // หัวตารางกลุ่ม
+            const hRow = document.createElement('tr');
+            hRow.className = 'dept-header-row';
+            hRow.id = `dept-${gid}`;
+            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
+            tableBody.appendChild(hRow);
+
+            // รายชื่อ
+            groups[gid].forEach(teacher => {
+                const tr = document.createElement('tr');
+                const statusCls = teacher.status === 1 ? 'done' : 'waiting';
+                const statusTxt = teacher.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ';
+                const step = teacher.status === 1 ? '[7/7]' : '[1/7]'];
+                
+                tr.innerHTML = `
+                    <td>${masterIndex++}</td>
+                    <td><strong>${teacher.id}</strong></td>
+                    <td>${teacher.name}</td>
+                    <td>
+                        <span class="count-tag">${step}</span>
+                        <span class="status-badge ${statusCls}">${statusTxt}</span>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        });
+    }
+
+    initTable();
 </script>
-
 </body>
 </html>
