@@ -47,7 +47,7 @@
             padding: 20px;
             border-radius: 12px;
             border: 1px solid #dbeafe;
-            margin-bottom: 20px; /* ลด margin ลงนิดหน่อยเพื่อรับกับปุ่ม */
+            margin-bottom: 20px;
         }
 
         .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
@@ -85,10 +85,9 @@
         .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.9rem; }
         .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
 
-        /* --- ส่วนที่เพิ่มใหม่: ปุ่มระบบยืนยันการส่งเกรด --- */
+        /* ส่วนปุ่มและวันที่เปิดระบบ */
         .grade-system-wrapper {
-            display: flex;
-            justify-content: center;
+            text-align: center;
             margin-bottom: 30px;
         }
         .btn-grade-system {
@@ -107,13 +106,19 @@
             cursor: pointer;
             font-size: 1rem;
             font-family: 'Sarabun', sans-serif;
+            margin-bottom: 10px;
         }
         .btn-grade-system:hover {
             background: #059669;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.3);
         }
-        /* ------------------------------------------ */
+        .open-date-text {
+            display: block;
+            color: #e11d48; /* สีแดงเข้ม */
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
 
         .table-wrapper {
             overflow-x: auto;
@@ -234,9 +239,12 @@
     </div>
 
     <div class="grade-system-wrapper">
-        <button class="btn-grade-system" onclick="alert('กำลังเข้าสู่ระบบยืนยันส่งเกรด...');">
+        <button class="btn-grade-system" onclick="alert('ระบบจะเปิดให้บริการในวันที่ 14 กุมภาพันธ์ 2569');">
             <i class="fas fa-check-double"></i> เข้าสู่ระบบยืนยันการส่งเกรด
         </button>
+        <span class="open-date-text">
+            <i class="fas fa-calendar-alt"></i> เปิดระบบ 14 กุมภาพันธ์ 2569
+        </span>
     </div>
 
     <div class="table-wrapper">
