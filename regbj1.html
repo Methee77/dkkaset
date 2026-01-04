@@ -112,7 +112,7 @@
 
         .nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* ส่วนเจ้าหน้าที่ */
+        /* ส่วนเจ้าหน้าที่ระบบ (คืนชีพกลับมาครบ 6 ท่าน) */
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
@@ -120,10 +120,12 @@
             border: 1px solid #dbeafe;
             margin-bottom: 25px;
         }
+        .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
         .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-        .admin-card { background: white; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 12px; border: 1px solid #f0f7ff; }
-        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
-        .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+        .admin-card { background: white; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 12px; border: 1px solid #f0f7ff; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+        .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.85rem; }
+        .role-tag { font-size: 0.65rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
 
         .grade-system-wrapper { text-align: center; margin-bottom: 35px; }
         .btn-grade-system {
@@ -186,8 +188,11 @@
     <div class="admin-section">
         <h3><i class="fas fa-user-shield"></i> เจ้าหน้าที่ระบบประจำปีการศึกษา 2568</h3>
         <div class="admin-grid">
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-laptop-code"></i></div><div class="admin-info"><h4>129 นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ</h4><span class="role-tag">ผู้ดูแลระบบ</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-database"></i></div><div class="admin-info"><h4>329 นางลำดวน ชิดปราง</h4><span class="role-tag">ผู้ดูแลระบบ</span></div></div>
+            <div class="admin-card"><div class="admin-icon"><i class="fas fa-laptop-code"></i></div><div class="admin-info"><h4>129 นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ</h4><span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span></div></div>
+            <div class="admin-card"><div class="admin-icon"><i class="fas fa-file-invoice"></i></div><div class="admin-info"><h4>222 นางสาวเสาวลักษณ์ ชินวงษ์</h4><span class="role-tag">งานวัดผล</span></div></div>
+            <div class="admin-card"><div class="admin-icon"><i class="fas fa-user-clock"></i></div><div class="admin-info"><h4>243 นายเมธี ใจสุขดี</h4><span class="role-tag">เจ้าหน้าที่งานวัดผลชั่วคราว</span></div></div>
+            <div class="admin-card"><div class="admin-icon"><i class="fas fa-database"></i></div><div class="admin-info"><h4>329 นางลำดวน ชิดปราง</h4><span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span></div></div>
+            <div class="admin-card"><div class="admin-icon"><i class="fas fa-user-tie"></i></div><div class="admin-info"><h4>816 นางสาวพัชรินทร์ ศรีทาคง</h4><span class="role-tag">หัวหน้ากลุ่มงานวัดผล</span></div></div>
             <div class="admin-card"><div class="admin-icon"><i class="fas fa-address-book"></i></div><div class="admin-info"><h4>830 นายณัฏฐกิตติ์ โพธิ์พุ่ม</h4><span class="role-tag">นายทะเบียน</span></div></div>
         </div>
     </div>
@@ -196,7 +201,7 @@
         <a href="#" class="btn-grade-system" onclick="alert('ระบบเปิด 14 ก.พ. 69'); return false;">
             <i class="fas fa-external-link-alt"></i> เข้าสู่ระบบยืนยันการส่งเกรด
         </a>
-        <p style="color:#64748b; font-size: 0.9rem; margin-top: 10px;">ระบบเปิดยืนยันผล 14 กุมภาพันธ์ 2569</p>
+        <p style="color:#64748b; font-size: 0.9rem; margin-top: 10px;">เปิดระบบยืนยันผล 14 กุมภาพันธ์ 2569</p>
     </div>
 
     <div class="dept-nav" id="deptNav"></div>
@@ -343,7 +348,6 @@
         const tableBody = document.getElementById('tableBody');
         const deptNav = document.getElementById('deptNav');
         
-        // แยกข้อมูลตามกลุ่มสาระ
         const groups = {};
         Object.keys(departments).forEach(d => groups[d] = []);
         teacherData.forEach(t => {
@@ -355,21 +359,18 @@
         Object.keys(groups).forEach(gid => {
             if(groups[gid].length === 0) return;
 
-            // สร้างปุ่ม Nav
             const btn = document.createElement('a');
             btn.className = 'nav-btn';
             btn.href = `#dept-${gid}`;
             btn.innerHTML = `<i class="fas fa-bookmark"></i> ${departments[gid]}`;
             deptNav.appendChild(btn);
 
-            // สร้างแถวหัวข้อกลุ่มในตาราง
             const hRow = document.createElement('tr');
             hRow.className = 'dept-header-row';
             hRow.id = `dept-${gid}`;
             hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
             tableBody.appendChild(hRow);
 
-            // รายชื่อครู
             groups[gid].forEach(teacher => {
                 const tr = document.createElement('tr');
                 const statusCls = teacher.status === 1 ? 'done' : 'waiting';
@@ -390,7 +391,6 @@
         });
     }
 
-    // เรียกใช้งานฟังก์ชัน
     document.addEventListener('DOMContentLoaded', initTable);
 </script>
 </body>
