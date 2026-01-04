@@ -16,9 +16,9 @@
             --pending-text: #991b1b;
             --border-color: #e2e8f0;
             --admin-section-bg: #eff6ff;
-            --notice-bg: #fff7ed;
-            --notice-border: #fdba74;
-            --notice-text: #9a3412;
+            /* สีสำหรับประกาศใหม่ */
+            --deadline-red: #be123c;
+            --warning-gold: #f59e0b;
         }
 
         body {
@@ -34,50 +34,82 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        h2 { color: var(--primary); margin: 0; }
+        h2 { color: var(--primary); margin: 0; font-weight: 600; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* แถบประกาศกำหนดการส่งเกรด */
-        .notice-banner {
-            background-color: var(--notice-bg);
-            border: 1px solid var(--notice-border);
-            border-left: 5px solid #f97316;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
+        /* การออกแบบประกาศใหม่ให้น่าอ่าน */
+        .announcement-card {
+            background: linear-gradient(to right, #fff7ed, #ffffff);
+            border: 1px solid #fed7aa;
+            border-left: 6px solid var(--warning-gold);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 15px;
-        }
-        .notice-icon {
-            font-size: 1.5rem;
-            color: #f97316;
-        }
-        .notice-content b {
-            color: #c2410c;
-            display: block;
-            margin-bottom: 2px;
-        }
-        .notice-content p {
-            margin: 0;
-            color: var(--notice-text);
-            font-size: 0.95rem;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
         }
 
+        .announcement-icon {
+            background: var(--warning-gold);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .announcement-content { flex-grow: 1; }
+        
+        .announcement-title {
+            color: #92400e;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .deadline-highlight {
+            background: #fff1f2;
+            color: var(--deadline-red);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px dashed var(--deadline-red);
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 1.05rem;
+        }
+
+        /* ปุ่มและส่วนอื่นๆ */
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid #dbeafe;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
@@ -115,50 +147,44 @@
         .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.9rem; }
         .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
 
-        /* ส่วนปุ่มและวันที่เปิดระบบ */
         .grade-system-wrapper {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
+
         .btn-grade-system {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
-            padding: 12px 28px;
-            border-radius: 10px;
+            padding: 14px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
-            transition: all 0.2s;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-family: 'Sarabun', sans-serif;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
+
         .btn-grade-system:hover {
-            background: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
         }
+
         .open-date-text {
             display: block;
-            color: #475569;
-            font-weight: 600;
-            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 400;
+            font-size: 0.9rem;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
         th {
             background-color: #f8fafc;
             color: #475569;
@@ -167,14 +193,7 @@
             padding: 15px;
             border-bottom: 2px solid var(--border-color);
         }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-color);
-            color: #1e293b;
-            font-size: 0.95rem;
-        }
-
+        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); color: #1e293b; font-size: 0.95rem; }
         tr:hover { background-color: #f8fafc; }
 
         .status-badge {
@@ -187,13 +206,7 @@
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
 
-        .dept-tag {
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-left: 4px solid #ccc;
-        }
-        
+        .dept-tag { font-size: 0.8rem; font-weight: 600; padding: 2px 8px; border-left: 4px solid #ccc; }
         .dept-1 { border-color: #f43f5e; color: #f43f5e; }
         .dept-2 { border-color: #fbbf24; color: #b45309; }
         .dept-3 { border-color: #fb923c; color: #c2410c; }
@@ -207,9 +220,8 @@
         .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
 
         @media (max-width: 768px) {
-            td, th { padding: 10px 5px; font-size: 0.8rem; }
-            .admin-grid { grid-template-columns: 1fr; }
-            .notice-banner { flex-direction: column; text-align: center; }
+            .announcement-card { flex-direction: column; text-align: center; padding: 15px; }
+            .btn-grade-system { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -221,11 +233,18 @@
         <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
     </div>
 
-    <div class="notice-banner">
-        <div class="notice-icon"><i class="fas fa-bullhorn"></i></div>
-        <div class="notice-content">
-            <b>กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)</b>
-            <p>ภาคเรียนที่ 2 ปีการศึกษา 2568 <span style="font-weight: 600; text-decoration: underline;">ไม่เกินเที่ยงคืนวันอังคารที่ 13 กุมภาพันธ์ 2569</span></p>
+    <div class="announcement-card">
+        <div class="announcement-icon">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="announcement-content">
+            <div class="announcement-title">
+                <i class="fas fa-exclamation-circle"></i> กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)
+            </div>
+            <p>ประจำภาคเรียนที่ 2 ปีการศึกษา 2568 กรุณาดำเนินการภายในเวลา:</p>
+            <div class="deadline-highlight">
+                <i class="fas fa-calendar-times"></i> ไม่เกินเที่ยงคืน วันอังคารที่ 13 กุมภาพันธ์ 2569
+            </div>
         </div>
     </div>
 
@@ -279,10 +298,10 @@
 
     <div class="grade-system-wrapper">
         <button class="btn-grade-system" onclick="alert('ระบบจะเปิดให้บริการในวันที่ 14 กุมภาพันธ์ 2569');">
-            <i class="fas fa-check-double"></i> เข้าสู่ระบบยืนยันการส่งเกรด
+            <i class="fas fa-external-link-alt"></i> เข้าสู่ระบบยืนยันการส่งเกรด
         </button>
         <span class="open-date-text">
-            <i class="fas fa-calendar-check"></i> เปิดระบบยืนยันผล 14 กุมภาพันธ์ 2569
+            <i class="fas fa-info-circle"></i> ระบบจะเปิดให้ยืนยันผลในวันที่ 14 ก.พ. 2569
         </span>
     </div>
 
@@ -303,6 +322,7 @@
 </div>
 
 <script>
+    // ข้อมูลครูและส่วนการทำงานของตารางยังคงเดิมเหมือนต้นฉบับ
     const departments = {
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
         "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
@@ -362,7 +382,7 @@
         { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 0 },
         { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
         { id: "340", name: "นายวินิจ ภูพวก", status: 0 },
-        { id: "341", name: "นางสาวมัฌิมา สุขะพิบูลย์", status: 1 },
+        { id: "341", name: "นางสาวมัชฌิมา สุขะพิบูลย์", status: 1 },
         { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
         { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 0 },
         { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
