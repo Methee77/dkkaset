@@ -10,7 +10,6 @@
     <style>
         :root {
             --primary: #1e3a8a;
-            --success: #10b981;
             --success-bg: #d1fae5;
             --success-text: #065f46;
             --pending-bg: #fee2e2;
@@ -27,7 +26,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -43,30 +42,12 @@
         h2 { color: var(--primary); margin: 0; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* Dashboard Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .stat-card {
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            color: white;
-        }
-        .stat-total { background: #64748b; }
-        .stat-done { background: var(--success); }
-        .stat-wait { background: #ef4444; }
-
-        /* Admin Section */
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid #dbeafe;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* ลด margin ลงนิดหน่อยเพื่อรับกับปุ่ม */
         }
 
         .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
@@ -104,9 +85,45 @@
         .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.9rem; }
         .role-tag { font-size: 0.7rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
 
-        /* Table */
-        .table-wrapper { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
+        /* --- ส่วนที่เพิ่มใหม่: ปุ่มระบบยืนยันการส่งเกรด --- */
+        .grade-system-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .btn-grade-system {
+            background: #10b981;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Sarabun', sans-serif;
+        }
+        .btn-grade-system:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.3);
+        }
+        /* ------------------------------------------ */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         th {
             background-color: #f8fafc;
             color: #475569;
@@ -115,7 +132,14 @@
             padding: 15px;
             border-bottom: 2px solid var(--border-color);
         }
-        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); color: #1e293b; font-size: 0.95rem; }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
         tr:hover { background-color: #f8fafc; }
 
         .status-badge {
@@ -128,24 +152,6 @@
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
 
-        /* Buttons */
-        .btn {
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 0.85rem;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .btn-confirm { background-color: var(--success); color: white; }
-        .btn-confirm:hover { background-color: #059669; transform: translateY(-1px); }
-        .btn-view { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-        .btn-view:hover { background-color: #e2e8f0; }
-
         .dept-tag {
             font-size: 0.8rem;
             font-weight: 600;
@@ -153,7 +159,6 @@
             border-left: 4px solid #ccc;
         }
         
-        /* Department Colors */
         .dept-1 { border-color: #f43f5e; color: #f43f5e; }
         .dept-2 { border-color: #fbbf24; color: #b45309; }
         .dept-3 { border-color: #fb923c; color: #c2410c; }
@@ -164,9 +169,11 @@
         .dept-8 { border-color: #ec4899; color: #be185d; }
         .dept-9 { border-color: #64748b; color: #334155; }
 
+        .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
+
         @media (max-width: 768px) {
             td, th { padding: 10px 5px; font-size: 0.8rem; }
-            .btn { padding: 4px 8px; font-size: 0.75rem; }
+            .admin-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -174,23 +181,8 @@
 
 <div class="container">
     <div class="header">
-        <h2><i class="fas fa-university"></i> ระบบสรุปผลการขอเปิดรายวิชาและยืนยันเกรด</h2>
+        <h2><i class="fas fa-university"></i> สรุปผลการขอเปิดรายวิชา</h2>
         <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
-    </div>
-
-    <div class="stats-grid">
-        <div class="stat-card stat-total">
-            <small>อาจารย์ทั้งหมด</small>
-            <div id="totalTeachers" style="font-size: 1.5rem; font-weight: 600;">0</div>
-        </div>
-        <div class="stat-card stat-done">
-            <small>ยืนยันข้อมูลแล้ว</small>
-            <div id="confirmedCount" style="font-size: 1.5rem; font-weight: 600;">0</div>
-        </div>
-        <div class="stat-card stat-wait">
-            <small>ยังไม่ดำเนินการ</small>
-            <div id="pendingCount" style="font-size: 1.5rem; font-weight: 600;">0</div>
-        </div>
     </div>
 
     <div class="admin-section">
@@ -204,6 +196,34 @@
                 </div>
             </div>
             <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-file-invoice"></i></div>
+                <div class="admin-info">
+                    <h4>222 นางสาวเสาวลักษณ์ ชินวงษ์</h4>
+                    <span class="role-tag">งานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-user-clock"></i></div>
+                <div class="admin-info">
+                    <h4>243 นายเมธี ใจสุขดี</h4>
+                    <span class="role-tag">เจ้าหน้าที่งานวัดผลชั่วคราว</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-database"></i></div>
+                <div class="admin-info">
+                    <h4>329 นางลำดวน ชิดปราง</h4>
+                    <span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-icon"><i class="fas fa-user-tie"></i></div>
+                <div class="admin-info">
+                    <h4>816 นางสาวพัชรินทร์ ศรีทาคง</h4>
+                    <span class="role-tag">หัวหน้ากลุ่มงานวัดผล</span>
+                </div>
+            </div>
+            <div class="admin-card">
                 <div class="admin-icon"><i class="fas fa-address-book"></i></div>
                 <div class="admin-info">
                     <h4>830 นายณัฏฐกิตติ์ โพธิ์พุ่ม</h4>
@@ -211,6 +231,12 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="grade-system-wrapper">
+        <button class="btn-grade-system" onclick="alert('กำลังเข้าสู่ระบบยืนยันส่งเกรด...');">
+            <i class="fas fa-check-double"></i> เข้าสู่ระบบยืนยันการส่งเกรด
+        </button>
     </div>
 
     <div class="table-wrapper">
@@ -222,7 +248,6 @@
                     <th>ชื่อ-นามสกุล</th>
                     <th>กลุ่มสาระ</th>
                     <th>สถานะ</th>
-                    <th style="text-align: center;">ดำเนินการ</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -239,70 +264,142 @@
 
     const teacherData = [
         { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
+        { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", status: 1 },
+        { id: "114", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", status: 1 },
         { id: "117", name: "นายวีระยุทธ โพธิ์สุวรรณ", status: 0 },
+        { id: "118", name: "นางวิไลพักตร์ กลิ่นกาหลง", status: 1 },
+        { id: "119", name: "นางนาตยา พิทักษ์วงศ์", status: 0 },
+        { id: "120", name: "นางสาววชิราภรณ์ ศรป้อม", status: 1 },
+        { id: "121", name: "นายจิรวัฒน์ โสภาพันธุ์", status: 1 },
+        { id: "123", name: "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์", status: 1 },
+        { id: "124", name: "นางสาวอุษา สายทอง", status: 1 },
+        { id: "125", name: "นายธีรภัทร แก้วสมนึก", status: 0 },
         { id: "129", name: "นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ", status: 1 },
+        { id: "213", name: "นายจุมพล อยู่คง", status: 0 },
+        { id: "216", name: "นางสาวภัสรา เพ็งใย", status: 1 },
+        { id: "217", name: "นางสาวรจนา ดาวเรือง", status: 1 },
+        { id: "218", name: "นางสาวปัญญาวดี ประดับสุข", status: 1 },
+        { id: "221", name: "นางปราณี อินทรักษา", status: 0 },
         { id: "222", name: "นางสาวเสาวลักษณ์ ชินวงษ์", status: 0 },
+        { id: "224", name: "นางสาวปัทมปาณี ทับทิมศรี", status: 0 },
+        { id: "225", name: "นางสาวศิราพรรณ ชูประสิทธิ์", status: 1 },
+        { id: "226", name: "นางอนุสรา โพธิ์หอม", status: 1 },
+        { id: "227", name: "นางสาววรรษา กาญจนลักษณ์", status: 0 },
+        { id: "228", name: "นางสาวภัคจิรา จงสุกใส", status: 0 },
+        { id: "229", name: "นางสาวสายรุ้ง ดอกลำภู", status: 0 },
+        { id: "230", name: "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ", status: 0 },
+        { id: "231", name: "นายนัฎฐกิตติ์ เพชรี", status: 1 },
+        { id: "243", name: "นายเมธี ใจสุขดี", status: 1 },
+        { id: "255", name: "นางสาวพชรกมล รุ่งวารินทร์", status: 0 },
+        { id: "310", name: "นางสาวจุฑามาศ เอี่ยมเกตุ", status: 0 },
+        { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", status: 1 },
+        { id: "314", name: "นางศิริพร เถาว์โท", status: 1 },
+        { id: "315", name: "นางนัญธมณีกร ระรอกแก้ว", status: 1 },
+        { id: "316", name: "นางสาวพิมพ์ณภัส อินทร์สกุล", status: 0 },
+        { id: "319", name: "นางสาววิชุดา งามอักษร", status: 0 },
+        { id: "320", name: "นางสาวลินดา จุฬาวรรณ", status: 0 },
+        { id: "321", name: "นางสาวจิราพร ลิ้มประเสริฐ", status: 0 },
+        { id: "324", name: "นางกรริสา จันทร์สุวรรณ", status: 0 },
+        { id: "325", name: "นายเอกชัย ลวดคำ", status: 0 },
+        { id: "326", name: "นายเสกสรร คำนนท์", status: 1 },
+        { id: "328", name: "นางสาวชลิตา คงศิริ", status: 1 },
+        { id: "329", name: "นางลำดวน ชิดปราง", status: 0 },
+        { id: "330", name: "นายสุรศักดิ์ สีน้ำเงิน", status: 0 },
+        { id: "331", name: "นางวรางคณา พรหมชนะ", status: 0 },
+        { id: "332", name: "นางศริยา วงษ์จันทร์", status: 1 },
         { id: "333", name: "นายภูวนัย อ่อนสอาด", status: 1 },
+        { id: "334", name: "นางสาวปวีณา วงษ์จินดา", status: 0 },
+        { id: "335", name: "นายสราวุธ แช่มช้อย", status: 0 },
+        { id: "336", name: "นายธีรภัทร สุดโต", status: 0 },
+        { id: "337", name: "นางสาวธิดาพร สังข์ทอง", status: 1 },
+        { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 0 },
+        { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
+        { id: "340", name: "นายวินิจ ภูพวก", status: 0 },
+        { id: "341", name: "นางสาวมัชฌิมา สุขะพิบูลย์", status: 1 },
+        { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
+        { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 0 },
+        { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
+        { id: "409", name: "นางจุฑามาศ เห็นประเสริฐ", status: 1 },
+        { id: "411", name: "นางสาวอุสา ทองปรีชา", status: 1 },
         { id: "412", name: "นายนิคม วงษ์สุวรรณ", status: 0 },
+        { id: "413", name: "นางปพัชญา จันทรโชติ", status: 0 },
+        { id: "414", name: "นางสาววราภรณ์ มาลัย", status: 0 },
+        { id: "417", name: "นายณัฐพัชร์ ทองรอด", status: 1 },
+        { id: "418", name: "นางสาวเกษจมาภรณ์ น้ำสุทอง", status: 0 },
+        { id: "419", name: "นายธีรวิช แก้วเกตุ", status: 0 },
+        { id: "420", name: "นายจิรายุส บูชา", status: 0 },
+        { id: "421", name: "นางสาวนิติภรณ์ อ่อนละมุล", status: 1 },
+        { id: "422", name: "นางสาวมลิสา สุขวงษ์จันทร์", status: 0 },
+        { id: "454", name: "นางชัญญา โพธิ์พันธุ์", status: 1 },
+        { id: "506", name: "นายโกศล จันทรโชติ", status: 0 },
+        { id: "509", name: "นายประพนธ์ ชิดปราง", status: 1 },
+        { id: "511", name: "นางสาวจิตรลัดดา กุศลเสถียร", status: 0 },
+        { id: "512", name: "นายศุภชัย เนตรนิล", status: 1 },
+        { id: "513", name: "นายวีระวัฒน์ ชาววังฆ้อง", status: 1 },
+        { id: "552", name: "นายสิทธิชัย แพน้อย", status: 0 },
+        { id: "554", name: "นางสาวปาริชาติ เพ็ชรวาว", status: 0 },
+        { id: "555", name: "นายพรชัย แก้วเรือง", status: 1 },
+        { id: "601", name: "นายณัฐวุฒิ สุดโต", status: 1 },
+        { id: "606", name: "นายภูรีวิทย์ เพ็งสุวรรณ", status: 0 },
+        { id: "613", name: "นางสาววราภรณ์ แก้วกระจ่าง", status: 1 },
+        { id: "614", name: "นางสาวมัณฑรี เกตุแก้ว", status: 0 },
+        { id: "616", name: "นางสาวปิยธิดา สร้อยระย้า", status: 1 },
+        { id: "617", name: "นางสาวอังคณา ดวงเกตุ", status: 0 },
+        { id: "618", name: "นางสาวกาญจนา คำเทศ", status: 1 },
+        { id: "654", name: "นางสาวยุพาภรณ์ จงรอบคอบ", status: 0 },
+        { id: "727", name: "นางพรทิพย์ วันดี", status: 0 },
+        { id: "728", name: "นางสาวจิรารัตน์ เอี่ยมเขียว", status: 1 },
+        { id: "729", name: "นางสาวสุนิษา สุวรรณเนตร์", status: 1 },
+        { id: "730", name: "นายนครินทร์ กล้าหาญ", status: 0 },
+        { id: "731", name: "นางสาวเกษราภรณ์ จูงวงค์สุข", status: 1 },
+        { id: "751", name: "นางสาวเนตรชนก ศรีชมภู", status: 0 },
+        { id: "753", name: "นายโยธิน เวชวิฐาน", status: 0 },
+        { id: "754", name: "นางสาวช่อลดา ประไพ", status: 0 },
+        { id: "755", name: "นายณัฐพร หิรัญอ่อน", status: 0 },
+        { id: "808", name: "นางสาวกัญญาพัชร เกตุแก้ว", status: 1 },
+        { id: "810", name: "นางสาวนันทิยา ปัญญาธิกวัฒน์", status: 1 },
+        { id: "812", name: "นางสาวพิชารมย์ สุขกลม", status: 0 },
+        { id: "815", name: "นางสาวกาญจนาพร เชิดชูสุวรรณ", status: 0 },
         { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", status: 1 },
-        { id: "830", name: "นายณัฏฐกิตติ์ โพธิ์พุ่ม", status: 0 }
+        { id: "818", name: "นางสาวมณีวรรณ พลายมี", status: 0 },
+        { id: "819", name: "นางสาวปริดา แก้วประหลาด", status: 1 },
+        { id: "820", name: "นางสาวภัคภร เอกอมรธนากิจ", status: 1 },
+        { id: "821", name: "นางสาวชาริตา พลายระหาร", status: 1 },
+        { id: "822", name: "นางสาวจุฑาวดี นามเมืองจันทร์", status: 0 },
+        { id: "824", name: "นางสาวพชรมนต์ คงเกื้อ", status: 1 },
+        { id: "826", name: "นางสาวปัทมาพร เต่าให้", status: 0 },
+        { id: "827", name: "นางสาวเบญจวรรณ วุฒิ", status: 1 },
+        { id: "828", name: "นายนคร คำพล", status: 0 },
+        { id: "829", name: "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์", status: 1 },
+        { id: "830", name: "นายณัฏฐกิตติ์ โพธิ์พุ่ม", status: 0 },
+        { id: "831", name: "นางสาวอุษามณี กล้าหาญ", status: 1 },
+        { id: "832", name: "นางสาวบุญรักษา ปะลาวัน", status: 1 },
+        { id: "901", name: "นางสาวอำพิกา บารมี", status: 0 },
+        { id: "903", name: "นางสาวยุพิน มะลิถอด", status: 0 }
     ];
 
-    function renderTable() {
-        const tableBody = document.getElementById('tableBody');
-        tableBody.innerHTML = '';
-        
-        let done = 0;
-        teacherData.forEach((teacher, index) => {
-            if(teacher.status === 1) done++;
-            
-            const deptId = teacher.id.charAt(0);
-            const deptName = departments[deptId] || "ไม่ระบุ";
-            const row = document.createElement('tr');
+    const tableBody = document.getElementById('tableBody');
 
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td><strong>${teacher.id}</strong></td>
-                <td>${teacher.name}</td>
-                <td><div class="dept-tag dept-${deptId}">${deptName}</div></td>
-                <td>
-                    <span class="status-badge ${teacher.status === 1 ? 'done' : 'waiting'}">
-                        ${teacher.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
-                    </span>
-                </td>
-                <td style="text-align: center;">
-                    ${teacher.status === 0 
-                        ? `<button class="btn btn-confirm" onclick="confirmGrade('${teacher.id}', '${teacher.name}')">
-                            <i class="fas fa-check-circle"></i> ยืนยันส่งเกรด
-                           </button>`
-                        : `<button class="btn btn-view">
-                            <i class="fas fa-search"></i> ดูใบสรุปเกรด
-                           </button>`
-                    }
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
+    teacherData.forEach((teacher, index) => {
+        const row = document.createElement('tr');
+        const deptId = teacher.id.charAt(0);
+        const deptName = departments[deptId] || "ไม่ระบุ";
+        const statusText = teacher.status === 1 ? "ยืนยันข้อมูลแล้ว" : "ยังไม่ดำเนินการ";
+        const statusClass = teacher.status === 1 ? "done" : "waiting";
+        const stepText = teacher.status === 1 ? "[7/7]" : "[1/7]";
 
-        // Update Stats
-        document.getElementById('totalTeachers').innerText = teacherData.length;
-        document.getElementById('confirmedCount').innerText = done;
-        document.getElementById('pendingCount').innerText = teacherData.length - done;
-    }
-
-    function confirmGrade(id, name) {
-        if(confirm(`ยืนยันการส่งเกรดสำหรับ: ${name} (รหัส ${id})?`)) {
-            const teacher = teacherData.find(t => t.id === id);
-            if(teacher) {
-                teacher.status = 1;
-                renderTable();
-                alert('ดำเนินการยืนยันข้อมูลเรียบร้อยแล้ว');
-            }
-        }
-    }
-
-    // Initial render
-    renderTable();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td><strong>${teacher.id}</strong></td>
+            <td>${teacher.name}</td>
+            <td><div class="dept-tag dept-${deptId}">${deptName}</div></td>
+            <td>
+                <span class="count-tag">${stepText}</span>
+                <span class="status-badge ${statusClass}">${statusText}</span>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
 </script>
 
 </body>
