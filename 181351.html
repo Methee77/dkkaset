@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veggie World: 11-Player Mission | 02181351-64</title>
+    <title>Veggie World: Mission Rubber Tire | 02181351-64</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,7 @@
 
         .pixel-font { font-family: 'Press Start 2P', cursive; }
 
-        /* Scenery */
+        /* Scenery Background */
         .scenery {
             position: absolute;
             bottom: 0;
@@ -42,7 +42,6 @@
             z-index: 0;
         }
 
-        /* 8-Bit Card */
         .game-card {
             background: #fff;
             color: #333;
@@ -60,7 +59,7 @@
             font-size: 0.6rem;
         }
 
-        /* Tire Pipe Visual */
+        /* Tire Pipe Design */
         .tire-pipe {
             width: 140px;
             height: 100px;
@@ -70,7 +69,7 @@
             border-radius: 12px 12px 0 0;
         }
         .tire-pipe::before {
-            content: "TIRE-POT";
+            content: "EDU-KU";
             font-family: 'Press Start 2P';
             font-size: 7px;
             color: rgba(0,0,0,0.4);
@@ -86,7 +85,6 @@
             border: 5px solid #000;
         }
 
-        /* Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
@@ -101,7 +99,7 @@
         }
 
         .stats-container {
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             border-bottom: 4px solid #fff;
         }
 
@@ -126,33 +124,40 @@
 <body>
 
     <nav class="stats-container sticky top-0 z-50 p-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center pixel-font text-[8px] md:text-xs">
+        <div class="max-w-7xl mx-auto flex justify-between items-center pixel-font text-[7px] md:text-[10px]">
             <div>
-                <p class="text-gray-400 mb-1">ID-UNIT</p>
+                <p class="text-gray-400 mb-1">COURSE-ID</p>
                 <p>02181351-64</p>
             </div>
+            <div class="hidden md:block text-center border-l border-r border-gray-600 px-6">
+                <p class="text-red-500 mb-1">FACULTY</p>
+                <p>คณะศึกษาศาสตร์และพัฒนศาสตร์</p>
+            </div>
             <div class="text-center">
-                <p class="text-red-500 mb-1">TEAM-SIZE</p>
-                <p>11 PLAYERS</p>
+                <p class="text-green-400 mb-1">SECTION</p>
+                <p>LEC: 700 | LAB: 711</p>
             </div>
             <div class="text-right">
                 <p class="text-yellow-400 mb-1">WORLD</p>
-                <p>1-1</p>
+                <p>KU-PS</p>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-[80vh] flex flex-col items-center justify-center py-20 overflow-hidden">
+    <section class="relative min-h-[70vh] flex flex-col items-center justify-center py-20 overflow-hidden">
         <div class="scenery"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10 px-4">
             <div class="floating inline-block">
-                <div class="stage-badge pixel-font mb-4">AGRICULTURE MISSION</div>
-                <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[6px_6px_0px_rgba(0,0,0,0.5)] leading-tight mb-8">
-                    ผักสวนครัว<br><span class="text-yellow-300 underline">ในล้อยาง</span>
+                <div class="stage-badge pixel-font mb-4">MISSION START!</div>
+                <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[6px_6px_0px_rgba(0,0,0,0.5)] leading-tight mb-4">
+                    ผักสวนครัวในล้อยาง
                 </h1>
+                <p class="text-lg md:text-2xl text-yellow-300 font-bold tracking-widest bg-black/40 py-2 inline-block px-4">
+                    สาขาเกษตรและสิ่งแวดล้อมศึกษา
+                </p>
             </div>
 
-            <div class="flex justify-center items-end mt-10">
+            <div class="flex justify-center items-end mt-12">
                 <div class="relative">
                     <div class="text-6xl absolute -top-16 left-6 floating" style="animation-delay: 0.5s;">🥦</div>
                     <div class="tire-pipe shadow-2xl"></div>
@@ -161,86 +166,75 @@
         </div>
     </section>
 
-    <main class="max-w-6xl mx-auto px-6 space-y-20 pb-20 relative z-10">
+    <main class="max-w-6xl mx-auto px-6 space-y-16 pb-24 relative z-10">
         
-        <div class="game-card p-8 md:flex items-center gap-10">
-            <div class="md:w-1/4 bg-blue-100 border-4 border-black h-40 flex items-center justify-center text-6xl">📖</div>
-            <div class="md:w-3/4 mt-6 md:mt-0">
-                <span class="stage-badge pixel-font mb-2">INFO</span>
-                <h2 class="text-2xl font-bold mb-2">การประเมินการจัดการศึกษา</h2>
-                <p class="text-gray-600">การศึกษาประสิทธิภาพการปลูกผักในล้อยางเพื่อสร้างจิตสำนึกด้านสิ่งแวดล้อมและการใช้ทรัพยากรหมุนเวียนในโรงเรียนและชุมชน</p>
+        <div class="game-card p-6 md:p-8 border-t-[16px] border-t-green-500">
+            <div class="md:flex items-center gap-10">
+                <div class="hidden md:flex w-1/4 bg-blue-50 border-4 border-black h-40 items-center justify-center text-6xl">📖</div>
+                <div class="md:w-3/4">
+                    <span class="stage-badge pixel-font mb-2">ABOUT PROJECT</span>
+                    <h2 class="text-2xl font-bold mb-2">การประเมินการจัดการศึกษาทางเกษตรฯ</h2>
+                    <p class="text-gray-600 mb-4">
+                        โครงการศึกษาการจัดการพื้นที่ปลูกผักจากวัสดุเหลือใช้ เพื่อประเมินผลสัมฤทธิ์ทางการเรียนรู้ด้านสิ่งแวดล้อมศึกษา 
+                        ของนิสิตคณะศึกษาศาสตร์และพัฒนศาสตร์ 
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-gray-100 border-2 border-black px-3 py-1 text-xs font-bold">หมู่เรียนบรรยาย: 700</span>
+                        <span class="bg-gray-100 border-2 border-black px-3 py-1 text-xs font-bold">หมู่เรียนปฏิบัติ: 711</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <section class="game-card p-6 md:p-10 border-t-[16px] border-t-blue-600">
-            <h2 class="pixel-font text-xl mb-12 text-center">SELECT YOUR PLAYER (ผู้จัดทำ)</h2>
+        <section class="game-card p-6 md:p-10 border-t-[20px] border-t-red-600">
+            <div class="text-center mb-12">
+                <h2 class="pixel-font text-xl mb-4 text-red-600">CHARACTER SELECT</h2>
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-widest">นิสิตสาขาเกษตรและสิ่งแวดล้อมศึกษา (11 PLAYERS)</p>
+            </div>
             
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-                
                 <div class="player-card group">
                     <div class="player-frame mb-3">
                         <span class="text-4xl group-hover:animate-bounce">👨‍🌾</span>
                     </div>
                     <div class="text-center">
                         <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">P1</span>
-                        <p class="font-bold text-sm mt-1">ชื่อ นามสกุล</p>
-                        <p class="text-[10px] text-blue-600 font-mono italic">ID: 64xxxxxx</p>
-                    </div>
-                </div>
-
-                <div class="player-card group">
-                    <div class="player-frame mb-3">
-                        <span class="text-4xl group-hover:animate-bounce">👩‍🌾</span>
-                    </div>
-                    <div class="text-center">
-                        <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">P2</span>
-                        <p class="font-bold text-sm mt-1">ชื่อ นามสกุล</p>
+                        <p class="font-bold text-sm mt-1 leading-tight">ชื่อ-นามสกุล</p>
                         <p class="text-[10px] text-blue-600 font-mono italic">ID: 64xxxxxx</p>
                     </div>
                 </div>
 
                 <script>
-                    // ตัวอย่างการสร้างวนลูปแสดงผล (ถ้าคุณต้องการแก้ในโค้ดเดียว)
-                    for(let i=3; i<=11; i++) {
+                    const players = [
+                        { id: 'P2', emoji: '👩‍🌾' }, { id: 'P3', emoji: '👨‍🌾' }, { id: 'P4', emoji: '👩‍🌾' },
+                        { id: 'P5', emoji: '👨‍🌾' }, { id: 'P6', emoji: '👩‍🌾' }, { id: 'P7', emoji: '👨‍🌾' },
+                        { id: 'P8', emoji: '👩‍🌾' }, { id: 'P9', emoji: '👨‍🌾' }, { id: 'P10', emoji: '👩‍🌾' },
+                        { id: 'P11', emoji: '👨‍🌾' }
+                    ];
+                    
+                    players.forEach(p => {
                         document.write(`
                         <div class="player-card group">
                             <div class="player-frame mb-3">
-                                <span class="text-4xl group-hover:animate-bounce">${i % 2 == 0 ? '👨‍🌾' : '👩‍🌾'}</span>
+                                <span class="text-4xl group-hover:animate-bounce">${p.emoji}</span>
                             </div>
                             <div class="text-center">
-                                <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">P${i}</span>
-                                <p class="font-bold text-sm mt-1">ชื่อ นามสกุล</p>
+                                <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">${p.id}</span>
+                                <p class="font-bold text-sm mt-1 leading-tight">ชื่อ-นามสกุล</p>
                                 <p class="text-[10px] text-blue-600 font-mono italic">ID: 64xxxxxx</p>
                             </div>
                         </div>
                         `);
-                    }
+                    });
                 </script>
-
             </div>
         </section>
 
-        <div class="game-card p-8 bg-green-50 border-t-[16px] border-t-green-600">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-center md:text-left">
-                    <h3 class="pixel-font text-sm mb-4">MISSION STATUS</h3>
-                    <div class="flex gap-2">
-                        <span class="text-2xl">⭐</span><span class="text-2xl">⭐</span><span class="text-2xl">⭐</span><span class="text-2xl">⭐</span><span class="text-2xl opacity-30">⭐</span>
-                    </div>
-                </div>
-                <div class="flex-1 w-full max-w-md">
-                    <div class="flex justify-between pixel-font text-[10px] mb-2 text-green-700">
-                        <span>SUCCESS RATE</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 border-4 border-black h-8 p-1">
-                        <div class="bg-green-500 h-full w-[85%]"></div>
-                    </div>
-                </div>
-                <div class="pixel-font text-xl text-red-600 animate-pulse">
-                    CLEAR!
-                </div>
-            </div>
+        <div class="game-card p-8 bg-black text-white border-white border-4 border-dashed text-center">
+            <h3 class="pixel-font text-sm mb-6 text-yellow-400 underline decoration-yellow-400">MISSION COMPLETED</h3>
+            <p class="text-lg">การประเมินโครงการผักสวนครัวในล้อยาง เสร็จสมบูรณ์</p>
+            <p class="text-sm text-gray-400 mt-2">สาขาเกษตรและสิ่งแวดล้อมศึกษา | หมู่ 700 & 711</p>
+            <div class="mt-8 pixel-font text-2xl text-green-400">THANK YOU!</div>
         </div>
 
     </main>
