@@ -3,149 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veggie World - Mission Rubber Tire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Mitr:wght@300;400&display=swap" rel="stylesheet">
+    <title>Veggie Mario - Educational Evaluation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Kanit:wght@300;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        :root {
+            --sky-blue: #5C94FC;
+            --mario-red: #E4000F;
+            --grass-green: #48D048;
+            --ground-brown: #E75926;
+        }
+
         body {
-            font-family: 'Mitr', sans-serif;
-            background-color: #5C94FC; /* สีฟ้าท้องฟ้า Mario */
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--sky-blue);
             color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .pixel-font { font-family: 'Press Start 2P', cursive; }
+
+        /* Scenery Background */
+        .scenery {
+            position: fixed;
+            bottom: 60px;
+            width: 100%;
+            height: 200px;
+            background-image: 
+                radial-gradient(circle at 20% 50%, white 20px, transparent 20px),
+                radial-gradient(circle at 25% 40%, white 25px, transparent 25px),
+                radial-gradient(circle at 30% 50%, white 20px, transparent 20px);
+            background-size: 400px 100%;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        /* 8-Bit Card Style */
+        .game-card {
+            background: #fff;
+            color: #333;
+            border: 6px solid #000;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
             image-rendering: pixelated;
         }
-        .pixel-font { font-family: 'Press Start 2P', cursive; }
-        
-        /* สไตล์บล็อกอิฐ */
-        .brick-border {
-            border: 4px solid #000;
-            box-shadow: 4px 4px 0px #412100;
-            background-color: #E75926;
+
+        .stage-badge {
+            background: var(--mario-red);
+            color: white;
+            padding: 4px 8px;
+            border: 3px solid #000;
+            display: inline-block;
+            font-size: 0.7rem;
         }
 
-        /* ตกแต่งปุ่มให้เหมือนบล็อก [?] */
-        .question-block {
-            background-color: #F8D870;
-            border: 4px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            transition: all 0.1s;
-        }
-        .question-block:active {
-            transform: translateY(4px);
-            box-shadow: 0px 0px 0px #000;
-        }
-
-        /* ท่อเขียว Warp Pipe */
-        .warp-pipe {
-            background: linear-gradient(to right, #22B14C, #22B14C 20%, #B5E61D 20%, #B5E61D 40%, #22B14C 40%);
-            border: 4px solid #000;
+        /* Animated Green Pipe (The Tire) */
+        .tire-pipe {
+            width: 120px;
             height: 100px;
-            width: 80px;
+            background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #15803d 100%);
+            border: 5px solid #000;
             position: relative;
+            border-radius: 10px 10px 0 0;
         }
-        .warp-pipe::before {
+        .tire-pipe::before {
             content: "";
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: -10px;
-            width: 100px;
-            height: 30px;
+            width: 140px;
+            height: 35px;
             background: inherit;
-            border: 4px solid #000;
+            border: 5px solid #000;
+            border-radius: 5px;
         }
 
-        .ground {
-            background-color: #704818;
-            background-image: linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028), 
-                              linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 3s ease-in-out infinite; }
+
+        .ground-tile {
+            background: #8B4513;
             height: 60px;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
+            border-top: 5px solid #552b0d;
+        }
+
+        /* Stats Bar */
+        .stats-container {
+            background: rgba(0,0,0,0.8);
+            border-bottom: 4px solid #fff;
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
-    <header class="p-6 bg-black flex justify-between items-center pixel-font text-[10px] md:text-sm sticky top-0 z-50">
-        <div>
-            <p>MARIO-ED</p>
-            <p>02181351-64</p>
-        </div>
-        <div class="text-center">
-            <p>VEGGIES</p>
-            <p>x 64</p>
-        </div>
-        <div class="text-right">
-            <p>WORLD</p>
-            <p>1-1</p>
-        </div>
-    </header>
-
-    <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 pt-10">
-        <h1 class="pixel-font text-2xl md:text-4xl mb-6 leading-relaxed">
-            ผักสวนครัวในล้อยาง<br>
-            <span class="text-yellow-300">MISSION START!</span>
-        </h1>
-        <div class="flex items-end gap-4 mb-10">
-            <div class="text-6-xl mb-4">👨‍🌾</div> 
-            <div class="warp-pipe flex items-center justify-center">
-                <span class="text-3xl mt-[-40px]">🥬</span>
+    <nav class="stats-container sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center pixel-font text-[10px] md:text-sm">
+            <div class="flex flex-col gap-1">
+                <span class="text-yellow-400">STUDENT-ID</span>
+                <span>02181351-64</span>
+            </div>
+            <div class="hidden md:block text-center">
+                <span class="text-red-500">PROJECT</span><br>
+                <span class="text-[12px]">RUBBER TIRE VEGGIE</span>
+            </div>
+            <div class="flex flex-col gap-1 text-right">
+                <span class="text-green-400">SCORE</span>
+                <span>000999</span>
             </div>
         </div>
-        <a href="#mission" class="question-block px-8 py-4 text-black pixel-font text-sm hover:bg-yellow-400">
-            PRESS START
-        </a>
+    </nav>
+
+    <section class="relative pt-20 pb-32 px-4 overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="floating inline-block mb-8">
+                <div class="stage-badge pixel-font mb-4">LEVEL 1-1: START EDUCATION</div>
+                <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[6px_6px_0px_rgba(0,0,0,0.5)] leading-tight mb-8">
+                    โครงการผักสวนครัว<br><span class="text-yellow-300">ในล้อยาง</span>
+                </h1>
+            </div>
+
+            <div class="flex justify-center items-end gap-0 mt-10">
+                <div class="relative">
+                    <div class="text-6xl absolute -top-16 left-4 floating" style="animation-delay: 1s;">🥬</div>
+                    <div class="tire-pipe"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scenery"></div>
     </section>
 
-    <main class="max-w-4xl mx-auto p-6 space-y-12 mb-20">
+    <main class="max-w-5xl mx-auto px-6 -mt-10 pb-40 space-y-16">
         
-        <div id="mission" class="brick-border p-6 rounded-none">
-            <h2 class="pixel-font text-xl mb-4">WORLD 1: ที่มาโครงการ</h2>
-            <p class="text-lg">การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา ผ่านการนำล้อยางรถยนต์เก่ามาประยุกต์ใช้เป็นพื้นที่ปลูกผัก เพื่อการเรียนรู้ที่ยั่งยืน</p>
+        <div class="game-card p-8 md:flex items-center gap-8 group hover:-translate-y-2 transition-transform">
+            <div class="md:w-1/3 bg-gray-200 h-48 border-4 border-black flex items-center justify-center text-5xl mb-6 md:mb-0">
+                🌱
+            </div>
+            <div class="md:w-2/3">
+                <span class="stage-badge pixel-font mb-2">STAGE 1</span>
+                <h2 class="text-2xl font-bold mb-3 text-green-700">หลักการและการจัดการศึกษา</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    การนำวัสดุเหลือใช้อย่าง "ล้อยาง" มาสร้างพื้นที่เรียนรู้ด้านเกษตรกรรม 
+                    เน้นการจัดการสิ่งแวดล้อมศึกษาให้ผู้เรียนเข้าใจวงจรชีวิตพืชและความสำคัญของเศรษฐกิจหมุนเวียน
+                </p>
+            </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white/10 border-4 border-dashed border-white p-6">
-                <h3 class="pixel-font text-sm mb-4 text-yellow-300">STAGE 2-1: เตรียมดิน</h3>
-                <p>ผสมดินปลูกอินทรีย์ให้สารอาหารครบถ้วน เหมือนเก็บ Super Mushroom</p>
+            <div class="game-card p-6 border-t-[16px] border-t-yellow-400">
+                <h3 class="pixel-font text-sm mb-4">OBJECTIVE [?]</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex gap-2"><span>⭐</span> เพื่อลดขยะจากยางรถยนต์ในชุมชน</li>
+                    <li class="flex gap-2"><span>⭐</span> เพื่อเป็นแหล่งเรียนรู้การเกษตรแบบพอเพียง</li>
+                </ul>
             </div>
-            <div class="bg-white/10 border-4 border-dashed border-white p-6">
-                <h3 class="pixel-font text-sm mb-4 text-yellow-300">STAGE 2-2: การดูแล</h3>
-                <p>การให้น้ำและแสงแดดที่เหมาะสม เพื่อให้พืชผักเติบโตสู่ Level ถัดไป</p>
+            <div class="game-card p-6 border-t-[16px] border-t-red-500">
+                <h3 class="pixel-font text-sm mb-4">EVALUATION</h3>
+                <div class="w-full bg-gray-200 h-6 border-2 border-black mb-2">
+                    <div class="bg-green-500 h-full w-[85%] border-r-2 border-black"></div>
+                </div>
+                <p class="text-[12px] font-bold">SUCCESS RATE: 85%</p>
             </div>
         </div>
 
-        <div class="bg-green-800 border-4 border-white p-6">
-            <h2 class="pixel-font text-xl mb-6 text-center">EVALUATION SCORE</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b-4 border-white pixel-font text-[10px]">
-                            <th class="p-2">INDICATOR</th>
-                            <th class="p-2">RESULT</th>
-                            <th class="p-2">RANK</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <tr>
-                            <td class="p-2 border-b border-white/20">การเจริญเติบโต</td>
-                            <td class="p-2 border-b border-white/20">85%</td>
-                            <td class="p-2 border-b border-white/20">A</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 border-b border-white/20">การใช้ทรัพยากร</td>
-                            <td class="p-2 border-b border-white/20">90%</td>
-                            <td class="p-2 border-b border-white/20">S</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="text-center pt-10">
+            <button class="game-card px-10 py-5 bg-yellow-400 hover:bg-yellow-300 active:translate-y-2 transition-all cursor-pointer">
+                <span class="pixel-font text-lg">VIEW FULL REPORT</span>
+            </button>
         </div>
 
     </main>
 
-    <footer class="fixed bottom-0 w-full">
-        <div class="ground"></div>
-    </footer>
+    <div class="fixed bottom-0 w-full z-40">
+        <div class="ground-tile"></div>
+    </div>
+
+    <div class="fixed top-32 left-10 text-3xl opacity-30 select-none">☁️</div>
+    <div class="fixed top-48 right-20 text-4xl opacity-30 select-none">☁️</div>
 
 </body>
 </html>
