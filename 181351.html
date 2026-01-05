@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veggie World: Mission Rubber Tire | 02181351-64</title>
+    <title>Veggie Mario Project | 02181351-64</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,7 @@
 
         .pixel-font { font-family: 'Press Start 2P', cursive; }
 
-        /* Scenery Background */
+        /* พื้นหลังเมฆ */
         .scenery {
             position: absolute;
             bottom: 0;
@@ -35,13 +35,13 @@
             height: 300px;
             background-image: 
                 radial-gradient(circle at 15% 50%, white 20px, transparent 20px),
-                radial-gradient(circle at 20% 40%, white 25px, transparent 25px),
-                radial-gradient(circle at 25% 50%, white 20px, transparent 20px);
+                radial-gradient(circle at 20% 40%, white 25px, transparent 25px);
             background-size: 600px 100%;
             opacity: 0.4;
             z-index: 0;
         }
 
+        /* การ์ดสไตล์ 8-bit */
         .game-card {
             background: #fff;
             color: #333;
@@ -50,29 +50,20 @@
             image-rendering: pixelated;
         }
 
-        .stage-badge {
-            background: var(--mario-red);
-            color: white;
-            padding: 6px 12px;
-            border: 3px solid #000;
-            display: inline-block;
-            font-size: 0.6rem;
-        }
-
-        /* Tire Pipe Design */
+        /* ท่อล้อยาง */
         .tire-pipe {
             width: 140px;
             height: 100px;
-            background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #15803d 100%);
+            background: linear-gradient(90deg, #1a1a1a 0%, #444 50%, #1a1a1a 100%);
             border: 5px solid #000;
             position: relative;
             border-radius: 12px 12px 0 0;
         }
         .tire-pipe::before {
-            content: "EDU-KU";
+            content: "RE-USE";
             font-family: 'Press Start 2P';
             font-size: 7px;
-            color: rgba(0,0,0,0.4);
+            color: #555;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -81,16 +72,18 @@
             left: -10px;
             width: 160px;
             height: 35px;
-            background: inherit;
+            background: #333;
             border: 5px solid #000;
         }
 
+        /* แอนิเมชั่นลอยตัว */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
         .floating { animation: float 3s ease-in-out infinite; }
 
+        /* พื้นดิน */
         .ground-tile {
             background: #8B4513;
             height: 50px;
@@ -98,8 +91,8 @@
             border-top: 5px solid #552b0d;
         }
 
-        .stats-container {
-            background: rgba(0,0,0,0.95);
+        .stats-bar {
+            background: rgba(0,0,0,0.9);
             border-bottom: 4px solid #fff;
         }
 
@@ -111,7 +104,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
         .player-card:hover .player-frame {
@@ -123,44 +115,36 @@
 </head>
 <body>
 
-    <nav class="stats-container sticky top-0 z-50 p-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center pixel-font text-[7px] md:text-[10px]">
-            <div>
-                <p class="text-gray-400 mb-1">COURSE-ID</p>
-                <p>02181351-64</p>
+    <nav class="stats-bar sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center pixel-font text-[8px] md:text-xs text-white">
+            <div class="flex flex-col gap-1">
+                <span class="text-gray-400">COURSE</span>
+                <span>02181351-64</span>
             </div>
-            <div class="hidden md:block text-center border-l border-r border-gray-600 px-6">
-                <p class="text-red-500 mb-1">FACULTY</p>
-                <p>คณะศึกษาศาสตร์และพัฒนศาสตร์</p>
-            </div>
-            <div class="text-center">
-                <p class="text-green-400 mb-1">SECTION</p>
-                <p>LEC: 700 | LAB: 711</p>
+            <div class="text-center hidden md:block">
+                <span class="text-red-500">MISSION</span><br>
+                <span>RUBBER TIRE VEGGIE</span>
             </div>
             <div class="text-right">
-                <p class="text-yellow-400 mb-1">WORLD</p>
-                <p>KU-PS</p>
+                <span class="text-yellow-400">WORLD</span><br>
+                <span>KU-PS</span>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-[70vh] flex flex-col items-center justify-center py-20 overflow-hidden">
+    <section class="relative min-h-[60vh] flex flex-col items-center justify-center py-20 overflow-hidden">
         <div class="scenery"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10 px-4">
             <div class="floating inline-block">
-                <div class="stage-badge pixel-font mb-4">MISSION START!</div>
-                <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[6px_6px_0px_rgba(0,0,0,0.5)] leading-tight mb-4">
+                <div class="bg-red-600 text-white pixel-font text-[10px] px-4 py-2 border-4 border-black mb-6 inline-block">MISSION START!</div>
+                <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-[8px_8px_0px_rgba(0,0,0,0.5)] leading-tight mb-8">
                     ผักสวนครัวในล้อยาง
                 </h1>
-                <p class="text-lg md:text-2xl text-yellow-300 font-bold tracking-widest bg-black/40 py-2 inline-block px-4">
-                    สาขาเกษตรและสิ่งแวดล้อมศึกษา
-                </p>
             </div>
-
-            <div class="flex justify-center items-end mt-12">
+            <div class="flex justify-center items-end mt-10">
                 <div class="relative">
-                    <div class="text-6xl absolute -top-16 left-6 floating" style="animation-delay: 0.5s;">🥦</div>
-                    <div class="tire-pipe shadow-2xl"></div>
+                    <div class="text-7xl absolute -top-16 left-6 floating" style="animation-delay: 0.5s;">🥬</div>
+                    <div class="tire-pipe"></div>
                 </div>
             </div>
         </div>
@@ -168,60 +152,64 @@
 
     <main class="max-w-6xl mx-auto px-6 space-y-16 pb-24 relative z-10">
         
-        <div class="game-card p-6 md:p-8 border-t-[16px] border-t-green-500">
-            <div class="md:flex items-center gap-10">
-                <div class="hidden md:flex w-1/4 bg-blue-50 border-4 border-black h-40 items-center justify-center text-6xl">📖</div>
-                <div class="md:w-3/4">
-                    <span class="stage-badge pixel-font mb-2">ABOUT PROJECT</span>
-                    <h2 class="text-2xl font-bold mb-2">การประเมินการจัดการศึกษาทางเกษตรฯ</h2>
-                    <p class="text-gray-600 mb-4">
-                        โครงการศึกษาการจัดการพื้นที่ปลูกผักจากวัสดุเหลือใช้ เพื่อประเมินผลสัมฤทธิ์ทางการเรียนรู้ด้านสิ่งแวดล้อมศึกษา 
-                        ของนิสิตคณะศึกษาศาสตร์และพัฒนศาสตร์ 
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <span class="bg-gray-100 border-2 border-black px-3 py-1 text-xs font-bold">หมู่เรียนบรรยาย: 700</span>
-                        <span class="bg-gray-100 border-2 border-black px-3 py-1 text-xs font-bold">หมู่เรียนปฏิบัติ: 711</span>
-                    </div>
-                </div>
+        <div class="game-card p-8 md:flex items-center gap-10">
+            <div class="md:w-1/4 bg-green-100 border-4 border-black h-40 flex items-center justify-center text-7xl">🌳</div>
+            <div class="md:w-3/4">
+                <h2 class="text-3xl font-bold text-green-700 mb-4">การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    โครงการนี้มุ่งเน้นการประเมินการเรียนรู้ผ่านการปฏิบัติจริง โดยนำล้อยางรถยนต์เก่ามาประยุกต์เป็นภาชนะปลูก เพื่อสร้างความเข้าใจในเรื่องเศรษฐกิจหมุนเวียนและการจัดการสิ่งแวดล้อมที่ยั่งยืน
+                </p>
             </div>
         </div>
 
-        <section class="game-card p-6 md:p-10 border-t-[20px] border-t-red-600">
+        <section class="game-card p-6 md:p-10 border-t-[20px] border-t-red-600 shadow-xl">
             <div class="text-center mb-12">
-                <h2 class="pixel-font text-xl mb-4 text-red-600">CHARACTER SELECT</h2>
-                <p class="text-sm font-bold text-gray-500 uppercase tracking-widest">นิสิตสาขาเกษตรและสิ่งแวดล้อมศึกษา (11 PLAYERS)</p>
+                <h2 class="pixel-font text-2xl mb-8 text-red-600">CHARACTER SELECT</h2>
+                
+                <div class="inline-block bg-black p-5 border-4 border-double border-white shadow-[6px_6px_0px_#444]">
+                    <p class="text-yellow-400 font-bold text-xl md:text-2xl mb-2">
+                        นิสิตคณะศึกษาศาสตร์และพัฒนศาสตร์
+                    </p>
+                    <p class="text-white text-lg md:text-xl mb-3 font-light tracking-wide">
+                        สาขาเกษตรและสิ่งแวดล้อมศึกษา
+                    </p>
+                    <div class="flex justify-center gap-6 text-xs pixel-font text-green-400 border-t border-gray-700 pt-3">
+                        <span>LEC: 700</span>
+                        <span class="text-white">|</span>
+                        <span>LAB: 711</span>
+                    </div>
+                </div>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-                <div class="player-card group">
-                    <div class="player-frame mb-3">
-                        <span class="text-4xl group-hover:animate-bounce">👨‍🌾</span>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+                <div class="player-card group cursor-pointer">
+                    <div class="player-frame mb-3 rounded-sm">
+                        <span class="text-5xl group-hover:scale-125 transition-transform duration-300">👨‍🌾</span>
                     </div>
                     <div class="text-center">
-                        <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">P1</span>
-                        <p class="font-bold text-sm mt-1 leading-tight">ชื่อ-นามสกุล</p>
-                        <p class="text-[10px] text-blue-600 font-mono italic">ID: 64xxxxxx</p>
+                        <span class="pixel-font text-[9px] bg-black text-white px-2 py-1">P1</span>
+                        <p class="font-bold text-md mt-2">ชื่อ-นามสกุล</p>
+                        <p class="text-[11px] text-blue-600 font-bold italic">ID: 64xxxxxx</p>
                     </div>
                 </div>
 
                 <script>
                     const players = [
-                        { id: 'P2', emoji: '👩‍🌾' }, { id: 'P3', emoji: '👨‍🌾' }, { id: 'P4', emoji: '👩‍🌾' },
-                        { id: 'P5', emoji: '👨‍🌾' }, { id: 'P6', emoji: '👩‍🌾' }, { id: 'P7', emoji: '👨‍🌾' },
-                        { id: 'P8', emoji: '👩‍🌾' }, { id: 'P9', emoji: '👨‍🌾' }, { id: 'P10', emoji: '👩‍🌾' },
-                        { id: 'P11', emoji: '👨‍🌾' }
+                        {id: 'P2', emoji: '👩‍🌾'}, {id: 'P3', emoji: '👨‍🌾'}, {id: 'P4', emoji: '👩‍🌾'},
+                        {id: 'P5', emoji: '👨‍🌾'}, {id: 'P6', emoji: '👩‍🌾'}, {id: 'P7', emoji: '👨‍🌾'},
+                        {id: 'P8', emoji: '👩‍🌾'}, {id: 'P9', emoji: '👨‍🌾'}, {id: 'P10', emoji: '👩‍🌾'},
+                        {id: 'P11', emoji: '👨‍🌾'}
                     ];
-                    
                     players.forEach(p => {
                         document.write(`
-                        <div class="player-card group">
-                            <div class="player-frame mb-3">
-                                <span class="text-4xl group-hover:animate-bounce">${p.emoji}</span>
+                        <div class="player-card group cursor-pointer">
+                            <div class="player-frame mb-3 rounded-sm">
+                                <span class="text-5xl group-hover:scale-125 transition-transform duration-300">${p.emoji}</span>
                             </div>
                             <div class="text-center">
-                                <span class="pixel-font text-[8px] bg-black text-white px-2 py-0.5">${p.id}</span>
-                                <p class="font-bold text-sm mt-1 leading-tight">ชื่อ-นามสกุล</p>
-                                <p class="text-[10px] text-blue-600 font-mono italic">ID: 64xxxxxx</p>
+                                <span class="pixel-font text-[9px] bg-black text-white px-2 py-1">${p.id}</span>
+                                <p class="font-bold text-md mt-2">ชื่อ-นามสกุล</p>
+                                <p class="text-[11px] text-blue-600 font-bold italic">ID: 64xxxxxx</p>
                             </div>
                         </div>
                         `);
@@ -230,18 +218,19 @@
             </div>
         </section>
 
-        <div class="game-card p-8 bg-black text-white border-white border-4 border-dashed text-center">
-            <h3 class="pixel-font text-sm mb-6 text-yellow-400 underline decoration-yellow-400">MISSION COMPLETED</h3>
-            <p class="text-lg">การประเมินโครงการผักสวนครัวในล้อยาง เสร็จสมบูรณ์</p>
-            <p class="text-sm text-gray-400 mt-2">สาขาเกษตรและสิ่งแวดล้อมศึกษา | หมู่ 700 & 711</p>
-            <div class="mt-8 pixel-font text-2xl text-green-400">THANK YOU!</div>
+        <div class="game-card p-8 bg-black border-4 border-dashed border-white text-center">
+            <h3 class="pixel-font text-lg text-yellow-400 mb-4 animate-pulse">MISSION STATUS: CLEAR!</h3>
+            <p class="text-white text-lg">ขอบคุณที่เยี่ยมชมโครงการของพวกเรา</p>
+            <div class="mt-6 flex justify-center gap-2">
+                <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+            </div>
         </div>
 
     </main>
 
-    <footer class="fixed bottom-0 w-full z-40">
+    <div class="fixed bottom-0 w-full z-40">
         <div class="ground-tile"></div>
-    </footer>
+    </div>
 
 </body>
 </html>
