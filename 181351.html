@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veggie World - Mission Rubber Tire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Mitr:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            background-color: #5C94FC; /* สีฟ้าท้องฟ้า Mario */
+            color: white;
+            image-rendering: pixelated;
+        }
+        .pixel-font { font-family: 'Press Start 2P', cursive; }
+        
+        /* สไตล์บล็อกอิฐ */
+        .brick-border {
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #412100;
+            background-color: #E75926;
+        }
+
+        /* ตกแต่งปุ่มให้เหมือนบล็อก [?] */
+        .question-block {
+            background-color: #F8D870;
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.1s;
+        }
+        .question-block:active {
+            transform: translateY(4px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        /* ท่อเขียว Warp Pipe */
+        .warp-pipe {
+            background: linear-gradient(to right, #22B14C, #22B14C 20%, #B5E61D 20%, #B5E61D 40%, #22B14C 40%);
+            border: 4px solid #000;
+            height: 100px;
+            width: 80px;
+            position: relative;
+        }
+        .warp-pipe::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            width: 100px;
+            height: 30px;
+            background: inherit;
+            border: 4px solid #000;
+        }
+
+        .ground {
+            background-color: #704818;
+            background-image: linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028), 
+                              linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <header class="p-6 bg-black flex justify-between items-center pixel-font text-[10px] md:text-sm sticky top-0 z-50">
+        <div>
+            <p>MARIO-ED</p>
+            <p>02181351-64</p>
+        </div>
+        <div class="text-center">
+            <p>VEGGIES</p>
+            <p>x 64</p>
+        </div>
+        <div class="text-right">
+            <p>WORLD</p>
+            <p>1-1</p>
+        </div>
+    </header>
+
+    <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 pt-10">
+        <h1 class="pixel-font text-2xl md:text-4xl mb-6 leading-relaxed">
+            ผักสวนครัวในล้อยาง<br>
+            <span class="text-yellow-300">MISSION START!</span>
+        </h1>
+        <div class="flex items-end gap-4 mb-10">
+            <div class="text-6-xl mb-4">👨‍🌾</div> 
+            <div class="warp-pipe flex items-center justify-center">
+                <span class="text-3xl mt-[-40px]">🥬</span>
+            </div>
+        </div>
+        <a href="#mission" class="question-block px-8 py-4 text-black pixel-font text-sm hover:bg-yellow-400">
+            PRESS START
+        </a>
+    </section>
+
+    <main class="max-w-4xl mx-auto p-6 space-y-12 mb-20">
+        
+        <div id="mission" class="brick-border p-6 rounded-none">
+            <h2 class="pixel-font text-xl mb-4">WORLD 1: ที่มาโครงการ</h2>
+            <p class="text-lg">การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา ผ่านการนำล้อยางรถยนต์เก่ามาประยุกต์ใช้เป็นพื้นที่ปลูกผัก เพื่อการเรียนรู้ที่ยั่งยืน</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white/10 border-4 border-dashed border-white p-6">
+                <h3 class="pixel-font text-sm mb-4 text-yellow-300">STAGE 2-1: เตรียมดิน</h3>
+                <p>ผสมดินปลูกอินทรีย์ให้สารอาหารครบถ้วน เหมือนเก็บ Super Mushroom</p>
+            </div>
+            <div class="bg-white/10 border-4 border-dashed border-white p-6">
+                <h3 class="pixel-font text-sm mb-4 text-yellow-300">STAGE 2-2: การดูแล</h3>
+                <p>การให้น้ำและแสงแดดที่เหมาะสม เพื่อให้พืชผักเติบโตสู่ Level ถัดไป</p>
+            </div>
+        </div>
+
+        <div class="bg-green-800 border-4 border-white p-6">
+            <h2 class="pixel-font text-xl mb-6 text-center">EVALUATION SCORE</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b-4 border-white pixel-font text-[10px]">
+                            <th class="p-2">INDICATOR</th>
+                            <th class="p-2">RESULT</th>
+                            <th class="p-2">RANK</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr>
+                            <td class="p-2 border-b border-white/20">การเจริญเติบโต</td>
+                            <td class="p-2 border-b border-white/20">85%</td>
+                            <td class="p-2 border-b border-white/20">A</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 border-b border-white/20">การใช้ทรัพยากร</td>
+                            <td class="p-2 border-b border-white/20">90%</td>
+                            <td class="p-2 border-b border-white/20">S</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="fixed bottom-0 w-full">
+        <div class="ground"></div>
+    </footer>
+
+</body>
+</html>
