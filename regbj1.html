@@ -185,7 +185,7 @@
 
 <script>
     const departments = {
-        "0": "บริหาร",
+        "0": "ฝ่ายบริหาร",
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
         "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
         "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
@@ -328,7 +328,7 @@
             const hRow = document.createElement('tr');
             hRow.className = 'dept-header-row';
             hRow.id = `dept-${gid}`;
-            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้/ฝ่าย ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
+            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
             tableBody.appendChild(hRow);
 
             groups[gid].forEach(teacher => {
