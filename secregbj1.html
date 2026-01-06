@@ -13,8 +13,8 @@
             --secondary: #3b82f6;
             --success-bg: #d1fae5;
             --success-text: #065f46;
-            --pending-bg: #fff7ed;
-            --pending-text: #9a3412;
+            --pending-bg: #fee2e2;
+            --pending-text: #991b1b;
             --border-color: #e2e8f0;
         }
 
@@ -86,6 +86,8 @@
 
         .course-code { font-family: monospace; color: #64748b; font-weight: bold; }
         .course-name { color: #1e3a8a; font-weight: 600; }
+        .room-tag { color: #3b82f6; font-weight: 600; }
+        .step-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; }
 
         .status-pill {
             padding: 4px 10px;
@@ -107,7 +109,7 @@
 <div class="container">
     <div class="header">
         <h2><i class="fas fa-file-check"></i> แบบสรุปยืนยันการส่งผลการเรียนเข้าระบบ</h2>
-        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 (จำแนกตามกลุ่มสาระการเรียนรู้)</p>
+        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 (จำแนกรายห้อง)</p>
     </div>
 
     <div id="contentArea"></div>
@@ -120,18 +122,31 @@
         "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กิจกรรมพัฒนาผู้เรียน"
     };
 
-    const academicData = [
-        { id: "111", name: "นางสาววาสนา ด่วนดี", code: "ท21102", course: "ภาษาไทย 2", status: 1 },
-        { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", code: "ท32205", course: "การอ่านพิจารณาวรรณกรรม", status: 1 },
-        { id: "216", name: "นางสาวภัสรา เพ็งใย", code: "ค22102", course: "คณิตศาสตร์ 4", status: 0 },
-        { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", code: "ว30202", course: "ฟิสิกส์เพิ่มเติม", status: 1 },
-        { id: "314", name: "นางศิริพร เถาว์โท", code: "ว23102", course: "วิทยาศาสตร์ 6", status: 0 },
-        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", code: "อ31102", course: "ภาษาอังกฤษพื้นฐาน", status: 1 }
+    // จำลองข้อมูลครูและวิชา
+    const rawData = [
+        { id: "118", teacher: "นางวิไลพักตร์ กลิ่นกาหลง", code: "ท21102", course: "ภาษาไทย 2" },
+        // สามารถเพิ่มวิชาอื่นๆ ตรงนี้ได้
     ];
+
+    const academicData = [];
+
+    // วนลูปสร้างข้อมูลห้อง 1-11 สำหรับวิชาภาษาไทย
+    rawData.forEach(base => {
+        for (let i = 1; i <= 11; i++) {
+            academicData.push({
+                id: base.id,
+                name: base.teacher,
+                code: base.code,
+                course: base.course,
+                room: `ม.1/${i}`,
+                status: 0 // 0 = ยังไม่ดำเนินการ, 1 = ส่งแล้ว
+            });
+        }
+    });
 
     const contentArea = document.getElementById('contentArea');
 
-    // จัดกลุ่ม
+    // จัดกลุ่มตามกลุ่มสาระ (อิงจากเลขตัวแรกของ ID ครู)
     const groupedData = {};
     academicData.forEach(item => {
         const deptId = item.id.charAt(0);
@@ -139,7 +154,7 @@
         groupedData[deptId].push(item);
     });
 
-    // วนลูปสร้างตาราง
+    // วนลูปสร้างตารางตามกลุ่มสาระ
     Object.keys(groupedData).sort().forEach(deptId => {
         const deptName = departments[deptId] || "อื่นๆ";
         const items = groupedData[deptId];
@@ -154,20 +169,24 @@
                     <thead>
                         <tr>
                             <th style="width: 15%">รหัสวิชา</th>
-                            <th style="width: 40%">ชื่อรายวิชา</th>
-                            <th style="width: 30%">ครูผู้สอน</th>
-                            <th style="width: 15%">การส่งผล</th>
+                            <th style="width: 30%">ชื่อรายวิชา / ห้อง</th>
+                            <th style="width: 25%">ครูผู้สอน</th>
+                            <th style="width: 30%">สถานะการส่งผล</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${items.map(item => `
                             <tr>
                                 <td><span class="course-code">${item.code}</span></td>
-                                <td class="course-name">${item.course}</td>
+                                <td>
+                                    <div class="course-name">${item.course}</div>
+                                    <div class="room-tag">ห้อง ${item.room}</div>
+                                </td>
                                 <td>${item.name}</td>
                                 <td>
+                                    <span class="step-tag">[1/7]</span>
                                     <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
-                                        ${item.status === 1 ? 'ส่งแล้ว' : 'ยังไม่ส่ง'}
+                                        ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
                                     </span>
                                 </td>
                             </tr>
