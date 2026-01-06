@@ -41,7 +41,6 @@
         h2 { color: var(--primary); margin: 0; font-weight: 600; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* Announcement Card */
         .announcement-card {
             background: linear-gradient(to right, #fff7ed, #ffffff);
             border: 1px solid #fed7aa;
@@ -78,7 +77,6 @@
             margin-top: 5px;
         }
 
-        /* เมนูกลุ่มสาระ (Quick Navigation) */
         .dept-nav {
             display: flex;
             flex-wrap: wrap;
@@ -112,7 +110,6 @@
 
         .nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* ส่วนเจ้าหน้าที่ระบบ (คืนชีพกลับมาครบ 6 ท่าน) */
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
@@ -223,12 +220,18 @@
 
 <script>
     const departments = {
+        "0": "บริหาร",
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
         "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
         "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
     };
 
     const teacherData = [
+        // เพิ่มกลุ่มบริหาร
+        { id: "001", name: "ผู้อำนวยการโรงเรียน", status: 1 },
+        { id: "002", name: "รองผู้อำนวยการ ฝ่ายวิชาการ", status: 1 },
+        
+        // ข้อมูลเดิมทั้งหมด
         { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
         { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", status: 1 },
         { id: "114", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", status: 1 },
@@ -333,7 +336,7 @@
         { id: "821", name: "นางสาวชาริตา พลายระหาร", status: 1 },
         { id: "822", name: "นางสาวจุฑาวดี นามเมืองจันทร์", status: 0 },
         { id: "824", name: "นางสาวพชรมนต์ คงเกื้อ", status: 1 },
-        { id: "826", name: "นางสาวปัทมาพร เต่าให้", status: 1 },
+        { id: "826", name: "นางสาวปัทมปาพร เต่าให้", status: 1 },
         { id: "827", name: "นางสาวเบญจวรรณ วุฒิ", status: 1 },
         { id: "828", name: "นายนคร คำพล", status: 1 },
         { id: "829", name: "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์", status: 1 },
@@ -356,7 +359,8 @@
         });
 
         let masterIndex = 1;
-        Object.keys(groups).forEach(gid => {
+        // เรียงลำดับกลุ่มเพื่อให้ 0 (บริหาร) ขึ้นก่อน
+        Object.keys(groups).sort().forEach(gid => {
             if(groups[gid].length === 0) return;
 
             const btn = document.createElement('a');
@@ -368,7 +372,7 @@
             const hRow = document.createElement('tr');
             hRow.className = 'dept-header-row';
             hRow.id = `dept-${gid}`;
-            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
+            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้/ฝ่าย ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
             tableBody.appendChild(hRow);
 
             groups[gid].forEach(teacher => {
