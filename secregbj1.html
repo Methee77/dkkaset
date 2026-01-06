@@ -34,74 +34,49 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
+        .header { text-align: center; margin-bottom: 25px; }
         h2 { color: var(--primary); margin: 0; font-size: 1.6rem; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
         .dept-group-header {
-            background: #f8fafc;
+            background: #1e3a8a;
             padding: 12px 18px;
-            margin-top: 25px;
+            margin-top: 30px;
             border-radius: 8px 8px 0 0;
-            border-left: 6px solid var(--primary);
-            border-bottom: 1px solid var(--border-color);
+            color: white;
         }
 
-        .dept-title {
+        .level-sub-header {
+            background: #eff6ff;
+            padding: 8px 18px;
+            border-left: 6px solid var(--secondary);
             font-weight: 600;
-            color: var(--primary);
-            font-size: 1.1rem;
+            color: var(--secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 5px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background-color: #ffffff;
-            color: #64748b;
-            font-weight: 600;
-            text-align: left;
-            padding: 12px 15px;
-            font-size: 0.9rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f1f5f9;
-            color: #1e293b;
-            font-size: 0.95rem;
-        }
+        .table-wrapper { overflow-x: auto; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th { background-color: #f8fafc; color: #64748b; padding: 12px 15px; text-align: left; font-size: 0.9rem; border-bottom: 2px solid var(--border-color); }
+        td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; }
 
         .course-code { font-family: monospace; color: #64748b; font-weight: bold; }
         .course-name { color: #1e3a8a; font-weight: 600; }
-        .room-tag { color: #3b82f6; font-weight: 600; }
-        .step-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; }
+        .room-tag { color: #3b82f6; font-weight: 600; font-size: 0.9rem; }
+        .step-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; font-weight: 600; }
 
         .status-pill {
-            padding: 4px 10px;
-            border-radius: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             display: inline-block;
         }
         .complete { background: var(--success-bg); color: var(--success-text); }
         .pending { background: var(--pending-bg); color: var(--pending-text); }
-
-        @media (max-width: 768px) {
-            td, th { padding: 10px; font-size: 0.85rem; }
-        }
     </style>
 </head>
 <body>
@@ -109,7 +84,7 @@
 <div class="container">
     <div class="header">
         <h2><i class="fas fa-file-check"></i> แบบสรุปยืนยันการส่งผลการเรียนเข้าระบบ</h2>
-        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568 (จำแนกรายห้อง)</p>
+        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
     </div>
 
     <div id="contentArea"></div>
@@ -122,81 +97,87 @@
         "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กิจกรรมพัฒนาผู้เรียน"
     };
 
-    // จำลองข้อมูลครูและวิชา
+    // เพิ่มข้อมูลวิชาที่นี่
     const rawData = [
-        { id: "118", teacher: "นางวิไลพักตร์ กลิ่นกาหลง", code: "ท21102", course: "ภาษาไทย 2" },
-        // สามารถเพิ่มวิชาอื่นๆ ตรงนี้ได้
+        { id: "118", teacher: "นางวิไลพักตร์ กลิ่นกาหลง", code: "ท21102", course: "ภาษาไทย 2", level: "ม.1" },
+        { id: "113", teacher: "นางสาวจินตนา บำรุงเพ็ชร", code: "ท20202", course: "สารสนเทศห้องสมุด 2", level: "ม.1" }
     ];
 
-    const academicData = [];
+    function initDisplay() {
+        const academicData = [];
+        // สร้างข้อมูลห้อง 1-11 สำหรับทุกวิชาใน rawData
+        rawData.forEach(base => {
+            for (let i = 1; i <= 11; i++) {
+                academicData.push({
+                    ...base,
+                    room: `${base.level}/${i}`,
+                    status: 0 // 0=ยังไม่ส่ง, 1=ส่งแล้ว
+                });
+            }
+        });
 
-    // วนลูปสร้างข้อมูลห้อง 1-11 สำหรับวิชาภาษาไทย
-    rawData.forEach(base => {
-        for (let i = 1; i <= 11; i++) {
-            academicData.push({
-                id: base.id,
-                name: base.teacher,
-                code: base.code,
-                course: base.course,
-                room: `ม.1/${i}`,
-                status: 0 // 0 = ยังไม่ดำเนินการ, 1 = ส่งแล้ว
-            });
-        }
-    });
+        renderTable(academicData);
+    }
 
-    const contentArea = document.getElementById('contentArea');
+    function renderTable(data) {
+        const contentArea = document.getElementById('contentArea');
+        contentArea.innerHTML = "";
 
-    // จัดกลุ่มตามกลุ่มสาระ (อิงจากเลขตัวแรกของ ID ครู)
-    const groupedData = {};
-    academicData.forEach(item => {
-        const deptId = item.id.charAt(0);
-        if (!groupedData[deptId]) groupedData[deptId] = [];
-        groupedData[deptId].push(item);
-    });
+        const groupedData = {};
+        data.forEach(item => {
+            const deptId = item.id.charAt(0);
+            if (!groupedData[deptId]) groupedData[deptId] = [];
+            groupedData[deptId].push(item);
+        });
 
-    // วนลูปสร้างตารางตามกลุ่มสาระ
-    Object.keys(groupedData).sort().forEach(deptId => {
-        const deptName = departments[deptId] || "อื่นๆ";
-        const items = groupedData[deptId];
+        Object.keys(groupedData).sort().forEach(deptId => {
+            const deptName = departments[deptId] || "อื่นๆ";
+            const items = groupedData[deptId];
 
-        const section = document.createElement('div');
-        section.innerHTML = `
-            <div class="dept-group-header">
-                <span class="dept-title">กลุ่มสาระฯ ${deptName}</span>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 15%">รหัสวิชา</th>
-                            <th style="width: 30%">ชื่อรายวิชา / ห้อง</th>
-                            <th style="width: 25%">ครูผู้สอน</th>
-                            <th style="width: 30%">สถานะการส่งผล</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${items.map(item => `
+            const deptSection = document.createElement('div');
+            deptSection.innerHTML = `
+                <div class="dept-group-header">
+                    <i class="fas fa-bookmark"></i> กลุ่มสาระฯ ${deptName}
+                </div>
+                <div class="level-sub-header">
+                    <i class="fas fa-graduation-cap"></i> ระดับชั้น ม.1
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
                             <tr>
-                                <td><span class="course-code">${item.code}</span></td>
-                                <td>
-                                    <div class="course-name">${item.course}</div>
-                                    <div class="room-tag">ห้อง ${item.room}</div>
-                                </td>
-                                <td>${item.name}</td>
-                                <td>
-                                    <span class="step-tag">[1/7]</span>
-                                    <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
-                                        ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
-                                    </span>
-                                </td>
+                                <th style="width: 15%">รหัสวิชา</th>
+                                <th style="width: 35%">รายวิชา / ห้อง</th>
+                                <th style="width: 25%">ครูผู้สอน</th>
+                                <th style="width: 25%">สถานะ</th>
                             </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
-        contentArea.appendChild(section);
-    });
+                        </thead>
+                        <tbody>
+                            ${items.map(item => `
+                                <tr>
+                                    <td><span class="course-code">${item.code}</span></td>
+                                    <td>
+                                        <div class="course-name">${item.course}</div>
+                                        <div class="room-tag">ห้อง ${item.room}</div>
+                                    </td>
+                                    <td>${item.teacher}</td>
+                                    <td>
+                                        <span class="step-tag">${item.status === 1 ? '[7/7]' : '[1/7]'}</span>
+                                        <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
+                                            ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            contentArea.appendChild(deptSection);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initDisplay);
 </script>
 
 </body>
