@@ -26,7 +26,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -58,13 +58,14 @@
         }
 
         .table-wrapper { overflow-x: auto; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; background: white; }
+        table { width: 100%; border-collapse: collapse; background: white; min-width: 800px; }
         th { background-color: #f8fafc; color: #64748b; padding: 12px 15px; text-align: left; font-size: 0.9rem; border-bottom: 2px solid var(--border-color); }
         td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; }
 
         .course-code { font-family: monospace; color: #64748b; font-weight: bold; }
         .course-name { color: #1e3a8a; font-weight: 600; }
-        .room-tag { color: #3b82f6; font-weight: 600; font-size: 0.9rem; }
+        .room-text { color: #3b82f6; font-weight: 600; }
+        .confirm-date { font-size: 0.85rem; color: #64748b; }
         .step-tag { color: #94a3b8; font-size: 0.8rem; margin-right: 5px; font-weight: 600; }
 
         .status-pill {
@@ -73,6 +74,7 @@
             font-size: 0.8rem;
             font-weight: 600;
             display: inline-block;
+            white-space: nowrap;
         }
         .complete { background: var(--success-bg); color: var(--success-text); }
         .pending { background: var(--pending-bg); color: var(--pending-text); }
@@ -90,39 +92,36 @@
 </div>
 
 <script>
-    const departments = {
-        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี"
-        // ... เพิ่มกลุ่มสาระอื่นๆ ได้ที่นี่
-    };
+    const departments = { "1": "ภาษาไทย" };
 
-    // จำลองข้อมูลครู (สำหรับดึงชื่อจากรหัส)
     const teachers = {
         "118": "นางวิไลพักตร์ กลิ่นกาหลง",
+        "125": "นายธีรภัทร แก้วสมนึก",
         "113": "นางสาวจินตนา บำรุงเพ็ชร",
-        "123": "ครูรหัส 123 (ชื่อครู)",
-        "124": "ครูรหัส 124 (ชื่อครู)"
+        "123": "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์",
+        "124": "นางสาวอุษา สายทอง"
     };
 
     function initDisplay() {
         let academicData = [];
 
-        // --- ม.1 ---
-        // ภาษาไทย 2 (ม.1/1 - ม.1/11)
+        // --- ข้อมูล ม.1 ---
         for (let i = 1; i <= 11; i++) {
-            academicData.push({ id: "118", teacher: teachers["118"], code: "ท21102", course: "ภาษาไทย 2", level: "ม.1", room: `ม.1/${i}`, status: 0 });
+            let tId = [1, 2, 5, 7, 9, 10].includes(i) ? "118" : "125";
+            academicData.push({ id: tId, teacher: teachers[tId], code: "ท21102", course: "ภาษาไทย 2", level: "ม.1", room: i, status: 0, date: null });
         }
-        // สารสนเทศห้องสมุด 2 (เอา ม.1/1 ออก เริ่มที่ 1/2 - 1/11)
         for (let i = 2; i <= 11; i++) {
-            academicData.push({ id: "113", teacher: teachers["113"], code: "ท20202", course: "สารสนเทศห้องสมุด 2", level: "ม.1", room: `ม.1/${i}`, status: 0 });
+            academicData.push({ id: "113", teacher: teachers["113"], code: "ท20202", course: "สารสนเทศห้องสมุด 2", level: "ม.1", room: i, status: 0, date: null });
         }
 
-        // --- ม.2 ---
-        // ภาษาไทย 4 (ท22102)
-        const m2Rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        m2Rooms.forEach(r => {
-            let tId = [1, 2, 4, 6, 8, 10].includes(r) ? "123" : "124";
-            academicData.push({ id: tId, teacher: teachers[tId], code: "ท22102", course: "ภาษาไทย 4", level: "ม.2", room: `ม.2/${r}`, status: 0 });
-        });
+        // --- ข้อมูล ม.2 ---
+        for (let i = 1; i <= 10; i++) {
+            let tId = [1, 2, 4, 6, 8, 10].includes(i) ? "123" : "124";
+            academicData.push({ id: tId, teacher: teachers[tId], code: "ท22102", course: "ภาษาไทย 4", level: "ม.2", room: i, status: 0, date: null });
+        }
+
+        // ตัวอย่างข้อมูลที่ยืนยันแล้วเพื่อทดสอบการแสดงผลวันที่
+        academicData[0].status = 1; academicData[0].date = "14 ก.พ. 69 (10:30)";
 
         renderTable(academicData);
     }
@@ -131,7 +130,6 @@
         const contentArea = document.getElementById('contentArea');
         contentArea.innerHTML = "";
 
-        // จัดกลุ่มตามกลุ่มสาระ
         const groupedDept = {};
         data.forEach(item => {
             const deptId = item.id.charAt(0);
@@ -142,10 +140,8 @@
         Object.keys(groupedDept).sort().forEach(deptId => {
             const deptName = departments[deptId] || "อื่นๆ";
             const deptItems = groupedDept[deptId];
-
             let sectionHTML = `<div class="dept-group-header"><i class="fas fa-bookmark"></i> กลุ่มสาระฯ ${deptName}</div>`;
 
-            // จัดกลุ่มย่อยตามระดับชั้นภายในกลุ่มสาระ
             const groupedLevel = {};
             deptItems.forEach(item => {
                 if (!groupedLevel[item.level]) groupedLevel[item.level] = [];
@@ -153,34 +149,34 @@
             });
 
             Object.keys(groupedLevel).sort().forEach(level => {
-                const items = groupedLevel[level];
                 sectionHTML += `
                     <div class="level-sub-header"><i class="fas fa-graduation-cap"></i> ระดับชั้น ${level}</div>
                     <div class="table-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="width: 15%">รหัสวิชา</th>
-                                    <th style="width: 35%">รายวิชา / ห้อง</th>
-                                    <th style="width: 25%">ครูผู้สอน</th>
-                                    <th style="width: 25%">สถานะ</th>
+                                    <th width="10%">รหัสวิชา</th>
+                                    <th width="25%">รายวิชา</th>
+                                    <th width="10%" style="text-align:center;">ห้อง</th>
+                                    <th width="20%">ครูผู้สอน</th>
+                                    <th width="15%">สถานะ</th>
+                                    <th width="20%">วันที่ยืนยันข้อมูล</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                ${items.map(item => `
+                                ${groupedLevel[level].map(item => `
                                     <tr>
                                         <td><span class="course-code">${item.code}</span></td>
-                                        <td>
-                                            <div class="course-name">${item.course}</div>
-                                            <div class="room-tag">ห้อง ${item.room}</div>
-                                        </td>
+                                        <td class="course-name">${item.course}</td>
+                                        <td style="text-align:center;"><span class="room-text">${level}/${item.room}</span></td>
                                         <td>${item.teacher}</td>
                                         <td>
                                             <span class="step-tag">${item.status === 1 ? '[7/7]' : '[1/7]'}</span>
                                             <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
-                                                ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
+                                                ${item.status === 1 ? 'ยืนยันแล้ว' : 'ยังไม่ดำเนินการ'}
                                             </span>
                                         </td>
+                                        <td class="confirm-date">${item.date ? '<i class="far fa-clock"></i> ' + item.date : '-'}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>
