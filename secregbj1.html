@@ -44,6 +44,7 @@
             margin-top: 30px;
             border-radius: 8px 8px 0 0;
             color: white;
+            font-weight: 600;
         }
 
         .level-sub-header {
@@ -52,10 +53,8 @@
             border-left: 6px solid var(--secondary);
             font-weight: 600;
             color: var(--secondary);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.1rem;
+            margin-top: 10px;
         }
 
         .table-wrapper { overflow-x: auto; margin-bottom: 20px; }
@@ -92,28 +91,37 @@
 
 <script>
     const departments = {
-        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
-        "4": "สังคมศึกษาฯ", "5": "สุขศึกษาและพลศึกษา", "6": "ศิลปะ",
-        "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กิจกรรมพัฒนาผู้เรียน"
+        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี"
+        // ... เพิ่มกลุ่มสาระอื่นๆ ได้ที่นี่
     };
 
-    // เพิ่มข้อมูลวิชาที่นี่
-    const rawData = [
-        { id: "118", teacher: "นางวิไลพักตร์ กลิ่นกาหลง", code: "ท21102", course: "ภาษาไทย 2", level: "ม.1" },
-        { id: "113", teacher: "นางสาวจินตนา บำรุงเพ็ชร", code: "ท20202", course: "สารสนเทศห้องสมุด 2", level: "ม.1" }
-    ];
+    // จำลองข้อมูลครู (สำหรับดึงชื่อจากรหัส)
+    const teachers = {
+        "118": "นางวิไลพักตร์ กลิ่นกาหลง",
+        "113": "นางสาวจินตนา บำรุงเพ็ชร",
+        "123": "ครูรหัส 123 (ชื่อครู)",
+        "124": "ครูรหัส 124 (ชื่อครู)"
+    };
 
     function initDisplay() {
-        const academicData = [];
-        // สร้างข้อมูลห้อง 1-11 สำหรับทุกวิชาใน rawData
-        rawData.forEach(base => {
-            for (let i = 1; i <= 11; i++) {
-                academicData.push({
-                    ...base,
-                    room: `${base.level}/${i}`,
-                    status: 0 // 0=ยังไม่ส่ง, 1=ส่งแล้ว
-                });
-            }
+        let academicData = [];
+
+        // --- ม.1 ---
+        // ภาษาไทย 2 (ม.1/1 - ม.1/11)
+        for (let i = 1; i <= 11; i++) {
+            academicData.push({ id: "118", teacher: teachers["118"], code: "ท21102", course: "ภาษาไทย 2", level: "ม.1", room: `ม.1/${i}`, status: 0 });
+        }
+        // สารสนเทศห้องสมุด 2 (เอา ม.1/1 ออก เริ่มที่ 1/2 - 1/11)
+        for (let i = 2; i <= 11; i++) {
+            academicData.push({ id: "113", teacher: teachers["113"], code: "ท20202", course: "สารสนเทศห้องสมุด 2", level: "ม.1", room: `ม.1/${i}`, status: 0 });
+        }
+
+        // --- ม.2 ---
+        // ภาษาไทย 4 (ท22102)
+        const m2Rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        m2Rooms.forEach(r => {
+            let tId = [1, 2, 4, 6, 8, 10].includes(r) ? "123" : "124";
+            academicData.push({ id: tId, teacher: teachers[tId], code: "ท22102", course: "ภาษาไทย 4", level: "ม.2", room: `ม.2/${r}`, status: 0 });
         });
 
         renderTable(academicData);
@@ -123,57 +131,67 @@
         const contentArea = document.getElementById('contentArea');
         contentArea.innerHTML = "";
 
-        const groupedData = {};
+        // จัดกลุ่มตามกลุ่มสาระ
+        const groupedDept = {};
         data.forEach(item => {
             const deptId = item.id.charAt(0);
-            if (!groupedData[deptId]) groupedData[deptId] = [];
-            groupedData[deptId].push(item);
+            if (!groupedDept[deptId]) groupedDept[deptId] = [];
+            groupedDept[deptId].push(item);
         });
 
-        Object.keys(groupedData).sort().forEach(deptId => {
+        Object.keys(groupedDept).sort().forEach(deptId => {
             const deptName = departments[deptId] || "อื่นๆ";
-            const items = groupedData[deptId];
+            const deptItems = groupedDept[deptId];
 
-            const deptSection = document.createElement('div');
-            deptSection.innerHTML = `
-                <div class="dept-group-header">
-                    <i class="fas fa-bookmark"></i> กลุ่มสาระฯ ${deptName}
-                </div>
-                <div class="level-sub-header">
-                    <i class="fas fa-graduation-cap"></i> ระดับชั้น ม.1
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 15%">รหัสวิชา</th>
-                                <th style="width: 35%">รายวิชา / ห้อง</th>
-                                <th style="width: 25%">ครูผู้สอน</th>
-                                <th style="width: 25%">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${items.map(item => `
+            let sectionHTML = `<div class="dept-group-header"><i class="fas fa-bookmark"></i> กลุ่มสาระฯ ${deptName}</div>`;
+
+            // จัดกลุ่มย่อยตามระดับชั้นภายในกลุ่มสาระ
+            const groupedLevel = {};
+            deptItems.forEach(item => {
+                if (!groupedLevel[item.level]) groupedLevel[item.level] = [];
+                groupedLevel[item.level].push(item);
+            });
+
+            Object.keys(groupedLevel).sort().forEach(level => {
+                const items = groupedLevel[level];
+                sectionHTML += `
+                    <div class="level-sub-header"><i class="fas fa-graduation-cap"></i> ระดับชั้น ${level}</div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td><span class="course-code">${item.code}</span></td>
-                                    <td>
-                                        <div class="course-name">${item.course}</div>
-                                        <div class="room-tag">ห้อง ${item.room}</div>
-                                    </td>
-                                    <td>${item.teacher}</td>
-                                    <td>
-                                        <span class="step-tag">${item.status === 1 ? '[7/7]' : '[1/7]'}</span>
-                                        <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
-                                            ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
-                                        </span>
-                                    </td>
+                                    <th style="width: 15%">รหัสวิชา</th>
+                                    <th style="width: 35%">รายวิชา / ห้อง</th>
+                                    <th style="width: 25%">ครูผู้สอน</th>
+                                    <th style="width: 25%">สถานะ</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
-            contentArea.appendChild(deptSection);
+                            </thead>
+                            <tbody>
+                                ${items.map(item => `
+                                    <tr>
+                                        <td><span class="course-code">${item.code}</span></td>
+                                        <td>
+                                            <div class="course-name">${item.course}</div>
+                                            <div class="room-tag">ห้อง ${item.room}</div>
+                                        </td>
+                                        <td>${item.teacher}</td>
+                                        <td>
+                                            <span class="step-tag">${item.status === 1 ? '[7/7]' : '[1/7]'}</span>
+                                            <span class="status-pill ${item.status === 1 ? 'complete' : 'pending'}">
+                                                ${item.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+
+            const div = document.createElement('div');
+            div.innerHTML = sectionHTML;
+            contentArea.appendChild(div);
         });
     }
 
