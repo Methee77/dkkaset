@@ -3,149 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โครงการผักสวนครัวในล้อยาง | 02181351-64</title>
+    <title>KU Veggie Mission: The Game!</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         :root {
-            --mario-blue: #5C94FC;
+            --sky-blue: #64B0F7;
             --mario-red: #E4000F;
-            --mario-green: #22c55e;
-            --mario-yellow: #facc15;
+            --mario-green: #22B14C;
+            --coin-yellow: #FACC15;
+            --ground-brown: #704818;
+            --brick-orange: #E75926;
         }
-        body { font-family: 'Kanit', sans-serif; background-color: #f0f3f5; color: #1a202c; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DotGothic16', sans-serif; /* ฟอนต์ที่อ่านง่ายแต่ยังเป็น Pixel */
+            background-color: var(--sky-blue);
+            color: white;
+            image-rendering: pixelated; /* ทำให้ภาพ/เงาดูเป็นพิกเซล */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
         .pixel-font { font-family: 'Press Start 2P', cursive; }
         
-        .header-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .mario-border { border: 4px solid #000; box-shadow: 6px 6px 0px #000; }
-        
-        /* สไตล์ปุ่มในเมนู */
-        .nav-link { transition: all 0.3s; position: relative; }
-        .nav-link:hover { color: var(--mario-yellow); }
+        /* Game Overlays & Scenery */
+        .sky-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, var(--sky-blue) 60%, #a4e4fc 100%);
+            z-index: -2;
+        }
+        .cloud-small { width: 60px; height: 20px; background-color: white; border-radius: 50%; position: absolute; }
+        .cloud-large { width: 90px; height: 30px; background-color: white; border-radius: 50%; position: absolute; }
 
-        /* การ์ดเนื้อหา */
-        .content-card { background: white; border-radius: 8px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
-        .content-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        /* Game UI Elements */
+        .game-panel {
+            background-color: #000;
+            border: 4px solid white;
+            padding: 8px 16px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            image-rendering: pixelated;
+        }
+        .block-item {
+            background-color: var(--coin-yellow);
+            border: 4px solid #000;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+            box-shadow: 4px 4px 0px #000;
+            position: relative;
+        }
+        .block-item:active { transform: translateY(4px); box-shadow: 0px 0px 0px #000; }
+        .block-item::before {
+            content: '?';
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            color: black;
+            opacity: 0.3;
+        }
 
-        /* ตัวแสดงสถานะ Mario */
-        .status-dot { width: 12px; height: 12px; border-radius: 2px; border: 2px solid #000; }
-    </style>
-</head>
-<body>
+        /* Pipe */
+        .pipe-base {
+            width: 120px; height: 100px;
+            background: linear-gradient(to right, var(--mario-green) 0%, var(--mario-green) 20%, #B5E61D 20%, #B5E61D 40%, var(--mario-green) 40%);
+            border: 4px solid #000;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            z-index: 10;
+        }
+        .pipe-mouth {
+            width: 140px; height: 30px;
+            background: inherit;
+            border: 4px solid #000;
+            position: absolute; top: -30px; left: -10px;
+            border-radius: 5px;
+        }
 
-    <nav class="sticky top-0 z-50 bg-white border-b-4 border-black px-4 py-3">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-red-600 p-2 mario-border text-white pixel-font text-[10px]">M</div>
-                <span class="font-bold text-lg hidden md:inline">VEGGIE MISSION</span>
-            </div>
-            <div class="flex gap-6 text-sm font-semibold uppercase tracking-tighter">
-                <a href="#home" class="nav-link">หน้าแรก</a>
-                <a href="#about" class="nav-link">บทนำ</a>
-                <a href="#evaluation" class="nav-link">การประเมิน</a>
-                <a href="#team" class="nav-link text-blue-600 underline underline-offset-4">ผู้จัดทำ</a>
-            </div>
-        </div>
-    </nav>
+        /* Ground */
+        .ground-base {
+            height: 60px;
+            background-color: var(--ground-brown);
+            border-top: 4px solid #000;
+            background-image: linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028), 
+                              linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            position: relative; z-index: 50;
+        }
 
-    <header id="home" class="header-gradient text-white py-20 px-6 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h1 class="pixel-font text-2xl md:text-4xl mb-6 leading-relaxed drop-shadow-lg">
-                โครงการผักสวนครัวในล้อยาง
-            </h1>
-            <p class="text-xl md:text-2xl font-light opacity-90 mb-10">
-                รายวิชา 02181351-64 การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <span class="bg-black/30 backdrop-blur px-4 py-2 rounded border border-white/20">หมู่เรียนบรรยาย: 700</span>
-                <span class="bg-black/30 backdrop-blur px-4 py-2 rounded border border-white/20">หมู่เรียนปฏิบัติ: 711</span>
-            </div>
-        </div>
-        <div class="absolute bottom-0 right-0 p-10 opacity-20 text-9xl">🌿</div>
-        <div class="absolute top-0 left-0 p-10 opacity-20 text-9xl">🚜</div>
-    </header>
+        /* Brick Wall */
+        .brick-wall {
+            background-color: var(--brick-orange);
+            border: 4px solid #000;
+            background-image: linear-gradient(45deg, #A83A00 25%, transparent 25%, transparent 75%, #A83A00 75%, #A83A00), 
+                              linear-gradient(45deg, #A83A00 25%, transparent 25%, transparent 75%, #A83A00 75%, #A83A00);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            color: #fff;
+            padding: 20px;
+        }
 
-    <main class="max-w-6xl mx-auto py-16 px-6 space-y-24">
-
-        <section id="about" class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-3xl font-bold mb-6 flex items-center gap-4">
-                    <span class="status-dot bg-green-500"></span> หลักการและเหตุผล
-                </h2>
-                <div class="space-y-4 text-gray-600 text-lg">
-                    <p>การจัดการศึกษาทางเกษตรในปัจจุบันต้องมุ่งเน้นการใช้ทรัพยากรให้เกิดประโยชน์สูงสุด โครงการนี้จึงเลือกใช้ <strong>"ล้อยางรถยนต์"</strong> ซึ่งเป็นวัสดุเหลือใช้มาเป็นภาชนะในการปลูกพืช</p>
-                    <p>เพื่อให้นิสิตได้เรียนรู้กระบวนการประเมินการจัดการศึกษา ตั้งแต่การวางแผน การลงมือปฏิบัติ และการวัดผลสัมฤทธิ์ทางการเกษตรและสิ่งแวดล้อมอย่างเป็นรูปธรรม</p>
-                </div>
-            </div>
-            <div class="mario-border bg-white p-4">
-                <div class="bg-gray-100 h-64 flex items-center justify-center border-2 border-dashed border-gray-300">
-                    <span class="text-gray-400">[ ใส่รูปภาพโครงการจริงที่นี่ ]</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="evaluation" class="space-y-10">
-            <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-tight">เกณฑ์การประเมินการจัดการศึกษา</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="content-card p-8 border-t-4 border-t-red-500">
-                    <div class="text-red-500 text-4xl mb-4">📍</div>
-                    <h3 class="font-bold text-xl mb-3">ด้านการจัดการ</h3>
-                    <p class="text-gray-500 text-sm">ประเมินความเหมาะสมของการเตรียมวัสดุอุปกรณ์ และการบริหารจัดการพื้นที่ล้อยาง</p>
-                </div>
-                <div class="content-card p-8 border-t-4 border-t-yellow-500">
-                    <div class="text-yellow-500 text-4xl mb-4">📍</div>
-                    <h3 class="font-bold text-xl mb-3">ด้านวิชาการ</h3>
-                    <p class="text-gray-500 text-sm">การถ่ายทอดองค์ความรู้เรื่องชนิดของผัก การปรุงดิน และการดูแลรักษาสิ่งแวดล้อม</p>
-                </div>
-                <div class="content-card p-8 border-t-4 border-t-green-500">
-                    <div class="text-green-500 text-4xl mb-4">📍</div>
-                    <h3 class="font-bold text-xl mb-3">ด้านผลสัมฤทธิ์</h3>
-                    <p class="text-gray-500 text-sm">ประเมินคุณภาพของผลผลิตที่ได้ และทัศนคติของผู้ร่วมโครงการต่อสิ่งแวดล้อม</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="team" class="bg-white mario-border p-8 md:p-12">
-            <div class="text-center mb-16">
-                <h2 class="pixel-font text-xl text-blue-700 mb-4">CHARACTER SELECT</h2>
-                <p class="text-gray-500 font-bold uppercase tracking-widest text-sm">นิสิตคณะศึกษาศาสตร์และพัฒนศาสตร์</p>
-                <p class="text-gray-500 text-sm uppercase">สาขาเกษตรและสิ่งแวดล้อมศึกษา</p>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-8">
-                <script>
-                    const names = ["ชื่อ-นามสกุล 1", "ชื่อ-นามสกุล 2", "ชื่อ-นามสกุล 3", "ชื่อ-นามสกุล 4", "ชื่อ-นามสกุล 5", "ชื่อ-นามสกุล 6", "ชื่อ-นามสกุล 7", "ชื่อ-นามสกุล 8", "ชื่อ-นามสกุล 9", "ชื่อ-นามสกุล 10", "ชื่อ-นามสกุล 11"];
-                    names.forEach((name, index) => {
-                        document.write(`
-                        <div class="text-center group">
-                            <div class="w-24 h-24 mx-auto mb-4 bg-gray-50 border-4 border-black rounded shadow-[4px_4px_0px_#ccc] group-hover:bg-yellow-100 flex items-center justify-center transition-all">
-                                <span class="text-4xl group-hover:scale-110 transition-transform">👤</span>
-                            </div>
-                            <p class="font-bold text-gray-800 text-sm mb-1">${name}</p>
-                            <p class="text-[10px] pixel-font text-blue-500">ID: 64xxxxxx</p>
-                        </div>
-                        `);
-                    });
-                </script>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-black text-white py-12 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-center md:text-left">
-                <p class="pixel-font text-[10px] mb-4 text-yellow-400">MISSION COMPLETED!</p>
-                <p class="opacity-60 text-sm">© 2024 Agricultural & Environmental Education</p>
-            </div>
-            <div class="flex gap-4">
-                <div class="bg-green-600 px-4 py-2 mario-border text-[10px] pixel-font">KU</div>
-                <div class="bg-white text-black px-4 py-2 mario-border text-[10px] pixel-font">PS</div>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+        /* Character Select Card */
+        .char-card {
+            background: #fff;
+            color: #000;
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            transition: transform 0.1s;
+        }
+        .char-card:hover { transform: translateY(-4px); box-shadow: 8px 8px 0px rgba(0,0,0,0.5); }
+        .char-avatar {
+            width: 80px; height: 80px;
+            background: #e0e0e0; border: 3
