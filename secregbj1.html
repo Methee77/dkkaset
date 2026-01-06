@@ -24,7 +24,6 @@
             margin: 0;
             padding: 20px;
             font-size: 16px;
-            line-height: 1.6;
         }
 
         .countdown-container {
@@ -36,7 +35,7 @@
             margin-bottom: 25px;
             box-shadow: 0 10px 15px -3px rgba(190, 18, 60, 0.3);
         }
-        .countdown-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; }
+        .countdown-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
         .countdown-timer { font-size: 2rem; font-weight: 600; letter-spacing: 1px; }
 
         .container {
@@ -80,6 +79,7 @@
         th { background-color: #f8fafc; color: #475569; padding: 15px; text-align: left; font-size: 1rem; border-bottom: 2px solid var(--border-color); }
         td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; font-size: 1rem; }
 
+        /* เส้นแบ่งรายวิชา */
         .course-divider { border-top: 3px double #cbd5e1 !important; }
 
         .course-code { font-family: monospace; font-weight: 600; color: #475569; }
@@ -93,9 +93,11 @@
             font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
+            white-space: nowrap;
         }
         .complete { background: var(--success-bg); color: var(--success-text); }
         .pending { background: var(--pending-bg); color: var(--pending-text); }
+        .step-count { font-weight: bold; margin-right: 5px; }
     </style>
 </head>
 <body>
@@ -118,57 +120,55 @@
 </div>
 
 <script>
-    const departments = { "1": "ภาษาไทย" };
-
     function initDisplay() {
         let data = [];
 
         // ม.1
         for(let i=1; i<=11; i++) {
             let t = [1,2,5,7,9,10].includes(i) ? "นางวิไลพักตร์ กลิ่นกาหลง" : "นายธีรภัทร แก้วสมนึก";
-            data.push({ id:"1", code:"ท21102", course:"ภาษาไทย 2", level:"ม.1", room:i, teacher:t });
+            data.push({ code:"ท21102", course:"ภาษาไทย 2", level:"ม.1", room:i, teacher:t, status:0, date:"-" });
         }
         for(let i=2; i<=11; i++) {
-            data.push({ id:"1", code:"ท20202", course:"สารสนเทศห้องสมุด 2", level:"ม.1", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร" });
+            data.push({ code:"ท20202", course:"สารสนเทศห้องสมุด 2", level:"ม.1", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร", status:0, date:"-" });
         }
 
         // ม.2
         for(let i=1; i<=10; i++) {
             let t = [1,2,4,6,8,10].includes(i) ? "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์" : "นางสาวอุษา สายทอง";
-            data.push({ id:"1", code:"ท22102", course:"ภาษาไทย 4", level:"ม.2", room:i, teacher:t });
+            data.push({ code:"ท22102", course:"ภาษาไทย 4", level:"ม.2", room:i, teacher:t, status:0, date:"-" });
         }
 
         // ม.3
         for(let i=1; i<=4; i++) {
-            data.push({ id:"1", code:"ท23102", course:"ภาษาไทย 6", level:"ม.3", room:i, teacher:"นางนาตยา พิทักษ์วงศ์" });
+            data.push({ code:"ท23102", course:"ภาษาไทย 6", level:"ม.3", room:i, teacher:"นางนาตยา พิทักษ์วงศ์", status:0, date:"-" });
         }
 
         // ม.4
         for(let i=1; i<=9; i++) {
-            data.push({ id:"1", code:"ท31102", course:"ภาษาไทย 2", level:"ม.4", room:i, teacher:"นายวีระยุทธ โพธิ์สุวรรณ" });
+            data.push({ code:"ท31102", course:"ภาษาไทย 2", level:"ม.4", room:i, teacher:"นายวีระยุทธ โพธิ์สุวรรณ", status:0, date:"-" });
         }
-        [6,7,9].forEach(i => data.push({ id:"1", code:"ท30202", course:"การจัดการห้องสมุดฯ", level:"ม.4", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร" }));
+        [6,7,9].forEach(i => data.push({ code:"ท30202", course:"การจัดการห้องสมุดฯ", level:"ม.4", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร", status:0, date:"-" }));
         for(let i=5; i<=9; i++) {
-            data.push({ id:"1", code:"ท31202", course:"การเขียนเพื่ออาชีพ", level:"ม.4", room:i, teacher:"นางสาววาสนา ด่วนดี" });
+            data.push({ code:"ท31202", course:"การเขียนเพื่ออาชีพ", level:"ม.4", room:i, teacher:"นางสาววาสนา ด่วนดี", status:0, date:"-" });
         }
 
         // ม.5
         for(let i=1; i<=9; i++) {
-            data.push({ id:"1", code:"ท32102", course:"ภาษาไทย 4", level:"ม.5", room:i, teacher:"นายจิรวัฒน์ โสภาพันธุ์" });
+            data.push({ code:"ท32102", course:"ภาษาไทย 4", level:"ม.5", room:i, teacher:"นายจิรวัฒน์ โสภาพันธุ์", status:0, date:"-" });
         }
-        [6,7,9].forEach(i => data.push({ id:"1", code:"ท30208", course:"การเขียนบันทึกฯ", level:"ม.5", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร" }));
+        [6,7,9].forEach(i => data.push({ code:"ท30208", course:"การเขียนบันทึกฯ", level:"ม.5", room:i, teacher:"นางสาวจินตนา บำรุงเพ็ชร", status:0, date:"-" }));
         for(let i=5; i<=8; i++) {
-            data.push({ id:"1", code:"ท32202", course:"การอ่านและพิจารณาวรรณกรรม", level:"ม.5", room:i, teacher:"นางสาววาสนา ด่วนดี" });
+            data.push({ code:"ท32202", course:"การอ่านและพิจารณาวรรณกรรม", level:"ม.5", room:i, teacher:"นางสาววาสนา ด่วนดี", status:0, date:"-" });
         }
 
         // ม.6
         for(let i=1; i<=9; i++) {
-            data.push({ id:"1", code:"ท33102", course:"ภาษาไทย 6", level:"ม.6", room:i, teacher:"นายกรณ์พงศ์ พัฒนปกรณ์พงษ์" });
+            data.push({ code:"ท33102", course:"ภาษาไทย 6", level:"ม.6", room:i, teacher:"นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", status:0, date:"-" });
         }
-        [6,7,9].forEach(i => data.push({ id:"1", code:"ท30224", course:"การพัฒนาทักษะภาษาไทย 2", level:"ม.6", room:i, teacher:"นายธีรภัทร แก้วสมนึก" }));
+        [6,7,9].forEach(i => data.push({ code:"ท30224", course:"การพัฒนาทักษะภาษาไทย 2", level:"ม.6", room:i, teacher:"นายธีรภัทร แก้วสมนึก", status:0, date:"-" }));
         for(let i=5; i<=9; i++) {
             let t = [5,6].includes(i) ? "นางสาวอุษา สายทอง" : "นางสาววชิราภรณ์ ศรป้อม";
-            data.push({ id:"1", code:"ท33202", course:"หลักภาษาไทย", level:"ม.6", room:i, teacher:t });
+            data.push({ code:"ท33202", course:"หลักภาษาไทย", level:"ม.6", room:i, teacher:t, status:0, date:"-" });
         }
 
         renderTable(data);
@@ -189,19 +189,23 @@
                      <div class="table-wrapper"><table>
                         <thead><tr>
                             <th width="12%">รหัสวิชา</th><th width="28%">รายวิชา</th><th width="10%">ห้อง</th>
-                            <th width="25%">ครูผู้สอน</th><th width="10%">สถานะ</th><th width="15%">วันที่ยืนยัน</th>
+                            <th width="25%">ครูผู้สอน</th><th width="20%">สถานะ</th><th width="15%">วันที่ยืนยัน</th>
                         </tr></thead><tbody>`;
             
             let lastCode = "";
             groupedLevel[level].forEach(item => {
                 const isNew = lastCode !== "" && lastCode !== item.code;
+                const statusHTML = item.status === 1 
+                    ? `<span class="status-pill complete"><span class="step-count">[7/7]</span> ยืนยันข้อมูลแล้ว</span>` 
+                    : `<span class="status-pill pending"><span class="step-count">[1/7]</span> ยังไม่ดำเนินการ</span>`;
+
                 html += `<tr class="${isNew ? 'course-divider' : ''}">
                     <td><span class="course-code">${item.code}</span></td>
                     <td class="course-name">${item.course}</td>
                     <td class="room-text">${level}/${item.room}</td>
                     <td>${item.teacher}</td>
-                    <td><span class="status-pill pending">ยังไม่ดำเนินการ</span></td>
-                    <td class="confirm-date">-</td>
+                    <td>${statusHTML}</td>
+                    <td class="confirm-date">${item.date}</td>
                 </tr>`;
                 lastCode = item.code;
             });
@@ -218,6 +222,7 @@
               m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
         document.getElementById("timer").innerText = `${d} วัน ${h} ชม. ${m} น. ${s} ว.`;
     }
+    
     setInterval(updateTimer, 1000);
     window.onload = initDisplay;
 </script>
