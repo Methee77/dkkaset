@@ -3,120 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Veggie Mission: The Game!</title>
+    <title>โครงการผักสวนครัวในล้อยาง | Agriculture KU-PS</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         :root {
-            --sky-blue: #64B0F7;
+            --mario-blue: #5C94FC;
             --mario-red: #E4000F;
-            --mario-green: #22B14C;
-            --coin-yellow: #FACC15;
-            --ground-brown: #704818;
-            --brick-orange: #E75926;
+            --mario-green: #48D048;
+            --mario-yellow: #F8D870;
+            --mario-brick: #E75926;
         }
 
         body {
-            font-family: 'DotGothic16', sans-serif; /* ฟอนต์ที่อ่านง่ายแต่ยังเป็น Pixel */
-            background-color: var(--sky-blue);
-            color: white;
-            image-rendering: pixelated; /* ทำให้ภาพ/เงาดูเป็นพิกเซล */
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
         }
 
         .pixel-font { font-family: 'Press Start 2P', cursive; }
-        
-        /* Game Overlays & Scenery */
-        .sky-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, var(--sky-blue) 60%, #a4e4fc 100%);
-            z-index: -2;
-        }
-        .cloud-small { width: 60px; height: 20px; background-color: white; border-radius: 50%; position: absolute; }
-        .cloud-large { width: 90px; height: 30px; background-color: white; border-radius: 50%; position: absolute; }
 
-        /* Game UI Elements */
-        .game-panel {
-            background-color: #000;
-            border: 4px solid white;
-            padding: 8px 16px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
-            image-rendering: pixelated;
-        }
-        .block-item {
-            background-color: var(--coin-yellow);
+        /* กราฟิกท่อล้อยาง */
+        .tire-pipe {
+            width: 140px; height: 100px;
+            background: linear-gradient(90deg, #1a1a1a 0%, #444 50%, #1a1a1a 100%);
             border: 4px solid #000;
-            width: 80px; height: 80px;
+            position: relative;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+        .tire-pipe::before {
+            content: "REUSE";
+            font-family: 'Press Start 2P'; font-size: 8px; color: #777;
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem;
-            box-shadow: 4px 4px 0px #000;
-            position: relative;
-        }
-        .block-item:active { transform: translateY(4px); box-shadow: 0px 0px 0px #000; }
-        .block-item::before {
-            content: '?';
-            position: absolute;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2rem;
-            color: black;
-            opacity: 0.3;
-        }
-
-        /* Pipe */
-        .pipe-base {
-            width: 120px; height: 100px;
-            background: linear-gradient(to right, var(--mario-green) 0%, var(--mario-green) 20%, #B5E61D 20%, #B5E61D 40%, var(--mario-green) 40%);
-            border: 4px solid #000;
-            border-radius: 8px 8px 0 0;
-            position: relative;
-            z-index: 10;
-        }
-        .pipe-mouth {
-            width: 140px; height: 30px;
-            background: inherit;
-            border: 4px solid #000;
             position: absolute; top: -30px; left: -10px;
-            border-radius: 5px;
+            width: 160px; height: 35px;
+            background: #222; border: 4px solid #000; border-radius: 6px;
         }
 
-        /* Ground */
-        .ground-base {
-            height: 60px;
-            background-color: var(--ground-brown);
-            border-top: 4px solid #000;
-            background-image: linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028), 
-                              linear-gradient(45deg, #946028 25%, transparent 25%, transparent 75%, #946028 75%, #946028);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-            position: relative; z-index: 50;
-        }
-
-        /* Brick Wall */
-        .brick-wall {
-            background-color: var(--brick-orange);
-            border: 4px solid #000;
-            background-image: linear-gradient(45deg, #A83A00 25%, transparent 25%, transparent 75%, #A83A00 75%, #A83A00), 
-                              linear-gradient(45deg, #A83A00 25%, transparent 25%, transparent 75%, #A83A00 75%, #A83A00);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
-            color: #fff;
-            padding: 20px;
-        }
-
-        /* Character Select Card */
-        .char-card {
+        /* การ์ดสไตล์เกมแบบเนี๊ยบๆ */
+        .game-card {
             background: #fff;
-            color: #000;
             border: 4px solid #000;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
-            transition: transform 0.1s;
+            box-shadow: 8px 8px 0px #000;
+            transition: all 0.2s ease;
         }
-        .char-card:hover { transform: translateY(-4px); box-shadow: 8px 8px 0px rgba(0,0,0,0.5); }
-        .char-avatar {
-            width: 80px; height: 80px;
-            background: #e0e0e0; border: 3
+        .game-card:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px #000; }
+
+        /* แถบสถานะด้านบน */
+        .hud-top {
+            background: #000;
+            color: #fff;
+            border-bottom: 4px solid var(--mario-red);
+        }
+
+        /* พื้นดินด้านล่าง */
+        .ground-footer {
+            height: 60px;
+            background-color: var(--mario-brick);
+            background-image: linear-gradient(45deg, #a83a00 25%, transparent 25%, transparent 75%, #a83a00 75%, #a83a00);
+            background-size: 30px 30px;
+            border-top: 4px solid #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="hud-top sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center pixel-font text-[8px] md:text-[12px]">
+            <div class="flex flex-col gap-1">
+                <span class="text-gray-500">COURSE</span>
+                <span class="text-white">02181351-64</span>
+            </div>
+            <div class="hidden lg:block text-center border-x border-gray-800 px-6">
+                <span class="text-red-500">PROJECT</span><br>
+                <span>ผักสวนครัวในล้อยาง</span>
+            </div>
+            <div class="text-right">
+                <span class="text-yellow-400">WORLD</span><br>
+                <span>KU-PS</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-[var(--mario-blue)] py-16 px-6 border-b-4 border-black relative overflow-hidden">
+        <div class="absolute top-10 right-10 text-white opacity-20 text-9xl">☁️</div>
+        <div class="absolute bottom-5 left-20 text-white opacity-20 text-8xl">☁️</div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-black text-white drop-shadow-[6px_6px_0px_#000] mb-6">
+                ผักสวนครัวในล้อยาง
+            </h1>
+            <p class="text-xl md:text-2xl text-white font-bold mb-10 opacity-90">
+                การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา
+            </p>
+            
+            <div class="flex justify-center mt-10">
+                <div class="relative group">
+                    <div class="text-7xl absolute -top-16 left-6 transition-transform group-hover:-translate-y-4">🥬</div>
+                    <div class="tire-pipe"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto py-16 px-6 space-y-20">
+        
+        <div class="game-card p-8 md:p-12">
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="w-full md:w-1/3 bg-gray-100 aspect-square flex items-center justify-center text-8xl border-4 border-dashed border-gray-300">
+                    🚜
+                </div>
+                <div class="w-full md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800 border-l-8 border-green-500 pl-4">หลักการและเหตุผล</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        โครงการนี้จัดทำขึ้นเพื่อศึกษากระบวนการจัดการศึกษาทางเกษตรผ่านการใช้ล้อยางรถยนต์เก่ามาเป็นวัสดุปลูกพืชผักสวนครัว 
+                        โดยเน้นการประเมินประสิทธิภาพใน 3 ด้านหลัก: การเจริญเติบโตของพืช, ความตระหนักด้านสิ่งแวดล้อม และความคุ้มค่าของทรัพยากร
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-blue-100 text-blue-700 font-bold px-4 py-1 border-2 border-blue-700">LEC: 700</span>
+                        <span class="bg-green-100 text-green-700 font-bold px-4 py-1 border-2 border-green-700">LAB: 711</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="game-card p-8 md:p-12 border-t-[16px] border-t-red-600">
+            <div class="text-center mb-12">
+                <h2 class="pixel-font text-xl md:text-2xl text-red-600 mb-6">CHARACTER SELECT</h2>
+                
+                <div class="inline-block bg-black text-white p-6 border-4 border-double border-white shadow-[6px_6px_0px_#ccc]">
+                    <h3 class="text-xl md:text-2xl font-bold text-yellow-400 mb-2">นิสิตคณะศึกษาศาสตร์และพัฒนศาสตร์</h3>
+                    <p class="text-lg opacity-80 uppercase tracking-widest">สาขาเกษตรและสิ่งแวดล้อมศึกษา</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+                <script>
+                    const names = ["ชื่อ-นามสกุล 1", "ชื่อ-นามสกุล 2", "ชื่อ-นามสกุล 3", "ชื่อ-นามสกุล 4", "ชื่อ-นามสกุล 5", "ชื่อ-นามสกุล 6", "ชื่อ-นามสกุล 7", "ชื่อ-นามสกุล 8", "ชื่อ-นามสกุล 9", "ชื่อ-นามสกุล 10", "ชื่อ-นามสกุล 11"];
+                    const emojis = ['👨‍🌾', '👩‍🌾', '👷', '👨‍🎓', '👩‍🏫', '🥦', '🚜', '🌱', '🌍', '🛠️', '💡'];
+                    
+                    names.forEach((name, i) => {
+                        document.write(`
+                            <div class="text-center group">
+                                <div class="w-full aspect-square bg-gray-50 border-4 border-black mb-4 flex items-center justify-center text-5xl group-hover:bg-yellow-200 transition-colors shadow-[4px_4px_0px_#000]">
+                                    ${emojis[i]}
+                                </div>
+                                <span class="pixel-font text-[8px] bg-red-600 text-white px-2 py-1 mb-2 inline-block">P${i+1}</span>
+                                <p class="font-bold text-gray-800 text-sm md:text-base">${name}</p>
+                                <p class="text-blue-600 text-[10px] font-bold italic">ID: 64xxxxxx</p>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+
+        <div class="bg-black text-white p-10 border-4 border-white border-dashed text-center">
+            <h3 class="pixel-font text-sm mb-6 text-yellow-400">MISSION STATUS: COMPLETE</h3>
+            <p class="text-lg md:text-xl font-light">"การประเมินการจัดการศึกษาทางเกษตรและสิ่งแวดล้อมศึกษา เสร็จสมบูรณ์"</p>
+            <div class="mt-8 pixel-font text-4xl text-green-500 animate-pulse">THANK YOU</div>
+        </div>
+
+    </main>
+
+    <footer class="ground-footer fixed bottom-0 w-full z-40"></footer>
+
+</body>
+</html>
