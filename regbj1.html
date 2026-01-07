@@ -18,6 +18,7 @@
             --admin-section-bg: #eff6ff;
             --deadline-red: #be123c;
             --warning-gold: #f59e0b;
+            --soft-gold: #fffbeb;
         }
 
         body {
@@ -41,40 +42,67 @@
         h2 { color: var(--primary); margin: 0; font-weight: 600; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
+        /* ปรับปรุงประกาศให้ดู Smooth ขึ้น */
         .announcement-card {
-            background: linear-gradient(to right, #fff7ed, #ffffff);
-            border: 1px solid #fed7aa;
+            background-color: var(--soft-gold);
+            border: 1px solid #fef3c7;
             border-left: 6px solid var(--warning-gold);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            padding: 24px;
+            margin-bottom: 30px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 20px;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.05);
         }
 
         .announcement-icon {
             background: var(--warning-gold);
             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             flex-shrink: 0;
         }
 
-        .deadline-highlight {
-            background: #fff1f2;
-            color: var(--deadline-red);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: 1px dashed var(--deadline-red);
+        .announcement-content b {
+            color: #92400e;
+            font-size: 1.15rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .announcement-content p {
+            margin: 0;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .deadline-tag {
             display: inline-block;
-            margin-top: 5px;
+            background: white;
+            color: var(--deadline-red);
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid #fecaca;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .announcement-footer {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #fef3c7;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #92400e;
+            opacity: 0.8;
         }
 
         .admin-section {
@@ -83,7 +111,6 @@
             border-radius: 12px;
             border: 1px solid #dbeafe;
             margin-bottom: 25px;
-            margin-top: 20px;
         }
         .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
         .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
@@ -140,23 +167,18 @@
     </div>
 
     <div class="announcement-card">
-        <div class="announcement-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="announcement-icon"><i class="fas fa-info-circle"></i></div>
         <div class="announcement-content">
-            <b style="color:#92400e;">กำหนดการส่งเกรด (ก่อนกลางภาค/สอบกลางภาค)</b>
-            <p style="margin:5px 0;">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
-            <div class="deadline-highlight">ไม่เกินเที่ยงคืน วันอังคารที่ 13 กุมภาพันธ์ 2569</div>
-        </div>
-    </div>
-
-    <div class="announcement-card" style="border-left-color: var(--deadline-red); background: #fff5f5;">
-        <div class="announcement-icon" style="background: var(--deadline-red);"><i class="fas fa-exclamation-triangle"></i></div>
-        <div class="announcement-content">
-            <b style="color: var(--deadline-red); font-size: 1.1rem;">ประกาศ: คุณครูที่ยังไม่ได้ดำเนินการยืนยันรายวิชาสำหรับหลักสูตรมัธยมศึกษา</b>
-            <p style="margin:5px 0; color: #475569;">ขอให้คุณครูนำส่งใบขอเปิดรายวิชาเรียน 2/2568 ที่ห้องทะเบียนวัดผล</p>
-            <div class="deadline-highlight">ภายใน วันจันทร์ที่ 12 มกราคม 2569 (ก่อนเวลา 15.00 น.)</div>
-            <p style="margin-top:8px; font-size: 0.85rem; color: #64748b;">
-                <i class="fas fa-user-edit"></i> ผู้ประกาศ: นายเมธี ใจสุขดี (7 ม.ค. 69, 12.58 น.)
-            </p>
+            <b>แจ้งดำเนินการยืนยันรายวิชาผ่านระบบ SGS</b>
+            <p>สำหรับคุณครูที่ยังไม่ได้ดำเนินการยืนยันรายวิชาเรียนในระบบ ขอความอนุเคราะห์ให้นำส่ง 
+            <strong>"ใบขอเปิดรายวิชาเรียน 2/2568"</strong> ที่พิมพ์จากระบบ SGS มายังกลุ่มงานวัดผล</p>
+            <div class="deadline-tag">
+                <i class="far fa-clock"></i> กำหนดส่ง: ภายในวันจันทร์ที่ 12 มกราคม 2569 (ไม่เกิน 15.00 น.)
+            </div>
+            <div class="announcement-footer">
+                <span><i class="fas fa-user-pen"></i> ผู้ประกาศ: นายเมธี ใจสุขดี</span>
+                <span><i class="far fa-calendar-alt"></i> 7 ม.ค. 69 | 12.58 น.</span>
+            </div>
         </div>
     </div>
 
@@ -195,7 +217,7 @@
 </div>
 
 <script>
-    // ... (ส่วนของ JavaScript เหมือนเดิมทุกประการ) ...
+    // ... ส่วนของ JavaScript คงเดิมตามข้อมูลที่คุณครูมี ...
     const departments = {
         "0": "ฝ่ายบริหาร",
         "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
@@ -204,7 +226,7 @@
     };
 
     const teacherData = [
-        { id: "022", name: "อ.ดร.จุฑาทิพย์ ถาวรรัตน์", status: 1 },
+        { id: "022", name: "อ.ดร.จุาทิพย์ ถาวรรัตน์", status: 1 },
         { id: "049", name: "อ.ดร.สุปราณี พุ้ยมอม", status: 1 },
         { id: "050", name: "ผศ.ดร.อารีรัตน์ ภาคพิธเจริญ", status: 1 },
         { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
@@ -259,7 +281,7 @@
         { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 1 },
         { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
         { id: "340", name: "นายวินิจ ภูพวก", status: 1 },
-        { id: "341", name: "นางสาวมัชฌิมา สุขะพิบูลย์", status: 1 },
+        { id: "341", name: "นางสาวมัฌชิมา สุขะพิบูลย์", status: 1 },
         { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
         { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 1 },
         { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
@@ -324,7 +346,6 @@
 
     function initTable() {
         const tableBody = document.getElementById('tableBody');
-        
         const groups = {};
         Object.keys(departments).forEach(d => groups[d] = []);
         teacherData.forEach(t => {
@@ -335,10 +356,8 @@
         let masterIndex = 1;
         Object.keys(groups).sort().forEach(gid => {
             if(groups[gid].length === 0) return;
-
             const hRow = document.createElement('tr');
             hRow.className = 'dept-header-row';
-            hRow.id = `dept-${gid}`;
             hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
             tableBody.appendChild(hRow);
 
@@ -347,7 +366,6 @@
                 const statusCls = teacher.status === 1 ? 'done' : 'waiting';
                 const statusTxt = teacher.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ';
                 const step = teacher.status === 1 ? '[7/7]' : '[1/7]';
-                
                 tr.innerHTML = `
                     <td>${masterIndex++}</td>
                     <td><strong>${teacher.id}</strong></td>
@@ -361,7 +379,6 @@
             });
         });
     }
-
     document.addEventListener('DOMContentLoaded', initTable);
 </script>
 </body>
