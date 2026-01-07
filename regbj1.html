@@ -14,7 +14,7 @@
             --success-text: #065f46;
             --pending-bg: #fee2e2;
             --pending-text: #991b1b;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
             --admin-section-bg: #eff6ff;
             --deadline-red: #be123c;
             --warning-gold: #f59e0b;
@@ -26,7 +26,6 @@
             background-color: #f1f5f9;
             margin: 0;
             padding: 20px;
-            scroll-behavior: smooth;
         }
 
         .container {
@@ -34,26 +33,26 @@
             margin: 0 auto;
             background: white;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 0; /* ลบขอบมนออก */
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .header { text-align: center; margin-bottom: 25px; }
         h2 { color: var(--primary); margin: 0; font-weight: 600; }
         p.subtitle { color: #64748b; margin-top: 5px; }
 
-        /* ปรับปรุงประกาศให้ดู Smooth ขึ้น */
+        /* ปรับปรุงประกาศเป็นเหลี่ยม */
         .announcement-card {
             background-color: var(--soft-gold);
             border: 1px solid #fef3c7;
             border-left: 6px solid var(--warning-gold);
-            border-radius: 12px;
+            border-radius: 0; /* ลบขอบมนออก */
             padding: 24px;
             margin-bottom: 30px;
             display: flex;
             align-items: flex-start;
             gap: 20px;
-            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.05);
         }
 
         .announcement-icon {
@@ -61,7 +60,7 @@
             color: white;
             width: 45px;
             height: 45px;
-            border-radius: 10px;
+            border-radius: 0; /* ลบขอบมนออก */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -87,11 +86,10 @@
             background: white;
             color: var(--deadline-red);
             padding: 6px 16px;
-            border-radius: 8px;
+            border-radius: 0; /* ลบขอบมนออก */
             font-weight: 600;
             border: 1px solid #fecaca;
             margin-top: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .announcement-footer {
@@ -108,28 +106,27 @@
         .admin-section {
             background-color: var(--admin-section-bg);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 0; /* ลบขอบมนออก */
             border: 1px solid #dbeafe;
             margin-bottom: 25px;
         }
         .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
         .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-        .admin-card { background: white; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 12px; border: 1px solid #f0f7ff; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
-        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+        .admin-card { background: white; padding: 12px; border-radius: 0; border: 1px solid #dbeafe; display: flex; align-items: center; gap: 12px; }
+        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
         .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.85rem; }
-        .role-tag { font-size: 0.65rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin-top: 3px; display: inline-block; }
+        .role-tag { font-size: 0.65rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 0; font-weight: 600; margin-top: 3px; border: 1px solid #c7d2fe; display: inline-block; }
 
         .grade-system-wrapper { text-align: center; margin-bottom: 35px; }
         .btn-grade-system {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: #10b981;
             color: white;
             padding: 14px 35px;
-            border-radius: 50px;
+            border-radius: 0; /* ลบขอบมนออก */
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
@@ -138,9 +135,9 @@
         }
 
         .table-wrapper { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        th { background-color: #f8fafc; color: #475569; padding: 15px; text-align: left; border-bottom: 2px solid var(--border-color); }
-        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+        table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-color); }
+        th { background-color: #f8fafc; color: #475569; padding: 15px; text-align: left; border-bottom: 2px solid var(--border-color); border-right: 1px solid var(--border-color); }
+        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-size: 0.95rem; }
         
         .dept-header-row { background-color: #f1f5f9 !important; }
         .dept-header-row td { 
@@ -149,10 +146,9 @@
             padding: 15px; 
             font-size: 1rem; 
             border-left: 5px solid var(--primary); 
-            scroll-margin-top: 20px; 
         }
 
-        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .status-badge { padding: 4px 10px; border-radius: 0; font-size: 0.8rem; font-weight: 600; border: 1px solid currentColor; }
         .done { background: var(--success-bg); color: var(--success-text); }
         .waiting { background: var(--pending-bg); color: var(--pending-text); }
         .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
@@ -217,16 +213,17 @@
 </div>
 
 <script>
-    // ... ส่วนของ JavaScript คงเดิมตามข้อมูลที่คุณครูมี ...
+    // ส่วน JavaScript คงเดิมทั้งหมดตามที่ระบุไว้ก่อนหน้า
+    // ...
     const departments = {
-        "0": "ฝ่ายบริหาร",
-        "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
-        "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ",
-        "7": "การงานอาชีพ", "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
+        "0": "ฝ่ายบริหาร", "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
+        "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ", "7": "การงานอาชีพ", 
+        "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
     };
 
     const teacherData = [
-        { id: "022", name: "อ.ดร.จุาทิพย์ ถาวรรัตน์", status: 1 },
+        // ข้อมูลครูชุดเดิม...
+        { id: "022", name: "อ.ดร.จุฑาทิพย์ ถาวรรัตน์", status: 1 },
         { id: "049", name: "อ.ดร.สุปราณี พุ้ยมอม", status: 1 },
         { id: "050", name: "ผศ.ดร.อารีรัตน์ ภาคพิธเจริญ", status: 1 },
         { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
@@ -236,7 +233,7 @@
         { id: "118", name: "นางวิไลพักตร์ กลิ่นกาหลง", status: 1 },
         { id: "119", name: "นางนาตยา พิทักษ์วงศ์", status: 1 },
         { id: "120", name: "นางสาววชิราภรณ์ ศรป้อม", status: 1 },
-        { id: "121", name: "นายจิรวัฒน์ โสภาพันธุ์", status: 1 },
+        { id: "121", name: "นายิรวัฒน์ โสภาพันธุ์", status: 1 },
         { id: "123", name: "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์", status: 1 },
         { id: "124", name: "นางสาวอุษา สายทอง", status: 1 },
         { id: "125", name: "นายธีรภัทร แก้วสมนึก", status: 1 },
