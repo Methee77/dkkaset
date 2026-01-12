@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARIO EXAM SERVICE</title>
+    <title>มาริโอ้ ค้นหาตารางสอบ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
-            --mario-red: #ff0000;
+            --mario-red: #e4000f;
             --mario-blue: #049cd8;
             --mario-yellow: #fbd000;
             --mario-green: #43b047;
@@ -18,193 +18,179 @@
         body {
             background-color: var(--sky-blue);
             font-family: 'Kanit', sans-serif;
-            image-rendering: pixelated;
+            color: #333;
         }
 
-        .pixel-font { font-family: 'Press Start 2P', cursive; font-size: 0.7rem; }
-
-        /* Mario Style Blocks */
-        .mario-border {
+        /* ตกแต่งสไตล์พิกเซล */
+        .pixel-border {
             border: 4px solid #000;
             box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
-        }
-
-        .mario-card {
             background: white;
-            border: 4px solid #000;
             position: relative;
         }
 
-        .mario-card::before {
-            content: "";
-            position: absolute;
-            top: 2px; left: 2px; right: 2px; bottom: 2px;
-            border: 2px solid #eee;
-            pointer-events: none;
-        }
-
-        .btn-mario {
-            background-color: var(--mario-red);
-            color: white;
+        .mario-btn {
             border: 4px solid #000;
             box-shadow: 4px 4px 0px #000;
             transition: all 0.1s;
-            image-rendering: pixelated;
+            color: white;
+            font-weight: 900;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
         }
 
-        .btn-mario:active {
+        .mario-btn:active {
             transform: translate(4px, 4px);
             box-shadow: 0px 0px 0px #000;
         }
 
-        .btn-green { background-color: var(--mario-green); }
-        .btn-blue { background-color: var(--mario-blue); }
+        /* พื้นดินด้านล่าง */
+        .mario-ground {
+            background-color: #8b4513;
+            height: 50px;
+            background-image: 
+                linear-gradient(45deg, #a0522d 25%, transparent 25%, transparent 75%, #a0522d 75%, #a0522d),
+                linear-gradient(45deg, #a0522d 25%, #8b4513 25%, #8b4513 75%, #a0522d 75%, #a0522d);
+            background-size: 30px 30px;
+            border-top: 4px solid #000;
+        }
 
-        .coin-spin {
-            display: inline-block;
-            width: 20px;
+        .pipe {
+            background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+            border: 4px solid #000;
+            width: 100%;
+            height: 30px;
+        }
+
+        /* อนิเมชั่นเหรียญ */
+        .coin {
+            width: 15px;
             height: 20px;
-            background-color: var(--mario-yellow);
+            background: var(--mario-yellow);
             border: 2px solid #000;
             border-radius: 50%;
-            animation: spin 1s infinite;
+            animation: rotate 1s infinite linear;
         }
 
-        @keyframes spin {
-            0%, 100% { transform: scaleX(1); }
-            50% { transform: scaleX(0.1); }
-        }
-
-        .pipe-header {
-            background: linear-gradient(90deg, #43b047 0%, #76d87a 45%, #43b047 50%, #2e7d32 100%);
-            border: 4px solid #000;
-            height: 60px;
-            position: relative;
-        }
-
-        .ground {
-            background: #8b4513;
-            height: 40px;
-            background-image: linear-gradient(45deg, #a0522d 25%, transparent 25%, transparent 75%, #a0522d 75%, #a0522d), 
-                              linear-gradient(45deg, #a0522d 25%, transparent 25%, transparent 75%, #a0522d 75%, #a0522d);
-            background-size: 20px 20px;
-            border-top: 4px solid #000;
+        @keyframes rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
     </style>
 </head>
-<body class="pb-20">
+<body class="min-h-screen flex flex-col">
 
-<div class="max-w-4xl mx-auto px-4 pt-10">
-    <header class="text-center mb-10">
-        <div class="pixel-font text-white mb-4 drop-shadow-md">ชมรมผู้สูงอายุ TikTokKPS</div>
-        <div class="mario-card p-6 inline-block transform -rotate-1">
-            <h1 class="text-4xl md:text-6xl font-black text-black tracking-tighter">
-                SUPER <span class="text-red-600">EXAM</span> BROS.
-            </h1>
-            <div class="flex justify-between items-center mt-2 px-2">
-                <span class="pixel-font text-[10px]">YEAR: 2568</span>
-                <span class="pixel-font text-[10px] text-blue-600">UPDATED: 2 JAN 2026</span>
-            </div>
+<div class="flex-grow max-w-5xl mx-auto w-full px-4 pt-10 pb-20">
+    <header class="text-center mb-8">
+        <div class="inline-block bg-black text-white px-4 py-1 mb-4 border-2 border-white text-xs tracking-widest">
+            ชมรมผู้สูงอายุ TIKTOKKPS
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-[0_5px_0_rgba(0,0,0,1)] italic">
+            ตารางสอบ<span class="text-yellow-400">มาริโอ้</span>
+        </h1>
+        <div class="flex justify-center gap-4 mt-2 font-bold text-white text-sm drop-shadow-md">
+            <span>ปีการศึกษา 2568</span>
+            <span>|</span>
+            <span class="text-yellow-200">อัปเดต 2 มกราคม 2569</span>
         </div>
     </header>
 
-    <section id="searchView" class="max-w-md mx-auto">
-        <div class="mario-card p-8 shadow-[12px_12px_0px_#000]">
+    <section id="searchView" class="max-w-xl mx-auto">
+        <div class="pixel-border p-8 text-center">
             <div class="mb-6">
-                <label class="pixel-font block mb-3 text-red-600 uppercase">Insert Student ID</label>
+                <label class="block font-black text-xl mb-3 text-red-600">กรอกรหัสประจำตัวนิสิต</label>
                 <input type="text" id="studentId" 
-                    class="w-full border-4 border-black p-4 text-2xl font-bold text-center focus:outline-none focus:ring-4 ring-yellow-400" 
-                    placeholder="0000000000">
+                    class="w-full border-4 border-black p-4 text-2xl font-black text-center focus:ring-4 focus:ring-yellow-400 outline-none" 
+                    placeholder="รหัส 10 หลัก">
             </div>
             
             <div class="grid grid-cols-2 gap-4 mb-8">
-                <div class="text-center p-2 bg-gray-100 border-2 border-black">
-                    <p class="pixel-font text-[8px] mb-1">Semester</p>
-                    <p class="font-bold text-sm">ปลาย 2568</p>
+                <div class="bg-gray-100 border-2 border-black p-2">
+                    <p class="text-xs font-bold text-gray-500">ภาคการศึกษา</p>
+                    <p class="font-black">ภาคปลาย 2568</p>
                 </div>
-                <div class="text-center p-2 bg-gray-100 border-2 border-black">
-                    <p class="pixel-font text-[8px] mb-1">Type</p>
-                    <p class="font-bold text-sm">MIDTERM</p>
+                <div class="bg-gray-100 border-2 border-black p-2">
+                    <p class="text-xs font-bold text-gray-500">ประเภทการสอบ</p>
+                    <p class="font-black">กลางภาค</p>
                 </div>
             </div>
 
-            <button onclick="handleSearch()" class="btn-mario w-full py-4 text-xl font-black pixel-font">
-                START SEARCH →
+            <button onclick="handleSearch()" class="mario-btn bg-[#e4000f] w-full py-4 text-2xl hover:bg-red-700">
+                เริ่มการค้นหา →
             </button>
 
-            <div class="mt-8 flex items-center justify-center gap-2">
-                <div class="coin-spin"></div>
-                <p class="pixel-font text-[10px]">VISITORS: <span id="totalCount">1,248</span></p>
+            <div class="mt-8 flex items-center justify-center gap-3">
+                <div class="coin"></div>
+                <p class="font-bold">จำนวนผู้เข้าชม: <span id="totalCount">1,248</span></p>
             </div>
             
-            <p id="errorMsg" class="mt-4 text-red-600 font-bold hidden text-center pixel-font text-[10px]">! NO STUDENT FOUND</p>
+            <p id="errorMsg" class="mt-4 text-red-600 font-black hidden">! ไม่พบข้อมูลรหัสประจำตัวนี้</p>
         </div>
     </section>
 
     <section id="resultView" class="hidden">
-        <div class="bg-yellow-400 border-4 border-black p-4 mb-6 flex items-center gap-4 animate-bounce">
-            <span class="pixel-font text-2xl">?</span>
-            <div class="text-sm">
-                <p class="font-black underline">ประกาศเตือน: นิสิตประเมินการสอน ครั้งที่ 1</p>
-                <p>วันที่ 5 - 9 มกราคม 2569 ผ่านระบบ MYKU</p>
+        <div class="pixel-border bg-yellow-300 p-4 mb-6 flex items-center gap-4 border-yellow-500">
+            <div class="bg-black text-white w-10 h-10 flex items-center justify-center font-black text-2xl">!</div>
+            <div>
+                <p class="font-black text-black leading-none">ประกาศ: นิสิตต้องประเมินการสอน ครั้งที่ 1</p>
+                <p class="text-sm font-bold mt-1">วันที่ 5 - 9 ม.ค. 69 ผ่านระบบ MYKU ก่อนเข้าสอบ</p>
             </div>
         </div>
 
-        <div class="mario-card p-6 mb-6 shadow-[8px_8px_0px_#000]">
-            <div class="flex flex-col md:flex-row justify-between border-b-4 border-black pb-4 mb-4 gap-4">
+        <div class="pixel-border p-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between border-b-4 border-dotted border-black pb-4 mb-4 gap-4">
                 <div>
-                    <p class="pixel-font text-blue-600 mb-1">PLAYER NAME</p>
+                    <p class="text-blue-600 font-black text-sm">ข้อมูลผู้เข้าสอบ</p>
                     <h2 id="resName" class="text-3xl font-black text-black">-</h2>
-                    <p id="resId" class="font-bold text-gray-600">-</p>
+                    <p id="resId" class="text-xl font-bold text-gray-700">-</p>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <a href="https://my.ku.th" target="_blank" class="btn-mario btn-blue px-4 py-2 text-center text-xs pixel-font">MYKU LOGIN</a>
-                    <button onclick="location.reload()" class="btn-mario bg-gray-500 px-4 py-2 text-xs pixel-font">RESET</button>
+                    <a href="https://my.ku.th" target="_blank" class="mario-btn bg-[#049cd8] px-4 py-2 text-sm text-center">เข้าสู่ MYKU</a>
+                    <button onclick="location.reload()" class="mario-btn bg-gray-600 px-4 py-2 text-sm">ค้นหาใหม่</button>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
-                <p><strong>คณะ:</strong> <span id="resFaculty"></span></p>
-                <p><strong>ภาควิชา:</strong> <span id="resDept"></span></p>
-                <p><strong>สาขา:</strong> <span id="resMajor"></span></p>
-                <p><strong>ชั้นปี:</strong> <span id="resYear"></span></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
+                <p><span class="text-gray-500">คณะ:</span> <span id="resFaculty" class="text-black"></span></p>
+                <p><span class="text-gray-500">ภาควิชา:</span> <span id="resDept" class="text-black"></span></p>
+                <p><span class="text-gray-500">สาขา:</span> <span id="resMajor" class="text-black"></span></p>
+                <p><span class="text-gray-500">ชั้นปี:</span> <span id="resYear" class="text-black"></span></p>
             </div>
         </div>
 
-        <div class="pixel-font text-white mb-2 ml-2">WORLD 1-1: REGULAR EXAM</div>
-        <div class="bg-white border-4 border-black overflow-hidden mb-8 shadow-[8px_8px_0px_#000]">
-            <table class="w-full text-left text-sm">
-                <thead class="bg-black text-white">
-                    <tr>
-                        <th class="p-3 text-center">CODE</th>
-                        <th class="p-3">SUBJECT</th>
-                        <th class="p-3">DATE/TIME</th>
-                        <th class="p-3">ROOM</th>
+        <h3 class="text-2xl font-black text-white mb-3 drop-shadow-md">ตารางสอบในวิทยาเขต</h3>
+        <div class="pixel-border overflow-x-auto mb-8">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-black text-white">
+                        <th class="p-4">รหัสวิชา</th>
+                        <th class="p-4">ชื่อวิชา</th>
+                        <th class="p-4 text-center">วัน/เวลาสอบ</th>
+                        <th class="p-4 text-center">ห้องสอบ</th>
                     </tr>
                 </thead>
-                <tbody id="examTableBody" class="divide-y-2 divide-black">
+                <tbody id="examTableBody" class="font-bold">
                     </tbody>
             </table>
         </div>
 
-        <div class="flex justify-center mb-10">
-            <button onclick="toggleOffCampus()" id="btnOffCampus" class="btn-mario btn-green px-8 py-4 pixel-font">
-                OFF-CAMPUS COURSES
+        <div class="text-center mb-10">
+            <button onclick="toggleOffCampus()" id="btnOffCampus" class="mario-btn bg-[#43b047] px-8 py-3 text-xl">
+                แสดงวิชานอกตารางวิทยาเขต
             </button>
         </div>
 
         <div id="offCampusContainer" class="hidden">
-            <div class="pixel-font text-white mb-2 ml-2">SECRET LEVEL: OFF-CAMPUS</div>
-            <div class="bg-white border-4 border-red-600 overflow-hidden mb-10 shadow-[8px_8px_0px_#dc2626]">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-red-600 text-white">
-                        <tr>
-                            <th class="p-3 text-center">CODE</th>
-                            <th class="p-3">SUBJECT</th>
-                            <th class="p-3">DATE/TIME</th>
-                            <th class="p-3">ROOM</th>
+            <h3 class="text-2xl font-black text-white mb-3 drop-shadow-md text-red-600">วิชานอกตาราง / วิชาเลือก</h3>
+            <div class="pixel-border border-red-600 overflow-x-auto mb-10">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-red-600 text-white">
+                            <th class="p-4">รหัสวิชา</th>
+                            <th class="p-4">ชื่อวิชา</th>
+                            <th class="p-4 text-center">วัน/เวลาสอบ</th>
+                            <th class="p-4 text-center">ห้องสอบ</th>
                         </tr>
                     </thead>
-                    <tbody id="offCampusTableBody" class="divide-y-2 divide-red-600">
+                    <tbody id="offCampusTableBody" class="font-bold">
                         </tbody>
                 </table>
             </div>
@@ -212,44 +198,47 @@
     </section>
 </div>
 
-<footer class="fixed bottom-0 w-full">
-    <div class="pipe-header max-w-4xl mx-auto flex items-center justify-center">
-        <p class="pixel-font text-white text-[9px]">© 2026 DEVELOPED BY SUTHEE v1.0</p>
+<footer class="fixed bottom-0 w-full z-50">
+    <div class="pipe"></div>
+    <div class="mario-ground flex items-center justify-center">
+        <p class="text-white font-black text-xs tracking-widest">© 2026 พัฒนาโดยสุธี | DIGITAL EXAM BROS</p>
     </div>
-    <div class="ground"></div>
 </footer>
 
 <script>
-    // ข้อมูลชุดเดิมจากคุณ
+    // ฐานข้อมูลเดิมของคุณ
     const db = {
-        "6720600494": { name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", advisor: "กลางภาค ภาคปลาย/2568",
+        "6720600494": { name: "นายเมธี ใจสุขดี", id: "6720600494", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2", 
             exams: [
-                { code: "01355102", titleEn: "English for University", date: "10 ม.ค. 69", time: "13:00 - 15:30", sec: "710", room: "LH3-304" },
-                { code: "02036271", titleEn: "Horticultural Science", date: "12 ม.ค. 69", time: "16:30 - 18:30", sec: "700", room: "LH4-201" },
-                { code: "02036261", titleEn: "Soil Science", date: "14 ม.ค. 69", time: "13:00 - 15:00", sec: "700", room: "KH80-208" }
+                { code: "01355102", titleEn: "English for University", titleTh: "ภาษาอังกฤษในมหาวิทยาลัย", date: "10 ม.ค. 69", time: "13:00 - 15:30", sec: "710", room: "LH3-304" },
+                { code: "02036271", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "12 ม.ค. 69", time: "16:30 - 18:30", sec: "700", room: "LH4-201" },
+                { code: "02036261", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "14 ม.ค. 69", time: "13:00 - 15:00", sec: "700", room: "KH80-208" }
             ],
             offCampus: [
-                { code: "02181331", titleEn: "Communication in Agri Ed", date: "9 ม.ค. 69", time: "10.00-12.00", sec: "700/711", room: "EDS3-301" },
-                { code: "02033302", titleEn: "Livestock Way of Life", date: "19 ม.ค. 69", time: "16.00-17.30", sec: "700", room: "LH4-102" }
+                { code: "02181331", titleEn: "Communication in Ag Ed", titleTh: "การสื่อสารทางเกษตร", date: "9 ม.ค. 69", time: "10.00-12.00", sec: "700/711", room: "EDS3-301" },
+                { code: "02033302", titleEn: "Livestock Way of Life", titleTh: "ปศุสัตว์กับวิถีชีวิตไทย", date: "19 ม.ค. 69", time: "16.00-17.30", sec: "700", room: "LH4-102" }
             ]
         },
-        // ... (ข้อมูลอื่นๆ ใส่เพิ่มได้ตามต้นฉบับครับ)
+        "6720600028": { name: "นางสาวกมลลักษณ์ ชาวบางงาม", id: "6720600028", faculty: "ศึกษาศาสตร์และพัฒนศาสตร์", major: "เกษตรและสิ่งแวดล้อมศึกษา", dept: "การพัฒนาทรัพยากรมนุษย์และชุมชน", year: "F39-2",
+            exams: [
+                { code: "02036271", titleEn: "Horticultural Science", titleTh: "วิทยาศาสตร์ด้านพืชสวน", date: "12 ม.ค. 69", time: "16:30 - 18:30", sec: "700", room: "LH4-201" },
+                { code: "02036261", titleEn: "Soil Science", titleTh: "วิทยาศาสตร์ทางดิน", date: "14 ม.ค. 69", time: "13:00 - 15:00", sec: "700", room: "KH80-208" }
+            ],
+            offCampus: [
+                { code: "02181331", titleEn: "Communication in Ag Ed", titleTh: "การสื่อสารทางเกษตร", date: "9 ม.ค. 69", time: "10.00-12.00", sec: "700/711", room: "EDS3-301" }
+            ]
+        }
+        // (เพิ่มข้อมูลนิสิตท่านอื่นๆ 6720600052, 6720600133, ฯลฯ ได้ตามต้นฉบับเลยครับ)
     };
-
-    // จำลองข้อมูลนิสิตรายอื่นๆ จากต้นฉบับที่คุณให้มา
-    const originalIds = ["6720600028", "6720600052", "6720600133", "6720600184", "6720600214", "6720600630", "6720600656", "6720600753", "6720603647", "6720603728"];
-    // ในที่นี้ผมขออนุญาตยกตัวอย่างฟังก์ชันการทำงานหลักตาม UI ใหม่นะครับ
 
     function handleSearch() {
         const idInput = document.getElementById('studentId').value.trim();
         const student = db[idInput];
-        
         if (student) {
             document.getElementById('searchView').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
-            
             document.getElementById('resName').innerText = student.name;
-            document.getElementById('resId').innerText = "ID: " + student.id;
+            document.getElementById('resId').innerText = "รหัสนิสิต: " + student.id;
             document.getElementById('resFaculty').innerText = student.faculty;
             document.getElementById('resMajor').innerText = student.major;
             document.getElementById('resDept').innerText = student.dept;
@@ -265,21 +254,21 @@
     function renderTable(targetId, data) {
         const tbody = document.getElementById(targetId);
         if(!data || data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="text-center py-10 pixel-font">NOTHING FOUND</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center py-6 text-gray-400">-- ไม่พบข้อมูลการสอบ --</td></tr>';
             return;
         }
         tbody.innerHTML = data.map(ex => `
-            <tr class="hover:bg-yellow-50">
-                <td class="p-3 text-center font-bold text-blue-600">${ex.code}</td>
-                <td class="p-3">
-                    <div class="font-bold uppercase leading-none mb-1">${ex.titleEn}</div>
-                    <div class="text-[10px] text-gray-500 font-bold">${ex.sec}</div>
+            <tr class="border-b-2 border-gray-100 hover:bg-blue-50">
+                <td class="p-4 text-blue-600 font-black">${ex.code}</td>
+                <td class="p-4">
+                    <div class="text-black">${ex.titleTh}</div>
+                    <div class="text-[10px] text-gray-400 uppercase">${ex.titleEn}</div>
                 </td>
-                <td class="p-3">
-                    <div class="text-xs font-bold">${ex.date}</div>
-                    <div class="text-xs text-red-600 font-bold">${ex.time}</div>
+                <td class="p-4 text-center">
+                    <div class="text-red-600">${ex.date}</div>
+                    <div class="text-xs text-black">${ex.time} (หมู่ ${ex.sec})</div>
                 </td>
-                <td class="p-3 font-black text-center">${ex.room}</td>
+                <td class="p-4 text-center text-lg font-black">${ex.room}</td>
             </tr>
         `).join('');
     }
@@ -289,11 +278,11 @@
         const btn = document.getElementById('btnOffCampus');
         if (container.classList.contains('hidden')) {
             container.classList.remove('hidden');
-            btn.innerText = "HIDE SECRET LEVEL";
+            btn.innerText = "ซ่อนวิชานอกตารางวิทยาเขต";
             container.scrollIntoView({ behavior: 'smooth' });
         } else {
             container.classList.add('hidden');
-            btn.innerText = "OFF-CAMPUS COURSES";
+            btn.innerText = "แสดงวิชานอกตารางวิทยาเขต";
         }
     }
 
