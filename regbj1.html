@@ -3,380 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปผลการขอเปิดรายวิชา 2/2568</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>งานทะเบียนวัดผล | Banharnjamsaiwittaya 1 School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #1e3a8a;
-            --success-bg: #d1fae5;
-            --success-text: #065f46;
-            --pending-bg: #fee2e2;
-            --pending-text: #991b1b;
-            --border-color: #cbd5e1;
-            --admin-section-bg: #eff6ff;
-            --deadline-red: #be123c;
-            --warning-gold: #f59e0b;
-            --soft-gold: #fffbeb;
+            --primary: #0056b3;
+            --primary-light: #e7f1ff;
+            --secondary: #6c757d;
+            --bg-body: #f0f2f5;
+            --white: #ffffff;
+            --text-main: #2d3436;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f1f5f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 0; /* ลบขอบมนออก */
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-        }
-
-        .header { text-align: center; margin-bottom: 25px; }
-        h2 { color: var(--primary); margin: 0; font-weight: 600; }
-        p.subtitle { color: #64748b; margin-top: 5px; }
-
-        /* ปรับปรุงประกาศเป็นเหลี่ยม */
-        .announcement-card {
-            background-color: var(--soft-gold);
-            border: 1px solid #fef3c7;
-            border-left: 6px solid var(--warning-gold);
-            border-radius: 0; /* ลบขอบมนออก */
-            padding: 24px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .announcement-icon {
-            background: var(--warning-gold);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 0; /* ลบขอบมนออก */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .announcement-content b {
-            color: #92400e;
-            font-size: 1.15rem;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .announcement-content p {
-            margin: 0;
-            color: #4b5563;
+            font-family: 'Kodchasan', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
-        .deadline-tag {
-            display: inline-block;
-            background: white;
-            color: var(--deadline-red);
-            padding: 6px 16px;
-            border-radius: 0; /* ลบขอบมนออก */
-            font-weight: 600;
-            border: 1px solid #fecaca;
-            margin-top: 12px;
+        /* -----------------------------------------------------------
+            LAYOUT - ล็อกเมนูข้างให้แสดงผลตลอดบน Desktop
+        ----------------------------------------------------------- */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
         }
 
-        .announcement-footer {
-            margin-top: 15px;
-            padding-top: 12px;
-            border-top: 1px solid #fef3c7;
+        aside {
+            background-color: var(--white);
+            border-right: 1px solid rgba(0,0,0,0.05);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #92400e;
-            opacity: 0.8;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        .admin-section {
-            background-color: var(--admin-section-bg);
-            padding: 20px;
-            border-radius: 0; /* ลบขอบมนออก */
-            border: 1px solid #dbeafe;
-            margin-bottom: 25px;
-        }
-        .admin-section h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; margin-bottom: 15px; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-        .admin-card { background: white; padding: 12px; border-radius: 0; border: 1px solid #dbeafe; display: flex; align-items: center; gap: 12px; }
-        .admin-icon { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
-        .admin-info h4 { margin: 0; color: #1e293b; font-size: 0.85rem; }
-        .role-tag { font-size: 0.65rem; background: #e0e7ff; color: #3730a3; padding: 1px 6px; border-radius: 0; font-weight: 600; margin-top: 3px; border: 1px solid #c7d2fe; display: inline-block; }
+        .brand { text-align: center; padding-bottom: 1rem; border-bottom: 2px solid var(--primary-light); }
+        .brand i { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .brand h2 { font-size: 1.2rem; color: var(--primary); }
 
-        .grade-system-wrapper { text-align: center; margin-bottom: 35px; }
-        .btn-grade-system {
-            background: #10b981;
-            color: white;
-            padding: 14px 35px;
-            border-radius: 0; /* ลบขอบมนออก */
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-family: 'Sarabun', sans-serif;
-            text-decoration: none;
+        .nav-menu { list-style: none; }
+        .nav-label { font-size: 0.8rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+        .nav-item { margin-bottom: 0.5rem; }
+        .nav-link {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            text-decoration: none; color: var(--text-main); border-radius: 12px; transition: 0.3s; font-weight: 500;
+        }
+        .nav-link:hover, .nav-link.active { background-color: var(--primary-light); color: var(--primary); }
+        .nav-link.active { background-color: var(--primary); color: var(--white); }
+
+        /* Main Content */
+        main { padding: 2rem; width: 100%; max-width: 1400px; margin: 0 auto; }
+
+        header.top-bar {
+            background: var(--white); padding: 1.5rem 2rem; border-radius: 20px;
+            margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow);
         }
 
-        .table-wrapper { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-color); }
-        th { background-color: #f8fafc; color: #475569; padding: 15px; text-align: left; border-bottom: 2px solid var(--border-color); border-right: 1px solid var(--border-color); }
-        td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-size: 0.95rem; }
+        /* Countdown Card */
+        .card-countdown {
+            background: linear-gradient(135deg, #0056b3 0%, #00a8ff 100%);
+            color: var(--white); padding: 2.5rem; border-radius: 24px;
+            text-align: center; margin-bottom: 2.5rem; box-shadow: 0 15px 35px rgba(0, 86, 179, 0.3);
+        }
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 500px; margin: 1.5rem auto; }
+        .timer-box { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 1rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); }
+        .t-num { font-size: 2rem; font-weight: 700; display: block; }
+
+        /* -----------------------------------------------------------
+            NEW STATISTICS DESIGN - สถิติงานวิชาการ 2568/2 สวยๆ
+        ----------------------------------------------------------- */
+        .stats-container { margin-bottom: 3rem; }
+        .stats-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+        .stats-header i { font-size: 1.5rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 12px; }
+        .stats-header h3 { font-size: 1.4rem; color: var(--primary); font-weight: 700; }
         
-        .dept-header-row { background-color: #f1f5f9 !important; }
-        .dept-header-row td { 
-            font-weight: 600; 
-            color: var(--primary); 
-            padding: 15px; 
-            font-size: 1rem; 
-            border-left: 5px solid var(--primary); 
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .stat-card {
+            background: var(--white); padding: 1.5rem; border-radius: 24px; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); display: flex; 
+            flex-direction: column; gap: 1rem; transition: 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
+        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0, 86, 179, 0.1); }
+        
+        .stat-icon { width: 55px; height: 55px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; }
+        .bg-grad-blue { background: linear-gradient(135deg, #007bff, #00d2ff); }
+        .bg-grad-green { background: linear-gradient(135deg, #28a745, #a8e063); }
+        .bg-grad-orange { background: linear-gradient(135deg, #f39c12, #f1c40f); }
+        .bg-grad-red { background: linear-gradient(135deg, #dc3545, #ff4b2b); }
 
-        .status-badge { padding: 4px 10px; border-radius: 0; font-size: 0.8rem; font-weight: 600; border: 1px solid currentColor; }
-        .done { background: var(--success-bg); color: var(--success-text); }
-        .waiting { background: var(--pending-bg); color: var(--pending-text); }
-        .count-tag { color: #94a3b8; font-size: 0.75rem; margin-right: 5px; }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-main); line-height: 1; margin-bottom: 5px; display: block; }
+        .stat-label { font-size: 0.9rem; color: var(--secondary); font-weight: 600; display: flex; justify-content: space-between; }
+        .stat-trend { font-size: 0.75rem; padding: 2px 8px; border-radius: 20px; background: #e7f1ff; color: var(--primary); }
+
+        /* -----------------------------------------------------------
+            CENTER MENU - เมนูตรวจสอบข้อมูลตรงกลาง
+        ----------------------------------------------------------- */
+        .quick-access-section { margin-bottom: 2.5rem; }
+        .cta-card {
+            background: var(--white); border-radius: 24px; padding: 1.5rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow); border: 2px solid transparent;
+            text-decoration: none; color: inherit; transition: 0.3s;
+        }
+        .cta-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .cta-content { display: flex; align-items: center; gap: 20px; }
+        .cta-icon { width: 60px; height: 60px; background: var(--primary-light); color: var(--primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+        .cta-text h3 { font-size: 1.3rem; color: var(--primary); font-weight: 700; }
+        .cta-button { background: var(--primary); color: white; padding: 10px 20px; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+        /* Content Grid & News */
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+        .card { background: var(--white); padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 2rem; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--primary); }
+
+        .news-list-classic { display: flex; flex-direction: column; }
+        .news-item-classic {
+            display: flex; align-items: center; gap: 12px; padding: 12px 10px;
+            text-decoration: none; color: var(--text-main); border-bottom: 1px solid #eee; transition: 0.2s;
+        }
+        .news-item-classic:hover { background-color: var(--primary-light); padding-left: 15px; color: var(--primary); }
+        .date-label { font-weight: 700; color: var(--primary); min-width: 90px; font-size: 0.9rem; }
+
+        .status-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
+
+        @media (max-width: 1100px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+            aside { display: none; }
+            .content-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-card { flex-direction: column; text-align: center; gap: 15px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h2><i class="fas fa-university"></i> สรุปผลการขอเปิดรายวิชา</h2>
-        <p class="subtitle">ภาคเรียนที่ 2 ปีการศึกษา 2568</p>
-    </div>
+<div class="dashboard-container">
+    <aside>
+        <div class="brand"><i class="fas fa-university"></i><h2>ระบบงานทะเบียน</h2><p style="font-size: 0.7rem; color: #888;">Banharnjamsaiwittaya 1</p></div>
+        <nav>
+            <p class="nav-label">Main Menu</p>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-th-large"></i> หน้าแรก</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> ปฏิทินวิชาการ</a></li>
+                <li class="nav-item"><a href="people.html" class="nav-link"><i class="fas fa-users"></i> บุคลากร</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-phone"></i> ติดต่อสอบถาม</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    <div class="announcement-card">
-        <div class="announcement-icon"><i class="fas fa-info-circle"></i></div>
-        <div class="announcement-content">
-            <b>ประกาศแจ้งคุณครู (หลักสูตรมัธยมศึกษา)</b>
-            <p>สำหรับคุณครูที่ยังไม่ได้ดำเนินการยืนยันรายวิชาเรียน ขอความอนุเคราะห์ให้นำส่ง 
-            <strong>"ใบขอเปิดรายวิชาเรียน 2/2568"</strong> ที่ห้องทะเบียนวัดผล</p>
-            <div class="deadline-tag">
-                <i class="far fa-clock"></i> ภายใน จ. 12 ม.ค. 69 ก่อนเวลา 15.00 น.
+    <main>
+        <header class="top-bar">
+            <div class="welcome-text"><h1>งานทะเบียนวัดผล ฝ่ายประมวลผล GPA</h1></div>
+            <div class="user-info"><i class="far fa-clock"></i> <span id="current-time">กำลังโหลด...</span></div>
+        </header>
+
+        <section class="card-countdown">
+            <h2 style="font-weight: 600;">เปิดระบบบันทึกผลการเรียน 2/2568</h2>
+            <p style="opacity: 0.8;">เริ่มวันที่ 16 ธันวาคม 2568 เวลา 08:00 น.</p>
+            <div id="timer" class="timer-grid">
+                <div class="timer-box"><span id="days" class="t-num">00</span><span>วัน</span></div>
+                <div class="timer-box"><span id="hours" class="t-num">00</span><span>ชม.</span></div>
+                <div class="timer-box"><span id="minutes" class="t-num">00</span><span>นาที</span></div>
+                <div class="timer-box"><span id="seconds" class="t-num">00</span><span>วินาที</span></div>
             </div>
-            <div class="announcement-footer">
-                <span><i class="fas fa-user-pen"></i> ผู้ประกาศ: นายเมธี ใจสุขดี</span>
-                <span><i class="far fa-calendar-alt"></i> 7 ม.ค. 69 | 12.58 น.</span>
+        </section>
+
+        <section class="stats-container">
+            <div class="stats-header">
+                <i class="fas fa-chart-line"></i>
+                <h3>สถิติงานวิชาการ ภาคเรียนที่ 2 ปีการศึกษา 2568</h3>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon bg-grad-blue"><i class="fas fa-book-open"></i></div>
+                    <div class="stat-info"><span class="stat-value">425</span><div class="stat-label">วิชาที่เปิดสอน <span class="stat-trend">+5%</span></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-grad-green"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="stat-info"><span class="stat-value">128</span><div class="stat-label">บุคลากร <span class="stat-trend">คงที่</span></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-grad-orange"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-info"><span class="stat-value">2,450</span><div class="stat-label">นักเรียน <span class="stat-trend">+2.1%</span></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-grad-red"><i class="fas fa-school"></i></div>
+                    <div class="stat-info"><span class="stat-value">56</span><div class="stat-label">ห้องเรียน <span class="stat-trend">ครบ</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-access-section">
+            <a href="check-subject.html" class="cta-card">
+                <div class="cta-content">
+                    <div class="cta-icon"><i class="fas fa-folder-plus"></i></div>
+                    <div class="cta-text">
+                        <h3>ตรวจสอบผลการขอเปิดรายวิชา</h3>
+                        <p>ตรวจสอบสถานะรายวิชาใหม่ ภาคเรียนที่ 2/2568</p>
+                    </div>
+                </div>
+                <div class="cta-button">ตรวจสอบข้อมูล <i class="fas fa-arrow-right"></i></div>
+            </a>
+        </section>
+
+        <div class="content-grid">
+            <div class="left-col">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-bullhorn"></i> ข่าวประชาสัมพันธ์ล่าสุด</div>
+                    <div class="news-list-classic">
+                        <a href="#" class="news-item-classic"><span class="date-label">[30/ก.ย. 68]</span><span class="news-text">ประกาศห้องสอบปลายภาคเรียนที่ 1/2568</span></a>
+                        <a href="#" class="news-item-classic"><span class="date-label">[22/ก.ย. 68]</span><span class="news-text">แจ้งกำหนดการรับรองผลการเรียน และแก้ไข 0, ร, มส.</span></a>
+                        <a href="#" class="news-item-classic"><span class="date-label">[08/ส.ค. 68]</span><span class="news-text">กำหนดการส่งเกรดภาคเรียนที่ 1/2568</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="right-col">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-info-circle"></i> สถานะระบบ</div>
+                    <div class="status-row"><span>ปีการศึกษา</span><strong>2568/2</strong></div>
+                    <div class="status-row"><span>บันทึกเกรด</span><span class="badge badge-danger">ปิดระบบ</span></div>
+                    <div class="status-row"><span>ประกาศผล</span><span class="badge badge-success">เปิดปกติ</span></div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="admin-section">
-        <h3><i class="fas fa-user-shield"></i> เจ้าหน้าที่ระบบประจำปีการศึกษา 2568</h3>
-        <div class="admin-grid">
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-laptop-code"></i></div><div class="admin-info"><h4>129 นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ</h4><span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-file-invoice"></i></div><div class="admin-info"><h4>222 นางสาวเสาวลักษณ์ ชินวงษ์</h4><span class="role-tag">งานวัดผล</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-user-clock"></i></div><div class="admin-info"><h4>243 นายเมธี ใจสุขดี</h4><span class="role-tag">เจ้าหน้าที่งานวัดผลชั่วคราว</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-database"></i></div><div class="admin-info"><h4>329 นางลำดวน ชิดปราง</h4><span class="role-tag">ผู้ดูแลระบบ</span> <span class="role-tag">งานวัดผล</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-user-tie"></i></div><div class="admin-info"><h4>816 นางสาวพัชรินทร์ ศรีทาคง</h4><span class="role-tag">หัวหน้ากลุ่มงานวัดผล</span></div></div>
-            <div class="admin-card"><div class="admin-icon"><i class="fas fa-address-book"></i></div><div class="admin-info"><h4>830 นายณัฏฐกิตติ์ โพธิ์พุ่ม</h4><span class="role-tag">นายทะเบียน</span></div></div>
-        </div>
-    </div>
-
-    <div class="grade-system-wrapper">
-        <a href="#" class="btn-grade-system" onclick="alert('ระบบเปิด 14 ก.พ. 69'); return false;">
-            <i class="fas fa-external-link-alt"></i> เข้าสู่ระบบยืนยันการส่งเกรด
-        </a>
-        <p style="color:#64748b; font-size: 0.9rem; margin-top: 10px;">เปิดระบบยืนยันผล 14 กุมภาพันธ์ 2569</p>
-    </div>
-
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th width="80">ลำดับ</th>
-                    <th width="100">รหัสครู</th>
-                    <th>ชื่อ-นามสกุล</th>
-                    <th width="180">สถานะ</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
+        
+        <footer style="text-align: center; color: #888; font-size: 0.75rem; padding-bottom: 2rem;">
+            &copy; 2026 งานทะเบียนวัดผล โรงเรียนบรรหารแจ่มใสวิทยา 1 | พัฒนาโดย ฝ่าย ICT
+        </footer>
+    </main>
 </div>
 
 <script>
-    // ส่วน JavaScript คงเดิมทั้งหมดตามที่ระบุไว้ก่อนหน้า
-    // ...
-    const departments = {
-        "0": "ฝ่ายบริหาร", "1": "ภาษาไทย", "2": "คณิตศาสตร์", "3": "วิทยาศาสตร์และเทคโนโลยี",
-        "4": "สังคมศึกษา", "5": "สุขศึกษา", "6": "ศิลปะ", "7": "การงานอาชีพ", 
-        "8": "ภาษาต่างประเทศ", "9": "กลุ่มงานสนับสนุน"
-    };
-
-    const teacherData = [
-        // ข้อมูลครูชุดเดิม...
-        { id: "022", name: "อ.ดร.จุฑาทิพย์ ถาวรรัตน์", status: 1 },
-        { id: "049", name: "อ.ดร.สุปราณี พุ้ยมอม", status: 1 },
-        { id: "050", name: "ผศ.ดร.อารีรัตน์ ภาคพิธเจริญ", status: 1 },
-        { id: "111", name: "นางสาววาสนา ด่วนดี", status: 1 },
-        { id: "113", name: "นางสาวจินตนา บำรุงเพ็ชร", status: 1 },
-        { id: "114", name: "นายกรณ์พงศ์ พัฒนปกรณ์พงษ์", status: 1 },
-        { id: "117", name: "นายวีระยุทธ โพธิ์สุวรรณ", status: 1 },
-        { id: "118", name: "นางวิไลพักตร์ กลิ่นกาหลง", status: 1 },
-        { id: "119", name: "นางนาตยา พิทักษ์วงศ์", status: 1 },
-        { id: "120", name: "นางสาววชิราภรณ์ ศรป้อม", status: 1 },
-        { id: "121", name: "นายิรวัฒน์ โสภาพันธุ์", status: 1 },
-        { id: "123", name: "นางสาวภัคปภัสร์ กาญจน์นันทรักษ์", status: 1 },
-        { id: "124", name: "นางสาวอุษา สายทอง", status: 1 },
-        { id: "125", name: "นายธีรภัทร แก้วสมนึก", status: 1 },
-        { id: "129", name: "นายกีรติภัทร รัตนพิพัฒน์วงษ์ศิริ", status: 1 },
-        { id: "213", name: "นายจุมพล อยู่คง", status: 1 },
-        { id: "216", name: "นางสาวภัสรา เพ็งใย", status: 1 },
-        { id: "217", name: "นางสาวรจนา ดาวเรือง", status: 1 },
-        { id: "218", name: "นางสาวปัญญาวดี ประดับสุข", status: 1 },
-        { id: "221", name: "นางปราณี อินทรักษา", status: 1 },
-        { id: "222", name: "นางสาวเสาวลักษณ์ ชินวงษ์", status: 1 },
-        { id: "224", name: "นางสาวปัทมปาณี ทับทิมศรี", status: 1 },
-        { id: "225", name: "นางสาวศิราพรรณ ชูประสิทธิ์", status: 1 },
-        { id: "226", name: "นางอนุสรา โพธิ์หอม", status: 1 },
-        { id: "227", name: "นางสาววรรษา กาญจนลักษณ์", status: 1 },
-        { id: "228", name: "นางสาวภัคจิรา จงสุกใส", status: 1 },
-        { id: "229", name: "นางสาวสายรุ้ง ดอกลำภู", status: 1 },
-        { id: "230", name: "นางสาวประไพพัตร ปฏิพัทธศิลปกิจ", status: 1 },
-        { id: "231", name: "นายนัฎฐกิตติ์ เพชรี", status: 1 },
-        { id: "243", name: "นายเมธี ใจสุขดี", status: 1 },
-        { id: "255", name: "นางสาวพชรกมล รุ่งวารินทร์", status: 1 },
-        { id: "310", name: "นางสาวจุฑามาศ เอี่ยมเกตุ", status: 1 },
-        { id: "311", name: "นางสาวเนตรราตรี ท้าวโสม", status: 1 },
-        { id: "314", name: "นางศิริพร เถาว์โท", status: 1 },
-        { id: "315", name: "นางนัญธมณีกร ระรอกแก้ว", status: 1 },
-        { id: "316", name: "นางสาวพิมพ์ณภัส อินทร์สกุล", status: 1 },
-        { id: "319", name: "นางสาววิชุดา งามอักษร", status: 1 },
-        { id: "320", name: "นางสาวลินดา จุฬาวรรณ", status: 1 },
-        { id: "321", name: "นางสาวจิราพร ลิ้มประเสริฐ", status: 1 },
-        { id: "324", name: "นางกรริสา จันทร์สุวรรณ", status: 1 },
-        { id: "325", name: "นายเอกชัย ลวดคำ", status: 1 },
-        { id: "326", name: "นายเสกสรร คำนนท์", status: 1 },
-        { id: "328", name: "นางสาวชลิตา คงศิริ", status: 1 },
-        { id: "329", name: "นางลำดวน ชิดปราง", status: 1 },
-        { id: "330", name: "นายสุรศักดิ์ สีน้ำเงิน", status: 1 },
-        { id: "331", name: "นางวรางคณา พรหมชนะ", status: 1 },
-        { id: "332", name: "นางศริยา วงษ์จันทร์", status: 1 },
-        { id: "333", name: "นายภูวนัย อ่อนสอาด", status: 1 },
-        { id: "334", name: "นางสาวปวีณา วงษ์จินดา", status: 1 },
-        { id: "335", name: "นายสราวุธ แช่มช้อย", status: 1 },
-        { id: "336", name: "นายธีรภัทร สุดโต", status: 1 },
-        { id: "337", name: "นางสาวธิดาพร สังข์ทอง", status: 1 },
-        { id: "338", name: "นางสาวศิรินทิพย์ ลาภสอาดพร", status: 1 },
-        { id: "339", name: "นางสาวทิพามล ศรีวิเชียร", status: 1 },
-        { id: "340", name: "นายวินิจ ภูพวก", status: 1 },
-        { id: "341", name: "นางสาวมัฌชิมา สุขะพิบูลย์", status: 1 },
-        { id: "351", name: "นายบรรเจิด พุ่มพันธ์สน", status: 1 },
-        { id: "353", name: "นายวรัตน์ภูมิ บุญตันทา", status: 1 },
-        { id: "407", name: "นายไชยพร แย้มมี", status: 1 },
-        { id: "409", name: "นางจุฑามาศ เห็นประเสริฐ", status: 1 },
-        { id: "411", name: "นางสาวอุสา ทองปรีชา", status: 1 },
-        { id: "412", name: "นายนิคม วงษ์สุวรรณ", status: 1 },
-        { id: "413", name: "นางปพัชญา จันทรโชติ", status: 1 },
-        { id: "414", name: "นางสาววราภรณ์ มาลัย", status: 1 },
-        { id: "417", name: "นายณัฐพัชร์ ทองรอด", status: 1 },
-        { id: "418", name: "นางสาวเกษจมาภรณ์ น้ำสุทอง", status: 1 },
-        { id: "419", name: "นายธีรวิช แก้วเกตุ", status: 1 },
-        { id: "420", name: "นายจิรายุส บูชา", status: 1 },
-        { id: "421", name: "นางสาวนิติภรณ์ อ่อนละมุล", status: 1 },
-        { id: "422", name: "นางสาวมลิสา สุขวงษ์จันทร์", status: 1 },
-        { id: "454", name: "นางชัญญา โพธิ์พันธุ์", status: 1 },
-        { id: "506", name: "นายโกศล จันทรโชติ", status: 1 },
-        { id: "509", name: "นายประพนธ์ ชิดปราง", status: 1 },
-        { id: "511", name: "นางสาวจิตรลัดดา กุศลเสถียร", status: 1 },
-        { id: "512", name: "นายศุภชัย เนตรนิล", status: 1 },
-        { id: "513", name: "นายวีระวัฒน์ ชาววังฆ้อง", status: 1 },
-        { id: "552", name: "นายสิทธิชัย แพน้อย", status: 0 },
-        { id: "554", name: "นางสาวปาริชาติ เพ็ชรวาว", status: 1 },
-        { id: "555", name: "นายพรชัย แก้วเรือง", status: 1 },
-        { id: "601", name: "นายณัฐวุฒิ สุดโต", status: 1 },
-        { id: "606", name: "นายภูรีวิทย์ เพ็งสุวรรณ", status: 1 },
-        { id: "613", name: "นางสาววราภรณ์ แก้วกระจ่าง", status: 1 },
-        { id: "614", name: "นางสาวมัณฑรี เกตุแก้ว", status: 1 },
-        { id: "616", name: "นางสาวปิยธิดา สร้อยระย้า", status: 1 },
-        { id: "617", name: "นางสาวอังคณา ดวงเกตุ", status: 1 },
-        { id: "618", name: "นางสาวกาญจนา คำเทศ", status: 1 },
-        { id: "654", name: "นางสาวยุพาภรณ์ จงรอบคอบ", status: 1 },
-        { id: "727", name: "นางพรทิพย์ วันดี", status: 1 },
-        { id: "728", name: "นางสาวจิรารัตน์ เอี่ยมเขียว", status: 1 },
-        { id: "729", name: "นางสาวสุนิษา สุวรรณเนตร์", status: 1 },
-        { id: "730", name: "นายนครินทร์ กล้าหาญ", status: 0 },
-        { id: "731", name: "นางสาวเกษราภรณ์ จูงวงค์สุข", status: 1 },
-        { id: "751", name: "นางสาวเนตรชนก ศรีชมภู", status: 0 },
-        { id: "753", name: "นายโยธิน เวชวิฐาน", status: 1 },
-        { id: "754", name: "นางสาวช่อลดา ประไพ", status: 1 },
-        { id: "755", name: "นายณัฐพร หิรัญอ่อน", status: 1 },
-        { id: "808", name: "นางสาวกัญญาพัชร เกตุแก้ว", status: 1 },
-        { id: "810", name: "นางสาวนันทิยา ปัญญาธิกวัฒน์", status: 1 },
-        { id: "812", name: "นางสาวพิชารมย์ สุขกลม", status: 1 },
-        { id: "815", name: "นางสาวกาญจนาพร เชิดชูสุวรรณ", status: 1 },
-        { id: "816", name: "นางสาวพัชรินทร์ ศรีทาคง", status: 1 },
-        { id: "818", name: "นางสาวมณีวรรณ พลายมี", status: 1 },
-        { id: "819", name: "นางสาวปริดา แก้วประหลาด", status: 1 },
-        { id: "820", name: "นางสาวภัคภร เอกอมรธนากิจ", status: 1 },
-        { id: "821", name: "นางสาวชาริตา พลายระหาร", status: 1 },
-        { id: "822", name: "นางสาวจุฑาวดี นามเมืองจันทร์", status: 1 },
-        { id: "824", name: "นางสาวพชรมนต์ คงเกื้อ", status: 1 },
-        { id: "826", name: "นางสาวปัทมปาพร เต่าให้", status: 1 },
-        { id: "827", name: "นางสาวเบญจวรรณ วุฒิ", status: 1 },
-        { id: "828", name: "นายนคร คำพล", status: 1 },
-        { id: "829", name: "นางสาวพลอยณิชชา ศิรกิตติวรพงษ์", status: 1 },
-        { id: "830", name: "นายณัฏฐกิตติ์ โพธิ์พุ่ม", status: 1 },
-        { id: "831", name: "นางสาวอุษามณี กล้าหาญ", status: 1 },
-        { id: "832", name: "นางสาวบุญรักษา ปะลาวัน", status: 1 },
-        { id: "901", name: "นางสาวอำพิกา บารมี", status: 1 },
-        { id: "903", name: "นางสาวยุพิน มะลิถอด", status: 1 }
-    ];
-
-    function initTable() {
-        const tableBody = document.getElementById('tableBody');
-        const groups = {};
-        Object.keys(departments).forEach(d => groups[d] = []);
-        teacherData.forEach(t => {
-            const gid = t.id.charAt(0);
-            if(groups[gid]) groups[gid].push(t);
-        });
-
-        let masterIndex = 1;
-        Object.keys(groups).sort().forEach(gid => {
-            if(groups[gid].length === 0) return;
-            const hRow = document.createElement('tr');
-            hRow.className = 'dept-header-row';
-            hRow.innerHTML = `<td colspan="4">กลุ่มสาระการเรียนรู้ ${departments[gid]} (${groups[gid].length} ท่าน)</td>`;
-            tableBody.appendChild(hRow);
-
-            groups[gid].forEach(teacher => {
-                const tr = document.createElement('tr');
-                const statusCls = teacher.status === 1 ? 'done' : 'waiting';
-                const statusTxt = teacher.status === 1 ? 'ยืนยันข้อมูลแล้ว' : 'ยังไม่ดำเนินการ';
-                const step = teacher.status === 1 ? '[7/7]' : '[1/7]';
-                tr.innerHTML = `
-                    <td>${masterIndex++}</td>
-                    <td><strong>${teacher.id}</strong></td>
-                    <td>${teacher.name}</td>
-                    <td>
-                        <span class="count-tag">${step}</span>
-                        <span class="status-badge ${statusCls}">${statusTxt}</span>
-                    </td>
-                `;
-                tableBody.appendChild(tr);
-            });
-        });
+    const targetDate = new Date("2025-12-16T08:00:00").getTime();
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff > 0) {
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
     }
-    document.addEventListener('DOMContentLoaded', initTable);
+    function showTime() { document.getElementById("current-time").innerText = new Date().toLocaleString('th-TH'); }
+    setInterval(updateTimer, 1000); setInterval(showTime, 1000);
+    updateTimer(); showTime();
 </script>
 </body>
 </html>
